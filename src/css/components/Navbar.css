@@ -26,6 +26,10 @@
   font-weight: bold;
 }
 
+.menu {
+  display: none;
+}
+
 .links li {
   position: relative;
 }
@@ -33,15 +37,15 @@
 .links li::before {
   content: "";
   position: absolute;
-  height: 2px;
+  height: 3px;
   bottom: -0.5rem;
   right: 0;
   left: 0;
   background: linear-gradient(
     45deg,
-    #8d95a2 80%,
-    #d1d3d4 82%,
-    #ffffff 85%,
+    #8d95a2 75%,
+    #d1d3d4 78%,
+    #ffffff 83%,
     #e1ab39 87%,
     #634632 90%,
     #e9c156 92%
@@ -52,7 +56,7 @@
 .links li::after {
   content: "";
   position: absolute;
-  height: 2px;
+  height: 3px;
   bottom: -0.5rem;
   right: 0;
   left: 0;
@@ -71,4 +75,73 @@
   color: var(--text-color);
   font-size: 1.1rem;
   padding: 0.563rem 1rem;
+}
+
+.mobile-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 100vh;
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.mobile-navigation .close-menu {
+  all: unset;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+
+.mobile-navigation .links {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-navigation .links li::before,
+.mobile-navigation .links li::after {
+  display: none;
+}
+
+.mobile-navigation .links a {
+  display: flex;
+  flex-direction: column;
+  translate: 40%;
+  transition: 0.2s ease-in-out;
+}
+
+.mobile-navigation.navigation-menu-open .close-menu {
+  transition: 0.3s ease-in-out 0.5s;
+  opacity: 1;
+}
+
+.mobile-navigation.navigation-menu-open .links a {
+  transition: 0.5s ease-in-out;
+  translate: 0;
+}
+
+@media (width < 37.5rem) {
+  .menu {
+    display: flex;
+    font-size: 2.25rem;
+    color: var(--text-color);
+  }
+
+  .links {
+    display: none;
+  }
 }

@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 import logo from "/logo.png";
 
 import "../css/components/Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ toggleMenu }) => {
   return (
     <div className="navbar-top">
       <div className="navbar-content-container">
-        <img src={logo} alt="Logo" aria-label="Logo" />
+        <Link to="/">
+          <img src={logo} alt="Logo" aria-label="Logo" />
+        </Link>
+        <HiOutlineMenuAlt3 className="menu" onClick={toggleMenu} />
         <ul className="links">
           <li>
-            <Link to="/cjenik">Cijenik</Link>
+            <Link to="/">Početna</Link>
+          </li>
+          <li>
+            <Link to="/usluge">Usluge</Link>
           </li>
           <li>
             <Link to="/onama">O nama</Link>
