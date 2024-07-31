@@ -34,6 +34,31 @@
   position: relative;
 }
 
+.links li:nth-child(1):before {
+  --starting-gradient: #8d95a2;
+  --ending-gradient: #d1d3d4;
+}
+
+.links li:nth-child(2):before {
+  --starting-gradient: #d1d3d4;
+  --ending-gradient: #ffffff;
+}
+
+.links li:nth-child(3):before {
+  --starting-gradient: #ffffff;
+  --ending-gradient: #e1ab39;
+}
+
+.links li:nth-child(4):before {
+  --starting-gradient: #e1ab39;
+  --ending-gradient: #634632;
+}
+
+.links li:nth-child(5):before {
+  --starting-gradient: #634632;
+  --ending-gradient: #e9c156;
+}
+
 .links li::before {
   content: "";
   position: absolute;
@@ -43,31 +68,17 @@
   left: 0;
   background: linear-gradient(
     45deg,
-    #8d95a2 70%,
-    #d1d3d4 73%,
-    #ffffff 77%,
-    #e1ab39 88%,
-    #634632 90%,
-    #e9c156 92%
+    var(--starting-gradient),
+    var(--ending-gradient)
   );
-  background-attachment: fixed;
-}
-
-.links li::after {
-  content: "";
-  position: absolute;
-  height: 3px;
-  bottom: -1rem;
-  right: 0;
-  left: 0;
-  background-color: var(--navs-color);
-  transform-origin: left;
-  transition: scale 0.1s ease-in-out;
-}
-
-.links li:hover::after {
   transform-origin: right;
   scale: 0 1;
+  transition: scale 0.2s;
+}
+
+.links li:hover::before {
+  transform-origin: left;
+  scale: 1 1;
 }
 
 .links li a {
