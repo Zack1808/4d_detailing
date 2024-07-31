@@ -121,6 +121,7 @@
 .mobile-navigation .links {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .mobile-navigation .links li::before {
