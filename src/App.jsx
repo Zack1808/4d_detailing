@@ -22,16 +22,19 @@ const App = () => {
             <FaXmark style={{ fontSize: "1.5rem" }} />
           </button>
           <ul className="links">
-            <li>
+            <li onClick={() => setMenuIsOpen(false)}>
               <Link to="/">Početna</Link>
             </li>
-            <li>
+            <li onClick={() => setMenuIsOpen(false)}>
               <Link to="/usluge">Usluge</Link>
             </li>
-            <li>
+            <li onClick={() => setMenuIsOpen(false)}>
               <Link to="/onama">O nama</Link>
             </li>
-            <li>
+            <li onClick={() => setMenuIsOpen(false)}>
+              <Link to="/galerija">Galerija</Link>
+            </li>
+            <li onClick={() => setMenuIsOpen(false)}>
               <Link to="/kontakt">Kontakt</Link>
             </li>
           </ul>
