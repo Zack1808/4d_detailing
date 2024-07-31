@@ -1,3 +1,5 @@
+import { Button } from "./";
+
 import "../css/components/HeroContainer.css";
 
 const HeroContainer = () => {
@@ -8,6 +10,7 @@ const HeroContainer = () => {
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, rem.
         </p>
+        <Button primary>Vidi više</Button>
       </div>
     </div>
   );
