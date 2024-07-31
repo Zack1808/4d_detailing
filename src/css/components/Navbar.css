@@ -123,8 +123,7 @@
   flex-direction: column;
 }
 
-.mobile-navigation .links li::before,
-.mobile-navigation .links li::after {
+.mobile-navigation .links li::before {
   display: none;
 }
 
