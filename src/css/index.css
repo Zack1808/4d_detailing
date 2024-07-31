@@ -1,13 +1,13 @@
 @font-face {
   font-family: "Minion Pro";
-  src: url("/public/fonts/Minion-BoldIt.otf");
+  src: url("/fonts/Minion-BoldIt.otf");
   font-weight: bolder;
   font-style: italic;
 }
 
 @font-face {
   font-family: "Futura";
-  src: url("/public/fonts/Futura-Book-font.ttf");
+  src: url("/fonts/Futura-Book-font.ttf");
   font-weight: normal;
   font-style: normal;
 }
@@ -37,13 +37,12 @@ h1,
 h2,
 h3 {
   font-family: "Minion Pro";
-  width: max-content;
   background-image: linear-gradient(
     45deg,
     #e9c156,
     #ffffaa,
     #e1ab39,
-    #634632,
+    #7e5d48,
     #e9c156
   );
   background-clip: text;

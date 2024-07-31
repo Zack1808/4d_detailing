@@ -1,0 +1,75 @@
+.hero-container {
+  width: 100%;
+  height: calc(100vh - 4.985375rem); /* Adjust height as needed */
+  background: url("/hero-bg-big.webp");
+  background-size: cover;
+  background-position: center;
+  transform: scaleX(-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out 0.2s;
+}
+
+.loaded .hero-container {
+  opacity: 1;
+}
+
+.hero-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to left,
+    hsla(180, 37%, 4%, 0.9),
+    hsla(180, 37%, 4%, 0.7),
+    hsla(180, 37%, 4%, 0)
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1500px;
+  transform: scaleX(-1);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hero-content > * {
+  translate: -5%;
+  opacity: 0;
+  transition: 0.3s ease-in-out 0.5s;
+}
+
+.loaded .hero-content > * {
+  translate: 0;
+  opacity: 1;
+}
+
+.hero-content p {
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+@media (width < 700px) {
+  .hero-container {
+    background-image: url("/hero-bg-small.webp");
+    transform: scaleX(1);
+  }
+
+  .hero-container::before {
+    background: hsla(180, 37%, 4%, 0.8);
+  }
+
+  .hero-content {
+    transform: scaleX(1);
+  }
+}

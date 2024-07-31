@@ -4,6 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  transition: 0.2s ease-in-out;
+  translate: 0 -50%;
+}
+
+.loaded .navbar-top {
+  translate: none;
 }
 
 .navbar-content-container {
@@ -12,10 +19,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  opacity: 0;
+  transition: 0.5s ease-in-out 0.2s;
+}
+
+.loaded .navbar-content-container {
+  opacity: 1;
 }
 
 .navbar-content-container img {
-  width: 160px;
+  width: 10rem;
 }
 
 .links {
