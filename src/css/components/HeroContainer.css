@@ -50,20 +50,9 @@
   transition: 0.3s ease-in-out 0.5s;
 }
 
-.hero-content .btn {
-  transform: translateX(-3rem) !important;
-  opacity: 0 !important;
-  transition: 0.3s ease-in-out 0.5s;
-}
-
 .loaded .hero-content > * {
   transform: translateX(0);
   opacity: 1;
-}
-
-.loaded .hero-container .btn {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
 }
 
 .hero-content p {
