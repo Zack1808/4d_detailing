@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
@@ -10,25 +10,8 @@ const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const img = new Image();
-    const img2 = new Image();
-
-    img.src = "/hero-bg-big.webp";
-    img2.src = "/hero-bg-small.webp";
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-      timer;
-    }, 1500);
-
-    img.onload = () => {
-      img2.onload = timer;
-    };
-
-    return () => {
-      clearTimeout(timer);
-    };
+  const handleEndLoading = useCallback(() => {
+    setLoading(false);
   }, []);
 
   return (
@@ -39,7 +22,10 @@ const App = () => {
           <div className={`content ${menuIsOpen ? "content-menu-open" : ""}`}>
             <Navbar toggleMenu={() => setMenuIsOpen(true)} />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={<Home onLoadingComplete={handleEndLoading} />}
+              />
             </Routes>
           </div>
           <div

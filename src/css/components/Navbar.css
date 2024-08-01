@@ -11,7 +11,7 @@
 
 .loaded .navbar-top {
   translate: none;
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 99;
   right: 0;
