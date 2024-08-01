@@ -11,9 +11,11 @@
 
 .loaded .navbar-top {
   translate: none;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 99;
+  right: 0;
+  left: 0;
 }
 
 .navbar-content-container {
