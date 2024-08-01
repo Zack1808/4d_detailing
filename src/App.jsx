@@ -9,7 +9,6 @@ import { Navbar, Loading } from "./components";
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const img = new Image();
@@ -18,25 +17,23 @@ const App = () => {
     img.src = "/hero-bg-big.webp";
     img2.src = "/hero-bg-small.webp";
 
-    const timer = setTimeout(() => setLoading(false), 1600);
-    const timer2 = setTimeout(() => {
-      setFadeOut(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
       timer;
     }, 1500);
 
     img.onload = () => {
-      img2.onload = timer2;
+      img2.onload = timer;
     };
 
     return () => {
       clearTimeout(timer);
-      clearTimeout(timer2);
     };
   }, []);
 
   return (
     <>
-      {loading && <Loading className={fadeOut ? "fade-out" : ""} />}
+      <Loading className={loading ? "loading" : ""} />
       <BrowserRouter>
         <div className={`outer-container ${loading ? "" : "loaded"}`}>
           <div className={`content ${menuIsOpen ? "content-menu-open" : ""}`}>
@@ -61,7 +58,7 @@ const App = () => {
                 <Link to="/usluge">Usluge</Link>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/onama">O nama</Link>
+                <Link to="/o-nama">O nama</Link>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/galerija">Galerija</Link>

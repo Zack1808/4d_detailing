@@ -1,0 +1,19 @@
+.home-offers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  color: var(--text-color);
+}
+
+.home-container {
+  width: 100%;
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.home-offers p {
+  max-width: 70ch;
+}

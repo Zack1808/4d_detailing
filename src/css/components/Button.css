@@ -4,7 +4,7 @@
   color: var(--text-color);
   cursor: pointer;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .primary {
@@ -14,15 +14,35 @@
     #e9c156,
     #ffffaa,
     #e1ab39,
-    #7e5d48,
+    #976444,
     #e9c156
   );
   background-size: 150%;
-  background-position: 40%;
+  background-position: 100%;
   transition: background-position 0.2s ease;
 }
 
 .primary:hover,
 .primary:focus {
   background-position: 0%;
+}
+
+.secondary {
+  color: var(--navs-color);
+  background-image: linear-gradient(
+    135deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #949296,
+    #f1f2f2
+  );
+  background-size: 150%;
+  background-position: 100%;
+  transition: background-position 0.2s ease;
+}
+
+.secondary:hover,
+.secondary:focus {
+  background-position: 0;
 }

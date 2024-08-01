@@ -10,7 +10,8 @@
   align-items: center;
   padding: 1rem;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out 0.2s;
+  transition: opacity 0.3s ease-in-out 0.5s;
+  position: relative;
 }
 
 .loaded .hero-container {
@@ -36,7 +37,7 @@
 .hero-content {
   width: 100%;
   max-width: 1500px;
-  transform: scaleX(-1);
+  transform: scaleX(-1) translateY(-50%);
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -47,13 +48,7 @@
 .hero-content > * {
   transform: translateX(-3rem);
   opacity: 0;
-  transition: 0.3s ease-in-out 0.5s;
-}
-
-.hero-content .btn {
-  transform: translateX(-3rem) !important;
-  opacity: 0 !important;
-  transition: 0.3s ease-in-out 0.5s;
+  transition: 0.3s ease-in-out 0.8s;
 }
 
 .loaded .hero-content > * {
@@ -61,14 +56,51 @@
   opacity: 1;
 }
 
-.loaded .hero-container .btn {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-}
-
 .hero-content p {
   color: var(--text-color);
   font-size: 1.2rem;
+}
+
+.hero-info-container {
+  position: absolute;
+  z-index: 2;
+  transform: scaleX(-1);
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 2rem 1rem;
+  font-weight: bold;
+  background-image: linear-gradient(
+    135deg,
+    #e9c156,
+    #ffffaa,
+    #e1ab39,
+    #7e5d48,
+    #e9c156
+  );
+  transition: opacity translate 0.2s ease-in-out 0.8s;
+  translate: 0 50%;
+  opacity: 0;
+  background-size: 120%;
+  animation: info-background-moving 60s infinite alternate;
+}
+
+.hero-info-container p {
+  text-align: center;
+  color: var(--navs-color);
+}
+
+.hero-info-container a {
+  color: var(--navs-color);
+}
+
+.loaded .hero-info-container {
+  opacity: 1;
+  translate: 0 0;
 }
 
 @media (width < 700px) {
@@ -82,6 +114,20 @@
   }
 
   .hero-content {
+    transform: scaleX(1) translateY(-20%);
+  }
+
+  .hero-info-container {
     transform: scaleX(1);
+    padding: 1.5rem 1rem;
+  }
+}
+
+@keyframes info-background-moving {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 100%;
   }
 }
