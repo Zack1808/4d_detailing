@@ -21,7 +21,7 @@ const Navbar = ({ toggleMenu }) => {
             <Link to="/usluge">Usluge</Link>
           </li>
           <li>
-            <Link to="/onama">O nama</Link>
+            <Link to="/o-nama">O nama</Link>
           </li>
           <li>
             <Link to="/galerija">Galerija</Link>

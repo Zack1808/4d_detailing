@@ -10,7 +10,18 @@ const HeroContainer = () => {
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, rem.
         </p>
-        <Button primary>Vidi više</Button>
+        <Button primary to="/usluge">
+          Pregledaj usluge
+        </Button>
+      </div>
+      <div className="hero-info-container">
+        <p>
+          Za rezervaciju termina kontaktirajte nas na mail{" "}
+          <a href="mailto:4d.detailing.ln@gmail.com">
+            4d.detailing.ln@gmail.com
+          </a>{" "}
+          ili na broj <a href="tel:+385977588716">+385 97 758 8716</a>
+        </p>
       </div>
     </div>
   );

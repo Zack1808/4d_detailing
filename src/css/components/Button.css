@@ -4,7 +4,7 @@
   color: var(--text-color);
   cursor: pointer;
   font-weight: bold;
-  border-radius: 5px !important;
+  border-radius: 2px;
 }
 
 .primary {

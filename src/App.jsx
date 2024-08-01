@@ -58,7 +58,7 @@ const App = () => {
                 <Link to="/usluge">Usluge</Link>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/onama">O nama</Link>
+                <Link to="/o-nama">O nama</Link>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/galerija">Galerija</Link>
