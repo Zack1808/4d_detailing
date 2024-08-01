@@ -1,7 +1,7 @@
 .hero-container {
   width: 100%;
   height: calc(100vh - 4.985375rem);
-  height: calc(100dvh - 4.985375rem);
+  height: calc(100svh - 4.985375rem);
   background: url("/hero-bg-big.webp");
   background-size: cover;
   background-position: center;
