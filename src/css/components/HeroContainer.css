@@ -82,8 +82,7 @@
     #7e5d48,
     #e9c156
   );
-  transition: opacity translate 0.2s ease-in-out 0.8s;
-  translate: 0 50%;
+  transition: opacity 0.2s ease-in-out 0.8s;
   opacity: 0;
   background-size: 120%;
   animation: info-background-moving 60s infinite alternate;
@@ -100,7 +99,6 @@
 
 .loaded .hero-info-container {
   opacity: 1;
-  translate: 0 0;
 }
 
 @media (width < 700px) {
