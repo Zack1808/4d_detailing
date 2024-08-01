@@ -7,6 +7,8 @@
   width: 100%;
   aspect-ratio: 12 / 9;
   position: relative;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .category-card-container > * {
@@ -54,16 +56,19 @@
   transition: filter 0.3s ease-in-out;
 }
 
-.category-card-container:hover h4 {
+.category-card-container:hover h4,
+.category-card-container:focus h4 {
   background-color: transparent;
   color: var(--navs-color);
   transition: color 0.3s ease-in-out;
 }
 
-.category-card-container:hover h4::before {
+.category-card-container:hover h4::before,
+.category-card-container:focus h4::before {
   scale: 1 1;
 }
 
-.category-card-container:hover::before {
+.category-card-container:hover::before,
+.category-card-container:focus::before {
   filter: none;
 }

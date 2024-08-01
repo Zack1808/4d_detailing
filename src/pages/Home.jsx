@@ -63,7 +63,7 @@ const Home = ({ onLoadingComplete }) => {
             <CategoryCard
               to="/paketi"
               bigTitle="Paketi"
-              imageUrl="/Interjer.webp"
+              imageUrl="/hero-bg-big.webp"
             />
           </div>
         </div>
