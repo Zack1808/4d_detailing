@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { HeroContainer, Loading } from "../components";
+import { HeroContainer, CategoryCard } from "../components";
 
 import "../css/pages/Home.css";
 
@@ -35,7 +35,6 @@ const Home = ({ onLoadingComplete }) => {
 
   return (
     <>
-      <Loading />
       <HeroContainer />
       <div className="home-offers">
         <div className="home-container">
@@ -47,6 +46,26 @@ const Home = ({ onLoadingComplete }) => {
             Voluptates voluptatibus pariatur totam quos. Quae saepe eius
             officiis fugit nulla necessitatibus earum.
           </p>
+          <div className="home-categories">
+            <CategoryCard
+              to="/exterijer"
+              smallTitle="Čišćenje"
+              bigTitle="Eksterijera"
+              imageUrl="/eksterijer.webp"
+            />
+            <CategoryCard
+              to="/interijer"
+              smallTitle="Čišćenje"
+              bigTitle="Interijera"
+              imageUrl="/Interjer.webp"
+            />
+
+            <CategoryCard
+              to="/paketi"
+              bigTitle="Paketi"
+              imageUrl="/Interjer.webp"
+            />
+          </div>
         </div>
       </div>
     </>

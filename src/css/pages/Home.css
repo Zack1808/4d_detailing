@@ -17,3 +17,11 @@
 .home-offers p {
   max-width: 70ch;
 }
+
+.home-categories {
+  margin-top: 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}

@@ -86,7 +86,7 @@
   transition: opacity 0.2s ease-in-out 0.8s;
   opacity: 0;
   background-size: 120%;
-  animation: info-background-moving 60s infinite alternate;
+  animation: info-background-moving 30s infinite alternate;
 }
 
 .hero-info-container p {
