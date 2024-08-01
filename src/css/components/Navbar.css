@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
 
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out 0.3s;
   translate: 0 -50%;
 }
 
@@ -20,7 +20,7 @@
   justify-content: space-between;
   align-items: center;
   opacity: 0;
-  transition: 0.5s ease-in-out 0.2s;
+  transition: 0.5s ease-in-out 0.5s;
 }
 
 .loaded .navbar-content-container {

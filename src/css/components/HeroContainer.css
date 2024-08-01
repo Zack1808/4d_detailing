@@ -10,7 +10,7 @@
   align-items: center;
   padding: 1rem;
   opacity: 0;
-  transition: opacity 0.3s ease-in-out 0.2s;
+  transition: opacity 0.3s ease-in-out 0.5s;
 }
 
 .loaded .hero-container {
@@ -47,7 +47,7 @@
 .hero-content > * {
   transform: translateX(-3rem);
   opacity: 0;
-  transition: 0.3s ease-in-out 0.5s;
+  transition: 0.3s ease-in-out 0.8s;
 }
 
 .loaded .hero-content > * {

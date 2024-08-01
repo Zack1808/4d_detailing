@@ -4,7 +4,7 @@ const Button = ({ children, primary, secondary, className, ...rest }) => {
   return (
     <button
       className={`btn ${primary ? "primary" : ""} ${
-        secondary ? "secnodary" : ""
+        secondary ? "secondary" : ""
       } ${className}`}
       {...rest}
     >
