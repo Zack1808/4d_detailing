@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   transition: 0.2s ease-in-out 0.3s;
   translate: 0 -50%;
 }
@@ -223,13 +222,13 @@
   padding-left: 1rem;
   overflow: hidden;
   transform-origin: top;
-  animation: closeMobileDropdown 0.2s ease-in-out forwards;
+  animation: closeMobileDropdown 0.3s ease-in-out forwards;
 }
 
 .mobile-navigation-dropdown.open {
   display: flex;
   flex-direction: column;
-  animation: openMobileDropdown 0.2s ease-in-out forwards;
+  animation: openMobileDropdown 0.3s ease-in-out forwards;
 }
 
 @media (width < 43.75rem) {
@@ -249,14 +248,14 @@
     max-height: 0;
   }
   to {
-    max-height: 9.3125rem;
+    max-height: var(--dropDownHeight);
   }
 }
 
 @keyframes closeMobileDropdown {
   from {
     display: flex;
-    max-height: 9.3125rem;
+    max-height: var(--dropDownHeight);
   }
   to {
     display: none;

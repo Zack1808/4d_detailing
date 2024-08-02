@@ -24,6 +24,7 @@ const Navbar = ({ toggleMenu }) => {
               <div className={`navigation-dropdown`}>
                 <Link to="/eksterijer">Čišćenje Eksterijera</Link>
                 <Link to="/interijer">Čišćenje Interijera</Link>
+                <Link to="/interijer">Poliranje i zaštita</Link>
                 <Link to="/paketi">Paketi</Link>
               </div>
             </span>
