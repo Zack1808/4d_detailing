@@ -42,18 +42,42 @@ const App = () => {
                 <Link to="/">Početna</Link>
               </li>
               <li onClick={() => setDropDownIsOpen((prevState) => !prevState)}>
-                <a>
+                <span>
                   Usluge {dropDownIsOpen ? "-" : "+"}
                   <div
                     className={`mobile-navigation-dropdown ${
                       dropDownIsOpen ? "open" : ""
                     }`}
                   >
-                    <Link to="/eksterijer">Čišćenje Eksterijera</Link>
-                    <Link to="/interijer">Čišćenje Interijera</Link>
-                    <Link to="/paketi">Paketi</Link>
+                    <Link
+                      to="/eksterijer"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Čišćenje Eksterijera
+                    </Link>
+                    <Link
+                      to="/interijer"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Čišćenje Interijera
+                    </Link>
+                    <Link
+                      to="/paketi"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Paketi
+                    </Link>
                   </div>
-                </a>
+                </span>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/o-nama">O nama</Link>
