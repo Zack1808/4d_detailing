@@ -30,11 +30,20 @@ const App = () => {
     )
       return;
 
-    setDropDownHeight(
+    console.log(
       interijer.current.offsetHeight +
         eksterijer.current.offsetHeight +
         poliranje.current.offsetHeight +
         paketi.current.offsetHeight
+    );
+
+    setDropDownHeight(
+      (interijer.current.offsetHeight +
+        eksterijer.current.offsetHeight +
+        poliranje.current.offsetHeight +
+        paketi.current.offsetHeight +
+        paketi.current.offsetHeight) /
+        16
     );
   }, []);
 
@@ -44,7 +53,7 @@ const App = () => {
       <BrowserRouter>
         <div
           className={`outer-container ${loading ? "" : "loaded"}`}
-          style={{ "--dropDownHeight": `${dropdownHeight / 16}rem` }}
+          style={{ "--dropDownHeight": `${dropdownHeight}rem` }}
         >
           <div className={`content ${menuIsOpen ? "content-menu-open" : ""}`}>
             <Navbar toggleMenu={() => setMenuIsOpen(true)} />
