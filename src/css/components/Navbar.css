@@ -118,6 +118,7 @@
   top: 0;
   right: 0;
   z-index: 1;
+  padding: 0 1rem 0 3rem;
 }
 
 .mobile-navigation .close-menu {
@@ -140,6 +141,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .mobile-navigation .links li::before {
@@ -148,9 +150,11 @@
 
 .mobile-navigation .links a {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   translate: 40%;
   transition: 0.2s ease-in-out;
+  gap: 1rem;
 }
 
 .mobile-navigation.navigation-menu-open .close-menu {
@@ -163,6 +167,23 @@
   translate: 0;
 }
 
+.mobile-navigation-dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  padding-left: 1rem;
+  overflow: hidden;
+  transform-origin: top;
+  animation: closeMobileDropdown 0.2s ease-in-out forwards;
+}
+
+.mobile-navigation-dropdown.open {
+  display: flex;
+  flex-direction: column;
+  animation: openMobileDropdown 0.2s ease-in-out forwards;
+}
+
 @media (width < 43.75rem) {
   .menu {
     display: flex;
@@ -172,5 +193,25 @@
 
   .links {
     display: none;
+  }
+}
+
+@keyframes openMobileDropdown {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 9.3125rem;
+  }
+}
+
+@keyframes closeMobileDropdown {
+  from {
+    display: flex;
+    max-height: 9.3125rem;
+  }
+  to {
+    display: none;
+    max-height: 0;
   }
 }

@@ -8,6 +8,7 @@ import { Navbar, Loading } from "./components";
 
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const handleEndLoading = useCallback(() => {
@@ -40,8 +41,19 @@ const App = () => {
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/">Početna</Link>
               </li>
-              <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/usluge">Usluge</Link>
+              <li onClick={() => setDropDownIsOpen((prevState) => !prevState)}>
+                <a>
+                  Usluge {dropDownIsOpen ? "-" : "+"}
+                  <div
+                    className={`mobile-navigation-dropdown ${
+                      dropDownIsOpen ? "open" : ""
+                    }`}
+                  >
+                    <Link to="/eksterijer">Čišćenje Eksterijera</Link>
+                    <Link to="/interijer">Čišćenje Interijera</Link>
+                    <Link to="/paketi">Paketi</Link>
+                  </div>
+                </a>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/o-nama">O nama</Link>
