@@ -68,6 +68,15 @@ const App = () => {
                       Čišćenje Interijera
                     </Link>
                     <Link
+                      to="/interijer"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Poliranje i zaštita
+                    </Link>
+                    <Link
                       to="/paketi"
                       onClick={(event) => {
                         event.stopPropagation();

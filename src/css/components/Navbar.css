@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   transition: 0.2s ease-in-out 0.3s;
   translate: 0 -50%;
 }
@@ -249,14 +248,14 @@
     max-height: 0;
   }
   to {
-    max-height: 9.3125rem;
+    max-height: 12.75rem;
   }
 }
 
 @keyframes closeMobileDropdown {
   from {
     display: flex;
-    max-height: 9.3125rem;
+    max-height: 12.75rem;
   }
   to {
     display: none;
