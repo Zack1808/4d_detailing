@@ -50,21 +50,26 @@
   transition: scale 0.3s ease-in-out;
 }
 
-.category-card-container::before {
+.category-card-container::before,
+.category-card-container::after {
   content: "";
   position: absolute;
   inset: 0;
   background-image: var(--_backgroundImage);
   background-size: cover;
+}
+
+.category-card-container::before {
   filter: grayscale(10) brightness(0.4);
-  transition: filter 0.3s ease-in-out;
+  z-index: 2;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .category-card-container:hover h4,
 .category-card-container:focus h4 {
   background-color: transparent;
   color: var(--navs-color);
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .category-card-container:hover h4::before,
@@ -74,5 +79,5 @@
 
 .category-card-container:hover::before,
 .category-card-container:focus::before {
-  filter: none;
+  opacity: 0;
 }
