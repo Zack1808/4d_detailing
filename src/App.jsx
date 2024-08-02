@@ -8,6 +8,7 @@ import { Navbar, Loading } from "./components";
 
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const handleEndLoading = useCallback(() => {
@@ -40,8 +41,43 @@ const App = () => {
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/">Početna</Link>
               </li>
-              <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/usluge">Usluge</Link>
+              <li onClick={() => setDropDownIsOpen((prevState) => !prevState)}>
+                <span>
+                  Usluge {dropDownIsOpen ? "-" : "+"}
+                  <div
+                    className={`mobile-navigation-dropdown ${
+                      dropDownIsOpen ? "open" : ""
+                    }`}
+                  >
+                    <Link
+                      to="/eksterijer"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Čišćenje Eksterijera
+                    </Link>
+                    <Link
+                      to="/interijer"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Čišćenje Interijera
+                    </Link>
+                    <Link
+                      to="/paketi"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setMenuIsOpen(false);
+                      }}
+                    >
+                      Paketi
+                    </Link>
+                  </div>
+                </span>
               </li>
               <li onClick={() => setMenuIsOpen(false)}>
                 <Link to="/o-nama">O nama</Link>
