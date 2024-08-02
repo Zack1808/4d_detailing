@@ -9,6 +9,34 @@ const imagesToLoad = [
   "/hero-bg-small.webp",
   "/Interjer.webp",
   "/eksterijer.webp",
+  "/poliranje.webp",
+];
+
+const cards = [
+  {
+    to: "/eksterijer",
+    smallTitle: "Čišćenje",
+    bigTitle: "Eksterijera",
+    imageUrl: "/eksterijer.webp",
+  },
+  {
+    to: "/interijer",
+    smallTitle: "Čišćenje",
+    bigTitle: "Interijera",
+    imageUrl: "/Interjer.webp",
+  },
+  {
+    to: "/poliranje",
+    smallTitle: "Poliranje i",
+    bigTitle: "Zaštita",
+    imageUrl: "/poliranje.webp",
+  },
+  {
+    to: "/paketi",
+    smallTitle: "Posebni",
+    bigTitle: "Paketi",
+    imageUrl: "/hero-bg-big.webp",
+  },
 ];
 
 const Home = ({ onLoadingComplete }) => {
@@ -47,24 +75,9 @@ const Home = ({ onLoadingComplete }) => {
             officiis fugit nulla necessitatibus earum.
           </p>
           <div className="home-categories">
-            <CategoryCard
-              to="/exterijer"
-              smallTitle="Čišćenje"
-              bigTitle="Eksterijera"
-              imageUrl="/eksterijer.webp"
-            />
-            <CategoryCard
-              to="/interijer"
-              smallTitle="Čišćenje"
-              bigTitle="Interijera"
-              imageUrl="/Interjer.webp"
-            />
-
-            <CategoryCard
-              to="/paketi"
-              bigTitle="Paketi"
-              imageUrl="/hero-bg-big.webp"
-            />
+            {cards.map((card, index) => (
+              <CategoryCard key={index} {...card} />
+            ))}
           </div>
         </div>
       </div>
