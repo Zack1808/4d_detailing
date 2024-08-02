@@ -44,7 +44,7 @@ const App = () => {
       <BrowserRouter>
         <div
           className={`outer-container ${loading ? "" : "loaded"}`}
-          style={{ "--dropDownHeight": dropdownHeight }}
+          style={{ "--dropDownHeight": `${dropdownHeight / 16}rem` }}
         >
           <div className={`content ${menuIsOpen ? "content-menu-open" : ""}`}>
             <Navbar toggleMenu={() => setMenuIsOpen(true)} />
