@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
@@ -10,16 +10,42 @@ const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [dropdownHeight, setDropDownHeight] = useState(0);
+
+  const interijer = useRef(null);
+  const eksterijer = useRef(null);
+  const poliranje = useRef(null);
+  const paketi = useRef(null);
 
   const handleEndLoading = useCallback(() => {
     setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (
+      !interijer.current ||
+      !eksterijer.current ||
+      !poliranje.current ||
+      !paketi.current
+    )
+      return;
+
+    setDropDownHeight(
+      interijer.current.offsetHeight +
+        eksterijer.current.offsetHeight +
+        poliranje.current.offsetHeight +
+        paketi.current.offsetHeight
+    );
   }, []);
 
   return (
     <>
       <Loading className={loading ? "loading" : ""} />
       <BrowserRouter>
-        <div className={`outer-container ${loading ? "" : "loaded"}`}>
+        <div
+          className={`outer-container ${loading ? "" : "loaded"}`}
+          style={{ "--dropDownHeight": dropdownHeight }}
+        >
           <div className={`content ${menuIsOpen ? "content-menu-open" : ""}`}>
             <Navbar toggleMenu={() => setMenuIsOpen(true)} />
             <Routes>
@@ -51,6 +77,7 @@ const App = () => {
                   >
                     <Link
                       to="/eksterijer"
+                      ref={eksterijer}
                       onClick={(event) => {
                         event.stopPropagation();
                         setMenuIsOpen(false);
@@ -60,6 +87,7 @@ const App = () => {
                     </Link>
                     <Link
                       to="/interijer"
+                      ref={interijer}
                       onClick={(event) => {
                         event.stopPropagation();
                         setMenuIsOpen(false);
@@ -68,7 +96,8 @@ const App = () => {
                       Čišćenje Interijera
                     </Link>
                     <Link
-                      to="/interijer"
+                      to="/poliranje"
+                      ref={poliranje}
                       onClick={(event) => {
                         event.stopPropagation();
                         setMenuIsOpen(false);
@@ -78,6 +107,7 @@ const App = () => {
                     </Link>
                     <Link
                       to="/paketi"
+                      ref={paketi}
                       onClick={(event) => {
                         event.stopPropagation();
                         setMenuIsOpen(false);
