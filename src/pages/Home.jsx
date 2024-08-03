@@ -54,7 +54,7 @@ const Home = ({ onLoadingComplete, scrollTo }) => {
 
     const { top } = servicesRef.current.getBoundingClientRect();
 
-    const containerPosition = top + window.scrollY - 50;
+    const containerPosition = top - 50;
 
     scrollTo(containerPosition);
   };
