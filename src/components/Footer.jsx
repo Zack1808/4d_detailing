@@ -49,9 +49,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyright">
-        <span>
-          <FaRegCopyright /> 4D Detailing, {new Date().getFullYear()}
-        </span>
+        <span>4D Detailing, {new Date().getFullYear()}</span>
         <span>
           izradio:{" "}
           <a target="_blank" href="https://jeanpierrenovak.netlify.app">
