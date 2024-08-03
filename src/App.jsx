@@ -4,7 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 
 import { Home } from "./pages";
 
-import { Navbar, Loading } from "./components";
+import { Navbar, Loading, Footer } from "./components";
 
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -56,6 +56,7 @@ const App = () => {
                 element={<Home onLoadingComplete={handleEndLoading} />}
               />
             </Routes>
+            <Footer />
           </div>
           <div
             className={`mobile-navigation ${
