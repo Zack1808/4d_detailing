@@ -4,3 +4,4 @@ export { default as Loading } from "./Loading";
 export { default as Button } from "./Button";
 export { default as CategoryCard } from "./CategoryCard";
 export { default as CommentDisplay } from "./CommentDisplay";
+export { default as InfinteScroller } from "./InfinteScroller";
