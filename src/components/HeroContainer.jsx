@@ -2,7 +2,7 @@ import { Button } from "./";
 
 import "../css/components/HeroContainer.css";
 
-const HeroContainer = () => {
+const HeroContainer = ({ onClick }) => {
   return (
     <div className="hero-container">
       <div className="hero-content">
@@ -10,7 +10,7 @@ const HeroContainer = () => {
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, rem.
         </p>
-        <Button primary to="/usluge">
+        <Button primary onClick={onClick}>
           Pregledaj usluge
         </Button>
       </div>

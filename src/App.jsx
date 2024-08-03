@@ -16,10 +16,20 @@ const App = () => {
   const eksterijer = useRef(null);
   const poliranje = useRef(null);
   const paketi = useRef(null);
+  const content = useRef(null);
 
   const handleEndLoading = useCallback(() => {
     setLoading(false);
   }, []);
+
+  const scrollToView = (top) => {
+    if (!content.current) return;
+
+    content.current.scrollTo({
+      top,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     if (
@@ -48,12 +58,20 @@ const App = () => {
           className={`outer-container ${loading ? "" : "loaded"}`}
           style={{ "--dropDownHeight": `${dropdownHeight}rem` }}
         >
-          <div className={`content ${menuIsOpen ? "content-menu-open" : ""}`}>
+          <div
+            className={`content ${menuIsOpen ? "content-menu-open" : ""}`}
+            ref={content}
+          >
             <Navbar toggleMenu={() => setMenuIsOpen(true)} />
             <Routes>
               <Route
                 path="/"
-                element={<Home onLoadingComplete={handleEndLoading} />}
+                element={
+                  <Home
+                    onLoadingComplete={handleEndLoading}
+                    scrollTo={scrollToView}
+                  />
+                }
               />
             </Routes>
             <Footer />
