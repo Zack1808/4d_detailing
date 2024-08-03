@@ -62,9 +62,10 @@ h3 {
   font-size: var(--title-small);
 }
 
-p {
+p,
+cite {
   line-height: 1.5rem;
-  letter-spacing: 0.025rem;
+  letter-spacing: 0.05rem;
 }
 
 .outer-container {
@@ -87,6 +88,6 @@ p {
 
 .content.content-menu-open {
   scale: 0.5;
-  translate: -45%;
+  translate: -60%;
   overflow: hidden;
 }

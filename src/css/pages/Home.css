@@ -1,4 +1,5 @@
-.home-offers {
+.home-offers,
+.home-comment-display {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,4 +25,24 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   gap: 1rem;
+}
+
+hr {
+  background-image: linear-gradient(
+    45deg,
+    #e9c156,
+    #ffffaa,
+    #e1ab39,
+    #7e5d48,
+    #e9c156
+  );
+  border: none;
+  height: 1px;
+  background-size: 200%;
+  animation: info-background-moving 5s infinite alternate;
+}
+
+.home-comment-display .home-container {
+  display: flex;
+  flex-direction: row;
 }

@@ -30,13 +30,6 @@ const App = () => {
     )
       return;
 
-    console.log(
-      interijer.current.offsetHeight +
-        eksterijer.current.offsetHeight +
-        poliranje.current.offsetHeight +
-        paketi.current.offsetHeight
-    );
-
     setDropDownHeight(
       (interijer.current.offsetHeight +
         eksterijer.current.offsetHeight +
