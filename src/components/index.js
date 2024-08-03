@@ -5,3 +5,4 @@ export { default as Button } from "./Button";
 export { default as CategoryCard } from "./CategoryCard";
 export { default as CommentDisplay } from "./CommentDisplay";
 export { default as InfinteScroller } from "./InfinteScroller";
+export { default as Footer } from "./Footer";
