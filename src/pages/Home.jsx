@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { HeroContainer, CategoryCard } from "../components";
+import { HeroContainer, CategoryCard, CommentDisplay } from "../components";
 
 import "../css/pages/Home.css";
 
@@ -79,6 +79,21 @@ const Home = ({ onLoadingComplete }) => {
               <CategoryCard key={index} {...card} />
             ))}
           </div>
+        </div>
+      </div>
+      <hr />
+      <div className="home-comment-display">
+        <div className="home-container">
+          <CommentDisplay
+            comment="Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku."
+            user="Darko Kovač"
+            stars={5}
+          />
+          <CommentDisplay
+            comment={`Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`}
+            user="Zvonimir Migić"
+            stars={5}
+          />
         </div>
       </div>
     </>
