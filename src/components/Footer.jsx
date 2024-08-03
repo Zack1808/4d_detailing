@@ -10,36 +10,42 @@ const Footer = () => {
     <footer className="page-footer">
       <div className="footer-container">
         <div className="footer-about-us">
-          <Link to="/">
-            <img src="/logo.png" alt="page logo" />
-          </Link>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
-            perferendis exercitationem odio cum. Eum, facere amet atque odio
-            ipsa id minima quas aliquid quaerat sunt!
-          </p>
+          <span>
+            <Link to="/" className="logo">
+              <img src="/logo.png" alt="page logo" />
+            </Link>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et
+              perferendis exercitationem odio cum. Eum, facere amet atque odio
+              ipsa id minima quas aliquid quaerat sunt!
+            </p>
+          </span>
         </div>
         <div className="footer-contact-information">
-          <h4>Kontakt</h4>
-          <a href="mailto:4d.detailing.ln@gmail.com">
-            <strong>
-              <IoMail /> Email:
-            </strong>
-            4d.detailing.ln@gmail.com
-          </a>
-          <a href="tel:+385977588716">
-            <strong>
-              <FaPhoneAlt /> Telefon:
-            </strong>{" "}
-            +385 97 758 8716
-          </a>
+          <span>
+            <h4>Kontakt</h4>
+            <a href="mailto:4d.detailing.ln@gmail.com">
+              <strong>
+                <IoMail /> Email:
+              </strong>
+              4d.detailing.ln@gmail.com
+            </a>
+            <a href="tel:+385977588716">
+              <strong>
+                <FaPhoneAlt /> Telefon:
+              </strong>{" "}
+              +385 97 758 8716
+            </a>
+          </span>
         </div>
         <div className="footer-links">
-          <h4>Linkovi</h4>
-          <Link to="/">Početna</Link>
-          <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
-          <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>
-          <Link to="/kontakt">Kontakt</Link>
+          <span>
+            <h4>Linkovi</h4>
+            <Link to="/">Početna</Link>
+            <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
+            <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>
+            <Link to="/kontakt">Kontakt</Link>
+          </span>
         </div>
       </div>
       <div className="copyright">
