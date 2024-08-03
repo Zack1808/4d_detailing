@@ -25,8 +25,10 @@ const App = () => {
   const scrollToView = (top) => {
     if (!content.current) return;
 
+    const scrollToContainer = top + content.current.scrollTop;
+
     content.current.scrollTo({
-      top,
+      top: scrollToContainer,
       behavior: "smooth",
     });
   };
