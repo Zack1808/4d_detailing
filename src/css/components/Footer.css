@@ -72,6 +72,7 @@
 @media (width < 700px) {
   .footer-container {
     flex-direction: column;
+    gap: 3rem;
   }
   .footer-about-us,
   .footer-contact-information,
