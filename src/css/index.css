@@ -87,6 +87,6 @@ p {
 
 .content.content-menu-open {
   scale: 0.5;
-  translate: -45%;
+  translate: -60%;
   overflow: hidden;
 }
