@@ -44,7 +44,7 @@ const cards = [
   },
 ];
 
-const Home = ({ onLoadingComplete, scrollTo }) => {
+const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
   const [imagesLoaded, setImagesLoaed] = useState(0);
 
   const servicesRef = useRef(null);
@@ -77,6 +77,10 @@ const Home = ({ onLoadingComplete, scrollTo }) => {
 
     onLoadingComplete();
   }, [imagesLoaded]);
+
+  useEffect(() => {
+    resetScroll();
+  }, []);
 
   return (
     <>

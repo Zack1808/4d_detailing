@@ -33,6 +33,15 @@ const App = () => {
     });
   };
 
+  const resetScrollPosition = () => {
+    if (!content.current) return;
+
+    content.current.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     if (
       !interijer.current ||
@@ -72,6 +81,7 @@ const App = () => {
                   <Home
                     onLoadingComplete={handleEndLoading}
                     scrollTo={scrollToView}
+                    resetScroll={resetScrollPosition}
                   />
                 }
               />
