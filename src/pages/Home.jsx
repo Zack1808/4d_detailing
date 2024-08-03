@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import {
   HeroContainer,
@@ -44,8 +44,20 @@ const cards = [
   },
 ];
 
-const Home = ({ onLoadingComplete }) => {
+const Home = ({ onLoadingComplete, scrollTo }) => {
   const [imagesLoaded, setImagesLoaed] = useState(0);
+
+  const servicesRef = useRef(null);
+
+  const handleClick = () => {
+    if (!servicesRef.current) return;
+
+    const { top } = servicesRef.current.getBoundingClientRect();
+
+    const containerPosition = top + window.scrollY - 50;
+
+    scrollTo(containerPosition);
+  };
 
   useEffect(() => {
     const handleImageLoaded = () => {
@@ -68,8 +80,8 @@ const Home = ({ onLoadingComplete }) => {
 
   return (
     <>
-      <HeroContainer />
-      <div className="home-offers">
+      <HeroContainer onClick={handleClick} />
+      <div className="home-offers" ref={servicesRef}>
         <div className="home-container">
           <h2>Lorem ipsum dolor sit.</h2>
           <p>
