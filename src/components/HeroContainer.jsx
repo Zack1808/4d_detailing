@@ -21,11 +21,11 @@ const HeroContainer = ({ onClick }) => {
             href="mailto:4d.detailing.ln@gmail.com"
             aria-label="Email za kontakt"
           >
-            4d.detailing.ln@gmail.com
+            <strong>4d.detailing.ln@gmail.com</strong>
           </a>{" "}
           ili na broj{" "}
           <a href="tel:+385977588716" aria-label="Broj telefona za kontakt">
-            +385 97 758 8716
+            <strong>+385 97 758 8716</strong>
           </a>
         </p>
       </div>

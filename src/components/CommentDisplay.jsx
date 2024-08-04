@@ -7,8 +7,8 @@ const CommentDisplay = ({ comment = " comment", user = "user", stars = 5 }) => {
     let starItems = new Array();
     for (let i = 1; i <= 5; i++) {
       i <= stars
-        ? starItems.push(<FaStar key={i} className="star" />)
-        : starItems.push(<FaRegStar key={i} className="star" />);
+        ? starItems.push(<div className="star-full" key={i} />)
+        : starItems.push(<div className="star-outline" key={i} />);
     }
     return starItems;
   };
