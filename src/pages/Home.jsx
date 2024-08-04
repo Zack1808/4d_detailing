@@ -85,7 +85,7 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
   return (
     <>
       <HeroContainer onClick={handleClick} />
-      <div className="home-offers" ref={servicesRef}>
+      <div className="home-offers" ref={servicesRef} aria-label="Prikaz usluga">
         <div className="home-container">
           <h2>Lorem ipsum dolor sit.</h2>
           <p>
@@ -95,7 +95,7 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
             Voluptates voluptatibus pariatur totam quos. Quae saepe eius
             officiis fugit nulla necessitatibus earum.
           </p>
-          <div className="home-categories">
+          <div className="home-categories" aria-label="Kartice sa uslugama">
             {cards.map((card, index) => (
               <CategoryCard key={index} {...card} />
             ))}
@@ -103,7 +103,7 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
         </div>
       </div>
       <hr />
-      <div className="home-comment-display">
+      <div className="home-comment-display" aria-label="Prikaz recenzija">
         <div className="home-container">
           <InfinteScroller>
             <CommentDisplay

@@ -15,7 +15,7 @@ const CategoryCard = ({
       style={{ "--_backgroundImage": `url(${imageUrl})` }}
     >
       {smallTitle && <p>{smallTitle}</p>}
-      <h4>{bigTitle}</h4>
+      <span>{bigTitle}</span>
     </Link>
   );
 };

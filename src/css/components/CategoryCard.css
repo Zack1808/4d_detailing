@@ -21,7 +21,7 @@
   border-start-end-radius: 2px;
 }
 
-.category-card-container h4 {
+.category-card-container span {
   font-size: var(--title-small);
   background-color: rgba(6, 13, 13, 0.8);
   padding: 0.5rem 3rem 0.5rem 1rem;
@@ -32,7 +32,7 @@
   overflow: hidden;
 }
 
-.category-card-container h4::before {
+.category-card-container span::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -65,15 +65,15 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.category-card-container:hover h4,
-.category-card-container:focus h4 {
+.category-card-container:hover span,
+.category-card-container:focus span {
   background-color: transparent;
   color: var(--navs-color);
   transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.category-card-container:hover h4::before,
-.category-card-container:focus h4::before {
+.category-card-container:hover span::before,
+.category-card-container:focus span::before {
   scale: 1 1;
 }
 
