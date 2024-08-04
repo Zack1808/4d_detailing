@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
-import { Home } from "./pages";
+import { Home, Eksterijer } from "./pages";
 
 import { Navbar, Loading, Footer } from "./components";
 
@@ -81,6 +81,15 @@ const App = () => {
                   <Home
                     onLoadingComplete={handleEndLoading}
                     scrollTo={scrollToView}
+                    resetScroll={resetScrollPosition}
+                  />
+                }
+              />
+              <Route
+                path="/eksterijer"
+                element={
+                  <Eksterijer
+                    onLoadingComplete={handleEndLoading}
                     resetScroll={resetScrollPosition}
                   />
                 }
