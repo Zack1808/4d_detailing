@@ -19,7 +19,7 @@ const Navbar = ({ toggleMenu }) => {
             <Link to="/">Početna</Link>
           </li>
           <li>
-            <span tabIndex={1}>
+            <button>
               Usluge <FaChevronDown />
               <div className={`navigation-dropdown`}>
                 <Link to="/eksterijer">Čišćenje Eksterijera</Link>
@@ -27,7 +27,7 @@ const Navbar = ({ toggleMenu }) => {
                 <Link to="/interijer">Poliranje i zaštita</Link>
                 <Link to="/paketi">Paketi</Link>
               </div>
-            </span>
+            </button>
           </li>
           <li>
             <Link to="/o-nama">O nama</Link>

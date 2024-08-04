@@ -33,6 +33,15 @@ const App = () => {
     });
   };
 
+  const resetScrollPosition = () => {
+    if (!content.current) return;
+
+    content.current.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     if (
       !interijer.current ||
@@ -72,6 +81,7 @@ const App = () => {
                   <Home
                     onLoadingComplete={handleEndLoading}
                     scrollTo={scrollToView}
+                    resetScroll={resetScrollPosition}
                   />
                 }
               />
@@ -82,8 +92,13 @@ const App = () => {
             className={`mobile-navigation ${
               menuIsOpen ? "navigation-menu-open" : ""
             }`}
+            aria-hidden={!menuIsOpen}
           >
-            <button className="close-menu" onClick={() => setMenuIsOpen(false)}>
+            <button
+              className="close-menu"
+              onClick={() => setMenuIsOpen(false)}
+              aria-label="Zatvori izbornik"
+            >
               <FaXmark style={{ fontSize: "1.5rem" }} />
             </button>
             <ul className="links">

@@ -51,7 +51,7 @@ const Footer = () => {
       <div className="copyright">
         <span>4D Detailing, {new Date().getFullYear()}</span>
         <span>
-          izradio:{" "}
+          Izradio:{" "}
           <a target="_blank" href="https://jeanpierrenovak.netlify.app">
             &nbsp;JPN
           </a>
