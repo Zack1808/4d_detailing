@@ -25,17 +25,17 @@ const InfinteScroller = ({ children }) => {
           <li key={index}>{child}</li>
         ))}
         {children.map((child, index) => (
-          <li key={index} className="scroller-hidden">
+          <li key={index} className="scroller-hidden" aria-hidden>
             {child}
           </li>
         ))}
         {children.map((child, index) => (
-          <li key={index} className="scroller-hidden">
+          <li key={index} className="scroller-hidden" aria-hidden>
             {child}
           </li>
         ))}
         {children.map((child, index) => (
-          <li key={index} className="scroller-hidden">
+          <li key={index} className="scroller-hidden" aria-hidden>
             {child}
           </li>
         ))}
