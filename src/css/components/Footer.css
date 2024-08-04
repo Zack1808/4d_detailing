@@ -12,7 +12,7 @@
   display: flex;
   gap: 4rem;
   width: 100%;
-  max-width: 1500px;
+  max-width: 93.75rem;
   justify-content: space-between;
 }
 
@@ -58,7 +58,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1500px;
+  max-width: 93.75rem;
   color: var(--text-color);
   opacity: 0.5;
 }

@@ -26,8 +26,8 @@
     2% 35%,
     39% 35%
   );
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   background-image: linear-gradient(
     90deg,
     #e9c156,
@@ -62,8 +62,8 @@
     #7e5d48,
     #e9c156
   );
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   position: relative;
   background-color: red;
   z-index: 2;

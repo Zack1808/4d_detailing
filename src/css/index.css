@@ -93,3 +93,21 @@ strong {
   translate: -60%;
   overflow: hidden;
 }
+
+::-webkit-scrollbar {
+  width: 3px;
+  position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(
+    180deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #7a797a,
+    #f1f2f2,
+    #d1d3d4
+  );
+  border-radius: 50px;
+}

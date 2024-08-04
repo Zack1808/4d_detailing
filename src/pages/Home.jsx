@@ -70,6 +70,8 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
       img.onload = handleImageLoaded;
       img.onerror = handleImageLoaded;
     });
+
+    resetScroll();
   }, []);
 
   useEffect(() => {
@@ -77,10 +79,6 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
 
     onLoadingComplete();
   }, [imagesLoaded]);
-
-  useEffect(() => {
-    resetScroll();
-  }, []);
 
   return (
     <>

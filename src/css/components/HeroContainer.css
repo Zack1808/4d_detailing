@@ -37,7 +37,7 @@
 
 .hero-content {
   width: 100%;
-  max-width: 1500px;
+  max-width: 93.75rem;
   transform: scaleX(-1) translateY(-50%);
   z-index: 2;
   display: flex;
