@@ -38,10 +38,13 @@ const transition = (Component) => {
           }}
         >
           <motion.img
-            src="/logo.png"
+            src="/logo-transition.png"
             initial={{ right: "90%" }}
-            animate={{ right: "-20%", transition: { duration: 0.8 } }}
-            style={{ position: "absolute" }}
+            animate={{ right: "-90%", transition: { duration: 0.8 } }}
+            style={{
+              position: "absolute",
+              width: "clamp(200px, 20rem, 350px)",
+            }}
           />
         </motion.div>
       </>
