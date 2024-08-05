@@ -20,7 +20,7 @@
   background-image: url("/hero-bg-small.webp");
   background-size: cover;
   background-position: center center;
-  filter: grayscale(0.2) brightness(0.1);
+  filter: grayscale(0.2) brightness(0.2);
 }
 
 .header-content {

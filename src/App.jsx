@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
 import { Home, Eksterijer } from "./pages";
 
-import { Navbar, Loading, Footer } from "./components";
+import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
 
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -38,7 +38,6 @@ const App = () => {
 
     content.current.scrollTo({
       top: 0,
-      behavior: "smooth",
     });
   };
 
@@ -74,7 +73,7 @@ const App = () => {
             ref={content}
           >
             <Navbar toggleMenu={() => setMenuIsOpen(true)} />
-            <Routes>
+            <AnimatedRouted>
               <Route
                 path="/"
                 element={
@@ -94,7 +93,7 @@ const App = () => {
                   />
                 }
               />
-            </Routes>
+            </AnimatedRouted>
             <Footer />
           </div>
           <div

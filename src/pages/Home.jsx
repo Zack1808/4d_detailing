@@ -7,6 +7,8 @@ import {
   InfinteScroller,
 } from "../components";
 
+import transition from "../helpers/transition";
+
 import "../css/pages/Home.css";
 
 const imagesToLoad = [
@@ -81,7 +83,7 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
   }, [imagesLoaded]);
 
   return (
-    <>
+    <div>
       <HeroContainer onClick={handleClick} />
       <div className="home-offers" ref={servicesRef} aria-label="Prikaz usluga">
         <div className="home-container">
@@ -117,8 +119,8 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
           </InfinteScroller>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Home;
+export default transition(Home);
