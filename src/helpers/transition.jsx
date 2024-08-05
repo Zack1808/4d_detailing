@@ -43,7 +43,7 @@ const transition = (Component) => {
             animate={{ right: "-90%", transition: { duration: 0.8 } }}
             style={{
               position: "absolute",
-              width: "clamp(200px, 20rem, 350px)",
+              width: "20rem",
             }}
           />
         </motion.div>
