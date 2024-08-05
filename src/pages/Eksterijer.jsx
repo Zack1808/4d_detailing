@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import { Header } from "../components";
 
+import transition from "../helpers/transition";
+
 import "../css/pages/Eksterijer.css";
 
 const imagesToLoad = ["/hero-bg-small.webp"];
@@ -40,4 +42,4 @@ const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
   );
 };
 
-export default Eksterijer;
+export default transition(Eksterijer);

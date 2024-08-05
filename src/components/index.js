@@ -7,3 +7,4 @@ export { default as CommentDisplay } from "./CommentDisplay";
 export { default as InfinteScroller } from "./InfinteScroller";
 export { default as Footer } from "./Footer";
 export { default as Header } from "./Header";
+export { default as AnimatedRouted } from "./AnimatedRouted";
