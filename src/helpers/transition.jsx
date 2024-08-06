@@ -23,9 +23,9 @@ const transition = (Component) => {
         ></motion.div>
         <motion.div
           initial={{ scaleX: 1 }}
-          animate={{ scaleX: 0 }}
+          animate={{ scaleX: 0, transition: { delay: 0.7 } }}
           exit={{ scaleX: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
+          transition={{ duration: 0.5 }}
           style={{
             position: "fixed",
             inset: 0,
@@ -39,8 +39,12 @@ const transition = (Component) => {
         >
           <motion.img
             src="/logo-transition.png"
+            alt="logo"
             initial={{ right: "90%" }}
-            animate={{ right: "-90%", transition: { duration: 0.8 } }}
+            animate={{
+              right: "-120%",
+              transition: { duration: window.innerWidth > 700 ? 2 : 0.8 },
+            }}
             style={{
               position: "absolute",
               width: "20rem",
