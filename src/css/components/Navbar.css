@@ -11,10 +11,45 @@
 .loaded .navbar-top {
   translate: none;
   position: sticky;
-  top: 0;
+  top: -0.1rem;
   z-index: 99;
   right: 0;
   left: 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  .navbar-top {
+    padding-top: 1.5rem;
+  }
+
+  .loaded .navbar-top::before,
+  .loaded .navbar-top::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -0.1rem;
+    right: -0.1rem;
+    height: 0.5rem;
+  }
+
+  .loaded .navbar-top::before {
+    background-image: linear-gradient(
+      135deg,
+      #e9c156,
+      #ffffaa,
+      #e1ab39,
+      #7e5d48,
+      #e9c156
+    );
+  }
+
+  .loaded .navbar-top::after {
+    background-color: var(--navs-color);
+    height: 0.6rem;
+    transform-origin: right;
+    animation: shrink linear;
+    animation-timeline: scroll();
+  }
 }
 
 .navbar-content-container {
@@ -264,5 +299,11 @@
   to {
     display: none;
     max-height: 0;
+  }
+}
+
+@keyframes shrink {
+  to {
+    scale: 0 1;
   }
 }

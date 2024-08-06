@@ -1,0 +1,13 @@
+.eksterijer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.eksterijer-content {
+  width: 100%;
+  max-width: 93.75rem;
+}

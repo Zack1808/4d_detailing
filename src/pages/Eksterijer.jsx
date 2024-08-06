@@ -38,6 +38,9 @@ const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
   return (
     <>
       <Header title="Čišćenje Eksterijera" />
+      <div className="eksterijer-container">
+        <div className="eksterijer-content">Hello</div>
+      </div>
     </>
   );
 };
