@@ -33,8 +33,8 @@ const CategoryDisplayer = React.memo(({ categories }) => {
             }`}
             key={`${index}${category.title}`}
           >
-            <img src={category.imgUrl} alt={category.title} />
             <p>{category.description}</p>
+            <img src={category.imgUrl} alt={category.title} />
           </div>
         ))}
       </div>
