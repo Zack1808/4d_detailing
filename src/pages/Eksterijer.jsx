@@ -37,7 +37,7 @@ const categories = [
   },
 ];
 
-const Eksterijer = ({ onLoadingComplete, resetScroll, scrollTo }) => {
+const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -74,7 +74,6 @@ const Eksterijer = ({ onLoadingComplete, resetScroll, scrollTo }) => {
             categories={categories}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
-            scrollTo={scrollTo}
           />
         </div>
       </div>

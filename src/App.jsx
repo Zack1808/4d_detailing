@@ -94,7 +94,6 @@ const App = () => {
                   <Eksterijer
                     onLoadingComplete={handleEndLoading}
                     resetScroll={resetScrollPosition}
-                    scrollTo={scrollToView}
                   />
                 }
               />
