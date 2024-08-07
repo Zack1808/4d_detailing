@@ -190,6 +190,32 @@
   .category-displayer-btns li {
     width: 100%;
   }
+
+  .category-displayer-btns li .btn:hover::before,
+  .category-displayer-btns li .btn:focus::before,
+  .category-displayer-btns li .btn:hover::after,
+  .category-displayer-btns li .btn:focus::after {
+    opacity: 0;
+  }
+
+  .category-displayer-btns li.active .btn::before,
+  .category-displayer-btns li.active .btn::after {
+    opacity: 1;
+  }
+
+  .category-displayer-btns li:hover::after,
+  .category-displayer-btns li:focus-within::after {
+    opacity: 0;
+  }
+
+  .category-displayer-btns li:hover,
+  .category-displayer-btns li:focus-within {
+    background-color: transparent;
+  }
+
+  .category-displayer-btns li.active::after {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-in-category {
