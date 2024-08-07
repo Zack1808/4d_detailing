@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
-import { Home, Eksterijer, Interijer } from "./pages";
+import { Home, Eksterijer, Interijer, Poliranje } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
 
@@ -101,6 +101,15 @@ const App = () => {
                 path="/interijer"
                 element={
                   <Interijer
+                    onLoadingComplete={handleEndLoading}
+                    resetScroll={resetScrollPosition}
+                  />
+                }
+              />
+              <Route
+                path="/poliranje"
+                element={
+                  <Poliranje
                     onLoadingComplete={handleEndLoading}
                     resetScroll={resetScrollPosition}
                   />
