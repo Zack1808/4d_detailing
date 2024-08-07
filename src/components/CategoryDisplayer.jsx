@@ -1,12 +1,8 @@
-import React, { useState } from "react";
-
 import { Button } from "./";
 
 import "../css/components/CategoryDisplayer.css";
 
-const CategoryDisplayer = React.memo(({ categories }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
+const CategoryDisplayer = ({ categories, activeIndex, setActiveIndex }) => {
   return (
     <div className="category-displayer-container">
       <ul className="category-displayer-btns">
@@ -33,13 +29,15 @@ const CategoryDisplayer = React.memo(({ categories }) => {
             }`}
             key={`${index}${category.title}`}
           >
-            <p>{category.description}</p>
+            <div className="category-text">
+              <h2>{category.title}</h2>
+              <p>{category.description}</p>
+            </div>
             <img src={category.imgUrl} alt={category.title} />
           </div>
         ))}
       </div>
     </div>
   );
-});
-
+};
 export default CategoryDisplayer;

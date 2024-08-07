@@ -37,8 +37,9 @@ const categories = [
   },
 ];
 
-const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
+const Eksterijer = ({ onLoadingComplete, resetScroll, scrollTo }) => {
   const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const handleImageLoaded = () => {
@@ -69,7 +70,12 @@ const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
       <Header title="Čišćenje Eksterijera" />
       <div className="eksterijer-container">
         <div className="eksterijer-content">
-          <CategoryDisplayer categories={categories} />
+          <CategoryDisplayer
+            categories={categories}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            scrollTo={scrollTo}
+          />
         </div>
       </div>
     </>

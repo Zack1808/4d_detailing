@@ -27,8 +27,12 @@ const App = () => {
 
     const scrollToContainer = top + content.current.scrollTop;
 
+    console.log(scrollToContainer);
+
+    console.log(top);
+
     content.current.scrollTo({
-      top: scrollToContainer,
+      top: top,
       behavior: "smooth",
     });
   };
@@ -90,6 +94,7 @@ const App = () => {
                   <Eksterijer
                     onLoadingComplete={handleEndLoading}
                     resetScroll={resetScrollPosition}
+                    scrollTo={scrollToView}
                   />
                 }
               />

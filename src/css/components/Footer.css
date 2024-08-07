@@ -79,7 +79,7 @@
   font-size: 1.75rem;
 }
 
-@media (width < 700px) {
+@media (width < 50rem) {
   .footer-container {
     flex-direction: column;
     gap: 3rem;
