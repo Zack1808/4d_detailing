@@ -28,7 +28,7 @@ const Navbar = ({ toggleMenu }) => {
                 <Link to="/interijer" onClick={(event) => event.target.blur()}>
                   Čišćenje Interijera
                 </Link>
-                <Link to="/interijer" onClick={(event) => event.target.blur()}>
+                <Link to="/poliranje" onClick={(event) => event.target.blur()}>
                   Poliranje i zaštita
                 </Link>
                 <Link to="/paketi" onClick={(event) => event.target.blur()}>

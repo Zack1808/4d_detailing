@@ -6,6 +6,7 @@
   padding: 3rem 2rem;
   gap: 3rem;
   background-color: var(--navs-color);
+  margin-top: auto;
 }
 
 .footer-container {

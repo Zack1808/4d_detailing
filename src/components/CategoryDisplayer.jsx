@@ -1,8 +1,11 @@
+import { useLocation } from "react-router-dom";
 import { Button } from "./";
 
 import "../css/components/CategoryDisplayer.css";
 
 const CategoryDisplayer = ({ categories, activeIndex, setActiveIndex }) => {
+  const location = useLocation().pathname;
+
   return (
     <div className="category-displayer-container">
       <ul className="category-displayer-btns">
@@ -12,6 +15,7 @@ const CategoryDisplayer = ({ categories, activeIndex, setActiveIndex }) => {
             className={activeIndex === index ? "active" : ""}
           >
             <Button
+              to={`${location}?${category.title.replace(/ /g, "-")}`}
               onClick={() => {
                 setActiveIndex(index);
               }}
