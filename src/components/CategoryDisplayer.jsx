@@ -12,6 +12,7 @@ const CategoryDisplayer = ({ categories, activeIndex, setActiveIndex }) => {
             className={activeIndex === index ? "active" : ""}
           >
             <Button
+              to={`/eksterijer?${category.title.replace(/ /g, "-")}`}
               onClick={() => {
                 setActiveIndex(index);
               }}

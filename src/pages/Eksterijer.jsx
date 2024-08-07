@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { CategoryDisplayer, Header } from "../components";
 
@@ -41,10 +42,16 @@ const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const location = decodeURIComponent(
+    useLocation().search.replace("?", "").replace(/-/g, " ")
+  );
+
   useEffect(() => {
     const handleImageLoaded = () => {
       setImagesLoaded((prevState) => prevState + 1);
     };
+
+    setActiveIndex(categories.findIndex((item) => item.title === location));
 
     imagesToLoad.forEach((image) => {
       const img = new Image();
