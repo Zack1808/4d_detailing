@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="page-footer">
       <div className="footer-container">
         <div className="footer-about-us">
-          <span>
+          <div>
             <Link to="/" className="logo">
               <img src="/logo.png" alt="page logo" />
             </Link>
@@ -19,10 +19,10 @@ const Footer = () => {
               perferendis exercitationem odio cum. Eum, facere amet atque odio
               ipsa id minima quas aliquid quaerat sunt!
             </p>
-          </span>
+          </div>
         </div>
         <div className="footer-contact-information">
-          <span>
+          <div>
             <h4>Kontakt</h4>
             <a href="mailto:4d.detailing.ln@gmail.com">
               <strong>
@@ -36,22 +36,22 @@ const Footer = () => {
               </strong>{" "}
               +385 97 758 8716
             </a>
-            <a>
+            <span>
               <strong>
                 <FaClock /> Radno vrijeme:
               </strong>
               po dogovoru
-            </a>
-          </span>
+            </span>
+          </div>
         </div>
         <div className="footer-links">
-          <span>
+          <div>
             <h4>Linkovi</h4>
             <Link to="/">Početna</Link>
             <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
             <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>
             <Link to="/kontakt">Kontakt</Link>
-          </span>
+          </div>
         </div>
       </div>
 
@@ -61,10 +61,15 @@ const Footer = () => {
           <a
             target="_blank"
             href="https://www.instagram.com/4ddetailingln?igsh=ZXF0bmI5b2YydmZy"
+            aria-label="Kontakt Instagram"
           >
             <FaInstagram className="social-media-icon" />
           </a>
-          <a target="_blank" href="https://wa.me/+385977588716">
+          <a
+            target="_blank"
+            href="https://wa.me/+385977588716"
+            aria-label="Kontakt Whatsapp"
+          >
             <FaWhatsapp className="social-media-icon" />
           </a>
         </div>
