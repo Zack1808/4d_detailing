@@ -67,7 +67,7 @@ const Paketi = ({ onLoadingComplete, resetScroll }) => {
 
   return (
     <>
-      <Header title="Paketi" />
+      <Header title="Posebni paketi" />
       <div className="eksterijer-container">
         <div className="eksterijer-content">
           <CategoryDisplayer
