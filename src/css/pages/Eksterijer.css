@@ -1,0 +1,28 @@
+.eksterijer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  padding-top: 3rem;
+}
+
+.eksterijer-content {
+  width: 100%;
+  max-width: 93.75rem;
+}
+
+.dropdown-category-displayer {
+  display: none;
+}
+
+@media (width < 50rem) {
+  .category-displayer {
+    display: none;
+  }
+
+  .dropdown-category-displayer {
+    display: flex;
+  }
+}

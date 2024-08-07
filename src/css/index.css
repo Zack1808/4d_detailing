@@ -86,6 +86,7 @@ strong {
   z-index: 5;
   transition: 0.5s ease-in-out;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .content.content-menu-open {
@@ -96,7 +97,6 @@ strong {
 
 ::-webkit-scrollbar {
   width: 3px;
-  position: absolute;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -112,24 +112,8 @@ strong {
   border-radius: 50px;
 }
 
-.slide-in {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100dvh;
-  width: 100%;
-  background: var(--navs-color);
-  transform-origin: bottom;
-  z-index: 1000;
-}
-
-.slide-out {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100dvh;
-  width: 100%;
-  background: var(--navs-color);
-  transform-origin: top;
-  z-index: 1000;
+@supports (animation-timeline: scroll()) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }

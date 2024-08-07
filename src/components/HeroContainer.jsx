@@ -6,10 +6,8 @@ const HeroContainer = ({ onClick }) => {
   return (
     <div className="hero-container">
       <div className="hero-content">
-        <h1>Lorem, ipsum dolor.</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet, rem.
-        </p>
+        <h1>Detailing u 4D formatu</h1>
+        <p>Jer dovoljno nije dovoljno</p>
         <Button primary onClick={onClick} aria-label="Pomaknite se na usluge">
           Pregledaj usluge
         </Button>
