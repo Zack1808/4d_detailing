@@ -2,6 +2,14 @@
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+  transform: translateY(10%);
+  opacity: 0;
+  transition: 0.3s ease-in-out 0.8s;
+}
+
+.loaded .category-displayer-container {
+  opacity: 1;
+  transform: none;
 }
 
 .category-displayer-btns {
