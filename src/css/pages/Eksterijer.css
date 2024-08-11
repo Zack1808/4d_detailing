@@ -7,6 +7,14 @@
   padding: 1rem;
   padding-top: 3rem;
   gap: 2.25rem;
+  transform: translateY(10%);
+  opacity: 0;
+  transition: 0.3s ease-in-out 0.8s;
+}
+
+.loaded .eksterijer-container {
+  transform: none;
+  opacity: 1;
 }
 
 .eksterijer-content {
