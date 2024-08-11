@@ -62,17 +62,6 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
   };
 
   useEffect(() => {
-    const handleImageLoaded = () => {
-      setImagesLoaed((prevState) => prevState + 1);
-    };
-
-    imagesToLoad.forEach((image) => {
-      const img = new Image();
-      img.src = image;
-      img.onload = handleImageLoaded;
-      img.onerror = handleImageLoaded;
-    });
-
     resetScroll();
   }, []);
 

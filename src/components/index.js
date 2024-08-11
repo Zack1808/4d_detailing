@@ -8,4 +8,4 @@ export { default as InfinteScroller } from "./InfinteScroller";
 export { default as Footer } from "./Footer";
 export { default as Header } from "./Header";
 export { default as AnimatedRouted } from "./AnimatedRouted";
-export { default as CategoryDisplayer } from "./CategoryDisplayer";
+export { default as PriceCard } from "./PriceCard";

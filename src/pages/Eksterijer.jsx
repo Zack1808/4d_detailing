@@ -1,74 +1,35 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
-import { CategoryDisplayer, Header } from "../components";
+import { Header, PriceCard } from "../components";
 
 import transition from "../helpers/transition";
 
 import "../css/pages/Eksterijer.css";
 
-const imagesToLoad = [
-  "/hero-bg-small.webp",
-  "https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1565689876697-e467b6c54da2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1581066057498-034b1cf15385?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-];
-
 const categories = [
   {
     title: "Vanjsko pranje",
-    imgUrl:
-      "https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem totam magnam quo quae dignissimos, quis iusto, voluptate corrupti quidem molestias asperiores praesentium in rerum eum, vero quas dicta quod harum vitae. Cumque vitae reiciendis laboriosam sint alias animi consequatur necessitatibus non magnam! Quos earum ab quisquam cupiditate sapiente laudantium illum dolorum nemo non, hic numquam dicta aut reprehenderit perferendis in ipsa ut optio id necessitatibus iste. Reprehenderit eos nobis pariatur consectetur qui optio nemo! Obcaecati necessitatibus velit laboriosam voluptatibus est unde facilis cupiditate mollitia exercitationem ut. Voluptatem sit deleniti dignissimos explicabo, asperiores eveniet molestias eaque doloribus esse, nobis atque accusamus nisi reiciendis illum consequatur quidem sunt consequuntur labore quisquam sequi nihil fugit. Praesentium eum quia id sapiente corrupti necessitatibus alias minima dolorum quaerat deserunt ipsum beatae totam delectus perferendis veritatis ab, possimus enim laudantium sunt dolores assumenda! Amet iusto omnis suscipit! Ducimus cum exercitationem voluptates minima nesciunt commodi reprehenderit facilis repellat, iusto accusantium nemo dicta ex voluptatem aspernatur est. Vero, porro atque? Eligendi molestias iste consequatur incidunt quo suscipit libero soluta minima. Ut vero doloremque in maxime unde dolore itaque quo quibusdam perspiciatis exercitationem, praesentium non labore ea placeat quia, odit veniam, eos laborum tempora incidunt. Corporis sint deleniti quisquam, blanditiis ab nihil vel saepe? At asperiores quod illo dolore molestiae neque, incidunt laborum ipsum expedita laboriosam harum suscipit sequi excepturi, corrupti exercitationem consectetur ad, eius possimus cupiditate impedit ipsa. Nulla, deleniti quam eos, exercitationem voluptas, vel qui eveniet reprehenderit illo veniam similique accusamus sequi ipsam ab. Incidunt, molestiae sit?",
+    price: 15,
+    list: ["+ usisavanje interijera", "+ brisanje prašine interijera"],
   },
   {
     title: "Vanjsko pranje s naplatcima",
-    imgUrl:
-      "https://images.unsplash.com/photo-1565689876697-e467b6c54da2?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem totam magnam quo quae dignissimos, quis iusto, voluptate corrupti quidem molestias asperiores praesentium in rerum eum, vero quas dicta quod harum vitae. Cumque vitae reiciendis laboriosam sint alias animi consequatur necessitatibus non magnam! Quos earum ab quisquam cupiditate sapiente laudantium illum dolorum nemo non, hic numquam dicta aut reprehenderit perferendis in ipsa ut optio id necessitatibus iste. Reprehenderit eos nobis pariatur consectetur qui optio nemo! Obcaecati necessitatibus velit laboriosam voluptatibus est unde facilis cupiditate mollitia exercitationem ut. Voluptatem sit deleniti dignissimos explicabo, asperiores eveniet molestias eaque doloribus esse, nobis atque accusamus nisi reiciendis illum consequatur quidem sunt consequuntur labore quisquam sequi nihil fugit. Praesentium eum quia id sapiente corrupti necessitatibus alias minima dolorum quaerat deserunt ipsum beatae totam delectus perferendis veritatis ab, possimus enim laudantium sunt dolores assumenda! Amet iusto omnis suscipit! Ducimus cum exercitationem voluptates minima nesciunt commodi reprehenderit facilis repellat, iusto accusantium nemo dicta ex voluptatem aspernatur est. Vero, porro atque? Eligendi molestias iste consequatur incidunt quo suscipit libero soluta minima. Ut vero doloremque in maxime unde dolore itaque quo quibusdam perspiciatis exercitationem, praesentium non labore ea placeat quia, odit veniam, eos laborum tempora incidunt. Corporis sint deleniti quisquam, blanditiis ab nihil vel saepe? At asperiores quod illo dolore molestiae neque, incidunt laborum ipsum expedita laboriosam harum suscipit sequi excepturi, corrupti exercitationem consectetur ad, eius possimus cupiditate impedit ipsa. Nulla, deleniti quam eos, exercitationem voluptas, vel qui eveniet reprehenderit illo veniam similique accusamus sequi ipsam ab. Incidunt, molestiae sit?",
+    price: 20,
+    list: ["+ usisavanje interijera", "+ brisanje prašine interijera"],
   },
   {
     title: "Premium čišćenje vozila",
-    imgUrl:
-      "https://images.unsplash.com/photo-1581066057498-034b1cf15385?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem totam magnam quo quae dignissimos, quis iusto, voluptate corrupti quidem molestias asperiores praesentium in rerum eum, vero quas dicta quod harum vitae. Cumque vitae reiciendis laboriosam sint alias animi consequatur necessitatibus non magnam! Quos earum ab quisquam cupiditate sapiente laudantium illum dolorum nemo non, hic numquam dicta aut reprehenderit perferendis in ipsa ut optio id necessitatibus iste. Reprehenderit eos nobis pariatur consectetur qui optio nemo! Obcaecati necessitatibus velit laboriosam voluptatibus est unde facilis cupiditate mollitia exercitationem ut. Voluptatem sit deleniti dignissimos explicabo, asperiores eveniet molestias eaque doloribus esse, nobis atque accusamus nisi reiciendis illum consequatur quidem sunt consequuntur labore quisquam sequi nihil fugit. Praesentium eum quia id sapiente corrupti necessitatibus alias minima dolorum quaerat deserunt ipsum beatae totam delectus perferendis veritatis ab, possimus enim laudantium sunt dolores assumenda! Amet iusto omnis suscipit! Ducimus cum exercitationem voluptates minima nesciunt commodi reprehenderit facilis repellat, iusto accusantium nemo dicta ex voluptatem aspernatur est. Vero, porro atque? Eligendi molestias iste consequatur incidunt quo suscipit libero soluta minima. Ut vero doloremque in maxime unde dolore itaque quo quibusdam perspiciatis exercitationem, praesentium non labore ea placeat quia, odit veniam, eos laborum tempora incidunt. Corporis sint deleniti quisquam, blanditiis ab nihil vel saepe? At asperiores quod illo dolore molestiae neque, incidunt laborum ipsum expedita laboriosam harum suscipit sequi excepturi, corrupti exercitationem consectetur ad, eius possimus cupiditate impedit ipsa. Nulla, deleniti quam eos, exercitationem voluptas, vel qui eveniet reprehenderit illo veniam similique accusamus sequi ipsam ab. Incidunt, molestiae sit?",
+    price: 35,
+    list: [
+      "Detaljno pranje eksterijera",
+      "Detaljno pranje interijera bez kemijskog izvlačenja tekstilnih površina i krova",
+    ],
+    priceSuv: 10,
+    priceTransporter: 30,
   },
 ];
 
-const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
-  const [imagesLoaded, setImagesLoaded] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const location = decodeURIComponent(
-    useLocation().search.replace("?", "").replace(/-/g, " ")
-  );
-
-  useEffect(() => {
-    const handleImageLoaded = () => {
-      setImagesLoaded((prevState) => prevState + 1);
-    };
-
-    location &&
-      setActiveIndex(categories.findIndex((item) => item.title === location));
-
-    imagesToLoad.forEach((image) => {
-      const img = new Image();
-      img.src = image;
-      img.onload = handleImageLoaded;
-      img.onerror = handleImageLoaded;
-    });
-
-    resetScroll();
-  }, []);
-
-  useEffect(() => {
-    if (imagesLoaded < imagesToLoad.length) return;
-
-    onLoadingComplete();
-  }, [imagesLoaded]);
+const Eksterijer = ({ resetScroll }) => {
   useEffect(() => {
     resetScroll();
   }, []);
@@ -78,11 +39,42 @@ const Eksterijer = ({ onLoadingComplete, resetScroll }) => {
       <Header title="Čišćenje Eksterijera" />
       <div className="eksterijer-container">
         <div className="eksterijer-content">
-          <CategoryDisplayer
-            categories={categories}
-            activeIndex={activeIndex}
-            setActiveIndex={setActiveIndex}
+          <div className="eksterijer-text">
+            <h2>Čišćenje Eksterijera</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              provident earum pariatur repellat, praesentium voluptas assumenda!
+              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
+              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
+              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
+              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
+              fugiat enim nulla saepe placeat a delectus repellat doloribus,
+              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
+              provident, nisi, delectus qui atque id in rerum, est nam dolorum
+              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
+              dolores dolore iusto placeat inventore facere, quos eius deleniti.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+              provident earum pariatur repellat, praesentium voluptas assumenda!
+              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
+              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
+              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
+              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
+              fugiat enim nulla saepe placeat a delectus repellat doloribus,
+              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
+              provident, nisi, delectus qui atque id in rerum, est nam dolorum
+              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
+              dolores dolore iusto placeat inventore facere, quos eius deleniti.
+            </p>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="placeholder-image-eksterijer"
           />
+        </div>
+        <div className="eksterijer-price-list">
+          {categories.map((category) => (
+            <PriceCard {...category} key={category.title} />
+          ))}
         </div>
       </div>
     </>

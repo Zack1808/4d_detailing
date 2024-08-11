@@ -274,6 +274,10 @@
   .links {
     display: none;
   }
+
+  .links::before {
+    display: none;
+  }
 }
 
 @keyframes openMobileDropdown {
