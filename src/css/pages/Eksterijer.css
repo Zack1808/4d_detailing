@@ -6,23 +6,81 @@
   width: 100%;
   padding: 1rem;
   padding-top: 3rem;
+  gap: 2.25rem;
 }
 
 .eksterijer-content {
   width: 100%;
   max-width: 93.75rem;
+  display: flex;
+  color: var(--text-color);
+  align-items: flex-start;
+  gap: 2rem;
+  justify-content: center;
 }
 
-.dropdown-category-displayer {
-  display: none;
+.eksterijer-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+  max-width: 70ch;
 }
 
-@media (width < 50rem) {
-  .category-displayer {
-    display: none;
+.eksterijer-text p {
+  max-width: 70ch;
+}
+
+.eksterijer-content img {
+  flex: 1;
+  width: 50%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center bottom;
+  margin-top: 5.5rem;
+  -webkit-mask: linear-gradient(
+    90deg,
+    transparent,
+    transparent 1%,
+    red 60%,
+    red
+  );
+  mask: linear-gradient(90deg, transparent, transparent 1%, red 60%, red);
+}
+
+.eksterijer-price-list {
+  width: 100%;
+  max-width: 93.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+@media (width < 55rem) {
+  .eksterijer-content {
+    flex-direction: column;
   }
 
-  .dropdown-category-displayer {
-    display: flex;
+  .eksterijer-text {
+    max-width: none;
+  }
+
+  .eksterijer-text p {
+    max-width: none;
+  }
+
+  .eksterijer-content img {
+    margin-top: 0;
+    width: 100%;
+    -webkit-mask: linear-gradient(transparent, red 30%);
+    mask: linear-gradient(transparent, transparent 1%, red 60%, red);
+  }
+}
+
+@media (width < 32.5rem) {
+  .eksterijer-price-list {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   }
 }

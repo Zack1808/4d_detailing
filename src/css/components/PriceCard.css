@@ -1,0 +1,131 @@
+.price-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  background: hsl(0 100% 100% / 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 80;
+  color: var(--text-color);
+  transition: color 0.3s ease-in-out;
+}
+
+.price-card-container > * {
+  z-index: 20;
+}
+
+.price-card-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #686769,
+    #f1f2f2,
+    #d1d3d4
+  );
+  z-index: -1;
+  background-size: cover;
+  background-attachment: fixed;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.price-card-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/droplets.png");
+  background-size: 200px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  background-attachment: fixed;
+}
+
+.price-card-container:hover,
+.price-card-container:focus {
+  color: var(--navs-color);
+}
+
+.price-card-container:hover::before,
+.price-card-container:focus::before {
+  opacity: 1;
+}
+
+.price-card-container:hover::after,
+.price-card-container:focus::after {
+  opacity: 0.2;
+}
+
+.price-card-container h4 {
+  font-size: var(--title-regular);
+  font-weight: 500;
+}
+
+.price-card-container h5 {
+  font-size: var(--title-big);
+  display: flex;
+  gap: 0.4rem;
+}
+
+.price-card-container h5 small {
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.price-card-container ul {
+  margin-block: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style-type: none;
+}
+
+.price-card-container ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.price-card-container ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.price-card-added {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.price-card-container small {
+  font-size: 0.8rem;
+  text-decoration: underline;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.price-card-container .btn {
+  margin-top: auto;
+  text-align: center;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+
+.price-card-container:hover .btn,
+.price-card-container:focus .btn {
+  opacity: 1;
+}
+
+@media (width < 62.5rem) {
+  .price-card-container .btn {
+    opacity: 1;
+  }
+}

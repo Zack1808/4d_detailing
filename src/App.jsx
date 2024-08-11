@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
@@ -6,11 +6,24 @@ import { Home, Eksterijer, Interijer, Poliranje, Paketi } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
 
+const images = [
+  "https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "/hero-bg-big.webp",
+  "/hero-bg-small.webp",
+  "/Interjer.webp",
+  "/eksterijer.webp",
+  "/poliranje.webp",
+  "https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1614687154052-e05046c3feec?q=80&w=2008&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
+
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [dropdownHeight, setDropDownHeight] = useState(0);
+  const [, setImagesLoaed] = useState(0);
 
   const interijer = useRef(null);
   const eksterijer = useRef(null);
@@ -18,21 +31,13 @@ const App = () => {
   const paketi = useRef(null);
   const content = useRef(null);
 
-  const handleEndLoading = useCallback(() => {
-    setLoading(false);
-  }, []);
-
   const scrollToView = (top) => {
     if (!content.current) return;
 
     const scrollToContainer = top + content.current.scrollTop;
 
-    console.log(scrollToContainer);
-
-    console.log(top);
-
     content.current.scrollTo({
-      top: top,
+      top: scrollToContainer,
       behavior: "smooth",
     });
   };
@@ -64,6 +69,26 @@ const App = () => {
     );
   }, []);
 
+  useEffect(() => {
+    const handleImageLoaded = () => {
+      setImagesLoaed((prevState) => {
+        const currentState = prevState + 1;
+        if (currentState < images.length) return currentState;
+        else {
+          setLoading(false);
+          return currentState;
+        }
+      });
+    };
+
+    images.forEach((image) => {
+      const img = new Image();
+      img.src = image;
+      img.onload = handleImageLoaded;
+      img.onerror = handleImageLoaded;
+    });
+  }, []);
+
   return (
     <>
       <Loading className={loading ? "loading" : ""} />
@@ -82,7 +107,6 @@ const App = () => {
                 path="/"
                 element={
                   <Home
-                    onLoadingComplete={handleEndLoading}
                     scrollTo={scrollToView}
                     resetScroll={resetScrollPosition}
                   />
@@ -90,39 +114,19 @@ const App = () => {
               />
               <Route
                 path="/eksterijer"
-                element={
-                  <Eksterijer
-                    onLoadingComplete={handleEndLoading}
-                    resetScroll={resetScrollPosition}
-                  />
-                }
+                element={<Eksterijer resetScroll={resetScrollPosition} />}
               />
               <Route
                 path="/interijer"
-                element={
-                  <Interijer
-                    onLoadingComplete={handleEndLoading}
-                    resetScroll={resetScrollPosition}
-                  />
-                }
+                element={<Interijer resetScroll={resetScrollPosition} />}
               />
               <Route
                 path="/poliranje"
-                element={
-                  <Poliranje
-                    onLoadingComplete={handleEndLoading}
-                    resetScroll={resetScrollPosition}
-                  />
-                }
+                element={<Poliranje resetScroll={resetScrollPosition} />}
               />
               <Route
                 path="/paketi"
-                element={
-                  <Paketi
-                    onLoadingComplete={handleEndLoading}
-                    resetScroll={resetScrollPosition}
-                  />
-                }
+                element={<Paketi resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
             <Footer />
