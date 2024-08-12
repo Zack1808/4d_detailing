@@ -113,19 +113,19 @@ const App = () => {
                 }
               />
               <Route
-                path="/eksterijer"
+                path="/čišćenje-eksterijera"
                 element={<Eksterijer resetScroll={resetScrollPosition} />}
               />
               <Route
-                path="/interijer"
+                path="/čišćenje-interijera"
                 element={<Interijer resetScroll={resetScrollPosition} />}
               />
               <Route
-                path="/poliranje"
+                path="/poliranje-i-zaštita"
                 element={<Poliranje resetScroll={resetScrollPosition} />}
               />
               <Route
-                path="/paketi"
+                path="/posebni-paketi"
                 element={<Paketi resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
@@ -157,7 +157,7 @@ const App = () => {
                     }`}
                   >
                     <Link
-                      to="/eksterijer"
+                      to="/čišćenje-eksterijera"
                       ref={eksterijer}
                       onClick={(event) => {
                         event.stopPropagation();
@@ -167,7 +167,7 @@ const App = () => {
                       Čišćenje Eksterijera
                     </Link>
                     <Link
-                      to="/interijer"
+                      to="/čišćenje-interijera"
                       ref={interijer}
                       onClick={(event) => {
                         event.stopPropagation();
@@ -177,7 +177,7 @@ const App = () => {
                       Čišćenje Interijera
                     </Link>
                     <Link
-                      to="/poliranje"
+                      to="/poliranje-i-zaštita"
                       ref={poliranje}
                       onClick={(event) => {
                         event.stopPropagation();
@@ -187,14 +187,14 @@ const App = () => {
                       Poliranje i zaštita
                     </Link>
                     <Link
-                      to="/paketi"
+                      to="/posebni-paketi"
                       ref={paketi}
                       onClick={(event) => {
                         event.stopPropagation();
                         setMenuIsOpen(false);
                       }}
                     >
-                      Paketi
+                      Posebni paketi
                     </Link>
                   </div>
                 </span>

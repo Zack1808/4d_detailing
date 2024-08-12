@@ -14,6 +14,7 @@ const categories = [
       "Brušenje i poliranje",
       "Dodavanje zaštitnog premaza + boost premaza",
     ],
+    info: "Cijena usluge se može mjenjati ovisno o zamagljenosti farova",
   },
   {
     title: "Poliranje laka jednoslojno",
@@ -26,6 +27,7 @@ const categories = [
     ],
     priceSuv: 30,
     priceTransporter: 80,
+    info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
   },
   {
     title: "Poliranje laka troslojno",
@@ -38,13 +40,13 @@ const categories = [
     ],
     priceSuv: 90,
     priceTransporter: 240,
+    info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
   },
   {
     title: "Zaštita voskom u trajanju od 3 mjeseca",
     price: 15,
     list: [
       "+ vanjsko pranje vozila",
-      "Napomena: prije zaštite laka keramičkim premazom, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i dao maksimum svoje učinkovitosti ( Nije uključeno u cijenu)",
     ],
   },
   {
@@ -52,7 +54,6 @@ const categories = [
     price: 50,
     list: [
       "+ vanjsko pranje vozila",
-      "Napomena: prije zaštite laka keramičkim premazom, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i dao maksimum svoje učinkovitosti ( Nije uključeno u cijenu)",
     ],
   },
   {

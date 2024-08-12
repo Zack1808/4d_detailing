@@ -11,11 +11,13 @@ const categories = [
     title: "Vanjsko pranje",
     price: 15,
     list: ["+ usisavanje interijera", "+ brisanje prašine interijera"],
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
   {
     title: "Vanjsko pranje s naplatcima",
     price: 20,
     list: ["+ usisavanje interijera", "+ brisanje prašine interijera"],
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
   {
     title: "Premium čišćenje vozila",
@@ -26,6 +28,7 @@ const categories = [
     ],
     priceSuv: 10,
     priceTransporter: 30,
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
 ];
 

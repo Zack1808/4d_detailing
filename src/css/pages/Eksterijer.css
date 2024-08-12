@@ -89,6 +89,6 @@
 
 @media (width < 32.5rem) {
   .eksterijer-price-list {
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 }

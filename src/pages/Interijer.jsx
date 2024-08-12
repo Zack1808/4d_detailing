@@ -11,11 +11,13 @@ const categories = [
     title: "Kemijsko čišćenje sjedala",
     price: 50,
     list: ["Samo kemijsko izvalčenje sjedala"],
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
   {
     title: "Kemijsko čišćenje unutrašnjosti",
     price: 90,
     list: ["Potpuno kemijsko čišćenje vidljivh površina osim krova"],
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
   {
     title: "Full detailing interijera",
@@ -27,6 +29,7 @@ const categories = [
     ],
     priceSuv: 50,
     priceTransporter: 130,
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
 ];
 
