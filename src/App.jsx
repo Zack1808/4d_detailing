@@ -2,12 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
-import { Home, Eksterijer, Interijer, Poliranje, Paketi } from "./pages";
+import { Home, Eksterijer, Interijer, Poliranje, Paketi, About } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
 
 const images = [
-  "https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "/hero-bg-big.webp",
   "/hero-bg-small.webp",
   "/Interjer.webp",
@@ -16,6 +15,7 @@ const images = [
   "https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1614687154052-e05046c3feec?q=80&w=2008&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
 
 const App = () => {
@@ -127,6 +127,10 @@ const App = () => {
               <Route
                 path="/posebni-paketi"
                 element={<Paketi resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/o-nama"
+                element={<About resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
             <Footer />

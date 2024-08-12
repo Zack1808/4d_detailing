@@ -6,8 +6,8 @@ const HeroContainer = ({ onClick }) => {
   return (
     <div className="hero-container">
       <div className="hero-content">
-        <h1>Detailing u 4D formatu</h1>
-        <p>Jer dovoljno nije dovoljno</p>
+        <h1>Visina, širina, dubina i vrijeme</h1>
+        <p>Detailing u sve 4 dimenzije</p>
         <Button primary onClick={onClick} aria-label="Pomaknite se na usluge">
           Pregledaj usluge
         </Button>
