@@ -22,17 +22,29 @@ const Navbar = ({ toggleMenu }) => {
             <button>
               Usluge <FaChevronDown />
               <div className={`navigation-dropdown`}>
-                <Link to="/eksterijer" onClick={(event) => event.target.blur()}>
+                <Link
+                  to="/čišćenje-eksterijera"
+                  onClick={(event) => event.target.blur()}
+                >
                   Čišćenje Eksterijera
                 </Link>
-                <Link to="/interijer" onClick={(event) => event.target.blur()}>
+                <Link
+                  to="/čišćenje-interijera"
+                  onClick={(event) => event.target.blur()}
+                >
                   Čišćenje Interijera
                 </Link>
-                <Link to="/poliranje" onClick={(event) => event.target.blur()}>
+                <Link
+                  to="/poliranje-i-zaštita"
+                  onClick={(event) => event.target.blur()}
+                >
                   Poliranje i zaštita
                 </Link>
-                <Link to="/paketi" onClick={(event) => event.target.blur()}>
-                  Paketi
+                <Link
+                  to="/posebni-paketi"
+                  onClick={(event) => event.target.blur()}
+                >
+                  Posebni paketi
                 </Link>
               </div>
             </button>

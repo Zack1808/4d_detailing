@@ -21,34 +21,32 @@ const imagesToLoad = [
 
 const cards = [
   {
-    to: "/eksterijer",
+    to: "/čišćenje-eksterijera",
     smallTitle: "Čišćenje",
     bigTitle: "Eksterijera",
     imageUrl: "/eksterijer.webp",
   },
   {
-    to: "/interijer",
+    to: "/čišćenje-interijera",
     smallTitle: "Čišćenje",
     bigTitle: "Interijera",
     imageUrl: "/Interjer.webp",
   },
   {
-    to: "/poliranje",
+    to: "/poliranje-i-zaštita",
     smallTitle: "Poliranje i",
     bigTitle: "Zaštita",
     imageUrl: "/poliranje.webp",
   },
   {
-    to: "/paketi",
+    to: "/posebni-paketi",
     smallTitle: "Posebni",
     bigTitle: "Paketi",
     imageUrl: "/hero-bg-big.webp",
   },
 ];
 
-const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
-  const [imagesLoaded, setImagesLoaed] = useState(0);
-
+const Home = ({ scrollTo, resetScroll }) => {
   const servicesRef = useRef(null);
 
   const handleClick = () => {
@@ -64,12 +62,6 @@ const Home = ({ onLoadingComplete, scrollTo, resetScroll }) => {
   useEffect(() => {
     resetScroll();
   }, []);
-
-  useEffect(() => {
-    if (imagesLoaded < imagesToLoad.length) return;
-
-    onLoadingComplete();
-  }, [imagesLoaded]);
 
   return (
     <div>

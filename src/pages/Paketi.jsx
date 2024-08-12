@@ -17,6 +17,7 @@ const categories = [
       "+ zaštita keramičkim voskom",
       "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
     ],
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
   {
     title: "Paket Novo vozilo",
@@ -27,6 +28,7 @@ const categories = [
       "+ zaštita keramičkim voskom u trajanju od 6 mjeseci",
       "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
     ],
+    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },
 ];
 
@@ -37,11 +39,11 @@ const Eksterijer = ({ resetScroll }) => {
 
   return (
     <>
-      <Header title="Poliranje i zaštita" />
+      <Header title="Posebni paketi" />
       <div className="eksterijer-container">
         <div className="eksterijer-content">
           <div className="eksterijer-text">
-            <h2>Poliranje i zaštita</h2>
+            <h2>Posebni paketi</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
               provident earum pariatur repellat, praesentium voluptas assumenda!

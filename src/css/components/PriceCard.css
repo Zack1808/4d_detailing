@@ -49,17 +49,17 @@
 }
 
 .price-card-container:hover,
-.price-card-container:focus {
+.price-card-container:focus-within {
   color: var(--navs-color);
 }
 
 .price-card-container:hover::before,
-.price-card-container:focus::before {
+.price-card-container:focus-within::before {
   opacity: 1;
 }
 
 .price-card-container:hover::after,
-.price-card-container:focus::after {
+.price-card-container:focus-within::after {
   opacity: 0.2;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .price-card-container:hover .btn,
-.price-card-container:focus .btn {
+.price-card-container:focus-within .btn {
   opacity: 1;
 }
 
