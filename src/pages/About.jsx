@@ -1,10 +1,16 @@
+import { useEffect } from "react";
+
 import { Header, Button } from "../components";
 
 import transition from "../helpers/transition";
 
 import "../css/pages/About.css";
 
-const About = () => {
+const About = ({ resetScroll }) => {
+  useEffect(() => {
+    resetScroll();
+  }, []);
+
   return (
     <>
       <Header title="4D detailing" />

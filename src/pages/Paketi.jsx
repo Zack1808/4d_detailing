@@ -8,7 +8,7 @@ import "../css/pages/Eksterijer.css";
 
 const categories = [
   {
-    title: "Priprema za prodaju",
+    title: "Paket Refresh",
     price: 200,
     list: [
       "+ kemijsko čišćenje unutrašnjosti",
@@ -16,6 +16,7 @@ const categories = [
       "+ jednoslojno poliranje",
       "+ zaštita keramičkim voskom",
       "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
+      "Napomena: po želji klijenta moguće je i izraditi slike za prodaju vozila (gratis)",
     ],
     info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
   },

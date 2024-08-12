@@ -66,7 +66,7 @@ const Eksterijer = ({ resetScroll }) => {
             </p>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1527581849771-416a9d62308e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="placeholder-image-eksterijer"
           />
         </div>
