@@ -66,6 +66,14 @@
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 1rem;
   justify-items: center;
+  transform: translateY(10%);
+  opacity: 0;
+}
+
+.loaded .eksterijer-price-list {
+  transition: 0.3s ease-in-out 0.8s;
+  transform: none;
+  opacity: 1;
 }
 
 @media (width < 55rem) {

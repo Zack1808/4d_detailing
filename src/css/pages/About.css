@@ -84,6 +84,13 @@
   .about-content,
   .about-container:nth-child(2n) .about-content {
     flex-direction: column;
+    transform: translateY(10%);
+  }
+
+  .loaded .about-content,
+  .loaded .about-container:nth-child(2n) .about-content {
+    transition: transform 0.3s ease-in-out 0.8s;
+    transform: none;
   }
 
   .about-content img,
@@ -97,12 +104,14 @@
       red
     );
     mask: linear-gradient(180deg, transparent, transparent 1%, red 60%, red);
+    transform: none;
   }
 
   .about-content .about-text,
   .about-container:nth-child(2n) .about-content .about-text {
     max-width: none;
     align-items: flex-end;
+    transform: none;
   }
 }
 
