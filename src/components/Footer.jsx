@@ -75,7 +75,7 @@ const Footer = () => {
         </div>
         <span>
           Izradio:{" "}
-          <a target="_blank" href="https://jeanpierrenovak.netlify.app">
+          <a target="_blank" href="https://jeanpierrenovak.from.hr">
             &nbsp;JPN
           </a>
         </span>

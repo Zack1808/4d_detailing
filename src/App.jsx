@@ -2,7 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
-import { Home, Eksterijer, Interijer, Poliranje, Paketi, About } from "./pages";
+import {
+  Home,
+  Eksterijer,
+  Interijer,
+  Poliranje,
+  Paketi,
+  About,
+  Gallery,
+} from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
 
@@ -131,6 +139,10 @@ const App = () => {
               <Route
                 path="/o-nama"
                 element={<About resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/galerija"
+                element={<Gallery resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
             <Footer />

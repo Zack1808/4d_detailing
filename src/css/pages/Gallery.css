@@ -1,0 +1,27 @@
+.gallery-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 1rem;
+  color: var(--text-color);
+}
+
+.gallery-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 93.75rem;
+  padding-block: 2rem;
+  transform: translateY(10%);
+  opacity: 0;
+}
+
+.loaded .gallery-content {
+  transition: 0.3s ease-in-out 0.8s;
+  transform: none;
+  opacity: 1;
+}
+
+.gallery-content p {
+  max-width: 70ch;
+}
