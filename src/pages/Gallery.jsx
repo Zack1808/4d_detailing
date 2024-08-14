@@ -1,14 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { Header } from "../components";
+import { Header, ImageCard } from "../components";
 
 import transition from "../helpers/transition";
 
 import "../css/pages/Gallery.css";
 
 const Gallery = ({ resetScroll }) => {
+  const [allImages, setAllImages] = useState([]);
+  const [selectedCollection, setSelectedCollection] = useState(null);
+
+  const handleClick = (index) => {
+    setSelectedCollection(index);
+  };
+
   useEffect(() => {
     resetScroll();
+
+    fetch("/meta.json")
+      .then((response) => response.json())
+      .then((data) => setAllImages(data));
   }, []);
 
   return (
@@ -25,6 +36,16 @@ const Gallery = ({ resetScroll }) => {
             iste, sint tenetur voluptate! Molestias nisi a laudantium sapiente,
             mollitia ut odit illum.
           </p>
+        </div>
+        <div className="gallery-images">
+          {allImages.map((image, index) => (
+            <ImageCard
+              title={image.title}
+              image={image.images[0]}
+              key={index}
+              onClick={() => handleClick(index)}
+            />
+          ))}
         </div>
       </div>
     </>
