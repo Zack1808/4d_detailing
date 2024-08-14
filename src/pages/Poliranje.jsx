@@ -45,16 +45,12 @@ const categories = [
   {
     title: "Zaštita voskom u trajanju od 3 mjeseca",
     price: 15,
-    list: [
-      "+ vanjsko pranje vozila",
-    ],
+    list: ["+ vanjsko pranje vozila"],
   },
   {
     title: "Zaštita voskom u trajanju od 6-8 mjeseci",
     price: 50,
-    list: [
-      "+ vanjsko pranje vozila",
-    ],
+    list: ["+ vanjsko pranje vozila"],
   },
   {
     title: "Zaštita keramičkim premazom u trajanju od 3 godine",
@@ -98,11 +94,7 @@ const Eksterijer = ({ resetScroll }) => {
               deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
               nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
               officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus,
-              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
-              provident, nisi, delectus qui atque id in rerum, est nam dolorum
-              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
-              dolores dolore iusto placeat inventore facere, quos eius deleniti.
+              fugiat enim nulla saepe placeat a delectus repellat doloribus.
             </p>
           </div>
           <img

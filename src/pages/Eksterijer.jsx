@@ -62,15 +62,11 @@ const Eksterijer = ({ resetScroll }) => {
               deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
               nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
               officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus,
-              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
-              provident, nisi, delectus qui atque id in rerum, est nam dolorum
-              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
-              dolores dolore iusto placeat inventore facere, quos eius deleniti.
+              fugiat enim nulla saepe placeat a delectus repellat doloribus.
             </p>
           </div>
           <img
-            src="https://images.unsplash.com/photo-1689182360215-8b124a5b21be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1527581849771-416a9d62308e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="placeholder-image-eksterijer"
           />
         </div>

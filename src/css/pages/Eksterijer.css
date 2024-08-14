@@ -7,14 +7,6 @@
   padding: 1rem;
   padding-top: 3rem;
   gap: 2.25rem;
-  transform: translateY(10%);
-  opacity: 0;
-  transition: 0.3s ease-in-out 0.8s;
-}
-
-.loaded .eksterijer-container {
-  transform: none;
-  opacity: 1;
 }
 
 .eksterijer-content {
@@ -34,6 +26,8 @@
   gap: 2rem;
   flex: 1;
   max-width: 70ch;
+  transform: translateX(-10%);
+  opacity: 0;
 }
 
 .eksterijer-text p {
@@ -46,7 +40,6 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center bottom;
-  margin-top: 5.5rem;
   -webkit-mask: linear-gradient(
     90deg,
     transparent,
@@ -55,6 +48,15 @@
     red
   );
   mask: linear-gradient(90deg, transparent, transparent 1%, red 60%, red);
+  transform: translateX(10%);
+  opacity: 0;
+}
+
+.loaded .eksterijer-content img,
+.loaded .eksterijer-text {
+  transition: opacity 0.3s ease-in-out 0.8s, transform 0.3s ease-in-out 0.8s;
+  transform: none;
+  opacity: 1;
 }
 
 .eksterijer-price-list {
@@ -64,15 +66,36 @@
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 1rem;
   justify-items: center;
+  transform: translateY(10%);
+  opacity: 0;
+}
+
+.loaded .eksterijer-price-list {
+  transition: 0.3s ease-in-out 0.8s;
+  transform: none;
+  opacity: 1;
 }
 
 @media (width < 55rem) {
+  .eksterijer-container {
+    opacity: 0;
+    transform: translateY(10%);
+    transition: opacity 0.3s ease-in-out 0.8s, transform 0.3s ease-in-out 0.8s;
+  }
+
+  .loaded .eksterijer-container {
+    opacity: 1;
+    transform: none;
+  }
+
   .eksterijer-content {
     flex-direction: column;
   }
 
   .eksterijer-text {
     max-width: none;
+    transform: none;
+    opacity: 1;
   }
 
   .eksterijer-text p {
@@ -84,6 +107,13 @@
     width: 100%;
     -webkit-mask: linear-gradient(transparent, red 30%);
     mask: linear-gradient(transparent, transparent 1%, red 60%, red);
+    transform: none;
+    opacity: 1;
+  }
+
+  .loaded .eksterijer-content img,
+  .loaded .eksterijer-text {
+    transition: none;
   }
 }
 
