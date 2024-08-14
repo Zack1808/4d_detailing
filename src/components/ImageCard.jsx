@@ -9,7 +9,6 @@ const ImageCard = ({ title, image, ...rest }) => {
       className="image-card-container"
       style={{ "--bgImage": `url(${image})` }}
     >
-      {console.log(image)}
       <h4>{title}</h4>
     </button>
   );

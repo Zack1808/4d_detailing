@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Header, ImageCard } from "../components";
+import { Header, ImageCard, Modal } from "../components";
 
 import transition from "../helpers/transition";
 
@@ -9,9 +9,11 @@ import "../css/pages/Gallery.css";
 const Gallery = ({ resetScroll }) => {
   const [allImages, setAllImages] = useState([]);
   const [selectedCollection, setSelectedCollection] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleClick = (index) => {
     setSelectedCollection(index);
+    setModalIsOpen(true);
   };
 
   useEffect(() => {
@@ -48,6 +50,9 @@ const Gallery = ({ resetScroll }) => {
           ))}
         </div>
       </div>
+      <Modal isOpen={modalIsOpen} toggleModal={setModalIsOpen}>
+        Hello
+      </Modal>
     </>
   );
 };
