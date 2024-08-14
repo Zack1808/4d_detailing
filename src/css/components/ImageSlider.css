@@ -1,0 +1,50 @@
+.image-slider-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.image-slider-content {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  align-items: center;
+}
+
+.image-slider-content .btn {
+  position: absolute;
+  z-index: 2;
+  border-radius: 0;
+  padding: 1rem;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  opacity: 0.95;
+}
+
+.image-slider-content .btn.left-btn {
+  left: 0.5rem;
+}
+
+.image-slider-content .btn.right-btn {
+  right: 0.5rem;
+}
+
+.image-slider-content img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: scale-down;
+  object-position: center center;
+}
+
+@media (width < 31.25rem) {
+  .image-slider-content img {
+    aspect-ratio: 3 / 4;
+  }
+}

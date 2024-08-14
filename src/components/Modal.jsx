@@ -6,7 +6,7 @@ import { Button } from "../components";
 
 import "../css/components/Modal.css";
 
-const Modal = ({ isOpen, toggleModal, children }) => {
+const Modal = ({ title, isOpen, toggleModal, children }) => {
   const [pageIsLoading, setPageIsLoading] = useState(true);
 
   const modalBackgroundRef = useRef();
@@ -37,6 +37,7 @@ const Modal = ({ isOpen, toggleModal, children }) => {
         }`}
       >
         <div className="modal-header">
+          {title && <h3>{title}</h3>}
           <Button onClick={() => toggleModal(false)}>
             <FaXmark />
           </Button>

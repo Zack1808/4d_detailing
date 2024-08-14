@@ -3,7 +3,7 @@
   display: flex;
   inset: 0;
   z-index: 5;
-  background-color: hsl(from var(--bg-color) h s l / 0.3);
+  background-color: hsl(from var(--bg-color) h s l / 0.7);
   animation: closeModal 0.5s ease-in-out forwards;
   justify-content: center;
   align-items: center;
@@ -44,6 +44,12 @@
 .modal-header {
   display: flex;
   justify-content: flex-end;
+  align-items: baseline;
+  color: var(--text-color);
+}
+
+.modal-header h3 {
+  margin-right: auto;
 }
 
 @keyframes openModal {
