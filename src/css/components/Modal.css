@@ -30,7 +30,7 @@
 
 .modal-open.modal-inner-container {
   display: flex;
-  animation: openModal 0.5s ease-in-out forwards;
+  animation: openModal 0.3s ease-in-out forwards;
   animation-delay: 0.3s;
 }
 
@@ -48,7 +48,7 @@
   color: var(--text-color);
 }
 
-.modal-header h3 {
+.modal-header h2 {
   margin-right: auto;
 }
 

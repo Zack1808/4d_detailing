@@ -57,12 +57,13 @@
   inset: 0;
   background-image: var(--_backgroundImage);
   background-size: cover;
+
+  transition: opacity 0.3s ease-in-out;
 }
 
 .category-card-container::before {
   filter: grayscale(10) brightness(0.4);
   z-index: 2;
-  transition: opacity 0.3s ease-in-out;
 }
 
 .category-card-container:hover span,

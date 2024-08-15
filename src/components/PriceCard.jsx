@@ -32,7 +32,7 @@ const PriceCard = ({
       </div>
       {info && <small>{info}</small>}
 
-      <Button primary>Napravi termin</Button>
+      <Button primary>Rezerviraj termin</Button>
     </div>
   );
 };
