@@ -41,6 +41,7 @@
   aspect-ratio: 16 / 9;
   object-fit: scale-down;
   object-position: center center;
+  transition: transform 0.3s ease-in-out;
 }
 
 @media (width < 31.25rem) {

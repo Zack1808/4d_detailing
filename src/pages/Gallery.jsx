@@ -55,7 +55,7 @@ const Gallery = ({ resetScroll }) => {
         toggleModal={setModalIsOpen}
         title={`${selected.title} - slike`}
       >
-        <ImageSlider images={selected.images} />
+        <ImageSlider images={selected.images} reset={modalIsOpen} />
       </Modal>
     </>
   );

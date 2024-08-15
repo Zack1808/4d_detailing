@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { Button } from "../components";
 
 import "../css/components/ImageSlider.css";
 
-const ImageSlider = ({ images }) => {
+const ImageSlider = ({ images, reset }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const renderIndexSelectors = () => {
@@ -19,12 +19,17 @@ const ImageSlider = ({ images }) => {
           className={`select-index-btn ${
             i === currentImageIndex ? "active" : ""
           }`}
+          onClick={() => setCurrentImageIndex(i)}
         ></button>,
       ];
     }
 
     return buttons;
   };
+
+  useEffect(() => {
+    reset && setCurrentImageIndex(0);
+  }, [reset]);
 
   return (
     <div className="image-slider-container">
@@ -38,7 +43,7 @@ const ImageSlider = ({ images }) => {
             <FaChevronLeft />
           </Button>
         )}
-        {currentImageIndex < images.length && (
+        {currentImageIndex < images.length - 1 && (
           <Button
             secondary
             className="right-btn"
@@ -52,6 +57,9 @@ const ImageSlider = ({ images }) => {
             src={image}
             alt={`Preview image number ${index + 1}`}
             key={`image${index}`}
+            style={{
+              transform: `translateX(calc(-100% * ${currentImageIndex}))`,
+            }}
           />
         ))}
       </div>
