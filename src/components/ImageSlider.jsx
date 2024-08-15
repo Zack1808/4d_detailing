@@ -20,6 +20,7 @@ const ImageSlider = ({ images, reset }) => {
             i === currentImageIndex ? "active" : ""
           }`}
           onClick={() => setCurrentImageIndex(i)}
+          aria-label={`See image number ${i + 1}`}
         ></button>,
       ];
     }
@@ -39,6 +40,7 @@ const ImageSlider = ({ images, reset }) => {
             secondary
             className="left-btn"
             onClick={() => setCurrentImageIndex((prevState) => prevState - 1)}
+            aria-label="See previous image"
           >
             <FaChevronLeft />
           </Button>
@@ -48,6 +50,7 @@ const ImageSlider = ({ images, reset }) => {
             secondary
             className="right-btn"
             onClick={() => setCurrentImageIndex((prevState) => prevState + 1)}
+            aria-label="See next image"
           >
             <FaChevronRight />
           </Button>
@@ -60,6 +63,7 @@ const ImageSlider = ({ images, reset }) => {
             style={{
               transform: `translateX(calc(-100% * ${currentImageIndex}))`,
             }}
+            onDrag={() => console.log("here")}
           />
         ))}
       </div>

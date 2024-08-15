@@ -42,7 +42,7 @@ const Modal = ({ title, isOpen, toggleModal, children }) => {
             <FaXmark />
           </Button>
         </div>
-        {children}
+        <div className="modal-body">{children}</div>
       </div>
     </div>,
     document.getElementById("modal")

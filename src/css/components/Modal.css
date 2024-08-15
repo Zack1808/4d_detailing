@@ -52,6 +52,10 @@
   margin-right: auto;
 }
 
+.modal-body {
+  padding-block: 1rem;
+}
+
 @keyframes openModal {
   from {
     opacity: 0;
