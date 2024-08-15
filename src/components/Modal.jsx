@@ -20,7 +20,9 @@ const Modal = ({ title, isOpen, toggleModal, children }) => {
   };
 
   useEffect(() => {
-    isOpen && setPageIsLoading(false);
+    if (!isOpen) return;
+
+    setPageIsLoading(false);
   }, [isOpen]);
 
   return ReactDOM.createPortal(
@@ -37,7 +39,7 @@ const Modal = ({ title, isOpen, toggleModal, children }) => {
         }`}
       >
         <div className="modal-header">
-          {title && <h3>{title}</h3>}
+          {title && <h2>{title}</h2>}
           <Button onClick={() => toggleModal(false)}>
             <FaXmark />
           </Button>
