@@ -1,10 +1,7 @@
 .hero-container {
   width: 100%;
-  height: calc(100vh - 4.985375rem);
   height: calc(100svh - 4.985375rem);
-  background: url("/hero-bg-big.webp");
-  background-size: cover;
-  background-position: center;
+  background: url("/hero-bg-big.webp") center/cover no-repeat;
   transform: scaleX(-1);
   display: flex;
   justify-content: center;
@@ -22,10 +19,7 @@
 .hero-container::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: linear-gradient(
     to left,
     hsla(180, 37%, 4%, 0.9),
@@ -44,16 +38,13 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-}
-
-.hero-content > * {
-  transform: translateX(-3rem);
+  translate: 3rem;
   opacity: 0;
-  transition: 0.3s ease-in-out 0.8s;
+  transition: translate 0.3s ease-in-out 0.8s, opacity 0.3s ease-in-out 0.8s;
 }
 
-.loaded .hero-content > * {
-  transform: translateX(0);
+.loaded .hero-content {
+  translate: 0;
   opacity: 1;
 }
 
@@ -66,15 +57,12 @@
   position: absolute;
   z-index: 2;
   transform: scaleX(-1);
-  bottom: 0;
-  right: 0;
-  left: 0;
+  inset: auto 0 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
   padding: 2rem 1rem;
-  font-weight: bold;
   background-image: linear-gradient(
     135deg,
     #e9c156,
@@ -102,7 +90,7 @@
   opacity: 1;
 }
 
-@media (width < 700px) {
+@media (width < 43.75rem) {
   .hero-container {
     background-image: url("/hero-bg-small.webp");
     transform: scaleX(1);

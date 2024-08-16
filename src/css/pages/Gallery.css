@@ -20,7 +20,7 @@
 }
 
 .loaded .gallery-content {
-  transition: 0.3s ease-in-out 0.8s;
+  transition: transform 0.3s ease-in-out 0.8s, opacity 0.3s ease-in-out 0.8s;
   transform: none;
   opacity: 1;
 }
@@ -40,7 +40,7 @@
 }
 
 .loaded .gallery-images {
-  transition: 0.3s ease-in-out 0.8s;
+  transition: transform 0.3s ease-in-out 0.8s, opacity 0.3s ease-in-out 0.8s;
   transform: none;
   opacity: 1;
 }

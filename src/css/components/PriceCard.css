@@ -8,19 +8,25 @@
   background: hsl(0 100% 100% / 0.1);
   position: relative;
   overflow: hidden;
-  z-index: 80;
   color: var(--text-color);
   transition: color 0.3s ease-in-out;
 }
 
 .price-card-container > * {
-  z-index: 20;
+  z-index: 2;
 }
 
-.price-card-container::before {
+.price-card-container::before,
+.price-card-container::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.price-card-container::before {
   background: linear-gradient(
     135deg,
     #8d95a2,
@@ -30,36 +36,25 @@
     #f1f2f2,
     #d1d3d4
   );
-  z-index: -1;
   background-size: cover;
   background-attachment: fixed;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
 }
 
 .price-card-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
   background-image: url("/droplets.png");
   background-size: 200px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
   background-attachment: fixed;
 }
 
-.price-card-container:hover,
-.price-card-container:focus-within {
+.price-card-container:is(:hover, :focus-within) {
   color: var(--navs-color);
 }
 
-.price-card-container:hover::before,
-.price-card-container:focus-within::before {
+.price-card-container:is(:hover, :focus-within)::before {
   opacity: 1;
 }
 
-.price-card-container:hover::after,
-.price-card-container:focus-within::after {
+.price-card-container:is(:hover, :focus-within)::after {
   opacity: 0.2;
 }
 
@@ -119,8 +114,7 @@
   transition: 0.3s ease-in-out;
 }
 
-.price-card-container:hover .btn,
-.price-card-container:focus-within .btn {
+.price-card-container:is(:hover, :focus-within) .btn {
   opacity: 1;
 }
 

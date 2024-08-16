@@ -1,7 +1,6 @@
 .page-footer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 3rem 2rem;
   gap: 3rem;
@@ -22,37 +21,20 @@
 .footer-links {
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  flex: 1 1;
+  align-items: center;
+  flex: 1;
   color: var(--text-color);
   gap: 1rem;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.footer-container div {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: fit-content;
 }
 
 .page-footer a,
-.page-footer span {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: flex-start;
-  align-items: center;
-  color: var(--text-color);
-  text-decoration: none;
-  line-height: 1rem;
-}
-
+.page-footer span,
 .page-footer strong {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 .copyright {
@@ -64,14 +46,6 @@
   color: var(--text-color);
 }
 
-.copyright span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0.5;
-}
-
 .social-media {
   display: flex;
   gap: 1rem;
@@ -81,15 +55,10 @@
   font-size: 1.75rem;
 }
 
-@media (width < 50rem) {
+@media (max-width: 50rem) {
   .footer-container {
     flex-direction: column;
     gap: 3rem;
-  }
-  .footer-about-us,
-  .footer-contact-information,
-  .footer-links {
-    max-width: none;
   }
 
   .copyright {
@@ -97,7 +66,7 @@
     gap: 1rem;
   }
 
-  .copyright .social-media {
+  .social-media {
     order: -1;
     margin-bottom: 1rem;
   }

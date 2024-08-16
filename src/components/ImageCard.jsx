@@ -2,7 +2,7 @@ import React from "react";
 
 import "../css/components/ImageCard.css";
 
-const ImageCard = ({ title, image, ...rest }) => {
+const ImageCard = React.memo(({ title, image, ...rest }) => {
   return (
     <button
       {...rest}
@@ -12,6 +12,6 @@ const ImageCard = ({ title, image, ...rest }) => {
       <h4>{title}</h4>
     </button>
   );
-};
+});
 
 export default ImageCard;

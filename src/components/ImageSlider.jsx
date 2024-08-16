@@ -1,35 +1,25 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import { Button } from "../components";
 
 import "../css/components/ImageSlider.css";
 
-const ImageSlider = ({ images, reset }) => {
+const ImageSlider = React.memo(({ images, reset }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const renderIndexSelectors = () => {
-    let buttons = [];
+  const handlePrevClick = useCallback(() => {
+    setCurrentImageIndex((prevState) => Math.max(prevState - 1, 0));
+  }, []);
 
-    for (let i = 0; i < images.length; i++) {
-      buttons = [
-        ...buttons,
-        <button
-          key={`button${i}`}
-          className={`select-index-btn ${
-            i === currentImageIndex ? "active" : ""
-          }`}
-          onClick={() => setCurrentImageIndex(i)}
-          aria-label={`See image number ${i + 1}`}
-        ></button>,
-      ];
-    }
-
-    return buttons;
-  };
+  const handleNextClick = useCallback(() => {
+    setCurrentImageIndex((prevState) =>
+      Math.min(prevState + 1, images.length - 1)
+    );
+  }, [images.length]);
 
   useEffect(() => {
-    reset && setCurrentImageIndex(0);
+    if (reset) setCurrentImageIndex(0);
   }, [reset]);
 
   return (
@@ -39,7 +29,7 @@ const ImageSlider = ({ images, reset }) => {
           <Button
             secondary
             className="left-btn"
-            onClick={() => setCurrentImageIndex((prevState) => prevState - 1)}
+            onClick={handlePrevClick}
             aria-label="See previous image"
           >
             <FaChevronLeft />
@@ -49,7 +39,7 @@ const ImageSlider = ({ images, reset }) => {
           <Button
             secondary
             className="right-btn"
-            onClick={() => setCurrentImageIndex((prevState) => prevState + 1)}
+            onClick={handleNextClick}
             aria-label="See next image"
           >
             <FaChevronRight />
@@ -68,10 +58,19 @@ const ImageSlider = ({ images, reset }) => {
         ))}
       </div>
       <div className="image-slider-index-selector">
-        {renderIndexSelectors()}
+        {images.map((_, index) => (
+          <button
+            key={`button${index}`}
+            className={`select-index-btn ${
+              index === currentImageIndex ? "active" : ""
+            }`}
+            onClick={() => setCurrentImageIndex(index)}
+            aria-label={`See image number ${index + 1}`}
+          ></button>
+        ))}
       </div>
     </div>
   );
-};
+});
 
 export default ImageSlider;
