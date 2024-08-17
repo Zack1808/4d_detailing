@@ -24,8 +24,10 @@
 }
 
 .loading-container img {
+  --distance: 70vw;
   width: 16rem;
   animation: driveOff 0.5s ease-in-out forwards;
+  transform: translateZ(0);
 }
 
 .loading-container h4 {
@@ -51,7 +53,7 @@
     translate: none;
   }
   to {
-    translate: 70vw;
+    translate: var(--distance);
   }
 }
 
@@ -63,5 +65,11 @@
   to {
     display: none;
     opacity: 0;
+  }
+}
+
+@media (width < 60rem) {
+  .loading-container img {
+    --distance: 120vw;
   }
 }
