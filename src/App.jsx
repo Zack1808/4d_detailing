@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 
@@ -160,7 +160,7 @@ const App = () => {
 
   const content = useRef(null);
 
-  const scrollToView = (top) => {
+  const scrollToView = useCallback((top) => {
     if (!content.current) return;
 
     const scrollToContainer = top + content.current.scrollTop;
@@ -169,15 +169,15 @@ const App = () => {
       top: scrollToContainer,
       behavior: "smooth",
     });
-  };
+  }, []);
 
-  const resetScrollPosition = () => {
+  const resetScrollPosition = useCallback(() => {
     if (!content.current) return;
 
     content.current.scrollTo({
       top: 0,
     });
-  };
+  }, []);
 
   useEffect(() => {
     const handleImageLoaded = () => {
