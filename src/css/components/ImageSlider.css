@@ -40,8 +40,9 @@
   aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: center center;
-  transition: transform 0.3s ease-in-out;
+  transition: translate 0.3s ease-in-out;
   flex-shrink: 0;
+  transform: translateZ(0);
 }
 
 .image-slider-index-selector {

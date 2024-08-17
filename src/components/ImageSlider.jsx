@@ -51,9 +51,8 @@ const ImageSlider = React.memo(({ images, reset }) => {
             alt={`Preview image number ${index + 1}`}
             key={`image${index}`}
             style={{
-              transform: `translateX(calc(-100% * ${currentImageIndex}))`,
+              translate: `${-100 * currentImageIndex}% 0`,
             }}
-            onDrag={() => console.log("here")}
           />
         ))}
       </div>

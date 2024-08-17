@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Header, PriceCard } from "../components";
 
@@ -6,37 +6,40 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Eksterijer.css";
 
-const categories = [
-  {
-    title: "Paket Refresh",
-    price: 200,
-    list: [
-      "+ kemijsko čišćenje unutrašnjosti",
-      "+ vanjsko čišćenje",
-      "+ jednoslojno poliranje",
-      "+ zaštita keramičkim voskom",
-      "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
-      "Napomena: po želji klijenta moguće je i izraditi slike za prodaju vozila (gratis)",
-    ],
-    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
-  },
-  {
-    title: "Paket Novo vozilo",
-    price: 500,
-    list: [
-      "+ full detailing interijera",
-      "+ troslojno poliranje",
-      "+ zaštita keramičkim voskom u trajanju od 6 mjeseci",
-      "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
-    ],
-    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
-  },
-];
-
-const Eksterijer = ({ resetScroll }) => {
+const Paketi = ({ resetScroll }) => {
   useEffect(() => {
     resetScroll();
-  }, []);
+  }, [resetScroll]);
+
+  const categories = useMemo(
+    () => [
+      {
+        title: "Paket Refresh",
+        price: 200,
+        list: [
+          "+ kemijsko čišćenje unutrašnjosti",
+          "+ vanjsko čišćenje",
+          "+ jednoslojno poliranje",
+          "+ zaštita keramičkim voskom",
+          "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
+          "Napomena: po želji klijenta moguće je i izraditi slike za prodaju vozila (gratis)",
+        ],
+        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+      },
+      {
+        title: "Paket Novo vozilo",
+        price: 500,
+        list: [
+          "+ full detailing interijera",
+          "+ troslojno poliranje",
+          "+ zaštita keramičkim voskom u trajanju od 6 mjeseci",
+          "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
+        ],
+        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+      },
+    ],
+    []
+  );
 
   return (
     <>
@@ -81,4 +84,4 @@ const Eksterijer = ({ resetScroll }) => {
   );
 };
 
-export default transition(Eksterijer);
+export default transition(Paketi);

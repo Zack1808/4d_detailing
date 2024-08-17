@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Header, PriceCard } from "../components";
 
@@ -6,37 +6,40 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Eksterijer.css";
 
-const categories = [
-  {
-    title: "Kemijsko čišćenje sjedala",
-    price: 50,
-    list: ["Samo kemijsko izvalčenje sjedala"],
-    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
-  },
-  {
-    title: "Kemijsko čišćenje unutrašnjosti",
-    price: 90,
-    list: ["Potpuno kemijsko čišćenje vidljivh površina osim krova"],
-    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
-  },
-  {
-    title: "Full detailing interijera",
-    price: 250,
-    list: [
-      "Kompletno dubinsko čišćenje unutrašnjosti",
-      "Ponovna montaža sjedala",
-      "+ vanjsko pranje kao priprema",
+const Interijer = ({ resetScroll }) => {
+  const categories = useMemo(
+    () => [
+      {
+        title: "Kemijsko čišćenje sjedala",
+        price: 50,
+        list: ["Samo kemijsko izvalčenje sjedala"],
+        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+      },
+      {
+        title: "Kemijsko čišćenje unutrašnjosti",
+        price: 90,
+        list: ["Potpuno kemijsko čišćenje vidljivh površina osim krova"],
+        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+      },
+      {
+        title: "Full detailing interijera",
+        price: 250,
+        list: [
+          "Kompletno dubinsko čišćenje unutrašnjosti",
+          "Ponovna montaža sjedala",
+          "+ vanjsko pranje kao priprema",
+        ],
+        priceSuv: 50,
+        priceTransporter: 130,
+        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+      },
     ],
-    priceSuv: 50,
-    priceTransporter: 130,
-    info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
-  },
-];
+    []
+  );
 
-const Eksterijer = ({ resetScroll }) => {
   useEffect(() => {
     resetScroll();
-  }, []);
+  }, [resetScroll]);
 
   return (
     <>
@@ -81,4 +84,4 @@ const Eksterijer = ({ resetScroll }) => {
   );
 };
 
-export default transition(Eksterijer);
+export default transition(Interijer);

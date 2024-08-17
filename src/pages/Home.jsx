@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useMemo, useCallback } from "react";
 
 import {
   HeroContainer,
@@ -11,45 +11,10 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Home.css";
 
-const imagesToLoad = [
-  "/hero-bg-big.webp",
-  "/hero-bg-small.webp",
-  "/Interjer.webp",
-  "/eksterijer.webp",
-  "/poliranje.webp",
-];
-
-const cards = [
-  {
-    to: "/čišćenje-eksterijera",
-    smallTitle: "Čišćenje",
-    bigTitle: "Eksterijera",
-    imageUrl: "/eksterijer.webp",
-  },
-  {
-    to: "/čišćenje-interijera",
-    smallTitle: "Čišćenje",
-    bigTitle: "Interijera",
-    imageUrl: "/Interjer.webp",
-  },
-  {
-    to: "/poliranje-i-zaštita",
-    smallTitle: "Poliranje i",
-    bigTitle: "Zaštita",
-    imageUrl: "/poliranje.webp",
-  },
-  {
-    to: "/posebni-paketi",
-    smallTitle: "Posebni",
-    bigTitle: "Paketi",
-    imageUrl: "/hero-bg-big.webp",
-  },
-];
-
 const Home = ({ scrollTo, resetScroll }) => {
   const servicesRef = useRef(null);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (!servicesRef.current) return;
 
     const { top } = servicesRef.current.getBoundingClientRect();
@@ -57,11 +22,41 @@ const Home = ({ scrollTo, resetScroll }) => {
     const containerPosition = top - 50;
 
     scrollTo(containerPosition);
-  };
+  }, [scrollTo]);
 
   useEffect(() => {
     resetScroll();
-  }, []);
+  }, [resetScroll]);
+
+  const cards = useMemo(
+    () => [
+      {
+        to: "/čišćenje-eksterijera",
+        smallTitle: "Čišćenje",
+        bigTitle: "Eksterijera",
+        imageUrl: "/eksterijer.webp",
+      },
+      {
+        to: "/čišćenje-interijera",
+        smallTitle: "Čišćenje",
+        bigTitle: "Interijera",
+        imageUrl: "/Interjer.webp",
+      },
+      {
+        to: "/poliranje-i-zaštita",
+        smallTitle: "Poliranje i",
+        bigTitle: "Zaštita",
+        imageUrl: "/poliranje.webp",
+      },
+      {
+        to: "/posebni-paketi",
+        smallTitle: "Posebni",
+        bigTitle: "Paketi",
+        imageUrl: "/hero-bg-big.webp",
+      },
+    ],
+    []
+  );
 
   return (
     <div>

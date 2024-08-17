@@ -39,17 +39,125 @@ const images = [
   "https://images.unsplash.com/photo-1625773049545-fb23fc4f4538?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
 
+const MobileNavigation = ({
+  menuIsOpen,
+  setMenuIsOpen,
+  dropDownIsOpen,
+  setDropDownIsOpen,
+  setDropDownHeight,
+}) => {
+  const interijer = useRef(null);
+  const eksterijer = useRef(null);
+  const poliranje = useRef(null);
+  const paketi = useRef(null);
+
+  useEffect(() => {
+    if (
+      interijer.current &&
+      eksterijer.current &&
+      poliranje.current &&
+      paketi.current
+    )
+      setDropDownHeight(
+        (interijer.current.offsetHeight +
+          eksterijer.current.offsetHeight +
+          poliranje.current.offsetHeight +
+          paketi.current.offsetHeight +
+          paketi.current.offsetHeight) /
+          16
+      );
+  }, [interijer, eksterijer, poliranje, paketi]);
+
+  return (
+    <div
+      className={`mobile-navigation ${
+        menuIsOpen ? "navigation-menu-open" : ""
+      }`}
+      aria-hidden={!menuIsOpen}
+    >
+      <button
+        className="close-menu"
+        onClick={() => setMenuIsOpen(false)}
+        aria-label="Zatvori izbornik"
+      >
+        <FaXmark style={{ fontSize: "1.5rem" }} />
+      </button>
+      <ul className="links">
+        <li onClick={() => setMenuIsOpen(false)}>
+          <Link to="/">Početna</Link>
+        </li>
+        <li onClick={() => setDropDownIsOpen((prevState) => !prevState)}>
+          <span>
+            Usluge {dropDownIsOpen ? "-" : "+"}
+            <div
+              className={`mobile-navigation-dropdown ${
+                dropDownIsOpen ? "open" : ""
+              }`}
+            >
+              <Link
+                to="/čišćenje-eksterijera"
+                ref={eksterijer}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setMenuIsOpen(false);
+                }}
+              >
+                Čišćenje Eksterijera
+              </Link>
+              <Link
+                to="/čišćenje-interijera"
+                ref={interijer}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setMenuIsOpen(false);
+                }}
+              >
+                Čišćenje Interijera
+              </Link>
+              <Link
+                to="/poliranje-i-zaštita"
+                ref={poliranje}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setMenuIsOpen(false);
+                }}
+              >
+                Poliranje i zaštita
+              </Link>
+              <Link
+                to="/posebni-paketi"
+                ref={paketi}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setMenuIsOpen(false);
+                }}
+              >
+                Posebni paketi
+              </Link>
+            </div>
+          </span>
+        </li>
+        <li onClick={() => setMenuIsOpen(false)}>
+          <Link to="/o-nama">O nama</Link>
+        </li>
+        <li onClick={() => setMenuIsOpen(false)}>
+          <Link to="/galerija">Galerija</Link>
+        </li>
+        <li onClick={() => setMenuIsOpen(false)}>
+          <Link to="/kontakt">Kontakt</Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [dropdownHeight, setDropDownHeight] = useState(0);
-  const [, setImagesLoaed] = useState(0);
+  const [imagesLoaded, setImagesLoaed] = useState(0);
 
-  const interijer = useRef(null);
-  const eksterijer = useRef(null);
-  const poliranje = useRef(null);
-  const paketi = useRef(null);
   const content = useRef(null);
 
   const scrollToView = (top) => {
@@ -72,33 +180,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (
-      !interijer.current ||
-      !eksterijer.current ||
-      !poliranje.current ||
-      !paketi.current
-    )
-      return;
-
-    setDropDownHeight(
-      (interijer.current.offsetHeight +
-        eksterijer.current.offsetHeight +
-        poliranje.current.offsetHeight +
-        paketi.current.offsetHeight +
-        paketi.current.offsetHeight) /
-        16
-    );
-  }, []);
-
-  useEffect(() => {
     const handleImageLoaded = () => {
       setImagesLoaed((prevState) => {
         const currentState = prevState + 1;
-        if (currentState < images.length) return currentState;
-        else {
-          setLoading(false);
-          return currentState;
-        }
+        if (currentState >= images.length) setLoading(false);
+        return currentState;
       });
     };
 
@@ -160,85 +246,13 @@ const App = () => {
             </AnimatedRouted>
             <Footer />
           </div>
-          <div
-            className={`mobile-navigation ${
-              menuIsOpen ? "navigation-menu-open" : ""
-            }`}
-            aria-hidden={!menuIsOpen}
-          >
-            <button
-              className="close-menu"
-              onClick={() => setMenuIsOpen(false)}
-              aria-label="Zatvori izbornik"
-            >
-              <FaXmark style={{ fontSize: "1.5rem" }} />
-            </button>
-            <ul className="links">
-              <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/">Početna</Link>
-              </li>
-              <li onClick={() => setDropDownIsOpen((prevState) => !prevState)}>
-                <span>
-                  Usluge {dropDownIsOpen ? "-" : "+"}
-                  <div
-                    className={`mobile-navigation-dropdown ${
-                      dropDownIsOpen ? "open" : ""
-                    }`}
-                  >
-                    <Link
-                      to="/čišćenje-eksterijera"
-                      ref={eksterijer}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setMenuIsOpen(false);
-                      }}
-                    >
-                      Čišćenje Eksterijera
-                    </Link>
-                    <Link
-                      to="/čišćenje-interijera"
-                      ref={interijer}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setMenuIsOpen(false);
-                      }}
-                    >
-                      Čišćenje Interijera
-                    </Link>
-                    <Link
-                      to="/poliranje-i-zaštita"
-                      ref={poliranje}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setMenuIsOpen(false);
-                      }}
-                    >
-                      Poliranje i zaštita
-                    </Link>
-                    <Link
-                      to="/posebni-paketi"
-                      ref={paketi}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setMenuIsOpen(false);
-                      }}
-                    >
-                      Posebni paketi
-                    </Link>
-                  </div>
-                </span>
-              </li>
-              <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/o-nama">O nama</Link>
-              </li>
-              <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/galerija">Galerija</Link>
-              </li>
-              <li onClick={() => setMenuIsOpen(false)}>
-                <Link to="/kontakt">Kontakt</Link>
-              </li>
-            </ul>
-          </div>
+          <MobileNavigation
+            dropDownIsOpen={dropDownIsOpen}
+            setDropDownHeight={setDropDownHeight}
+            setDropDownIsOpen={setDropDownIsOpen}
+            menuIsOpen={menuIsOpen}
+            setMenuIsOpen={setMenuIsOpen}
+          />
         </div>
       </BrowserRouter>
     </>
