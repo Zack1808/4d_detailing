@@ -42,7 +42,7 @@ const transition = (Component) => {
           }}
         >
           <motion.img
-            src="/logo-transition.png"
+            src="/logo-transition.webp"
             alt="logo"
             initial={{ right: "90%" }}
             animate={{

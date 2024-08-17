@@ -12,7 +12,7 @@ const Footer = React.memo(() => {
       <div className="footer-container">
         <div className="footer-about-us">
           <Link to="/" className="logo">
-            <img src="/logo.png" alt="page logo" />
+            <img src="/logo.webp" alt="page logo" />
           </Link>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Et

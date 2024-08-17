@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { FaChevronDown } from "react-icons/fa6";
 
-import logo from "/logo.png";
+import logo from "/logo.webp";
 
 import "../css/components/Navbar.css";
 
