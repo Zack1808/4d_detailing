@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 import { Header, ImageCard, Modal, ImageSlider } from "../components";
 
@@ -24,6 +24,17 @@ const Gallery = ({ resetScroll }) => {
       .then((data) => setAllImages(data));
   }, []);
 
+  const imageCards = useMemo(() => {
+    return allImages.map((image, index) => (
+      <ImageCard
+        title={image.title}
+        image={image.images[0]}
+        key={index}
+        onClick={() => handleClick(index)}
+      />
+    ));
+  }, [allImages, handleClick]);
+
   return (
     <>
       <Header title="Galerija" />
@@ -39,16 +50,7 @@ const Gallery = ({ resetScroll }) => {
             mollitia ut odit illum.
           </p>
         </div>
-        <div className="gallery-images">
-          {allImages.map((image, index) => (
-            <ImageCard
-              title={image.title}
-              image={image.images[0]}
-              key={index}
-              onClick={() => handleClick(index)}
-            />
-          ))}
-        </div>
+        <div className="gallery-images">{imageCards}</div>
       </div>
       <Modal
         isOpen={modalIsOpen}

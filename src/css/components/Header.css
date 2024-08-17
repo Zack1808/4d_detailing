@@ -23,18 +23,15 @@
 }
 
 .header-content {
-  z-index: 2;
+  z-index: 1;
   width: 100%;
   max-width: 93.75rem;
-}
-
-.header-content > * {
   transform: translateX(-3rem);
   opacity: 0;
-  transition: 0.3s ease-in-out 0.8s;
+  transition: transform 0.3s ease-in-out 0.8s, opacity 0.3s ease-in-out 0.8s;
 }
 
-.loaded .header-content > * {
+.loaded .header-content {
   transform: translateX(0);
   opacity: 1;
 }

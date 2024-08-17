@@ -26,12 +26,9 @@
   gap: 2rem;
   flex: 1;
   max-width: 70ch;
-  transform: translateX(-10%);
+  translate: -10% 0;
   opacity: 0;
-}
-
-.eksterijer-text p {
-  max-width: 70ch;
+  transform: translateZ(0);
 }
 
 .eksterijer-content img {
@@ -48,14 +45,15 @@
     red
   );
   mask: linear-gradient(90deg, transparent, transparent 1%, red 60%, red);
-  transform: translateX(10%);
+  translate: 10% 0;
   opacity: 0;
+  transform: translateZ(0);
 }
 
 .loaded .eksterijer-content img,
 .loaded .eksterijer-text {
-  transition: opacity 0.3s ease-in-out 0.8s, transform 0.3s ease-in-out 0.8s;
-  transform: none;
+  transition: opacity 0.3s ease-in-out 0.8s, translate 0.3s ease-in-out 0.8s;
+  translate: 0 0;
   opacity: 1;
 }
 
@@ -66,26 +64,27 @@
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   gap: 1rem;
   justify-items: center;
-  transform: translateY(10%);
+  translate: 0 10%;
   opacity: 0;
 }
 
 .loaded .eksterijer-price-list {
-  transition: 0.3s ease-in-out 0.8s;
-  transform: none;
+  transition: translate 0.3s ease-in-out 0.8s, opacity 0.3s ease-in-out 0.8s;
+  translate: none;
   opacity: 1;
 }
 
 @media (width < 55rem) {
   .eksterijer-container {
     opacity: 0;
-    transform: translateY(10%);
-    transition: opacity 0.3s ease-in-out 0.8s, transform 0.3s ease-in-out 0.8s;
+    translate: 0 10%;
+    transition: opacity 0.3s ease-in-out 0.8s, translate 0.3s ease-in-out 0.8s;
+    transform: translateZ(0);
   }
 
   .loaded .eksterijer-container {
     opacity: 1;
-    transform: none;
+    translate: 0 0;
   }
 
   .eksterijer-content {
@@ -94,7 +93,7 @@
 
   .eksterijer-text {
     max-width: none;
-    transform: none;
+    translate: 0 0;
     opacity: 1;
   }
 
@@ -107,7 +106,7 @@
     width: 100%;
     -webkit-mask: linear-gradient(transparent, red 30%);
     mask: linear-gradient(transparent, transparent 1%, red 60%, red);
-    transform: none;
+    translate: 0 0;
     opacity: 1;
   }
 

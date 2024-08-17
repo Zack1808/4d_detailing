@@ -1,9 +1,19 @@
 import { motion } from "framer-motion";
 
+const motionDivStyle = {
+  position: "fixed",
+  inset: 0,
+  backgroundColor: "var(--navs-color)",
+  zIndex: 9999,
+  transform: "translateZ(0)",
+};
+
 const transition = (Component) => {
   return (props) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       return <Component {...props} />;
+
+    const transitionDuration = window.innerWidth > 700 ? 2 : 0.8;
 
     return (
       <>
@@ -14,10 +24,7 @@ const transition = (Component) => {
           exit={{ scaleX: 1 }}
           transition={{ duration: 0.5 }}
           style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "var(--navs-color)",
-            zIndex: 9999,
+            ...motionDivStyle,
             transformOrigin: "left",
           }}
         ></motion.div>
@@ -27,10 +34,7 @@ const transition = (Component) => {
           exit={{ scaleX: 0 }}
           transition={{ duration: 0.5 }}
           style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "var(--navs-color)",
-            zIndex: 9999,
+            ...motionDivStyle,
             transformOrigin: "right",
             display: "flex",
             justifyContent: "center",
@@ -43,7 +47,7 @@ const transition = (Component) => {
             initial={{ right: "90%" }}
             animate={{
               right: "-120%",
-              transition: { duration: window.innerWidth > 700 ? 2 : 0.8 },
+              transition: { duration: transitionDuration },
             }}
             style={{
               position: "absolute",

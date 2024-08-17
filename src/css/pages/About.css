@@ -71,7 +71,7 @@
 .loaded .about-container:nth-child(2n) .about-content img,
 .loaded .about-content .about-text,
 .loaded .about-container:nth-child(2n) .about-content .about-text {
-  transition: 0.3s ease-in-out 0.8s;
+  transition: transform 0.3s ease-in-out 0.8s, opacity 0.3s ease-in-out 0.8s;
   transform: none;
   opacity: 1;
 }

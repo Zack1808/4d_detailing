@@ -1,11 +1,11 @@
 .image-slider-container {
   display: flex;
-  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
   position: relative;
+  width: 100%;
 }
 
 .image-slider-content {
@@ -19,9 +19,7 @@
 .image-slider-content .btn {
   position: absolute;
   z-index: 2;
-  border-radius: 0;
   padding: 1rem;
-  aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,11 +38,11 @@
 .image-slider-content img {
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: scale-down;
+  object-fit: contain;
   object-position: center center;
-  transition: transform 0.3s ease-in-out;
+  transition: translate 0.3s ease-in-out;
   flex-shrink: 0;
-  flex-grow: 0;
+  transform: translateZ(0);
 }
 
 .image-slider-index-selector {

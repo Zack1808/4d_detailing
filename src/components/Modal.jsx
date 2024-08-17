@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import ReactDOM from "react-dom";
 import { FaXmark } from "react-icons/fa6";
 
@@ -7,8 +7,6 @@ import { Button } from "../components";
 import "../css/components/Modal.css";
 
 const Modal = ({ title, isOpen, toggleModal, children }) => {
-  const [pageIsLoading, setPageIsLoading] = useState(true);
-
   const modalBackgroundRef = useRef();
 
   const handleClick = (event) => {
@@ -19,34 +17,27 @@ const Modal = ({ title, isOpen, toggleModal, children }) => {
     toggleModal(false);
   };
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    setPageIsLoading(false);
-  }, [isOpen]);
-
   return ReactDOM.createPortal(
-    <div
-      className={`modal-outer-container ${isOpen ? "modal-open" : ""} ${
-        pageIsLoading ? "stop-modal-animation" : ""
-      }`}
-      onClick={handleClick}
-      ref={modalBackgroundRef}
-    >
+    isOpen && (
       <div
-        className={`modal-inner-container ${isOpen ? "modal-open" : ""} ${
-          pageIsLoading ? "stop-modal-animation" : ""
-        }`}
+        className={`modal-outer-container`}
+        onClick={handleClick}
+        ref={modalBackgroundRef}
       >
-        <div className="modal-header">
-          {title && <h2>{title}</h2>}
-          <Button onClick={() => toggleModal(false)}>
-            <FaXmark />
-          </Button>
+        <div className={`modal-inner-container`}>
+          <div className="modal-header">
+            {title && <h2>{title}</h2>}
+            <Button
+              onClick={() => toggleModal(false)}
+              aria-label="Zatvori iskočni prozor"
+            >
+              <FaXmark aria-hidden="true" />
+            </Button>
+          </div>
+          <div className="modal-body">{children}</div>
         </div>
-        <div className="modal-body">{children}</div>
       </div>
-    </div>,
+    ),
     document.getElementById("modal")
   );
 };

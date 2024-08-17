@@ -9,6 +9,8 @@
   position: relative;
   border-radius: 2px;
   overflow: hidden;
+  transform: translateZ(0);
+  background: var(--_backgroundImage) center/cover no-repeat;
 }
 
 .category-card-container > * {
@@ -27,8 +29,7 @@
   padding: 0.5rem 3rem 0.5rem 1rem;
   position: relative;
   z-index: 2;
-  border-start-end-radius: 2px;
-  border-end-end-radius: 2px;
+  border-radius: 0 2px 2px 0;
   overflow: hidden;
 }
 
@@ -50,35 +51,28 @@
   transition: scale 0.3s ease-in-out;
 }
 
-.category-card-container::before,
-.category-card-container::after {
+.category-card-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: var(--_backgroundImage);
-  background-size: cover;
-
-  transition: opacity 0.3s ease-in-out;
-}
-
-.category-card-container::before {
+  background: var(--_backgroundImage) center/cover no-repeat;
+  transition: opacity 0.3s ease-in-out, scale 0.3s ease-in-out;
   filter: grayscale(10) brightness(0.4);
   z-index: 2;
+  scale: 1.02;
 }
 
-.category-card-container:hover span,
-.category-card-container:focus span {
+.category-card-container:is(:hover, :focus) span {
   background-color: transparent;
   color: var(--navs-color);
   transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.category-card-container:hover span::before,
-.category-card-container:focus span::before {
+.category-card-container:is(:hover, :focus) span::before {
   scale: 1 1;
 }
 
-.category-card-container:hover::before,
-.category-card-container:focus::before {
+.category-card-container:is(:hover, :focus)::before {
   opacity: 0;
+  scale: 1;
 }

@@ -25,8 +25,8 @@
   -webkit-mask: linear-gradient(
     90deg,
     transparent,
-    red 20%,
-    red 80%,
+    red 10%,
+    red 90%,
     transparent
   );
   mask: linear-gradient(90deg, transparent, red 10%, red 90%, transparent);

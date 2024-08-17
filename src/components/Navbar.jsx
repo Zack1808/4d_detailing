@@ -10,10 +10,14 @@ const Navbar = ({ toggleMenu }) => {
   return (
     <div className="navbar-top">
       <div className="navbar-content-container">
-        <Link to="/">
-          <img src={logo} alt="Logo" aria-label="Logo" />
+        <Link to="/" aria-label="Početna">
+          <img src={logo} alt="4D detailing logo" />
         </Link>
-        <HiOutlineMenuAlt3 className="menu" onClick={toggleMenu} />
+        <HiOutlineMenuAlt3
+          className="menu"
+          onClick={toggleMenu}
+          aria-label="Otvori izbornik"
+        />
         <ul className="links">
           <li>
             <Link to="/">Početna</Link>

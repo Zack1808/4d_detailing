@@ -1,14 +1,16 @@
+import React from "react";
+
 import { Button } from "./";
 
 import "../css/components/HeroContainer.css";
 
-const HeroContainer = ({ onClick }) => {
+const HeroContainer = React.memo(({ onClick }) => {
   return (
     <div className="hero-container">
       <div className="hero-content">
         <h1>Detailing u 4D formatu</h1>
         <p>Jer dovoljno nije dovoljno</p>
-        <Button primary onClick={onClick} aria-label="Pomaknite se na usluge">
+        <Button primary onClick={onClick} aria-label="Pregledaj usluge">
           Pregledaj usluge
         </Button>
       </div>
@@ -29,6 +31,6 @@ const HeroContainer = ({ onClick }) => {
       </div>
     </div>
   );
-};
+});
 
 export default HeroContainer;

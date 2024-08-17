@@ -1,12 +1,11 @@
-import { useRef, useEffect, Children } from "react";
+import { useRef, useEffect, Children, useMemo } from "react";
 
 import "../css/components/InfiniteScroller.css";
 
 const InfinteScroller = ({ children }) => {
-  const childrenArray = Children.toArray(children);
-
   const scrollRef = useRef(null);
-  const contentRef = useRef(null);
+
+  const childrenArray = useMemo(() => Children.toArray(children), [children]);
 
   useEffect(() => {
     if (
@@ -20,25 +19,18 @@ const InfinteScroller = ({ children }) => {
 
   return (
     <div className="infinite-scrooler-container" ref={scrollRef}>
-      <ul className="infinte-scroller-content" ref={contentRef}>
-        {children.map((child, index) => (
-          <li key={index}>{child}</li>
-        ))}
-        {children.map((child, index) => (
-          <li key={index} className="scroller-hidden" aria-hidden>
-            {child}
-          </li>
-        ))}
-        {children.map((child, index) => (
-          <li key={index} className="scroller-hidden" aria-hidden>
-            {child}
-          </li>
-        ))}
-        {children.map((child, index) => (
-          <li key={index} className="scroller-hidden" aria-hidden>
-            {child}
-          </li>
-        ))}
+      <ul className="infinte-scroller-content">
+        {childrenArray
+          .concat(childrenArray, childrenArray, childrenArray)
+          .map((child, index) => (
+            <li
+              key={index}
+              className={index >= childrenArray.length ? "scroller-hidden" : ""}
+              aria-hidden={index >= childrenArray.length ? "true" : "false"}
+            >
+              {child}
+            </li>
+          ))}
       </ul>
     </div>
   );

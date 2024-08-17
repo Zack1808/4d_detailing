@@ -1,13 +1,14 @@
+import React from "react";
 import "../css/components/Header.css";
 
-const Header = ({ title = "Title" }) => {
+const Header = React.memo(({ title = "Title" }) => {
   return (
-    <div className="header-container">
+    <header className="header-container">
       <div className="header-content">
         <h1>{title}</h1>
       </div>
-    </div>
+    </header>
   );
-};
+});
 
 export default Header;

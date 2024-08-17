@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { Header, PriceCard } from "../components";
 
@@ -6,68 +6,71 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Eksterijer.css";
 
-const categories = [
-  {
-    title: "Poliranje farova",
-    price: 20,
-    list: [
-      "Brušenje i poliranje",
-      "Dodavanje zaštitnog premaza + boost premaza",
-    ],
-    info: "Cijena usluge se može mjenjati ovisno o zamagljenosti farova",
-  },
-  {
-    title: "Poliranje laka jednoslojno",
-    price: 100,
-    list: [
-      "+ vanjsko pranje vozila",
-      "+ kemijska i mehanička dekontaminacija laka",
-      "+ priprema laka za poliranje",
-      "+ zaštita voskom ako nije odabrana druga vrsta zaštite",
-    ],
-    priceSuv: 30,
-    priceTransporter: 80,
-    info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
-  },
-  {
-    title: "Poliranje laka troslojno",
-    price: 300,
-    list: [
-      "+ vanjsko pranje vozila",
-      "+ kemijska i mehanička dekontaminacija laka",
-      "+ priprema laka za poliranje",
-      "+ zaštita voskom ako nije odabrana druga vrsta zaštite",
-    ],
-    priceSuv: 90,
-    priceTransporter: 240,
-    info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
-  },
-  {
-    title: "Zaštita voskom u trajanju od 3 mjeseca",
-    price: 15,
-    list: ["+ vanjsko pranje vozila"],
-  },
-  {
-    title: "Zaštita voskom u trajanju od 6-8 mjeseci",
-    price: 50,
-    list: ["+ vanjsko pranje vozila"],
-  },
-  {
-    title: "Zaštita keramičkim premazom u trajanju od 3 godine",
-    price: 300,
-    list: [
-      "+ vanjsko pranje vozila",
-      "Napomena: prije zaštite laka keramičkim premazom, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i dao maksimum svoje učinkovitosti ( Nije uključeno u cijenu)",
-    ],
-    priceSuv: 100,
-    priceTransporter: 180,
-  },
-];
-
 const Eksterijer = ({ resetScroll }) => {
   useEffect(() => {
     resetScroll();
-  }, []);
+  }, [resetScroll]);
+
+  const categories = useMemo(
+    () => [
+      {
+        title: "Poliranje farova",
+        price: 20,
+        list: [
+          "Brušenje i poliranje",
+          "Dodavanje zaštitnog premaza + boost premaza",
+        ],
+        info: "Cijena usluge se može mjenjati ovisno o zamagljenosti farova",
+      },
+      {
+        title: "Poliranje laka jednoslojno",
+        price: 100,
+        list: [
+          "+ vanjsko pranje vozila",
+          "+ kemijska i mehanička dekontaminacija laka",
+          "+ priprema laka za poliranje",
+          "+ zaštita voskom ako nije odabrana druga vrsta zaštite",
+        ],
+        priceSuv: 30,
+        priceTransporter: 80,
+        info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
+      },
+      {
+        title: "Poliranje laka troslojno",
+        price: 300,
+        list: [
+          "+ vanjsko pranje vozila",
+          "+ kemijska i mehanička dekontaminacija laka",
+          "+ priprema laka za poliranje",
+          "+ zaštita voskom ako nije odabrana druga vrsta zaštite",
+        ],
+        priceSuv: 90,
+        priceTransporter: 240,
+        info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
+      },
+      {
+        title: "Zaštita voskom u trajanju od 3 mjeseca",
+        price: 15,
+        list: ["+ vanjsko pranje vozila"],
+      },
+      {
+        title: "Zaštita voskom u trajanju od 6-8 mjeseci",
+        price: 50,
+        list: ["+ vanjsko pranje vozila"],
+      },
+      {
+        title: "Zaštita keramičkim premazom u trajanju od 3 godine",
+        price: 300,
+        list: [
+          "+ vanjsko pranje vozila",
+          "Napomena: prije zaštite laka keramičkim premazom, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i dao maksimum svoje učinkovitosti ( Nije uključeno u cijenu)",
+        ],
+        priceSuv: 100,
+        priceTransporter: 180,
+      },
+    ],
+    []
+  );
 
   return (
     <>
