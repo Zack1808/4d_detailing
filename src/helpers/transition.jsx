@@ -44,9 +44,9 @@ const transition = (Component) => {
           <motion.img
             src="/logo-transition.webp"
             alt="logo"
-            initial={{ right: "90%" }}
+            initial={{ translateX: "calc(-70vw - 14rem)" }}
             animate={{
-              right: "-120%",
+              translateX: "calc(70vw + 14rem)",
               transition: { duration: transitionDuration },
             }}
             style={{

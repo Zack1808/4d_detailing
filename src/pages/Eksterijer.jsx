@@ -38,7 +38,7 @@ const Eksterijer = ({ resetScroll }) => {
 
   useEffect(() => {
     resetScroll();
-  }, [resetScroll]);
+  }, []);
 
   return (
     <>

@@ -22,7 +22,7 @@ const Gallery = ({ resetScroll }) => {
     fetch("/meta.json")
       .then((response) => response.json())
       .then((data) => setAllImages(data));
-  }, [resetScroll]);
+  }, []);
 
   const imageCards = useMemo(() => {
     return allImages.map((image, index) => (
