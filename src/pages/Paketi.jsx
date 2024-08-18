@@ -9,7 +9,7 @@ import "../css/pages/Eksterijer.css";
 const Paketi = ({ resetScroll }) => {
   useEffect(() => {
     resetScroll();
-  }, [resetScroll]);
+  }, []);
 
   const categories = useMemo(
     () => [

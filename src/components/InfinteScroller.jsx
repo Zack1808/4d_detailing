@@ -2,7 +2,7 @@ import { useRef, useEffect, Children, useMemo } from "react";
 
 import "../css/components/InfiniteScroller.css";
 
-const InfinteScroller = ({ children }) => {
+const InfiniteScroller = ({ children }) => {
   const scrollRef = useRef(null);
 
   const childrenArray = useMemo(() => Children.toArray(children), [children]);
@@ -36,4 +36,4 @@ const InfinteScroller = ({ children }) => {
   );
 };
 
-export default InfinteScroller;
+export default InfiniteScroller;

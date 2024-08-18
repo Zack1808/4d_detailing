@@ -12,7 +12,7 @@
 
 .infinte-scroller-content li {
   display: flex;
-  flex: 1 1;
+  flex: 1 1 auto;
   min-width: 350px;
 }
 
@@ -35,6 +35,7 @@
 .infinite-scrooler-container[data-animated="true"] .infinte-scroller-content {
   width: fit-content;
   flex-wrap: nowrap;
+  transform: translateX(0);
   animation: infinite-scroll 40s linear infinite;
 }
 
@@ -50,12 +51,15 @@
 }
 
 @keyframes infinite-scroll {
-  to {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
     transform: translateX(calc(-50% - 0.5rem));
   }
 }
 
-@media (width < 400px) {
+@media (width < 25rem) {
   .infinte-scroller-content li {
     min-width: 300px;
   }

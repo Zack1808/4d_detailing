@@ -10,11 +10,11 @@ const Modal = ({ title, isOpen, toggleModal, children }) => {
   const modalBackgroundRef = useRef();
 
   const handleClick = (event) => {
-    if (!modalBackgroundRef.current) return;
-
-    if (modalBackgroundRef.current !== event.target) return;
-
-    toggleModal(false);
+    if (
+      modalBackgroundRef.current &&
+      modalBackgroundRef.current === event.target
+    )
+      toggleModal(false);
   };
 
   return ReactDOM.createPortal(

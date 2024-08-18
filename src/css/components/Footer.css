@@ -10,6 +10,7 @@
 
 .footer-container {
   display: flex;
+  flex-wrap: wrap;
   gap: 4rem;
   width: 100%;
   max-width: 93.75rem;
@@ -51,6 +52,7 @@
   color: var(--text-color);
   text-decoration: none;
   width: max-content;
+  text-align: left;
 }
 
 .footer-contact-information > span,
@@ -68,6 +70,8 @@
   width: 100%;
   max-width: 93.75rem;
   color: var(--text-color);
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .social-media {
@@ -83,11 +87,13 @@
   .footer-container {
     flex-direction: column;
     gap: 3rem;
+    text-align: center;
   }
 
   .copyright {
     flex-direction: column;
     gap: 1rem;
+    text-align: center;
   }
 
   .social-media {

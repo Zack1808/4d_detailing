@@ -26,7 +26,7 @@ const Home = ({ scrollTo, resetScroll }) => {
 
   useEffect(() => {
     resetScroll();
-  }, [resetScroll]);
+  }, []);
 
   const cards = useMemo(
     () => [

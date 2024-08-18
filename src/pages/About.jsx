@@ -9,7 +9,7 @@ import "../css/pages/About.css";
 const About = React.memo(({ resetScroll }) => {
   useEffect(() => {
     resetScroll();
-  }, [resetScroll]);
+  }, []);
 
   const pageSections = useMemo(
     () => [

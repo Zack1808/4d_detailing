@@ -72,8 +72,6 @@
     #7e5d48,
     #e9c156
   );
-  transition: opacity 0.2s ease-in-out 0.8s;
-  opacity: 0;
   background-size: 120%;
   animation: info-background-moving 30s infinite alternate;
 }
@@ -85,10 +83,6 @@
 
 .hero-info-container a {
   color: var(--navs-color);
-}
-
-.loaded .hero-info-container {
-  opacity: 1;
 }
 
 @media (width < 43.75rem) {
@@ -112,10 +106,10 @@
 }
 
 @keyframes info-background-moving {
-  from {
+  0% {
     background-position: 0%;
   }
-  to {
+  100% {
     background-position: 100%;
   }
 }
