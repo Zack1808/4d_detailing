@@ -23,8 +23,23 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
+  max-width: 30rem;
   color: var(--text-color);
   gap: 1rem;
+}
+
+.footer-about-us h4 {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.page-footer img {
+  width: 15rem;
 }
 
 .page-footer a,
@@ -35,6 +50,15 @@
   gap: 0.5rem;
   color: var(--text-color);
   text-decoration: none;
+  width: max-content;
+}
+
+.footer-contact-information > span,
+.footer-links > span {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .copyright {

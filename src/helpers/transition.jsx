@@ -51,7 +51,7 @@ const transition = (Component) => {
             }}
             style={{
               position: "absolute",
-              width: "20rem",
+              width: "14rem",
             }}
           />
         </motion.div>
