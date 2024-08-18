@@ -23,7 +23,7 @@ const Navbar = ({ toggleMenu }) => {
             <Link to="/">Početna</Link>
           </li>
           <li>
-            <button>
+            <button aria-haspopup="true" aria-expanded="false">
               Usluge <FaChevronDown />
               <div className={`navigation-dropdown`}>
                 <Link

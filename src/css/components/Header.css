@@ -16,10 +16,10 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/hero-bg-small.webp");
-  background-size: cover;
-  background-position: center center;
+  background: url("/hero-bg-small.webp") center/cover no-repeat;
   filter: grayscale(0.2) brightness(0.2);
+  transition: filter 0.3s ease-in-out 0.5s;
+  z-index: -1;
 }
 
 .header-content {

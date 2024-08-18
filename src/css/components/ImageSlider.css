@@ -40,9 +40,9 @@
   aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: center center;
-  transition: translate 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   flex-shrink: 0;
-  transform: translateZ(0);
+  will-change: transform;
 }
 
 .image-slider-index-selector {
@@ -67,6 +67,7 @@
     #e9c156
   );
   position: relative;
+  cursor: pointer;
 }
 
 .image-slider-index-selector button::before,

@@ -1,5 +1,6 @@
 .loading-container {
   width: 100%;
+  height: 100vh;
   height: 100dvh;
   background-color: var(--bg-color);
   flex-direction: column;
@@ -11,22 +12,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateZ(0);
   animation: vanish 0.5s linear 0.5s forwards;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .loading-container.loading {
-  justify-content: center;
-  align-items: center;
-  transition: 0.3s ease-in-out;
-  opacity: 1;
   animation: none;
 }
 
 .loading-container img {
-  --distance: 70vw;
   width: 14rem;
   animation: driveOff 0.5s ease-in-out forwards;
-  transform: translateZ(0);
   will-change: translate, opacity;
 }
 
@@ -41,36 +38,30 @@
 }
 
 @keyframes loading {
-  from {
+  0% {
     opacity: 0.3;
   }
-  to {
+  100% {
     opacity: 1;
   }
 }
 
 @keyframes driveOff {
-  from {
-    translate: none;
+  0% {
+    transform: translateX(0);
   }
-  to {
-    translate: var(--distance);
+  100% {
+    transform: translateX(calc(70vw + 14rem));
   }
 }
 
 @keyframes vanish {
-  from {
+  0% {
     display: flex;
     opacity: 1;
   }
-  to {
+  100% {
     display: none;
     opacity: 0;
-  }
-}
-
-@media (width < 60rem) {
-  .loading-container img {
-    --distance: 120vw;
   }
 }

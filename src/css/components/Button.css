@@ -8,8 +8,11 @@
   border-radius: 2px;
   text-decoration: none;
   transform: translateZ(0);
-  transition: background-position 0.2s ease, scale 0.2s ease;
+  transition: background-position 0.2s ease, transform 0.2s ease;
   display: inline-block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, background-position;
 }
 
 .primary {
@@ -43,5 +46,5 @@
 .secondary:is(:hover, :focus),
 .primary:is(:hover, :focus) {
   background-position: 0;
-  scale: 1.02;
+  transform: scale(1.02) translateZ(0);
 }

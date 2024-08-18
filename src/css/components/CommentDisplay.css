@@ -37,6 +37,9 @@
     #e9c156
   );
   position: relative;
+  will-change: clip-path, background-image;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .star-outline::before {
@@ -45,6 +48,7 @@
   inset: 0.375rem;
   clip-path: inherit;
   background-color: var(--navs-color);
+  will-change: clip-path, background-color;
 }
 
 blockquote {

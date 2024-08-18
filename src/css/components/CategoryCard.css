@@ -11,6 +11,8 @@
   overflow: hidden;
   transform: translateZ(0);
   background: var(--_backgroundImage) center/cover no-repeat;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .category-card-container > * {
@@ -31,6 +33,7 @@
   z-index: 2;
   border-radius: 0 2px 2px 0;
   overflow: hidden;
+  will-change: background-color, color;
 }
 
 .category-card-container span::before {
@@ -47,8 +50,9 @@
   );
   z-index: -1;
   transform-origin: left;
-  scale: 0 1;
-  transition: scale 0.3s ease-in-out;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
 }
 
 .category-card-container::before {
@@ -56,10 +60,11 @@
   position: absolute;
   inset: 0;
   background: var(--_backgroundImage) center/cover no-repeat;
-  transition: opacity 0.3s ease-in-out, scale 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   filter: grayscale(10) brightness(0.4);
   z-index: 2;
-  scale: 1.02;
+  transform: scale(1.02);
+  will-change: opacity, transform;
 }
 
 .category-card-container:is(:hover, :focus) span {
@@ -69,10 +74,10 @@
 }
 
 .category-card-container:is(:hover, :focus) span::before {
-  scale: 1 1;
+  transform: scaleX(1);
 }
 
 .category-card-container:is(:hover, :focus)::before {
   opacity: 0;
-  scale: 1;
+  transform: scale(1);
 }

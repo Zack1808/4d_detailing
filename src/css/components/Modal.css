@@ -2,12 +2,12 @@
   position: fixed;
   display: flex;
   inset: 0;
-  z-index: 5;
+  z-index: 1000;
   background-color: hsl(from var(--bg-color) h s l / 0.7);
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  animation: openModal 0.5s ease-in-out forwards;
+  animation: openModal 0.3s ease-in-out forwards;
 }
 
 .modal-inner-container {
@@ -19,7 +19,7 @@
   background-color: var(--navs-color);
   padding: 1rem;
   opacity: 0;
-  animation: openModal 0.3s ease-in-out forwards 0.3s;
+  animation: scaleIn 0.3s ease-in-out forwards;
 }
 
 .modal-header {
@@ -38,10 +38,21 @@
 }
 
 @keyframes openModal {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
     opacity: 1;
   }
 }

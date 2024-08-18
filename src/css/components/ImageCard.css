@@ -9,10 +9,11 @@
   align-items: flex-end;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
 .image-card-container > * {
-  z-index: 2;
+  z-index: 1;
 }
 
 .image-card-container::before {
@@ -22,12 +23,13 @@
   background: var(--bgImage) center/cover no-repeat;
   filter: grayscale(1) brightness(0.5);
   opacity: 0;
-  transition: opacity 0.3s ease-in-out, scale 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 1;
 }
 
 .image-card-container:is(:hover, :focus)::before {
   opacity: 1;
-  scale: 1.02;
+  transform: scale(1.02);
 }
 
 .image-card-container h4 {
