@@ -3,7 +3,7 @@ import "../css/components/Loading.css";
 const Loading = ({ className }) => {
   return (
     <div className={`loading-container ${className}`}>
-      <img src="/logo-transition.webp" alt="Logo" />
+      <div className="loader"></div>
       <h4>Loading...</h4>
     </div>
   );

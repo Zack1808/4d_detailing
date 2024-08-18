@@ -4,63 +4,116 @@
   height: 100dvh;
   background-color: var(--bg-color);
   flex-direction: column;
-  gap: 50px;
+  gap: 70px;
   position: fixed;
   inset: 0;
   z-index: 100;
-  opacity: 1;
-  display: flex;
+  opacity: 0;
+  display: none;
   justify-content: center;
   align-items: center;
-  transform: translateZ(0);
-  animation: vanish 0.5s linear 0.5s forwards;
-  transition: opacity 0.3s ease-in-out;
+  animation: vanish 0.5s;
 }
 
 .loading-container.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+  opacity: 1;
   animation: none;
 }
 
-.loading-container img {
-  width: 14rem;
-  animation: driveOff 0.5s ease-in-out forwards;
-  will-change: translate, opacity;
+.loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+  height: 50px;
+  animation: loading 2s infinite;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  height: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.loader::before {
+  background-image: linear-gradient(
+    45deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #686769,
+    #f1f2f2,
+    #d1d3d4
+  );
+  filter: brightness(0.5);
+  background-size: 100% 200%;
+  animation: sliver 2s infinite;
+}
+
+.loader::after {
+  background-image: linear-gradient(
+    45deg,
+    #e9c156,
+    #ffffaa,
+    #e1ab39,
+    #7e5d48,
+    #e9c156
+  );
+  background-size: 100% 200%;
+  animation: gold 2s infinite;
 }
 
 .loading-container h4 {
   color: var(--text-color);
-  font-size: var(--title-small);
 }
 
-.loading-container.loading img,
-.loading-container.loading h4 {
-  animation: loading 1s linear infinite alternate;
+@keyframes sliver {
+  25% {
+    z-index: 0;
+  }
+  50% {
+    translate: 200%;
+    filter: brightness(1);
+  }
+  75% {
+    z-index: 1;
+  }
+}
+
+@keyframes gold {
+  25% {
+    z-index: 1;
+  }
+  50% {
+    translate: -200%;
+  }
+  70% {
+    filter: brightness(0.5);
+  }
+  75% {
+    z-index: 0;
+  }
 }
 
 @keyframes loading {
-  0% {
-    opacity: 0.3;
-  }
   100% {
-    opacity: 1;
-  }
-}
-
-@keyframes driveOff {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(70vw + 14rem));
+    rotate: 360deg;
   }
 }
 
 @keyframes vanish {
-  0% {
+  from {
     display: flex;
     opacity: 1;
   }
-  100% {
+  to {
     display: none;
     opacity: 0;
   }

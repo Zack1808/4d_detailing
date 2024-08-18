@@ -14,6 +14,7 @@ const transition = (Component) => {
       return <Component {...props} />;
 
     const transitionDuration = window.innerWidth > 700 ? 2 : 0.8;
+    const delay = window.innerWidth > 700 ? 0.4 : 0.9;
 
     return (
       <>
@@ -30,7 +31,7 @@ const transition = (Component) => {
         ></motion.div>
         <motion.div
           initial={{ scaleX: 1 }}
-          animate={{ scaleX: 0, transition: { delay: 0.7 } }}
+          animate={{ scaleX: 0, transition: { delay: delay } }}
           exit={{ scaleX: 0 }}
           transition={{ duration: 0.5 }}
           style={{
@@ -46,7 +47,7 @@ const transition = (Component) => {
             alt="logo"
             initial={{ translateX: "calc(-70vw - 14rem)" }}
             animate={{
-              translateX: "calc(70vw + 14rem)",
+              translateX: "calc(100vw + 14rem)",
               transition: { duration: transitionDuration },
             }}
             style={{
