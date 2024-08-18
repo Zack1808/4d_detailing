@@ -39,7 +39,7 @@ const Interijer = ({ resetScroll }) => {
 
   useEffect(() => {
     resetScroll();
-  }, []);
+  }, [resetScroll]);
 
   return (
     <>
