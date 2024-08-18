@@ -14,7 +14,7 @@ const transition = (Component) => {
       return <Component {...props} />;
 
     const transitionDuration = window.innerWidth > 700 ? 2 : 0.8;
-    const delay = window.innerWidth > 700 ? 0.4 : 0.9;
+    const delay = window.innerWidth > 700 ? 1 : 0.7;
 
     return (
       <>
@@ -45,7 +45,7 @@ const transition = (Component) => {
           <motion.img
             src="/logo-transition.webp"
             alt="logo"
-            initial={{ translateX: "calc(-70vw - 14rem)" }}
+            initial={{ translateX: "calc(-100vw - 14rem)" }}
             animate={{
               translateX: "calc(100vw + 14rem)",
               transition: { duration: transitionDuration },
