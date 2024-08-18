@@ -179,6 +179,7 @@
   justify-content: center;
   align-items: center;
   width: 85%;
+  height: 100vh;
   height: 100dvh;
   position: fixed;
   inset: 0 0 auto auto;
