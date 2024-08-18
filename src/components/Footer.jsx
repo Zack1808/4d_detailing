@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
 import { FaClock, FaInstagram, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+
 import "../css/components/Footer.css";
 
 const Footer = React.memo(() => {
@@ -11,6 +12,7 @@ const Footer = React.memo(() => {
     <footer className="page-footer">
       <div className="footer-container">
         <div className="footer-about-us">
+          <h4 className="visually-hidden">O nama</h4>
           <Link to="/" className="logo">
             <img src="/logo.webp" alt="page logo" />
           </Link>
@@ -21,26 +23,30 @@ const Footer = React.memo(() => {
           </p>
         </div>
         <div className="footer-contact-information">
-          <h4>Kontakt</h4>
-          <a href="mailto:4d.detailing.ln@gmail.com">
-            <IoMail aria-hidden="true" />
-            <strong>Email:</strong> 4d.detailing.ln@gmail.com
-          </a>
-          <a href="tel:+385977588716">
-            <FaPhoneAlt aria-hidden="true" />
-            <strong>Telefon:</strong> +385 97 758 8716
-          </a>
           <span>
-            <FaClock aria-hidden="true" />
-            <strong>Radno vrijeme:</strong> po dogovoru
+            <h4>Kontakt</h4>
+            <a href="mailto:4d.detailing.ln@gmail.com">
+              <IoMail aria-hidden="true" />
+              <strong>Email:</strong> 4d.detailing.ln@gmail.com
+            </a>
+            <a href="tel:+385977588716">
+              <FaPhoneAlt aria-hidden="true" />
+              <strong>Telefon:</strong> +385 97 758 8716
+            </a>
+            <span>
+              <FaClock aria-hidden="true" />
+              <strong>Radno vrijeme:</strong> po dogovoru
+            </span>
           </span>
         </div>
         <div className="footer-links">
-          <h4>Linkovi</h4>
-          <Link to="/">Početna</Link>
-          <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
-          <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>
-          <Link to="/kontakt">Kontakt</Link>
+          <span>
+            <h4>Linkovi</h4>
+            <Link to="/">Početna</Link>
+            <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
+            <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>
+            <Link to="/kontakt">Kontakt</Link>
+          </span>
         </div>
       </div>
       <div className="copyright">

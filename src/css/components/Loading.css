@@ -24,7 +24,7 @@
 
 .loading-container img {
   --distance: 70vw;
-  width: 16rem;
+  width: 14rem;
   animation: driveOff 0.5s ease-in-out forwards;
   transform: translateZ(0);
   will-change: translate, opacity;
