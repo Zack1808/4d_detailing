@@ -13,7 +13,7 @@ const transition = (Component) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       return <Component {...props} />;
 
-    const transitionDuration = window.innerWidth > 700 ? 2 : 0.8;
+    const transitionDuration = window.innerWidth > 700 ? 1.3 : 0.8;
     const delay = window.innerWidth > 700 ? 1 : 0.7;
 
     return (
@@ -31,7 +31,7 @@ const transition = (Component) => {
         ></motion.div>
         <motion.div
           initial={{ scaleX: 1 }}
-          animate={{ scaleX: 0, transition: { delay: delay } }}
+          animate={{ scaleX: 0, transition: { delay: 0.7 } }}
           exit={{ scaleX: 0 }}
           transition={{ duration: 0.5 }}
           style={{

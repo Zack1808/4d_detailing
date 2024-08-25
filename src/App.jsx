@@ -198,7 +198,7 @@ const App = () => {
 
   return (
     <>
-      <Loading className={loading ? "loading" : ""} />
+      <Loading className={loading ? "loading" : "removing"} />
       <BrowserRouter>
         <div
           className={`outer-container ${loading ? "" : "loaded"}`}
