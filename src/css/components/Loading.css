@@ -7,21 +7,24 @@
   gap: 3rem;
   position: fixed;
   inset: 0;
-  z-index: 100;
-  opacity: 0;
-  display: none;
+  z-index: 1000000;
+  display: flex;
   justify-content: center;
   align-items: center;
-  animation: vanish 0.5s;
 }
 
 .loading-container.loading {
-  display: flex;
   justify-content: center;
   align-items: center;
   transition: 0.3s ease-in-out;
   opacity: 1;
-  animation: none;
+  visibility: visible;
+}
+
+.loading-container.removing {
+  animation: vanish 0.5s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .loading-container img {
@@ -32,9 +35,13 @@
   color: var(--text-color);
 }
 
-.loading-container img,
-.loading-container h4 {
+.loading-container.loading img,
+.loading-container.loading h4 {
   animation: loading 1s ease-in-out infinite alternate;
+}
+
+.loading-container.removing img {
+  animation: loaded 0.5s ease-in-out forwards;
 }
 
 @keyframes loading {
@@ -46,13 +53,22 @@
   }
 }
 
+@keyframes loaded {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
 @keyframes vanish {
   from {
-    display: flex;
+    visibility: visible;
     opacity: 1;
   }
   to {
-    display: none;
+    visibility: hidden;
     opacity: 0;
   }
 }
