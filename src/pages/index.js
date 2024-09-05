@@ -5,3 +5,4 @@ export { default as Poliranje } from "./Poliranje";
 export { default as Paketi } from "./Paketi";
 export { default as About } from "./About";
 export { default as Gallery } from "./Gallery";
+export { default as Contact } from "./Contact";

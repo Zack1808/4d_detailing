@@ -10,6 +10,7 @@ import {
   Paketi,
   About,
   Gallery,
+  Contact,
 } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
@@ -242,6 +243,10 @@ const App = () => {
               <Route
                 path="/galerija"
                 element={<Gallery resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/Kontakt"
+                element={<Contact resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
             <Footer />
