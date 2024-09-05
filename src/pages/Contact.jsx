@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Header, Input } from "../components";
+import { Header, Input, Textarea, Button } from "../components";
 
 import transition from "../helpers/transition";
 
@@ -61,6 +61,10 @@ const Contact = React.memo(({ resetScroll }) => {
                 type="text"
                 required
               />
+              <Textarea label="Poruka" placeholder="Želim napraviti termin." />
+              <Button primary style={{ alignSelf: "flex-end" }}>
+                Pošalji
+              </Button>
             </form>
           </div>
           <div className="contact-info">

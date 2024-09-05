@@ -1,29 +1,31 @@
-.input-container {
+.textarea-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   position: relative;
 }
 
-.input-container input {
+.textarea-container textarea {
   all: unset;
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
+  min-height: 5rem;
+  resize: vertical;
 }
 
-.input-container label {
+.textarea-container label {
   padding-inline: 1rem;
   transform: translateY(2.7rem);
   transition: transform 0.2s ease-in-out;
   align-self: flex-start;
 }
 
-.input-container input::placeholder {
+.textarea-container textarea::placeholder {
   color: transparent;
   transition: color 0.2s ease-in-out;
 }
 
-.input-container::before {
+.textarea-container::before {
   content: "";
   position: absolute;
   inset: 100% 0 auto;
@@ -41,14 +43,14 @@
   background-attachment: fixed;
 }
 
-.input-container:focus-within::before {
+.textarea-container:focus-within::before {
   transform: scaleX(1);
 }
 
-.input-container input:focus::placeholder {
+.textarea-container textarea:focus::placeholder {
   color: hsl(0 100% 100% / 0.5);
 }
 
-.input-container:focus-within label {
+.textarea-container:focus-within label {
   transform: none;
 }

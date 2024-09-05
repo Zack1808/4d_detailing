@@ -13,3 +13,4 @@ export { default as ImageCard } from "./ImageCard";
 export { default as Modal } from "./Modal";
 export { default as ImageSlider } from "./ImageSlider";
 export { default as Input } from "./Input";
+export { default as Textarea } from "./Textarea";
