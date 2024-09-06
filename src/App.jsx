@@ -14,6 +14,7 @@ import {
   Gallery,
   Contact,
   Privacy,
+  Terms,
 } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
@@ -254,6 +255,10 @@ const App = () => {
               <Route
                 path="/pravila-privatnosti"
                 element={<Privacy resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/uvijeti-korištenja"
+                element={<Terms resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
             <Footer />
