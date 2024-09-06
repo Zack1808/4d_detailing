@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   Home,
@@ -10,6 +12,9 @@ import {
   Paketi,
   About,
   Gallery,
+  Contact,
+  Privacy,
+  Terms,
 } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
@@ -243,6 +248,18 @@ const App = () => {
                 path="/galerija"
                 element={<Gallery resetScroll={resetScrollPosition} />}
               />
+              <Route
+                path="/kontakt"
+                element={<Contact resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/pravila-privatnosti"
+                element={<Privacy resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/uvijeti-korištenja"
+                element={<Terms resetScroll={resetScrollPosition} />}
+              />
             </AnimatedRouted>
             <Footer />
           </div>
@@ -254,6 +271,7 @@ const App = () => {
             setMenuIsOpen={setMenuIsOpen}
           />
         </div>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

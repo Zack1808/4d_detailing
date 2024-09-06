@@ -22,9 +22,9 @@
 }
 
 :root {
-  --navs-color: hsl(180, 37%, 4%);
-  --bg-color: hsl(180, 12%, 7%);
-  --text-color: hsl(200, 3%, 83%);
+  --navs-color: hsl(180, 40%, 4%);
+  --bg-color: #101414;
+  --text-color: #d2d4d5;
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
