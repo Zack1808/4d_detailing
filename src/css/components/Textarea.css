@@ -1,6 +1,6 @@
 .textarea-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 0.5rem;
   position: relative;
 }
@@ -51,6 +51,7 @@
   color: hsl(0 100% 100% / 0.5);
 }
 
-.textarea-container:focus-within label {
+.textarea-container:focus-within label,
+.textarea-container textarea:not(:placeholder-shown) + label {
   transform: none;
 }

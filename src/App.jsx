@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import {
   Home,
@@ -259,6 +261,7 @@ const App = () => {
             setMenuIsOpen={setMenuIsOpen}
           />
         </div>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

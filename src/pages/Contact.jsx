@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import { IoMail } from "react-icons/io5";
 import { FaClock, FaPhoneAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
+import emailjs from "@emailjs/browser";
 
 import { Header, Input, Textarea, Button } from "../components";
 
@@ -9,6 +11,30 @@ import transition from "../helpers/transition";
 import "../css/pages/Contact.css";
 
 const Contact = React.memo(({ resetScroll }) => {
+  const formRef = useRef();
+
+  const handleSubmit = useCallback((event) => {
+    event.preventDefault();
+    if (!formRef.current) return;
+    emailjs
+      .sendForm(
+        "YOUR_SERVICE_ID",
+        import.meta.env.VITE_APP_EMAIL_TEMPLATE_ID,
+        formRef.current,
+        {
+          publicKey: import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY,
+        }
+      )
+      .then(
+        () => {
+          toast.success("Upit poslan!", { theme: "dark" });
+        },
+        (error) => {
+          toast.error("Nešto je pošlo po zlu", { theme: "dark" });
+        }
+      );
+  }, []);
+
   useEffect(() => {
     resetScroll();
   }, [resetScroll]);
@@ -61,13 +87,14 @@ const Contact = React.memo(({ resetScroll }) => {
               </li>
             </ul>
           </div>
-          <form>
+          <form ref={formRef} onSubmit={handleSubmit}>
             <Input
               label="Ime"
               id="name"
               placeholder="Ivan"
               type="text"
               required
+              name="name"
             />
             <Input
               label="Prezime"
@@ -75,6 +102,7 @@ const Contact = React.memo(({ resetScroll }) => {
               placeholder="Ivić"
               type="text"
               required
+              name="surname"
             />
             <Input
               label="Email"
@@ -82,6 +110,7 @@ const Contact = React.memo(({ resetScroll }) => {
               placeholder="ivoivic@gmail.com"
               type="email"
               required
+              name="email"
             />
             <Input
               label="Predmet"
@@ -89,8 +118,14 @@ const Contact = React.memo(({ resetScroll }) => {
               placeholder="Narudžba za detailing"
               type="text"
               required
+              name="subject"
             />
-            <Textarea label="Poruka" placeholder="Želim napraviti termin." />
+            <Textarea
+              label="Poruka"
+              placeholder="Želim napraviti termin."
+              id="message"
+              name="message"
+            />
             <Button primary style={{ alignSelf: "flex-end" }}>
               Pošalji
             </Button>
