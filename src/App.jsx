@@ -13,6 +13,7 @@ import {
   About,
   Gallery,
   Contact,
+  Privacy,
 } from "./pages";
 
 import { Navbar, Loading, Footer, AnimatedRouted } from "./components";
@@ -247,8 +248,12 @@ const App = () => {
                 element={<Gallery resetScroll={resetScrollPosition} />}
               />
               <Route
-                path="/Kontakt"
+                path="/kontakt"
                 element={<Contact resetScroll={resetScrollPosition} />}
+              />
+              <Route
+                path="/pravila-privatnosti"
+                element={<Privacy resetScroll={resetScrollPosition} />}
               />
             </AnimatedRouted>
             <Footer />
