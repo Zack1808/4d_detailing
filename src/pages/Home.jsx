@@ -63,13 +63,11 @@ const Home = ({ scrollTo, resetScroll }) => {
       <HeroContainer onClick={handleClick} />
       <div className="home-offers" ref={servicesRef} aria-label="Prikaz usluga">
         <div className="home-container">
-          <h2>Lorem ipsum dolor sit.</h2>
+          <h2>Naše usluge</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa
-            repellendus soluta porro harum ab dicta exercitationem aperiam rem
-            ex perferendis suscipit eius quo, quasi officia esse molestias.
-            Voluptates voluptatibus pariatur totam quos. Quae saepe eius
-            officiis fugit nulla necessitatibus earum.
+            Nudimo Vam pakete profesionalnih usluga detaljnog čišćenja vozila.
+            One uključuju dubinsko čišćenje, poliranje i zaštitu vašeg limenog
+            ljubimca.
           </p>
           <div className="home-categories" aria-label="Kartice sa uslugama">
             {cards.map((card, index) => (
@@ -81,6 +79,7 @@ const Home = ({ scrollTo, resetScroll }) => {
       <hr />
       <div className="home-comment-display" aria-label="Prikaz recenzija">
         <div className="home-container">
+          <h2>Recenzije</h2>
           <InfinteScroller>
             <CommentDisplay
               comment="Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku."

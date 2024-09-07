@@ -48,24 +48,13 @@ const Eksterijer = ({ resetScroll }) => {
           <div className="eksterijer-text">
             <h2>Čišćenje Eksterijera</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus,
-              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
-              provident, nisi, delectus qui atque id in rerum, est nam dolorum
-              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
-              dolores dolore iusto placeat inventore facere, quos eius deleniti.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus.
+              Poznata je činjenica da automatske autopraonice s četkama nisu
+              najbolje rješenje za čistoću Vašeg vozila, štoviše, često u
+              uzrokuju oštećenja ili nezadovoljavajuće rezultate pranja. Kod nas
+              možete dovesti vozilo na sigurno i detaljno pranje koje neće
+              oštetiti boju niti ostaviti nečistoće na nezgodnim dijelovima
+              vozila. Koristimo profesionalna i provjerena sredstva i metode
+              kako bi osigurali samo najbolje rezultate pranja.
             </p>
           </div>
           <img

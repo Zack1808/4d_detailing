@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
 import { FaClock, FaInstagram, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 
 import "../css/components/Footer.css";
 
@@ -37,6 +38,13 @@ const Footer = React.memo(() => {
               <FaClock aria-hidden="true" />
               <strong>Radno vrijeme:</strong> po dogovoru
             </span>
+            <a href="https://maps.app.goo.gl/kQ868KeYKgo41F1r8" target="_blank">
+              <FaLocationDot aria-hidden="true" />
+              <p>
+                <strong>Lokacija sjedišta:</strong> Rakitovec 274, 10410 Velika
+                Gorica
+              </p>
+            </a>
           </span>
         </div>
         <div className="footer-links">

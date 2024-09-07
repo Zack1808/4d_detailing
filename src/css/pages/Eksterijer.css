@@ -16,7 +16,7 @@
   color: var(--text-color);
   align-items: flex-start;
   gap: 2rem;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .eksterijer-text {
@@ -32,8 +32,8 @@
 }
 
 .eksterijer-content img {
-  flex: 1;
-  width: 50%;
+  /* flex: 1; */
+  width: 45%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center bottom;
