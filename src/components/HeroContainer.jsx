@@ -9,7 +9,7 @@ const HeroContainer = React.memo(({ onClick }) => {
     <div className="hero-container">
       <div className="hero-content">
         <h1>Detailing u 4D formatu</h1>
-        <p>Jer dovoljno nije dovoljno</p>
+        <p></p>
         <Button primary onClick={onClick} aria-label="Pregledaj usluge">
           Pregledaj usluge
         </Button>
