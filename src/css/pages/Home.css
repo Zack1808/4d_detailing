@@ -44,5 +44,6 @@ hr {
 
 .home-comment-display .home-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 3rem;
 }

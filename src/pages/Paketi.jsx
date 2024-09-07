@@ -24,7 +24,7 @@ const Paketi = ({ resetScroll }) => {
           "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
           "Napomena: po želji klijenta moguće je i izraditi slike za prodaju vozila (gratis)",
         ],
-        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+        info: "Cijena usluge se može mjenjati ovisno o veličini vozila",
       },
       {
         title: "Paket Novo vozilo",
@@ -35,7 +35,7 @@ const Paketi = ({ resetScroll }) => {
           "+ zaštita keramičkim voskom u trajanju od 6 mjeseci",
           "+ točkanje oštećenja od kamenčića (klijent sam nosi boju)",
         ],
-        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+        info: "Cijena usluge se može mjenjati ovisno o veličini vozila",
       },
     ],
     []
@@ -49,24 +49,17 @@ const Paketi = ({ resetScroll }) => {
           <div className="eksterijer-text">
             <h2>Posebni paketi</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus,
-              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
-              provident, nisi, delectus qui atque id in rerum, est nam dolorum
-              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
-              dolores dolore iusto placeat inventore facere, quos eius deleniti.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus.
+              Cijenjeni korisnici, za Vas smo pripremili i par posebnih paketa
+              usluga. Oni su spoj nekoliko naših pojedinačnih ponuda iz sva tri
+              područja njege vozila. Ovi paketi su posebno prigodni za korisnike
+              koji po prvi puta žele njegu svog vozila dati u naše ruke kako bi
+              se lakše odlučili na uslugu. Također za korisnike koji žele
+              redovito kod nas održavati vozilo ovi paketi su odlična priprema
+              za program održavanja.
+              <br />
+              <br />
+              Cijene paketa ovise isključivo o veličini vozila. Slobodno nam se
+              javite s dodatnim pitanjima!
             </p>
           </div>
           <img

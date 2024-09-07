@@ -42,12 +42,8 @@ const Gallery = ({ resetScroll }) => {
         <div className="gallery-content">
           <h2>Galerija</h2>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore
-            natus impedit, at obcaecati cum porro delectus velit placeat eos rem
-            sunt ipsa. Quaerat minima quis repudiandae? Consectetur ducimus
-            provident velit obcaecati quo voluptatibus ea nulla inventore, a
-            iste, sint tenetur voluptate! Molestias nisi a laudantium sapiente,
-            mollitia ut odit illum.
+            Pogledajte neke od naših najboljih projekata. Ovim fotografijama
+            želimo pokazati kvalitetu naših usluga.
           </p>
         </div>
         <div className="gallery-images">{imageCards}</div>

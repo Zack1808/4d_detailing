@@ -19,14 +19,14 @@ const Terms = React.memo(({ resetScroll }) => {
             ova pravila korištenja prije nego što nastavite koristiti stranicu.
             Korištenjem stranice pristajete na pridržavanje sljedećih uvjeta:
           </p>
-          <h2>1. Opći uvijeti</h2>
+          <h3>1. Opći uvijeti</h3>
           <p>
             Ova web stranica je osmišljena kako bi vam pružila informacije o
             našim uslugama auto detailinga i omogućila vam da pregledate
             galeriju naših radova. Također možete koristiti kontakt obrazac kako
             biste nas direktno kontaktirali.
           </p>
-          <h2>2. Autorska prava</h2>
+          <h3>2. Autorska prava</h3>
           <p>
             Svi sadržaji objavljeni na ovoj stranici, uključujući, ali ne
             ograničavajući se na tekstove, slike, grafike i logotipe, zaštićeni
@@ -35,7 +35,7 @@ const Terms = React.memo(({ resetScroll }) => {
             reprodukcija ili izmjena sadržaja bez dozvole.
           </p>
 
-          <h2>3. Korištenje galerije</h2>
+          <h3>3. Korištenje galerije</h3>
           <p>
             Galerija na stranici prikazuje naše najbolje radove iz područja auto
             detailinga. Svi radovi prikazani u galeriji vlasništvo su naše
@@ -43,7 +43,7 @@ const Terms = React.memo(({ resetScroll }) => {
             Bilo kakvo neovlašteno preuzimanje ili distribucija slika je strogo
             zabranjeno.
           </p>
-          <h2>4. Kontakt obrazac</h2>
+          <h3>4. Kontakt obrazac</h3>
           <p>
             Putem kontakt obrasca možete nas kontaktirati s upitima,
             prijedlozima ili zahtjevima za uslugama. Svi podaci prikupljeni
@@ -51,14 +51,14 @@ const Terms = React.memo(({ resetScroll }) => {
             prikupljamo dodatne osobne podatke niti koristimo kolačiće na ovoj
             stranici.
           </p>
-          <h2>5. Odgovornost</h2>
+          <h3>5. Odgovornost</h3>
           <p>
             Iako se trudimo osigurati da su sve informacije na ovoj stranici
             točne i ažurirane, ne preuzimamo odgovornost za eventualne pogreške
             ili propuste u sadržaju. Korištenje stranice je isključivo na
             vlastitu odgovornost korisnika.
           </p>
-          <h2>6. Izmjene pravila</h2>
+          <h3>6. Izmjene pravila</h3>
           <p>
             Zadržavamo pravo izmjene ovih pravila korištenja u bilo kojem
             trenutku. Preporučujemo da povremeno provjerite ovu stranicu kako

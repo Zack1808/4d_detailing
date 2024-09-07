@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useRef } from "react";
 import { IoMail } from "react-icons/io5";
 import { FaClock, FaPhoneAlt } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 
@@ -47,18 +48,10 @@ const Contact = React.memo(({ resetScroll }) => {
           <div className="contact-form">
             <h2>Kontaktirajte nas</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Accusantium obcaecati velit explicabo repudiandae saepe omnis
-              perferendis consectetur et a labore, nam laboriosam quisquam totam
-              similique, assumenda iusto doloremque ad fugit. Impedit deleniti
-              ipsum animi, iste corporis sapiente facilis reprehenderit sit, et
-              laudantium accusamus ab ad? Dolor voluptates pariatur ducimus?
-              Nemo, asperiores. Libero excepturi culpa suscipit eaque neque aut
-              eum perferendis hic laboriosam! Pariatur veniam temporibus
-              doloremque quam, culpa nesciunt unde magnam ab beatae cupiditate
-              sunt, illum autem fugiat voluptas facere veritatis possimus. Quam
-              odit eos maiores molestiae rerum delectus. Deserunt, non fugit!
-              Eaque ipsam deserunt porro officiis commodi cumque incidunt.
+              U slučaju bilo kojih dodatnih pitanja, nedoumica te za dodatne
+              informacije o našim uslugama ili cijenama možete nas kontaktirati
+              putem e-pošte, telefonskim putem, SMS ili Whatsapp porukom te
+              putem kontakt obrasca.
             </p>
             <ul className="contact-data">
               <li>
@@ -85,7 +78,20 @@ const Contact = React.memo(({ resetScroll }) => {
                   </p>
                 </span>
               </li>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/kQ868KeYKgo41F1r8"
+                  target="_blank"
+                >
+                  <FaLocationDot aria-hidden="true" />
+                  <p>
+                    <strong>Lokacija sjedišta:</strong> Rakitovec 274, 10410
+                    Velika Gorica
+                  </p>
+                </a>
+              </li>
             </ul>
+            <iframe src="https://maps.google.com/maps?q=rakitovec%20274&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
           </div>
           <form ref={formRef} onSubmit={handleSubmit}>
             <Input
