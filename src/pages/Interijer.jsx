@@ -18,13 +18,17 @@ const Interijer = ({ resetScroll }) => {
       {
         title: "Kemijsko čišćenje unutrašnjosti",
         price: 90,
-        list: ["Potpuno kemijsko čišćenje vidljivh površina osim krova"],
+        list: [
+          "Vanjsko pranje kao priprema",
+          "Potpuno kemijsko čišćenje vidljivh površina osim krova",
+        ],
         info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
       },
       {
         title: "Full detailing interijera",
         price: 250,
         list: [
+          "Vanjsko pranje kao priprema",
           "Kompletno dubinsko čišćenje unutrašnjosti",
           "Ponovna montaža sjedala",
           "+ vanjsko pranje kao priprema",
@@ -49,24 +53,13 @@ const Interijer = ({ resetScroll }) => {
           <div className="eksterijer-text">
             <h2>Čišćenje Interijera</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus,
-              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
-              provident, nisi, delectus qui atque id in rerum, est nam dolorum
-              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
-              dolores dolore iusto placeat inventore facere, quos eius deleniti.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus.
+              Čišćenje interijera često bude teško i vremenski zahtjevan proces.
+              Cijelom interijeru vozila korištenjem posebnih namjenskih
+              sredstava i alata pružamo najbolje rezultate čišćenja koji pritom
+              nisu opasni za dijelove unutrašnjosti Vašeg limenog ljubimca.
+              <br />
+              <br />U slučaju jačih zaprljanja cijena usluga može porasti. Za
+              dodatne informacije vezane uz cijenu slobodno nas kontaktirajte.
             </p>
           </div>
           <img

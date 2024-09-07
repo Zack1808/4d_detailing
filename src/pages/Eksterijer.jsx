@@ -25,6 +25,7 @@ const Eksterijer = ({ resetScroll }) => {
         title: "Premium čišćenje vozila",
         price: 35,
         list: [
+          "Vanjsko pranje kao priprema",
           "Detaljno pranje eksterijera",
           "Detaljno pranje interijera bez kemijskog izvlačenja tekstilnih površina i krova",
         ],
@@ -55,6 +56,9 @@ const Eksterijer = ({ resetScroll }) => {
               oštetiti boju niti ostaviti nečistoće na nezgodnim dijelovima
               vozila. Koristimo profesionalna i provjerena sredstva i metode
               kako bi osigurali samo najbolje rezultate pranja.
+              <br />
+              <br />
+              Za dodatne informacije slobodno nam se javite.
             </p>
           </div>
           <img

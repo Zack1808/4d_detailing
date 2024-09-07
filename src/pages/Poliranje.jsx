@@ -23,8 +23,8 @@ const Eksterijer = ({ resetScroll }) => {
         info: "Cijena usluge se može mjenjati ovisno o zamagljenosti farova",
       },
       {
-        title: "Poliranje laka jednoslojno",
-        price: 100,
+        title: "Poliranje laka",
+        price: "100€ (po sloju)",
         list: [
           "+ vanjsko pranje vozila",
           "+ kemijska i mehanička dekontaminacija laka",
@@ -33,20 +33,21 @@ const Eksterijer = ({ resetScroll }) => {
         ],
         priceSuv: 30,
         priceTransporter: 80,
-        info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
+        info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka.",
       },
       {
-        title: "Poliranje laka troslojno",
-        price: 300,
+        title: "Višeslojna korekcija laka",
+        price: 500,
         list: [
           "+ vanjsko pranje vozila",
           "+ kemijska i mehanička dekontaminacija laka",
           "+ priprema laka za poliranje",
           "+ zaštita voskom ako nije odabrana druga vrsta zaštite",
+          "Po potrebi zatočkavanje i brušenje većih ogrebotina (kupac donosi boju)",
+          "Napomena: prije zaštite laka keramičkim premazom, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i dao maksimum svoje učinkovitosti ( Nije uključeno u cijenu)",
         ],
-        priceSuv: 90,
-        priceTransporter: 240,
-        info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka",
+        priceSuv: 100,
+        priceTransporter: 180,
       },
       {
         title: "Zaštita voskom u trajanju od 3 mjeseca",
@@ -80,24 +81,18 @@ const Eksterijer = ({ resetScroll }) => {
           <div className="eksterijer-text">
             <h2>Poliranje i zaštita</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus,
-              voluptatum ullam pariatur rerum, tempore accusantium soluta. Ad
-              provident, nisi, delectus qui atque id in rerum, est nam dolorum
-              ab nihil. Ut eaque ipsa quisquam, obcaecati labore aut, atque
-              dolores dolore iusto placeat inventore facere, quos eius deleniti.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-              provident earum pariatur repellat, praesentium voluptas assumenda!
-              Nisi, ipsum! Non fugiat, quam dolorum asperiores voluptatum ipsa
-              deserunt in cumque unde, delectus voluptatem, iste natus? Nostrum
-              nemo nam totam rerum repudiandae ipsum facere. Possimus omnis ab
-              officiis ipsa nihil quaerat magni beatae laborum doloremque quia
-              fugiat enim nulla saepe placeat a delectus repellat doloribus.
+              Zbog zagađenosti atmosfere i utjecaja prirode na Vašeg limenog
+              ljubimca, on s vremenom gubi svoj sjaj i veličanstvenost. To se
+              osobito primjećuje na vozilima koja su konstantno izložena suncu i
+              vremenskim neprilikama. One čine da boja poprima oku nevidljiva
+              zaprljanja i oksidaciju površinskog laka, zbog kojih ona gubi
+              svoju ljepotu. Poliranjem Vašoj vozilu moguće je vratiti
+              izgubljeni sjaj i otpornost na nečistoće.
+              <br />
+              <br />
+              Ovisno o vrsti boje i, naravno, željenim rezultatima, nudimo razne
+              tretmane poliranja i zaštite laka Vašeg vozila. Slobodno nam se
+              javite za više informacija.
             </p>
           </div>
           <img
