@@ -14,15 +14,13 @@ const PriceCard = React.memo(
           </>
         );
       else {
-        console.log(typeof price);
         let priceString = price.split(" ");
         const number = priceString[0].replace("€", "");
         priceString.shift();
         const text = priceString.join(" ");
-        console.log(priceString);
         return (
           <>
-            {number} <small>€</small> {text}
+            {number} <small>€</small> <span>{text}</span>
           </>
         );
       }
