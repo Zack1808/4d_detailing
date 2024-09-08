@@ -19,7 +19,7 @@ const Contact = React.memo(({ resetScroll }) => {
     if (!formRef.current) return;
     emailjs
       .sendForm(
-        "YOUR_SERVICE_ID",
+        import.meta.env.VITE_APP_EMAIL_SERVICE_ID,
         import.meta.env.VITE_APP_EMAIL_TEMPLATE_ID,
         formRef.current,
         {
