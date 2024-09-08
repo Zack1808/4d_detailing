@@ -74,6 +74,12 @@
   text-decoration: none;
 }
 
+.price-card-container h5 span {
+  font-size: 1.75rem;
+  align-self: center;
+  font-weight: lighter;
+}
+
 .price-card-container ul {
   margin-block: 1rem;
   display: flex;

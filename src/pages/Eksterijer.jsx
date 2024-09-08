@@ -12,21 +12,30 @@ const Eksterijer = ({ resetScroll }) => {
       {
         title: "Vanjsko pranje",
         price: 15,
-        list: ["+ usisavanje interijera", "+ brisanje prašine interijera"],
+        list: [
+          "Detaljno pranje eksterijera",
+          "Usisavanje interijera",
+          "Brisanje prašine interijera",
+        ],
         info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
       },
       {
         title: "Vanjsko pranje s naplatcima",
         price: 20,
-        list: ["+ usisavanje interijera", "+ brisanje prašine interijera"],
+        list: [
+          "Detaljno pranje eksterijera",
+          "Detaljno pranje naplataka",
+          "Usisavanje interijera",
+          "Brisanje prašine interijera",
+        ],
         info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
       },
       {
         title: "Premium čišćenje vozila",
         price: 35,
         list: [
-          "Vanjsko pranje kao priprema",
           "Detaljno pranje eksterijera",
+          "Detaljno pranje naplataka",
           "Detaljno pranje interijera bez kemijskog izvlačenja tekstilnih površina i krova",
         ],
         priceSuv: 10,
@@ -50,12 +59,12 @@ const Eksterijer = ({ resetScroll }) => {
             <h2>Čišćenje Eksterijera</h2>
             <p>
               Poznata je činjenica da automatske autopraonice s četkama nisu
-              najbolje rješenje za čistoću Vašeg vozila, štoviše, često u
-              uzrokuju oštećenja ili nezadovoljavajuće rezultate pranja. Kod nas
-              možete dovesti vozilo na sigurno i detaljno pranje koje neće
-              oštetiti boju niti ostaviti nečistoće na nezgodnim dijelovima
-              vozila. Koristimo profesionalna i provjerena sredstva i metode
-              kako bi osigurali samo najbolje rezultate pranja.
+              najbolje rješenje za čistoću Vašeg vozila, štoviše, često uzrokuju
+              oštećenja ili nezadovoljavajuće rezultate pranja. Kod nas možete
+              dovesti vozilo na sigurno i detaljno pranje koje neće oštetiti
+              boju niti ostaviti nečistoće na dijelovima Vašeg vozila. Koristimo
+              profesionalna i provjerena sredstva i metode kako bi osigurali
+              samo najbolje rezultate pranja.
               <br />
               <br />
               Za dodatne informacije slobodno nam se javite.
