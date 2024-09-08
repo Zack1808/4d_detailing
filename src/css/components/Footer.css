@@ -90,6 +90,10 @@
     text-align: center;
   }
 
+  .page-footer span {
+    width: 100%;
+  }
+
   .copyright {
     flex-direction: column;
     gap: 1rem;
