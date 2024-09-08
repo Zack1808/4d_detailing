@@ -13,8 +13,8 @@ const Interijer = ({ resetScroll }) => {
         title: "Kemijsko čišćenje sjedala",
         price: 50,
         list: [
-          "Kemijsko izvalčenje vozačevog, suvozačevog sjedala",
-          "Kemijsko izvalčenje stražnjih putničkih sjedala",
+          "Kemijsko izvlačenje vozačevog, suvozačevog sjedala",
+          "Kemijsko izvlačenje stražnjih putničkih sjedala",
           "Zaštita površina sjedala",
         ],
         info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
