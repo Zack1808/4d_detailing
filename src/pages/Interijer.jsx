@@ -13,11 +13,11 @@ const Interijer = ({ resetScroll }) => {
         title: "Kemijsko čišćenje sjedala",
         price: 50,
         list: [
-          "Kemijsko izvlačenje vozačevog, suvozačevog sjedala",
-          "Kemijsko izvlačenje stražnjih putničkih sjedala",
+          "Kemijsko čišćenje vozačevog i suvozačevog sjedala",
+          "Kemijsko čišćenje stražnjih putničkih sjedala",
           "Zaštita površina sjedala",
         ],
-        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila.",
       },
       {
         title: "Kemijsko čišćenje unutrašnjosti",
@@ -25,11 +25,11 @@ const Interijer = ({ resetScroll }) => {
         list: [
           "Detaljno pranje eksterijera kao priprema",
           "Detaljno pranje naplataka",
-          "Potpuno kemijsko čišćenje vidljivih površina osim krova",
-          "Kemijsko izvlačenje sjedala i podova",
+          "Potpuno kemijsko čišćenje svih vidljivih površina osim krova",
+          "Kemijsko čišćenje sjedala i podova",
           "Zaštita plastičnih i tekstilnih površina",
         ],
-        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+        info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
       },
       {
         title: "Full detailing interijera",
@@ -39,14 +39,14 @@ const Interijer = ({ resetScroll }) => {
           "Detaljno pranje naplataka",
           "Demontaža sjedala",
           "Kompletno dubinsko čišćenje unutrašnjosti",
-          "Čišćenje teško dostupnih mjesta, dlaka od ljubimaca i sl.",
-          "Kemijsko izvlačenje sjedala i podova",
+          "Čišćenje teško dostupnih mjesta, dlaka od ljubimaca i sličnih nečistoća",
+          "Kemijsko čišćenje sjedala i podova",
           "Ponovna montaža sjedala",
           "Zaštita plastičnih i tekstilnih površina",
         ],
         priceSuv: 50,
         priceTransporter: 130,
-        info: "Cijena usluge se može mjenjati ovisno o veličini i zaprljanosti vozila",
+        info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
       },
     ],
     []
@@ -64,12 +64,13 @@ const Interijer = ({ resetScroll }) => {
           <div className="eksterijer-text">
             <h2>Čišćenje Interijera</h2>
             <p>
-              Čišćenje interijera često bude teško i vremenski zahtjevan proces.
-              Cijelom interijeru vozila korištenjem posebnih namjenskih
-              sredstava i alata pružamo najbolje rezultate čišćenja koji pritom
-              nisu opasni za dijelove unutrašnjosti Vašeg limenog ljubimca.
+              Čišćenje interijera često je teško i vremenski zahtjevan proces.
+              Cijelom interijeru vozila, korištenjem posebnih namjenskih
+              sredstava i alata, pružamo najbolje rezultate čišćenja, koji
+              pritom nisu opasni za dijelove unutrašnjosti vašeg limenog
+              ljubimca.
               <br />
-              <br />U slučaju jačih zaprljanja cijena usluga može porasti. Za
+              <br />U slučaju jačih zaprljanja, cijena usluge može porasti. Za
               dodatne informacije vezane uz cijenu slobodno nas kontaktirajte.
             </p>
           </div>

@@ -43,7 +43,7 @@ const Gallery = ({ resetScroll }) => {
           <h2>Galerija</h2>
           <p>
             Pogledajte neke od naših najboljih projekata. Ovim fotografijama
-            želimo pokazati kvalitetu naših usluga.
+            želimo prikazati kvalitetu naših usluga.
           </p>
         </div>
         <div className="gallery-images">{imageCards}</div>

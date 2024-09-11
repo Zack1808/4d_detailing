@@ -18,13 +18,13 @@ const Eksterijer = ({ resetScroll }) => {
         price: 20,
         list: [
           "Brušenje i poliranje",
-          "Dodavanje zaštitnog premaza + boost premaza",
+          "Dodavanje zaštitnog premaza i boost premaza",
         ],
-        info: "Cijena usluge se može mjenjati ovisno o zamagljenosti farova",
+        info: "Cijena usluge može se mijenjati ovisno o zamagljenosti farova.",
       },
       {
         title: "Poliranje laka",
-        price: "100€ (po sloju)",
+        price: "100 (po sloju)",
         list: [
           "Detaljno pranje eksterijera kao priprema",
           "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
@@ -32,7 +32,7 @@ const Eksterijer = ({ resetScroll }) => {
         ],
         priceSuv: 30,
         priceTransporter: 80,
-        info: "Cijena usluge se može mjenjati ovisno o veličini vozila i oštećenosti laka.",
+        info: "Cijena usluge može se mijenjati ovisno o veličini vozila i oštećenosti laka",
       },
       {
         title: "Višeslojna korekcija laka",
@@ -41,7 +41,7 @@ const Eksterijer = ({ resetScroll }) => {
           "Detaljno pranje eksterijera kao priprema",
           "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
           "Zaštita voskom ako nije odabrana druga vrsta zaštite",
-          "Po potrebi zatočkavanje i brušenje većih ogrebotina (kupac donosi boju)",
+          "Po potrebi, zatočkavanje i brušenje većih ogrebotina (kupac donosi boju)",
         ],
         priceSuv: 100,
         priceTransporter: 180,
@@ -74,7 +74,7 @@ const Eksterijer = ({ resetScroll }) => {
         ],
         priceSuv: 100,
         priceTransporter: 180,
-        info: "Napomena: prije zaštite laka keramičkim premazom, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i dao maksimum svoje učinkovitosti (Nije uključeno u cijenu usluge keramičkog premaza!)",
+        info: "Napomena: Prije nanošenja keramičkog premaza, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i postigao maksimalnu učinkovitost. (Poliranje nije uključeno u cijenu usluge keramičkog premaza.)nnnnnnn",
       },
     ],
     []
@@ -88,18 +88,18 @@ const Eksterijer = ({ resetScroll }) => {
           <div className="eksterijer-text">
             <h2>Poliranje i zaštita</h2>
             <p>
-              Zbog zagađenosti atmosfere i utjecaja prirode na Vašeg limenog
-              ljubimca, on s vremenom gubi svoj sjaj i veličanstvenost. To se
-              osobito primjećuje na vozilima koja su konstantno izložena suncu i
-              vremenskim neprilikama. One čine da boja poprima oku nevidljiva
-              zaprljanja i oksidaciju površinskog laka, zbog kojih ona gubi
-              svoju ljepotu. Poliranjem Vašoj vozilu moguće je vratiti
-              izgubljeni sjaj i otpornost na nečistoće.
+              Zbog zagađenja atmosfere i utjecaja prirodnih faktora, vaš limeni
+              ljubimac s vremenom gubi sjaj i veličanstvenost. To je osobito
+              vidljivo na vozilima koja su stalno izložena suncu i vremenskim
+              neprilikama. Takvi uvjeti mogu uzrokovati nevidljiva zaprljanja i
+              oksidaciju površinskog laka, zbog kojih boja gubi svoju ljepotu.
+              Poliranjem vašem vozilu može se vratiti izgubljeni sjaj i
+              otpornost na nečistoće.
               <br />
               <br />
-              Ovisno o vrsti boje i, naravno, željenim rezultatima, nudimo razne
-              tretmane poliranja i zaštite laka Vašeg vozila. Slobodno nam se
-              javite za više informacija.
+              Ovisno o vrsti boje i željenim rezultatima, nudimo različite
+              tretmane poliranja i zaštite laka vašeg vozila. Slobodno nas
+              kontaktirajte za više informacija.
             </p>
           </div>
           <img

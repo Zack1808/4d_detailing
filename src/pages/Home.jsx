@@ -65,7 +65,7 @@ const Home = ({ scrollTo, resetScroll }) => {
         <div className="home-container">
           <h2>Naše usluge</h2>
           <p>
-            Nudimo Vam pakete profesionalnih usluga detaljnog čišćenja vozila.
+            Nudimo vam pakete profesionalnih usluga detaljnog čišćenja vozila.
             One uključuju dubinsko čišćenje, poliranje i zaštitu vašeg limenog
             ljubimca.
           </p>

@@ -24,7 +24,7 @@ const Paketi = ({ resetScroll }) => {
           "Zaštita keramičkim voskom",
           "Točkanje oštećenja od kamenčića (klijent sam nosi boju)",
         ],
-        info: "Napomena: po želji klijenta moguće je i izraditi slike za prodaju vozila (gratis). Cijena usluge se može mjenjati ovisno o veličini vozila",
+        info: "Napomena: Po želji klijenta moguće je izraditi i slike za prodaju vozila (gratis). Cijena usluge može se mijenjati ovisno o veličini vozila.",
       },
       {
         title: "Paket Novo vozilo",
@@ -37,7 +37,7 @@ const Paketi = ({ resetScroll }) => {
           "Zaštita sintetičkim premazom u trajanju od 6 mjeseci",
           "Zatočkavanje oštećenja od kamenčića (klijent sam donosi boju)",
         ],
-        info: "Cijena usluge se može mjenjati ovisno o veličini vozila",
+        info: "Cijena usluge može se mijenjati ovisno o veličini vozila.",
       },
     ],
     []

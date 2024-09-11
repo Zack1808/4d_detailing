@@ -15,20 +15,20 @@ const About = React.memo(({ resetScroll }) => {
     () => [
       {
         title: "Tko stoji iza 4D Detailinga",
-        text: "Kao ljubitelji automobila od malih nogu, tim putem smo nastavili i u odraslim danima. Brigom i njegom prema vlastitim automobilima te zadovoljavajućim rezultatima čistoće i ljepote željeli smo to zadovoljstvo i kvalitetu proširiti i donijeti i vama, našim cijenjenim klijentima. Iz te ideje nastao je naš detailing studio 4D Detailing. Bilo da ste kao i mi zaljubljenici u automobilizam ili jednostavno nemate vremena ili mjesta brinuti se za vaše vozilo, mi smo tu da vam ponudimo profesionalne usluge iz svih područja njege i održavanja vozila.\nNaša je vizija jednog dana biti jedni od vodećih detailing studija u Republici Hrvatskoj, a možda i šire. Želimo što više ljudi ponuditi profesionalnu kvalitetu i rezultate, jer čisti i sjajni automobili nisu trošak već ulaganje u njihovu trajnost.",
+        text: "Kao ljubitelji automobila od malih nogu, tim putem smo nastavili i u odrasloj dobi. Brigom i njegom prema vlastitim automobilima te zadovoljavajućim rezultatima čistoće i ljepote, željeli smo to zadovoljstvo i kvalitetu proširiti i donijeti vama, našim cijenjenim klijentima. Iz te ideje nastao je naš detailing studio, 4D Detailing. Bilo da ste, kao i mi, zaljubljenici u automobilizam ili jednostavno nemate vremena ili prostora za brigu o vašem vozilu, mi smo tu da vam ponudimo profesionalne usluge iz svih područja njege i održavanja vozila.\nNaša vizija je jednog dana postati jedan od vodećih detailing studija u Republici Hrvatskoj, a možda i šire. Želimo što više ljudi upoznati s profesionalnom kvalitetom i rezultatima, jer čisti i sjajni automobili nisu trošak već ulaganje u njihovu trajnost.",
         img: "https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         alt: "Tko smo mi",
       },
       {
         title: "Sjaj u 4 dimenzije",
-        text: "Zbog zagađenja u atmosferi i utjecaja vremenskih uvjeta, vaš automobil s vremenom gubi svoj sjaj i atraktivnost. To je posebno vidljivo na vozilima koja su stalno izložena suncu i nepovoljnim vremenskim prilikama. Ovi uvjeti uzrokuju nevidljivo nakupljanje prljavštine i oksidaciju sloja laka, što dovodi do gubitka njegove ljepote. Poliranjem se može obnoviti izgubljeni sjaj i povećati otpornost na nečistoće.\nNaše usluge možete provjeriti ovdje.",
+        text: "Zbog zagađenja u atmosferi i utjecaja vremenskih uvjeta, vaš automobil s vremenom gubi svoj sjaj i atraktivnost. Ovo je posebno vidljivo na vozilima koja su stalno izložena suncu i nepovoljnim vremenskim prilikama. Ti uvjeti uzrokuju nevidljivo nakupljanje prljavštine i oksidaciju sloja laka, što dovodi do gubitka njegove ljepote. Poliranjem se može obnoviti izgubljeni sjaj i povećati otpornost na nečistoće.\nNaše usluge možete provjeriti ovdje.",
         img: "/poliranje.webp",
         alt: "poliranje",
         link: "/poliranje-i-zaštita",
       },
       {
-        title: "4D brine za Vas",
-        text: `Kako odabir njege za vozilo može biti kompliciran, za Vas smo stvorili par različitih paketa. Oni predstavljaju kombinaciju naših pojedinačnih ponuda iz sva tri segmenta njege vozila. Idealni su za one koji prvi put povjeravaju svoje vozilo našoj brizi, kako bi im olakšali donošenje odluke. Također, odličan su izbor za one koji žele redovito održavati svoje vozilo kod nas, jer pružaju dobru osnovu za program redovnog održavanja.\nProvjerite naše pakete ovdje.`,
+        title: "4D brine za vas",
+        text: `S obzirom na to da odabir njege za vozilo može biti kompliciran, za vas smo stvorili nekoliko različitih paketa. Oni predstavljaju kombinaciju naših pojedinačnih usluga iz sva tri segmenta njege vozila. Idealni su za one koji prvi put povjeravaju svoje vozilo našoj brizi, jer olakšavaju donošenje odluke. Također, odličan su izbor za one koji žele redovito održavati svoje vozilo kod nas, jer pružaju dobru osnovu za program redovnog održavanja.\nProvjerite naše pakete ovdje.`,
         img: "/hero-bg-big.webp",
         alt: "paketi",
         link: "/posebni-paketi",

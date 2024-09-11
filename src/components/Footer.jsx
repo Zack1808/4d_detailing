@@ -18,9 +18,9 @@ const Footer = React.memo(() => {
             <img src="/logo.webp" alt="page logo" />
           </Link>
           <p>
-            Profesionalne usluge čišćenja i poliranja vozila
+            Profesionalne usluge čišćenja i poliranja vozila.
             <br />
-            Jer čistoća i sjaj nisu trošak nego ulaganje!
+            Jer čistoća i sjaj nisu trošak, nego ulaganje!
           </p>
         </div>
         <div className="footer-contact-information">
