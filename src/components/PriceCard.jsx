@@ -46,7 +46,9 @@ const PriceCard = React.memo(
         </div>
         {info && <small>{info}</small>}
 
-        <Button primary>Rezerviraj termin</Button>
+        <Button primary to="/kontakt">
+          Rezerviraj termin
+        </Button>
       </div>
     );
   }

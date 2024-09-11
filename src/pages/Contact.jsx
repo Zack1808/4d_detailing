@@ -48,10 +48,9 @@ const Contact = React.memo(({ resetScroll }) => {
           <div className="contact-form">
             <h2>Kontaktirajte nas</h2>
             <p>
-              U slučaju bilo kojih dodatnih pitanja, nedoumica te za dodatne
-              informacije o našim uslugama ili cijenama možete nas kontaktirati
-              putem e-pošte, telefonskim putem, SMS ili Whatsapp porukom te
-              putem kontakt obrasca.
+              U slučaju dodatnih pitanja, nedoumica ili za informacije o našim
+              uslugama i cijenama, možete nas kontaktirati putem e-pošte,
+              telefona, SMS-a, WhatsApp poruka ili kontakt obrasca.
             </p>
             <ul className="contact-data">
               <li>
