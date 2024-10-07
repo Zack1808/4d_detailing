@@ -91,6 +91,11 @@ const Home = ({ scrollTo, resetScroll }) => {
               user="Zvonimir Migić"
               stars={5}
             />
+            <CommentDisplay
+              comment={`Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`}
+              user="Luka Ferencak"
+              stars={5}
+            />
           </InfinteScroller>
         </div>
       </div>

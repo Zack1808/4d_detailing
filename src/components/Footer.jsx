@@ -61,7 +61,7 @@ const Footer = React.memo(() => {
         <span>4D Detailing, {currentYear}</span>
         <div className="social-media">
           <a
-            href="https://www.instagram.com/4ddetailingln?igsh=ZXF0bmI5b2YydmZy"
+            href="https://www.instagram.com/4dcardetailing?igsh=MTAzYnVsa2U0bmY5MA=="
             aria-label="Kontakt Instagram"
             target="_blank"
             rel="noopener noreferrer"
