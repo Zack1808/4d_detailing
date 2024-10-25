@@ -19,7 +19,7 @@
   margin: 0;
   box-sizing: border-box;
   line-height: 1.5;
-  /* outline: 1px solid lime !important; */
+  outline: 1px solid lime !important;
 }
 
 :root {
