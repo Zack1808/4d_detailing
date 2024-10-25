@@ -30,6 +30,17 @@
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
   --title-big: 3rem;
+
+  --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #7e5d48, #e9c156);
+  --silver: linear-gradient(
+    180deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #7a797a,
+    #f1f2f2,
+    #d1d3d4
+  );
 }
 
 body {
@@ -42,14 +53,7 @@ h1,
 h2,
 h3 {
   font-family: "Minion Pro";
-  background-image: linear-gradient(
-    45deg,
-    #e9c156,
-    #ffffaa,
-    #e1ab39,
-    #7e5d48,
-    #e9c156
-  );
+  background-image: var(--gold);
   background-clip: text;
   color: transparent;
 }
@@ -71,15 +75,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(
-    180deg,
-    #8d95a2,
-    #d1d3d4,
-    #ffffff,
-    #7a797a,
-    #f1f2f2,
-    #d1d3d4
-  );
+  background-image: var(--silver);
   border-radius: 50px;
 }
 

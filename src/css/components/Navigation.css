@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  background-color: var(--navs-color);
+}
+
+nav {
+  display: flex;
+  width: 100%;
+  max-width: 93.75rem;
+}
+
+.navbar-logo {
+  width: 11rem;
+  height: 3.2rem;
+}
+
+.mobile-nav-container {
+  display: none;
+}
+
+@media (width < 50rem) {
+  .mobile-nav-container {
+    display: flex;
+  }
+}
