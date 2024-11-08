@@ -70,6 +70,7 @@ h3 {
   font-size: var(--title-small);
 }
 
-p {
-  width: 60ch;
+.container {
+  width: 100%;
+  max-width: 93.75rem;
 }

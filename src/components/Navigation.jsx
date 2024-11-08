@@ -19,11 +19,17 @@ export const MobileNavigation = () => {
 export const Navigation = () => {
   return (
     <header>
-      <Link to="/">
-        <img className="navbar-logo" src="/logo.webp" alt="4D Detailing logo" />
-      </Link>
-      <Nav className="desktop-navigation"></Nav>
-      <FaBars className="menu-icon" />
+      <div className="container">
+        <Link to="/">
+          <img
+            className="navbar-logo"
+            src="/logo.webp"
+            alt="4D Detailing logo"
+          />
+        </Link>
+        <Nav className="desktop-navigation"></Nav>
+        <FaBars className="menu-icon" />
+      </div>
     </header>
   );
 };

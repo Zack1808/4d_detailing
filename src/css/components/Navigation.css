@@ -8,17 +8,15 @@ header {
   color: var(--thirtary-color);
 }
 
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .navbar-logo {
   width: 10rem;
   height: 2.8rem;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 93.75rem;
 }
 
 .mobile-nav-container {
@@ -32,8 +30,11 @@ nav {
 @media (width < 43.75rem) {
   .menu-icon {
     display: flex;
-    height: 3.5rem;
-    width: 3.5rem;
+    font-size: 2.5rem;
+  }
+
+  .desktop-navigation {
+    display: none;
   }
 
   .mobile-nav-container {
