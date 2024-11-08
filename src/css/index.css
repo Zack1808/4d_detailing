@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "Minion Pro";
+  src: url("/fonts/Minion-BoldIt.otf");
+  font-weight: bolder;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url("/fonts/Futura-Book-font.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* outline: 1px solid lime !important; */
+}
+
+:root {
+  --secondary-color: hsl(180, 40%, 4%);
+  --primary-color: #101414;
+  --thirtary-color: #d2d4d5;
+
+  --gold: linear-gradient(45deg, #e9c156,
+    #ffffaa,
+    #e1ab39,
+    #7e5d48,
+    #e9c156);
+  --silver: 
+
+  --title-small: 1.5rem;
+  --title-regular: 2.25rem;
+  --title-big: 3rem;
+}
+
+body {
+  font-family: "Futura";
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Minion Pro";
+  background-image: var(--gold);
+  background-clip: text;
+  color: transparent;
+}
+
+h1 {
+  font-size: var(--title-big);
+}
+
+h2 {
+  font-size: var(--title-regular);
+}
+
+h3 {
+  font-size: var(--title-small);
+}
+
+p {
+  width: 60ch;
+}
