@@ -26,12 +26,16 @@
   --primary-color: #101414;
   --thirtary-color: #d2d4d5;
 
-  --gold: linear-gradient(45deg, #e9c156,
-    #ffffaa,
-    #e1ab39,
-    #7e5d48,
-    #e9c156);
-  --silver: 
+  --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #7e5d48, #e9c156);
+  --silver: linear-gradient(
+    180deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #7a797a,
+    #f1f2f2,
+    #d1d3d4
+  );
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;

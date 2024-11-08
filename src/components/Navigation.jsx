@@ -4,20 +4,26 @@ import { FaBars } from "react-icons/fa";
 
 import "../css/components/Navigation.css";
 
-const MobileNavigation = () => {
-  return <div className="mobile-nav-container">Mobile Navigation</div>;
+const Nav = ({ className }) => {
+  <nav className={className}></nav>;
 };
 
-const Navigation = () => {
+export const MobileNavigation = () => {
+  return (
+    <div className="mobile-nav-container">
+      <Nav className="mobile-navigation"></Nav>
+    </div>
+  );
+};
+
+export const Navigation = () => {
   return (
     <header>
       <Link to="/">
         <img className="navbar-logo" src="/logo.webp" alt="4D Detailing logo" />
       </Link>
-      <nav></nav>
+      <Nav className="desktop-navigation"></Nav>
       <FaBars className="menu-icon" />
     </header>
   );
 };
-
-export default Navigation;

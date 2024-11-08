@@ -4,8 +4,8 @@ header {
   align-items: center;
   gap: 2rem;
   padding: 1rem;
-  background-color: var(--navs-color);
-  color: var(--text-color);
+  background-color: var(--secondary-color);
+  color: var(--thirtary-color);
 }
 
 .navbar-logo {

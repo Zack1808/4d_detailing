@@ -1,1 +1,3 @@
-export { default as Navigation } from "./Navigation";
+import { Navigation, MobileNavigation } from "./Navigation";
+
+export { Navigation, MobileNavigation };
