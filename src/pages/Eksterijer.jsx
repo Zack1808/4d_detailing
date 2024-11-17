@@ -52,9 +52,6 @@ const Eksterijer = ({ resetScroll }) => {
           "Ispiranje i sušenje motornog prostora",
           "Zaštitni premaz",
         ],
-        priceSuv: 10,
-        priceTransporter: 30,
-        info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
       },
     ],
     []
