@@ -48,7 +48,7 @@ const Eksterijer = ({ resetScroll }) => {
         list: [
           "Pretpranje aktivnom pjenom",
           "Odmašćivanje površina motornog prostora",
-          "Detaljno pranje površine motornog prostora",
+          "Detaljno pranje površina motornog prostora",
           "Ispiranje i sušenje motornog prostora",
           "Zaštitni premaz",
         ],
