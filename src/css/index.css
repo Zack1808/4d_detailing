@@ -36,6 +36,15 @@
     #f1f2f2,
     #d1d3d4
   );
+  --mixed: linear-gradient(
+    135deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #e1ab39,
+    #634632,
+    #e9c156
+  );
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
