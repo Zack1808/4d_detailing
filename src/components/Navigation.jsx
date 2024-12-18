@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 
@@ -54,15 +54,30 @@ const Navbar = ({ mobile }) => {
   );
 };
 
-export const Navigation = () => {
+export const NavigationBar = () => {
+  const [scrolledEnough, setScrolledEnough] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) setScrolledEnough(true);
+      else setScrolledEnough(false);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header>
+    <header className={scrolledEnough ? "scrolled" : ""}>
       <div className="container">
         <Link to="/">
           <img className="navbar-logo" src={logo} alt="4D Detailing logo" />
         </Link>
         <Navbar />
-        {/* <FaBars className="menu-icon" /> */}
+        <button className="menu-btn">
+          <FaBars className="menu-icon" />
+        </button>
       </div>
     </header>
   );

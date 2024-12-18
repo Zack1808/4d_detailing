@@ -1,3 +1,3 @@
-import { Navigation } from "./Navigation";
+import { NavigationBar } from "./Navigation";
 
-export { Navigation };
+export { NavigationBar };

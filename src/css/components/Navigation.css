@@ -1,11 +1,21 @@
 header {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 1rem;
-  background-color: var(--secondary-color);
+  padding: 2rem 1rem;
+  background-color: hsl(from var(--secondary-color) h s l / 0);
   color: var(--thirtary-color);
+  transition: 0.5s ease;
+}
+
+header.scrolled {
+  background-color: var(--secondary-color);
+  padding: 1rem;
 }
 
 header .container {
@@ -15,6 +25,12 @@ header .container {
 }
 
 .navbar-logo {
+  width: 15rem;
+  height: 4.2rem;
+  transition: 0.5s ease;
+}
+
+header.scrolled .navbar-logo {
   width: 10rem;
   height: 2.8rem;
 }
@@ -31,17 +47,6 @@ header .container {
   list-style-type: none;
 }
 
-.desktop-nav .main-links::before {
-  content: "";
-  height: 0.25rem;
-  position: absolute;
-  inset-inline: 0;
-  bottom: -0.5rem;
-  border-radius: 50px;
-  background: var(--nav);
-  background: var(--mixed);
-}
-
 .desktop-nav .main-links > li {
   position: relative;
   padding: 0;
@@ -49,19 +54,20 @@ header .container {
 
 .desktop-nav .main-links > li::before {
   content: "";
-  height: 0.5rem;
   position: absolute;
-  inset: auto 0 -0.6rem 0;
-  background-color: var(--secondary-color);
-  transform-origin: left;
-  scale: 1 1;
+  height: 2px;
+  transform-origin: right;
+  inset: auto 0 0;
+  background-color: var(--thirtary-color);
+  border-radius: 50px;
+  scale: 0 1;
   transition: scale 0.2s ease;
 }
 
 .desktop-nav .main-links > li:hover::before,
 .desktop-nav .main-links > li:focus-within::before {
-  transform-origin: right;
-  scale: 0 1;
+  transform-origin: left;
+  scale: 1 1;
 }
 
 .desktop-nav .main-links a,
@@ -85,8 +91,9 @@ header .container {
 }
 
 .desktop-nav .secondary-links {
+  z-index: 10;
   position: absolute;
-  padding-top: 1.3rem;
+  padding-top: 3rem;
   list-style-type: none;
   top: 100%;
   border-radius: 5px;
@@ -94,8 +101,12 @@ header .container {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
-  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  transition: 0.2s ease;
   min-width: 250px;
+}
+
+header.scrolled .desktop-nav .secondary-links {
+  padding-top: 1.3rem;
 }
 
 .desktop-nav .secondary-links li {
@@ -124,9 +135,23 @@ header .container {
   transform: translateY(0);
 }
 
-@media (width < 43.75rem) {
+@media (width < 48.125rem) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .navbar-logo {
+    width: 12rem;
+    height: 3.36rem;
+    transition: 0.5s ease;
+  }
+
+  .menu-btn {
+    all: unset;
+  }
+
   .menu-icon {
     display: flex;
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
