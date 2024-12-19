@@ -52,3 +52,11 @@
     transform: none;
   }
 }
+
+@media (width < 31.25rem) {
+  .hero-btn-container {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
