@@ -9,6 +9,7 @@ header {
   background-color: hsl(from var(--secondary-color) h s l / 0);
   color: var(--thirtary-color);
   transition: 0.3s ease;
+  z-index: 20;
 }
 
 header.scrolled {
@@ -101,7 +102,7 @@ header.scrolled .navbar-logo {
 .desktop-nav .secondary-links {
   z-index: 10;
   position: absolute;
-  padding-top: 0.5rem;
+  padding-top: 0.2rem;
   list-style-type: none;
   top: 100%;
   border-radius: 5px;

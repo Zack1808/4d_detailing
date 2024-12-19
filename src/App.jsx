@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { NavigationBar, Navbar } from "./components";
+import { NavigationBar, Navbar, Hero } from "./components";
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -33,15 +33,7 @@ const App = () => {
         ref={containerRef}
       >
         <NavigationBar toggleMenu={toggleMenu} />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <Hero />
         <br />
         <br />
         <br />

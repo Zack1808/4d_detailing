@@ -1,0 +1,40 @@
+.btn {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--thirtary-color);
+  padding: 0.7rem 1.4rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.primary-btn {
+  background: var(--gold);
+  color: var(--primary-color);
+  background-size: 200%;
+  background-position: 0;
+  transition: 0.3s ease;
+}
+
+.primary-btn:hover,
+.primary-btn:focus {
+  background-position: 30%;
+  transform: scale(1.02);
+}
+
+.secondary-btn {
+  background: var(--silver);
+  color: var(--primary-color);
+  background-size: 200%;
+  background-position: 0;
+  transition: 0.3s ease;
+}
+
+.secondary-btn:hover,
+.secondary-btn:focus {
+  background-position: 20%;
+  transform: scale(1.02);
+}

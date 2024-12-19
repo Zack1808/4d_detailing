@@ -81,8 +81,8 @@ export const NavigationBar = ({ toggleMenu }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (containerRef.current.scrollTop > 100) setScrolledEnough(true);
-      else setScrolledEnough(false);
+      if (containerRef.current.scrollTop > 110) setScrolledEnough(true);
+      else if (containerRef.current.scrollTop < 100) setScrolledEnough(false);
     };
 
     containerRef.current.addEventListener("scroll", handleScroll);

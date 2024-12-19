@@ -18,6 +18,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  line-height: 2;
+  letter-spacing: 0.15rem;
+  font-size: 1rem;
   /* outline: 1px solid lime !important; */
 }
 
@@ -28,7 +31,7 @@
 
   --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #7e5d48, #e9c156);
   --silver: linear-gradient(
-    180deg,
+    40deg,
     #8d95a2,
     #d1d3d4,
     #ffffff,
@@ -106,6 +109,10 @@ h2 {
 
 h3 {
   font-size: var(--title-small);
+}
+
+p {
+  color: var(--thirtary-color);
 }
 
 .container {
