@@ -5,7 +5,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   background-color: hsl(from var(--secondary-color) h s l / 0);
   color: var(--thirtary-color);
   transition: 0.3s ease;
@@ -124,7 +124,7 @@ header.scrolled .desktop-nav .secondary-links {
 
 .desktop-nav .secondary-links li:hover,
 .desktop-nav .secondary-links li:focus-within {
-  background-color: hsl(from var(--thirtary-color) h s l / 0.1);
+  background-color: var(--accent-color);
   transition: 0.2s ease;
 }
 
@@ -183,13 +183,9 @@ header.scrolled .desktop-nav .secondary-links {
   .menu-close {
     all: unset;
     position: fixed;
-    display: flex;
     top: 1rem;
     right: 1rem;
-    margin-left: auto;
-    justify-self: flex-start;
     color: var(--thirtary-color);
-    font-size: 2rem;
     border: 2px solid;
     display: flex;
     aspect-ratio: 1/1;
@@ -229,7 +225,7 @@ header.scrolled .desktop-nav .secondary-links {
 
   .menu-chevron {
     transform: rotate(90deg);
-    transition: 0.3s 0.3s ease;
+    transition: 0.3s 0.1s ease;
   }
 
   .menu-dropdown-open.menu-chevron {

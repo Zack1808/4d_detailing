@@ -11,7 +11,7 @@
   background-size: 100% 140%, 80%;
   width: 100%;
   height: 100dvh;
-  margin-top: -8.7rem;
+  margin-top: calc(var(--header-size) * -1px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,4 +32,23 @@
   gap: 1.5rem;
   justify-content: flex-start;
   align-items: center;
+}
+
+@media (width < 62.5rem) {
+  .hero-container {
+    background: linear-gradient(
+        180deg,
+        var(--primary-color),
+        hsl(from var(--primary-color) h s l / 0.7),
+        var(--primary-color)
+      ),
+      url("/hero-bg-small.webp");
+    background-size: cover;
+    transform: none;
+    background-position: center center;
+  }
+
+  .hero-container .container {
+    transform: none;
+  }
 }

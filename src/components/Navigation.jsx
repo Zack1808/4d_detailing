@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
@@ -15,7 +15,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
   return (
     <nav className={`${mobile ? "mobile-nav" : "desktop-nav"} ${className}`}>
       <button onClick={toggleMenu} className="menu-close">
-        <GrFormClose />
+        <GrFormClose size={32} />
       </button>
       <ul className="main-links">
         <li>
@@ -77,22 +77,29 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
 export const NavigationBar = ({ toggleMenu }) => {
   const [scrolledEnough, setScrolledEnough] = useState(false);
 
+  const headerRef = useRef();
+
   const { containerRef } = useScrollPosition();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (containerRef.current.scrollTop > 110) setScrolledEnough(true);
-      else if (containerRef.current.scrollTop < 100) setScrolledEnough(false);
+      if (containerRef.current.scrollTop > 60) setScrolledEnough(true);
+      else if (containerRef.current.scrollTop < 30) setScrolledEnough(false);
     };
 
     containerRef.current.addEventListener("scroll", handleScroll);
+
+    document.documentElement.style.setProperty(
+      "--header-size",
+      headerRef.current.offsetHeight
+    );
 
     return () =>
       containerRef.current.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={scrolledEnough ? "scrolled" : ""}>
+    <header className={scrolledEnough ? "scrolled" : ""} ref={headerRef}>
       <div className="container">
         <Link to="/">
           <img className="navbar-logo" src={logo} alt="4D Detailing logo" />

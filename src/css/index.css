@@ -28,6 +28,7 @@
   --secondary-color: hsl(180, 40%, 4%);
   --primary-color: #101414;
   --thirtary-color: #d2d4d5;
+  --accent-color: #2a2e2e;
 
   --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #7e5d48, #e9c156);
   --silver: linear-gradient(
