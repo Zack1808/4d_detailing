@@ -1,7 +1,5 @@
 header {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
+  position: sticky;
   top: 0;
   display: flex;
   justify-content: center;
@@ -10,7 +8,7 @@ header {
   padding: 2rem 1rem;
   background-color: hsl(from var(--secondary-color) h s l / 0);
   color: var(--thirtary-color);
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 
 header.scrolled {
@@ -27,7 +25,7 @@ header .container {
 .navbar-logo {
   width: 15rem;
   height: 4.2rem;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
 }
 
 header.scrolled .navbar-logo {
@@ -35,11 +33,18 @@ header.scrolled .navbar-logo {
   height: 2.8rem;
 }
 
-.menu-icon {
+.menu-icon,
+.menu-btn,
+.menu-close {
   display: none;
 }
 
-.desktop-nav .main-links {
+.mobile-nav {
+  display: none;
+}
+
+.desktop-nav .main-links,
+.mobile-nav .main-links {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +76,9 @@ header.scrolled .navbar-logo {
 }
 
 .desktop-nav .main-links a,
-.desktop-nav .main-links .btn-link {
+.desktop-nav .main-links .btn-link,
+.mobile-nav .main-links a,
+.mobile-nav .main-links .btn-link {
   all: unset;
   color: var(--thirtary-color);
   text-decoration: none;
@@ -84,7 +91,8 @@ header.scrolled .navbar-logo {
   cursor: pointer;
 }
 
-.desktop-nav .main-links .btn-link {
+.desktop-nav .main-links .btn-link,
+.mobile-nav .main-links .btn-link {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
@@ -93,7 +101,7 @@ header.scrolled .navbar-logo {
 .desktop-nav .secondary-links {
   z-index: 10;
   position: absolute;
-  padding-top: 3rem;
+  padding-top: 0.5rem;
   list-style-type: none;
   top: 100%;
   border-radius: 5px;
@@ -115,7 +123,7 @@ header.scrolled .desktop-nav .secondary-links {
 
 .desktop-nav .secondary-links li:hover,
 .desktop-nav .secondary-links li:focus-within {
-  background-color: hsl(from var(--secondary-color) h s l / 0.9);
+  background-color: hsl(from var(--thirtary-color) h s l / 0.1);
   transition: 0.2s ease;
 }
 
@@ -136,13 +144,34 @@ header.scrolled .desktop-nav .secondary-links {
 }
 
 @media (width < 48.125rem) {
+  header {
+    padding: 1rem;
+  }
+
   .desktop-nav {
     display: none;
   }
 
+  .menu-icon {
+    display: flex;
+    font-size: 2rem;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+  }
+
   .navbar-logo {
-    width: 12rem;
-    height: 3.36rem;
+    width: 10rem;
+    height: 2.8rem;
     transition: 0.5s ease;
   }
 
@@ -150,8 +179,73 @@ header.scrolled .desktop-nav .secondary-links {
     all: unset;
   }
 
-  .menu-icon {
+  .menu-close {
+    all: unset;
+    position: fixed;
     display: flex;
+    top: 1rem;
+    right: 1rem;
+    margin-left: auto;
+    justify-self: flex-start;
+    color: var(--thirtary-color);
     font-size: 2rem;
+    border: 2px solid;
+    display: flex;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    padding: 0.2rem;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+
+  .menu-open .menu-close {
+    opacity: 1;
+    transition: 0.3s 0.3s ease;
+  }
+
+  .mobile-nav .main-links {
+    flex-direction: column;
+    align-items: flex-start;
+    transform: translateX(20%);
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+
+  .menu-open.mobile-nav .main-links {
+    transform: translate(-10%);
+    opacity: 1;
+    transition: 0.3s 0.3s ease;
+  }
+
+  .mobile-nav .main-links li {
+    width: 100%;
+  }
+
+  .mobile-nav .main-links a,
+  .mobile-nav .main-links .btn-link {
+    width: 100%;
+  }
+
+  .menu-chevron {
+    transform: rotate(90deg);
+    transition: 0.3s 0.3s ease;
+  }
+
+  .menu-dropdown-open.menu-chevron {
+    transform: rotate(0);
+  }
+
+  .mobile-nav .secondary-links {
+    list-style-type: none;
+    padding-left: 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s ease;
+  }
+
+  .mobile-nav .menu-dropdown-open.secondary-links {
+    transition: 1s ease;
+    max-height: 500px;
+    transform: translateZ(0);
   }
 }

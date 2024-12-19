@@ -1,23 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaChevronDown } from "react-icons/fa";
+import { GrFormClose } from "react-icons/gr";
+
+import { useScrollPosition } from "../context/scrollContext";
 
 import logo from "/logo.svg";
 
 import "../css/components/Navigation.css";
 
-const Navbar = ({ mobile }) => {
+export const Navbar = ({ mobile, toggleMenu, className }) => {
+  const [dropDownOpen, setDropDownOpen] = useState(false);
+
   return (
-    <nav className={mobile ? "mobile-nav" : "desktop-nav"}>
+    <nav className={`${mobile ? "mobile-nav" : "desktop-nav"} ${className}`}>
+      <button onClick={toggleMenu} className="menu-close">
+        <GrFormClose />
+      </button>
       <ul className="main-links">
         <li>
           <Link to="/">Početna</Link>
         </li>
         <li>
-          <button className="btn-link">
-            Usluge <FaChevronDown />
+          <button
+            className="btn-link"
+            onClick={() => setDropDownOpen((prevState) => !prevState)}
+          >
+            Usluge{" "}
+            <FaChevronDown
+              className={`menu-chevron ${
+                dropDownOpen ? "menu-dropdown-open" : ""
+              }`}
+            />
           </button>
-          <ul className="secondary-links">
+          <ul
+            className={`secondary-links ${
+              dropDownOpen ? "menu-dropdown-open" : ""
+            }`}
+          >
             <li>
               <Link to="/čišćenje-eksterijera" onClick={(e) => e.target.blur()}>
                 Čišćenje eksterijera
@@ -54,18 +74,21 @@ const Navbar = ({ mobile }) => {
   );
 };
 
-export const NavigationBar = () => {
+export const NavigationBar = ({ toggleMenu }) => {
   const [scrolledEnough, setScrolledEnough] = useState(false);
+
+  const { containerRef } = useScrollPosition();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) setScrolledEnough(true);
+      if (containerRef.current.scrollTop > 100) setScrolledEnough(true);
       else setScrolledEnough(false);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    containerRef.current.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () =>
+      containerRef.current.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -75,7 +98,7 @@ export const NavigationBar = () => {
           <img className="navbar-logo" src={logo} alt="4D Detailing logo" />
         </Link>
         <Navbar />
-        <button className="menu-btn">
+        <button className="menu-btn" onClick={toggleMenu}>
           <FaBars className="menu-icon" />
         </button>
       </div>
