@@ -55,9 +55,16 @@ blockquote {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-width: 60ch;
 }
 
 blockquote footer {
   color: var(--thirtary-color);
   font-weight: bold;
+}
+
+@media (width < 46.75rem) {
+  blockquote {
+    min-width: 38ch;
+  }
 }

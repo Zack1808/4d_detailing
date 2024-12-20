@@ -2,7 +2,12 @@ import React, { useCallback, useMemo, useRef } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
 
-import { Hero, CategoryCard, CommentDisplay } from "../components";
+import {
+  Hero,
+  CategoryCard,
+  CommentDisplay,
+  InfiniteScroller,
+} from "../components";
 
 import "../css/pages/Home.css";
 
@@ -89,11 +94,11 @@ const Home = () => {
 
         <article className="container">
           <h2>Recenzije</h2>
-          <div>
+          <InfiniteScroller>
             {comments.map((comment) => (
               <CommentDisplay {...comment} key={comment.user} />
             ))}
-          </div>
+          </InfiniteScroller>
         </article>
       </main>
     </div>
