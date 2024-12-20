@@ -74,7 +74,7 @@ body {
 
 .content::before {
   content: "";
-  z-index: 20;
+  z-index: 20000;
   position: fixed;
   inset-inline: 0;
   top: var(--scroll-offset);
@@ -112,7 +112,8 @@ h3 {
   font-size: var(--title-small);
 }
 
-p {
+p,
+span {
   color: var(--thirtary-color);
 }
 
@@ -123,6 +124,14 @@ p {
 
 .page-container {
   margin-top: calc(var(--header-size) * -1px);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem;
 }
 
 ::-webkit-scrollbar {

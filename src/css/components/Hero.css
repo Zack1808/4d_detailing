@@ -1,5 +1,5 @@
 .hero-container {
-  padding: 1rem;
+  padding: 0 1rem;
   background: radial-gradient(
       ellipse at left,
       hsl(from var(--primary-color) h s l / 0.2),

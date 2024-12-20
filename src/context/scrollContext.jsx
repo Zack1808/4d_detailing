@@ -10,11 +10,14 @@ export const ScrollProvider = ({ children }) => {
   const containerRef = useRef(null);
 
   const scrollTo = (scrollPosition) => {
-    if (containerRef.current)
+    if (containerRef.current) {
+      const scroll = containerRef.current.scrollTop + scrollPosition;
+
       containerRef.current.scrollTo({
-        top: scrollPosition,
-        behaviour: "smooth",
+        top: scroll,
+        behavior: "smooth",
       });
+    }
   };
 
   return (

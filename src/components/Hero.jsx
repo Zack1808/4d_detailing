@@ -4,14 +4,16 @@ import { Button } from "./";
 
 import "../css/components/Hero.css";
 
-const Hero = () => {
+const Hero = ({ scrollTo }) => {
   return (
     <div className="hero-container">
       <div className="container">
         <h1>4D Detiailing</h1>
         <p>Luksuz koji si možete priuštiti</p>
         <div className="hero-btn-container">
-          <Button primary>Pregledaj usluge</Button>
+          <Button primary onClick={scrollTo}>
+            Pregledaj usluge
+          </Button>
           <Button link="/kontakt" secondary>
             Kontaktiraj nas
           </Button>
