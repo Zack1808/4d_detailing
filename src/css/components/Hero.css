@@ -10,8 +10,7 @@
   background-position: 40% 60%, 0 center;
   background-size: 100% 140%, 80%;
   width: 100%;
-  height: 100dvh;
-  margin-top: calc(var(--header-size) * -1px);
+  height: 100svh;
   display: flex;
   justify-content: center;
   align-items: center;
