@@ -9,6 +9,13 @@
   padding: 0.7rem 1.4rem;
   border-radius: 5px;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-position: 20%;
+  transform: scale(1.02);
 }
 
 .primary-btn {
@@ -19,22 +26,10 @@
   transition: 0.3s ease;
 }
 
-.primary-btn:hover,
-.primary-btn:focus {
-  background-position: 30%;
-  transform: scale(1.02);
-}
-
 .secondary-btn {
   background: var(--silver);
   color: var(--primary-color);
   background-size: 200%;
   background-position: 0;
   transition: 0.3s ease;
-}
-
-.secondary-btn:hover,
-.secondary-btn:focus {
-  background-position: 20%;
-  transform: scale(1.02);
 }

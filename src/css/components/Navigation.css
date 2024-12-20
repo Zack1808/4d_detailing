@@ -5,7 +5,7 @@ header {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 1rem 1rem;
+  padding: 1rem;
   background-color: hsl(from var(--secondary-color) h s l / 0);
   color: var(--thirtary-color);
   transition: 0.3s ease;
@@ -14,7 +14,6 @@ header {
 
 header.scrolled {
   background-color: var(--secondary-color);
-  padding: 1rem;
 }
 
 header .container {
@@ -244,5 +243,33 @@ header.scrolled .desktop-nav .secondary-links {
     transition: 1s ease;
     max-height: 500px;
     transform: translateZ(0);
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  header {
+    padding-top: 1.2rem
+  }
+
+  header::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 0.1rem;
+    transform-origin: left;
+    background: var(--gold);
+    scale: 0 1;
+    animation: grow linear;
+    animation-timeline: scroll();
+  }
+
+  @keyframes grow {
+    to {
+      scale: 1 1;
+    }
   }
 }
