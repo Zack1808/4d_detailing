@@ -4,6 +4,7 @@ import Button from "./Button";
 import CategoryCard from "./CategoryCard";
 import CommentDisplay from "./CommentDisplay";
 import InfiniteScroller from "./InfiniteScroller";
+import Footer from "./Footer";
 
 export {
   NavigationBar,
@@ -13,4 +14,5 @@ export {
   CategoryCard,
   CommentDisplay,
   InfiniteScroller,
+  Footer,
 };

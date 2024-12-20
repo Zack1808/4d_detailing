@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { NavigationBar, Navbar } from "./components";
+import { NavigationBar, Navbar, Footer } from "./components";
 import { Home } from "./pages";
 
 import { useScrollPosition } from "./context/scrollContext";
@@ -37,6 +37,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
+        <Footer />
       </div>
       <ToastContainer />
     </BrowserRouter>
