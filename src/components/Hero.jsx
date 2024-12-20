@@ -8,7 +8,7 @@ const Hero = ({ scrollTo }) => {
   return (
     <div className="hero-container">
       <div className="container">
-        <h1>4D Detiailing</h1>
+        <h1>4D Detailing</h1>
         <p>Luksuz koji si možete priuštiti</p>
         <div className="hero-btn-container">
           <Button primary onClick={scrollTo}>

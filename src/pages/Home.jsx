@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useRef } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
 
-import { Hero, CategoryCard } from "../components";
+import { Hero, CategoryCard, CommentDisplay } from "../components";
 
 import "../css/pages/Home.css";
 
@@ -37,23 +37,26 @@ const Home = () => {
     []
   );
 
-  const comment = useMemo(() => [
-    {
-      comment: `Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku.`,
-      user: "Darko Kovač",
-      stars: 5,
-    },
-    {
-      comment: `Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`,
-      user: "Zvonimir Migić",
-      stars: 5,
-    },
-    {
-      comment: `Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`,
-      user: "Luka Ferencak",
-      stars: 5,
-    },
-  ]);
+  const comments = useMemo(
+    () => [
+      {
+        comment: `Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku.`,
+        user: "Darko Kovač",
+        stars: 5,
+      },
+      {
+        comment: `Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`,
+        user: "Zvonimir Migić",
+        stars: 5,
+      },
+      {
+        comment: `Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`,
+        user: "Luka Ferencak",
+        stars: 5,
+      },
+    ],
+    []
+  );
 
   const handleClick = useCallback(() => {
     const { top } = mainRef.current.getBoundingClientRect();
@@ -86,6 +89,11 @@ const Home = () => {
 
         <article className="container">
           <h2>Recenzije</h2>
+          <div>
+            {comments.map((comment) => (
+              <CommentDisplay {...comment} key={comment.user} />
+            ))}
+          </div>
         </article>
       </main>
     </div>
