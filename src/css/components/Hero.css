@@ -33,7 +33,7 @@
   align-items: center;
 }
 
-@media (width < 62.5rem) {
+@media (width < 68.75rem) {
   .hero-container {
     background: linear-gradient(
         180deg,
