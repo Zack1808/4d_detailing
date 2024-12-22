@@ -7,6 +7,8 @@ import {
   CategoryCard,
   CommentDisplay,
   InfiniteScroller,
+  Button,
+  Modal,
 } from "../components";
 
 import "../css/pages/Home.css";
@@ -63,15 +65,14 @@ const Home = () => {
     []
   );
 
-  const handleClick = useCallback(() => {
+  const handleScroll = useCallback(() => {
     const { top } = mainRef.current.getBoundingClientRect();
-
-    scrollTo(top - 70);
+    scrollTo(top - 90);
   }, [scrollTo]);
 
   return (
     <div className="page-container">
-      <Hero scrollTo={handleClick} />
+      <Hero scrollTo={handleScroll} />
 
       <main ref={mainRef} className="home">
         <article className="container">
@@ -92,8 +93,13 @@ const Home = () => {
 
         <hr />
 
-        <article className="container">
+        <article className="container home-ratings">
           <h2>Recenzije</h2>
+          <p>
+            Pogledajte recenzije naših zadovoljnih korisnika. <br />
+            Zadovoljni ste našom uslugom?
+          </p>
+          <Button primary>Ostavite recenziju</Button>
           <InfiniteScroller>
             {comments.map((comment) => (
               <CommentDisplay {...comment} key={comment.user} />
@@ -101,6 +107,9 @@ const Home = () => {
           </InfiniteScroller>
         </article>
       </main>
+      <Modal isOpen={true} title={"Hello"}>
+        Hello
+      </Modal>
     </div>
   );
 };

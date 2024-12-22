@@ -6,6 +6,7 @@ import CommentDisplay from "./CommentDisplay";
 import InfiniteScroller from "./InfiniteScroller";
 import Footer from "./Footer";
 import GoogleAnalytic from "./GoogleAnalytic";
+import Modal from "./Modal";
 
 export {
   NavigationBar,
@@ -17,4 +18,5 @@ export {
   InfiniteScroller,
   Footer,
   GoogleAnalytic,
+  Modal,
 };

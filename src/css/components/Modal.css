@@ -1,0 +1,36 @@
+.modal-background {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: hsl(0 0% 0% / 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 100%;
+  max-width: 60rem;
+  display: flex;
+  background-color: var(--primary-color);
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--thirtary-color);
+}
+
+.modal-title h4 {
+  font-size: 2rem;
+}
+
+.modal-title button {
+  all: unset;
+  cursor: pointer;
+}

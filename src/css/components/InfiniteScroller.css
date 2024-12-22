@@ -1,6 +1,7 @@
 .infinite-scrooler {
   width: 100%;
   max-width: 93.75rem;
+  margin-top: 1rem;
 }
 
 .infinte-scroller-content {
