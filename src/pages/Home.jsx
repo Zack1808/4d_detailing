@@ -21,6 +21,7 @@ const Home = () => {
   const [starCount, setStarCount] = useState(1);
 
   const mainRef = useRef();
+  const reviewFormRef = useRef();
 
   const { scrollTo } = useScrollPosition();
 
@@ -82,10 +83,19 @@ const Home = () => {
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
+    clearReviewForm();
   };
 
   const sendReview = (event) => {
     event.preventDefault();
+    clearReviewForm();
+  };
+
+  const clearReviewForm = () => {
+    setStarCount(1);
+    reviewFormRef.current.name.value = "";
+    reviewFormRef.current.name.surname = "";
+    reviewFormRef.current.name.reviewText = "";
   };
 
   return (
@@ -136,7 +146,7 @@ const Home = () => {
         title={"Dodaj recenziju"}
         closeModal={handleCloseModal}
       >
-        <form onSubmit={sendReview}>
+        <form onSubmit={sendReview} ref={reviewFormRef}>
           <StarSelect
             starSelectedCount={starCount}
             starSelected={(count) => setStarCount(count)}
@@ -155,7 +165,7 @@ const Home = () => {
           <Textarea
             label="Tekst recencije"
             placeholder="Tekst recencije"
-            name="review-text"
+            name="reviewText"
             required
             id="review-text"
           />
