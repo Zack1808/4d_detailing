@@ -10,12 +10,10 @@ const Modal = ({ isOpen, closeModal, title, children }) => {
       className={`modal-background ${isOpen ? "modal-open" : ""}`}
       onClick={closeModal}
     >
-      <div className="modal">
+      <div className="modal" onClick={(event) => event.stopPropagation()}>
         <div className="modal-title">
           <h4>{title && title}</h4>
-          <button onClick={closeModal}>
-            <GrFormClose size={48} />
-          </button>
+          <GrFormClose size={48} onClick={closeModal} />
         </div>
         <div className="body">{children}</div>
       </div>

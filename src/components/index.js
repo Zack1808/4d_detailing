@@ -7,6 +7,8 @@ import InfiniteScroller from "./InfiniteScroller";
 import Footer from "./Footer";
 import GoogleAnalytic from "./GoogleAnalytic";
 import Modal from "./Modal";
+import Input from "./Input";
+import Textarea from "./Textarea";
 
 export {
   NavigationBar,
@@ -19,4 +21,6 @@ export {
   Footer,
   GoogleAnalytic,
   Modal,
+  Input,
+  Textarea,
 };

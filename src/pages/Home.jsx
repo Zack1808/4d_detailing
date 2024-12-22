@@ -9,6 +9,8 @@ import {
   InfiniteScroller,
   Button,
   Modal,
+  Input,
+  Textarea,
 } from "../components";
 
 import "../css/pages/Home.css";
@@ -80,6 +82,10 @@ const Home = () => {
     setModalIsOpen(false);
   };
 
+  const sendReview = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="page-container">
       <Hero scrollTo={handleScroll} />
@@ -105,13 +111,16 @@ const Home = () => {
 
         <article className="container home-ratings">
           <h2>Recenzije</h2>
+
           <p>
             Pogledajte recenzije naših zadovoljnih korisnika. <br />
             Zadovoljni ste našom uslugom?
           </p>
+
           <Button primary onClick={handleOpenModal}>
             Ostavite recenziju
           </Button>
+
           <InfiniteScroller>
             {comments.map((comment) => (
               <CommentDisplay {...comment} key={comment.user} />
@@ -119,8 +128,37 @@ const Home = () => {
           </InfiniteScroller>
         </article>
       </main>
-      <Modal isOpen={modalIsOpen} title={"Hello"} closeModal={handleCloseModal}>
-        Hello
+
+      <Modal
+        isOpen={modalIsOpen}
+        title={"Dodaj recenziju"}
+        closeModal={handleCloseModal}
+      >
+        <form onSubmit={sendReview}>
+          <Input placeholder="Ime" label="Ime" name="name" id="name" required />
+          <Input
+            placeholder="Prezime"
+            label="Prezime"
+            name="surname"
+            id="surname"
+            required
+          />
+
+          <Textarea
+            label="Recenzija"
+            placeholder="Recenzija"
+            name="recencija"
+            required
+            id="review"
+          />
+
+          <div className="modal-form-buttons">
+            <Button primary>Pošalji recenziju</Button>
+            <Button type="button" onClick={handleCloseModal}>
+              Odustani
+            </Button>
+          </div>
+        </form>
       </Modal>
     </div>
   );

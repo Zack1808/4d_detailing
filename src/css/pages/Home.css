@@ -31,3 +31,9 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+.modal-form-buttons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
