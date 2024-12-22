@@ -74,7 +74,7 @@ const Home = () => {
 
   const handleScroll = useCallback(() => {
     const { top } = mainRef.current.getBoundingClientRect();
-    scrollTo(top - 90);
+    scrollTo(top - 110);
   }, [scrollTo]);
 
   const handleOpenModal = () => {

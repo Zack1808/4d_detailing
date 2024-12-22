@@ -23,14 +23,7 @@
     2% 35%,
     39% 35%
   );
-  background-image: linear-gradient(
-    90deg,
-    #e9c156,
-    #ffffaa,
-    #e1ab39,
-    #7e5d48,
-    #e9c156
-  );
+  background-image: var(--gold);
   position: relative;
   will-change: clip-path, background-image;
   -webkit-backface-visibility: hidden;
@@ -53,4 +46,15 @@
 
 label {
   color: var(--thirtary-color);
+}
+
+@media (width < 31.25rem) {
+  .stars.scale {
+    gap: 1.5rem;
+    padding-inline: 0.7rem;
+  }
+  .scale .star {
+    scale: 1.2;
+    cursor: pointer;
+  }
 }
