@@ -9,6 +9,7 @@ import GoogleAnalytic from "./GoogleAnalytic";
 import Modal from "./Modal";
 import Input from "./Input";
 import Textarea from "./Textarea";
+import StarSelect from "./StarSelect";
 
 export {
   NavigationBar,
@@ -23,4 +24,5 @@ export {
   Modal,
   Input,
   Textarea,
+  StarSelect,
 };

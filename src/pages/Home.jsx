@@ -11,12 +11,14 @@ import {
   Modal,
   Input,
   Textarea,
+  StarSelect,
 } from "../components";
 
 import "../css/pages/Home.css";
 
 const Home = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [starCount, setStarCount] = useState(1);
 
   const mainRef = useRef();
 
@@ -135,6 +137,12 @@ const Home = () => {
         closeModal={handleCloseModal}
       >
         <form onSubmit={sendReview}>
+          <StarSelect
+            starSelectedCount={starCount}
+            starSelected={(count) => setStarCount(count)}
+            label="Recenzija"
+          />
+
           <Input placeholder="Ime" label="Ime" name="name" id="name" required />
           <Input
             placeholder="Prezime"
@@ -145,11 +153,11 @@ const Home = () => {
           />
 
           <Textarea
-            label="Recenzija"
-            placeholder="Recenzija"
-            name="recencija"
+            label="Tekst recencije"
+            placeholder="Tekst recencije"
+            name="review-text"
             required
-            id="review"
+            id="review-text"
           />
 
           <div className="modal-form-buttons">
