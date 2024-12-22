@@ -19,7 +19,9 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
       </button>
       <ul className="main-links">
         <li>
-          <Link to="/">Početna</Link>
+          <Link to="/" onClick={toggleMenu}>
+            Početna
+          </Link>
         </li>
         <li>
           <button
@@ -39,35 +41,69 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
             }`}
           >
             <li>
-              <Link to="/čišćenje-eksterijera" onClick={(e) => e.target.blur()}>
+              <Link
+                to="/čišćenje-eksterijera"
+                onClick={(e) => {
+                  e.target.blur();
+                  toggleMenu();
+                  setDropDownOpen(false);
+                }}
+              >
                 Čišćenje eksterijera
               </Link>
             </li>
             <li>
-              <Link to="/čišćenje-interijera" onClick={(e) => e.target.blur()}>
+              <Link
+                to="/čišćenje-interijera"
+                onClick={(e) => {
+                  e.target.blur();
+                  toggleMenu();
+                  setDropDownOpen(false);
+                }}
+              >
                 Čišćenje interjera
               </Link>
             </li>
             <li>
-              <Link to="/poliranje-i-zaštita" onClick={(e) => e.target.blur()}>
+              <Link
+                to="/poliranje-i-zaštita"
+                onClick={(e) => {
+                  e.target.blur();
+                  toggleMenu();
+                  setDropDownOpen(false);
+                }}
+              >
                 Poliranje i zaštita
               </Link>
             </li>
             <li>
-              <Link to="/posebni-paketi" onClick={(e) => e.target.blur()}>
+              <Link
+                to="/posebni-paketi"
+                onClick={(e) => {
+                  e.target.blur();
+                  toggleMenu();
+                  setDropDownOpen(false);
+                }}
+              >
                 Posebni Paketi
               </Link>
             </li>
           </ul>
         </li>
         <li>
-          <Link to="/o-nama">O nama</Link>
+          <Link to="/o-nama" onClick={toggleMenu}>
+            O nama
+          </Link>
         </li>
         <li>
-          <Link to="/galerija">Galerija</Link>
+          <Link to="/galerija" onClick={toggleMenu}>
+            Galerija
+          </Link>
         </li>
         <li>
-          <Link to="/kontakt">Kontakt</Link>
+          <Link to="/kontakt" onClick={toggleMenu}>
+            Kontakt
+          </Link>
         </li>
       </ul>
     </nav>
