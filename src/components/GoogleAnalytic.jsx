@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import { Button } from "./";
+
+import "../css/components/GoogleAnalytic.css";
+
+const GoogleAnalytic = ({ hasConsent, consentGiven }) => {
+  const [popUpOpen, setPopUpOpen] = useState(true);
+
+  useEffect(() => {
+    if (hasConsent) {
+      const script = document.createElement("script");
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-4MMF4065DH";
+      script.async = true;
+
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+
+      window.gtag("js", new Date());
+      window.gtag("config", "G-4MMF4065DH", { anonymize_ip: true });
+    }
+  }, [hasConsent]);
+
+  const closeConsetRequest = () => {
+    setPopUpOpen(false);
+  };
+
+  return (
+    <div
+      className={`consent-container ${
+        !hasConsent && popUpOpen ? "no-consent" : ""
+      }`}
+    >
+      <h4>Kolačići</h4>
+      <p>
+        Ova web stranica koristi Google Analytics za praćenje prometa i
+        razumijevanje načina na koji korisnici stupaju u interakciju s web
+        stranicom.
+        <Link to="/pravila-privatnosti">
+          Ovdje možete saznati više o tome kako Google koristi te podatke.
+        </Link>
+      </p>
+
+      <div className="consent-buttons">
+        <Button primary onClick={consentGiven}>
+          Prihvati i zatvori
+        </Button>
+        <Button onClick={closeConsetRequest}>Odbij</Button>
+      </div>
+    </div>
+  );
+};
+
+export default GoogleAnalytic;

@@ -2,20 +2,20 @@ import React, { useMemo } from "react";
 
 import "../css/components/CommentDisplay.css";
 
-const CommentDisplay = React.memo(({ rating, text, author }) => {
+const CommentDisplay = React.memo(({ stars, comment, user }) => {
   const renderStars = useMemo(() => {
     return Array.from({ length: 5 }, (_, i) => (
-      <span key={i} className={`star ${i < rating ? "" : "star-outline"}`} />
+      <span key={i} className={`star ${i < stars ? "" : "star-outline"}`} />
     ));
-  }, [rating]);
+  }, [stars]);
 
   return (
     <div className="comment-display">
       <div className="stars">{renderStars}</div>
       <blockquote>
-        <p>{text}</p>
+        <p>{comment}</p>
         <footer>
-          - <cite>{author}</cite>
+          - <cite>{user}</cite>
         </footer>
       </blockquote>
     </div>

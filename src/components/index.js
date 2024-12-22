@@ -5,6 +5,7 @@ import CategoryCard from "./CategoryCard";
 import CommentDisplay from "./CommentDisplay";
 import InfiniteScroller from "./InfiniteScroller";
 import Footer from "./Footer";
+import GoogleAnalytic from "./GoogleAnalytic";
 
 export {
   NavigationBar,
@@ -15,4 +16,5 @@ export {
   CommentDisplay,
   InfiniteScroller,
   Footer,
+  GoogleAnalytic,
 };
