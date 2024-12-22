@@ -36,22 +36,42 @@ const Home = () => {
       {
         to: "/čišćenje-eksterijera",
         title: "Čišćenje Eksterijera",
-        imageUrl: "/eksterijer.webp",
+        imagesUrl: [
+          "/eksterijer.webp",
+          "/Interjer.webp",
+          "/poliranje.webp",
+          "/hero-bg-big.webp",
+        ],
       },
       {
         to: "/čišćenje-interijera",
         title: "Čišćenje Interijera",
-        imageUrl: "/Interjer.webp",
+        imagesUrl: [
+          "/Interjer.webp",
+          "/eksterijer.webp",
+          "/poliranje.webp",
+          "/hero-bg-big.webp",
+        ],
       },
       {
         to: "/poliranje-i-zaštita",
         title: "Poliranje i Zaštita",
-        imageUrl: "/poliranje.webp",
+        imagesUrl: [
+          "/poliranje.webp",
+          "/eksterijer.webp",
+          "/Interjer.webp",
+          "/hero-bg-big.webp",
+        ],
       },
       {
         to: "/posebni-paketi",
         title: "Posebni Paketi",
-        imageUrl: "/hero-bg-big.webp",
+        imagesUrl: [
+          "/hero-bg-big.webp",
+          "/eksterijer.webp",
+          "/Interjer.webp",
+          "/poliranje.webp",
+        ],
       },
     ],
     []

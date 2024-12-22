@@ -10,6 +10,7 @@ import Modal from "./Modal";
 import Input from "./Input";
 import Textarea from "./Textarea";
 import StarSelect from "./StarSelect";
+import ImageSlider from "./ImageSlider";
 
 export {
   NavigationBar,
@@ -25,4 +26,5 @@ export {
   Input,
   Textarea,
   StarSelect,
+  ImageSlider,
 };

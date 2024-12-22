@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { ImageSlider } from "./";
 
 import "../css/components/CategoryCard.css";
 
-const CategoryCard = React.memo(({ to, title, imageUrl }) => {
+const CategoryCard = React.memo(({ to, title, imagesUrl = [] }) => {
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <Link
       to={to}
       className="category-card"
-      style={{ "--_category-background": `url(${imageUrl})` }}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
+      <ImageSlider
+        images={imagesUrl}
+        className="slider-background"
+        hover={isHovering}
+        animationDuration={5}
+      />
       <span>{title}</span>
     </Link>
   );
