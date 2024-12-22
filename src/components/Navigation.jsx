@@ -85,12 +85,11 @@ export const NavigationBar = ({ toggleMenu }) => {
     const handleScroll = () => {
       if (containerRef.current.scrollTop > 60) {
         setScrolledEnough(true);
-        document.documentElement.style.setProperty("--pop-up-opacity", 1);
         document.documentElement.style.setProperty(
           "--pop-up-visibility",
           "visible"
         );
-        document.documentElement.style.setProperty("--pop-up-bottom", -1);
+        document.documentElement.style.setProperty("--pop-up-bottom", 0);
       } else if (containerRef.current.scrollTop < 30) setScrolledEnough(false);
     };
 

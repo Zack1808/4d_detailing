@@ -65,6 +65,6 @@ blockquote footer {
 
 @media (width < 46.75rem) {
   blockquote {
-    min-width: 38ch;
+    min-width: 30ch;
   }
 }

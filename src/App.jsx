@@ -19,15 +19,7 @@ const App = () => {
     setHasConsent(consent);
   }, []);
 
-  const toggleMenu = () =>
-    setMenuIsOpen((prevState) => {
-      document.documentElement.style.setProperty(
-        "--scroll-offset",
-        `${containerRef.current.scrollTop}px`
-      );
-      return !prevState;
-    });
-
+  const toggleMenu = () => setMenuIsOpen((prevState) => !prevState);
   const handleConsent = () => {
     setHasConsent((prevState) => {
       localStorage.setItem("4d-consent", JSON.stringify(!hasConsent));
@@ -46,7 +38,11 @@ const App = () => {
         className={`content ${menuIsOpen ? "menu-open" : ""}`}
         ref={containerRef}
       >
-        <GoogleAnalytic hasConsent={hasConsent} consentGiven={handleConsent} />
+        <GoogleAnalytic
+          hasConsent={hasConsent}
+          consentGiven={handleConsent}
+          menuIsOpen={menuIsOpen}
+        />
         <NavigationBar toggleMenu={toggleMenu} />
         <Routes>
           <Route path="/" element={<Home />} />

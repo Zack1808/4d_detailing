@@ -5,7 +5,7 @@ import { Button } from "./";
 
 import "../css/components/GoogleAnalytic.css";
 
-const GoogleAnalytic = ({ hasConsent, consentGiven }) => {
+const GoogleAnalytic = ({ hasConsent, consentGiven, menuIsOpen }) => {
   const [popUpOpen, setPopUpOpen] = useState(true);
 
   useEffect(() => {
@@ -35,13 +35,14 @@ const GoogleAnalytic = ({ hasConsent, consentGiven }) => {
     <div
       className={`consent-container ${
         !hasConsent && popUpOpen ? "no-consent" : ""
-      }`}
+      } ${menuIsOpen ? "remove-consent" : ""}`}
     >
       <h4>Kolačići</h4>
       <p>
         Ova web stranica koristi Google Analytics za praćenje prometa i
         razumijevanje načina na koji korisnici stupaju u interakciju s web
         stranicom.
+        <br />
         <Link to="/pravila-privatnosti">
           Ovdje možete saznati više o tome kako Google koristi te podatke.
         </Link>

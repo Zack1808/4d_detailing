@@ -1,9 +1,9 @@
 .consent-container {
   position: fixed;
-  bottom: calc(var(--pop-up-bottom, -50) * 1%);
+  bottom: 0;
   left: 50%;
   z-index: 99999;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(calc(var(--pop-up-bottom, 100) * 1%));
   background-color: var(--accent-color2);
   width: 100%;
   max-width: 93.75rem;
@@ -20,6 +20,11 @@
 
 .no-consent.consent-container {
   display: flex;
+}
+
+.remove-consent.consent-container {
+  transition: none;
+  visibility: hidden;
 }
 
 .consent-container h4 {
