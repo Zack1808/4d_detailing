@@ -1,4 +1,5 @@
 .modal-background {
+  padding: 1rem;
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -6,6 +7,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s ease;
+}
+
+.modal-open.modal-background {
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal {
@@ -17,6 +26,14 @@
   gap: 1rem;
   padding: 1rem;
   border-radius: 5px;
+  opacity: 0;
+  transform: translateY(50%);
+}
+
+.modal-open .modal {
+  transition: 0.2s 0.2s ease;
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .modal-title {

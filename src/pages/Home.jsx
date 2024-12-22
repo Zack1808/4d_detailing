@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
 
@@ -14,6 +14,8 @@ import {
 import "../css/pages/Home.css";
 
 const Home = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const mainRef = useRef();
 
   const { scrollTo } = useScrollPosition();
@@ -70,6 +72,14 @@ const Home = () => {
     scrollTo(top - 90);
   }, [scrollTo]);
 
+  const handleOpenModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className="page-container">
       <Hero scrollTo={handleScroll} />
@@ -99,7 +109,9 @@ const Home = () => {
             Pogledajte recenzije naših zadovoljnih korisnika. <br />
             Zadovoljni ste našom uslugom?
           </p>
-          <Button primary>Ostavite recenziju</Button>
+          <Button primary onClick={handleOpenModal}>
+            Ostavite recenziju
+          </Button>
           <InfiniteScroller>
             {comments.map((comment) => (
               <CommentDisplay {...comment} key={comment.user} />
@@ -107,7 +119,7 @@ const Home = () => {
           </InfiniteScroller>
         </article>
       </main>
-      <Modal isOpen={true} title={"Hello"}>
+      <Modal isOpen={modalIsOpen} title={"Hello"} closeModal={handleCloseModal}>
         Hello
       </Modal>
     </div>

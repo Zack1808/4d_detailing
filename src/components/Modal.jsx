@@ -6,7 +6,10 @@ import "../css/components/Modal.css";
 
 const Modal = ({ isOpen, closeModal, title, children }) => {
   return ReactDOM.createPortal(
-    <div className={`modal-background ${isOpen ? "modal-open" : ""}`}>
+    <div
+      className={`modal-background ${isOpen ? "modal-open" : ""}`}
+      onClick={closeModal}
+    >
       <div className="modal">
         <div className="modal-title">
           <h4>{title && title}</h4>
