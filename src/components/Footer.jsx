@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
 import {
@@ -9,6 +9,8 @@ import {
   FaCopyright,
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+
+import { useScrollPosition } from "../context/scrollContext";
 
 import logo from "/logo.svg";
 

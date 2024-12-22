@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
 
@@ -23,7 +29,7 @@ const Home = () => {
   const mainRef = useRef();
   const reviewFormRef = useRef();
 
-  const { scrollTo } = useScrollPosition();
+  const { scrollTo, resetScroll } = useScrollPosition();
 
   const cards = useMemo(
     () => [
@@ -71,6 +77,8 @@ const Home = () => {
     ],
     []
   );
+
+  useEffect(() => resetScroll(), []);
 
   const handleScroll = useCallback(() => {
     const { top } = mainRef.current.getBoundingClientRect();

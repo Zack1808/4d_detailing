@@ -20,8 +20,12 @@ export const ScrollProvider = ({ children }) => {
     }
   };
 
+  const resetScroll = () => {
+    scrollTo(containerRef.current.scrollTop * -1);
+  };
+
   return (
-    <ScrollContext.Provider value={{ containerRef, scrollTo }}>
+    <ScrollContext.Provider value={{ containerRef, scrollTo, resetScroll }}>
       {children}
     </ScrollContext.Provider>
   );
