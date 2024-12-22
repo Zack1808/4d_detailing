@@ -39,9 +39,9 @@ const GoogleAnalytic = ({ hasConsent, consentGiven, menuIsOpen }) => {
     >
       <h4>Kolačići</h4>
       <p>
-        Ova web stranica koristi Google Analytics za praćenje prometa i
-        razumijevanje načina na koji korisnici stupaju u interakciju s web
-        stranicom.
+        Koristimo kolačiće za praćenje prometa na web stranici i analizu
+        interakcije korisnika s našom stranicom. To nam pomaže za poboljšanje
+        korisničkog iskustvo.
         <br />
         <Link to="/pravila-privatnosti">
           Ovdje možete saznati više o tome kako Google koristi te podatke.
