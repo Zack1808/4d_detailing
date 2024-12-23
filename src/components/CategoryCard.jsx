@@ -14,8 +14,6 @@ const CategoryCard = React.memo(({ to, title, imagesUrl = [] }) => {
       className="category-card"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      onFocus={() => setIsHovering(true)}
-      onBlur={() => setIsHovering(false)}
     >
       <ImageSlider
         images={imagesUrl}
