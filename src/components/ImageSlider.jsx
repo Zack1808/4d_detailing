@@ -1,40 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import "../css/components/ImageSlider.css";
 
-const ImageSlider = ({ images, hover, className, animationDuration }) => {
-  const [currentImage, setCurrentImage] = useState(0);
+const ImageSlider = React.memo(
+  ({ images, hover, className, animationDuration }) => {
+    const [currentImage, setCurrentImage] = useState(0);
+    const timerRef = useRef(null);
 
-  useEffect(() => {
-    let timer;
-
-    if (hover) {
-      const changeImage = (index) => {
-        setCurrentImage(index);
-        timer = setTimeout(() => {
-          const nextIndex = (index + 1) % images.length;
-          changeImage(nextIndex);
+    useEffect(() => {
+      const startImageTransition = () => {
+        timerRef.current = setInterval(() => {
+          setCurrentImage((prevImage) => (prevImage + 1) % images.length);
         }, animationDuration * 1000);
       };
 
-      changeImage(currentImage);
-    } else setCurrentImage(0);
+      if (hover) {
+        startImageTransition();
+      } else setCurrentImage(0);
 
-    return () => clearTimeout(timer);
-  }, [hover, currentImage, images.length, animationDuration]);
+      return () => clearInterval(timerRef.current);
+    }, [hover]);
 
-  return (
-    <div className={`image-slider ${className} ${hover ? "hovering" : ""}`}>
-      {images.map((image, index) => (
-        <img
-          key={`image${index + 1}`}
-          src={image}
-          alt={`Pozadina ${index + 1}`}
-          className={currentImage === index ? "active" : ""}
-        />
-      ))}
-    </div>
-  );
-};
+    return (
+      <div className={`image-slider ${className} ${hover ? "hovering" : ""}`}>
+        {images.map((image, index) => (
+          <div
+            style={{ backgroundImage: `url(${image})` }}
+            key={`image${index + 1}`}
+            className={`${currentImage === index ? "active" : ""} image`}
+          />
+        ))}
+      </div>
+    );
+  }
+);
 
 export default ImageSlider;

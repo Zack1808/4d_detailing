@@ -3,7 +3,8 @@
   bottom: 0;
   left: 50%;
   z-index: 99999;
-  transform: translateX(-50%) translateY(calc(var(--pop-up-bottom, 100) * 1%));
+  transform: translateX(-50%) translateY(calc(var(--pop-up-bottom, 100) * 1%))
+    translateZ(0);
   background-color: var(--accent-color2);
   width: 100%;
   max-width: 93.75rem;

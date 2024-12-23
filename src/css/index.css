@@ -122,7 +122,7 @@ span {
 }
 
 .page-container {
-  margin-top: calc(var(--header-size) * -1px);
+  margin-top: var(--header-size);
 }
 
 main {

@@ -6,14 +6,23 @@ header {
   align-items: center;
   gap: 2rem;
   padding: 1rem;
-  background-color: hsl(from var(--secondary-color) h s l / 0);
+  background-color: transparent;
   color: var(--thirtary-color);
-  transition: 0.3s ease;
   z-index: 20;
 }
 
-header.scrolled {
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background-color: var(--secondary-color);
+  z-index: -2;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+header.scrolled::after {
+  opacity: 1;
 }
 
 header .container {
@@ -25,7 +34,7 @@ header .container {
 .navbar-logo {
   width: 13rem;
   height: 3.64rem;
-  transition: 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 header.scrolled .navbar-logo {

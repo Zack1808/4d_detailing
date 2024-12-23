@@ -46,7 +46,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
                 onClick={(e) => {
                   e.target.blur();
                   toggleMenu();
-                  setDropDownOpen(false);
+                  setDro;
                 }}
               >
                 Čišćenje eksterijera
@@ -58,7 +58,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
                 onClick={(e) => {
                   e.target.blur();
                   toggleMenu();
-                  setDropDownOpen(false);
+                  setDro;
                 }}
               >
                 Čišćenje interjera
@@ -70,7 +70,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
                 onClick={(e) => {
                   e.target.blur();
                   toggleMenu();
-                  setDropDownOpen(false);
+                  setDro;
                 }}
               >
                 Poliranje i zaštita
@@ -82,7 +82,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
                 onClick={(e) => {
                   e.target.blur();
                   toggleMenu();
-                  setDropDownOpen(false);
+                  setDro;
                 }}
               >
                 Posebni Paketi
@@ -133,7 +133,7 @@ export const NavigationBar = ({ toggleMenu }) => {
 
     document.documentElement.style.setProperty(
       "--header-size",
-      headerRef.current.offsetHeight
+      `${headerRef.current.offsetHeight * -1}px`
     );
 
     return () =>
