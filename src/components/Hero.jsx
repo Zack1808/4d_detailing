@@ -4,7 +4,7 @@ import { Button } from "./";
 
 import "../css/components/Hero.css";
 
-const Hero = ({ scrollTo }) => {
+const Hero = React.memo(({ scrollTo }) => {
   return (
     <div className="hero-container">
       <div className="container">
@@ -21,6 +21,6 @@ const Hero = ({ scrollTo }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Hero;

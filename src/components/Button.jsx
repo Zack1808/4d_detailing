@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../css/components/Button.css";
 
-const Button = ({ children, primary, secondary, link, ...rest }) => {
+const Button = React.memo(({ children, primary, secondary, link, ...rest }) => {
   if (link)
     return (
       <Link
@@ -27,6 +27,6 @@ const Button = ({ children, primary, secondary, link, ...rest }) => {
       {children}
     </button>
   );
-};
+});
 
 export default Button;

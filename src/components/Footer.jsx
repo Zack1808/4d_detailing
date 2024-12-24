@@ -10,8 +10,6 @@ import {
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
-import { useScrollPosition } from "../context/scrollContext";
-
 import logo from "/logo.svg";
 
 import "../css/components/Footer.css";
