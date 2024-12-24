@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { NavigationBar, Navbar, Footer, GoogleAnalytic } from "./components";
-import { Home } from "./pages";
+import { NavigationBar, Navbar, Footer } from "./components";
+const GoogleAnalytic = React.lazy(() => import("./components/GoogleAnalytic"));
+const Home = React.lazy(() => import("./pages/Home"));
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -29,27 +30,29 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar
-        mobile
-        toggleMenu={toggleMenu}
-        className={menuIsOpen ? "menu-open" : ""}
-      />
-      <div
-        className={`content ${menuIsOpen ? "menu-open" : ""}`}
-        ref={containerRef}
-      >
-        <GoogleAnalytic
-          hasConsent={hasConsent}
-          consentGiven={handleConsent}
-          menuIsOpen={menuIsOpen}
+      <Suspense>
+        <Navbar
+          mobile
+          toggleMenu={toggleMenu}
+          className={menuIsOpen ? "menu-open" : ""}
         />
-        <NavigationBar toggleMenu={toggleMenu} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-        <Footer />
-      </div>
-      <ToastContainer />
+        <div
+          className={`content ${menuIsOpen ? "menu-open" : ""}`}
+          ref={containerRef}
+        >
+          <GoogleAnalytic
+            hasConsent={hasConsent}
+            consentGiven={handleConsent}
+            menuIsOpen={menuIsOpen}
+          />
+          <NavigationBar toggleMenu={toggleMenu} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+          <Footer />
+        </div>
+        <ToastContainer />
+      </Suspense>
     </BrowserRouter>
   );
 };

@@ -4,6 +4,7 @@ import React, {
   useRef,
   useState,
   useEffect,
+  Suspense,
 } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
