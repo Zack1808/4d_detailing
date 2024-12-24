@@ -1,0 +1,44 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  position: absolute;
+  z-index: 999;
+  inset: 0;
+}
+
+.loading.loading-done {
+  transition: opacity 0.5s 2s ease, visibility 0.5s 2s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation: flicker 1s ease-in-out infinite alternate;
+}
+
+.loading-logo {
+  width: 16rem;
+  aspect-ratio: 16 / 8;
+  background-image: url("/logo-transition.webp");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.loading p {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+@keyframes flicker {
+  to {
+    opacity: 0.2;
+  }
+}

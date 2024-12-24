@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { NavigationBar, Navbar, Footer } from "./components";
+import { NavigationBar, Navbar, Footer, Loading } from "./components";
+
 const GoogleAnalytic = React.lazy(() => import("./components/GoogleAnalytic"));
+
 const Home = React.lazy(() => import("./pages/Home"));
 
 import { useScrollPosition } from "./context/scrollContext";
@@ -12,6 +14,7 @@ import { useScrollPosition } from "./context/scrollContext";
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [hasConsent, setHasConsent] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { containerRef } = useScrollPosition();
 
@@ -30,7 +33,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Suspense>
+      <Suspense fallback={<Loading setLoading={setLoading} />}>
+        <Loading loading={loading} />
         <Navbar
           mobile
           toggleMenu={toggleMenu}
