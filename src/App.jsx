@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -8,6 +8,7 @@ import { NavigationBar, Navbar, Footer, Loading } from "./components";
 const GoogleAnalytic = React.lazy(() => import("./components/GoogleAnalytic"));
 
 const Home = React.lazy(() => import("./pages/Home"));
+const Exterior = React.lazy(() => import("./pages/Exterior"));
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -52,6 +53,7 @@ const App = () => {
           <NavigationBar toggleMenu={toggleMenu} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/čišćenje-eksterijera" element={<Exterior />} />
           </Routes>
           <Footer />
         </div>

@@ -12,6 +12,12 @@ import "../css/components/Navigation.css";
 export const Navbar = ({ mobile, toggleMenu, className }) => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
 
+  const handleClick = (event) => {
+    event.target.blur();
+    toggleMenu && toggleMenu();
+    setDropDownOpen(false);
+  };
+
   return (
     <nav className={`${mobile ? "mobile-nav" : "desktop-nav"} ${className}`}>
       <button onClick={toggleMenu} className="menu-close">
@@ -41,50 +47,22 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
             }`}
           >
             <li>
-              <Link
-                to="/čišćenje-eksterijera"
-                onClick={(e) => {
-                  e.target.blur();
-                  toggleMenu();
-                  setDro;
-                }}
-              >
+              <Link to="/čišćenje-eksterijera" onClick={handleClick}>
                 Čišćenje eksterijera
               </Link>
             </li>
             <li>
-              <Link
-                to="/čišćenje-interijera"
-                onClick={(e) => {
-                  e.target.blur();
-                  toggleMenu();
-                  setDro;
-                }}
-              >
+              <Link to="/čišćenje-interijera" onClick={handleClick}>
                 Čišćenje interjera
               </Link>
             </li>
             <li>
-              <Link
-                to="/poliranje-i-zaštita"
-                onClick={(e) => {
-                  e.target.blur();
-                  toggleMenu();
-                  setDro;
-                }}
-              >
+              <Link to="/poliranje-i-zaštita" onClick={handleClick}>
                 Poliranje i zaštita
               </Link>
             </li>
             <li>
-              <Link
-                to="/posebni-paketi"
-                onClick={(e) => {
-                  e.target.blur();
-                  toggleMenu();
-                  setDro;
-                }}
-              >
+              <Link to="/posebni-paketi" onClick={handleClick}>
                 Posebni Paketi
               </Link>
             </li>
