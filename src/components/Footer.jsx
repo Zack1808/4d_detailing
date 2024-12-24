@@ -7,6 +7,8 @@ import {
   FaWhatsapp,
   FaPhoneAlt,
   FaCopyright,
+  FaYoutube,
+  FaTiktok,
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -72,6 +74,14 @@ const Footer = React.memo(() => {
         </span>
         <div className="social-media">
           <a
+            href="https://www.youtube.com/@4DDetailing"
+            aria-label="Youtube kanal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaYoutube className="social-media-icon" aria-hidden="true" />
+          </a>
+          <a
             href="https://www.instagram.com/4dcardetailing?igsh=MTAzYnVsa2U0bmY5MA=="
             aria-label="Kontakt Instagram"
             target="_blank"
@@ -86,6 +96,14 @@ const Footer = React.memo(() => {
             rel="noopener noreferrer"
           >
             <FaWhatsapp className="social-media-icon" aria-hidden="true" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@4ddetailing?_t=ZN-8sUT8kPvC5e&_r=1"
+            aria-label="TikTok profil"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTiktok className="social-media-icon" aria-hidden="true" />
           </a>
         </div>
         <span>

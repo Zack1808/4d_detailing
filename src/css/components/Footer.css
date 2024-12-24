@@ -74,6 +74,12 @@
   text-align: center;
 }
 
+.copyright span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .social-media {
   display: flex;
   gap: 1rem;
