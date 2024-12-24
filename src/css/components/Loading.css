@@ -34,7 +34,7 @@
 
 .loading-done .loading-logo {
   transform: translateX(100vw);
-  transition: 0.5s 2s cubic-bezier(0.84, 0.01, 0.58, 1);
+  transition: 0.5s 2s cubic-bezier(1, 0, 0.19, 1);
 }
 
 .loading p {
@@ -45,6 +45,16 @@
 .loading-done.loading p {
   opacity: 0;
   transition: 0.2s 2s ease;
+}
+
+@media (width < 37.5rem) {
+  .loading-logo {
+    width: 12rem;
+  }
+
+  .loading p {
+    font-size: 1.2rem;
+  }
 }
 
 @keyframes flicker {
