@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" as="image" href="/hero-bg-big.webp" />
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/Futura-Book-font.ttf"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/Minion-Bold.otf"
+      type="font/otf"
+      crossorigin="anonymous"
+    />
     <link rel="preload" as="image" href="/hero-bg-small.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -30,8 +44,8 @@
   <body>
     <div id="root"></div>
     <div id="modal"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <script type="application/ld+json">
+    <script type="module" src="/src/main.jsx" defer></script>
+    <script type="application/ld+json" defer>
       {
         "@context": "https://schema.org",
         "@type": "AutomotiveBusiness",
@@ -50,9 +64,5 @@
         "priceRange": "15€ to 800€"
       }
     </script>
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-4MMF4065DH"
-    ></script>
   </body>
 </html>
