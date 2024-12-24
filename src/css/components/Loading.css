@@ -10,7 +10,7 @@
 }
 
 .loading.loading-done {
-  transition: opacity 0.5s 2s ease, visibility 0.5s 2s ease;
+  transition: opacity 0.5s 3s ease, visibility 0.5s 3s ease;
   opacity: 0;
   visibility: hidden;
 }
@@ -32,9 +32,19 @@
   background-repeat: no-repeat;
 }
 
+.loading-done .loading-logo {
+  transform: translateX(100vw);
+  transition: 0.5s 2s cubic-bezier(0.84, 0.01, 0.58, 1);
+}
+
 .loading p {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.loading-done.loading p {
+  opacity: 0;
+  transition: 0.2s 2s ease;
 }
 
 @keyframes flicker {
