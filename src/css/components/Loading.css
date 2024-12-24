@@ -4,7 +4,7 @@
   align-items: center;
   flex-direction: column;
   background-color: var(--secondary-color);
-  position: absolute;
+  position: fixed;
   z-index: 999;
   inset: 0;
 }

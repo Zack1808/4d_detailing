@@ -61,6 +61,7 @@
 body {
   font-family: "Futura";
   background-color: var(--secondary-color);
+  overflow: hidden;
 }
 
 .content {
