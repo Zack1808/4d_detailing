@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  padding-block: 10rem 4rem;
+  background: radial-gradient(
+      ellipse at top right,
+      hsl(from var(--primary-color) h s l / 0.4),
+      var(--primary-color) 55%
+    ),
+    var(--bg-image);
+  background-repeat: no-repeat;
+  background-position: center 65%, 100% center;
+  background-size: 100% 270%, 70%;
+}
+
+.header-content {
+  width: 100%;
+  max-width: 93.75rem;
+}
+
+@media (width < 48.125rem) {
+  .header {
+    background: linear-gradient(
+        180deg,
+        var(--primary-color),
+        hsl(from var(--primary-color) h s l / 0.8),
+        var(--primary-color)
+      ),
+      var(--bg-image);
+    background-size: 100% 100%, cover;
+    background-position: center center;
+  }
+}

@@ -12,6 +12,7 @@ import Textarea from "./Textarea";
 import StarSelect from "./StarSelect";
 import ImageSlider from "./ImageSlider";
 import Loading from "./Loading";
+import Header from "./Header";
 
 export {
   NavigationBar,
@@ -29,4 +30,5 @@ export {
   StarSelect,
   ImageSlider,
   Loading,
+  Header,
 };
