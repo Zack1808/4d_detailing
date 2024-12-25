@@ -12,6 +12,7 @@
   background-size: 200%;
   overflow: hidden;
   justify-self: center;
+  cursor: pointer;
 }
 
 .price-card::before {

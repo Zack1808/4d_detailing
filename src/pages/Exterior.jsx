@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { useScrollPosition } from "../context/scrollContext";
@@ -7,7 +7,7 @@ import transition from "../helpers/transition";
 
 import { Header, PriceCard, Button } from "../components";
 
-import "../css/pages/Exterior.css";
+import "../css/pages/Services.css";
 
 const Exterior = () => {
   const { resetScroll } = useScrollPosition();
