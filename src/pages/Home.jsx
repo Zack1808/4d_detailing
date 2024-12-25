@@ -143,8 +143,12 @@ const Home = () => {
           </p>
 
           <section className="category-list">
-            {cards.map((card) => (
-              <CategoryCard key={card.to} {...card} />
+            {cards.map((card, index) => (
+              <CategoryCard
+                key={card.to}
+                {...card}
+                style={{ "--transition-delay": `${0.07 * (index + 1)}s` }}
+              />
             ))}
           </section>
         </article>

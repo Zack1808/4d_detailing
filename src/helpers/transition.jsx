@@ -27,8 +27,25 @@ const transition = (Component) => {
             visibility: "visible",
             transition: { duration: 0.5 },
           }}
-          style={motionDivStyle}
-        />
+          style={{
+            ...motionDivStyle,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <motion.div
+            style={{
+              backgroundImage: "url('/logo-transition.webp')",
+              width: "14rem",
+              aspectRatio: "16/9",
+              backgroundPosition: "center",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 1, visibility: "visible" }}
           animate={{
@@ -40,9 +57,8 @@ const transition = (Component) => {
           transition={{ duration: 0.5 }}
           style={{
             ...motionDivStyle,
-            transformOrigin: "right",
             display: "flex",
-            justifyContent: "flex-start",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >
@@ -50,7 +66,10 @@ const transition = (Component) => {
             initial={{ translateX: "-100%" }}
             animate={{
               translateX: "calc(100vw + 14rem)",
-              transition: { duration: 1 },
+              transition: {
+                duration: 1,
+                ease: [1, 0, 0.5, 1],
+              },
             }}
             style={{
               backgroundImage: "url('/logo-transition.webp')",
