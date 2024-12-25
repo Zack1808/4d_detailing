@@ -5,7 +5,7 @@ import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
-import { Header, PriceCard } from "../components";
+import { Header, PriceCard, Button } from "../components";
 
 import "../css/pages/Exterior.css";
 
@@ -88,6 +88,9 @@ const Exterior = () => {
               <br />
               Za dodatne informacije slobodno nam se javite.
             </p>
+            <Button primary link="/kontakt">
+              Rezerviraj termin
+            </Button>
           </section>
           <img
             ref={imageRef}

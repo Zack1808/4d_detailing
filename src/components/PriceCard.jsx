@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Button } from "./";
-
 import "../css/components/PriceCard.css";
 
 const PriceCard = React.memo(
@@ -37,9 +35,6 @@ const PriceCard = React.memo(
             </span>
           )}
         </footer>
-        <Button to="/kontakt" primary>
-          Rezerviraj termin
-        </Button>
       </div>
     );
   }
