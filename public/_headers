@@ -1,6 +1,9 @@
 /*
   Cache-Control: public, max-age=0, must-revalidate
 
+/*
+  X-Robots-Tag: all
+
 /hero-bg-big.webp
   Cache-Control: public, max-age=31536000
 /hero-bg-small.webp
