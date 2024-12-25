@@ -23,7 +23,7 @@
   opacity: 0;
   transition: 0.3s ease;
   background-image: url("/droplets.png");
-  background-size: 50% 30%;
+  background-size: 200px;
   filter: blur(1px);
 }
 
@@ -38,9 +38,8 @@
   flex-direction: column;
 }
 
-.price-card header h4 {
+.price-card header p {
   font-size: 2rem;
-  font-weight: normal;
   max-width: 20ch;
 }
 

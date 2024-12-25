@@ -7,7 +7,7 @@ const PriceCard = React.memo(
     return (
       <div className="price-card">
         <header>
-          <h4>{title}</h4>
+          <p>{title}</p>
           <strong>
             <small>€</small>
             {price}
