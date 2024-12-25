@@ -20,17 +20,15 @@ const InfiniteScroller = ({ children }) => {
   return (
     <div className="infinite-scrooler" ref={scrollRef}>
       <ul className="infinte-scroller-content">
-        {childrenArray
-          .concat(childrenArray, childrenArray, childrenArray)
-          .map((child, index) => (
-            <li
-              key={index}
-              className={index >= childrenArray.length ? "scroller-hidden" : ""}
-              aria-hidden={index >= childrenArray.length ? "true" : "false"}
-            >
-              {child}
-            </li>
-          ))}
+        {childrenArray.concat(childrenArray).map((child, index) => (
+          <li
+            key={index}
+            className={index >= childrenArray.length ? "scroller-hidden" : ""}
+            aria-hidden={index >= childrenArray.length ? "true" : "false"}
+          >
+            {child}
+          </li>
+        ))}
       </ul>
     </div>
   );

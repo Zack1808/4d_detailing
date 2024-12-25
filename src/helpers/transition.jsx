@@ -25,7 +25,7 @@ const transition = (Component) => {
           exit={{
             opacity: 1,
             visibility: "visible",
-            transition: { duration: 0.5 },
+            transition: { duration: 0.3 },
           }}
           style={{
             ...motionDivStyle,
@@ -54,7 +54,7 @@ const transition = (Component) => {
             transition: { delay: 1 },
           }}
           exit={{ opacity: 0, visibility: "hidden" }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
           style={{
             ...motionDivStyle,
             display: "flex",
@@ -68,6 +68,7 @@ const transition = (Component) => {
               translateX: "calc(100vw + 14rem)",
               transition: {
                 duration: 1,
+                delay: 0.2,
                 ease: [1, 0, 0.5, 1],
               },
             }}

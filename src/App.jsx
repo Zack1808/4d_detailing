@@ -48,7 +48,9 @@ const App = () => {
           className={menuIsOpen ? "menu-open" : ""}
         />
         <div
-          className={`content ${menuIsOpen ? "menu-open" : ""}`}
+          className={`content ${menuIsOpen ? "menu-open" : ""} ${
+            !loading ? "loaded" : ""
+          }`}
           ref={containerRef}
         >
           <GoogleAnalytic
