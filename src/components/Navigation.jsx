@@ -20,7 +20,11 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
 
   return (
     <nav className={`${mobile ? "mobile-nav" : "desktop-nav"} ${className}`}>
-      <button onClick={toggleMenu} className="menu-close">
+      <button
+        onClick={toggleMenu}
+        className="menu-close"
+        aria-label="Zatvori izbornik"
+      >
         <GrFormClose size={32} />
       </button>
       <ul className="main-links">
@@ -131,7 +135,11 @@ export const NavigationBar = ({ toggleMenu }) => {
           />
         </Link>
         <Navbar />
-        <button className="menu-btn" onClick={toggleMenu}>
+        <button
+          className="menu-btn"
+          onClick={toggleMenu}
+          aria-label="Otvori izbornik"
+        >
           <FaBars className="menu-icon" />
         </button>
       </div>

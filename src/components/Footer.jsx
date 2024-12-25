@@ -23,7 +23,7 @@ const Footer = React.memo(() => {
     <footer className="page-footer">
       <div className="footer-container">
         <div className="footer-about-us">
-          <h4 className="visually-hidden">O nama</h4>
+          <strong className="visually-hidden">O nama</strong>
           <Link to="/" className="logo">
             <img src={logo} alt="page logo" />
           </Link>
@@ -35,7 +35,7 @@ const Footer = React.memo(() => {
         </div>
         <div className="footer-contact-information">
           <span>
-            <h4>Kontakt</h4>
+            <strong>Kontakt</strong>
             <a href="mailto:4d.detailing.ln@gmail.com">
               <IoMail aria-hidden="true" />
               <strong>Email:</strong> 4d.detailing.ln@gmail.com
@@ -59,7 +59,7 @@ const Footer = React.memo(() => {
         </div>
         <div className="footer-links">
           <span>
-            <h4>Linkovi</h4>
+            <strong>Linkovi</strong>
             <Link to="/">Početna</Link>
             <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
             <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>

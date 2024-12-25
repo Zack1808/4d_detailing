@@ -29,7 +29,7 @@
   gap: 1rem;
 }
 
-.footer-about-us h4 {
+.footer-about-us strong {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
