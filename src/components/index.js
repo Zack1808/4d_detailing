@@ -13,6 +13,7 @@ import StarSelect from "./StarSelect";
 import ImageSlider from "./ImageSlider";
 import Loading from "./Loading";
 import Header from "./Header";
+import AnimatedRouted from "./AnimatedRoute";
 
 export {
   NavigationBar,
@@ -31,4 +32,5 @@ export {
   ImageSlider,
   Loading,
   Header,
+  AnimatedRouted,
 };

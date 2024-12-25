@@ -3,7 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { NavigationBar, Navbar, Footer, Loading } from "./components";
+import {
+  NavigationBar,
+  Navbar,
+  Footer,
+  Loading,
+  AnimatedRouted,
+} from "./components";
 
 const GoogleAnalytic = React.lazy(() => import("./components/GoogleAnalytic"));
 
@@ -51,10 +57,10 @@ const App = () => {
             menuIsOpen={menuIsOpen}
           />
           <NavigationBar toggleMenu={toggleMenu} />
-          <Routes>
+          <AnimatedRouted>
             <Route path="/" element={<Home />} />
             <Route path="/čišćenje-eksterijera" element={<Exterior />} />
-          </Routes>
+          </AnimatedRouted>
           <Footer />
         </div>
         <ToastContainer />

@@ -1,5 +1,7 @@
 import React from "react";
 
+import transition from "../helpers/transition";
+
 import { Header } from "../components";
 
 import "../css/pages/Exterior.css";
@@ -37,4 +39,4 @@ const Exterior = () => {
   );
 };
 
-export default Exterior;
+export default transition(Exterior);

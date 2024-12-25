@@ -8,6 +8,8 @@ import React, {
 
 import { useScrollPosition } from "../context/scrollContext";
 
+import transition from "../helpers/transition";
+
 import {
   Hero,
   CategoryCard,
@@ -210,4 +212,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default transition(Home);
