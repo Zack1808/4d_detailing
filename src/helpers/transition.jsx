@@ -24,12 +24,11 @@ const transition = (Component) => {
           animate={{
             opacity: 0,
             visibility: "hidden",
-            transition: { duration: 0.2 },
           }}
           exit={{
             opacity: 1,
             visibility: "visible",
-            transition: { duration: 0.2 },
+            transition: { duration: 0.5 },
           }}
           style={motionDivStyle}
         />
@@ -41,7 +40,7 @@ const transition = (Component) => {
             transition: { delay: 1 },
           }}
           exit={{ opacity: 0, visibility: "hidden" }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.5 }}
           style={{
             ...motionDivStyle,
             transformOrigin: "right",
