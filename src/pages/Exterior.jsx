@@ -9,7 +9,7 @@ import "../css/pages/Exterior.css";
 const Exterior = () => {
   return (
     <div className="page-container">
-      <Header title="Čišćenje eksterijera" bgImage="/eksterijer.webp" />
+      <Header title="Čišćenje eksterijera" bgImage="/eksterijer.avif" />
 
       <main className="exterior">
         <article className="container">
