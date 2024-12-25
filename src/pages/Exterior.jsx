@@ -14,7 +14,6 @@ const Exterior = () => {
       <main className="exterior">
         <article className="container">
           <section>
-            <h2>Čišćenje eksterijera</h2>
             <p>
               Poznata je činjenica da automatske autopraonice s četkama nisu
               najbolje rješenje za čistoću vašeg vozila. Štoviše, često uzrokuju
