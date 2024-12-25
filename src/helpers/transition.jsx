@@ -36,7 +36,7 @@ const transition = (Component) => {
         >
           <motion.div
             style={{
-              backgroundImage: "url('/logo-transition.webp')",
+              backgroundImage: "url('/logo-transition.avif')",
               width: "14rem",
               aspectRatio: "16/9",
               backgroundPosition: "center",
@@ -73,7 +73,7 @@ const transition = (Component) => {
               },
             }}
             style={{
-              backgroundImage: "url('/logo-transition.webp')",
+              backgroundImage: "url('/logo-transition.avif')",
               width: "14rem",
               aspectRatio: "16/9",
               backgroundPosition: "center",
