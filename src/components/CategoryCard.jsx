@@ -14,6 +14,10 @@ const CategoryCard = React.memo(({ to, title, imagesUrl = [], ...rest }) => {
     triggerOnce: true,
   });
 
+  const handleClick = () => {
+    document.documentElement.style.setProperty("--transition-delay", `${1.2}s`);
+  };
+
   return (
     <Link
       to={to}
@@ -21,6 +25,7 @@ const CategoryCard = React.memo(({ to, title, imagesUrl = [], ...rest }) => {
       className={`category-card ${inView ? "category-visible" : ""}`}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onClick={handleClick}
       {...rest}
     >
       <ImageSlider

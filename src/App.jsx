@@ -15,6 +15,9 @@ const GoogleAnalytic = React.lazy(() => import("./components/GoogleAnalytic"));
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Exterior = React.lazy(() => import("./pages/Exterior"));
+const Interior = React.lazy(() => import("./pages/Interior"));
+const Polishing = React.lazy(() => import("./pages/Polishing"));
+const Packages = React.lazy(() => import("./pages/Packages"));
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -62,6 +65,9 @@ const App = () => {
           <AnimatedRouted>
             <Route path="/" element={<Home />} />
             <Route path="/čišćenje-eksterijera" element={<Exterior />} />
+            <Route path="/čišćenje-interijera" element={<Interior />} />
+            <Route path="/poliranje-i-zaštita" element={<Polishing />} />
+            <Route path="/posebni-paketi" element={<Packages />} />
           </AnimatedRouted>
           <Footer />
         </div>
