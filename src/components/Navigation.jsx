@@ -122,7 +122,13 @@ export const NavigationBar = ({ toggleMenu }) => {
     <header className={scrolledEnough ? "scrolled" : ""} ref={headerRef}>
       <div className="container">
         <Link to="/">
-          <img className="navbar-logo" src={logo} alt="4D Detailing logo" />
+          <img
+            className="navbar-logo"
+            width="13rem"
+            height="3.64rem"
+            src={logo}
+            alt="4D Detailing logo"
+          />
         </Link>
         <Navbar />
         <button className="menu-btn" onClick={toggleMenu}>
