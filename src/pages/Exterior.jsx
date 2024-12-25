@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
@@ -7,6 +9,10 @@ import { Header } from "../components";
 import "../css/pages/Exterior.css";
 
 const Exterior = () => {
+  const { resetScroll } = useScrollPosition();
+
+  useEffect(() => resetScroll(), []);
+
   return (
     <div className="page-container">
       <Header title="Čišćenje eksterijera" bgImage="/eksterijer.avif" />
