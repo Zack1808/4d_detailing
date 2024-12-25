@@ -1,0 +1,22 @@
+.exterior {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.exterior article {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.exterior section {
+  max-width: 75ch;
+}
+
+.exterior img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+}
