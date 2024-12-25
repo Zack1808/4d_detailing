@@ -1,7 +1,7 @@
 .category {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .category article {
@@ -27,6 +27,13 @@
   transition-delay: var(--transition-delay, 3.3s);
   opacity: 1;
   scale: 1;
+}
+
+.category article.category-prices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1rem;
+  justify-items: center;
 }
 
 @media (width < 56.25rem) {

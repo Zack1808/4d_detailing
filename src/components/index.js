@@ -14,6 +14,7 @@ import ImageSlider from "./ImageSlider";
 import Loading from "./Loading";
 import Header from "./Header";
 import AnimatedRouted from "./AnimatedRoute";
+import PriceCard from "./PriceCard";
 
 export {
   NavigationBar,
@@ -33,4 +34,5 @@ export {
   Loading,
   Header,
   AnimatedRouted,
+  PriceCard,
 };

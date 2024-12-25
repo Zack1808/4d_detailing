@@ -5,7 +5,7 @@ import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
-import { Header } from "../components";
+import { Header, PriceCard } from "../components";
 
 import "../css/pages/Exterior.css";
 
@@ -98,7 +98,11 @@ const Exterior = () => {
           />
         </article>
 
-        <article className="container category-prices"></article>
+        <article className="container category-prices">
+          {priceCards.map((priceCard, index) => (
+            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
+          ))}
+        </article>
       </main>
     </div>
   );
