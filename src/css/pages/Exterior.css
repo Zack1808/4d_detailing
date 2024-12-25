@@ -1,32 +1,47 @@
-.exterior {
+.category {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.exterior article {
+.category article {
   display: grid;
   grid-template-columns: 1fr 0.8fr;
 }
 
-.exterior section {
+.category section {
   max-width: 75ch;
 }
 
-.exterior img {
+.category img {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 5px;
+  scale: 0.8;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.loaded .category .image-pop {
+  transition-delay: var(--transition-delay, 3.3s);
+  opacity: 1;
+  scale: 1;
 }
 
 @media (width < 56.25rem) {
-  .exterior {
+  .category {
     margin: 0;
   }
 
-  .exterior article {
+  .category article {
     grid-template-columns: 1fr;
     gap: 1.2rem;
+  }
+}
+
+@media (width <= 28rem) {
+  .loaded .category .image-pop {
+    transition-delay: 0s;
   }
 }

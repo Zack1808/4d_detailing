@@ -93,7 +93,7 @@ const Home = () => {
       },
       {
         comment: `Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`,
-        user: "Luka Ferencak",
+        user: "Luka Ferenčak",
         stars: 5,
       },
     ],

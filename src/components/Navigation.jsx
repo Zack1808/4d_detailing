@@ -16,6 +16,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
     event.target.blur();
     toggleMenu && toggleMenu();
     setDropDownOpen(false);
+    document.documentElement.style.setProperty("--transition-delay", `${1.2}s`);
   };
 
   return (
