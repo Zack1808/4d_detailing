@@ -29,7 +29,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
       </button>
       <ul className="main-links">
         <li>
-          <Link to="/" onClick={toggleMenu}>
+          <Link to="/" onClick={handleClick}>
             Početna
           </Link>
         </li>
@@ -73,17 +73,17 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
           </ul>
         </li>
         <li>
-          <Link to="/o-nama" onClick={toggleMenu}>
+          <Link to="/o-nama" onClick={handleClick}>
             O nama
           </Link>
         </li>
         <li>
-          <Link to="/galerija" onClick={toggleMenu}>
+          <Link to="/galerija" onClick={handleClick}>
             Galerija
           </Link>
         </li>
         <li>
-          <Link to="/kontakt" onClick={toggleMenu}>
+          <Link to="/kontakt" onClick={handleClick}>
             Kontakt
           </Link>
         </li>
