@@ -35,7 +35,7 @@
 }
 
 @media (width < 68.75rem) {
-  .hero-container {
+  .hero-container.lazy-loaded {
     background: linear-gradient(
         180deg,
         var(--primary-color),
