@@ -23,12 +23,13 @@
   opacity: 0;
   transition: 0.3s ease;
   background-image: url("/droplets.png");
-  background-size: 200px;
+  background-size: 15rem 26.6rem;
+  background-repeat: round;
   filter: blur(1px);
 }
 
 .price-card:hover::before {
-  opacity: 0.15;
+  opacity: 0.5;
 }
 
 .price-card header {
