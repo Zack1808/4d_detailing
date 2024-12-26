@@ -17,6 +17,13 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
     toggleMenu && toggleMenu();
     setDropDownOpen(false);
     document.documentElement.style.setProperty("--transition-delay", `${1.2}s`);
+    void document.documentElement.offsetWidth;
+    console.log(
+      "Computed value:",
+      getComputedStyle(document.documentElement).getPropertyValue(
+        "--transition-delay"
+      )
+    );
   };
 
   return (
@@ -102,7 +109,11 @@ export const NavigationBar = ({ toggleMenu }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      document.documentElement.style.setProperty("--transition-delay", `${0}s`);
+      if (containerRef.current.scrollTop > 0)
+        document.documentElement.style.setProperty(
+          "--transition-delay",
+          `${0}s`
+        );
       if (containerRef.current.scrollTop > 60) {
         setScrolledEnough(true);
         document.documentElement.style.setProperty(
