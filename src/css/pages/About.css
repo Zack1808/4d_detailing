@@ -17,8 +17,8 @@
   inset: 0;
   background: linear-gradient(
     transparent 5%,
-    hsl(from var(--accent-color2) h s l / 0.3) 15%,
-    hsl(from var(--accent-color2) h s l / 0.3) 85%,
+    hsl(from var(--accent-color2) h s l / 0.6) 15%,
+    hsl(from var(--accent-color2) h s l / 0.6) 85%,
     transparent 95%
   );
   z-index: -1;

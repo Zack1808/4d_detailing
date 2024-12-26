@@ -76,7 +76,9 @@ const About = () => {
               <br />
               Provjerite naše pakete ovdje.
             </p>
-            <Button primary>Vidi ponude</Button>
+            <Button primary link="/posebni-paketi">
+              Vidi ponude
+            </Button>
           </section>
           <FadeImage src="/packages.avif" alt="Opisna slika" />
         </article>
