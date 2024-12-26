@@ -9,10 +9,11 @@
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition: 0.2s ease;
+  transition: 0.2s 0.2s ease;
 }
 
 .modal-open.modal-background {
+  transition: 0.2s ease;
   opacity: 1;
   visibility: visible;
 }
@@ -30,6 +31,7 @@
   transform: translateY(50%);
   max-height: calc(100svh - 2rem);
   overflow-y: auto;
+  transition: 0.2s ease;
 }
 
 .modal-open .modal {
