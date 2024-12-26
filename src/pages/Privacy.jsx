@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useScrollPosition } from "../context/scrollContext";
 
 import { Header } from "../components";
 
@@ -7,6 +9,10 @@ import transition from "../helpers/transition";
 import "../css/pages/Privacy.css";
 
 const Privacy = () => {
+  const { resetScroll } = useScrollPosition();
+
+  useEffect(() => resetScroll(), []);
+
   return (
     <div className="page-container">
       <Header

@@ -20,6 +20,7 @@ const Polishing = React.lazy(() => import("./pages/Polishing"));
 const Packages = React.lazy(() => import("./pages/Packages"));
 const About = React.lazy(() => import("./pages/About"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
+const Terms = React.lazy(() => import("./pages/Terms"));
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -72,6 +73,7 @@ const App = () => {
             <Route path="/posebni-paketi" element={<Packages />} />
             <Route path="/o-nama" element={<About />} />
             <Route path="/pravila-privatnosti" element={<Privacy />} />
+            <Route path="/uvijeti-korištenja" element={<Terms />} />
           </AnimatedRouted>
           <Footer />
         </div>
