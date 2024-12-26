@@ -1,0 +1,21 @@
+.privacy article {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.privacy article h2 {
+  margin-bottom: 1rem;
+}
+
+.privacy ul {
+  padding-left: 3rem;
+  font-weight: bold;
+  list-style-type: square;
+  color: var(--thirtary-color);
+}
+
+.privacy a {
+  color: var(--thirtary-color);
+  font-weight: bold;
+}

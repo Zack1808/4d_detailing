@@ -19,6 +19,7 @@ const Interior = React.lazy(() => import("./pages/Interior"));
 const Polishing = React.lazy(() => import("./pages/Polishing"));
 const Packages = React.lazy(() => import("./pages/Packages"));
 const About = React.lazy(() => import("./pages/About"));
+const Privacy = React.lazy(() => import("./pages/Privacy"));
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -70,6 +71,7 @@ const App = () => {
             <Route path="/poliranje-i-zaštita" element={<Polishing />} />
             <Route path="/posebni-paketi" element={<Packages />} />
             <Route path="/o-nama" element={<About />} />
+            <Route path="/pravila-privatnosti" element={<Privacy />} />
           </AnimatedRouted>
           <Footer />
         </div>
