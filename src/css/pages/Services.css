@@ -44,6 +44,7 @@
 @media (width < 56.25rem) {
   .category {
     margin: 0;
+    padding-top: 4rem;
   }
 
   .category article {

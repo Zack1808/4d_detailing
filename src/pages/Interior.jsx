@@ -1,21 +1,15 @@
 import React, { useEffect, useMemo } from "react";
-import { useInView } from "react-intersection-observer";
 
 import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
-import { Header, PriceCard, Button } from "../components";
+import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
 
 const Interior = () => {
   const { resetScroll } = useScrollPosition();
-
-  const [imageRef, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: true,
-  });
 
   const priceCards = useMemo(
     () => [
@@ -85,11 +79,8 @@ const Interior = () => {
               Rezerviraj termin
             </Button>
           </section>
-          <img
-            ref={imageRef}
-            className={inView ? "image-pop" : ""}
+          <FadeImage
             src="https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            srcSet="https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D 480w, https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D 800w, https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D 1200w"
             alt="placeholder-image-eksterijer"
           />
         </article>

@@ -15,6 +15,7 @@ import Loading from "./Loading";
 import Header from "./Header";
 import AnimatedRouted from "./AnimatedRoute";
 import PriceCard from "./PriceCard";
+import FadeImage from "./FadeImage";
 
 export {
   NavigationBar,
@@ -35,4 +36,5 @@ export {
   Header,
   AnimatedRouted,
   PriceCard,
+  FadeImage,
 };

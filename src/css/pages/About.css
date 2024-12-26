@@ -1,0 +1,77 @@
+.about article {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.about article.reversed {
+  grid-template-columns: 0.8fr 1fr;
+  padding: 4.5rem 0;
+  position: relative;
+}
+
+.about article.reversed::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 5%,
+    hsl(from var(--accent-color2) h s l / 0.3) 15%,
+    hsl(from var(--accent-color2) h s l / 0.3) 85%,
+    transparent 95%
+  );
+  z-index: -1;
+  scale: 2 1;
+}
+
+.about article section {
+  max-width: 75ch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.about article.reversed section {
+  justify-self: end;
+}
+
+.about img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+  scale: 0.95;
+  opacity: 0;
+  transition: opacity 0.7s ease, scale 0.9s ease;
+}
+
+.loaded .about .image-pop {
+  transition-delay: var(--transition-delay, 3.3s);
+  opacity: 1;
+  scale: 1;
+}
+
+@media (width < 56.25rem) {
+  .about {
+    margin: 0;
+    padding-top: 4rem;
+  }
+
+  .about article {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about article.reversed {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (width <= 28rem) {
+  .loaded .about .image-pop {
+    transition-delay: 0s;
+  }
+}
