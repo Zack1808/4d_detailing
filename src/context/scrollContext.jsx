@@ -21,7 +21,9 @@ export const ScrollProvider = ({ children }) => {
   };
 
   const resetScroll = () => {
-    scrollTo(containerRef.current.scrollTop * -1);
+    containerRef.current.scrollTo({
+      top: containerRef.current.scrollTop * -1,
+    });
   };
 
   return (

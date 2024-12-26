@@ -25,7 +25,7 @@ const transition = (Component) => {
           exit={{
             opacity: 1,
             visibility: "visible",
-            transition: { duration: 0.3 },
+            transition: { duration: 0.2 },
           }}
           style={{
             ...motionDivStyle,
@@ -54,7 +54,7 @@ const transition = (Component) => {
             transition: { delay: 1 },
           }}
           exit={{ opacity: 0, visibility: "hidden" }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           style={{
             ...motionDivStyle,
             display: "flex",

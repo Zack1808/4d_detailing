@@ -4,7 +4,7 @@ import "../css/components/Loading.css";
 
 const Loading = ({ loading, setLoading }) => {
   useEffect(() => {
-    return () => setLoading(false);
+    return () => setLoading && setLoading(false);
   }, []);
 
   return (

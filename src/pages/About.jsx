@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import transition from "../helpers/transition";
 
 import { Header, FadeImage, Button } from "../components";
 
+import { useScrollPosition } from "../context/scrollContext";
+
 import "../css/pages/About.css";
 
 const About = () => {
+  const { resetScroll } = useScrollPosition();
+
+  useEffect(() => resetScroll(), []);
+
   return (
     <div className="page-container">
       <Header title="O nama" bgImage="/hero-bg-small.avif" />
