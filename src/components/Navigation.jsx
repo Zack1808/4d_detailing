@@ -16,7 +16,6 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
     event.target.blur();
     toggleMenu && toggleMenu();
     setDropDownOpen(false);
-    document.documentElement.style.setProperty("--transition-delay", `${1.2}s`);
   };
 
   return (
@@ -106,6 +105,11 @@ export const NavigationBar = ({ toggleMenu }) => {
         document.documentElement.style.setProperty(
           "--transition-delay",
           `${0}s`
+        );
+      else
+        document.documentElement.style.setProperty(
+          "--transition-delay",
+          `${1.2}s`
         );
       if (containerRef.current.scrollTop > 60) {
         setScrolledEnough(true);
