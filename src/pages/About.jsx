@@ -34,16 +34,10 @@ const About = () => {
               trajnost.
             </p>
           </section>
-          <FadeImage
-            src="https://images.unsplash.com/photo-1508974239320-0a029497e820?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Opisna slika"
-          />
+          <FadeImage src="/who-is-4d.avif" alt="Opisna slika" />
         </article>
         <article className="container reversed">
-          <FadeImage
-            src="https://images.unsplash.com/photo-1527581849771-416a9d62308e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Opisna slika"
-          />
+          <FadeImage src="/hero-bg-big.avif" alt="Opisna slika" />
           <section>
             <h2>Sjaj u 4 dimenzije</h2>
             <p>
@@ -78,7 +72,7 @@ const About = () => {
             </p>
             <Button primary>Vidi ponude</Button>
           </section>
-          <FadeImage src="/hero-bg-big.avif" alt="Opisna slika" />
+          <FadeImage src="/packages.avif" alt="Opisna slika" />
         </article>
       </main>
     </div>

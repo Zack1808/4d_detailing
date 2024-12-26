@@ -47,7 +47,7 @@ const Packages = () => {
 
   return (
     <div className="page-container">
-      <Header title="Posebni paketi" bgImage="/hero-bg-big.avif" />
+      <Header title="Posebni paketi" bgImage="/packages.avif" />
 
       <main className="category">
         <article className="container">

@@ -6,7 +6,7 @@
 
 .category article {
   display: grid;
-  grid-template-columns: 1fr 0.8fr;
+  grid-template-columns: 1fr 0.9fr;
 }
 
 .category section {
@@ -20,7 +20,7 @@
 
 .category img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   border-radius: 5px;
   scale: 0.95;

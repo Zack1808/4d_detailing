@@ -84,7 +84,7 @@ const Polishing = () => {
 
   return (
     <div className="page-container">
-      <Header title="Poliranje i zaštita" bgImage="/poliranje.avif" />
+      <Header title="Poliranje i zaštita" bgImage="/hero-bg-big.avif" />
 
       <main className="category">
         <article className="container">

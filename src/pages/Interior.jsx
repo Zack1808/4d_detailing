@@ -60,7 +60,7 @@ const Interior = () => {
 
   return (
     <div className="page-container">
-      <Header title="Čišćenje interijera" bgImage="/Interjer.avif" />
+      <Header title="Čišćenje interijera" bgImage="/interjer.avif" />
 
       <main className="category">
         <article className="container">
@@ -80,7 +80,7 @@ const Interior = () => {
             </Button>
           </section>
           <FadeImage
-            src="https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/car-inside.avif"
             alt="placeholder-image-eksterijer"
           />
         </article>
