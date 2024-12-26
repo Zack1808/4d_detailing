@@ -5,7 +5,7 @@ import "../css/components/FadeImage.css";
 
 const FadeImage = ({ src, alt }) => {
   const [imageRef, inView] = useInView({
-    threshold: 0.1,
+    threshold: 0.2,
     triggerOnce: true,
   });
 
