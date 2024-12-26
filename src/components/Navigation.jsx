@@ -17,13 +17,6 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
     toggleMenu && toggleMenu();
     setDropDownOpen(false);
     document.documentElement.style.setProperty("--transition-delay", `${1.2}s`);
-    void document.documentElement.offsetWidth;
-    console.log(
-      "Computed value:",
-      getComputedStyle(document.documentElement).getPropertyValue(
-        "--transition-delay"
-      )
-    );
   };
 
   return (
