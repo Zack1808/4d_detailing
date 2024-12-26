@@ -1,0 +1,26 @@
+.page-not-found {
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-not-found main {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 5rem;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.page-not-found article {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-not-found p {
+  font-weight: bold;
+  font-size: 1.5rem;
+}

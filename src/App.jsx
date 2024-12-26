@@ -21,6 +21,7 @@ const Packages = React.lazy(() => import("./pages/Packages"));
 const About = React.lazy(() => import("./pages/About"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
 const Terms = React.lazy(() => import("./pages/Terms"));
+const Error404 = React.lazy(() => import("./pages/Error404"));
 
 import { useScrollPosition } from "./context/scrollContext";
 
@@ -66,14 +67,15 @@ const App = () => {
           />
           <NavigationBar toggleMenu={toggleMenu} />
           <AnimatedRouted>
-            <Route path="/" element={<Home />} />
-            <Route path="/čišćenje-eksterijera" element={<Exterior />} />
-            <Route path="/čišćenje-interijera" element={<Interior />} />
-            <Route path="/poliranje-i-zaštita" element={<Polishing />} />
-            <Route path="/posebni-paketi" element={<Packages />} />
-            <Route path="/o-nama" element={<About />} />
-            <Route path="/pravila-privatnosti" element={<Privacy />} />
-            <Route path="/uvijeti-korištenja" element={<Terms />} />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/čišćenje-eksterijera" element={<Exterior />} />
+            <Route exact path="/čišćenje-interijera" element={<Interior />} />
+            <Route exact path="/poliranje-i-zaštita" element={<Polishing />} />
+            <Route exact path="/posebni-paketi" element={<Packages />} />
+            <Route exact path="/o-nama" element={<About />} />
+            <Route exact path="/pravila-privatnosti" element={<Privacy />} />
+            <Route exact path="/uvijeti-korištenja" element={<Terms />} />
+            <Route path="*" element={<Error404 />} />
           </AnimatedRouted>
           <Footer />
         </div>
