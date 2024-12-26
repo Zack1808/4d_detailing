@@ -15,21 +15,33 @@
   cursor: pointer;
 }
 
-.price-card::before {
+.price-card::before,
+.price-card::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   opacity: 0;
   transition: 0.3s ease;
+}
+
+.price-card::after {
+  z-index: -3;
+  backdrop-filter: blur(calc(0.1rem));
+  background-color: hsl(0 0 0% /0.4);
+}
+
+.price-card::before {
   background-image: url("/droplets.png");
-  background-size: 15rem 26.6rem;
-  background-repeat: round;
-  filter: blur(1px);
+  background-size: 50% 100%;
 }
 
 .price-card:hover::before {
-  opacity: 0.5;
+  opacity: 1;
+}
+
+.price-card:hover::after {
+  opacity: 1;
 }
 
 .price-card header {
