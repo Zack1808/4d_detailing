@@ -94,3 +94,9 @@
     left: 0.5rem;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .image-slider .image {
+    transition: none;
+  }
+}
