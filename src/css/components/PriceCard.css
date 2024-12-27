@@ -27,13 +27,13 @@
 
 .price-card::after {
   z-index: -3;
-  backdrop-filter: blur(calc(0.1rem));
+  backdrop-filter: blur(0.04rem);
   background-color: hsl(0 0 0% /0.4);
 }
 
 .price-card::before {
   background-image: url("/droplets.png");
-  background-size: 50% 100%;
+  background-size: 40% 100%;
 }
 
 .price-card:hover::before {
