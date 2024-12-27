@@ -73,7 +73,6 @@
 
   .image-slider .btn-next,
   .image-slider .btn-previous {
-    background: hsl(from var(--primary-color) h s l / 0.5);
     opacity: 1;
     padding: 2rem;
   }
