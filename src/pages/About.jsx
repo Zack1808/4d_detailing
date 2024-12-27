@@ -42,7 +42,7 @@ const About = () => {
           </section>
           <FadeImage src="/who-is-4d.avif" alt="Opisna slika" />
         </article>
-        <article className="container reversed">
+        <article className="container">
           <FadeImage src="/hero-bg-big.avif" alt="Opisna slika" />
           <section>
             <h2>Sjaj u 4 dimenzije</h2>

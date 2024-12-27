@@ -28,7 +28,7 @@
 .price-card::after {
   z-index: -3;
   backdrop-filter: blur(0.04rem);
-  background-color: hsl(0 0 0% /0.4);
+  background-color: hsl(0 0 0% /0.5);
 }
 
 .price-card::before {
