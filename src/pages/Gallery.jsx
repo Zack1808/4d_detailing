@@ -73,7 +73,10 @@ const Gallery = () => {
         title={galleryItems[selectedGallery]?.title}
       >
         {galleryItems[selectedGallery] && (
-          <ImageSlider images={galleryItems[selectedGallery].images} />
+          <ImageSlider
+            images={galleryItems[selectedGallery].images}
+            resetGallery={modalOpen}
+          />
         )}
       </Modal>
     </div>

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import "../css/components/ImageSlider.css";
 
-const ImageSlider = React.memo(({ images, className }) => {
+const ImageSlider = React.memo(({ images, className, resetGallery }) => {
   const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    if (resetGallery) setCurrentImage(0);
+  }, [resetGallery]);
 
   const setNextImage = () => {
     setCurrentImage((prevImage) => (prevImage + 1) % images.length);
