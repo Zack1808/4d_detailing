@@ -5,6 +5,7 @@
   inset: 0;
   overflow: hidden;
   display: flex;
+  align-items: center;
 }
 
 .image-slider .btn-next,
@@ -74,6 +75,22 @@
   .image-slider .btn-next,
   .image-slider .btn-previous {
     opacity: 1;
-    padding: 2rem;
+    inset-block: auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--secondary-color);
+    opacity: 0.9;
+  }
+
+  .image-slider .btn-next {
+    right: 0.5rem;
+  }
+
+  .image-slider .btn-previous {
+    left: 0.5rem;
   }
 }
