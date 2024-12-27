@@ -1,38 +1,39 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import "../css/components/ImageSlider.css";
 
-const ImageSlider = React.memo(
-  ({ images, hover, className, animationDuration }) => {
-    const [currentImage, setCurrentImage] = useState(0);
-    const timerRef = useRef(null);
+const ImageSlider = React.memo(({ images, className }) => {
+  const [currentImage, setCurrentImage] = useState(0);
 
-    useEffect(() => {
-      const startImageTransition = () => {
-        timerRef.current = setInterval(() => {
-          setCurrentImage((prevImage) => (prevImage + 1) % images.length);
-        }, animationDuration * 1000);
-      };
+  const setNextImage = () => {
+    setCurrentImage((prevImage) => (prevImage + 1) % images.length);
+  };
 
-      if (hover) {
-        startImageTransition();
-      } else setCurrentImage(0);
+  const setPrevImage = () => {
+    setCurrentImage((prevImage) => (prevImage - 1) % images.length);
+  };
 
-      return () => clearInterval(timerRef.current);
-    }, [hover]);
-
-    return (
-      <div className={`image-slider ${className} ${hover ? "hovering" : ""}`}>
-        {images.map((image, index) => (
-          <div
-            style={{ backgroundImage: `url(${image})` }}
-            key={`image${index + 1}`}
-            className={`${currentImage === index ? "active" : ""} image`}
-          />
-        ))}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={`image-slider ${className}`}>
+      <button className="btn-previous" onClick={setPrevImage}>
+        <FaChevronLeft />
+      </button>
+      {images.map((image, index) => (
+        <div
+          style={{
+            backgroundImage: `url(${image})`,
+            transform: `translateX(calc(-100% * ${currentImage}))`,
+          }}
+          key={`image${index + 1}`}
+          className={`image`}
+        />
+      ))}
+      <button className="btn-next" onClick={setNextImage}>
+        <FaChevronRight />
+      </button>
+    </div>
+  );
+});
 
 export default ImageSlider;

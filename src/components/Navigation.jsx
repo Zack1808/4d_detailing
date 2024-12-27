@@ -107,11 +107,13 @@ export const NavigationBar = ({ toggleMenu }) => {
           "--transition-delay",
           `${0}s`
         );
-      else
+      else {
         document.documentElement.style.setProperty(
           "--transition-delay",
           `${1.2}s`
         );
+      }
+
       if (containerRef.current.scrollTop > 60) {
         setScrolledEnough(true);
         document.documentElement.style.setProperty(

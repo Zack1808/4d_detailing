@@ -127,6 +127,7 @@ span {
 
 .page-container {
   margin-top: var(--header-size);
+  min-height: 100svh;
 }
 
 main {

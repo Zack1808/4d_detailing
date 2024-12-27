@@ -127,7 +127,7 @@ const Home = () => {
               <CategoryCard
                 key={card.to}
                 {...card}
-                style={{ "--transition-delay": `${0.07 * (index + 1)}s` }}
+                style={{ "--transition-delay": `${0.07 * index}s` }}
               />
             ))}
           </section>

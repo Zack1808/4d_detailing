@@ -1,19 +1,80 @@
 .image-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.image-slider .btn-next,
+.image-slider .btn-previous {
+  all: unset;
+  position: absolute;
+  inset-block: 0;
+  padding: 2rem;
+  color: var(--thirtary-color);
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.image-slider .btn-next::before,
+.image-slider .btn-previous::before {
+  content: "";
   position: absolute;
   inset: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.image-slider .btn-previous::before {
+  background: linear-gradient(
+    90deg,
+    hsl(from var(--thirtary-color) h s l / 0.1),
+    transparent
+  );
+}
+
+.image-slider .btn-next::before {
+  background: linear-gradient(
+    -90deg,
+    hsl(from var(--thirtary-color) h s l / 0.1),
+    transparent
+  );
+}
+
+.image-slider .btn-next:hover::before,
+.image-slider .btn-previous:hover::before {
+  opacity: 1;
+}
+
+.image-slider .btn-next {
+  right: 0;
 }
 
 .image-slider .image {
-  position: absolute;
+  flex-shrink: 0;
   width: 100%;
   height: 100%;
   background-position: center center;
-  background-size: cover;
-  opacity: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
   pointer-events: none;
+  transition: 0.7s cubic-bezier(0.92, -0.33, 0.38, 1.4);
 }
 
-.image-slider .image.active {
-  opacity: 1;
-  transition: opacity 0.5s ease;
+@media (width < 31.25rem) {
+  .image-slider {
+    aspect-ratio: 9 / 12;
+  }
+
+  .image-slider .btn-next,
+  .image-slider .btn-previous {
+    background: hsl(from var(--primary-color) h s l / 0.5);
+    opacity: 1;
+    padding: 2rem;
+  }
 }
