@@ -11,7 +11,9 @@ const ImageSlider = React.memo(({ images, className }) => {
   };
 
   const setPrevImage = () => {
-    setCurrentImage((prevImage) => (prevImage - 1) % images.length);
+    setCurrentImage((prevImage) => {
+      return prevImage > 0 ? prevImage - 1 : images.length - 1;
+    });
   };
 
   return (
