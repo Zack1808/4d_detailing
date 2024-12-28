@@ -46,17 +46,6 @@ const Exterior = () => {
         priceTransporter: "30",
         info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
       },
-      {
-        title: "Pranje motornog prostora",
-        price: "40",
-        services: [
-          "Pretpranje aktivnom pjenom",
-          "Odmašćivanje površina motornog prostora",
-          "Detaljno pranje površina motornog prostora",
-          "Ispiranje i sušenje motornog prostora",
-          "Zaštitni premaz",
-        ],
-      },
     ],
     []
   );
