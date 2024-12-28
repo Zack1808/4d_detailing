@@ -96,7 +96,10 @@ const Contact = () => {
               </li>
             </ul>
 
-            <iframe src="https://maps.google.com/maps?q=rakitovec%20274&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" />
+            <iframe
+              title="Lokacija sjedišta"
+              src="https://maps.google.com/maps?q=rakitovec%20274&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+            />
           </section>
 
           <section>
