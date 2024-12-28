@@ -74,7 +74,7 @@ const Polishing = () => {
         ],
         priceSuv: "100",
         priceTransporter: "180",
-        info: "Napomena: Prije nanošenja keramičkog premaza, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i postigao maksimalnu učinkovitost. (Poliranje nije uključeno u cijenu usluge keramičkog premaza.)nnnnnnn",
+        info: "Napomena: Prije nanošenja keramičkog premaza, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i postigao maksimalnu učinkovitost. (Poliranje nije uključeno u cijenu usluge keramičkog premaza.)",
       },
     ],
     []
