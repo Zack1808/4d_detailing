@@ -64,7 +64,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
-  transition: 0.7s cubic-bezier(0.92, -0.33, 0.38, 1.4);
 }
 
 @media (width < 31.25rem) {
