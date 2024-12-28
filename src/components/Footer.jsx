@@ -69,8 +69,7 @@ const Footer = React.memo(() => {
       </div>
       <div className="copyright">
         <span>
-          <FaCopyright aria-label="copyright" /> 4D Detailing, 2024 -{" "}
-          {currentYear}
+          <FaCopyright aria-label="copyright" /> 4D Detailing, osnovan 2024
         </span>
         <div className="social-media">
           <a
