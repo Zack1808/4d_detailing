@@ -1,37 +1,46 @@
-.header-container {
+.header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10rem 1rem 3rem;
-  position: relative;
+  padding: 1rem;
+  padding-block: 15rem 4rem;
+  background: radial-gradient(
+      ellipse at top right,
+      hsl(from var(--primary-color) h s l / 0.4),
+      var(--primary-color) 55%
+    ),
+    var(--bg-image);
+  background-repeat: no-repeat;
+  background-position: center 65%, 100% center;
+  background-size: 100% 270%, 70%;
+}
+
+.header h1 {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out 1s;
+  translate: 0 10px;
+  transition: 0.7s 3.3s ease;
 }
 
-.loaded .header-container {
+.loaded .header h1 {
   opacity: 1;
-}
-
-.header-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("/hero-bg-small.webp") center/cover no-repeat;
-  filter: grayscale(0.2) brightness(0.2);
-  transition: filter 0.3s ease-in-out 1s;
-  z-index: -1;
+  translate: 0;
 }
 
 .header-content {
-  z-index: 1;
   width: 100%;
   max-width: 93.75rem;
-  transform: translateX(-3rem);
-  opacity: 0;
-  transition: transform 0.3s ease-in-out 1.3s, opacity 0.3s ease-in-out 1.3s;
 }
 
-.loaded .header-content {
-  transform: translateX(0);
-  opacity: 1;
+@media (width < 48.125rem) {
+  .header {
+    background: linear-gradient(
+        180deg,
+        var(--primary-color),
+        hsl(from var(--primary-color) h s l / 0.8),
+        var(--primary-color)
+      ),
+      var(--bg-image);
+    background-size: 100% 100%, cover;
+    background-position: center center;
+  }
 }

@@ -1,73 +1,96 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-import { Button } from "../components";
+import { useInView } from "react-intersection-observer";
 
 import "../css/components/ImageSlider.css";
 
-const ImageSlider = React.memo(({ images, reset }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+const ImageSlider = React.memo(({ images, className, resetGallery }) => {
+  const [currentImage, setCurrentImage] = useState(1);
+  const [transition, setTransition] = useState(
+    "0.7s cubic-bezier(0.92, -0.33, 0.38, 1.4)"
+  );
 
-  const handlePrevClick = useCallback(() => {
-    setCurrentImageIndex((prevState) => Math.max(prevState - 1, 0));
-  }, []);
-
-  const handleNextClick = useCallback(() => {
-    setCurrentImageIndex((prevState) =>
-      Math.min(prevState + 1, images.length - 1)
-    );
-  }, [images.length]);
+  const [imageRef1, inView1] = useInView({
+    threshold: 1,
+  });
+  const [imageRef2, inView2] = useInView({
+    threshold: 1,
+  });
 
   useEffect(() => {
-    if (reset) setCurrentImageIndex(0);
-  }, [reset]);
+    if (resetGallery) {
+      setTransition("0s");
+      setCurrentImage(1);
+    }
+  }, [resetGallery]);
+
+  useEffect(() => {
+    if (inView1) {
+      setTransition("0s");
+      setCurrentImage(images.length);
+    }
+  }, [inView1]);
+
+  useEffect(() => {
+    if (inView2) {
+      setTransition("0s");
+      setCurrentImage(1);
+    }
+  }, [inView2]);
+
+  const setNextImage = useCallback(() => {
+    setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
+    setCurrentImage((prevImage) => {
+      return prevImage < images.length + 1 ? prevImage + 1 : 1;
+    });
+  }, [setTransition, setCurrentImage]);
+
+  const setPrevImage = useCallback(() => {
+    setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
+    setCurrentImage((prevImage) => {
+      return prevImage > 0 ? prevImage - 1 : images.length;
+    });
+  }, [setTransition, setCurrentImage]);
 
   return (
-    <div className="image-slider-container">
-      <div className="image-slider-content">
-        {currentImageIndex > 0 && (
-          <Button
-            secondary
-            className="left-btn"
-            onClick={handlePrevClick}
-            aria-label="See previous image"
-          >
-            <FaChevronLeft />
-          </Button>
-        )}
-        {currentImageIndex < images.length - 1 && (
-          <Button
-            secondary
-            className="right-btn"
-            onClick={handleNextClick}
-            aria-label="See next image"
-          >
-            <FaChevronRight />
-          </Button>
-        )}
-        {images.map((image, index) => (
-          <img
-            src={image}
-            alt={`Preview image number ${index + 1}`}
-            key={`image${index}`}
-            style={{
-              transform: `translateX(${-100 * currentImageIndex}%)`,
-            }}
-          />
-        ))}
-      </div>
-      <div className="image-slider-index-selector">
-        {images.map((_, index) => (
-          <button
-            key={`button${index}`}
-            className={`select-index-btn ${
-              index === currentImageIndex ? "active" : ""
-            }`}
-            onClick={() => setCurrentImageIndex(index)}
-            aria-label={`See image number ${index + 1}`}
-          ></button>
-        ))}
-      </div>
+    <div className={`image-slider ${className}`}>
+      <button className="btn-previous" onClick={setPrevImage}>
+        <FaChevronLeft />
+      </button>
+      <div
+        ref={imageRef1}
+        style={{
+          backgroundImage: `url(${images[images.length - 1]})`,
+          transform: `translateX(calc(-100% * ${currentImage}))`,
+          transition,
+        }}
+        key={`image01`}
+        className={`image`}
+      />
+      {images.map((image, index) => (
+        <div
+          style={{
+            backgroundImage: `url(${image})`,
+            transform: `translateX(calc(-100% * ${currentImage}))`,
+            transition,
+          }}
+          key={`image${index + 1}`}
+          className={`image`}
+        />
+      ))}
+      <div
+        ref={imageRef2}
+        style={{
+          backgroundImage: `url(${images[0]})`,
+          transform: `translateX(calc(-100% * ${currentImage}))`,
+          transition,
+        }}
+        key={`image02`}
+        className={`image`}
+      />
+      <button className="btn-next" onClick={setNextImage}>
+        <FaChevronRight />
+      </button>
     </div>
   );
 });

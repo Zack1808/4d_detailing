@@ -1,18 +1,22 @@
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
-import { Header, PriceCard } from "../components";
+import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
-import "../css/pages/Eksterijer.css";
+import { Header, PriceCard, Button, FadeImage } from "../components";
 
-const Interijer = ({ resetScroll }) => {
-  const categories = useMemo(
+import "../css/pages/Services.css";
+
+const Interior = () => {
+  const { resetScroll } = useScrollPosition();
+
+  const priceCards = useMemo(
     () => [
       {
         title: "Kemijsko čišćenje sjedala",
-        price: 50,
-        list: [
+        price: "50",
+        services: [
           "Kemijsko čišćenje vozačevog i suvozačevog sjedala",
           "Kemijsko čišćenje stražnjih putničkih sjedala",
           "Zaštita površina sjedala",
@@ -21,8 +25,8 @@ const Interijer = ({ resetScroll }) => {
       },
       {
         title: "Kemijsko čišćenje unutrašnjosti",
-        price: 90,
-        list: [
+        price: "90",
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Detaljno pranje naplataka",
           "Potpuno kemijsko čišćenje svih vidljivih površina osim krova",
@@ -33,8 +37,8 @@ const Interijer = ({ resetScroll }) => {
       },
       {
         title: "Full detailing interijera",
-        price: 250,
-        list: [
+        price: "250",
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Detaljno pranje naplataka",
           "Demontaža sjedala",
@@ -44,25 +48,23 @@ const Interijer = ({ resetScroll }) => {
           "Ponovna montaža sjedala",
           "Zaštita plastičnih i tekstilnih površina",
         ],
-        priceSuv: 50,
-        priceTransporter: 130,
+        priceSuv: "50",
+        priceTransporter: "130",
         info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
       },
     ],
     []
   );
 
-  useEffect(() => {
-    resetScroll();
-  }, [resetScroll]);
+  useEffect(() => resetScroll(), []);
 
   return (
-    <>
-      <Header title="Čišćenje Interijera" />
-      <div className="eksterijer-container">
-        <div className="eksterijer-content">
-          <div className="eksterijer-text">
-            <h2>Čišćenje Interijera</h2>
+    <div className="page-container">
+      <Header title="Čišćenje interijera" bgImage="/interjer.avif" />
+
+      <main className="category">
+        <article className="container">
+          <section>
             <p>
               Čišćenje interijera često je teško i vremenski zahtjevan proces.
               Cijelom interijeru vozila, korištenjem posebnih namjenskih
@@ -73,20 +75,24 @@ const Interijer = ({ resetScroll }) => {
               <br />U slučaju jačih zaprljanja, cijena usluge može porasti. Za
               dodatne informacije vezane uz cijenu slobodno nas kontaktirajte.
             </p>
-          </div>
-          <img
-            src="https://images.unsplash.com/photo-1601362840138-44bca7a80305?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            <Button primary link="/kontakt">
+              Rezerviraj termin
+            </Button>
+          </section>
+          <FadeImage
+            src="/car-inside.avif"
             alt="placeholder-image-eksterijer"
           />
-        </div>
-        <div className="eksterijer-price-list">
-          {categories.map((category) => (
-            <PriceCard {...category} key={category.title} />
+        </article>
+
+        <article className="container category-prices">
+          {priceCards.map((priceCard, index) => (
+            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
           ))}
-        </div>
-      </div>
-    </>
+        </article>
+      </main>
+    </div>
   );
 };
 
-export default transition(Interijer);
+export default transition(Interior);

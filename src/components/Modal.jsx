@@ -1,43 +1,23 @@
-import { useRef } from "react";
+import React from "react";
+import { GrFormClose } from "react-icons/gr";
 import ReactDOM from "react-dom";
-import { FaXmark } from "react-icons/fa6";
-
-import { Button } from "../components";
 
 import "../css/components/Modal.css";
 
-const Modal = ({ title, isOpen, toggleModal, children }) => {
-  const modalBackgroundRef = useRef();
-
-  const handleClick = (event) => {
-    if (
-      modalBackgroundRef.current &&
-      modalBackgroundRef.current === event.target
-    )
-      toggleModal(false);
-  };
-
+const Modal = ({ isOpen, closeModal, title, children }) => {
   return ReactDOM.createPortal(
-    isOpen && (
-      <div
-        className={`modal-outer-container`}
-        onClick={handleClick}
-        ref={modalBackgroundRef}
-      >
-        <div className={`modal-inner-container`}>
-          <div className="modal-header">
-            {title && <h2>{title}</h2>}
-            <Button
-              onClick={() => toggleModal(false)}
-              aria-label="Zatvori iskočni prozor"
-            >
-              <FaXmark aria-hidden="true" />
-            </Button>
-          </div>
-          <div className="modal-body">{children}</div>
+    <div
+      className={`modal-background ${isOpen ? "modal-open" : ""}`}
+      onClick={closeModal}
+    >
+      <div className="modal" onClick={(event) => event.stopPropagation()}>
+        <div className="modal-title">
+          <h4>{title && title}</h4>
+          <GrFormClose size={48} onClick={closeModal} />
         </div>
+        <div className="body">{children}</div>
       </div>
-    ),
+    </div>,
     document.getElementById("modal")
   );
 };

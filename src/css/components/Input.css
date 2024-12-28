@@ -7,15 +7,17 @@
 
 .input-container input {
   all: unset;
-  padding: 1rem;
+  padding: 0.7rem 1rem;
   background-color: rgba(255, 255, 255, 0.05);
+  color: var(--thirtary-color);
 }
 
 .input-container label {
   padding-inline: 1rem;
-  transform: translateY(2.7rem);
+  transform: translateY(170%);
   transition: transform 0.2s ease-in-out;
   align-self: flex-start;
+  color: var(--thirtary-color);
 }
 
 .input-container input::placeholder {
@@ -28,14 +30,7 @@
   position: absolute;
   inset: 100% 0 auto;
   height: 1px;
-  background-image: linear-gradient(
-    135deg,
-    #e9c156,
-    #ffffaa,
-    #e1ab39,
-    #7e5d48,
-    #e9c156
-  );
+  background-image: var(--gold);
   transform: scaleX(0);
   transition: 0.2s ease-in-out;
   background-attachment: fixed;
@@ -51,5 +46,5 @@
 
 .input-container:focus-within label,
 .input-container input:not(:placeholder-shown) + label {
-  transform: none;
+  transform: translateY(30%);
 }

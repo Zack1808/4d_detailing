@@ -1,61 +1,88 @@
-import { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
-import { Header, ImageCard, Modal, ImageSlider } from "../components";
+import { Header, CategoryCard, Modal, ImageSlider } from "../components";
 
 import transition from "../helpers/transition";
 
+import { useScrollPosition } from "../context/scrollContext";
+
 import "../css/pages/Gallery.css";
 
-const Gallery = ({ resetScroll }) => {
-  const [allImages, setAllImages] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selected, setSelected] = useState({ title: "title", images: [] });
+const Gallery = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedGallery, setSelectedGallery] = useState();
 
-  const handleClick = (index) => {
-    setSelected(allImages[index]);
-    setModalIsOpen(true);
-  };
+  const { resetScroll } = useScrollPosition();
 
-  useEffect(() => {
-    resetScroll();
+  const galleryItems = [
+    {
+      to: "/galerija",
+      title: "Porsche Cayenne",
+      images: [
+        "/gallery-images/Porshe_Cayenne_preview.webp",
+        "/gallery-images/Porshe_Cayenne_01.webp",
+        "/gallery-images/Porshe_Cayenne_02.webp",
+        "/gallery-images/Porshe_Cayenne_03.webp",
+        "/gallery-images/Porshe_Cayenne_04.webp",
+        "/gallery-images/Porshe_Cayenne_05.webp",
+      ],
+    },
+  ];
 
-    fetch("/meta.json")
-      .then((response) => response.json())
-      .then((data) => setAllImages(data));
-  }, [resetScroll]);
+  useEffect(() => resetScroll(), []);
 
-  const imageCards = useMemo(() => {
-    return allImages.map((image, index) => (
-      <ImageCard
-        title={image.title}
-        image={image.images[0]}
-        key={index}
-        onClick={() => handleClick(index)}
-      />
-    ));
-  }, [allImages, handleClick]);
+  const openModal = useCallback(
+    (event, index) => {
+      event.preventDefault();
+      setSelectedGallery(index);
+      setModalOpen(true);
+    },
+    [setSelectedGallery, setModalOpen]
+  );
+
+  const closeModal = useCallback(() => setModalOpen(false));
 
   return (
-    <>
-      <Header title="Galerija" />
-      <div className="gallery-container">
-        <div className="gallery-content">
-          <h2>Galerija</h2>
-          <p>
-            Pogledajte neke od naših najboljih projekata. Ovim fotografijama
-            želimo prikazati kvalitetu naših usluga.
-          </p>
-        </div>
-        <div className="gallery-images">{imageCards}</div>
-      </div>
+    <div className="page-container">
+      <Header title="Galerija" bgImage="/hero-bg-big.avif" />
+
+      <main className="gallery">
+        <article className="container">
+          <section>
+            <p>
+              Pogledajte neke od naših najboljih projekata. Ovim fotografijama
+              želimo prikazati kvalitetu naših usluga.
+            </p>
+          </section>
+        </article>
+
+        <article className="container gallery-cards">
+          {galleryItems.map((galleryItem, index) => (
+            <CategoryCard
+              key={`gallery-item-${index + 1}`}
+              title={galleryItem.title}
+              imageUrl={galleryItem.images[0]}
+              style={{ "--transition-delay": `${0.07 * index + 1.2}s` }}
+              onClick={(event) => {
+                openModal(event, index);
+              }}
+            />
+          ))}
+        </article>
+      </main>
       <Modal
-        isOpen={modalIsOpen}
-        toggleModal={setModalIsOpen}
-        title={`${selected.title} - slike`}
+        isOpen={modalOpen}
+        closeModal={closeModal}
+        title={galleryItems[selectedGallery]?.title}
       >
-        <ImageSlider images={selected.images} reset={modalIsOpen} />
+        {galleryItems[selectedGallery] && (
+          <ImageSlider
+            images={galleryItems[selectedGallery].images}
+            resetGallery={modalOpen}
+          />
+        )}
       </Modal>
-    </>
+    </div>
   );
 };
 

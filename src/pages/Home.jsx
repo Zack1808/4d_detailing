@@ -1,104 +1,200 @@
-import { useEffect, useRef, useMemo, useCallback } from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 
-import {
-  HeroContainer,
-  CategoryCard,
-  CommentDisplay,
-  InfinteScroller,
-} from "../components";
+import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
+import {
+  Hero,
+  CategoryCard,
+  CommentDisplay,
+  InfiniteScroller,
+  Button,
+  Modal,
+  Input,
+  Textarea,
+  StarSelect,
+} from "../components";
+
 import "../css/pages/Home.css";
 
-const Home = ({ scrollTo, resetScroll }) => {
-  const servicesRef = useRef(null);
+const Home = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [starCount, setStarCount] = useState(1);
 
-  const handleClick = useCallback(() => {
-    if (!servicesRef.current) return;
+  const mainRef = useRef();
+  const reviewFormRef = useRef();
 
-    const { top } = servicesRef.current.getBoundingClientRect();
-
-    const containerPosition = top - 50;
-
-    scrollTo(containerPosition);
-  }, [scrollTo]);
-
-  useEffect(() => {
-    resetScroll();
-  }, [resetScroll]);
+  const { scrollTo, resetScroll } = useScrollPosition();
 
   const cards = useMemo(
     () => [
       {
         to: "/čišćenje-eksterijera",
-        smallTitle: "Čišćenje",
-        bigTitle: "Eksterijera",
-        imageUrl: "/eksterijer.webp",
+        title: "Čišćenje Eksterijera",
+        imageUrl: "/eksterijer.avif",
       },
       {
         to: "/čišćenje-interijera",
-        smallTitle: "Čišćenje",
-        bigTitle: "Interijera",
-        imageUrl: "/Interjer.webp",
+        title: "Čišćenje Interijera",
+        imageUrl: "/interjer.avif",
       },
       {
         to: "/poliranje-i-zaštita",
-        smallTitle: "Poliranje i",
-        bigTitle: "Zaštita",
-        imageUrl: "/poliranje.webp",
+        title: "Poliranje i Zaštita",
+        imageUrl: "/hero-bg-big.avif",
       },
       {
         to: "/posebni-paketi",
-        smallTitle: "Posebni",
-        bigTitle: "Paketi",
-        imageUrl: "/hero-bg-big.webp",
+        title: "Posebni Paketi",
+        imageUrl: "/packages.avif",
       },
     ],
     []
   );
 
+  const comments = useMemo(
+    () => [
+      {
+        comment: `Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku.`,
+        user: "Darko Kovač",
+        stars: 5,
+      },
+      {
+        comment: `Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`,
+        user: "Zvonimir Migić",
+        stars: 5,
+      },
+      {
+        comment: `Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`,
+        user: "Luka Ferenčak",
+        stars: 5,
+      },
+    ],
+    []
+  );
+
+  useEffect(() => resetScroll(), []);
+
+  const handleScroll = useCallback(() => {
+    const { top } = mainRef.current.getBoundingClientRect();
+    scrollTo(top - 110);
+  }, [scrollTo]);
+
+  const clearReviewForm = useCallback(() => {
+    setStarCount(1);
+    reviewFormRef.current.name.value = "";
+    reviewFormRef.current.name.surname = "";
+    reviewFormRef.current.name.reviewText = "";
+  }, [setStarCount, reviewFormRef.current]);
+
+  const handleOpenModal = useCallback(() => {
+    setModalIsOpen(true);
+  }, [setModalIsOpen]);
+
+  const handleCloseModal = useCallback(() => {
+    setModalIsOpen(false);
+    clearReviewForm();
+  }, [setModalIsOpen, clearReviewForm]);
+
+  const sendReview = useCallback(
+    (event) => {
+      event.preventDefault();
+      clearReviewForm();
+    },
+    [clearReviewForm]
+  );
+
   return (
-    <div>
-      <HeroContainer onClick={handleClick} />
-      <div className="home-offers" ref={servicesRef} aria-label="Prikaz usluga">
-        <div className="home-container">
+    <div className="page-container">
+      <Hero scrollTo={handleScroll} />
+
+      <main ref={mainRef} className="home">
+        <article className="container">
           <h2>Naše usluge</h2>
+
           <p>
             Nudimo vam pakete profesionalnih usluga detaljnog čišćenja vozila.
             One uključuju dubinsko čišćenje, poliranje i zaštitu vašeg limenog
             ljubimca.
           </p>
-          <div className="home-categories" aria-label="Kartice sa uslugama">
+
+          <section className="category-list">
             {cards.map((card, index) => (
-              <CategoryCard key={index} {...card} />
+              <CategoryCard
+                key={card.to}
+                {...card}
+                style={{ "--transition-delay": `${0.07 * index}s` }}
+              />
             ))}
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div className="home-comment-display" aria-label="Prikaz recenzija">
-        <div className="home-container">
+          </section>
+        </article>
+
+        <hr />
+
+        <article className="container home-ratings">
           <h2>Recenzije</h2>
-          <InfinteScroller>
-            <CommentDisplay
-              comment="Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku."
-              user="Darko Kovač"
-              stars={5}
-            />
-            <CommentDisplay
-              comment={`Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`}
-              user="Zvonimir Migić"
-              stars={5}
-            />
-            <CommentDisplay
-              comment={`Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`}
-              user="Luka Ferencak"
-              stars={5}
-            />
-          </InfinteScroller>
-        </div>
-      </div>
+
+          <p>
+            Pogledajte recenzije naših zadovoljnih korisnika. <br />
+            Zadovoljni ste našom uslugom?
+          </p>
+
+          <Button primary onClick={handleOpenModal}>
+            Ostavite recenziju
+          </Button>
+
+          <InfiniteScroller>
+            {comments.map((comment) => (
+              <CommentDisplay {...comment} key={comment.user} />
+            ))}
+          </InfiniteScroller>
+        </article>
+      </main>
+
+      <Modal
+        isOpen={modalIsOpen}
+        title={"Dodaj recenziju"}
+        closeModal={handleCloseModal}
+      >
+        <form onSubmit={sendReview} ref={reviewFormRef}>
+          <StarSelect
+            starSelectedCount={starCount}
+            starSelected={(count) => setStarCount(count)}
+            label="Recenzija"
+          />
+
+          <Input placeholder="Ime" label="Ime" name="name" id="name" required />
+          <Input
+            placeholder="Prezime"
+            label="Prezime"
+            name="surname"
+            id="surname"
+            required
+          />
+
+          <Textarea
+            label="Tekst recencije"
+            placeholder="Tekst recencije"
+            name="reviewText"
+            required
+            id="review-text"
+          />
+
+          <div className="modal-form-buttons">
+            <Button primary>Pošalji recenziju</Button>
+            <Button type="button" onClick={handleCloseModal}>
+              Odustani
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 };

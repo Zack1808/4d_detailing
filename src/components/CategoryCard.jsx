@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 import "../css/components/CategoryCard.css";
 
-const CategoryCard = React.memo(
-  ({ imageUrl = "", to = "/", smallTitle, bigTitle = "bigTitle" }) => {
-    return (
-      <Link
-        to={to}
-        className="category-card-container"
-        style={{ "--_backgroundImage": `url(${imageUrl})` }}
-        aria-label={`Poveznica na ${smallTitle ? smallTitle : ""} ${bigTitle}`}
-      >
-        {smallTitle && <p>{smallTitle}</p>}
-        <span>{bigTitle}</span>
-      </Link>
-    );
-  }
-);
+const CategoryCard = React.memo(({ to, title, imageUrl, ...rest }) => {
+  const [cardRef, inView] = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+
+  return (
+    <Link
+      to={to}
+      ref={cardRef}
+      className={`category-card ${inView ? "category-visible" : ""}`}
+      {...rest}
+    >
+      <img src={imageUrl} alt="Catergory card" />
+      <span>{title}</span>
+    </Link>
+  );
+});
 
 export default CategoryCard;

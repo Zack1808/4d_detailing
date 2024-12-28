@@ -1,0 +1,12 @@
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*
+  X-Robots-Tag: all
+
+/hero-bg-big.avif
+  Cache-Control: public, max-age=31536000
+/hero-bg-small.avif
+  Cache-Control: public, max-age=31536000
+/logo-transition.avif
+  Cache-Control: public, max-age=31536000

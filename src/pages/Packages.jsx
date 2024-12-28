@@ -1,22 +1,22 @@
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
-import { Header, PriceCard } from "../components";
+import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
-import "../css/pages/Eksterijer.css";
+import { Header, PriceCard, Button, FadeImage } from "../components";
 
-const Paketi = ({ resetScroll }) => {
-  useEffect(() => {
-    resetScroll();
-  }, [resetScroll]);
+import "../css/pages/Services.css";
 
-  const categories = useMemo(
+const Packages = () => {
+  const { resetScroll } = useScrollPosition();
+
+  const priceCards = useMemo(
     () => [
       {
         title: "Paket Refresh",
         price: "200\t-\t350",
-        list: [
+        services: [
           "Kemijsko čišćenje unutrašnjosti",
           "Detaljno pranje eksterijera",
           "Detaljno pranje naplataka",
@@ -29,7 +29,7 @@ const Paketi = ({ resetScroll }) => {
       {
         title: "Paket Novo vozilo",
         price: "500\t-\t750",
-        list: [
+        services: [
           "Detaljno pranje eksterijera",
           "Detaljno pranje naplataka",
           "Full detailing interijera",
@@ -43,13 +43,15 @@ const Paketi = ({ resetScroll }) => {
     []
   );
 
+  useEffect(() => resetScroll(), []);
+
   return (
-    <>
-      <Header title="Posebni paketi" />
-      <div className="eksterijer-container">
-        <div className="eksterijer-content">
-          <div className="eksterijer-text">
-            <h2>Posebni paketi</h2>
+    <div className="page-container">
+      <Header title="Posebni paketi" bgImage="/packages.avif" />
+
+      <main className="category">
+        <article className="container">
+          <section>
             <p>
               Cijenjeni korisnici, za Vas smo pripremili i par posebnih paketa
               usluga. Oni su spoj nekoliko naših pojedinačnih ponuda iz sva tri
@@ -63,20 +65,24 @@ const Paketi = ({ resetScroll }) => {
               Cijene paketa ovise isključivo o veličini vozila. Slobodno nam se
               javite s dodatnim pitanjima!
             </p>
-          </div>
-          <img
+            <Button primary link="/kontakt">
+              Rezerviraj termin
+            </Button>
+          </section>
+          <FadeImage
             src="https://images.unsplash.com/photo-1614687154052-e05046c3feec?q=80&w=2008&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="placeholder-image-eksterijer"
           />
-        </div>
-        <div className="eksterijer-price-list">
-          {categories.map((category) => (
-            <PriceCard {...category} key={category.title} />
+        </article>
+
+        <article className="container category-prices">
+          {priceCards.map((priceCard, index) => (
+            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
           ))}
-        </div>
-      </div>
-    </>
+        </article>
+      </main>
+    </div>
   );
 };
 
-export default transition(Paketi);
+export default transition(Packages);

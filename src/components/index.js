@@ -1,16 +1,40 @@
-export { default as Navbar } from "./Navbar";
-export { default as HeroContainer } from "./HeroContainer";
-export { default as Loading } from "./Loading";
-export { default as Button } from "./Button";
-export { default as CategoryCard } from "./CategoryCard";
-export { default as CommentDisplay } from "./CommentDisplay";
-export { default as InfinteScroller } from "./InfinteScroller";
-export { default as Footer } from "./Footer";
-export { default as Header } from "./Header";
-export { default as AnimatedRouted } from "./AnimatedRouted";
-export { default as PriceCard } from "./PriceCard";
-export { default as ImageCard } from "./ImageCard";
-export { default as Modal } from "./Modal";
-export { default as ImageSlider } from "./ImageSlider";
-export { default as Input } from "./Input";
-export { default as Textarea } from "./Textarea";
+import { NavigationBar, Navbar } from "./Navigation";
+import Hero from "./Hero";
+import Button from "./Button";
+import CategoryCard from "./CategoryCard";
+import CommentDisplay from "./CommentDisplay";
+import InfiniteScroller from "./InfiniteScroller";
+import Footer from "./Footer";
+import GoogleAnalytic from "./GoogleAnalytic";
+import Modal from "./Modal";
+import Input from "./Input";
+import Textarea from "./Textarea";
+import StarSelect from "./StarSelect";
+import ImageSlider from "./ImageSlider";
+import Loading from "./Loading";
+import Header from "./Header";
+import AnimatedRouted from "./AnimatedRoute";
+import PriceCard from "./PriceCard";
+import FadeImage from "./FadeImage";
+
+export {
+  NavigationBar,
+  Navbar,
+  Hero,
+  Button,
+  CategoryCard,
+  CommentDisplay,
+  InfiniteScroller,
+  Footer,
+  GoogleAnalytic,
+  Modal,
+  Input,
+  Textarea,
+  StarSelect,
+  ImageSlider,
+  Loading,
+  Header,
+  AnimatedRouted,
+  PriceCard,
+  FadeImage,
+};

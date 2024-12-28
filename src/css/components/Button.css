@@ -1,50 +1,35 @@
 .btn {
-  border: 0;
-  background-color: transparent;
-  padding: 1rem 1.7rem;
-  color: var(--text-color);
-  cursor: pointer;
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--thirtary-color);
+  padding: 0.7rem 1.4rem;
+  border-radius: 5px;
   font-weight: bold;
-  border-radius: 2px;
-  text-decoration: none;
-  transform: translateZ(0);
-  transition: background-position 0.2s ease, transform 0.2s ease;
-  display: inline-block;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  will-change: transform, background-position;
+  cursor: pointer;
 }
 
-.primary {
-  color: var(--navs-color);
-  background-image: linear-gradient(
-    135deg,
-    #e9c156,
-    #ffffaa,
-    #e1ab39,
-    #976444,
-    #e9c156
-  );
-  background-size: 120%;
-  background-position: 100%;
+.btn:hover,
+.btn:focus {
+  background-position: 20%;
+  transform: scale(1.02);
 }
 
-.secondary {
-  color: var(--navs-color);
-  background-image: linear-gradient(
-    135deg,
-    #8d95a2,
-    #d1d3d4,
-    #ffffff,
-    #949296,
-    #f1f2f2
-  );
-  background-size: 120%;
-  background-position: 100%;
-}
-
-.secondary:is(:hover, :focus),
-.primary:is(:hover, :focus) {
+.primary-btn {
+  background: var(--gold);
+  color: var(--primary-color);
+  background-size: 200%;
   background-position: 0;
-  transform: scale(1.02) translateZ(0);
+  transition: 0.3s ease;
+}
+
+.secondary-btn {
+  background: var(--silver);
+  color: var(--primary-color);
+  background-size: 200%;
+  background-position: 0;
+  transition: 0.3s ease;
 }

@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { IoMail } from "react-icons/io5";
-import { FaClock, FaInstagram, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
+import {
+  FaClock,
+  FaInstagram,
+  FaWhatsapp,
+  FaPhoneAlt,
+  FaCopyright,
+  FaYoutube,
+  FaTiktok,
+} from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+
+import logo from "/logo.svg";
 
 import "../css/components/Footer.css";
 
@@ -13,9 +23,9 @@ const Footer = React.memo(() => {
     <footer className="page-footer">
       <div className="footer-container">
         <div className="footer-about-us">
-          <h4 className="visually-hidden">O nama</h4>
+          <strong className="visually-hidden">O nama</strong>
           <Link to="/" className="logo">
-            <img src="/logo.webp" alt="page logo" />
+            <img src={logo} alt="page logo" />
           </Link>
           <p>
             Profesionalne usluge čišćenja i poliranja vozila.
@@ -25,7 +35,7 @@ const Footer = React.memo(() => {
         </div>
         <div className="footer-contact-information">
           <span>
-            <h4>Kontakt</h4>
+            <strong>Kontakt</strong>
             <a href="mailto:4d.detailing.ln@gmail.com">
               <IoMail aria-hidden="true" />
               <strong>Email:</strong> 4d.detailing.ln@gmail.com
@@ -49,7 +59,7 @@ const Footer = React.memo(() => {
         </div>
         <div className="footer-links">
           <span>
-            <h4>Linkovi</h4>
+            <strong>Linkovi</strong>
             <Link to="/">Početna</Link>
             <Link to="/pravila-privatnosti">Pravila privatnosti</Link>
             <Link to="/uvijeti-korištenja">Uvjeti korištenja</Link>
@@ -58,8 +68,18 @@ const Footer = React.memo(() => {
         </div>
       </div>
       <div className="copyright">
-        <span>4D Detailing, {currentYear}</span>
+        <span>
+          <FaCopyright aria-label="copyright" /> 4D Detailing, osnovan 2024
+        </span>
         <div className="social-media">
+          <a
+            href="https://www.youtube.com/@4DDetailing"
+            aria-label="Youtube kanal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaYoutube className="social-media-icon" aria-hidden="true" />
+          </a>
           <a
             href="https://www.instagram.com/4dcardetailing?igsh=MTAzYnVsa2U0bmY5MA=="
             aria-label="Kontakt Instagram"
@@ -75,6 +95,14 @@ const Footer = React.memo(() => {
             rel="noopener noreferrer"
           >
             <FaWhatsapp className="social-media-icon" aria-hidden="true" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@4ddetailing?_t=ZN-8sUT8kPvC5e&_r=1"
+            aria-label="TikTok profil"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTiktok className="social-media-icon" aria-hidden="true" />
           </a>
         </div>
         <span>

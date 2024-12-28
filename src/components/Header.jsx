@@ -1,13 +1,14 @@
 import React from "react";
+
 import "../css/components/Header.css";
 
-const Header = React.memo(({ title = "Title" }) => {
+const Header = React.memo(({ title = "title", bgImage }) => {
   return (
-    <header className="header-container">
+    <div className="header" style={{ "--bg-image": `url(${bgImage})` }}>
       <div className="header-content">
         <h1>{title}</h1>
       </div>
-    </header>
+    </div>
   );
 });
 

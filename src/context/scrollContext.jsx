@@ -1,0 +1,37 @@
+import { createContext, useContext, useRef, useCallback } from "react";
+
+const ScrollContext = createContext();
+
+export const useScrollPosition = () => {
+  return useContext(ScrollContext);
+};
+
+export const ScrollProvider = ({ children }) => {
+  const containerRef = useRef(null);
+
+  const scrollTo = useCallback(
+    (scrollPosition) => {
+      if (containerRef.current) {
+        const scroll = containerRef.current.scrollTop + scrollPosition;
+
+        containerRef.current.scrollTo({
+          top: scroll,
+          behavior: "smooth",
+        });
+      }
+    },
+    [containerRef.current]
+  );
+
+  const resetScroll = useCallback(() => {
+    containerRef.current.scrollTo({
+      top: containerRef.current.scrollTop * -1,
+    });
+  }, [containerRef.current]);
+
+  return (
+    <ScrollContext.Provider value={{ containerRef, scrollTo, resetScroll }}>
+      {children}
+    </ScrollContext.Provider>
+  );
+};

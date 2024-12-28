@@ -1,74 +1,64 @@
-.loading-container {
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
-  background-color: var(--bg-color);
-  flex-direction: column;
-  gap: 3rem;
-  position: fixed;
-  inset: 0;
-  z-index: 1000000;
+.loading {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  position: fixed;
+  z-index: 999;
+  inset: 0;
 }
 
-.loading-container.loading {
+.loading.loading-done {
+  transition: opacity 0.5s 3s ease, visibility 0.5s 3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-container {
+  display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.3s ease-in-out;
-  opacity: 1;
-  visibility: visible;
+  flex-direction: column;
+  animation: flicker 1s ease-in-out infinite alternate;
 }
 
-.loading-container.removing {
-  animation: vanish 0.5s;
-  animation-delay: 0.5s;
-  animation-fill-mode: forwards;
+.loading-logo {
+  width: 16rem;
+  aspect-ratio: 16 / 8;
+  background-image: url("/logo-transition.avif");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.loading-container img {
-  width: 15rem;
+.loading-done .loading-logo {
+  transform: translateX(100vw);
+  transition: 0.5s 2s cubic-bezier(1, 0, 0.19, 1);
 }
 
-.loading-container h4 {
-  color: var(--text-color);
+.loading p {
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
-.loading-container.loading img,
-.loading-container.loading h4 {
-  animation: loading 1s ease-in-out infinite alternate;
+.loading-done.loading p {
+  opacity: 0;
+  transition: 0.2s 2s ease;
 }
 
-.loading-container.removing img {
-  animation: loaded 0.5s ease-in-out forwards;
-}
-
-@keyframes loading {
-  0% {
-    opacity: 0.3;
+@media (width < 37.5rem) {
+  .loading-logo {
+    width: 12rem;
   }
-  100% {
-    opacity: 1;
-  }
-}
 
-@keyframes loaded {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(100vw);
+  .loading p {
+    font-size: 1.2rem;
   }
 }
 
-@keyframes vanish {
-  from {
-    visibility: visible;
-    opacity: 1;
-  }
+@keyframes flicker {
   to {
-    visibility: hidden;
-    opacity: 0;
+    opacity: 0.2;
   }
 }

@@ -5,14 +5,20 @@ import { FaLocationDot } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 
-import { Header, Input, Textarea, Button } from "../components";
+import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
+import { Header, Input, Textarea, Button } from "../components";
+
 import "../css/pages/Contact.css";
 
-const Contact = React.memo(({ resetScroll }) => {
-  const formRef = useRef();
+const Contact = () => {
+  const { resetScroll } = useScrollPosition();
+
+  const formRef = useRef(null);
+
+  useEffect(() => resetScroll(), []);
 
   const handleSubmit = useCallback((event) => {
     event.preventDefault();
@@ -36,22 +42,21 @@ const Contact = React.memo(({ resetScroll }) => {
       );
   }, []);
 
-  useEffect(() => {
-    resetScroll();
-  }, [resetScroll]);
-
   return (
-    <div>
-      <Header title="Kontakt" />
-      <div className="contact-container">
-        <div className="contact-content">
-          <div className="contact-form">
-            <h2>Kontaktirajte nas</h2>
+    <div className="page-container">
+      <Header
+        title="Obratite nam se s povjerenjem"
+        bgImage="https://images.unsplash.com/photo-1485770958101-9dd7e4ea6d93?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+
+      <main className="contact">
+        <article className="container">
+          <section>
             <p>
               U slučaju dodatnih pitanja, nedoumica ili za informacije o našim
-              uslugama i cijenama, možete nas kontaktirati putem e-pošte,
-              telefona, SMS-a, WhatsApp poruka ili kontakt obrasca.
+              uslugama i cijenama, možete nas kontaktirati putem ovih usluga:
             </p>
+
             <ul className="contact-data">
               <li>
                 <a href="mailto:4d.detailing.ln@gmail.com">
@@ -90,55 +95,61 @@ const Contact = React.memo(({ resetScroll }) => {
                 </a>
               </li>
             </ul>
-            <iframe src="https://maps.google.com/maps?q=rakitovec%20274&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"></iframe>
-          </div>
-          <form ref={formRef} onSubmit={handleSubmit}>
-            <Input
-              label="Ime"
-              id="name"
-              placeholder="Ivan"
-              type="text"
-              required
-              name="name"
+
+            <iframe
+              title="Lokacija sjedišta"
+              src="https://maps.google.com/maps?q=rakitovec%20274&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
             />
-            <Input
-              label="Prezime"
-              id="surname"
-              placeholder="Ivić"
-              type="text"
-              required
-              name="surname"
-            />
-            <Input
-              label="Email"
-              id="email"
-              placeholder="ivoivic@gmail.com"
-              type="email"
-              required
-              name="email"
-            />
-            <Input
-              label="Predmet"
-              id="subject"
-              placeholder="Narudžba za detailing"
-              type="text"
-              required
-              name="subject"
-            />
-            <Textarea
-              label="Poruka"
-              placeholder="Želim napraviti termin."
-              id="message"
-              name="message"
-            />
-            <Button primary style={{ alignSelf: "flex-end" }}>
-              Pošalji
-            </Button>
-          </form>
-        </div>
-      </div>
+          </section>
+
+          <section>
+            <form onSubmit={handleSubmit} ref={formRef}>
+              <Input
+                placeholder="Ime"
+                label="Ime"
+                name="name"
+                id="name"
+                type="text"
+                required
+              />
+              <Input
+                placeholder="Prezime"
+                label="Prezime"
+                name="surname"
+                id="surname"
+                type="text"
+                required
+              />
+              <Input
+                placeholder="Email"
+                label="Email"
+                name="email"
+                id="email"
+                type="email"
+                required
+              />
+              <Input
+                placeholder="Predmet"
+                label="Predmet"
+                name="subject"
+                id="subject"
+                type="text"
+                required
+              />
+              <Textarea
+                placeholder="Poruka"
+                label="Poruka"
+                name="message"
+                id="message"
+                required
+              />
+              <Button primary>Pošalji</Button>
+            </form>
+          </section>
+        </article>
+      </main>
     </div>
   );
-});
+};
 
 export default transition(Contact);

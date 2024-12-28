@@ -3,25 +3,30 @@ import { Link } from "react-router-dom";
 
 import "../css/components/Button.css";
 
-const Button = React.memo(
-  ({ children, primary, secondary, className = "", to, ...rest }) => {
-    const buttonClasses = `btn ${primary ? "primary" : ""} ${
-      secondary ? "secondary" : ""
-    }  ${className}`.trim();
-
-    if (to)
-      return (
-        <Link to={to} className={buttonClasses} {...rest}>
-          {children}
-        </Link>
-      );
-
+const Button = React.memo(({ children, primary, secondary, link, ...rest }) => {
+  if (link)
     return (
-      <button className={buttonClasses} {...rest}>
+      <Link
+        {...rest}
+        className={`${primary && "primary-btn"} ${
+          secondary && "secondary-btn"
+        } btn`}
+        to={link}
+      >
         {children}
-      </button>
+      </Link>
     );
-  }
-);
+
+  return (
+    <button
+      {...rest}
+      className={`${primary && "primary-btn"} ${
+        secondary && "secondary-btn"
+      } btn`}
+    >
+      {children}
+    </button>
+  );
+});
 
 export default Button;

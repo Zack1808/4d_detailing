@@ -1,127 +1,72 @@
-.about-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding-inline: 1rem;
-}
-
-.about-container:nth-child(2n) {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.about-content {
-  width: 100%;
-  max-width: 93.75rem;
-  display: flex;
-  padding-block: 2rem;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.about-container:nth-child(2n) .about-content {
-  flex-direction: row-reverse;
-}
-
-.about-content img {
-  width: 50%;
-  min-width: 50%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  -webkit-mask: linear-gradient(
-    90deg,
-    transparent,
-    transparent 1%,
-    red 60%,
-    red
-  );
-  mask: linear-gradient(90deg, transparent, transparent 1%, red 60%, red);
-  transform: translateX(10%);
-  opacity: 0;
-}
-
-.about-container:nth-child(2n) .about-content img {
-  -webkit-mask: linear-gradient(
-    270deg,
-    transparent,
-    transparent 1%,
-    red 60%,
-    red
-  );
-  mask: linear-gradient(270deg, transparent, transparent 1%, red 60%, red);
-  transform: translateX(-10%);
-}
-
-.about-content .about-text {
-  display: flex;
-  flex-direction: column;
+.about article {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  justify-content: space-between;
   gap: 2rem;
-  color: var(--text-color);
+}
+
+.about article:nth-child(2n) {
+  grid-template-columns: 0.8fr 1fr;
+  padding: 4.5rem 0;
+  position: relative;
+}
+
+.about article:nth-child(2n)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent 5%,
+    hsl(from var(--accent-color2) h s l / 0.6) 15%,
+    hsl(from var(--accent-color2) h s l / 0.6) 85%,
+    transparent 95%
+  );
+  z-index: -1;
+  scale: 2 1;
+}
+
+.about article section {
+  max-width: 75ch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
-  transform: translateX(-10%);
+  gap: 2rem;
+}
+
+.about article:nth-child(2n) section {
+  justify-self: end;
+}
+
+.about img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 5px;
+  object-position: center 20%;
+  scale: 0.95;
   opacity: 0;
+  transition: opacity 0.3s ease, scale 0.5s ease;
 }
 
-.about-container:nth-child(2n) .about-content .about-text {
-  align-items: flex-end;
-  transform: translateX(10%);
-}
-
-.loaded .about-content img,
-.loaded .about-container:nth-child(2n) .about-content img,
-.loaded .about-content .about-text,
-.loaded .about-container:nth-child(2n) .about-content .about-text {
-  transition: transform 0.3s ease-in-out 1.3s, opacity 0.3s ease-in-out 1.3s;
-  transform: none;
+.loaded .about .image-pop {
+  transition-delay: var(--transition-delay, 3.3s);
   opacity: 1;
+  scale: 1;
 }
 
-.about-text h2 {
-  align-self: flex-start;
-}
+@media (width < 56.25rem) {
+  .about {
+    margin: 0;
+    padding-top: 4rem;
+  }
 
-@media (width < 55rem) {
-  .about-content,
-  .about-container:nth-child(2n) .about-content {
+  .about article {
+    display: flex;
     flex-direction: column;
-    transform: translateY(10%);
   }
 
-  .loaded .about-content,
-  .loaded .about-container:nth-child(2n) .about-content {
-    transition: transform 0.3s ease-in-out 1.3s;
-    transform: none;
-  }
-
-  .about-content img,
-  .about-container:nth-child(2n) .about-content img {
-    width: 100%;
-    -webkit-mask: linear-gradient(
-      180deg,
-      transparent,
-      transparent 1%,
-      red 60%,
-      red
-    );
-    mask: linear-gradient(180deg, transparent, transparent 1%, red 60%, red);
-    transform: none;
-  }
-
-  .about-content .about-text,
-  .about-container:nth-child(2n) .about-content .about-text {
-    max-width: none;
-    align-items: flex-end;
-    transform: none;
-  }
-}
-
-@media (width < 32.5rem) {
-  .about-content .about-text,
-  .about-container:nth-child(2n) .about-content .about-text {
-    align-items: stretch;
-  }
-
-  .about-content .about-text .btn {
-    text-align: center;
+  .about article:nth-child(2n) {
+    flex-direction: column-reverse;
   }
 }

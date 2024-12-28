@@ -1,22 +1,22 @@
-import { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 
-import { Header, PriceCard } from "../components";
+import { useScrollPosition } from "../context/scrollContext";
 
 import transition from "../helpers/transition";
 
-import "../css/pages/Eksterijer.css";
+import { Header, PriceCard, Button, FadeImage } from "../components";
 
-const Eksterijer = ({ resetScroll }) => {
-  useEffect(() => {
-    resetScroll();
-  }, [resetScroll]);
+import "../css/pages/Services.css";
 
-  const categories = useMemo(
+const Polishing = () => {
+  const { resetScroll } = useScrollPosition();
+
+  const priceCards = useMemo(
     () => [
       {
         title: "Poliranje farova",
-        price: 20,
-        list: [
+        price: "20",
+        services: [
           "Brušenje i poliranje",
           "Dodavanje zaštitnog premaza i boost premaza",
         ],
@@ -25,31 +25,31 @@ const Eksterijer = ({ resetScroll }) => {
       {
         title: "Poliranje laka",
         price: "100 (po sloju)",
-        list: [
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
           "Zaštita voskom ako nije odabrana druga vrsta zaštite",
         ],
-        priceSuv: 30,
-        priceTransporter: 80,
+        priceSuv: "30",
+        priceTransporter: "80",
         info: "Cijena usluge može se mijenjati ovisno o veličini vozila i oštećenosti laka",
       },
       {
         title: "Višeslojna korekcija laka",
-        price: 500,
-        list: [
+        price: "500",
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
           "Zaštita voskom ako nije odabrana druga vrsta zaštite",
           "Po potrebi, zatočkavanje i brušenje većih ogrebotina (kupac donosi boju)",
         ],
-        priceSuv: 100,
-        priceTransporter: 180,
+        priceSuv: "100",
+        priceTransporter: "180",
       },
       {
         title: "Zaštita voskom u trajanju od 3 mjeseca",
-        price: 15,
-        list: [
+        price: "15",
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Priprema laka za zaštitni premaz",
           "Premaz voskom za zaštitu laka",
@@ -57,8 +57,8 @@ const Eksterijer = ({ resetScroll }) => {
       },
       {
         title: "Zaštita sintetičkim premazom u trajanju od 6-8 mjeseci",
-        price: 50,
-        list: [
+        price: "50",
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Priprema laka za zaštitni premaz",
           "Premaz sintetičkim premazom",
@@ -66,27 +66,29 @@ const Eksterijer = ({ resetScroll }) => {
       },
       {
         title: "Zaštita keramičkim premazom u trajanju od 3 godine",
-        price: 300,
-        list: [
+        price: "300",
+        services: [
           "Detaljno pranje eksterijera kao priprema",
           "Priprema laka za zaštitni premaz",
           "Premaz keramičkim premazom",
         ],
-        priceSuv: 100,
-        priceTransporter: 180,
-        info: "Napomena: Prije nanošenja keramičkog premaza, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i postigao maksimalnu učinkovitost. (Poliranje nije uključeno u cijenu usluge keramičkog premaza.)nnnnnnn",
+        priceSuv: "100",
+        priceTransporter: "180",
+        info: "Napomena: Prije nanošenja keramičkog premaza, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i postigao maksimalnu učinkovitost. (Poliranje nije uključeno u cijenu usluge keramičkog premaza.)",
       },
     ],
     []
   );
 
+  useEffect(() => resetScroll(), []);
+
   return (
-    <>
-      <Header title="Poliranje i zaštita" />
-      <div className="eksterijer-container">
-        <div className="eksterijer-content">
-          <div className="eksterijer-text">
-            <h2>Poliranje i zaštita</h2>
+    <div className="page-container">
+      <Header title="Poliranje i zaštita" bgImage="/hero-bg-big.avif" />
+
+      <main className="category">
+        <article className="container">
+          <section>
             <p>
               Zbog zagađenja atmosfere i utjecaja prirodnih faktora, vaš limeni
               ljubimac s vremenom gubi sjaj i veličanstvenost. To je osobito
@@ -101,21 +103,24 @@ const Eksterijer = ({ resetScroll }) => {
               tretmane poliranja i zaštite laka vašeg vozila. Slobodno nas
               kontaktirajte za više informacija.
             </p>
-          </div>
-          <img
-            src="/poliranje.webp"
+            <Button primary link="/kontakt">
+              Rezerviraj termin
+            </Button>
+          </section>
+          <FadeImage
+            src="https://images.unsplash.com/photo-1527581849771-416a9d62308e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="placeholder-image-eksterijer"
-            style={{ objectPosition: "center top" }}
           />
-        </div>
-        <div className="eksterijer-price-list">
-          {categories.map((category) => (
-            <PriceCard {...category} key={category.title} />
+        </article>
+
+        <article className="container category-prices">
+          {priceCards.map((priceCard, index) => (
+            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
           ))}
-        </div>
-      </div>
-    </>
+        </article>
+      </main>
+    </div>
   );
 };
 
-export default transition(Eksterijer);
+export default transition(Polishing);

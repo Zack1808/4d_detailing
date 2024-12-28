@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 2rem;
+  padding: 3rem 1rem;
   gap: 3rem;
-  background-color: var(--navs-color);
+  background-color: var(--secondary-color);
   margin-top: auto;
 }
 
@@ -25,11 +25,11 @@
   align-items: center;
   flex: 1;
   max-width: 30rem;
-  color: var(--text-color);
+  color: var(--thirtary-color);
   gap: 1rem;
 }
 
-.footer-about-us h4 {
+.footer-about-us strong {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -47,11 +47,11 @@
 .page-footer span,
 .page-footer strong {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.5rem;
-  color: var(--text-color);
+  color: var(--thirtary-color);
   text-decoration: none;
-  width: max-content;
+  width: calc(max-content - 10px);
   text-align: left;
 }
 
@@ -72,6 +72,12 @@
   color: var(--text-color);
   flex-wrap: wrap;
   text-align: center;
+}
+
+.copyright span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .social-media {

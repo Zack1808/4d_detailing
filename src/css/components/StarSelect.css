@@ -1,0 +1,60 @@
+.stars {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.stars.scale {
+  gap: 2rem;
+  padding: 1rem 1rem 0;
+}
+
+.star {
+  width: 1.75rem;
+  height: 1.75rem;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+  background-image: var(--gold);
+  position: relative;
+  will-change: clip-path, background-image;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.scale .star {
+  scale: 1.5;
+  cursor: pointer;
+}
+
+.star-outline::before {
+  content: "";
+  position: absolute;
+  inset: 0.2rem;
+  clip-path: inherit;
+  background-color: var(--primary-color);
+  will-change: clip-path, background-color;
+}
+
+label {
+  color: var(--thirtary-color);
+}
+
+@media (width < 31.25rem) {
+  .stars.scale {
+    gap: 1.5rem;
+    padding-inline: 0.7rem;
+  }
+  .scale .star {
+    scale: 1.2;
+    cursor: pointer;
+  }
+}
