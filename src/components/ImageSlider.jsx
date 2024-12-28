@@ -39,14 +39,14 @@ const ImageSlider = React.memo(({ images, className, resetGallery }) => {
   }, [inView2]);
 
   const setNextImage = () => {
-    setTransition("0.5s cubic-bezier(0, 0, .5, 1.4)");
+    setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
     setCurrentImage((prevImage) => {
       return prevImage < images.length + 1 ? prevImage + 1 : 1;
     });
   };
 
   const setPrevImage = () => {
-    setTransition("0.5s cubic-bezier(0, 0, .5, 1.4)");
+    setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
     setCurrentImage((prevImage) => {
       return prevImage > 0 ? prevImage - 1 : images.length;
     });
