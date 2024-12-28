@@ -7,6 +7,8 @@ import emailjs from "@emailjs/browser";
 
 import { useScrollPosition } from "../context/scrollContext";
 
+import transition from "../helpers/transition";
+
 import { Header, Input, Textarea, Button } from "../components";
 
 import "../css/pages/Contact.css";
@@ -147,4 +149,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default transition(Contact);

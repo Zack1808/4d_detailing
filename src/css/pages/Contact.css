@@ -1,7 +1,7 @@
 .contact article {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
+  gap: 2rem;
 }
 
 .contact section {

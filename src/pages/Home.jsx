@@ -87,26 +87,29 @@ const Home = () => {
     scrollTo(top - 110);
   }, [scrollTo]);
 
-  const handleOpenModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-    clearReviewForm();
-  };
-
-  const sendReview = (event) => {
-    event.preventDefault();
-    clearReviewForm();
-  };
-
-  const clearReviewForm = () => {
+  const clearReviewForm = useCallback(() => {
     setStarCount(1);
     reviewFormRef.current.name.value = "";
     reviewFormRef.current.name.surname = "";
     reviewFormRef.current.name.reviewText = "";
-  };
+  }, [setStarCount, reviewFormRef.current]);
+
+  const handleOpenModal = useCallback(() => {
+    setModalIsOpen(true);
+  }, [setModalIsOpen]);
+
+  const handleCloseModal = useCallback(() => {
+    setModalIsOpen(false);
+    clearReviewForm();
+  }, [setModalIsOpen, clearReviewForm]);
+
+  const sendReview = useCallback(
+    (event) => {
+      event.preventDefault();
+      clearReviewForm();
+    },
+    [clearReviewForm]
+  );
 
   return (
     <div className="page-container">

@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useEffect } from "react";
+import { createContext, useContext, useRef, useCallback } from "react";
 
 const ScrollContext = createContext();
 
@@ -9,22 +9,25 @@ export const useScrollPosition = () => {
 export const ScrollProvider = ({ children }) => {
   const containerRef = useRef(null);
 
-  const scrollTo = (scrollPosition) => {
-    if (containerRef.current) {
-      const scroll = containerRef.current.scrollTop + scrollPosition;
+  const scrollTo = useCallback(
+    (scrollPosition) => {
+      if (containerRef.current) {
+        const scroll = containerRef.current.scrollTop + scrollPosition;
 
-      containerRef.current.scrollTo({
-        top: scroll,
-        behavior: "smooth",
-      });
-    }
-  };
+        containerRef.current.scrollTo({
+          top: scroll,
+          behavior: "smooth",
+        });
+      }
+    },
+    [containerRef.current]
+  );
 
-  const resetScroll = () => {
+  const resetScroll = useCallback(() => {
     containerRef.current.scrollTo({
       top: containerRef.current.scrollTop * -1,
     });
-  };
+  }, [containerRef.current]);
 
   return (
     <ScrollContext.Provider value={{ containerRef, scrollTo, resetScroll }}>

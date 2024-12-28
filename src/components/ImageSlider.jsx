@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 
@@ -38,19 +38,19 @@ const ImageSlider = React.memo(({ images, className, resetGallery }) => {
     }
   }, [inView2]);
 
-  const setNextImage = () => {
+  const setNextImage = useCallback(() => {
     setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
     setCurrentImage((prevImage) => {
       return prevImage < images.length + 1 ? prevImage + 1 : 1;
     });
-  };
+  }, [setTransition, setCurrentImage]);
 
-  const setPrevImage = () => {
+  const setPrevImage = useCallback(() => {
     setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
     setCurrentImage((prevImage) => {
       return prevImage > 0 ? prevImage - 1 : images.length;
     });
-  };
+  }, [setTransition, setCurrentImage]);
 
   return (
     <div className={`image-slider ${className}`}>

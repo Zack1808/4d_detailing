@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 import { Header, CategoryCard, Modal, ImageSlider } from "../components";
 
@@ -31,13 +31,16 @@ const Gallery = () => {
 
   useEffect(() => resetScroll(), []);
 
-  const openModal = (event, index) => {
-    event.preventDefault();
-    setSelectedGallery(index);
-    setModalOpen(true);
-  };
+  const openModal = useCallback(
+    (event, index) => {
+      event.preventDefault();
+      setSelectedGallery(index);
+      setModalOpen(true);
+    },
+    [setSelectedGallery, setModalOpen]
+  );
 
-  const closeModal = () => setModalOpen(false);
+  const closeModal = useCallback(() => setModalOpen(false));
 
   return (
     <div className="page-container">
