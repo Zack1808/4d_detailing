@@ -4,7 +4,7 @@ const motionDivStyle = {
   position: "fixed",
   inset: 0,
   backgroundColor: "var(--secondary-color)",
-  zIndex: 9999,
+  zIndex: 99999999,
   transform: "translateZ(0)",
 };
 
