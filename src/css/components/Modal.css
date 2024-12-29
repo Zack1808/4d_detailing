@@ -34,6 +34,15 @@
   transition: 0.2s ease;
 }
 
+.modal.no-background {
+  background: transparent;
+}
+
+.modal.full {
+  max-width: 80%;
+  padding: 0;
+}
+
 .modal-open .modal {
   transition: 0.2s 0.2s ease;
   transform: translateY(0);
@@ -49,4 +58,10 @@
 
 .modal-title h4 {
   font-size: 2rem;
+}
+
+@media (width < 32.5rem) {
+  .modal.full {
+    max-width: none;
+  }
 }

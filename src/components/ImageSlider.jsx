@@ -6,9 +6,7 @@ import "../css/components/ImageSlider.css";
 
 const ImageSlider = React.memo(({ images, className, resetGallery }) => {
   const [currentImage, setCurrentImage] = useState(1);
-  const [transition, setTransition] = useState(
-    "0.7s cubic-bezier(0.92, -0.33, 0.38, 1.4)"
-  );
+  const [transition, setTransition] = useState("0.7s ease-in-out");
 
   const [imageRef1, inView1] = useInView({
     threshold: 1,
@@ -39,14 +37,14 @@ const ImageSlider = React.memo(({ images, className, resetGallery }) => {
   }, [inView2]);
 
   const setNextImage = useCallback(() => {
-    setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
+    setTransition("0.35s ease-in-out");
     setCurrentImage((prevImage) => {
       return prevImage < images.length + 1 ? prevImage + 1 : 1;
     });
   }, [setTransition, setCurrentImage]);
 
   const setPrevImage = useCallback(() => {
-    setTransition("0.35s cubic-bezier(0, 0, 0.5, 1.4)");
+    setTransition("0.35s ease-in-out");
     setCurrentImage((prevImage) => {
       return prevImage > 0 ? prevImage - 1 : images.length;
     });
