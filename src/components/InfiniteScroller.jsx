@@ -19,7 +19,12 @@ const InfiniteScroller = ({ children }) => {
 
   return (
     <div className="infinite-scrooler" ref={scrollRef}>
-      <ul className="infinte-scroller-content">
+      <ul
+        className="infinte-scroller-content"
+        style={{
+          "--scrolling-duration": `${20 * children.length}s`,
+        }}
+      >
         {childrenArray.concat(childrenArray).map((child, index) => (
           <li
             key={index}

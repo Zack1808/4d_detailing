@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import { useScrollPosition } from "../context/scrollContext";
 
@@ -35,7 +36,7 @@ const Home = () => {
 
   const { scrollTo, resetScroll } = useScrollPosition();
 
-  const { getComments, comments } = useComments();
+  const { getComments, comments, loading, addComment } = useComments();
 
   const cards = useMemo(
     () => [
@@ -76,8 +77,8 @@ const Home = () => {
   const clearReviewForm = useCallback(() => {
     setStarCount(1);
     reviewFormRef.current.name.value = "";
-    reviewFormRef.current.name.surname = "";
-    reviewFormRef.current.name.reviewText = "";
+    reviewFormRef.current.surname.value = "";
+    reviewFormRef.current.reviewText.value = "";
   }, [setStarCount, reviewFormRef.current]);
 
   const handleOpenModal = useCallback(() => {
@@ -92,9 +93,11 @@ const Home = () => {
   const sendReview = useCallback(
     (event) => {
       event.preventDefault();
-      clearReviewForm();
+      const user = `${reviewFormRef.current.name.value} ${reviewFormRef.current.surname.value}`;
+      const comment = reviewFormRef.current.reviewText.value;
+      addComment(starCount, user, comment, handleCloseModal);
     },
-    [clearReviewForm]
+    [clearReviewForm, starCount, handleCloseModal]
   );
 
   return (
@@ -174,7 +177,13 @@ const Home = () => {
           />
 
           <div className="modal-form-buttons">
-            <Button primary>Pošalji recenziju</Button>
+            <Button primary>
+              {loading ? (
+                <AiOutlineLoading3Quarters className="loading-spinner" />
+              ) : (
+                "Pošalji recenziju"
+              )}
+            </Button>
             <Button type="button" onClick={handleCloseModal}>
               Odustani
             </Button>

@@ -38,9 +38,19 @@
   margin-top: 1.5rem;
 }
 
+.loading-spinner {
+  animation: rotation 1s ease-in-out infinite;
+}
+
 @media (width < 31.25rem) {
   .modal-form-buttons {
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+@keyframes rotation {
+  to {
+    rotate: 360deg;
   }
 }

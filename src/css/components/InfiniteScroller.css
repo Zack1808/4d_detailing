@@ -37,7 +37,7 @@
   width: fit-content;
   flex-wrap: nowrap;
   transform: translateX(0);
-  animation: infinite-scroll 60s linear infinite;
+  animation: infinite-scroll var(--scrolling-duration) linear infinite;
 }
 
 .infinite-scrooler[data-animated="true"] .infinte-scroller-content:hover {

@@ -7,11 +7,13 @@ import {
   where,
   collection,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 import { db } from "../firebaseConfig";
 
 export const useComments = () => {
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getComments = useCallback(async () => {
     const commentQuery = query(
@@ -33,5 +35,27 @@ export const useComments = () => {
     setComments(commentData);
   }, []);
 
-  return { getComments, comments };
+  const addComment = useCallback(
+    async (stars, user, comment, additionalFunction) => {
+      setLoading(true);
+      try {
+        await addDoc(collection(db, "reviews"), {
+          user,
+          comment,
+          stars,
+          isApproved: false,
+        });
+
+        toast.success("Recenzija uspješno poslana", { theme: "dark" });
+      } catch (error) {
+        toast.error("Slanje recenzije nije uspjelo", { theme: "dark" });
+      } finally {
+        setLoading(false);
+        additionalFunction();
+      }
+    },
+    []
+  );
+
+  return { getComments, comments, loading, addComment };
 };
