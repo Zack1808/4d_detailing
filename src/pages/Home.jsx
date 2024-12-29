@@ -8,6 +8,8 @@ import React, {
 
 import { useScrollPosition } from "../context/scrollContext";
 
+import { useComments } from "../firebaseFunctions/comments";
+
 import transition from "../helpers/transition";
 
 import {
@@ -32,6 +34,8 @@ const Home = () => {
   const reviewFormRef = useRef();
 
   const { scrollTo, resetScroll } = useScrollPosition();
+
+  const { getComments, comments } = useComments();
 
   const cards = useMemo(
     () => [
@@ -59,28 +63,10 @@ const Home = () => {
     []
   );
 
-  const comments = useMemo(
-    () => [
-      {
-        comment: `Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku.`,
-        user: "Darko Kovač",
-        stars: 5,
-      },
-      {
-        comment: `Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`,
-        user: "Zvonimir Migić",
-        stars: 5,
-      },
-      {
-        comment: `Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`,
-        user: "Luka Ferenčak",
-        stars: 5,
-      },
-    ],
-    []
-  );
-
-  useEffect(() => resetScroll(), []);
+  useEffect(() => {
+    resetScroll();
+    getComments();
+  }, []);
 
   const handleScroll = useCallback(() => {
     const { top } = mainRef.current.getBoundingClientRect();
