@@ -83,8 +83,8 @@ const App = () => {
           </AnimatedRouted>
           <Footer />
         </div>
-        <ToastContainer />
       </Suspense>
+      <ToastContainer />
     </BrowserRouter>
   );
 };

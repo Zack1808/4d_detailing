@@ -5,8 +5,11 @@ import React, {
   useState,
   useEffect,
 } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import { useScrollPosition } from "../context/scrollContext";
+
+import { useComments } from "../firebaseFunctions/comments";
 
 import transition from "../helpers/transition";
 
@@ -32,6 +35,8 @@ const Home = () => {
   const reviewFormRef = useRef();
 
   const { scrollTo, resetScroll } = useScrollPosition();
+
+  const { getComments, comments, loading, addComment } = useComments();
 
   const cards = useMemo(
     () => [
@@ -59,28 +64,10 @@ const Home = () => {
     []
   );
 
-  const comments = useMemo(
-    () => [
-      {
-        comment: `Odlična usluga! Od jednostavnosti dogovora, do konačnog rezultata, sve je bilo za preporuku.`,
-        user: "Darko Kovač",
-        stars: 5,
-      },
-      {
-        comment: `Bio sam kod njega da mi upristoji Toyotu kad sam ju "preuzeo" od svoje gospođe, preporučam mladog gospodina!`,
-        user: "Zvonimir Migić",
-        stars: 5,
-      },
-      {
-        comment: `Posao odlično obavljen, auto je ispoliran kao i prvog dana kad je izašao iz salona, sve pohvale, rad i komunikacija savršeni, definitivno za preporuku drugima.`,
-        user: "Luka Ferenčak",
-        stars: 5,
-      },
-    ],
-    []
-  );
-
-  useEffect(() => resetScroll(), []);
+  useEffect(() => {
+    resetScroll();
+    getComments();
+  }, []);
 
   const handleScroll = useCallback(() => {
     const { top } = mainRef.current.getBoundingClientRect();
@@ -90,8 +77,8 @@ const Home = () => {
   const clearReviewForm = useCallback(() => {
     setStarCount(1);
     reviewFormRef.current.name.value = "";
-    reviewFormRef.current.name.surname = "";
-    reviewFormRef.current.name.reviewText = "";
+    reviewFormRef.current.surname.value = "";
+    reviewFormRef.current.reviewText.value = "";
   }, [setStarCount, reviewFormRef.current]);
 
   const handleOpenModal = useCallback(() => {
@@ -106,9 +93,11 @@ const Home = () => {
   const sendReview = useCallback(
     (event) => {
       event.preventDefault();
-      clearReviewForm();
+      const user = `${reviewFormRef.current.name.value} ${reviewFormRef.current.surname.value}`;
+      const comment = reviewFormRef.current.reviewText.value;
+      addComment(starCount, user, comment, handleCloseModal);
     },
-    [clearReviewForm]
+    [clearReviewForm, starCount, handleCloseModal]
   );
 
   return (
@@ -188,7 +177,13 @@ const Home = () => {
           />
 
           <div className="modal-form-buttons">
-            <Button primary>Pošalji recenziju</Button>
+            <Button primary>
+              {loading ? (
+                <AiOutlineLoading3Quarters className="loading-spinner" />
+              ) : (
+                "Pošalji recenziju"
+              )}
+            </Button>
             <Button type="button" onClick={handleCloseModal}>
               Odustani
             </Button>

@@ -6,6 +6,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  border-radius: 5px;
 }
 
 .image-slider .btn-next,

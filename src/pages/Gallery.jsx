@@ -74,6 +74,8 @@ const Gallery = () => {
         isOpen={modalOpen}
         closeModal={closeModal}
         title={galleryItems[selectedGallery]?.title}
+        noBg
+        full
       >
         {galleryItems[selectedGallery] && (
           <ImageSlider

@@ -4,13 +4,16 @@ import ReactDOM from "react-dom";
 
 import "../css/components/Modal.css";
 
-const Modal = ({ isOpen, closeModal, title, children }) => {
+const Modal = ({ isOpen, closeModal, title, children, noBg, full }) => {
   return ReactDOM.createPortal(
     <div
       className={`modal-background ${isOpen ? "modal-open" : ""}`}
       onClick={closeModal}
     >
-      <div className="modal" onClick={(event) => event.stopPropagation()}>
+      <div
+        className={`modal ${noBg ? "no-background" : ""} ${full ? "full" : ""}`}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="modal-title">
           <h4>{title && title}</h4>
           <GrFormClose size={48} onClick={closeModal} />
