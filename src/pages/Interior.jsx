@@ -56,7 +56,24 @@ const Interior = () => {
     []
   );
 
-  useEffect(() => resetScroll(), []);
+  useEffect(() => {
+    resetScroll();
+    const link = document.createElement("link");
+    const meta = document.createElement("meta");
+
+    link.rel = "canonical";
+    link.href = "https://4d-detailing.hr/čišćenje-interijera";
+    document.head.appendChild(link);
+
+    meta.setAttribute("property", "og:url");
+    meta.content = "https://4d-detailing.hr/čišćenje-interijera";
+    document.head.appendChild(meta);
+
+    return () => {
+      document.head.removeChild(link);
+      document.head.removeChild(meta);
+    };
+  }, []);
 
   return (
     <>
