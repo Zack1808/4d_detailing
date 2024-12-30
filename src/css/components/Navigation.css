@@ -276,8 +276,8 @@ header.scrolled .desktop-nav .secondary-links {
     transform-origin: left;
     background: var(--gold);
     scale: 0 1;
-    animation: grow linear;
-    animation-timeline: scroll;
+    animation: grow 1s linear;
+    animation-timeline: scroll(y);
   }
 
   @keyframes grow {
