@@ -6,6 +6,8 @@ const motionDivStyle = {
   backgroundColor: "var(--secondary-color)",
   zIndex: 99999999,
   transform: "translateZ(0)",
+  width: "100vw",
+  height: "100vh",
 };
 
 const transition = (Component) => {
