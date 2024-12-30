@@ -67,7 +67,6 @@ body {
 
 .content {
   height: 100dvh;
-  position: relative;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: var(--primary-color);
