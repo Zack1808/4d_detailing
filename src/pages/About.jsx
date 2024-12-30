@@ -11,7 +11,24 @@ import "../css/pages/About.css";
 const About = () => {
   const { resetScroll } = useScrollPosition();
 
-  useEffect(() => resetScroll(), []);
+  useEffect(() => {
+    resetScroll();
+    const link = document.createElement("link");
+    const meta = document.createElement("meta");
+
+    link.rel = "canonical";
+    link.href = "https://4d-detailing.hr/o-nama";
+    document.head.appendChild(link);
+
+    meta.setAttribute("property", "og:url");
+    meta.content = "https://4d-detailing.hr/o-nama";
+    document.head.appendChild(meta);
+
+    return () => {
+      document.head.removeChild(link);
+      document.head.removeChild(meta);
+    };
+  }, []);
 
   return (
     <>
