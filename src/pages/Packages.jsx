@@ -46,7 +46,7 @@ const Packages = () => {
   useEffect(() => resetScroll(), []);
 
   return (
-    <div className="page-container">
+    <>
       <Header title="Posebni paketi" bgImage="/packages.avif" />
 
       <main className="category">
@@ -81,7 +81,7 @@ const Packages = () => {
           ))}
         </article>
       </main>
-    </div>
+    </>
   );
 };
 

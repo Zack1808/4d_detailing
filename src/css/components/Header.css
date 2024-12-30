@@ -1,4 +1,5 @@
 .header {
+  margin-top: var(--header-size);
   display: flex;
   justify-content: center;
   align-items: center;

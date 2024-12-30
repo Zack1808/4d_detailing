@@ -101,7 +101,7 @@ const Home = () => {
   );
 
   return (
-    <div className="page-container">
+    <>
       <Hero scrollTo={handleScroll} />
 
       <main ref={mainRef} className="home">
@@ -190,7 +190,7 @@ const Home = () => {
           </div>
         </form>
       </Modal>
-    </div>
+    </>
   );
 };
 

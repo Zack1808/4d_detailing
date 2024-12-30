@@ -83,7 +83,7 @@ const Polishing = () => {
   useEffect(() => resetScroll(), []);
 
   return (
-    <div className="page-container">
+    <>
       <Header title="Poliranje i zaštita" bgImage="/hero-bg-big.avif" />
 
       <main className="category">
@@ -119,7 +119,7 @@ const Polishing = () => {
           ))}
         </article>
       </main>
-    </div>
+    </>
   );
 };
 

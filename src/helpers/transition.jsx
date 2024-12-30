@@ -2,10 +2,15 @@ import { motion } from "framer-motion";
 
 const motionDivStyle = {
   position: "fixed",
-  inset: 0,
+  top: 0,  
+  left: 0, 
+  right: 0,  
+  bottom: 0,
   backgroundColor: "var(--secondary-color)",
   zIndex: 99999999,
   transform: "translateZ(0)",
+  width: "100vw",
+  height: "100vh",
 };
 
 const transition = (Component) => {

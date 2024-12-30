@@ -14,7 +14,7 @@ const Privacy = () => {
   useEffect(() => resetScroll(), []);
 
   return (
-    <div className="page-container">
+    <>
       <Header
         title="Pravila privatnosti"
         bgImage="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -142,7 +142,7 @@ const Privacy = () => {
           </section>
         </article>
       </main>
-    </div>
+    </>
   );
 };
 

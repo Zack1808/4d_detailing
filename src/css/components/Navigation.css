@@ -8,7 +8,7 @@ header {
   padding: 1rem;
   background-color: transparent;
   color: var(--thirtary-color);
-  z-index: 20;
+  z-index: 999999;
 }
 
 header::after {
@@ -152,6 +152,10 @@ header.scrolled .desktop-nav .secondary-links {
   transform: translateY(0);
 }
 
+.scroll-indicator {
+  display: none;
+}
+
 @media (width < 48.125rem) {
   header {
     padding: 1rem;
@@ -267,13 +271,13 @@ header.scrolled .desktop-nav .secondary-links {
   header::before {
     content: "";
     position: absolute;
-    inset: 0 0 auto;
+    inset: 0 0 0;
     height: 0.1rem;
     transform-origin: left;
     background: var(--gold);
     scale: 0 1;
-    animation: grow linear;
-    animation-timeline: scroll();
+    animation: grow 1s linear;
+    animation-timeline: scroll(y);
   }
 
   @keyframes grow {

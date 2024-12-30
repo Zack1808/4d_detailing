@@ -60,28 +60,38 @@ const App = () => {
           className={`content ${menuIsOpen ? "menu-open" : ""} ${
             !loading ? "loaded" : ""
           }`}
-          ref={containerRef}
         >
-          <GoogleAnalytic
-            hasConsent={hasConsent}
-            consentGiven={handleConsent}
-            menuIsOpen={menuIsOpen}
-          />
-          <NavigationBar toggleMenu={toggleMenu} />
-          <AnimatedRouted>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/čišćenje-eksterijera" element={<Exterior />} />
-            <Route exact path="/čišćenje-interijera" element={<Interior />} />
-            <Route exact path="/poliranje-i-zaštita" element={<Polishing />} />
-            <Route exact path="/posebni-paketi" element={<Packages />} />
-            <Route exact path="/o-nama" element={<About />} />
-            <Route exact path="/pravila-privatnosti" element={<Privacy />} />
-            <Route exact path="/uvijeti-korištenja" element={<Terms />} />
-            <Route exact path="/galerija" element={<Gallery />} />
-            <Route exact path="/kontakt" element={<Contact />} />
-            <Route path="*" element={<Error404 />} />
-          </AnimatedRouted>
-          <Footer />
+          <div className="page-container" ref={containerRef}>
+            <NavigationBar toggleMenu={toggleMenu} />
+            <div className="scroll-indicator" />
+            <GoogleAnalytic
+              hasConsent={hasConsent}
+              consentGiven={handleConsent}
+              menuIsOpen={menuIsOpen}
+            />
+            <AnimatedRouted>
+              <Route exact path="/" element={<Home />} />
+              <Route
+                exact
+                path="/čišćenje-eksterijera"
+                element={<Exterior />}
+              />
+              <Route exact path="/čišćenje-interijera" element={<Interior />} />
+              <Route
+                exact
+                path="/poliranje-i-zaštita"
+                element={<Polishing />}
+              />
+              <Route exact path="/posebni-paketi" element={<Packages />} />
+              <Route exact path="/o-nama" element={<About />} />
+              <Route exact path="/pravila-privatnosti" element={<Privacy />} />
+              <Route exact path="/uvijeti-korištenja" element={<Terms />} />
+              <Route exact path="/galerija" element={<Gallery />} />
+              <Route exact path="/kontakt" element={<Contact />} />
+              <Route path="*" element={<Error404 />} />
+            </AnimatedRouted>
+            <Footer />
+          </div>
         </div>
       </Suspense>
       <ToastContainer />
