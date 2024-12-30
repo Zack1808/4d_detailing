@@ -61,13 +61,14 @@ const App = () => {
             !loading ? "loaded" : ""
           }`}
         >
-          <GoogleAnalytic
-            hasConsent={hasConsent}
-            consentGiven={handleConsent}
-            menuIsOpen={menuIsOpen}
-          />
           <NavigationBar toggleMenu={toggleMenu} />
           <div className="page-container" ref={containerRef}>
+            <div className="scroll-indicator" />
+            <GoogleAnalytic
+              hasConsent={hasConsent}
+              consentGiven={handleConsent}
+              menuIsOpen={menuIsOpen}
+            />
             <AnimatedRouted>
               <Route exact path="/" element={<Home />} />
               <Route
@@ -89,8 +90,8 @@ const App = () => {
               <Route exact path="/kontakt" element={<Contact />} />
               <Route path="*" element={<Error404 />} />
             </AnimatedRouted>
+            <Footer />
           </div>
-          <Footer />
         </div>
       </Suspense>
       <ToastContainer />
