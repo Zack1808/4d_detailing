@@ -14,7 +14,7 @@ const About = () => {
   useEffect(() => resetScroll(), []);
 
   return (
-    <div className="page-container">
+    <>
       <Header title="O nama" bgImage="/hero-bg-small.avif" />
 
       <main className="about">
@@ -83,7 +83,7 @@ const About = () => {
           <FadeImage src="/packages.avif" alt="Opisna slika" />
         </article>
       </main>
-    </div>
+    </>
   );
 };
 

@@ -86,7 +86,6 @@ body {
 }
 
 .content.menu-open {
-  overflow-y: hidden;
   transform: scale(0.5) translateX(-120%);
 }
 
@@ -127,7 +126,13 @@ span {
 
 .page-container {
   margin-top: var(--header-size);
-  min-height: 100svh;
+  height: 100svh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.menu-open .page-container {
+  overflow-y: hidden;
 }
 
 main {

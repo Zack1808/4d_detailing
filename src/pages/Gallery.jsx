@@ -43,7 +43,7 @@ const Gallery = () => {
   const closeModal = useCallback(() => setModalOpen(false));
 
   return (
-    <div className="page-container">
+    <>
       <Header title="Galerija" bgImage="/hero-bg-big.avif" />
 
       <main className="gallery">
@@ -84,7 +84,7 @@ const Gallery = () => {
           />
         )}
       </Modal>
-    </div>
+    </>
   );
 };
 

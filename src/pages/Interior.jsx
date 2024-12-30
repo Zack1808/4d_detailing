@@ -59,7 +59,7 @@ const Interior = () => {
   useEffect(() => resetScroll(), []);
 
   return (
-    <div className="page-container">
+    <>
       <Header title="Čišćenje interijera" bgImage="/interjer.avif" />
 
       <main className="category">
@@ -91,7 +91,7 @@ const Interior = () => {
           ))}
         </article>
       </main>
-    </div>
+    </>
   );
 };
 
