@@ -58,7 +58,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
             </li>
             <li>
               <Link to="/čišćenje-interijera" onClick={handleClick}>
-                Čišćenje interjera
+                Čišćenje interijera
               </Link>
             </li>
             <li>
@@ -68,7 +68,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
             </li>
             <li>
               <Link to="/posebni-paketi" onClick={handleClick}>
-                Posebni Paketi
+                Posebni paketi
               </Link>
             </li>
           </ul>
