@@ -1,5 +1,4 @@
 .hero-container {
-  margin-top: var(--header-size);
   padding: 0 1rem;
   background-color: var(--primary-color);
   width: 100%;
