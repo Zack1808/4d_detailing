@@ -126,11 +126,6 @@ export const NavigationBar = ({ toggleMenu }) => {
 
     containerRef.current.addEventListener("scroll", handleScroll);
 
-    document.documentElement.style.setProperty(
-      "--header-size",
-      `${headerRef.current.offsetHeight * -1}px`
-    );
-
     return () =>
       containerRef.current.removeEventListener("scroll", handleScroll);
   }, []);
