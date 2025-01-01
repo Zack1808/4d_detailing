@@ -82,7 +82,7 @@
     align-items: center;
     border-radius: 50%;
     height: 1rem;
-    aspect-ratio: 1 / 1;
+    width: 1rem;
     background-color: var(--secondary-color);
     opacity: 0.9;
   }
