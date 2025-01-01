@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaChevronDown } from "react-icons/fa";
 import { GrFormClose } from "react-icons/gr";
@@ -96,8 +96,6 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
 export const NavigationBar = ({ toggleMenu }) => {
   const [scrolledEnough, setScrolledEnough] = useState(false);
 
-  const headerRef = useRef();
-
   const { containerRef } = useScrollPosition();
 
   useEffect(() => {
@@ -126,17 +124,12 @@ export const NavigationBar = ({ toggleMenu }) => {
 
     containerRef.current.addEventListener("scroll", handleScroll);
 
-    document.documentElement.style.setProperty(
-      "--header-size",
-      `${headerRef.current.offsetHeight * -1}px`
-    );
-
     return () =>
       containerRef.current.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header className={scrolledEnough ? "scrolled" : ""} ref={headerRef}>
+    <header className={scrolledEnough ? "scrolled" : ""}>
       <div className="container">
         <Link to="/">
           <img
