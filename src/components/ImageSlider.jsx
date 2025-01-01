@@ -9,10 +9,10 @@ const ImageSlider = React.memo(({ images, className, resetGallery }) => {
   const [transition, setTransition] = useState("0.7s ease-in-out");
 
   const [imageRef1, inView1] = useInView({
-    threshold: 1,
+    threshold: 0.9,
   });
   const [imageRef2, inView2] = useInView({
-    threshold: 1,
+    threshold: 0.9,
   });
 
   useEffect(() => {
