@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 
 const motionDivStyle = {
   position: "fixed",
-  top: 0,  
-  left: 0, 
-  right: 0,  
+  top: 0,
+  left: 0,
+  right: 0,
   bottom: 0,
   backgroundColor: "var(--secondary-color)",
   zIndex: 99999999,
@@ -68,7 +68,6 @@ const transition = (Component) => {
           }}
         >
           <motion.div
-            initial={{ translateX: "-100%" }}
             animate={{
               translateX: "calc(100vw + 14rem)",
               transition: {
