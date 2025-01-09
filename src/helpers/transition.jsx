@@ -30,7 +30,7 @@ const transition = (Component) => {
           exit={{
             opacity: 1,
             visibility: "visible",
-            transition: { duration: 0.1 },
+            transition: { duration: 0.2 },
           }}
           style={{
             ...motionDivStyle,
@@ -38,14 +38,25 @@ const transition = (Component) => {
             justifyContent: "center",
             alignItems: "center",
           }}
-        ></motion.div>
+        >
+          <motion.div
+            style={{
+              backgroundImage: "url('/logo-transition.avif')",
+              width: "14rem",
+              aspectRatio: "16/9",
+              backgroundPosition: "center",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 1, visibility: "visible" }}
           animate={{
             opacity: 0,
             visibility: "hidden",
-            transition: { delay: 0.5 },
+            transition: { delay: 0.3 },
           }}
           exit={{ opacity: 0, visibility: "hidden" }}
           transition={{ duration: 0.2 }}
@@ -57,13 +68,11 @@ const transition = (Component) => {
           }}
         >
           <motion.div
-            initial={{ left: "-14rem", right: "auto" }}
             animate={{
-              left: "auto",
-              right: "-14rem",
+              translateX: "calc(100vw + 14rem)",
               transition: {
                 duration: 0.5,
-                ease: [1, 0.5, 0.5, 1],
+                ease: [1, 0.2, 0.2, 1],
               },
             }}
             style={{
@@ -73,7 +82,6 @@ const transition = (Component) => {
               backgroundPosition: "center",
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
-              position: "absolute",
             }}
           />
         </motion.div>
