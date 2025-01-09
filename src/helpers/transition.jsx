@@ -2,10 +2,15 @@ import { motion } from "framer-motion";
 
 const motionDivStyle = {
   position: "fixed",
-  inset: 0,
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
   backgroundColor: "var(--secondary-color)",
-  zIndex: 999999,
+  zIndex: 99999999,
   transform: "translateZ(0)",
+  width: "100vw",
+  height: "100vh",
 };
 
 const transition = (Component) => {
@@ -17,39 +22,58 @@ const transition = (Component) => {
       <>
         <Component {...props} />
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 0 }}
-          exit={{ scaleX: 1 }}
+          initial={{ opacity: 0, visibility: "hidden" }}
+          animate={{
+            opacity: 0,
+            visibility: "hidden",
+          }}
+          exit={{
+            opacity: 1,
+            visibility: "visible",
+            transition: { duration: 0.1 },
+          }}
+          style={{
+            ...motionDivStyle,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        ></motion.div>
+
+        <motion.div
+          initial={{ opacity: 1, visibility: "visible" }}
+          animate={{
+            opacity: 0,
+            visibility: "hidden",
+            transition: { delay: 0.5 },
+          }}
+          exit={{ opacity: 0, visibility: "hidden" }}
           transition={{ duration: 0.2 }}
           style={{
             ...motionDivStyle,
-            transformOrigin: "left",
-          }}
-        ></motion.div>
-        <motion.div
-          initial={{ scaleX: 1 }}
-          animate={{ scaleX: 0, transition: { delay: 0.5 } }}
-          exit={{ scaleX: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            ...motionDivStyle,
-            transformOrigin: "right",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <motion.img
-            src="/logo-transition.avif"
-            alt="logo"
-            initial={{ translateX: "calc(-100vw - 14rem)" }}
+          <motion.div
+            initial={{ left: "-14rem", right: "auto" }}
             animate={{
-              translateX: "calc(100vw + 14rem)",
-              transition: { duration: 0.8 },
+              left: "auto",
+              right: "-14rem",
+              transition: {
+                duration: 0.5,
+                ease: [1, 0.5, 0.5, 1],
+              },
             }}
             style={{
-              position: "absolute",
+              backgroundImage: "url('/logo-transition.avif')",
               width: "14rem",
+              aspectRatio: "16/9",
+              backgroundPosition: "center",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              position: "absolute",
             }}
           />
         </motion.div>
