@@ -1,4 +1,4 @@
-header {
+header.navigation {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,10 +7,20 @@ header {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 1rem;
+  padding: 1.2rem 1rem 1rem;
   background-color: transparent;
   color: var(--thirtary-color);
   z-index: 999999;
+}
+
+header.navigation::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0;
+  height: 0.1rem;
+  transform-origin: left;
+  background: var(--gold);
+  scale: var(--scale, 0) 1;
 }
 
 header::after {
@@ -258,33 +268,5 @@ header.scrolled .desktop-nav .secondary-links {
     transition: 1s ease;
     max-height: 500px;
     transform: translateZ(0);
-  }
-}
-
-@supports (animation-timeline: scroll()) {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
-  header {
-    padding-top: 1.2rem;
-  }
-
-  header::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 0;
-    height: 0.1rem;
-    transform-origin: left;
-    background: var(--gold);
-    scale: 0 1;
-    animation: grow 1s linear;
-    animation-timeline: scroll(y);
-  }
-
-  @keyframes grow {
-    to {
-      scale: 1 1;
-    }
   }
 }

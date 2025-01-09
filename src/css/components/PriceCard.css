@@ -6,13 +6,11 @@
   padding: 1rem 1rem 3rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   transition: 0.2s ease;
-  position: relative;
-  background-size: 200%;
   overflow: hidden;
   justify-self: center;
-  cursor: pointer;
+  user-select: none;
 }
 
 .price-card::before,
@@ -25,25 +23,6 @@
   transition: 0.3s ease;
 }
 
-.price-card::after {
-  z-index: -3;
-  backdrop-filter: blur(0.04rem);
-  background-color: hsl(0 0 0% /0.5);
-}
-
-.price-card::before {
-  background-image: url("/droplets.png");
-  background-size: 40% 100%;
-}
-
-.price-card:hover::before {
-  opacity: 1;
-}
-
-.price-card:hover::after {
-  opacity: 1;
-}
-
 .price-card header {
   all: unset;
   display: flex;
@@ -51,7 +30,7 @@
   flex-direction: column;
 }
 
-.price-card header p {
+.price-card header h4 {
   font-size: 2rem;
   max-width: 20ch;
 }
@@ -75,23 +54,31 @@
   font-size: 1rem;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.additional {
+  display: flex;
+  flex-direction: column;
+}
+
 .price-card footer {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 .price-card footer span,
 .price-card footer strong {
-  font-size: 1.1rem;
+  font-size: 0.7rem;
 }
 
 .price-card .btn {
   margin-top: auto;
   margin-inline: auto;
-}
-
-.price-card:hover {
-  scale: 1.01;
 }

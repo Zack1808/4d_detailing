@@ -50,7 +50,7 @@
 }
 
 .loaded .about .image-pop {
-  transition-delay: var(--transition-delay, 3.3s);
+  transition-delay: var(--transition-delay, 0.3s);
   opacity: 1;
   scale: 1;
 }

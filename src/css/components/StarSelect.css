@@ -23,7 +23,7 @@
     2% 35%,
     39% 35%
   );
-  background-image: var(--gold);
+  background: var(--gold);
   position: relative;
   will-change: clip-path, background-image;
   -webkit-backface-visibility: hidden;
