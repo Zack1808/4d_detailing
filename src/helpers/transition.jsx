@@ -2,15 +2,10 @@ import { motion } from "framer-motion";
 
 const motionDivStyle = {
   position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
+  inset: 0,
   backgroundColor: "var(--secondary-color)",
-  zIndex: 99999999,
+  zIndex: 999999,
   transform: "translateZ(0)",
-  width: "100vw",
-  height: "100vh",
 };
 
 const transition = (Component) => {
@@ -18,70 +13,46 @@ const transition = (Component) => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       return <Component {...props} />;
 
+    const transitionDuration = window.innerWidth > 700 ? 1.3 : 0.8;
+    const delay = window.innerWidth > 700 ? 1 : 0.7;
+
     return (
       <>
         <Component {...props} />
         <motion.div
-          initial={{ opacity: 0, visibility: "hidden" }}
-          animate={{
-            opacity: 0,
-            visibility: "hidden",
-          }}
-          exit={{
-            opacity: 1,
-            visibility: "visible",
-            transition: { duration: 0.1 },
-          }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 0 }}
+          exit={{ scaleX: 1 }}
+          transition={{ duration: 0.2 }}
           style={{
             ...motionDivStyle,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            transformOrigin: "left",
           }}
-        >
-          <motion.div
-            style={{
-              backgroundImage: "url('/logo-transition.avif')",
-              width: "14rem",
-              aspectRatio: "16/9",
-              backgroundPosition: "center",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-            }}
-          />
-        </motion.div>
-
+        ></motion.div>
         <motion.div
-          initial={{ opacity: 1, visibility: "visible" }}
-          animate={{
-            opacity: 0,
-            visibility: "hidden",
-            transition: { delay: 0.3 },
-          }}
-          exit={{ opacity: 0, visibility: "hidden" }}
-          transition={{ duration: 0.1 }}
+          initial={{ scaleX: 1 }}
+          animate={{ scaleX: 0, transition: { delay: 0.5 } }}
+          exit={{ scaleX: 0 }}
+          transition={{ duration: 0.5 }}
           style={{
             ...motionDivStyle,
+            transformOrigin: "right",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <motion.div
+          <motion.img
+            src="/logo-transition.avif"
+            alt="logo"
+            initial={{ translateX: "calc(-100vw - 14rem)" }}
             animate={{
               translateX: "calc(100vw + 14rem)",
-              transition: {
-                duration: 0.5,
-                ease: [1, 0, 0.5, 1],
-              },
+              transition: { duration: transitionDuration },
             }}
             style={{
-              backgroundImage: "url('/logo-transition.avif')",
+              position: "absolute",
               width: "14rem",
-              aspectRatio: "16/9",
-              backgroundPosition: "center",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
             }}
           />
         </motion.div>
