@@ -18,7 +18,7 @@ const CategoryCard = React.memo(({ to, title, imageUrl, ...rest }) => {
       {...rest}
     >
       <img src={imageUrl} alt="Catergory card" />
-      <span>{title}</span>
+      <h4>{title}</h4>
     </Link>
   );
 });

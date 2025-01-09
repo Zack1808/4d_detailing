@@ -79,7 +79,7 @@ const Gallery = () => {
               key={`gallery-item-${index + 1}`}
               title={galleryItem.title}
               imageUrl={galleryItem.images[0]}
-              style={{ "--transition-delay": `${0.07 * index + 1.2}s` }}
+              style={{ "--transition-delay": `${0.07 * index + 0.3}s` }}
               onClick={(event) => {
                 openModal(event, index);
               }}

@@ -63,7 +63,6 @@ const App = () => {
         >
           <div className="page-container" ref={containerRef}>
             <NavigationBar toggleMenu={toggleMenu} />
-            <div className="scroll-indicator" />
             <GoogleAnalytic
               hasConsent={hasConsent}
               consentGiven={handleConsent}

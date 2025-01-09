@@ -6,12 +6,6 @@ const Loading = ({ loading, setLoading }) => {
   useEffect(() => {
     return () => {
       setLoading && setLoading(false);
-      setTimeout(() => {
-        document.documentElement.style.setProperty(
-          "--transition-delay",
-          `${0}s`
-        );
-      }, 3300);
     };
   }, []);
 

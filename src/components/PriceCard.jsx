@@ -7,28 +7,34 @@ const PriceCard = React.memo(
     return (
       <div className="price-card">
         <header>
-          <p>{title}</p>
-          <strong>
-            <small>€</small>
-            {price}
-          </strong>
+          <h4>{title}</h4>
+          <h4>
+            <strong>
+              <small>€</small>
+              {price}
+            </strong>
+          </h4>
         </header>
-        <ul>
-          {services.map((service, index) => (
-            <li key={`service-item-${index + 1}`}>{service}</li>
-          ))}
-        </ul>
+        <div className="main">
+          <ul>
+            {services.map((service, index) => (
+              <li key={`service-item-${index + 1}`}>{service}</li>
+            ))}
+          </ul>
+          <div className="additional">
+            {priceSuv && (
+              <span>
+                <strong>Cijena za SUV:</strong> +€{priceSuv}
+              </span>
+            )}
+            {priceTransporter && (
+              <span>
+                <strong>Cijena za Transporter:</strong> +€{priceTransporter}
+              </span>
+            )}
+          </div>
+        </div>
         <footer>
-          {priceSuv && (
-            <span>
-              <strong>Cijena za SUV:</strong> +€{priceSuv}
-            </span>
-          )}
-          {priceTransporter && (
-            <span>
-              <strong>Cijena za Transporter:</strong> +€{priceTransporter}
-            </span>
-          )}
           {info && (
             <span>
               <strong>Info:</strong> {info}

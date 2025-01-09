@@ -34,7 +34,8 @@
   transform: scale(2);
 }
 
-.category-card span {
+.category-card h4 {
+  color: var(--thirtary-color);
   max-width: 10ch;
   font-weight: bold;
   margin: 0;
@@ -75,7 +76,7 @@
 .category-card::after {
   background: linear-gradient(
     0deg,
-    hsl(from var(--primary-color) h s l / 0.9),
+    hsl(from var(--primary-color) h s l / 0.9) 10%,
     transparent
   );
   z-index: -2;
@@ -92,8 +93,8 @@
   scale: 2;
 }
 
-.category-card:hover span,
-.category-card:focus span {
+.category-card:hover h4,
+.category-card:focus h4 {
   transform: translateY(-10px);
 }
 
