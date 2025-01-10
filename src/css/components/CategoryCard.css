@@ -65,7 +65,7 @@
 .category-card.category-visible::before {
   background-image: linear-gradient(
     0deg,
-    hsl(41, 74%, 55%, 0.5),
+    hsl(from var(--gold) h s l / 0.6),
     transparent 70%
   );
   transform-origin: bottom;
