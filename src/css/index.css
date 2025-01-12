@@ -33,16 +33,8 @@
   --accent-color: #2a2e2e;
   --accent-color2: hsl(180, 11%, 15%);
 
-  --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #c99270, #e9c156);
-  --silver: linear-gradient(
-    40deg,
-    #8d95a2,
-    #d1d3d4,
-    #ffffff,
-    #7a797a,
-    #f1f2f2,
-    #d1d3d4
-  );
+  --gold: #c5a939;
+  --silver: #a6b0b5;
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
@@ -94,9 +86,7 @@ h6 {
 h1,
 h2,
 h3 {
-  background-image: var(--gold);
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
 }
 
 h1 {
