@@ -15,7 +15,7 @@ const Polishing = () => {
     () => [
       {
         title: "Poliranje farova",
-        price: "20",
+        price: "30",
         services: [
           "Brušenje i poliranje",
           "Dodavanje zaštitnog premaza i boost premaza",
