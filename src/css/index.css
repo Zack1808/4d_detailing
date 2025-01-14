@@ -7,6 +7,22 @@
 }
 
 @font-face {
+  font-family: "Mentor Black Regular";
+  src: url("/fonts/Mentor-Black-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mentor Black Italic";
+  src: url("/fonts/Mentor-Black-Italic.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Lato";
   src: url("/fonts/Lato-Regular.ttf");
   font-weight: normal;
@@ -80,12 +96,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Ibarra";
+  font-family: "Mentor Black Regular";
 }
 
 h1,
 h2,
 h3 {
+  font-family: "Mentor Black Italic";
   color: var(--gold);
 }
 
