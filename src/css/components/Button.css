@@ -22,6 +22,7 @@
   background: var(--gold);
   color: var(--primary-color);
   background-position: 0;
+  background-size: 200%;
   transition: 0.3s ease;
 }
 
@@ -29,5 +30,6 @@
   background: var(--silver);
   color: var(--primary-color);
   background-position: 0;
+  background-size: 200%;
   transition: 0.3s ease;
 }
