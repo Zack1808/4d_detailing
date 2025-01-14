@@ -21,7 +21,6 @@
 .primary-btn {
   background: var(--gold);
   color: var(--primary-color);
-  background-size: 200%;
   background-position: 0;
   transition: 0.3s ease;
 }
@@ -29,7 +28,6 @@
 .secondary-btn {
   background: var(--silver);
   color: var(--primary-color);
-  background-size: 200%;
   background-position: 0;
   transition: 0.3s ease;
 }
