@@ -49,7 +49,7 @@
   --accent-color: #2a2e2e;
   --accent-color2: hsl(180, 11%, 15%);
 
-  --gold: linear-gradient(135deg, #e0c763, #c5a939, #b89c36);
+  --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #c99270, #e9c156);
   --gold-transparent: linear-gradient(
     0deg,
     hsl(48, 67%, 63%, 0.6),
@@ -57,7 +57,15 @@
     hsl(47, 55%, 47%, 0.4),
     transparent 70%
   );
-  --silver: linear-gradient(135deg, #8b959a, #a6b0b5, #6e787d);
+  --silver: linear-gradient(
+    40deg,
+    #8d95a2,
+    #d1d3d4,
+    #ffffff,
+    #7a797a,
+    #f1f2f2,
+    #d1d3d4
+  );
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
