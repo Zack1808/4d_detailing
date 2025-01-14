@@ -7,6 +7,22 @@
 }
 
 @font-face {
+  font-family: "Mentor Black Regular";
+  src: url("/fonts/Mentor-Black-Regular.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mentor Black Italic";
+  src: url("/fonts/Mentor-Black-Italic.otf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Lato";
   src: url("/fonts/Lato-Regular.ttf");
   font-weight: normal;
@@ -33,8 +49,15 @@
   --accent-color: #2a2e2e;
   --accent-color2: hsl(180, 11%, 15%);
 
-  --gold: #c5a939;
-  --silver: #a6b0b5;
+  --gold: linear-gradient(135deg, #e0c763, #c5a939, #b89c36);
+  --gold-transparent: linear-gradient(
+    0deg,
+    hsl(48, 67%, 63%, 0.6),
+    hsl(48, 55%, 50%, 0.5),
+    hsl(47, 55%, 47%, 0.4),
+    transparent 70%
+  );
+  --silver: linear-gradient(135deg, #8b959a, #a6b0b5, #6e787d);
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
@@ -80,13 +103,16 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Ibarra";
+  font-family: "Mentor Black Regular";
 }
 
 h1,
 h2,
 h3 {
-  color: var(--gold);
+  font-family: "Mentor Black Italic";
+  background: var(--gold);
+  background-clip: text;
+  color: transparent;
 }
 
 h1 {

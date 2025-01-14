@@ -63,11 +63,7 @@
 }
 
 .category-card.category-visible::before {
-  background-image: linear-gradient(
-    0deg,
-    hsl(from var(--gold) h s l / 0.6),
-    transparent 70%
-  );
+  background-image: var(--gold-transparent);
   transform-origin: bottom;
   transform: scaleY(0);
   transition: 0.2s ease;
