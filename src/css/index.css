@@ -1,34 +1,4 @@
-@font-face {
-  font-family: "Ibarra";
-  src: url("/fonts/IbarraRealNova-Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Mentor Black Regular";
-  src: url("/fonts/Mentor-Black-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Mentor Black Italic";
-  src: url("/fonts/Mentor-Black-Italic.otf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Lato";
-  src: url("/fonts/Lato-Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 *,
 *::before,
@@ -49,15 +19,16 @@
   --accent-color: #2a2e2e;
   --accent-color2: hsl(180, 11%, 15%);
 
-  --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #c99270, #e9c156);
+  /* --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #c99270, #e9c156); */
+  --gold: linear-gradient(45deg, #b89f3d, #c2ae64, #a37e2a, #8d6d54, #b89f3d);
   --gold-transparent: linear-gradient(
     0deg,
-    hsl(48, 67%, 63%, 0.6),
-    hsl(48, 55%, 50%, 0.5),
-    hsl(47, 55%, 47%, 0.4),
+    rgba(184, 159, 61, 0.6),
+    rgba(194, 174, 100, 0.5),
+    rgba(163, 126, 42, 0.4),
     transparent 70%
   );
-  --silver: linear-gradient(
+  /* --silver: linear-gradient(
     40deg,
     #8d95a2,
     #d1d3d4,
@@ -65,7 +36,8 @@
     #7a797a,
     #f1f2f2,
     #d1d3d4
-  );
+  ); */
+  --silver: linear-gradient(40deg, #7f848c, #a6aaaf, #727375, #5e5f60, #7f848c);
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;
@@ -73,8 +45,9 @@
 }
 
 body {
-  font-family: "Lato";
+  font-family: "Lato", serif;
   background-color: var(--secondary-color);
+  font-weight: 400;
   overflow: hidden;
   max-width: 100vw;
 }
@@ -111,13 +84,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Mentor Black Regular";
+  font-family: "Crimson Pro", serif;
+  font-weight: 700;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Mentor Black Italic";
+  font-family: "Crimson Pro", serif;
+  font-style: italic;
   background: var(--gold);
   background-clip: text;
   color: transparent;
