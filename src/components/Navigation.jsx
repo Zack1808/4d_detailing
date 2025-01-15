@@ -96,7 +96,7 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
 export const NavigationBar = ({ toggleMenu }) => {
   const [scrolledEnough, setScrolledEnough] = useState(false);
 
-  const { containerRef } = useScrollPosition();
+  const { containerRef, resetScroll } = useScrollPosition();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,7 +138,7 @@ export const NavigationBar = ({ toggleMenu }) => {
   return (
     <header className={`navigation ${scrolledEnough ? "scrolled" : ""}`}>
       <div className="container">
-        <Link to="/">
+        <Link to="/" onClick={resetScroll}>
           <img
             className="navbar-logo"
             width="13rem"
