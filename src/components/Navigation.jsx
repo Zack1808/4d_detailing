@@ -138,7 +138,7 @@ export const NavigationBar = ({ toggleMenu }) => {
   return (
     <header className={`navigation ${scrolledEnough ? "scrolled" : ""}`}>
       <div className="container">
-        <Link to="/" onClick={() => resetScroll("smooth")}>
+        <Link to="/">
           <img
             className="navbar-logo"
             width="13rem"
