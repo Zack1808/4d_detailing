@@ -65,6 +65,7 @@ const Home = () => {
   );
 
   useEffect(() => {
+    scrollTo(1);
     getComments();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
