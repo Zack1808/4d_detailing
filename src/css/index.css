@@ -1,26 +1,28 @@
-@font-face {
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+/* @font-face {
   font-family: "Ibarra";
   src: url("/fonts/IbarraRealNova-Regular.ttf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "Mentor Black Regular";
   src: url("/fonts/Mentor-Black-Regular.otf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-}
+} */
 
-@font-face {
+/* @font-face {
   font-family: "Mentor Black Italic";
   src: url("/fonts/Mentor-Black-Italic.otf");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 @font-face {
   font-family: "Lato";
@@ -30,7 +32,7 @@
   font-display: swap;
 }
 
-@font-face {
+/* @font-face {
   font-family: "Crimson Pro Italic";
   src: url("/fonts/CrimsonPro-BoldItalic.ttf") format("truetype"),
     url("/fonts/CrimsonPro-BoldItalic.woff") format("woff"),
@@ -46,7 +48,7 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 *,
 *::before,
@@ -132,12 +134,14 @@ h4,
 h5,
 h6 {
   font-family: "Crimson Pro";
+  font-weight: 600;
+  font-style: italic;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Crimson Pro Italic" !important;
+  font-family: "Crimson Pro";
   background: var(--gold);
   background-clip: text;
   color: transparent;
