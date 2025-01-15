@@ -32,7 +32,9 @@
 
 @font-face {
   font-family: "Crimson Pro Italic";
-  src: url("/fonts/CrimsonPro-BoldItalic.ttf");
+  src: url("/fonts/CrimsonPro-BoldItalic.ttf") format("truetype"),
+    url("/fonts/CrimsonPro-BoldItalic.woff") format("woff"),
+    url("/fonts/CrimsonPro-BoldItalic.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
