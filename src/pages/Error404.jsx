@@ -11,7 +11,7 @@ import "../css/pages/Error404.css";
 const Error404 = () => {
   const { resetScroll } = useScrollPosition();
 
-  useEffect(() => resetScroll());
+  useEffect(() => () => resetScroll());
 
   return (
     <div className="page-not-found">

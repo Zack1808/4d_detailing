@@ -30,7 +30,6 @@ const Gallery = () => {
   ];
 
   useEffect(() => {
-    resetScroll();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
 
@@ -45,6 +44,7 @@ const Gallery = () => {
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(meta);
+      resetScroll();
     };
   }, []);
 

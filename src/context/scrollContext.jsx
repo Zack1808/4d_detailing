@@ -23,11 +23,15 @@ export const ScrollProvider = ({ children }) => {
     [containerRef.current]
   );
 
-  const resetScroll = useCallback(() => {
-    containerRef.current.scrollTo({
-      top: containerRef.current.scrollTop * -1,
-    });
-  }, [containerRef.current]);
+  const resetScroll = useCallback(
+    (behavior = "auto") => {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollTop * -1,
+        behavior,
+      });
+    },
+    [containerRef.current]
+  );
 
   return (
     <ScrollContext.Provider value={{ containerRef, scrollTo, resetScroll }}>

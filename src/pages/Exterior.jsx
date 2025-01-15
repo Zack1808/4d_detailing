@@ -51,7 +51,6 @@ const Exterior = () => {
   );
 
   useEffect(() => {
-    resetScroll();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
 
@@ -66,6 +65,7 @@ const Exterior = () => {
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(meta);
+      resetScroll();
     };
   }, []);
 

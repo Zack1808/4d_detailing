@@ -65,7 +65,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    resetScroll();
+    scrollTo(1);
     getComments();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
@@ -81,6 +81,7 @@ const Home = () => {
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(meta);
+      resetScroll();
     };
   }, []);
 
