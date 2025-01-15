@@ -64,3 +64,13 @@
     min-width: 300px;
   }
 }
+
+@media (width < 62.5rem) {
+  .infinite-scrooler[data-animated="true"] .infinte-scroller-content:hover {
+    animation-play-state: running;
+  }
+
+  .infinite-scrooler[data-animated="true"] .infinte-scroller-content:active {
+    animation-play-state: paused;
+  }
+}
