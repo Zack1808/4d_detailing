@@ -2,6 +2,7 @@
   width: 100%;
   max-width: 93.75rem;
   margin-top: 1rem;
+  user-select: none;
 }
 
 .infinte-scroller-content {
@@ -62,5 +63,15 @@
 @media (width < 25rem) {
   .infinte-scroller-content li {
     min-width: 300px;
+  }
+}
+
+@media (width < 62.5rem) {
+  .infinite-scrooler[data-animated="true"] .infinte-scroller-content:hover {
+    animation-play-state: running;
+  }
+
+  .infinite-scrooler[data-animated="true"] .infinte-scroller-content:active {
+    animation-play-state: paused;
   }
 }
