@@ -30,6 +30,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Crimson Pro Italic";
+  src: url("/fonts/CrimsonPro-SemiBoldItalic.ttf");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Crimson Pro";
+  src: url("/fonts/CrimsonPro-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -113,13 +129,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Mentor Black Regular";
+  font-family: "Crimson Pro";
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Mentor Black Italic";
+  font-family: "Crimson Pro Italic";
   background: var(--gold);
   background-clip: text;
   color: transparent;
