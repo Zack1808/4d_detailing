@@ -1,54 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap");
-
-/* @font-face {
-  font-family: "Ibarra";
-  src: url("/fonts/IbarraRealNova-Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-} */
-
-/* @font-face {
-  font-family: "Mentor Black Regular";
-  src: url("/fonts/Mentor-Black-Regular.otf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-} */
-
-/* @font-face {
-  font-family: "Mentor Black Italic";
-  src: url("/fonts/Mentor-Black-Italic.otf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-} */
-
-@font-face {
-  font-family: "Lato";
-  src: url("/fonts/Lato-Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* @font-face {
-  font-family: "Crimson Pro Italic";
-  src: url("/fonts/CrimsonPro-BoldItalic.ttf") format("truetype"),
-    url("/fonts/CrimsonPro-BoldItalic.woff") format("woff"),
-    url("/fonts/CrimsonPro-BoldItalic.woff2") format("woff2");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Crimson Pro";
-  src: url("/fonts/CrimsonPro-SemiBold.ttf");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-} */
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
 *,
 *::before,
@@ -95,8 +45,9 @@
 }
 
 body {
-  font-family: "Lato";
+  font-family: "Lato", serif;
   background-color: var(--secondary-color);
+  font-weight: 400;
   overflow: hidden;
   max-width: 100vw;
 }
@@ -133,15 +84,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Crimson Pro";
+  font-family: "Crimson Pro", serif;
   font-weight: 600;
-  font-style: italic;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Crimson Pro";
+  font-family: "Crimson Pro", serif;
+  font-style: italic;
   background: var(--gold);
   background-clip: text;
   color: transparent;
