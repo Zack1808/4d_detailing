@@ -121,7 +121,6 @@ span {
 }
 
 .page-container {
-  margin-top: var(--header-size, 0);
   height: 100svh;
   overflow-y: auto;
   overflow-x: hidden;
