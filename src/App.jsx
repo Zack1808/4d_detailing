@@ -61,8 +61,8 @@ const App = () => {
             !loading ? "loaded" : ""
           }`}
         >
+          <NavigationBar toggleMenu={toggleMenu} />
           <div className="page-container" ref={containerRef}>
-            <NavigationBar toggleMenu={toggleMenu} />
             <GoogleAnalytic
               hasConsent={hasConsent}
               consentGiven={handleConsent}
