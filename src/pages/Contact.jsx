@@ -19,7 +19,6 @@ const Contact = () => {
   const formRef = useRef(null);
 
   useEffect(() => {
-    resetScroll();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
 
@@ -34,6 +33,7 @@ const Contact = () => {
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(meta);
+      resetScroll();
     };
   }, []);
 

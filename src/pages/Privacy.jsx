@@ -12,7 +12,6 @@ const Privacy = () => {
   const { resetScroll } = useScrollPosition();
 
   useEffect(() => {
-    resetScroll();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
 
@@ -27,6 +26,7 @@ const Privacy = () => {
     return () => {
       document.head.removeChild(link);
       document.head.removeChild(meta);
+      resetScroll();
     };
   }, []);
 
