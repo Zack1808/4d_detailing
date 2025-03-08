@@ -14,13 +14,27 @@
 
 :root {
   --secondary-color: hsl(180, 40%, 4%);
-  --primary-color: #101414;
+  --primary-color: hsl(180, 11%, 7%);
   --thirtary-color: #d2d4d5;
   --accent-color: #2a2e2e;
   --accent-color2: hsl(180, 11%, 15%);
 
-  /* --gold: linear-gradient(45deg, #e9c156, #ffffaa, #e1ab39, #c99270, #e9c156); */
-  --gold: linear-gradient(45deg, #b89f3d, #c2ae64, #a37e2a, #8d6d54, #b89f3d);
+  /* --gold: linear-gradient(
+    45deg,
+    hsl(44, 77%, 63%),
+    hsl(60, 100%, 83%),
+    hsl(41, 74%, 55%),
+    hsl(23, 45%, 61%),
+    hsl(44, 77%, 63%)
+  ); */
+  --gold: linear-gradient(
+    -45deg,
+    hsl(48, 50%, 48%),
+    hsl(26, 25%, 44%),
+    hsl(42, 59%, 40%),
+    hsl(47, 44%, 58%),
+    hsl(48, 50%, 48%)
+  );
   --gold-transparent: linear-gradient(
     0deg,
     rgba(184, 159, 61, 0.6),
@@ -37,7 +51,14 @@
     #f1f2f2,
     #d1d3d4
   ); */
-  --silver: linear-gradient(40deg, #7f848c, #a6aaaf, #727375, #5e5f60, #7f848c);
+  --silver: linear-gradient(
+    -40deg,
+    hsl(217, 5%, 52%),
+    hsl(210, 1%, 37%),
+    hsl(220, 1%, 45%),
+    hsl(213, 5%, 67%),
+    hsl(217, 5%, 52%)
+  );
 
   --title-small: 1.5rem;
   --title-regular: 2.25rem;

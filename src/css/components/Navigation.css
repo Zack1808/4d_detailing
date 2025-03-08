@@ -45,14 +45,14 @@ header .container {
 }
 
 .navbar-logo {
-  width: 13rem;
-  height: 3.64rem;
+  width: 13.5rem;
+  height: 6rem;
   transition: width 0.3s ease, height 0.3s ease;
 }
 
 header.scrolled .navbar-logo {
-  width: 10rem;
-  height: 2.8rem;
+  width: 8.5rem;
+  height: 3.64rem;
 }
 
 .menu-icon,
@@ -196,8 +196,8 @@ header.scrolled .desktop-nav .secondary-links {
   }
 
   .navbar-logo {
-    width: 10rem;
-    height: 2.8rem;
+    width: 8.5rem;
+    height: 3.64rem;
     transition: 0.5s ease;
   }
 
