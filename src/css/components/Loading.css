@@ -26,7 +26,7 @@
 .loading-logo {
   width: 16rem;
   aspect-ratio: 16 / 8;
-  background-image: url("/logo-transition.avif");
+  background-image: url("/logo.svg");
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
