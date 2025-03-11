@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
-import logo from "/logo.svg";
+import logo from "/logo.png";
 
 import "../css/components/Footer.css";
 
