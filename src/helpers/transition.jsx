@@ -68,8 +68,11 @@ const transition = (Component) => {
           }}
         >
           <motion.div
-            initial={{ translateX: 0 }}
-            exit={{ translateX: 0 }}
+            initial={{
+              translateX: 0,
+              transition: { delay: 0, duration: 0.01 },
+            }}
+            exit={{ translateX: 0, transition: { delay: 0, duration: 0.01 } }}
             animate={{
               translateX: "calc(100vw + 14rem)",
               transition: {
