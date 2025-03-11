@@ -5,7 +5,7 @@ import { GrFormClose } from "react-icons/gr";
 
 import { useScrollPosition } from "../context/scrollContext";
 
-import logo from "/logo.svg";
+import logo from "/logo.png";
 
 import "../css/components/Navigation.css";
 
