@@ -5,7 +5,8 @@ import { GrFormClose } from "react-icons/gr";
 
 import { useScrollPosition } from "../context/scrollContext";
 
-import logo from "/logo.png";
+import logoPng from "/logo.png";
+import logoSvg from "/logo.svg";
 
 import "../css/components/Navigation.css";
 
@@ -149,13 +150,16 @@ export const NavigationBar = ({ toggleMenu }) => {
     >
       <div className="container">
         <Link to="/">
-          <img
-            className="navbar-logo"
-            width="13rem"
-            height="3.64rem"
-            src={logo}
-            alt="4D Detailing logo"
-          />
+          <picture>
+            <source srcSet={logoSvg} media="(min-width: 62.5rem)" />
+            <img
+              className="navbar-logo"
+              width="13rem"
+              height="3.64rem"
+              src={logoPng}
+              alt="4D Detailing logo"
+            />
+          </picture>
         </Link>
         <Navbar />
         <button

@@ -12,7 +12,8 @@ import {
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
-import logo from "/logo.png";
+import logoPng from "/logo.png";
+import logoSvg from "/logo.svg";
 
 import "../css/components/Footer.css";
 
@@ -25,7 +26,10 @@ const Footer = React.memo(() => {
         <div className="footer-about-us">
           <strong className="visually-hidden">O nama</strong>
           <Link to="/" className="logo">
-            <img src={logo} alt="page logo" />
+            <picture>
+              <source srcSet={logoSvg} media="(min-width: 62.5rem)" />
+              <img src={logoPng} alt="page logo" />
+            </picture>
           </Link>
           <p>
             Profesionalne usluge čišćenja i poliranja vozila.
