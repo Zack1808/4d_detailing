@@ -59,7 +59,7 @@ const transition = (Component) => {
             transition: { delay: 0.3 },
           }}
           exit={{ opacity: 0, visibility: "hidden" }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.3 }}
           style={{
             ...motionDivStyle,
             display: "flex",
@@ -70,13 +70,12 @@ const transition = (Component) => {
           <motion.div
             initial={{
               translateX: 0,
-              transition: { delay: 0, duration: 0.001 },
+              transition: { delay: 0, duration: 0 },
             }}
-            exit={{ translateX: 0, transition: { delay: 0, duration: 0.001 } }}
+            exit={{ translateX: 0, transition: { delay: 0, duration: 0 } }}
             animate={{
               translateX: "calc(100vw + 14rem)",
               transition: {
-                delay: 0.1,
                 duration: 0.6,
                 ease: [1, 0.2, 0.2, 1],
               },
