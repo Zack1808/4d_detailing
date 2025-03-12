@@ -8,6 +8,14 @@ const InfiniteScroller = ({ children }) => {
   const [currScroll, setCurrScroll] = useState(2);
   const [transition, setTransition] = useState("0.35s ease-in-out");
 
+  const getElementWidthInRem = () => {
+    const widthInPx = window.innerWidth;
+    const htmlFontSize = parseFloat(
+      getComputedStyle(document.documentElement).fontSize
+    );
+    return widthInPx / htmlFontSize;
+  };
+
   const [commentRef1, inView1] = useInView({
     threshold: 1,
   });
@@ -42,7 +50,8 @@ const InfiniteScroller = ({ children }) => {
   useEffect(() => {
     if (inView2) {
       setTransition("0s");
-      setCurrScroll(2);
+      if (getElementWidthInRem() > 50) setCurrScroll(2);
+      else setCurrScroll(3);
     }
   }, [inView2]);
 
