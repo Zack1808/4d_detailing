@@ -102,4 +102,4 @@ const Packages = () => {
   );
 };
 
-export default transition(Packages);
+export default Packages;

@@ -112,4 +112,4 @@ const Interior = () => {
   );
 };
 
-export default transition(Interior);
+export default Interior;

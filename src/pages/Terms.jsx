@@ -128,4 +128,4 @@ const Terms = () => {
   );
 };
 
-export default transition(Terms);
+export default Terms;

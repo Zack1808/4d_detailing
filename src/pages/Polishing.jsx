@@ -140,4 +140,4 @@ const Polishing = () => {
   );
 };
 
-export default transition(Polishing);
+export default Polishing;

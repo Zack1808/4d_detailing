@@ -31,4 +31,4 @@ const Error404 = () => {
   );
 };
 
-export default transition(Error404);
+export default Error404;

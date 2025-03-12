@@ -105,4 +105,4 @@ const Exterior = () => {
   );
 };
 
-export default transition(Exterior);
+export default Exterior;
