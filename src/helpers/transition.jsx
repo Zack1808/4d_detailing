@@ -76,6 +76,7 @@ const transition = (Component) => {
             animate={{
               translateX: "calc(100vw + 14rem)",
               transition: {
+                delay: 0.1,
                 duration: 0.6,
                 ease: [1, 0.2, 0.2, 1],
               },
