@@ -70,13 +70,13 @@ const transition = (Component) => {
           <motion.div
             initial={{
               translateX: 0,
-              transition: { delay: 0, duration: 0.01 },
+              transition: { delay: 0, duration: 0.001 },
             }}
-            exit={{ translateX: 0, transition: { delay: 0, duration: 0.01 } }}
+            exit={{ translateX: 0, transition: { delay: 0, duration: 0.001 } }}
             animate={{
               translateX: "calc(100vw + 14rem)",
               transition: {
-                duration: 0.5,
+                duration: 0.6,
                 ease: [1, 0.2, 0.2, 1],
               },
             }}
