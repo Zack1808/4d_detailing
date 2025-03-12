@@ -105,4 +105,4 @@ const Gallery = () => {
   );
 };
 
-export default transition(Gallery);
+export default Gallery;

@@ -163,4 +163,4 @@ const Privacy = () => {
   );
 };
 
-export default transition(Privacy);
+export default Privacy;

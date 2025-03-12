@@ -28,8 +28,10 @@ import {
 import "../css/pages/Home.css";
 
 const Home = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modal1IsOpen, setModal1IsOpen] = useState(false);
+  const [modal2IsOpen, setModal2IsOpen] = useState(false);
   const [starCount, setStarCount] = useState(1);
+  const [selected, setSelected] = useState(0);
 
   const mainRef = useRef();
   const reviewFormRef = useRef();
@@ -98,13 +100,19 @@ const Home = () => {
   }, [setStarCount, reviewFormRef.current]);
 
   const handleOpenModal = useCallback(() => {
-    setModalIsOpen(true);
-  }, [setModalIsOpen]);
+    setModal1IsOpen(true);
+  }, [setModal1IsOpen]);
 
   const handleCloseModal = useCallback(() => {
-    setModalIsOpen(false);
+    setModal1IsOpen(false);
+    setModal2IsOpen(false);
     clearReviewForm();
-  }, [setModalIsOpen, clearReviewForm]);
+  }, [setModal1IsOpen, clearReviewForm]);
+
+  const handleSelected = (index) => {
+    setSelected(index);
+    setModal2IsOpen(true);
+  };
 
   const sendReview = useCallback(
     (event) => {
@@ -156,15 +164,21 @@ const Home = () => {
           </Button>
 
           <InfiniteScroller>
-            {comments.map((comment) => (
-              <CommentDisplay {...comment} key={comment.user} />
+            {comments.map((comment, index) => (
+              <CommentDisplay
+                {...comment}
+                index={index}
+                key={comment.user}
+                limitedHeight
+                handleSelect={handleSelected}
+              />
             ))}
           </InfiniteScroller>
         </article>
       </main>
 
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={modal1IsOpen}
         title={"Dodaj recenziju"}
         closeModal={handleCloseModal}
       >
@@ -206,8 +220,24 @@ const Home = () => {
           </div>
         </form>
       </Modal>
+
+      <Modal
+        isOpen={modal2IsOpen}
+        title={"Recenzija"}
+        closeModal={handleCloseModal}
+        noBg
+      >
+        {comments.length && (
+          <CommentDisplay
+            user={comments[selected].user}
+            comment={comments[selected].comment}
+            stars={comments[selected].stars}
+            handleSelect={handleSelected}
+          />
+        )}
+      </Modal>
     </>
   );
 };
 
-export default transition(Home);
+export default Home;

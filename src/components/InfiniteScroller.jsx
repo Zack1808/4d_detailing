@@ -1,40 +1,83 @@
-import { useRef, useEffect, Children, useMemo } from "react";
+import { Children, useMemo, useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useInView } from "react-intersection-observer";
 
 import "../css/components/InfiniteScroller.css";
 
 const InfiniteScroller = ({ children }) => {
-  const scrollRef = useRef(null);
+  const [currScroll, setCurrScroll] = useState(2);
+  const [transition, setTransition] = useState("0.35s ease-in-out");
+
+  const getElementWidthInRem = () => {
+    const widthInPx = window.innerWidth;
+    const htmlFontSize = parseFloat(
+      getComputedStyle(document.documentElement).fontSize
+    );
+    return widthInPx / htmlFontSize;
+  };
+
+  const [commentRef1, inView1] = useInView({
+    threshold: 1,
+  });
+  const [commentRef2, inView2] = useInView({
+    threshold: 1,
+  });
 
   const childrenArray = useMemo(() => Children.toArray(children), [children]);
 
-  useEffect(() => {
-    if (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      !scrollRef.current
-    )
-      return;
+  const style = {
+    transform: `translateX(calc(-${100 * currScroll}%))`,
+    transition,
+  };
 
-    scrollRef.current.setAttribute("data-animated", true);
-  }, []);
+  const handleNext = () => {
+    setCurrScroll((prevState) => prevState + 1);
+    setTransition("0.35s ease-in-out");
+  };
+
+  const handlePrevious = () => {
+    setCurrScroll((prevState) => prevState - 1);
+    setTransition("0.35s ease-in-out");
+  };
+
+  useEffect(() => {
+    if (inView1) {
+      setTransition("0s");
+      setCurrScroll(childrenArray.length);
+    }
+  }, [inView1]);
+
+  useEffect(() => {
+    if (inView2) {
+      setTransition("0s");
+      if (getElementWidthInRem() > 50) setCurrScroll(2);
+      else setCurrScroll(3);
+    }
+  }, [inView2]);
 
   return (
-    <div className="infinite-scrooler" ref={scrollRef}>
-      <ul
-        className="infinte-scroller-content"
-        style={{
-          "--scrolling-duration": `${20 * children.length}s`,
-        }}
-      >
-        {childrenArray.concat(childrenArray).map((child, index) => (
-          <li
-            key={index}
-            className={index >= childrenArray.length ? "scroller-hidden" : ""}
-            aria-hidden={index >= childrenArray.length ? "true" : "false"}
-          >
+    <div className="infinite-scrooler">
+      <button className="comment-prev" onClick={handlePrevious}>
+        <FaChevronLeft />
+      </button>
+      <ul className="infinte-scroller-content">
+        <li style={style} ref={commentRef1}>
+          {childrenArray[childrenArray.length - 2]}
+        </li>
+        <li style={style}>{childrenArray[childrenArray.length - 1]}</li>
+        {childrenArray.map((child, index) => (
+          <li style={style} key={index}>
             {child}
           </li>
         ))}
+        <li style={style}>{childrenArray[0]}</li>
+        <li style={style} ref={commentRef2}>
+          {childrenArray[1]}
+        </li>
       </ul>
+      <button className="comment-next" onClick={handleNext}>
+        <FaChevronRight />
+      </button>
     </div>
   );
 };

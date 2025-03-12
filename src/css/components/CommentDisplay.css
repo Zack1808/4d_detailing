@@ -8,20 +8,30 @@
   border-radius: 5px;
 }
 
+p.limited {
+  max-height: 12.5ch;
+  overflow: hidden;
+  position: relative;
+}
+
+p.elipsis::before {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--secondary-color) 25%);
+  content: "Čitaj više...";
+  bottom: 0;
+  padding-left: 4rem;
+  right: 0;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 blockquote {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-width: 60ch;
 }
 
 blockquote footer {
   color: var(--thirtary-color);
   font-weight: bold;
-}
-
-@media (width < 46.75rem) {
-  blockquote {
-    min-width: 30ch;
-  }
 }

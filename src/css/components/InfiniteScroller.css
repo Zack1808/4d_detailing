@@ -3,27 +3,63 @@
   max-width: 93.75rem;
   margin-top: 1rem;
   user-select: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.comment-prev,
+.comment-next {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset-block: 0;
+  padding: 1rem;
+  color: var(--thirtary-color);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.comment-prev {
+  left: 0;
+}
+
+.comment-next {
+  right: 0;
+}
+
+.comment-prev::before,
+.comment-next::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    -90deg,
+    hsl(from var(--thirtary-color) h s l / 0.1),
+    transparent
+  );
+  opacity: 0;
+}
+
+.comment-prev::before {
+  background: linear-gradient(
+    90deg,
+    hsl(from var(--thirtary-color) h s l / 0.1),
+    transparent
+  );
+}
+
+.comment-prev:hover::before,
+.comment-next:hover::before,
+.comment-prev:focus::before,
+.comment-next:focus::before {
+  opacity: 1;
 }
 
 .infinte-scroller-content {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  list-style-type: none;
-}
-
-.infinte-scroller-content li {
-  display: flex;
-  flex: 1 1 auto;
-  min-width: 350px;
-}
-
-.infinte-scroller-content li.scroller-hidden {
-  display: none;
-}
-
-.infinite-scrooler[data-animated="true"] {
-  overflow: hidden;
+  width: 100%;
   -webkit-mask: linear-gradient(
     90deg,
     transparent,
@@ -34,44 +70,15 @@
   mask: linear-gradient(90deg, transparent, red 10%, red 90%, transparent);
 }
 
-.infinite-scrooler[data-animated="true"] .infinte-scroller-content {
-  width: fit-content;
-  flex-wrap: nowrap;
-  transform: translateX(0);
-  animation: infinite-scroll var(--scrolling-duration) linear infinite;
-}
-
-.infinite-scrooler[data-animated="true"] .infinte-scroller-content:hover {
-  animation-play-state: paused;
-}
-
-.infinite-scrooler[data-animated="true"]
-  .infinte-scroller-content
-  li.scroller-hidden {
+.infinte-scroller-content li {
+  max-width: 50%;
+  min-width: 50%;
   display: flex;
+  padding: 0.5rem;
 }
 
-@keyframes infinite-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 0.5rem));
-  }
-}
-
-@media (width < 25rem) {
+@media (width < 50rem) {
   .infinte-scroller-content li {
-    min-width: 300px;
-  }
-}
-
-@media (width < 62.5rem) {
-  .infinite-scrooler[data-animated="true"] .infinte-scroller-content:hover {
-    animation-play-state: running;
-  }
-
-  .infinite-scrooler[data-animated="true"] .infinte-scroller-content:active {
-    animation-play-state: paused;
+    min-width: 100%;
   }
 }
