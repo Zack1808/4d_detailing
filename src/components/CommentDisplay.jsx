@@ -5,9 +5,9 @@ import { StarSelect } from "./";
 import "../css/components/CommentDisplay.css";
 
 const CommentDisplay = React.memo(
-  ({ stars, comment, user, index, handleSelect }) => {
+  ({ stars, comment, user, index = -1, handleSelect }) => {
     const handleClick = () => {
-      handleSelect && index && handleSelect(index);
+      handleSelect && index > -1 && handleSelect(index);
     };
 
     return (
