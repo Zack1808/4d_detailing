@@ -169,6 +169,7 @@ const Home = () => {
                 {...comment}
                 index={index}
                 key={comment.user}
+                limitedHeight
                 handleSelect={handleSelected}
               />
             ))}
