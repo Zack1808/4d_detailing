@@ -77,7 +77,7 @@ const transition = (Component) => {
               translateX: "calc(100vw + 14rem)",
               transition: {
                 duration: 0.6,
-                ease: [1, 0.2, 0.2, 1],
+                ease: "easeInOut",
               },
             }}
             style={{
