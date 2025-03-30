@@ -65,7 +65,7 @@ const Polishing = () => {
         ],
       },
       {
-        title: "Zaštita keramičkim premazom u trajanju od 3 godine",
+        title: "Zaštita keramičkim premazom u trajanju od 5 godina",
         price: "300",
         services: [
           "Detaljno pranje eksterijera kao priprema",
