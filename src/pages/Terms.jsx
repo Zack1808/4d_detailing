@@ -52,9 +52,8 @@ const Terms = () => {
             <h2>1. Opći uvijeti</h2>
             <p>
               Ova web stranica je osmišljena kako bi vam pružila informacije o
-              našim uslugama auto detailinga i omogućila vam da pregledate
-              galeriju naših radova. Također možete koristiti kontakt obrazac
-              kako biste nas direktno kontaktirali.
+              našim uslugama auto detailinga. Također možete koristiti kontakt
+              obrazac kako biste nas direktno kontaktirali.
             </p>
           </section>
 
@@ -70,18 +69,7 @@ const Terms = () => {
           </section>
 
           <section>
-            <h2>3. Korištenje galerije</h2>
-            <p>
-              Galerija na stranici prikazuje naše najbolje radove iz područja
-              auto detailinga. Svi radovi prikazani u galeriji vlasništvo su
-              naše tvrtke i služe isključivo kao referenca za potencijalne
-              klijente. Bilo kakvo neovlašteno preuzimanje ili distribucija
-              slika je strogo zabranjeno.
-            </p>
-          </section>
-
-          <section>
-            <h2>4. Kontakt obrazac</h2>
+            <h2>3. Kontakt obrazac</h2>
             <p>
               Putem kontakt obrasca možete nas kontaktirati s upitima,
               prijedlozima ili zahtjevima za uslugama. Svi podaci prikupljeni
@@ -92,7 +80,7 @@ const Terms = () => {
           </section>
 
           <section>
-            <h2>5. Odgovornost</h2>
+            <h2>4. Odgovornost</h2>
             <p>
               Iako se trudimo osigurati da su sve informacije na ovoj stranici
               točne i ažurirane, ne preuzimamo odgovornost za eventualne
@@ -102,7 +90,7 @@ const Terms = () => {
           </section>
 
           <section>
-            <h2>7. Vaša prava</h2>
+            <h2>5. Vaša prava</h2>
             <p>
               Imate pravo na pristup, ispravak ili brisanje osobnih podataka
               koje ste nam dostavili. Ako želite ostvariti bilo koje od ovih

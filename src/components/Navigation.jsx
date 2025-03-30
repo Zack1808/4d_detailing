@@ -80,11 +80,6 @@ export const Navbar = ({ mobile, toggleMenu, className }) => {
           </Link>
         </li>
         <li>
-          <Link to="/galerija" onClick={handleClick}>
-            Galerija
-          </Link>
-        </li>
-        <li>
           <Link to="/kontakt" onClick={handleClick}>
             Kontakt
           </Link>
