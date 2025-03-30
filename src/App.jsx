@@ -22,7 +22,6 @@ const About = React.lazy(() => import("./pages/About"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
 const Terms = React.lazy(() => import("./pages/Terms"));
 const Error404 = React.lazy(() => import("./pages/Error404"));
-const Gallery = React.lazy(() => import("./pages/Gallery"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 
 import { useScrollPosition } from "./context/scrollContext";
@@ -85,7 +84,6 @@ const App = () => {
               <Route exact path="/o-nama" element={<About />} />
               <Route exact path="/pravila-privatnosti" element={<Privacy />} />
               <Route exact path="/uvijeti-korištenja" element={<Terms />} />
-              <Route exact path="/galerija" element={<Gallery />} />
               <Route exact path="/kontakt" element={<Contact />} />
               <Route path="*" element={<Error404 />} />
             </AnimatedRouted>

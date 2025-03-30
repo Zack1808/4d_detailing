@@ -10,7 +10,6 @@ import Modal from "./Modal";
 import Input from "./Input";
 import Textarea from "./Textarea";
 import StarSelect from "./StarSelect";
-import ImageSlider from "./ImageSlider";
 import Loading from "./Loading";
 import Header from "./Header";
 import AnimatedRouted from "./AnimatedRoute";
@@ -31,7 +30,6 @@ export {
   Input,
   Textarea,
   StarSelect,
-  ImageSlider,
   Loading,
   Header,
   AnimatedRouted,
