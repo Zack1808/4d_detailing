@@ -9,7 +9,7 @@ export default defineConfig({
         target:
           "https://firebasestorage.googleapis.com/v0/b/d-detailing-7e55b.firebasestorage.app/o/",
         changeOrigin: true,
-        encode: false,
+        rewrite: (path) => path.replace(/^\/firebase-proxy/, ""),
       },
     },
   },
