@@ -1,22 +1,24 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { getDocs, getDoc, doc, collection } from "firebase/firestore";
+
+import { ACTIONS } from "../context/storeContext";
 
 import { db } from "../firebaseConfig";
 
 export const useHome = () => {
-  const [hero, setHero] = useState({});
-
-  const getHero = useCallback(async () => {
+  const getHero = useCallback(async (dispatch) => {
     try {
       const docRef = doc(db, "home", "hero");
 
       const docSnap = await getDoc(docRef);
 
-      setHero(docSnap.data());
+      dispatch({ type: ACTIONS.SET_HERO_DATA, payload: docSnap.data() });
+
+      return docSnap.data();
     } catch (err) {
       console.log(err);
     }
   });
 
-  return { getHero, hero };
+  return { getHero };
 };

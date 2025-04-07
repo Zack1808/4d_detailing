@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useStore } from "./context/storeContext";
+
 import {
   NavigationBar,
   Navbar,
@@ -29,9 +31,9 @@ import { useScrollPosition } from "./context/scrollContext";
 const App = () => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [hasConsent, setHasConsent] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   const { containerRef } = useScrollPosition();
+  const { loading } = useStore();
 
   useEffect(() => {
     const consent = JSON.parse(localStorage.getItem("4d-consent"));
@@ -48,49 +50,39 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<Loading setLoading={setLoading} />}>
-        <Loading loading={loading} />
-        <Navbar
-          mobile
-          toggleMenu={toggleMenu}
-          className={menuIsOpen ? "menu-open" : ""}
-        />
-        <div
-          className={`content ${menuIsOpen ? "menu-open" : ""} ${
-            !loading ? "loaded" : ""
-          }`}
-        >
-          <NavigationBar toggleMenu={toggleMenu} />
-          <div className="page-container" ref={containerRef}>
-            <GoogleAnalytic
-              hasConsent={hasConsent}
-              consentGiven={handleConsent}
-              menuIsOpen={menuIsOpen}
-            />
-            <AnimatedRouted>
-              <Route exact path="/" element={<Home />} />
-              <Route
-                exact
-                path="/čišćenje-eksterijera"
-                element={<Exterior />}
-              />
-              <Route exact path="/čišćenje-interijera" element={<Interior />} />
-              <Route
-                exact
-                path="/poliranje-i-zaštita"
-                element={<Polishing />}
-              />
-              <Route exact path="/posebni-paketi" element={<Packages />} />
-              <Route exact path="/o-nama" element={<About />} />
-              <Route exact path="/pravila-privatnosti" element={<Privacy />} />
-              <Route exact path="/uvijeti-korištenja" element={<Terms />} />
-              <Route exact path="/kontakt" element={<Contact />} />
-              <Route path="*" element={<Error404 />} />
-            </AnimatedRouted>
-            <Footer />
-          </div>
+      <Loading loading={loading} />
+      <Navbar
+        mobile
+        toggleMenu={toggleMenu}
+        className={menuIsOpen ? "menu-open" : ""}
+      />
+      <div
+        className={`content ${menuIsOpen ? "menu-open" : ""} ${
+          !loading ? "loaded" : ""
+        }`}
+      >
+        <NavigationBar toggleMenu={toggleMenu} />
+        <div className="page-container" ref={containerRef}>
+          <GoogleAnalytic
+            hasConsent={hasConsent}
+            consentGiven={handleConsent}
+            menuIsOpen={menuIsOpen}
+          />
+          <AnimatedRouted>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/čišćenje-eksterijera" element={<Exterior />} />
+            <Route exact path="/čišćenje-interijera" element={<Interior />} />
+            <Route exact path="/poliranje-i-zaštita" element={<Polishing />} />
+            <Route exact path="/posebni-paketi" element={<Packages />} />
+            <Route exact path="/o-nama" element={<About />} />
+            <Route exact path="/pravila-privatnosti" element={<Privacy />} />
+            <Route exact path="/uvijeti-korištenja" element={<Terms />} />
+            <Route exact path="/kontakt" element={<Contact />} />
+            <Route path="*" element={<Error404 />} />
+          </AnimatedRouted>
+          <Footer />
         </div>
-      </Suspense>
+      </div>
       <ToastContainer />
     </BrowserRouter>
   );

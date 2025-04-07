@@ -7,10 +7,11 @@ import React, {
 } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+import { useStore } from "../context/storeContext";
+
 import { useScrollPosition } from "../context/scrollContext";
 
 import { useComments } from "../firebaseFunctions/comments";
-import { useHome } from "../firebaseFunctions/homeFetch";
 
 import transition from "../helpers/transition";
 
@@ -34,13 +35,14 @@ const Home = () => {
   const [starCount, setStarCount] = useState(1);
   const [selected, setSelected] = useState(0);
 
+  const { heroData } = useStore();
+
   const mainRef = useRef();
   const reviewFormRef = useRef();
 
   const { scrollTo, resetScroll } = useScrollPosition();
 
   const { getComments, comments, loading, addComment } = useComments();
-  const { getHero, hero } = useHome();
 
   const cards = useMemo(
     () => [
@@ -71,7 +73,6 @@ const Home = () => {
   useEffect(() => {
     scrollTo(1);
     getComments();
-    getHero();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
 
@@ -129,9 +130,7 @@ const Home = () => {
 
   return (
     <>
-      <Hero scrollTo={handleScroll} {...hero} />
-
-      {console.log(hero)}
+      <Hero scrollTo={handleScroll} {...heroData} />
 
       <main ref={mainRef} className="home">
         <article className="container">
