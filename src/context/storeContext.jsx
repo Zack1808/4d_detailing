@@ -9,7 +9,6 @@ export const ACTIONS = {
   SET_HERO_DATA: "SET_HERO_DATA",
   SET_SERVICES_DATA: "SET_SERVICES_DATA",
   SET_REVIEWS_DATA: "SET_REVIEWS_DATA",
-  SET_REVIEWS_LIST: "SET_REVIEWS_LIST",
   SET_EXTERIOR_CONTENT: "SET_EXTERIOR_CONTENT",
   SET_EXTERIOR_LIST: "SET_EXTERIOR_LIST",
   SET_INTERIOR_CONTENT: "SET_INTERIOR_CONTENT",
@@ -32,7 +31,6 @@ const initialState = {
   heroData: {},
   servicesData: {},
   reviewsData: {},
-  reviewsList: [],
   exteriorContent: {},
   exteriorList: [],
   interiorContent: {},
@@ -56,8 +54,6 @@ const reducer = (state, action) => {
       return { ...state, servicesData: action.payload };
     case ACTIONS.SET_REVIEWS_DATA:
       return { ...state, reviewsData: action.payload };
-    case ACTIONS.SET_REVIEWS_LIST:
-      return { ...state, reviewsList: action.payload };
     case ACTIONS.SET_SECTION_LOADING:
       return { ...state, sectionLoading: action.payload };
     case ACTIONS.SET_EXTERIOR_CONTENT:
@@ -90,7 +86,7 @@ const reducer = (state, action) => {
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { getHero, getServices } = useHome();
+  const { getHero, getServices, getReviewsContet } = useHome();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -98,6 +94,7 @@ export const StoreProvider = ({ children }) => {
       try {
         const heroD = await getHero(dispatch);
         const servicesD = await getServices(dispatch);
+        await getReviewsContet(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 

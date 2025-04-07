@@ -35,7 +35,7 @@ const Home = () => {
   const [starCount, setStarCount] = useState(1);
   const [selected, setSelected] = useState(0);
 
-  const { heroData, servicesData } = useStore();
+  const { heroData, servicesData, reviewsData } = useStore();
 
   const mainRef = useRef();
   const reviewFormRef = useRef();
@@ -43,32 +43,6 @@ const Home = () => {
   const { scrollTo, resetScroll } = useScrollPosition();
 
   const { getComments, comments, loading, addComment } = useComments();
-
-  const cards = useMemo(
-    () => [
-      {
-        to: "/čišćenje-eksterijera",
-        title: "Čišćenje Eksterijera",
-        imageUrl: "/eksterijer.avif",
-      },
-      {
-        to: "/čišćenje-interijera",
-        title: "Čišćenje Interijera",
-        imageUrl: "/interjer.avif",
-      },
-      {
-        to: "/poliranje-i-zaštita",
-        title: "Poliranje i Zaštita",
-        imageUrl: "/hero-bg-big.avif",
-      },
-      {
-        to: "/posebni-paketi",
-        title: "Posebni Paketi",
-        imageUrl: "/packages.avif",
-      },
-    ],
-    []
-  );
 
   useEffect(() => {
     scrollTo(1);
@@ -153,11 +127,16 @@ const Home = () => {
         <hr />
 
         <article className="container home-ratings">
-          <h2>Recenzije</h2>
+          <h2>{reviewsData.title}</h2>
 
           <p>
-            Pogledajte recenzije naših zadovoljnih korisnika. <br />
-            Zadovoljni ste našom uslugom?
+            {reviewsData.content?.split(/\n/g).map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                {console.log(line)}
+                <br />
+              </React.Fragment>
+            ))}
           </p>
 
           <Button primary onClick={handleOpenModal}>

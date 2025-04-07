@@ -30,5 +30,13 @@ export const useHome = () => {
     return docSnap.data();
   });
 
-  return { getHero, getServices };
+  const getReviewsContet = useCallback(async (dispatch) => {
+    const docRef = doc(db, "home", "reviews");
+
+    const docSnap = await getDoc(docRef);
+
+    dispatch({ type: ACTIONS.SET_REVIEWS_DATA, payload: docSnap.data() });
+  });
+
+  return { getHero, getServices, getReviewsContet };
 };
