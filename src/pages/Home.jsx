@@ -35,7 +35,7 @@ const Home = () => {
   const [starCount, setStarCount] = useState(1);
   const [selected, setSelected] = useState(0);
 
-  const { heroData } = useStore();
+  const { heroData, servicesData } = useStore();
 
   const mainRef = useRef();
   const reviewFormRef = useRef();
@@ -134,22 +134,19 @@ const Home = () => {
 
       <main ref={mainRef} className="home">
         <article className="container">
-          <h2>Naše usluge</h2>
+          <h2>{servicesData.title}</h2>
 
-          <p>
-            Nudimo vam pakete profesionalnih usluga detaljnog čišćenja vozila.
-            One uključuju dubinsko čišćenje, poliranje i zaštitu vašeg limenog
-            ljubimca.
-          </p>
+          <p>{servicesData.text}</p>
 
           <section className="category-list">
-            {cards.map((card, index) => (
-              <CategoryCard
-                key={card.to}
-                {...card}
-                style={{ "--transition-delay": `${0.07 * index}s` }}
-              />
-            ))}
+            {servicesData &&
+              servicesData.services?.map((card, index) => (
+                <CategoryCard
+                  key={card.to}
+                  {...card}
+                  style={{ "--transition-delay": `${0.07 * index}s` }}
+                />
+              ))}
           </section>
         </article>
 
