@@ -90,13 +90,14 @@ const reducer = (state, action) => {
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { getHero } = useHome();
+  const { getHero, getServices } = useHome();
 
   useEffect(() => {
     const retrieveData = async () => {
       dispatch({ type: ACTIONS.LOADING, payload: true });
       try {
         const heroD = await getHero(dispatch);
+        const servicesD = await getServices(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -104,6 +105,9 @@ export const StoreProvider = ({ children }) => {
 
         if (heroD?.heroBigBg) imageUrls.push(heroD.heroBigBg);
         if (heroD?.heroSmallBg) imageUrls.push(heroD.heroSmallBg);
+        servicesD.services.map((service) => {
+          if (service?.imageUrl) imageUrls.push(service.imageUrl);
+        });
 
         const preloadImages = imageUrls.map(
           (src) =>

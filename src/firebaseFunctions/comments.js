@@ -1,12 +1,5 @@
 import { useState, useCallback } from "react";
-import {
-  getDocs,
-  addDoc,
-  doc,
-  query,
-  where,
-  collection,
-} from "firebase/firestore";
+import { getDocs, addDoc, query, where, collection } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 import { db } from "../firebaseConfig";

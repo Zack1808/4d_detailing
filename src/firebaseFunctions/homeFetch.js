@@ -20,5 +20,15 @@ export const useHome = () => {
     }
   });
 
-  return { getHero };
+  const getServices = useCallback(async (dispatch) => {
+    const docRef = doc(db, "home", "services");
+
+    const docSnap = await getDoc(docRef);
+
+    dispatch({ type: ACTIONS.SET_SERVICES_DATA, payload: docSnap.data() });
+
+    return docSnap.data();
+  });
+
+  return { getHero, getServices };
 };
