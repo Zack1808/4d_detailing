@@ -23,7 +23,10 @@ const Hero = React.memo(
     return (
       <div
         className="hero-container"
-        style={{ "--heroBigBg": `url(${heroBigBg})` }}
+        style={{
+          "--heroBigBg": `url(${heroBigBg})`,
+          "--heroSmallBg": `url(${heroSmallBg})`,
+        }}
       >
         <div className="container">
           <h1>{title}</h1>
