@@ -10,6 +10,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useScrollPosition } from "../context/scrollContext";
 
 import { useComments } from "../firebaseFunctions/comments";
+import { useHome } from "../firebaseFunctions/homeFetch";
 
 import transition from "../helpers/transition";
 
@@ -39,6 +40,7 @@ const Home = () => {
   const { scrollTo, resetScroll } = useScrollPosition();
 
   const { getComments, comments, loading, addComment } = useComments();
+  const { getHero, hero } = useHome();
 
   const cards = useMemo(
     () => [
@@ -69,6 +71,7 @@ const Home = () => {
   useEffect(() => {
     scrollTo(1);
     getComments();
+    getHero();
     const link = document.createElement("link");
     const meta = document.createElement("meta");
 
@@ -126,7 +129,9 @@ const Home = () => {
 
   return (
     <>
-      <Hero scrollTo={handleScroll} />
+      <Hero scrollTo={handleScroll} {...hero} />
+
+      {console.log(hero)}
 
       <main ref={mainRef} className="home">
         <article className="container">
