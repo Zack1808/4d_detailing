@@ -95,6 +95,7 @@ export const StoreProvider = ({ children }) => {
     getInteriorList,
     getPolishData,
     getPolishList,
+    getPackagesData,
   } = useServices();
 
   useEffect(() => {
@@ -110,6 +111,7 @@ export const StoreProvider = ({ children }) => {
         await getInteriorList(dispatch);
         const polishD = await getPolishData(dispatch);
         await getPolishList(dispatch);
+        const packagesD = await getPackagesData(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -126,6 +128,8 @@ export const StoreProvider = ({ children }) => {
         if (interiorD?.headerImg) imageUrls.push(interiorD.headerImg);
         if (polishD?.contentImg) imageUrls.push(polishD.contentImg);
         if (polishD?.headerImg) imageUrls.push(polishD.headerImg);
+        if (packagesD?.contentImg) imageUrls.push(packagesD.contentImg);
+        if (packagesD?.headerImg) imageUrls.push(packagesD.headerImg);
 
         const preloadImages = imageUrls.map(
           (src) =>

@@ -132,6 +132,19 @@ export const useServices = () => {
     dispatch({ type: ACTIONS.SET_POLISH_LIST, payload: data });
   });
 
+  const getPackagesData = useCallback(async (dispatch) => {
+    const docRef = doc(db, "packages", "content");
+
+    const docSnap = await getDoc(docRef);
+
+    dispatch({
+      type: ACTIONS.SET_PACKAGES_CONTENT,
+      payload: docSnap.data(),
+    });
+
+    return docSnap.data();
+  });
+
   return {
     getExteriorData,
     getExteriorList,
@@ -139,5 +152,6 @@ export const useServices = () => {
     getInteriorList,
     getPolishData,
     getPolishList,
+    getPackagesData,
   };
 };
