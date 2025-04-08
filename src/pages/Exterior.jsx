@@ -12,7 +12,7 @@ import "../css/pages/Services.css";
 const Exterior = () => {
   const { resetScroll } = useScrollPosition();
 
-  const { exteriorContent } = useStore();
+  const { exteriorContent, exteriorList } = useStore();
 
   const priceCards = useMemo(
     () => [
@@ -98,8 +98,8 @@ const Exterior = () => {
         </article>
 
         <article className="container category-prices">
-          {priceCards.map((priceCard, index) => (
-            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
+          {exteriorList?.map((priceCard) => (
+            <PriceCard {...priceCard} key={priceCard.id} />
           ))}
         </article>
       </main>
