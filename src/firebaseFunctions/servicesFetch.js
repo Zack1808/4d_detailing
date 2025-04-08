@@ -145,6 +145,38 @@ export const useServices = () => {
     return docSnap.data();
   });
 
+  const getPackagesList = useCallback(async (dispatch) => {
+    const coll = collection(db, "packagesList");
+
+    const docSnap = await getDocs(coll);
+
+    const data = docSnap.docs.map((doc) => {
+      const {
+        price,
+        services,
+        title,
+        discount,
+        hasDiscount,
+        info,
+        priceSuv,
+        priceTransporter,
+      } = doc.data();
+
+      return {
+        id: doc.id,
+        price,
+        services,
+        title,
+        discount,
+        hasDiscount,
+        info,
+        priceSuv,
+        priceTransporter,
+      };
+    });
+    dispatch({ type: ACTIONS.SET_PACKAGES_LIST, payload: data });
+  });
+
   return {
     getExteriorData,
     getExteriorList,
@@ -153,5 +185,6 @@ export const useServices = () => {
     getPolishData,
     getPolishList,
     getPackagesData,
+    getPackagesList,
   };
 };

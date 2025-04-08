@@ -12,39 +12,7 @@ import "../css/pages/Services.css";
 const Packages = () => {
   const { resetScroll } = useScrollPosition();
 
-  const { packagesContent } = useStore();
-
-  const priceCards = useMemo(
-    () => [
-      {
-        title: "Paket Refresh",
-        price: "200\t-\t350",
-        services: [
-          "Kemijsko čišćenje unutrašnjosti",
-          "Detaljno pranje eksterijera",
-          "Detaljno pranje naplataka",
-          "Jednoslojno poliranje",
-          "Zaštita keramičkim voskom",
-          "Točkanje oštećenja od kamenčića (klijent sam nosi boju)",
-        ],
-        info: "Napomena: Po želji klijenta moguće je izraditi i slike za prodaju vozila (gratis). Cijena usluge može se mijenjati ovisno o veličini vozila.",
-      },
-      {
-        title: "Paket Novo vozilo",
-        price: "500\t-\t750",
-        services: [
-          "Detaljno pranje eksterijera",
-          "Detaljno pranje naplataka",
-          "Full detailing interijera",
-          "Troslojno poliranje",
-          "Zaštita sintetičkim premazom u trajanju od 6 mjeseci",
-          "Zatočkavanje oštećenja od kamenčića (klijent sam donosi boju)",
-        ],
-        info: "Cijena usluge može se mijenjati ovisno o veličini vozila.",
-      },
-    ],
-    []
-  );
+  const { packagesContent, packagesList } = useStore();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -94,8 +62,8 @@ const Packages = () => {
         </article>
 
         <article className="container category-prices">
-          {priceCards.map((priceCard, index) => (
-            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
+          {packagesList?.map((priceCard, index) => (
+            <PriceCard {...priceCard} key={packagesList.id} />
           ))}
         </article>
       </main>

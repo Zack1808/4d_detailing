@@ -96,6 +96,7 @@ export const StoreProvider = ({ children }) => {
     getPolishData,
     getPolishList,
     getPackagesData,
+    getPackagesList,
   } = useServices();
 
   useEffect(() => {
@@ -112,6 +113,7 @@ export const StoreProvider = ({ children }) => {
         const polishD = await getPolishData(dispatch);
         await getPolishList(dispatch);
         const packagesD = await getPackagesData(dispatch);
+        await getPackagesList(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
