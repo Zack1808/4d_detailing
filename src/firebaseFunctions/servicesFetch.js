@@ -100,11 +100,44 @@ export const useServices = () => {
     return docSnap.data();
   });
 
+  const getPolishList = useCallback(async (dispatch) => {
+    const coll = collection(db, "polishList");
+
+    const docSnap = await getDocs(coll);
+
+    const data = docSnap.docs.map((doc) => {
+      const {
+        price,
+        services,
+        title,
+        discount,
+        hasDiscount,
+        info,
+        priceSuv,
+        priceTransporter,
+      } = doc.data();
+
+      return {
+        id: doc.id,
+        price,
+        services,
+        title,
+        discount,
+        hasDiscount,
+        info,
+        priceSuv,
+        priceTransporter,
+      };
+    });
+    dispatch({ type: ACTIONS.SET_POLISH_LIST, payload: data });
+  });
+
   return {
     getExteriorData,
     getExteriorList,
     getInteriorData,
     getInteriorList,
     getPolishData,
+    getPolishList,
   };
 };

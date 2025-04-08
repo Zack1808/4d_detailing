@@ -94,6 +94,7 @@ export const StoreProvider = ({ children }) => {
     getInteriorData,
     getInteriorList,
     getPolishData,
+    getPolishList,
   } = useServices();
 
   useEffect(() => {
@@ -108,6 +109,7 @@ export const StoreProvider = ({ children }) => {
         const interiorD = await getInteriorData(dispatch);
         await getInteriorList(dispatch);
         const polishD = await getPolishData(dispatch);
+        await getPolishList(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 

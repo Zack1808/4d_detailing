@@ -12,76 +12,7 @@ import "../css/pages/Services.css";
 const Polishing = () => {
   const { resetScroll } = useScrollPosition();
 
-  const { polishContent } = useStore();
-
-  const priceCards = useMemo(
-    () => [
-      {
-        title: "Poliranje farova",
-        price: "30",
-        services: [
-          "Brušenje i poliranje",
-          "Dodavanje zaštitnog premaza i boost premaza",
-        ],
-        info: "Cijena usluge može se mijenjati ovisno o zamagljenosti farova.",
-      },
-      {
-        title: "Poliranje laka",
-        price: "100 (po sloju)",
-        services: [
-          "Detaljno pranje eksterijera kao priprema",
-          "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
-          "Zaštita voskom ako nije odabrana druga vrsta zaštite",
-        ],
-        priceSuv: "30",
-        priceTransporter: "80",
-        info: "Cijena usluge može se mijenjati ovisno o veličini vozila i oštećenosti laka",
-      },
-      {
-        title: "Višeslojna korekcija laka",
-        price: "500",
-        services: [
-          "Detaljno pranje eksterijera kao priprema",
-          "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
-          "Zaštita voskom ako nije odabrana druga vrsta zaštite",
-          "Po potrebi, zatočkavanje i brušenje većih ogrebotina (kupac donosi boju)",
-        ],
-        priceSuv: "100",
-        priceTransporter: "180",
-      },
-      {
-        title: "Zaštita voskom u trajanju od 3 mjeseca",
-        price: "15",
-        services: [
-          "Detaljno pranje eksterijera kao priprema",
-          "Priprema laka za zaštitni premaz",
-          "Premaz voskom za zaštitu laka",
-        ],
-      },
-      {
-        title: "Zaštita sintetičkim premazom u trajanju od 6-8 mjeseci",
-        price: "50",
-        services: [
-          "Detaljno pranje eksterijera kao priprema",
-          "Priprema laka za zaštitni premaz",
-          "Premaz sintetičkim premazom",
-        ],
-      },
-      {
-        title: "Zaštita keramičkim premazom u trajanju od 5 godina",
-        price: "300",
-        services: [
-          "Detaljno pranje eksterijera kao priprema",
-          "Priprema laka za zaštitni premaz",
-          "Premaz keramičkim premazom",
-        ],
-        priceSuv: "100",
-        priceTransporter: "180",
-        info: "Napomena: Prije nanošenja keramičkog premaza, obavezan je barem jedan sloj poliranja kako bi se premaz dobro primio i postigao maksimalnu učinkovitost. (Poliranje nije uključeno u cijenu usluge keramičkog premaza.)",
-      },
-    ],
-    []
-  );
+  const { polishContent, polishList } = useStore();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -124,9 +55,11 @@ const Polishing = () => {
           <FadeImage src={polishContent.contentImg} alt="Slika poliranja" />
         </article>
 
+        {console.log(polishList)}
+
         <article className="container category-prices">
-          {priceCards.map((priceCard, index) => (
-            <PriceCard {...priceCard} key={`price-card-${index + 1}`} />
+          {polishList?.map((priceCard) => (
+            <PriceCard {...priceCard} key={polishList.id} />
           ))}
         </article>
       </main>
