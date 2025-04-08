@@ -90,5 +90,21 @@ export const useServices = () => {
     dispatch({ type: ACTIONS.SET_INTERIOR_LIST, payload: data });
   });
 
-  return { getExteriorData, getExteriorList, getInteriorData, getInteriorList };
+  const getPolishData = useCallback(async (dispatch) => {
+    const docRef = doc(db, "polish", "content");
+
+    const docSnap = await getDoc(docRef);
+
+    dispatch({ type: ACTIONS.SET_POLISH_CONTENT, payload: docSnap.data() });
+
+    return docSnap.data();
+  });
+
+  return {
+    getExteriorData,
+    getExteriorList,
+    getInteriorData,
+    getInteriorList,
+    getPolishData,
+  };
 };
