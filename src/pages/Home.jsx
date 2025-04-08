@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+import { useStore } from "../context/storeContext";
+
 import { useScrollPosition } from "../context/scrollContext";
 
 import { useComments } from "../firebaseFunctions/comments";
@@ -33,38 +35,14 @@ const Home = () => {
   const [starCount, setStarCount] = useState(1);
   const [selected, setSelected] = useState(0);
 
+  const { heroData, servicesData, reviewsData } = useStore();
+
   const mainRef = useRef();
   const reviewFormRef = useRef();
 
   const { scrollTo, resetScroll } = useScrollPosition();
 
   const { getComments, comments, loading, addComment } = useComments();
-
-  const cards = useMemo(
-    () => [
-      {
-        to: "/čišćenje-eksterijera",
-        title: "Čišćenje Eksterijera",
-        imageUrl: "/eksterijer.avif",
-      },
-      {
-        to: "/čišćenje-interijera",
-        title: "Čišćenje Interijera",
-        imageUrl: "/interjer.avif",
-      },
-      {
-        to: "/poliranje-i-zaštita",
-        title: "Poliranje i Zaštita",
-        imageUrl: "/hero-bg-big.avif",
-      },
-      {
-        to: "/posebni-paketi",
-        title: "Posebni Paketi",
-        imageUrl: "/packages.avif",
-      },
-    ],
-    []
-  );
 
   useEffect(() => {
     scrollTo(1);
@@ -126,37 +104,38 @@ const Home = () => {
 
   return (
     <>
-      <Hero scrollTo={handleScroll} />
+      <Hero scrollTo={handleScroll} {...heroData} />
 
       <main ref={mainRef} className="home">
         <article className="container">
-          <h2>Naše usluge</h2>
+          <h2>{servicesData.title}</h2>
 
-          <p>
-            Nudimo vam pakete profesionalnih usluga detaljnog čišćenja vozila.
-            One uključuju dubinsko čišćenje, poliranje i zaštitu vašeg limenog
-            ljubimca.
-          </p>
+          <p>{servicesData.text}</p>
 
           <section className="category-list">
-            {cards.map((card, index) => (
-              <CategoryCard
-                key={card.to}
-                {...card}
-                style={{ "--transition-delay": `${0.07 * index}s` }}
-              />
-            ))}
+            {servicesData &&
+              servicesData.services?.map((card, index) => (
+                <CategoryCard
+                  key={card.to}
+                  {...card}
+                  style={{ "--transition-delay": `${0.07 * index}s` }}
+                />
+              ))}
           </section>
         </article>
 
         <hr />
 
         <article className="container home-ratings">
-          <h2>Recenzije</h2>
+          <h2>{reviewsData.title}</h2>
 
           <p>
-            Pogledajte recenzije naših zadovoljnih korisnika. <br />
-            Zadovoljni ste našom uslugom?
+            {reviewsData.content?.split(/\n/g).map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
           </p>
 
           <Button primary onClick={handleOpenModal}>

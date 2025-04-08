@@ -17,12 +17,11 @@ p.limited {
 p.elipsis::before {
   position: absolute;
   background: linear-gradient(90deg, transparent, var(--secondary-color) 25%);
-  content: "Čitaj više...";
+  content: "...";
   bottom: 0;
-  padding-left: 4rem;
+  padding-left: 2rem;
   right: 0;
   font-weight: bold;
-  text-decoration: underline;
 }
 
 blockquote {

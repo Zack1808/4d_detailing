@@ -3,9 +3,19 @@ import React from "react";
 import "../css/components/PriceCard.css";
 
 const PriceCard = React.memo(
-  ({ title, price, services, priceSuv, priceTransporter, info }) => {
+  ({
+    title,
+    price,
+    services,
+    priceSuv,
+    priceTransporter,
+    info,
+    hasDiscount,
+    discount,
+  }) => {
     return (
       <div className="price-card">
+        {hasDiscount && <div className="discount">{discount} popusta</div>}
         <header>
           <h4>{title}</h4>
           <h4>

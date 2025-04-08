@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 
 import { useScrollPosition } from "../context/scrollContext";
+import { useStore } from "../context/storeContext";
 
 import transition from "../helpers/transition";
 
@@ -15,6 +16,8 @@ import "../css/pages/Contact.css";
 
 const Contact = () => {
   const { resetScroll } = useScrollPosition();
+
+  const { contactData } = useStore();
 
   const formRef = useRef(null);
 
@@ -61,33 +64,34 @@ const Contact = () => {
 
   return (
     <>
-      <Header
-        title="Obratite nam se s povjerenjem"
-        bgImage="https://images.unsplash.com/photo-1485770958101-9dd7e4ea6d93?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      />
+      <Header title={contactData.title} bgImage={contactData.headerImg} />
 
       <main className="contact">
         <article className="container">
           <section>
             <p>
-              U slučaju dodatnih pitanja, nedoumica ili za informacije o našim
-              uslugama i cijenama, možete nas kontaktirati putem ovih usluga:
+              {contactData.content?.split(/\n/g).map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
             </p>
 
             <ul className="contact-data">
               <li>
-                <a href="mailto:4d.detailing.ln@gmail.com">
+                <a href={`mailto:${contactData.email}`}>
                   <IoMail aria-hidden="true" />
                   <p>
-                    <strong>Email:</strong> 4d.detailing.ln@gmail.com
+                    <strong>Email:</strong> {contactData.email}
                   </p>
                 </a>
               </li>
               <li>
-                <a href="tel:+385977588716">
+                <a href={`tel:${contactData.mobile}`}>
                   <FaPhoneAlt aria-hidden="true" />
                   <p>
-                    <strong>Telefon:</strong> +385 97 758 8716
+                    <strong>Telefon:</strong> {contactData.mobile}
                   </p>
                 </a>
               </li>
@@ -95,28 +99,21 @@ const Contact = () => {
                 <span>
                   <FaClock aria-hidden="true" />
                   <p>
-                    <strong>Radno vrijeme:</strong> po dogovoru
+                    <strong>Radno vrijeme:</strong> {contactData.worktime}
                   </p>
                 </span>
               </li>
               <li>
-                <a
-                  href="https://maps.app.goo.gl/kQ868KeYKgo41F1r8"
-                  target="_blank"
-                >
+                <a href={contactData.maps} target="_blank">
                   <FaLocationDot aria-hidden="true" />
                   <p>
-                    <strong>Lokacija sjedišta:</strong> Rakitovec 274, 10410
-                    Velika Gorica
+                    <strong>Lokacija sjedišta:</strong> {contactData.location}
                   </p>
                 </a>
               </li>
             </ul>
 
-            <iframe
-              title="Lokacija sjedišta"
-              src="https://maps.google.com/maps?q=rakitovec%20274&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-            />
+            <iframe title="Lokacija sjedišta" src={contactData.maps} />
           </section>
 
           <section>

@@ -11,6 +11,20 @@
   overflow: hidden;
   justify-self: center;
   user-select: none;
+  position: relative;
+}
+
+.discount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color);
+  background: var(--gold);
+  position: absolute;
+  rotate: 45deg;
+  right: -3.5rem;
+  top: 2.3rem;
+  padding: 0.5rem 4rem;
 }
 
 .price-card::before,
@@ -32,7 +46,7 @@
 
 .price-card header h4 {
   font-size: 2rem;
-  max-width: 20ch;
+  max-width: 15ch;
 }
 
 .price-card header strong {
