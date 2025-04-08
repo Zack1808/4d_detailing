@@ -2,6 +2,7 @@ import React, { useContext, useReducer, useEffect } from "react";
 
 import { useHome } from "../firebaseFunctions/homeFetch";
 import { useServices } from "../firebaseFunctions/servicesFetch";
+import { useAbout } from "../firebaseFunctions/aboutFetch";
 
 const StoreContext = React.createContext();
 
@@ -98,6 +99,7 @@ export const StoreProvider = ({ children }) => {
     getPackagesData,
     getPackagesList,
   } = useServices();
+  const { getAboutHeader } = useAbout();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -114,6 +116,7 @@ export const StoreProvider = ({ children }) => {
         await getPolishList(dispatch);
         const packagesD = await getPackagesData(dispatch);
         await getPackagesList(dispatch);
+        const aboutHeaderD = await getAboutHeader(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -132,6 +135,7 @@ export const StoreProvider = ({ children }) => {
         if (polishD?.headerImg) imageUrls.push(polishD.headerImg);
         if (packagesD?.contentImg) imageUrls.push(packagesD.contentImg);
         if (packagesD?.headerImg) imageUrls.push(packagesD.headerImg);
+        if (aboutHeaderD?.headerImg) imageUrls.push(aboutHeaderD.headerImg);
 
         const preloadImages = imageUrls.map(
           (src) =>

@@ -5,11 +5,14 @@ import transition from "../helpers/transition";
 import { Header, FadeImage, Button } from "../components";
 
 import { useScrollPosition } from "../context/scrollContext";
+import { useStore } from "../context/storeContext";
 
 import "../css/pages/About.css";
 
 const About = () => {
   const { resetScroll } = useScrollPosition();
+
+  const { aboutHeader } = useStore();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -32,7 +35,7 @@ const About = () => {
 
   return (
     <>
-      <Header title="O nama" bgImage="/hero-bg-small.avif" />
+      <Header title={aboutHeader.title} bgImage={aboutHeader.headerImg} />
 
       <main className="about">
         <article className="container">

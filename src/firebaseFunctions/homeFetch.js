@@ -7,17 +7,13 @@ import { db } from "../firebaseConfig";
 
 export const useHome = () => {
   const getHero = useCallback(async (dispatch) => {
-    try {
-      const docRef = doc(db, "home", "hero");
+    const docRef = doc(db, "home", "hero");
 
-      const docSnap = await getDoc(docRef);
+    const docSnap = await getDoc(docRef);
 
-      dispatch({ type: ACTIONS.SET_HERO_DATA, payload: docSnap.data() });
+    dispatch({ type: ACTIONS.SET_HERO_DATA, payload: docSnap.data() });
 
-      return docSnap.data();
-    } catch (err) {
-      console.log(err);
-    }
+    return docSnap.data();
   });
 
   const getServices = useCallback(async (dispatch) => {

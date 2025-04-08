@@ -62,7 +62,7 @@ const Packages = () => {
         </article>
 
         <article className="container category-prices">
-          {packagesList?.map((priceCard, index) => (
+          {packagesList?.map((priceCard) => (
             <PriceCard {...priceCard} key={packagesList.id} />
           ))}
         </article>
