@@ -3,6 +3,7 @@ import React, { useContext, useReducer, useEffect } from "react";
 import { useHome } from "../firebaseFunctions/homeFetch";
 import { useServices } from "../firebaseFunctions/servicesFetch";
 import { useAbout } from "../firebaseFunctions/aboutFetch";
+import { useContact } from "../firebaseFunctions/contactFetch";
 
 const StoreContext = React.createContext();
 
@@ -43,7 +44,7 @@ const initialState = {
   packagesList: [],
   aboutHeader: {},
   aboutData: [],
-  contactHeader: {},
+  contactData: {},
 };
 
 const reducer = (state, action) => {
@@ -79,7 +80,7 @@ const reducer = (state, action) => {
     case ACTIONS.SET_ABOUT_DATA:
       return { ...state, aboutData: action.payload };
     case ACTIONS.SET_CONTACT_DATA:
-      return { ...state, contactHeader: action.payload };
+      return { ...state, contactData: action.payload };
     default:
       return { ...state };
   }
@@ -100,6 +101,7 @@ export const StoreProvider = ({ children }) => {
     getPackagesList,
   } = useServices();
   const { getAboutHeader, getAboutContent } = useAbout();
+  const { getContact } = useContact();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -118,6 +120,7 @@ export const StoreProvider = ({ children }) => {
         await getPackagesList(dispatch);
         const aboutHeaderD = await getAboutHeader(dispatch);
         const aboutContentD = await getAboutContent(dispatch);
+        const contactD = await getContact(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -140,6 +143,7 @@ export const StoreProvider = ({ children }) => {
         aboutContentD.map((item) => {
           if (item?.imageUrl) imageUrls.push(item.imageUrl);
         });
+        if (contactD?.headerImg) imageUrls.push(contactD.headerImg);
 
         const preloadImages = imageUrls.map(
           (src) =>
