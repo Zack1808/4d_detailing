@@ -43,7 +43,6 @@ const About = () => {
             <article className="container" key={item.id}>
               <section>
                 <h2>{item.title}</h2>
-                {console.log(item)}
                 <p>
                   {item.content?.split(/\n/g).map((line, index) => (
                     <React.Fragment key={index}>

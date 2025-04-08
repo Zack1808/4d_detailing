@@ -4,9 +4,5 @@
 /*
   X-Robots-Tag: all
 
-/hero-bg-big.avif
-  Cache-Control: public, max-age=31536000
-/hero-bg-small.avif
-  Cache-Control: public, max-age=31536000
-/logo-transition.avif
+/firebase-proxy/*
   Cache-Control: public, max-age=31536000
