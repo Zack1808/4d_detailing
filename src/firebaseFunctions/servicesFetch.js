@@ -58,5 +58,37 @@ export const useServices = () => {
     return docSnap.data();
   });
 
-  return { getExteriorData, getExteriorList, getInteriorData };
+  const getInteriorList = useCallback(async (dispatch) => {
+    const coll = collection(db, "interiorList");
+
+    const docSnap = await getDocs(coll);
+
+    const data = docSnap.docs.map((doc) => {
+      const {
+        price,
+        services,
+        title,
+        discount,
+        hasDiscount,
+        info,
+        priceSuv,
+        priceTransporter,
+      } = doc.data();
+
+      return {
+        id: doc.id,
+        price,
+        services,
+        title,
+        discount,
+        hasDiscount,
+        info,
+        priceSuv,
+        priceTransporter,
+      };
+    });
+    dispatch({ type: ACTIONS.SET_INTERIOR_LIST, payload: data });
+  });
+
+  return { getExteriorData, getExteriorList, getInteriorData, getInteriorList };
 };

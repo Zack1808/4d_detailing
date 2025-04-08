@@ -88,7 +88,8 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { getHero, getServices, getReviewsContet } = useHome();
-  const { getExteriorData, getExteriorList, getInteriorData } = useServices();
+  const { getExteriorData, getExteriorList, getInteriorData, getInteriorList } =
+    useServices();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -100,6 +101,7 @@ export const StoreProvider = ({ children }) => {
         const exteriorD = await getExteriorData(dispatch);
         await getExteriorList(dispatch);
         const interiorD = await getInteriorData(dispatch);
+        await getInteriorList(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
