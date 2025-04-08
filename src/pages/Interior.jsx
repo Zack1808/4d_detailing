@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
+import { useStore } from "../context/storeContext";
 
 import transition from "../helpers/transition";
 
@@ -10,6 +11,8 @@ import "../css/pages/Services.css";
 
 const Interior = () => {
   const { resetScroll } = useScrollPosition();
+
+  const { interiorContent } = useStore();
 
   const priceCards = useMemo(
     () => [
@@ -77,29 +80,27 @@ const Interior = () => {
 
   return (
     <>
-      <Header title="Čišćenje interijera" bgImage="/interjer.avif" />
+      <Header
+        title={interiorContent.title}
+        bgImage={interiorContent.headerImg}
+      />
 
       <main className="category">
         <article className="container">
           <section>
             <p>
-              Čišćenje interijera često je teško i vremenski zahtjevan proces.
-              Cijelom interijeru vozila, korištenjem posebnih namjenskih
-              sredstava i alata, pružamo najbolje rezultate čišćenja, koji
-              pritom nisu opasni za dijelove unutrašnjosti vašeg limenog
-              ljubimca.
-              <br />
-              <br />U slučaju jačih zaprljanja, cijena usluge može porasti. Za
-              dodatne informacije vezane uz cijenu slobodno nas kontaktirajte.
+              {interiorContent.content?.split(/\n/g).map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
             </p>
             <Button primary link="/kontakt">
               Rezerviraj termin
             </Button>
           </section>
-          <FadeImage
-            src="/car-inside.avif"
-            alt="placeholder-image-eksterijer"
-          />
+          <FadeImage src={interiorContent.contentImg} alt="Slika interijera" />
         </article>
 
         <article className="container category-prices">

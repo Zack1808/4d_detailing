@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
 import { useStore } from "../context/storeContext";
@@ -13,45 +13,6 @@ const Exterior = () => {
   const { resetScroll } = useScrollPosition();
 
   const { exteriorContent, exteriorList } = useStore();
-
-  const priceCards = useMemo(
-    () => [
-      {
-        title: "Vanjsko pranje",
-        price: "15",
-        services: [
-          "Detaljno pranje eksterijera",
-          "Usisavanje interijera",
-          "Brisanje prašine s interijera",
-        ],
-        info: "Cijena usluge se može mijenjati ovisno o veličini i zaprljanosti vozila.",
-      },
-      {
-        title: "Vanjsko pranje, uključujući naplatke.",
-        price: "20",
-        services: [
-          "Detaljno pranje eksterijera",
-          "Detaljno pranje naplataka",
-          "Usisavanje interijera",
-          "Brisanje prašine interijera",
-        ],
-        info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
-      },
-      {
-        title: "Premium čišćenje vozila",
-        price: "35",
-        services: [
-          "Detaljno pranje eksterijera",
-          "Detaljno pranje naplataka",
-          "Detaljno pranje interijera bez kemijskog čišćenja tekstilnih površina i krova",
-        ],
-        priceSuv: "10",
-        priceTransporter: "30",
-        info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
-      },
-    ],
-    []
-  );
 
   useEffect(() => {
     const link = document.createElement("link");

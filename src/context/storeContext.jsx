@@ -88,7 +88,7 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { getHero, getServices, getReviewsContet } = useHome();
-  const { getExteriorData, getExteriorList } = useServices();
+  const { getExteriorData, getExteriorList, getInteriorData } = useServices();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -99,6 +99,7 @@ export const StoreProvider = ({ children }) => {
         await getReviewsContet(dispatch);
         const exteriorD = await getExteriorData(dispatch);
         await getExteriorList(dispatch);
+        const interiorD = await getInteriorData(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -111,6 +112,8 @@ export const StoreProvider = ({ children }) => {
         });
         if (exteriorD?.contentImg) imageUrls.push(exteriorD.contentImg);
         if (exteriorD?.headerImg) imageUrls.push(exteriorD.headerImg);
+        if (interiorD?.contentImg) imageUrls.push(interiorD.contentImg);
+        if (interiorD?.headerImg) imageUrls.push(interiorD.headerImg);
 
         const preloadImages = imageUrls.map(
           (src) =>

@@ -48,5 +48,15 @@ export const useServices = () => {
     dispatch({ type: ACTIONS.SET_EXTERIOR_LIST, payload: data });
   });
 
-  return { getExteriorData, getExteriorList };
+  const getInteriorData = useCallback(async (dispatch) => {
+    const docRef = doc(db, "interior", "content");
+
+    const docSnap = await getDoc(docRef);
+
+    dispatch({ type: ACTIONS.SET_INTERIOR_CONTENT, payload: docSnap.data() });
+
+    return docSnap.data();
+  });
+
+  return { getExteriorData, getExteriorList, getInteriorData };
 };
