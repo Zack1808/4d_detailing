@@ -12,6 +12,8 @@ import {
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
+import { useStore } from "../context/storeContext";
+
 import logoPng from "/logo.png";
 import logoSvg from "/logo.svg";
 
@@ -19,6 +21,8 @@ import "../css/components/Footer.css";
 
 const Footer = React.memo(() => {
   const currentYear = new Date().getFullYear();
+
+  const { contactData } = useStore();
 
   return (
     <footer className="page-footer">
@@ -40,23 +44,22 @@ const Footer = React.memo(() => {
         <div className="footer-contact-information">
           <span>
             <strong>Kontakt</strong>
-            <a href="mailto:4d.detailing.ln@gmail.com">
+            <a href={`mailto:${contactData.email}`}>
               <IoMail aria-hidden="true" />
-              <strong>Email:</strong> 4d.detailing.ln@gmail.com
+              <strong>Email:</strong> {contactData.email}
             </a>
-            <a href="tel:+385977588716">
+            <a href={`tel:${contactData.mobile}`}>
               <FaPhoneAlt aria-hidden="true" />
-              <strong>Telefon:</strong> +385 97 758 8716
+              <strong>Telefon:</strong> {contactData.mobile}
             </a>
             <span>
               <FaClock aria-hidden="true" />
-              <strong>Radno vrijeme:</strong> po dogovoru
+              <strong>Radno vrijeme:</strong> {contactData.worktime}
             </span>
-            <a href="https://maps.app.goo.gl/kQ868KeYKgo41F1r8" target="_blank">
+            <a href={contactData.maps} target="_blank">
               <FaLocationDot aria-hidden="true" />
               <p>
-                <strong>Lokacija sjedišta:</strong> Rakitovec 274, 10410 Velika
-                Gorica
+                <strong>Lokacija sjedišta:</strong> {contactData.location}
               </p>
             </a>
           </span>
