@@ -99,7 +99,7 @@ export const StoreProvider = ({ children }) => {
     getPackagesData,
     getPackagesList,
   } = useServices();
-  const { getAboutHeader } = useAbout();
+  const { getAboutHeader, getAboutContent } = useAbout();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -117,6 +117,7 @@ export const StoreProvider = ({ children }) => {
         const packagesD = await getPackagesData(dispatch);
         await getPackagesList(dispatch);
         const aboutHeaderD = await getAboutHeader(dispatch);
+        const aboutContentD = await getAboutContent(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -136,6 +137,9 @@ export const StoreProvider = ({ children }) => {
         if (packagesD?.contentImg) imageUrls.push(packagesD.contentImg);
         if (packagesD?.headerImg) imageUrls.push(packagesD.headerImg);
         if (aboutHeaderD?.headerImg) imageUrls.push(aboutHeaderD.headerImg);
+        aboutContentD.map((item) => {
+          if (item?.imageUrl) imageUrls.push(item.imageUrl);
+        });
 
         const preloadImages = imageUrls.map(
           (src) =>

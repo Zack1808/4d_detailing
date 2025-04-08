@@ -36,6 +36,7 @@
 
 .about article:nth-child(2n) section {
   justify-self: end;
+  order: 2;
 }
 
 .about img {
