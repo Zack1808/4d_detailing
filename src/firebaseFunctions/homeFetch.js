@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { getDocs, getDoc, doc, collection } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 
 import { ACTIONS } from "../context/storeContext";
 

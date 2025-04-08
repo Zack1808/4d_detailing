@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 
 import { useScrollPosition } from "../context/scrollContext";
+import { useStore } from "../context/storeContext";
 
 import transition from "../helpers/transition";
 
@@ -10,6 +11,8 @@ import "../css/pages/Services.css";
 
 const Exterior = () => {
   const { resetScroll } = useScrollPosition();
+
+  const { exteriorContent } = useStore();
 
   const priceCards = useMemo(
     () => [
@@ -71,28 +74,27 @@ const Exterior = () => {
 
   return (
     <>
-      <Header title="Čišćenje eksterijera" bgImage="/eksterijer.avif" />
+      <Header
+        title={exteriorContent.title}
+        bgImage={exteriorContent.headerImg}
+      />
 
       <main className="category">
         <article className="container">
           <section>
             <p>
-              Poznata je činjenica da automatske autopraonice s četkama nisu
-              najbolje rješenje za čistoću vašeg vozila. Štoviše, često uzrokuju
-              oštećenja ili nezadovoljavajuće rezultate pranja. Kod nas možete
-              dovesti vozilo na sigurno i detaljno pranje koje neće oštetiti
-              boju niti ostaviti nečistoće na dijelovima vašeg vozila. Koristimo
-              profesionalna i provjerena sredstva i metode kako bismo osigurali
-              samo najbolje rezultate pranja.
-              <br />
-              <br />
-              Za dodatne informacije slobodno nam se javite.
+              {exteriorContent.content?.split(/\n/g).map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
             </p>
             <Button primary link="/kontakt">
               Rezerviraj termin
             </Button>
           </section>
-          <FadeImage src="/washing.avif" alt="placeholder-image-eksterijer" />
+          <FadeImage src={exteriorContent.contentImg} alt="Slika eksterijera" />
         </article>
 
         <article className="container category-prices">

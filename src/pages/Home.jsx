@@ -133,7 +133,6 @@ const Home = () => {
             {reviewsData.content?.split(/\n/g).map((line, index) => (
               <React.Fragment key={index}>
                 {line}
-                {console.log(line)}
                 <br />
               </React.Fragment>
             ))}

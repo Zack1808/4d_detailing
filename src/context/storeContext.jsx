@@ -1,6 +1,7 @@
 import React, { useContext, useReducer, useEffect } from "react";
 
 import { useHome } from "../firebaseFunctions/homeFetch";
+import { useServices } from "../firebaseFunctions/servicesFetch";
 
 const StoreContext = React.createContext();
 
@@ -87,6 +88,7 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { getHero, getServices, getReviewsContet } = useHome();
+  const { getExteriorData } = useServices();
 
   useEffect(() => {
     const retrieveData = async () => {
@@ -95,6 +97,7 @@ export const StoreProvider = ({ children }) => {
         const heroD = await getHero(dispatch);
         const servicesD = await getServices(dispatch);
         await getReviewsContet(dispatch);
+        const exteriorD = await getExteriorData(dispatch);
 
         await new Promise((r) => setTimeout(r, 0));
 
@@ -105,6 +108,8 @@ export const StoreProvider = ({ children }) => {
         servicesD.services.map((service) => {
           if (service?.imageUrl) imageUrls.push(service.imageUrl);
         });
+        if (exteriorD?.contentImg) imageUrls.push(exteriorD.contentImg);
+        if (exteriorD?.headerImg) imageUrls.push(exteriorD.headerImg);
 
         const preloadImages = imageUrls.map(
           (src) =>
