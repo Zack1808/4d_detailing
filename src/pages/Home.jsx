@@ -29,7 +29,7 @@ import {
 
 import "../css/pages/Home.css";
 
-const Home = () => {
+const Home = React.memo(() => {
   const [modal1IsOpen, setModal1IsOpen] = useState(false);
   const [modal2IsOpen, setModal2IsOpen] = useState(false);
   const [starCount, setStarCount] = useState(1);
@@ -230,6 +230,6 @@ const Home = () => {
       </Modal>
     </>
   );
-};
+});
 
 export default Home;

@@ -158,9 +158,12 @@ export const StoreProvider = ({ children }) => {
               img.src = src;
               img.onload = () => {
                 imageCache[src] = img;
+                resolve({ src, img });
+              };
+              img.onerror = (e) => {
+                console.error("Failed to load image:", src);
                 resolve();
               };
-              img.onerror = reject;
 
               const link = document.createElement("link");
               link.rel = "preload";
@@ -172,6 +175,7 @@ export const StoreProvider = ({ children }) => {
         );
 
         await Promise.all(preloadImages);
+
         dispatch({ type: ACTIONS.SET_IMAGE_CACHE, payload: imageCache });
       } catch (err) {
         console.log(err);

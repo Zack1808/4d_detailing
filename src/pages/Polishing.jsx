@@ -9,7 +9,7 @@ import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
 
-const Polishing = () => {
+const Polishing = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { polishContent, polishList } = useStore();
@@ -71,6 +71,6 @@ const Polishing = () => {
       </main>
     </>
   );
-};
+});
 
 export default Polishing;

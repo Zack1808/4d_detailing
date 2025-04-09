@@ -9,7 +9,7 @@ import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
 
-const Packages = () => {
+const Packages = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { packagesContent, packagesList } = useStore();
@@ -65,12 +65,12 @@ const Packages = () => {
 
         <article className="container category-prices">
           {packagesList?.map((priceCard) => (
-            <PriceCard {...priceCard} key={packagesList.id} />
+            <PriceCard {...priceCard} key={priceCard.id} />
           ))}
         </article>
       </main>
     </>
   );
-};
+});
 
 export default Packages;

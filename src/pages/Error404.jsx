@@ -8,7 +8,7 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Error404.css";
 
-const Error404 = () => {
+const Error404 = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   useEffect(() => () => resetScroll());
@@ -29,6 +29,6 @@ const Error404 = () => {
       </main>
     </div>
   );
-};
+});
 
 export default Error404;

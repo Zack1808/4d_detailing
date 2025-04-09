@@ -14,7 +14,7 @@ import { Header, Input, Textarea, Button } from "../components";
 
 import "../css/pages/Contact.css";
 
-const Contact = () => {
+const Contact = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { contactData } = useStore();
@@ -168,6 +168,6 @@ const Contact = () => {
       </main>
     </>
   );
-};
+});
 
 export default Contact;
