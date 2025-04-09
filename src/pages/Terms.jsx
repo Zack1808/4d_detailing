@@ -8,7 +8,7 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Privacy.css";
 
-const Terms = () => {
+const Terms = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   useEffect(() => {
@@ -114,6 +114,6 @@ const Terms = () => {
       </main>
     </>
   );
-};
+});
 
 export default Terms;

@@ -9,7 +9,7 @@ import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
 
-const Interior = () => {
+const Interior = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { interiorContent, interiorList } = useStore();
@@ -71,6 +71,6 @@ const Interior = () => {
       </main>
     </>
   );
-};
+});
 
 export default Interior;

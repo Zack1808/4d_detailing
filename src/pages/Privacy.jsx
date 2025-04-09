@@ -8,7 +8,7 @@ import transition from "../helpers/transition";
 
 import "../css/pages/Privacy.css";
 
-const Privacy = () => {
+const Privacy = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   useEffect(() => {
@@ -161,6 +161,6 @@ const Privacy = () => {
       </main>
     </>
   );
-};
+});
 
 export default Privacy;

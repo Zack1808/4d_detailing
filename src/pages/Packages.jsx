@@ -9,7 +9,7 @@ import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
 
-const Packages = () => {
+const Packages = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { packagesContent, packagesList } = useStore();
@@ -71,6 +71,6 @@ const Packages = () => {
       </main>
     </>
   );
-};
+});
 
 export default Packages;

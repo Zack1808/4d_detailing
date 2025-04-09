@@ -9,7 +9,7 @@ import { useStore } from "../context/storeContext";
 
 import "../css/pages/About.css";
 
-const About = () => {
+const About = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { aboutHeader, aboutData } = useStore();
@@ -74,6 +74,6 @@ const About = () => {
       </main>
     </>
   );
-};
+});
 
 export default About;

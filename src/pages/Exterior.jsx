@@ -9,7 +9,7 @@ import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
 
-const Exterior = () => {
+const Exterior = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
   const { exteriorContent, exteriorList } = useStore();
@@ -38,7 +38,7 @@ const Exterior = () => {
       <Header
         title={exteriorContent.title}
         bgImage={exteriorContent.headerImg}
-        fallbackImage="/washing.avif"
+        fallbackImage="/exterior.avif"
       />
 
       <main className="category">
@@ -71,6 +71,6 @@ const Exterior = () => {
       </main>
     </>
   );
-};
+});
 
 export default Exterior;
