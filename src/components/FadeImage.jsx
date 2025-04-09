@@ -15,7 +15,7 @@ const FadeImage = ({ src, alt, fallbackImage }) => {
 
   const isLoaded = loadedCache[src];
 
-  console.log(isLoaded);
+  console.log(loadedCache);
 
   return (
     <img
