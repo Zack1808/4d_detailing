@@ -174,6 +174,7 @@ export const StoreProvider = ({ children }) => {
         await Promise.all(preloadImages);
 
         console.log(imageCache);
+        console.log("here");
 
         dispatch({ type: ACTIONS.SET_IMAGE_CACHE, payload: imageCache });
       } catch (err) {
