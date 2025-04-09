@@ -38,6 +38,7 @@ const Exterior = () => {
       <Header
         title={exteriorContent.title}
         bgImage={exteriorContent.headerImg}
+        fallbackImage="/eksterijer.avif"
       />
 
       <main className="category">
@@ -55,7 +56,11 @@ const Exterior = () => {
               Rezerviraj termin
             </Button>
           </section>
-          <FadeImage src={exteriorContent.contentImg} alt="Slika eksterijera" />
+          <FadeImage
+            src={exteriorContent.contentImg}
+            alt="Slika eksterijera"
+            fallbackImage="/washing.avif"
+          />
         </article>
 
         <article className="container category-prices">

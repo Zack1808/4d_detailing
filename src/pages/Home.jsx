@@ -102,9 +102,21 @@ const Home = () => {
     [clearReviewForm, starCount, handleCloseModal]
   );
 
+  const images = [
+    "/eksterijer.avif",
+    "/interjer.avif",
+    "/hero-bg-big.avif",
+    "/packages.avif",
+  ];
+
   return (
     <>
-      <Hero scrollTo={handleScroll} {...heroData} />
+      <Hero
+        scrollTo={handleScroll}
+        {...heroData}
+        fallbackBig="/hero-bg-big.avif"
+        fallbackSmall="/hero-bg-small.avif"
+      />
 
       <main ref={mainRef} className="home">
         <article className="container">
@@ -119,6 +131,7 @@ const Home = () => {
                   key={card.to}
                   {...card}
                   style={{ "--transition-delay": `${0.07 * index}s` }}
+                  fallbackImage={images[index]}
                 />
               ))}
           </section>

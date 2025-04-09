@@ -38,6 +38,7 @@ const Packages = () => {
       <Header
         title={packagesContent.title}
         bgImage={packagesContent.headerImg}
+        fallbackImage="/packages.avif"
       />
 
       <main className="category">
@@ -58,6 +59,7 @@ const Packages = () => {
           <FadeImage
             src={packagesContent.contentImg}
             alt="placeholder-image-eksterijer"
+            fallbackImage="https://images.unsplash.com/photo-1614687154052-e05046c3feec?q=80&w=2008&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />
         </article>
 

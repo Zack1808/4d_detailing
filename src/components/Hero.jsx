@@ -2,10 +2,25 @@ import React, { useEffect } from "react";
 
 import { Button } from "./";
 
+import { useStore } from "../context/storeContext";
+
 import "../css/components/Hero.css";
 
 const Hero = React.memo(
-  ({ scrollTo, title, subtitle, heroSmallBg, heroBigBg }) => {
+  ({
+    scrollTo,
+    title,
+    subtitle,
+    heroSmallBg,
+    heroBigBg,
+    fallbackBig,
+    fallbackSmall,
+  }) => {
+    const { loadedCache } = useStore();
+
+    const isLoadedBig = loadedCache[heroBigBg];
+    const isLoadedSmall = loadedCache[heroSmallBg];
+
     useEffect(() => {
       const heroContainer = document.querySelector(".hero-container");
       const observer = new IntersectionObserver(
@@ -24,8 +39,12 @@ const Hero = React.memo(
       <div
         className="hero-container"
         style={{
-          "--heroBigBg": `url(${heroBigBg})`,
-          "--heroSmallBg": `url(${heroSmallBg})`,
+          "--heroBigBg": isLoadedBig
+            ? `url(${heroBigBg})`
+            : `url(${fallbackBig})`,
+          "--heroSmallBg": isLoadedSmall
+            ? `url(${heroSmallBg})`
+            : `url(${fallbackSmall})`,
         }}
       >
         <div className="container">

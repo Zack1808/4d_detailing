@@ -1,19 +1,27 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 
+import { useStore } from "../context/storeContext";
+
 import "../css/components/FadeImage.css";
 
-const FadeImage = ({ src, alt }) => {
+const FadeImage = ({ src, alt, fallbackImage }) => {
   const [imageRef, inView] = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
+  const { loadedCache } = useStore();
+
+  const isLoaded = loadedCache[src];
+
   return (
     <img
       ref={imageRef}
-      src={src}
-      srcSet={`${src} 480w, ${src} 800w, ${src} 1200w`}
+      src={isLoaded ? src : fallbackImage}
+      srcSet={`${isLoaded ? src : fallbackImage} 480w, ${
+        isLoaded ? src : fallbackImage
+      } 800w, ${isLoaded ? src : fallbackImage} 1200w`}
       alt={alt}
       className={inView ? "image-pop" : ""}
     />
