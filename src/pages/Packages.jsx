@@ -65,7 +65,7 @@ const Packages = React.memo(() => {
 
         <article className="container category-prices">
           {packagesList?.map((priceCard) => (
-            <PriceCard {...priceCard} key={packagesList.id} />
+            <PriceCard {...priceCard} key={priceCard.id} />
           ))}
         </article>
       </main>
