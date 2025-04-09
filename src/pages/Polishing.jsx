@@ -55,8 +55,6 @@ const Polishing = () => {
           <FadeImage src={polishContent.contentImg} alt="Slika poliranja" />
         </article>
 
-        {console.log(polishList)}
-
         <article className="container category-prices">
           {polishList?.map((priceCard) => (
             <PriceCard {...priceCard} key={polishList.id} />
