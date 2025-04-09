@@ -33,17 +33,22 @@ const About = () => {
     };
   }, []);
 
+  const image = ["/who-is-4d.avif", "/hero-bg-big.avif", "/packages.avif"];
+
   return (
     <>
-      <Header title={aboutHeader.title} bgImage={aboutHeader.headerImg} />
+      <Header
+        title={aboutHeader.title}
+        bgImage={aboutHeader.headerImg}
+        fallbackImage="/hero-bg-small.avif"
+      />
 
       <main className="about">
-        {aboutData?.map((item) => {
+        {aboutData?.map((item, index) => {
           return (
             <article className="container" key={item.id}>
               <section>
                 <h2>{item.title}</h2>
-                {console.log(item)}
                 <p>
                   {item.content?.split(/\n/g).map((line, index) => (
                     <React.Fragment key={index}>
@@ -58,7 +63,11 @@ const About = () => {
                   </Button>
                 )}
               </section>
-              <FadeImage src={item.imageUrl} alt="Opisna slika" />
+              <FadeImage
+                src={item.imageUrl}
+                alt="Opisna slika"
+                fallbackImage={image[index]}
+              />
             </article>
           );
         })}

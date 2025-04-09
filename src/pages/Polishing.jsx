@@ -35,7 +35,11 @@ const Polishing = () => {
 
   return (
     <>
-      <Header title={polishContent.title} bgImage={polishContent.headerImg} />
+      <Header
+        title={polishContent.title}
+        bgImage={polishContent.headerImg}
+        fallbackImage="/hero-bg-big.avif"
+      />
 
       <main className="category">
         <article className="container">
@@ -52,10 +56,12 @@ const Polishing = () => {
               Rezerviraj termin
             </Button>
           </section>
-          <FadeImage src={polishContent.contentImg} alt="Slika poliranja" />
+          <FadeImage
+            src={polishContent.contentImg}
+            alt="Slika poliranja"
+            fallbackImage="https://images.unsplash.com/photo-1527581849771-416a9d62308e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          />
         </article>
-
-        {console.log(polishList)}
 
         <article className="container category-prices">
           {polishList?.map((priceCard) => (

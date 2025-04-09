@@ -23,6 +23,7 @@ export const ACTIONS = {
   SET_ABOUT_HEADER_DATA: "SET_ABOUT_HEADER_DATA",
   SET_ABOUT_DATA: "SET_ABOUT_DATA",
   SET_CONTACT_DATA: "SET_CONTACT_DATA",
+  SET_IMAGE_CACHE: "SET_IMAGE_CACHE",
 };
 
 export const useStore = () => {
@@ -45,6 +46,7 @@ const initialState = {
   aboutHeader: {},
   aboutData: [],
   contactData: {},
+  loadedCache: {},
 };
 
 const reducer = (state, action) => {
@@ -81,6 +83,8 @@ const reducer = (state, action) => {
       return { ...state, aboutData: action.payload };
     case ACTIONS.SET_CONTACT_DATA:
       return { ...state, contactData: action.payload };
+    case ACTIONS.SET_IMAGE_CACHE:
+      return { ...state, loadedCache: action.payload };
     default:
       return { ...state };
   }
@@ -145,17 +149,30 @@ export const StoreProvider = ({ children }) => {
         });
         if (contactD?.headerImg) imageUrls.push(contactD.headerImg);
 
+        const imageCache = {};
+
         const preloadImages = imageUrls.map(
           (src) =>
             new Promise((resolve, reject) => {
               const img = new Image();
               img.src = src;
-              img.onload = resolve;
+              img.onload = () => {
+                imageCache[src] = img;
+                resolve();
+              };
               img.onerror = reject;
+
+              const link = document.createElement("link");
+              link.rel = "preload";
+              link.as = "image/avif";
+              link.href = src;
+
+              document.head.appendChild(link);
             })
         );
 
         await Promise.all(preloadImages);
+        dispatch({ type: ACTIONS.SET_IMAGE_CACHE, payload: imageCache });
       } catch (err) {
         console.log(err);
       } finally {
