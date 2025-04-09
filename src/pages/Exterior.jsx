@@ -38,7 +38,7 @@ const Exterior = () => {
       <Header
         title={exteriorContent.title}
         bgImage={exteriorContent.headerImg}
-        fallbackImage="/eksterijer.avif"
+        fallbackImage="/washing.avif"
       />
 
       <main className="category">
