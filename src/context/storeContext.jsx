@@ -152,6 +152,13 @@ export const StoreProvider = ({ children }) => {
               img.src = src;
               img.onload = resolve;
               img.onerror = reject;
+
+              const link = document.createElement("link");
+              link.rel = "preload";
+              link.as = "image/avif";
+              link.href = src;
+
+              document.head.appendChild(link);
             })
         );
 
