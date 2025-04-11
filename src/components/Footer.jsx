@@ -56,7 +56,10 @@ const Footer = React.memo(() => {
               <FaClock aria-hidden="true" />
               <strong>Radno vrijeme:</strong> {contactData.worktime}
             </span>
-            <a href={contactData.maps} target="_blank">
+            <a
+              href={`https://www.google.com/maps?q=${contactData.location}`}
+              target="_blank"
+            >
               <FaLocationDot aria-hidden="true" />
               <p>
                 <strong>Lokacija sjedišta:</strong> {contactData.location}

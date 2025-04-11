@@ -108,7 +108,10 @@ const Contact = React.memo(() => {
                 </span>
               </li>
               <li>
-                <a href={contactData.maps} target="_blank">
+                <a
+                  href={`https://www.google.com/maps?q=${contactData.location}`}
+                  target="_blank"
+                >
                   <FaLocationDot aria-hidden="true" />
                   <p>
                     <strong>Lokacija sjedišta:</strong> {contactData.location}
