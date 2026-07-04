@@ -5,13 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useStore } from "./context/storeContext";
 
-import {
-  NavigationBar,
-  Navbar,
-  Footer,
-  Loading,
-  AnimatedRouted,
-} from "./components";
+import { NavigationBar, Navbar, Footer, Loading } from "./components";
 
 const GoogleAnalytic = React.lazy(() => import("./components/GoogleAnalytic"));
 
@@ -68,18 +62,90 @@ const App = () => {
             consentGiven={handleConsent}
             menuIsOpen={menuIsOpen}
           />
-          <AnimatedRouted>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/čišćenje-eksterijera" element={<Exterior />} />
-            <Route exact path="/čišćenje-interijera" element={<Interior />} />
-            <Route exact path="/poliranje-i-zaštita" element={<Polishing />} />
-            <Route exact path="/posebni-paketi" element={<Packages />} />
-            <Route exact path="/o-nama" element={<About />} />
-            <Route exact path="/pravila-privatnosti" element={<Privacy />} />
-            <Route exact path="/uvijeti-korištenja" element={<Terms />} />
-            <Route exact path="/kontakt" element={<Contact />} />
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <React.Suspense fallback={<Loading loading={loading} />}>
+                  <Home />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/čišćenje-eksterijera"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Exterior />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/čišćenje-interijera"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Interior />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/poliranje-i-zaštita"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Polishing />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/posebni-paketi"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Packages />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/o-nama"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <About />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/pravila-privatnosti"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Privacy />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/uvijeti-korištenja"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Terms />
+                </React.Suspense>
+              }
+            />
+            <Route
+              exact
+              path="/kontakt"
+              element={
+                <React.Suspense fallback={<Loading loading={true} />}>
+                  <Contact />
+                </React.Suspense>
+              }
+            />
             <Route path="*" element={<Error404 />} />
-          </AnimatedRouted>
+          </Routes>
           <Footer />
         </div>
       </div>

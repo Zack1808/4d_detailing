@@ -12,7 +12,6 @@ import Textarea from "./Textarea";
 import StarSelect from "./StarSelect";
 import Loading from "./Loading";
 import Header from "./Header";
-import AnimatedRouted from "./AnimatedRoute";
 import PriceCard from "./PriceCard";
 import FadeImage from "./FadeImage";
 
@@ -32,7 +31,6 @@ export {
   StarSelect,
   Loading,
   Header,
-  AnimatedRouted,
   PriceCard,
   FadeImage,
 };

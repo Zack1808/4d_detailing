@@ -24,11 +24,15 @@ const CategoryCard = React.memo(
         className={`category-card ${inView ? "category-visible" : ""}`}
         {...rest}
       >
-        <img src={isLoaded ? imageUrl : fallbackImage} alt="Catergory card" />
+        <img
+          loading="lazy"
+          src={isLoaded ? imageUrl : fallbackImage}
+          alt="Catergory card"
+        />
         <h4>{title}</h4>
       </Link>
     );
-  }
+  },
 );
 
 export default CategoryCard;

@@ -13,8 +13,6 @@ import { useScrollPosition } from "../context/scrollContext";
 
 import { useComments } from "../firebaseFunctions/comments";
 
-import transition from "../helpers/transition";
-
 import {
   Hero,
   CategoryCard,
@@ -35,7 +33,7 @@ const Home = React.memo(() => {
   const [starCount, setStarCount] = useState(1);
   const [selected, setSelected] = useState(0);
 
-  const { heroData, servicesData, reviewsData } = useStore();
+  const { reviewsData } = useStore();
 
   const mainRef = useRef();
   const reviewFormRef = useRef();
@@ -99,7 +97,7 @@ const Home = React.memo(() => {
       const comment = reviewFormRef.current.reviewText.value;
       addComment(starCount, user, comment, handleCloseModal);
     },
-    [clearReviewForm, starCount, handleCloseModal]
+    [clearReviewForm, starCount, handleCloseModal],
   );
 
   const images = [
@@ -109,31 +107,54 @@ const Home = React.memo(() => {
     "/packages.avif",
   ];
 
+  const cards = [
+    {
+      to: "/čišćenje-eksterijera",
+      title: "Čišćenje Eksterijera",
+    },
+    {
+      to: "/čišćenje-interijera",
+      title: "Čišćenje Interijera",
+    },
+    {
+      to: "/poliranje-i-zaštita",
+      title: "Poliranje i Zaštita",
+    },
+    {
+      to: "/posebni-paketi",
+      title: "Posebni Paketi",
+    },
+  ];
+
   return (
     <>
       <Hero
         scrollTo={handleScroll}
-        {...heroData}
+        title="4D Detailing"
+        subtitle="Luksuz koji si možete priuštiti"
         fallbackBig="/hero-bg-big.avif"
         fallbackSmall="/hero-bg-small.avif"
       />
 
       <main ref={mainRef} className="home">
         <article className="container">
-          <h2>{servicesData.title}</h2>
+          <h2>Naše usluge</h2>
 
-          <p>{servicesData.text}</p>
+          <p>
+            Nudimo vam pakete profesionalnih usluga detaljnog čišćenja vozila.
+            One uključuju dubinsko čišćenje, poliranje i zaštitu vašeg limenog
+            ljubimca.
+          </p>
 
           <section className="category-list">
-            {servicesData &&
-              servicesData.services?.map((card, index) => (
-                <CategoryCard
-                  key={card.to}
-                  {...card}
-                  style={{ "--transition-delay": `${0.07 * index}s` }}
-                  fallbackImage={images[index]}
-                />
-              ))}
+            {cards.map((card, index) => (
+              <CategoryCard
+                key={card.to}
+                {...card}
+                style={{ "--transition-delay": `${0.07 * index}s` }}
+                fallbackImage={images[index]}
+              />
+            ))}
           </section>
         </article>
 

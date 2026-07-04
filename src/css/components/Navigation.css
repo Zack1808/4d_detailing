@@ -47,7 +47,9 @@ header .container {
 .navbar-logo {
   width: 13.5rem;
   height: 6rem;
-  transition: width 0.3s ease, height 0.3s ease;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
 }
 
 header.scrolled .navbar-logo {
@@ -105,7 +107,7 @@ header.scrolled .navbar-logo {
   color: var(--thirtary-color);
   text-decoration: none;
   display: flex;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1rem;
   width: auto;
   height: auto;

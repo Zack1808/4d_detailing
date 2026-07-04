@@ -4,8 +4,6 @@ import { useScrollPosition } from "../context/scrollContext";
 
 import { Header } from "../components";
 
-import transition from "../helpers/transition";
-
 import "../css/pages/Privacy.css";
 
 const Privacy = React.memo(() => {

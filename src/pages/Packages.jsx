@@ -3,8 +3,6 @@ import React, { useEffect, useMemo } from "react";
 import { useScrollPosition } from "../context/scrollContext";
 import { useStore } from "../context/storeContext";
 
-import transition from "../helpers/transition";
-
 import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
@@ -12,7 +10,7 @@ import "../css/pages/Services.css";
 const Packages = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
-  const { packagesContent, packagesList } = useStore();
+  const { packagesList } = useStore();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -35,29 +33,29 @@ const Packages = React.memo(() => {
 
   return (
     <>
-      <Header
-        title={packagesContent.title}
-        bgImage={packagesContent.headerImg}
-        fallbackImage="/packages.avif"
-      />
+      <Header title="Posebni paketi" fallbackImage="/packages.avif" />
 
       <main className="category">
         <article className="container">
           <section>
             <p>
-              {packagesContent.content?.split(/\n/g).map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
+              Cijenjeni korisnici, za Vas smo pripremili i par posebnih paketa
+              usluga. Oni su spoj nekoliko naših pojedinačnih ponuda iz sva tri
+              područja njege vozila. Ovi paketi su posebno prigodni za korisnike
+              koji po prvi puta žele njegu svog vozila dati u naše ruke kako bi
+              se lakše odlučili na uslugu. Također za korisnike koji žele
+              redovito kod nas održavati vozilo ovi paketi su odlična priprema
+              za program održavanja.
+              <br />
+              <br />
+              Cijene paketa ovise isključivo o veličini vozila. Slobodno nam se
+              javite s dodatnim pitanjima!
             </p>
             <Button primary link="/kontakt">
               Rezerviraj termin
             </Button>
           </section>
           <FadeImage
-            src={packagesContent.contentImg}
             alt="placeholder-image-eksterijer"
             fallbackImage="https://images.unsplash.com/photo-1614687154052-e05046c3feec?q=80&w=2008&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           />

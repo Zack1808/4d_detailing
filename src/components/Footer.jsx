@@ -32,7 +32,7 @@ const Footer = React.memo(() => {
           <Link to="/" className="logo">
             <picture>
               <source srcSet={logoSvg} media="(min-width: 62.5rem)" />
-              <img src={logoPng} alt="page logo" />
+              <img loading="lazy" src={logoPng} alt="page logo" />
             </picture>
           </Link>
           <p>

@@ -21,7 +21,7 @@ p.elipsis::before {
   bottom: 0;
   padding-left: 2rem;
   right: 0;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 blockquote {
@@ -32,5 +32,5 @@ blockquote {
 
 blockquote footer {
   color: var(--thirtary-color);
-  font-weight: bold;
+  font-weight: 700;
 }

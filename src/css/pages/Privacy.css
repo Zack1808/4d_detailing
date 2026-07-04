@@ -10,12 +10,12 @@
 
 .privacy ul {
   padding-left: 3rem;
-  font-weight: bold;
+  font-weight: 700;
   list-style-type: square;
   color: var(--thirtary-color);
 }
 
 .privacy a {
   color: var(--thirtary-color);
-  font-weight: bold;
+  font-weight: 700;
 }

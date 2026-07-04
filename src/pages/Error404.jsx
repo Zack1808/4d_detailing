@@ -4,8 +4,6 @@ import { Header, Button } from "../components";
 
 import { useScrollPosition } from "../context/scrollContext";
 
-import transition from "../helpers/transition";
-
 import "../css/pages/Error404.css";
 
 const Error404 = React.memo(() => {

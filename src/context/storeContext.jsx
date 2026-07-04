@@ -111,72 +111,72 @@ export const StoreProvider = ({ children }) => {
     const retrieveData = async () => {
       dispatch({ type: ACTIONS.LOADING, payload: true });
       try {
-        const heroD = await getHero(dispatch);
-        const servicesD = await getServices(dispatch);
+        // const heroD = await getHero(dispatch);
+        // const servicesD = await getServices(dispatch);
         await getReviewsContet(dispatch);
-        const exteriorD = await getExteriorData(dispatch);
+        // const exteriorD = await getExteriorData(dispatch);
         await getExteriorList(dispatch);
-        const interiorD = await getInteriorData(dispatch);
+        // const interiorD = await getInteriorData(dispatch);
         await getInteriorList(dispatch);
-        const polishD = await getPolishData(dispatch);
+        // const polishD = await getPolishData(dispatch);
         await getPolishList(dispatch);
-        const packagesD = await getPackagesData(dispatch);
+        // const packagesD = await getPackagesData(dispatch);
         await getPackagesList(dispatch);
-        const aboutHeaderD = await getAboutHeader(dispatch);
-        const aboutContentD = await getAboutContent(dispatch);
-        const contactD = await getContact(dispatch);
+        // const aboutHeaderD = await getAboutHeader(dispatch);
+        // const aboutContentD = await getAboutContent(dispatch);
+        // const contactD = await getContact(dispatch);
 
-        await new Promise((r) => setTimeout(r, 0));
+        // await new Promise((r) => setTimeout(r, 0));
 
-        const imageUrls = [];
+        // const imageUrls = [];
 
-        if (heroD?.heroBigBg) imageUrls.push(heroD.heroBigBg);
-        if (heroD?.heroSmallBg) imageUrls.push(heroD.heroSmallBg);
-        servicesD.services.map((service) => {
-          if (service?.imageUrl) imageUrls.push(service.imageUrl);
-        });
-        if (exteriorD?.contentImg) imageUrls.push(exteriorD.contentImg);
-        if (exteriorD?.headerImg) imageUrls.push(exteriorD.headerImg);
-        if (interiorD?.contentImg) imageUrls.push(interiorD.contentImg);
-        if (interiorD?.headerImg) imageUrls.push(interiorD.headerImg);
-        if (polishD?.contentImg) imageUrls.push(polishD.contentImg);
-        if (polishD?.headerImg) imageUrls.push(polishD.headerImg);
-        if (packagesD?.contentImg) imageUrls.push(packagesD.contentImg);
-        if (packagesD?.headerImg) imageUrls.push(packagesD.headerImg);
-        if (aboutHeaderD?.headerImg) imageUrls.push(aboutHeaderD.headerImg);
-        aboutContentD.map((item) => {
-          if (item?.imageUrl) imageUrls.push(item.imageUrl);
-        });
-        if (contactD?.headerImg) imageUrls.push(contactD.headerImg);
+        // if (heroD?.heroBigBg) imageUrls.push(heroD.heroBigBg);
+        // if (heroD?.heroSmallBg) imageUrls.push(heroD.heroSmallBg);
+        // servicesD.services.map((service) => {
+        //   if (service?.imageUrl) imageUrls.push(service.imageUrl);
+        // });
+        // if (exteriorD?.contentImg) imageUrls.push(exteriorD.contentImg);
+        // if (exteriorD?.headerImg) imageUrls.push(exteriorD.headerImg);
+        // if (interiorD?.contentImg) imageUrls.push(interiorD.contentImg);
+        // if (interiorD?.headerImg) imageUrls.push(interiorD.headerImg);
+        // if (polishD?.contentImg) imageUrls.push(polishD.contentImg);
+        // if (polishD?.headerImg) imageUrls.push(polishD.headerImg);
+        // if (packagesD?.contentImg) imageUrls.push(packagesD.contentImg);
+        // if (packagesD?.headerImg) imageUrls.push(packagesD.headerImg);
+        // if (aboutHeaderD?.headerImg) imageUrls.push(aboutHeaderD.headerImg);
+        // aboutContentD.map((item) => {
+        //   if (item?.imageUrl) imageUrls.push(item.imageUrl);
+        // });
+        // if (contactD?.headerImg) imageUrls.push(contactD.headerImg);
 
-        const imageCache = {};
+        // const imageCache = {};
 
-        const preloadImages = imageUrls.map(
-          (src) =>
-            new Promise((resolve, reject) => {
-              const img = new Image();
-              img.src = src;
-              img.onload = () => {
-                imageCache[src] = img;
-                resolve({ src, img });
-              };
-              img.onerror = (e) => {
-                console.error("Failed to load image:", src);
-                resolve();
-              };
+        // const preloadImages = imageUrls.map(
+        //   (src) =>
+        //     new Promise((resolve, reject) => {
+        //       const img = new Image();
+        //       img.src = src;
+        //       img.onload = () => {
+        //         imageCache[src] = img;
+        //         resolve({ src, img });
+        //       };
+        //       img.onerror = (e) => {
+        //         console.error("Failed to load image:", src);
+        //         resolve();
+        //       };
 
-              const link = document.createElement("link");
-              link.rel = "preload";
-              link.as = "image/avif";
-              link.href = src;
+        //       const link = document.createElement("link");
+        //       link.rel = "preload";
+        //       link.as = "image/avif";
+        //       link.href = src;
 
-              document.head.appendChild(link);
-            })
-        );
+        //       document.head.appendChild(link);
+        //     }),
+        // );
 
-        await Promise.all(preloadImages);
+        // await Promise.all(preloadImages);
 
-        dispatch({ type: ACTIONS.SET_IMAGE_CACHE, payload: imageCache });
+        // dispatch({ type: ACTIONS.SET_IMAGE_CACHE, payload: imageCache });
       } catch (err) {
         console.log(err);
       } finally {

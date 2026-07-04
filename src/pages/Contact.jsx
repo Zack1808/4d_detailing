@@ -8,8 +8,6 @@ import emailjs from "@emailjs/browser";
 import { useScrollPosition } from "../context/scrollContext";
 import { useStore } from "../context/storeContext";
 
-import transition from "../helpers/transition";
-
 import { Header, Input, Textarea, Button } from "../components";
 
 import "../css/pages/Contact.css";
@@ -50,7 +48,7 @@ const Contact = React.memo(() => {
         formRef.current,
         {
           publicKey: import.meta.env.VITE_APP_EMAIL_PUBLIC_KEY,
-        }
+        },
       )
       .then(
         () => {
@@ -58,15 +56,14 @@ const Contact = React.memo(() => {
         },
         (error) => {
           toast.error("Nešto je pošlo po zlu", { theme: "dark" });
-        }
+        },
       );
   }, []);
 
   return (
     <>
       <Header
-        title={contactData.title}
-        bgImage={contactData.headerImg}
+        title="Obratite nam se s povjerenjem"
         fallbackImage="https://images.unsplash.com/photo-1485770958101-9dd7e4ea6d93?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
 
@@ -74,28 +71,24 @@ const Contact = React.memo(() => {
         <article className="container">
           <section>
             <p>
-              {contactData.content?.split(/\n/g).map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
+              U slučaju dodatnih pitanja, nedoumica ili za informacije o našim
+              uslugama i cijenama, možete nas kontaktirati putem ovih usluga:
             </p>
 
             <ul className="contact-data">
               <li>
-                <a href={`mailto:${contactData.email}`}>
+                <a href={`mailto:4d.detailing.ln@gmail.com`}>
                   <IoMail aria-hidden="true" />
                   <p>
-                    <strong>Email:</strong> {contactData.email}
+                    <strong>Email:</strong> 4d.detailing.ln@gmail.com
                   </p>
                 </a>
               </li>
               <li>
-                <a href={`tel:${contactData.mobile}`}>
+                <a href={`tel:+385 97 758 8716`}>
                   <FaPhoneAlt aria-hidden="true" />
                   <p>
-                    <strong>Telefon:</strong> {contactData.mobile}
+                    <strong>Telefon:</strong> +385 97 758 8716
                   </p>
                 </a>
               </li>
@@ -103,24 +96,29 @@ const Contact = React.memo(() => {
                 <span>
                   <FaClock aria-hidden="true" />
                   <p>
-                    <strong>Radno vrijeme:</strong> {contactData.worktime}
+                    <strong>Radno vrijeme:</strong> po dogovoru
                   </p>
                 </span>
               </li>
               <li>
                 <a
-                  href={`https://www.google.com/maps?q=${contactData.location}`}
+                  href={`https://maps.app.goo.gl/BM2TStTNWFyDirfr9`}
                   target="_blank"
                 >
                   <FaLocationDot aria-hidden="true" />
                   <p>
-                    <strong>Lokacija sjedišta:</strong> {contactData.location}
+                    <strong>Lokacija sjedišta:</strong> Rakitovec 274, 10410
+                    Velika Gorica
                   </p>
                 </a>
               </li>
             </ul>
 
-            <iframe title="Lokacija sjedišta" src={contactData.maps} />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.767049803596!2d16.136390876284516!3d45.65549967107774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476687ea7e828591%3A0xf8f5db96b6352889!2sRakitovec%20274%2C%2010419%2C%20Rakitovec!5e0!3m2!1sen!2shr!4v1783196063394!5m2!1sen!2shr"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
           </section>
 
           <section>

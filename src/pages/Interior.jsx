@@ -3,8 +3,6 @@ import React, { useEffect, useMemo } from "react";
 import { useScrollPosition } from "../context/scrollContext";
 import { useStore } from "../context/storeContext";
 
-import transition from "../helpers/transition";
-
 import { Header, PriceCard, Button, FadeImage } from "../components";
 
 import "../css/pages/Services.css";
@@ -12,7 +10,7 @@ import "../css/pages/Services.css";
 const Interior = React.memo(() => {
   const { resetScroll } = useScrollPosition();
 
-  const { interiorContent, interiorList } = useStore();
+  const { interiorList } = useStore();
 
   useEffect(() => {
     const link = document.createElement("link");
@@ -35,32 +33,26 @@ const Interior = React.memo(() => {
 
   return (
     <>
-      <Header
-        title={interiorContent.title}
-        bgImage={interiorContent.headerImg}
-        fallbackImage="/interjer.avif"
-      />
+      <Header title="Čišćenje interijera" fallbackImage="/interjer.avif" />
 
       <main className="category">
         <article className="container">
           <section>
             <p>
-              {interiorContent.content?.split(/\n/g).map((line, index) => (
-                <React.Fragment key={index}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
+              Čišćenje interijera često je teško i vremenski zahtjevan proces.
+              Cijelom interijeru vozila, korištenjem posebnih namjenskih
+              sredstava i alata, pružamo najbolje rezultate čišćenja, koji
+              pritom nisu opasni za dijelove unutrašnjosti vašeg limenog
+              ljubimca.
+              <br />
+              <br />U slučaju jačih zaprljanja, cijena usluge može porasti. Za
+              dodatne informacije vezane uz cijenu slobodno nas kontaktirajte.
             </p>
             <Button primary link="/kontakt">
               Rezerviraj termin
             </Button>
           </section>
-          <FadeImage
-            src={interiorContent.contentImg}
-            alt="Slika interijera"
-            fallbackImage="/car-inside.avif"
-          />
+          <FadeImage alt="Slika interijera" fallbackImage="/car-inside.avif" />
         </article>
 
         <article className="container category-prices">

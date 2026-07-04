@@ -3,8 +3,6 @@ import { useInView } from "react-intersection-observer";
 
 import { useStore } from "../context/storeContext";
 
-import "../css/components/FadeImage.css";
-
 const FadeImage = ({ src, alt, fallbackImage }) => {
   const [imageRef, inView] = useInView({
     threshold: 0.2,
@@ -18,6 +16,7 @@ const FadeImage = ({ src, alt, fallbackImage }) => {
   return (
     <img
       ref={imageRef}
+      loading="lazy"
       src={isLoaded ? src : fallbackImage}
       srcSet={`${isLoaded ? src : fallbackImage} 480w, ${
         isLoaded ? src : fallbackImage

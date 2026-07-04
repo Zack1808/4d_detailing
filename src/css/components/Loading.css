@@ -10,7 +10,9 @@
 }
 
 .loading.loading-done {
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
   opacity: 0;
   visibility: hidden;
 }
@@ -38,7 +40,7 @@
 }
 
 .loading p {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.5rem;
 }
 
