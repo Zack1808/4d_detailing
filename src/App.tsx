@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import Terms from "./pages/Terms";
 
 import Navigation from "./components/layout/Navigation";
+import Footer from "./components/layout/Footer";
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         <Route path="/uvijeti-koristenja" element={<Terms />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
