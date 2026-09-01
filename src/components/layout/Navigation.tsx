@@ -6,7 +6,7 @@ const Navigation: React.FC = () => {
     "font-semibold text-content text-lg text-secondary flex md:w-max w-full px-4 py-3 items-center justify-center hover:bg-thertiary";
 
   return (
-    <header className="w-full bg-primary px-4 py-4 shadow-thertiary/50 shadow-xs flex items-center justify-center">
+    <header className="w-full bg-primary px-4 py-4 shadow-thertiary/20 shadow-xs flex items-center justify-center">
       <div className="w-full md:max-w-[1700px] flex justify-between align-center md:flex-row flex-col gap-4">
         <Link
           to="/"

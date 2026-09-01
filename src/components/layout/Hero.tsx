@@ -10,7 +10,7 @@ const Hero: React.FC<React.HTMLAttributes<HTMLElement>> = ({
 
   return (
     <section className={sectionClasses} {...rest}>
-      <article className="w-full max-w-[1700px] flex items-center justify-between gap-5 p-5">
+      <article className="w-full max-w-[1700px] flex items-start justify-between gap-5 p-5 flex-col">
         {children}
       </article>
     </section>
