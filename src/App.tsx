@@ -8,9 +8,12 @@ import Privacy from "./pages/Privacy";
 import Services from "./pages/Services";
 import Terms from "./pages/Terms";
 
+import Navigation from "./components/layout/Navigation";
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/usluge" element={<Services />} />
