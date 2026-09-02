@@ -1,11 +1,31 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/MontSerrat/Montserrat-Italic-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
   --color-light: #fafafa;
   --color-dark: #1a1110;
   --color-gray-light: #91918e;
   --color-gray-semidark: #3e3d3c;
   --color-gray-dark: #2b2b2b;
-  --font-title: "Poppins", sans-serif;
-  --font-content: "Inter", serif;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
 }
