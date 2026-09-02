@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const Navigation: React.FC = () => {
   const linkClasses =
-    "font-semibold text-content text-lg text-secondary flex md:w-max w-full px-4 py-3 items-center justify-center hover:bg-thertiary";
+    "font-semibold text-content text-lg text-dark flex md:w-max w-full px-4 py-3 items-center justify-center hover:bg-gray-100/50";
 
   return (
-    <header className="w-full fixed bg-transparent px-4 py-4 shadow-thertiary/10 shadow-xs flex items-center justify-center z-50">
+    <header className="w-full fixed bg-transparent px-4 py-4 shadow-sm flex items-center justify-center z-50">
       <div className="w-full md:max-w-[1700px] flex justify-between align-center md:flex-row flex-col gap-4">
         <Link
           to="/"
           className="flex items-center justify-center gap-4 md:w-max w-full font-title text-secondary"
         >
           <img src="/logo_light.svg" alt="4D Detailing" className="w-24" />
-          <p className="font-semibold text-4xl">4D Detailing</p>
+          <p className="font-semibold text-4xl text-dark">4D Detailing</p>
         </Link>
 
         <nav className="flex items-center justify-center md:flex-row flex-col">
