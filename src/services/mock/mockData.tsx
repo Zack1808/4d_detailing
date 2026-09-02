@@ -15,6 +15,7 @@ export const mockServices: ServiceDataType[] = [
     extraTransporter: "30",
     info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila. Trajanje do 2.5 sata",
     hasDiscount: false,
+    discount: "",
     isFeatured: true,
   },
   {
@@ -31,6 +32,7 @@ export const mockServices: ServiceDataType[] = [
     extraTransporter: "30",
     info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila. Trajanje do 2.5 sata",
     hasDiscount: false,
+    discount: "",
     isFeatured: true,
   },
   {
@@ -47,6 +49,7 @@ export const mockServices: ServiceDataType[] = [
     extraTransporter: "30",
     info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila. Trajanje do 2.5 sata",
     hasDiscount: true,
+    discount: "",
     isFeatured: true,
   },
 ];
