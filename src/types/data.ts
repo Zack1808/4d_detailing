@@ -1,12 +1,14 @@
 export type ServiceDataType = {
   title: string;
   price: string;
+  category: "exterior" | "interior" | "polishing" | "package";
   services: string[];
   extraSuv?: string;
   extraTransporter?: string;
   info?: string;
   hasDiscount: boolean;
   discount?: string;
+  isFeatured: boolean;
 };
 
 export type ReviewType = {
