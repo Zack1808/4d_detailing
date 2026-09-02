@@ -6,14 +6,14 @@ const Navigation: React.FC = () => {
     "font-semibold text-content text-lg text-secondary flex md:w-max w-full px-4 py-3 items-center justify-center hover:bg-thertiary";
 
   return (
-    <header className="w-full bg-primary px-4 py-4 shadow-thertiary/20 shadow-xs flex items-center justify-center">
+    <header className="w-full fixed bg-transparent px-4 py-4 shadow-thertiary/10 shadow-xs flex items-center justify-center z-50">
       <div className="w-full md:max-w-[1700px] flex justify-between align-center md:flex-row flex-col gap-4">
         <Link
           to="/"
           className="flex items-center justify-center gap-4 md:w-max w-full font-title text-secondary"
         >
-          <img src="/logo_light.svg" alt="4D Detailing" className="w-14" />
-          <p className="font-semibold text-3xl">4D Detailing</p>
+          <img src="/logo_light.svg" alt="4D Detailing" className="w-24" />
+          <p className="font-semibold text-4xl">4D Detailing</p>
         </Link>
 
         <nav className="flex items-center justify-center md:flex-row flex-col">
