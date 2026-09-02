@@ -23,10 +23,10 @@ const BASE_CLASSES =
 
 const VARIANT_CLASSES = {
   primary:
-    "border border-dark bg-dark text-light hover:border-gray-semidark hover:bg-gray-semidark ",
+    "border border-dark dark:border-light bg-dark dark:bg-light text-light dark:text-dark hover:border-gray-semidark hover:bg-gray-semidark dark:hover:border-gray-400 dark:hover:bg-gray-400",
   secondary:
-    "border border-dark text-dark hover:border-gray-semidark hover:bg-gray-200",
-  none: "text-dark",
+    "border border-dark dark:border-light text-dark dark:text-light hover:border-gray-semidark dark:hover:border-gray-200 hover:bg-gray-200 dark:hover:bg-gray-semidark",
+  none: "text-dark dark:text-light",
 } as const;
 
 const buttonClasses = (

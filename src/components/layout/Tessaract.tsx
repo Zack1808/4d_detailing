@@ -99,6 +99,8 @@ const Tesseract = ({
   className,
   thickness = 5,
 }: TesseractProps) => {
+  const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   const auraRef = useRef<SVGGElement>(null);
   const bodyRef = useRef<SVGGElement>(null);
   const edgesRef = useRef<SVGGElement>(null);
@@ -180,6 +182,7 @@ const Tesseract = ({
       <defs>
         <filter
           id={`${id}-wideGlow`}
+          fill="#5aa8ee"
           x="-80%"
           y="-80%"
           width="260%"
@@ -193,7 +196,6 @@ const Tesseract = ({
       <g
         ref={auraRef}
         fill="none"
-        stroke="#5aa8ee"
         strokeWidth="8"
         strokeLinecap="square"
         strokeLinejoin="miter"
@@ -208,7 +210,6 @@ const Tesseract = ({
       {/* Main glossy body */}
       <g
         ref={bodyRef}
-        fill="none"
         stroke={`url(#${id}-tube)`}
         strokeWidth="7"
         strokeLinecap="round"
@@ -224,7 +225,7 @@ const Tesseract = ({
       <g
         ref={edgesRef}
         fill="none"
-        stroke="#1a1110"
+        stroke={darkMode ? "#fafafa" : "#1a1110"}
         strokeWidth={thickness}
         strokeLinecap="round"
         strokeLinejoin="miter"
@@ -237,7 +238,6 @@ const Tesseract = ({
       {/* Specular highlight */}
       <g
         ref={shineRef}
-        fill="none"
         strokeWidth="1.15"
         strokeLinecap="round"
         strokeLinejoin="round"
