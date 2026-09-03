@@ -7,13 +7,14 @@ type Point3D = {
 };
 
 type TesseractProps = {
-  width?: number | string;
-  height?: number | string;
+  size: number | string;
   className?: string;
   thickness?: number;
+  speed?: number;
+  color?: string;
 };
 
-const LOOP = 70000;
+const LOOP = 1000;
 
 // 16 vertices of a tesseract: (±1, ±1, ±1, ±1)
 const V: number[][] = [];
@@ -94,12 +95,13 @@ function pathFor(a: Point3D, b: Point3D): string {
 }
 
 const Tesseract = ({
-  width = 256,
-  height = 256,
+  size = 256,
   className,
-  thickness = 5,
+  thickness = 1,
+  speed = 1,
+  color = "#1a1110",
 }: TesseractProps) => {
-  const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const duration = LOOP * speed;
 
   const auraRef = useRef<SVGGElement>(null);
   const bodyRef = useRef<SVGGElement>(null);
@@ -134,7 +136,7 @@ const Tesseract = ({
     let animationFrameId: number;
 
     const animate = (ms: number) => {
-      const phase = (ms % LOOP) / LOOP;
+      const phase = (ms % duration) / duration;
 
       const points = V.map((vertex) => project(vertex, phase));
 
@@ -173,8 +175,8 @@ const Tesseract = ({
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
-      width={width}
-      height={height}
+      width={size}
+      height={size}
       className={className}
       aria-label="Rotating tesseract"
       role="img"
@@ -225,7 +227,7 @@ const Tesseract = ({
       <g
         ref={edgesRef}
         fill="none"
-        stroke={darkMode ? "#fafafa" : "#1a1110"}
+        stroke={color}
         strokeWidth={thickness}
         strokeLinecap="round"
         strokeLinejoin="miter"
