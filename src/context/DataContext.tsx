@@ -19,12 +19,19 @@ type DataProviderType = {
 const DataContext = React.createContext<DataContextType | undefined>(undefined);
 
 export const useData = () => {
-  return useContext(DataContext);
+  const context = useContext(DataContext);
+
+  if (!context) {
+    throw new Error("useData must be used within a DataProvider");
+  }
+
+  return context;
 };
 
 export const DataProvider = ({ children }: DataProviderType) => {
   const [services, setServices] = useState<ServiceDataType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
+  const [showLoader, setShowLoader] = useState<boolean>(true);
 
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -45,9 +52,27 @@ export const DataProvider = ({ children }: DataProviderType) => {
     getData();
   }, []);
 
+  useEffect(() => {
+    if (!pageLoading) {
+      const timer = setTimeout(() => setShowLoader(false), 700);
+
+      return () => clearTimeout(timer);
+    }
+  }, [pageLoading]);
+
   return (
     <DataContext.Provider value={{ isDark, services, reviews }}>
-      {pageLoading ? <PageLoader isDark={isDark} /> : children}
+      {showLoader && (
+        <PageLoader
+          isDark={isDark}
+          className={` ${
+            pageLoading
+              ? "opacity-100"
+              : "opacity-0 pointer-events-none transition-opacity duration-700"
+          }`}
+        />
+      )}
+      {children}
     </DataContext.Provider>
   );
 };

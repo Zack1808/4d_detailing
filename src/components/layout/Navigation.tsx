@@ -8,7 +8,7 @@ const Navigation: React.FC = () => {
     "font-semibold text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
 
   return (
-    <header className="w-full bg-light/10 dark:bg-dark/10 fixed  px-4 py-4 backdrop-blur-xs dark:backdrop-blur-lg shadow-sm flex items-center justify-center z-50">
+    <header className="w-full bg-light/10 dark:bg-dark/10 fixed  px-4 py-4 backdrop-blur-xs dark:backdrop-blur-lg shadow-sm flex items-center justify-center z-40">
       <div className="w-full md:max-w-[1700px] flex justify-between align-center md:flex-row flex-col gap-4">
         <Link
           to="/"
