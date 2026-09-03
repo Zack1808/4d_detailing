@@ -11,7 +11,7 @@ type TesseractProps = {
   className?: string;
   thickness?: number;
   speed?: number;
-  color?: string;
+  isDark?: boolean;
 };
 
 const LOOP = 1000;
@@ -99,7 +99,7 @@ const Tesseract = ({
   className,
   thickness = 1,
   speed = 1,
-  color = "#1a1110",
+  isDark = false,
 }: TesseractProps) => {
   const duration = LOOP * speed;
 
@@ -227,7 +227,7 @@ const Tesseract = ({
       <g
         ref={edgesRef}
         fill="none"
-        stroke={color}
+        stroke={isDark ? "#fafafa" : "#1a1110"}
         strokeWidth={thickness}
         strokeLinecap="round"
         strokeLinejoin="miter"

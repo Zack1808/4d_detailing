@@ -17,7 +17,7 @@ const Home: React.FC = () => {
         className="absolute md:right-80 right-0 -z-50 opacity-15 dark:opacity-35 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
         thickness={5}
         speed={70}
-        color={darkMode ? "#fafafa" : "#1a1110"}
+        isDark={darkMode}
       />
       <Hero>
         <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
