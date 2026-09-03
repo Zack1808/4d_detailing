@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useMemo } from "react";
 
 import PageLoader from "../components/layout/PageLoader";
 
@@ -33,7 +33,10 @@ export const DataProvider = ({ children }: DataProviderType) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [showLoader, setShowLoader] = useState<boolean>(true);
 
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const isDark = useMemo(
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches,
+    [window.matchMedia("(prefers-color-scheme: dark)").matches],
+  );
 
   const { pageLoading, getPageData } = useGetPageData();
 

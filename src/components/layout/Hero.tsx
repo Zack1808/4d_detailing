@@ -6,7 +6,7 @@ const Hero: React.FC<React.HTMLAttributes<HTMLElement>> = ({
   ...rest
 }) => {
   const sectionClasses =
-    `w-full min-h-svh flex justify-center items-center ${className}`.trim();
+    `w-full min-h-svh flex justify-center items-center bg-linear-to-b from-transparent from-70% to-light dark:to-dark  pt-40!  ${className}`.trim();
 
   return (
     <section className={sectionClasses} {...rest}>

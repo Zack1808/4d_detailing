@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useData } from "../../context/DataContext";
+
 const Navigation: React.FC = () => {
-  const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const { isDark } = useData();
 
   const linkClasses =
     "font-semibold text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
@@ -15,7 +17,7 @@ const Navigation: React.FC = () => {
           className="flex items-center justify-center gap-4 md:w-max w-full"
         >
           <img
-            src={darkMode ? "/logo_dark.svg" : "/logo_light.svg"}
+            src={isDark ? "/logo_dark.svg" : "/logo_light.svg"}
             alt="4D Detailing"
             className="w-24"
           />

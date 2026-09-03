@@ -7,18 +7,21 @@ import Button from "../components/common/Button";
 
 import Tesseract from "../components/animated/Tessaract";
 
+import { useData } from "../context/DataContext";
+
 const Home: React.FC = () => {
-  const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const { isDark } = useData();
 
   return (
     <main className="relative overflow-hidden">
       <Tesseract
         size={1700}
-        className="absolute md:right-80 right-0 -z-50 opacity-15 dark:opacity-35 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
+        className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
         thickness={5}
         speed={70}
-        isDark={darkMode}
+        isDark={isDark}
       />
+
       <Hero>
         <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
           4D Detailing
@@ -34,10 +37,15 @@ const Home: React.FC = () => {
         </div>
       </Hero>
 
-      <Container id="services">
+      <Container id="services" className="bg-light dark:bg-dark pt-40! ">
         <h2 className="font-bold text-3xl text-dark dark:text-light">
-          Naše usluge
+          Naše najpopularnije usluge
         </h2>
+        <p className="text-dark dark:text-light text-lg max-w-[75ch]">
+          Odaberite jednu od naših najtraženijih usluga i priuštite svom vozilu
+          temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa koje naši
+          klijenti najčešće biraju.
+        </p>
       </Container>
 
       <Container id="about">
@@ -51,6 +59,7 @@ const Home: React.FC = () => {
           Što kažu naši klijenti?
         </h2>
       </Container>
+
       <Container id="forward-contact"></Container>
     </main>
   );
