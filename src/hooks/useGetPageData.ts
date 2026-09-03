@@ -8,7 +8,7 @@ import {
 
 import { type ServiceDataType, type ReviewType } from "../types/data";
 
-type useGetPageDataType = (useMockData: boolean) => {
+type useGetPageDataType = (useMockData?: boolean) => {
   loading: boolean;
   pageLoading: boolean;
   error: string | null;
