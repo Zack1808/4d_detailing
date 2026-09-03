@@ -4,13 +4,14 @@ import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
 
 import Button from "../components/common/Button";
+import Card from "../components/common/Card";
 
 import Tesseract from "../components/animated/Tessaract";
 
 import { useData } from "../context/DataContext";
 
 const Home: React.FC = () => {
-  const { isDark } = useData();
+  const { isDark, services } = useData();
 
   return (
     <main className="relative overflow-hidden">
@@ -46,6 +47,12 @@ const Home: React.FC = () => {
           temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa koje naši
           klijenti najčešće biraju.
         </p>
+
+        <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-3 mt-6">
+          {services.map((service) => (
+            <Card item={service} />
+          ))}
+        </div>
       </Container>
 
       <Container id="about">
