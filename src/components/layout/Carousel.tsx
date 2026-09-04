@@ -157,7 +157,7 @@ const Carousel: React.FC<CarouselProps> = ({ reviews }) => {
         {" "}
         {slides.map((review, index) => (
           <div
-            className="w-full shrink-0 odd:pr-1.5 even:pl-1.5 md:w-1/2"
+            className={`w-full shrink-0 ${reviews.length % 2 === 0 ? "md:odd:pr-1.5 md:even:pl-1.5" : "md:odd:pl-1.5 md:even:pr-1.5"} md:w-1/2`}
             key={`${review.name}-${index}`}
           >
             <ReviewCard review={review} />

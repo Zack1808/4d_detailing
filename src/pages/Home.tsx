@@ -55,7 +55,7 @@ const Home: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex w-full md:flex-row flex-col items-baseline-last gap-6 mt-3 justify-between">
+        <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
           <div className="flex flex-col gap-3">
             <h5 className="text-dark dark:text-light text-xl font-bold">
               Ne znate koja je usluga najbolja za vaše vozilo?
@@ -107,9 +107,40 @@ const Home: React.FC = () => {
         </p>
 
         <Carousel reviews={reviews} />
+
+        <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
+          <div className="flex flex-col gap-3">
+            <h5 className="text-dark dark:text-light text-xl font-bold">
+              Bili ste zadovoljni našom uslugom?
+            </h5>
+            <p className="text-dark dark:text-light max-w-[75ch]">
+              Vaše mišljenje nam puno znači. Ako ste već svoje vozilo povjerili
+              našem timu, podijelite svoje iskustvo i pomozite drugima da nas
+              lakše upoznaju.
+            </p>
+          </div>
+
+          <Button variant="primary">Ostavite recenziju</Button>
+        </div>
       </Container>
 
-      <Container id="forward-contact"></Container>
+      <Container id="cta-contact">
+        <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
+          <div className="flex flex-col gap-3">
+            <h3 className="text-dark dark:text-light text-xl font-bold">
+              Vaše vozilo. Naša pažnja. Besprijekoran rezultat.
+            </h3>
+            <p className="text-dark dark:text-light max-w-[75ch]">
+              Prepustite svoje vozilo u ruke profesionalaca i vratite mu
+              čistoću, sjaj i zaštitu koju zaslužuje.
+            </p>
+          </div>
+
+          <Button variant="primary" to="/kontakt">
+            Rezerviraj termin
+          </Button>
+        </div>
+      </Container>
     </main>
   );
 };
