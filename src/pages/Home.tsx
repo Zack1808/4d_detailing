@@ -42,16 +42,31 @@ const Home: React.FC = () => {
         <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naše najpopularnije usluge
         </h2>
-        <p className="text-dark dark:text-light max-w-[75ch]">
+        <p className="text-dark dark:text-light max-w-[75ch] mt-3">
           Odaberite jednu od naših najtraženijih usluga i priuštite svom vozilu
           temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa koje naši
           klijenti najčešće biraju.
         </p>
 
-        <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-3 mt-6">
+        <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
           {services.map((service) => (
             <Card item={service} />
           ))}
+        </div>
+
+        <div className="flex w-full md:flex-row flex-col items-baseline-last gap-6 mt-3 justify-between">
+          <div className="flex flex-col gap-3">
+            <h5 className="text-dark dark:text-light text-xl font-bold">
+              Ne znate koja je usluga najbolja za vaše vozilo?
+            </h5>
+            <p className="text-dark dark:text-light max-w-[75ch]">
+              Pogledajte kompletnu ponudu i pronađite paket koji vam odgovara.
+            </p>
+          </div>
+
+          <Button variant="secondary" to="/usluge">
+            Pregledajte sve usluge
+          </Button>
         </div>
       </Container>
 
@@ -59,7 +74,7 @@ const Home: React.FC = () => {
         <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naša misija
         </h2>
-        <p className="text-dark dark:text-light max-w-[75ch]">
+        <p className="text-dark dark:text-light max-w-[75ch] mt-3">
           4D Detailing nastao je iz ljubavi prema automobilima i želje da tu
           strast pretvorimo u vrhunsku uslugu.
           <br />
