@@ -37,7 +37,7 @@ export const mockServices: ServiceDataType[] = [
   },
   {
     title: "Vanjsko pranje, uključujući naplatke.",
-    price: "20",
+    price: "35 - 100",
     services: [
       "Detaljno pranje eksterijera",
       "Detaljno pranje naplataka",
@@ -53,7 +53,7 @@ export const mockServices: ServiceDataType[] = [
     extraTransporter: "30",
     info: "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila. Trajanje do 2.5 sata",
     hasDiscount: true,
-    discount: "",
+    discount: "22",
     isFeatured: true,
   },
 ];

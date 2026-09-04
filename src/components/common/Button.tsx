@@ -19,7 +19,7 @@ type AnchorButtonProps = BaseButtonProps &
 type ButtonProps = RegularButtonProps | LinkButtonProps | AnchorButtonProps;
 
 const BASE_CLASSES =
-  "py-3 px-4 flex rounded-xs items-center gap-2 transition max-w-fit text-lg disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-400 disabled:pointer-events-none font-semibold";
+  "py-3 px-4 flex rounded-xs items-center gap-2 transition max-w-fit disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-400 disabled:pointer-events-none font-semibold";
 
 const VARIANT_CLASSES = {
   primary:

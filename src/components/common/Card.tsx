@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import Button from "./Button";
 
 import { type ServiceDataType } from "../../types/data";
+
+import { useData } from "../../context/DataContext";
 
 type CardProps = {
   item: ServiceDataType;
 };
 
 const Card: React.FC<CardProps> = ({ item }) => {
+  const { isDark } = useData();
+
+  const wheel = isDark ? "/wheel_dark.svg" : "/wheel_light.svg";
+
+  const discountedPrice = useMemo(() => {
+    const priceList = item.price.split("-");
+
+    if (!item.hasDiscount) return `${priceList.join("-")}`;
+
+    const newPriceList = priceList.map((price) => {
+      return Math.round(Number(price) * (1 - Number(item.discount) / 100));
+    });
+
+    return `${newPriceList.join(" - ")}`;
+  }, [item.price, item.discount, item.hasDiscount]);
+
   return (
     <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 p-4 flex flex-col gap-9">
       <header className="flex flex-col gap-6">
@@ -17,13 +35,19 @@ const Card: React.FC<CardProps> = ({ item }) => {
         </h4>
         <p className="text-4xl text-dark dark:text-light flex gap-3 font-bold">
           <small className="mb-3 text-md font-normal">€</small>
-          {item.price}
+          <span
+            className={`${item.hasDiscount ? "line-through text-gray-300 dark:text-gray-light" : ""}`}
+          >
+            {item.price}
+          </span>
+          {item.hasDiscount && <span>{discountedPrice}</span>}
         </p>
       </header>
-      <main className="flex flex-col gap-6 text-dark dark:text-light">
-        <ul className="flex flex-col gap-3 list-inside list-image-[url(/logo_dark.svg)]">
+      <main className="flex flex-col gap-6 text-dark dark:text-light ">
+        <ul className={`flex flex-col gap-3`}>
           {item.services.map((service) => (
-            <li key={service} className="">
+            <li key={service} className="flex items-center justify-start gap-3">
+              <img src={wheel} alt="wheel image" className="w-5" />
               {service}
             </li>
           ))}
