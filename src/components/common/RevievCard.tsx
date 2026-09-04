@@ -9,7 +9,7 @@ type ReviewCardProps = {
 
 const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
   return (
-    <div className="px-6 py-9 rounded-sm shadow-sm w-full bg-gray-light/20 dark:bg-gray-dark/20 flex flex-col gap-9">
+    <div className="px-6 py-9 rounded-sm shadow-sm w-full bg-gray-light/20 dark:bg-gray-dark/20 flex flex-col gap-9 h-full">
       <header className="flex gap-3 text-dark dark:text-light text-2xl">
         {Array.from({ length: review.starCount }).map((_, index) => (
           <FaStar key={index} />
@@ -18,10 +18,10 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
           <FaRegStar key={index} />
         ))}
       </header>
-      <blockquote className="text-dark dark:text-light flex flex-col gap-6">
+      <blockquote className="text-dark dark:text-light flex flex-col gap-6 h-full">
         <p>{review.review}</p>
 
-        <span className="font-bold">
+        <span className="font-bold mt-auto">
           -{" "}
           <cite>
             {review.name} {review.surname}
