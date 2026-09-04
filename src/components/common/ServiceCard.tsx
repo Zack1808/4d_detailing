@@ -6,11 +6,11 @@ import { type ServiceDataType } from "../../types/data";
 
 import { useData } from "../../context/DataContext";
 
-type CardProps = {
+type ServiceCardProps = {
   item: ServiceDataType;
 };
 
-const Card: React.FC<CardProps> = ({ item }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   const { isDark } = useData();
 
   const wheel = isDark ? "/wheel_dark.svg" : "/wheel_light.svg";
@@ -87,4 +87,4 @@ const Card: React.FC<CardProps> = ({ item }) => {
   );
 };
 
-export default Card;
+export default ServiceCard;

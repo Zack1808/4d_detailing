@@ -4,14 +4,15 @@ import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
 
 import Button from "../components/common/Button";
-import Card from "../components/common/Card";
+import ServiceCard from "../components/common/ServiceCard";
+import ReviewCard from "../components/common/RevievCard";
 
 import Tesseract from "../components/animated/Tessaract";
 
 import { useData } from "../context/DataContext";
 
 const Home: React.FC = () => {
-  const { isDark, services } = useData();
+  const { isDark, services, reviews } = useData();
 
   return (
     <main className="relative overflow-hidden">
@@ -50,7 +51,7 @@ const Home: React.FC = () => {
 
         <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
           {services.map((service) => (
-            <Card item={service} />
+            <ServiceCard item={service} />
           ))}
         </div>
 
@@ -98,6 +99,16 @@ const Home: React.FC = () => {
         <h2 className="font-bold text-4xl text-dark dark:text-light">
           Što kažu naši klijenti?
         </h2>
+        <p className="text-dark dark:text-light">
+          Vaše zadovoljstvo je naša najbolja preporuka.
+          <br />
+          Pogledajte iskustva onih koji su svoje vozilo već povjerili 4D
+          Detailing timu.
+        </p>
+
+        {reviews.map((review) => (
+          <ReviewCard review={review} />
+        ))}
       </Container>
 
       <Container id="forward-contact"></Container>
