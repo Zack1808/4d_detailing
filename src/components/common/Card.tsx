@@ -28,15 +28,15 @@ const Card: React.FC<CardProps> = ({ item }) => {
   }, [item.price, item.discount, item.hasDiscount]);
 
   return (
-    <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 p-4 flex flex-col gap-9">
+    <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 px-6 py-9 flex flex-col gap-9">
       <header className="flex flex-col gap-6">
-        <h4 className="text-2xl font-semibold text-dark dark:text-light">
+        <h3 className="text-3xl font-bold text-dark dark:text-light">
           {item.title}
-        </h4>
-        <p className="text-4xl text-dark dark:text-light flex gap-3 font-bold">
+        </h3>
+        <p className="text-2xl text-dark dark:text-light flex gap-3 font-semibold">
           <small className="mb-3 text-md font-normal">€</small>
           <span
-            className={`${item.hasDiscount ? "line-through text-gray-300 dark:text-gray-light" : ""}`}
+            className={`${item.hasDiscount ? "line-through text-gray-600 dark:text-gray-light" : ""}`}
           >
             {item.price}
           </span>
@@ -46,7 +46,10 @@ const Card: React.FC<CardProps> = ({ item }) => {
       <main className="flex flex-col gap-6 text-dark dark:text-light ">
         <ul className={`flex flex-col gap-3`}>
           {item.services.map((service) => (
-            <li key={service} className="flex items-center justify-start gap-3">
+            <li
+              key={service}
+              className="flex items-center  justify-start gap-3"
+            >
               <img src={wheel} alt="wheel image" className="w-5" />
               {service}
             </li>

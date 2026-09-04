@@ -39,10 +39,10 @@ const Home: React.FC = () => {
       </Hero>
 
       <Container id="services" className="bg-light dark:bg-dark pt-40! ">
-        <h2 className="font-bold text-3xl text-dark dark:text-light">
+        <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naše najpopularnije usluge
         </h2>
-        <p className="text-dark dark:text-light text-lg max-w-[75ch]">
+        <p className="text-dark dark:text-light max-w-[75ch]">
           Odaberite jednu od naših najtraženijih usluga i priuštite svom vozilu
           temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa koje naši
           klijenti najčešće biraju.
@@ -56,13 +56,13 @@ const Home: React.FC = () => {
       </Container>
 
       <Container id="about">
-        <h2 className="font-bold text-3xl text-dark dark:text-light">
+        <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naša misija
         </h2>
       </Container>
 
       <Container id="reviews">
-        <h2 className="font-bold text-3xl text-dark dark:text-light">
+        <h2 className="font-bold text-4xl text-dark dark:text-light">
           Što kažu naši klijenti?
         </h2>
       </Container>
