@@ -2,10 +2,10 @@ import React from "react";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
+import Carousel from "../components/layout/Carousel";
 
 import Button from "../components/common/Button";
 import ServiceCard from "../components/common/ServiceCard";
-import ReviewCard from "../components/common/RevievCard";
 
 import Tesseract from "../components/animated/Tessaract";
 
@@ -106,9 +106,7 @@ const Home: React.FC = () => {
           Detailing timu.
         </p>
 
-        {reviews.map((review) => (
-          <ReviewCard review={review} />
-        ))}
+        <Carousel reviews={reviews} />
       </Container>
 
       <Container id="forward-contact"></Container>
