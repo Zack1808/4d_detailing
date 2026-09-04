@@ -59,6 +59,24 @@ const Home: React.FC = () => {
         <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naša misija
         </h2>
+        <p className="text-dark dark:text-light max-w-[75ch]">
+          4D Detailing nastao je iz ljubavi prema automobilima i želje da tu
+          strast pretvorimo u vrhunsku uslugu.
+          <br />
+          Vjerujemo da svako vozilo zaslužuje pažnju, kvalitetnu njegu i
+          profesionalan pristup. Zato pružamo detailing usluge koje ne
+          podrazumijevaju samo čišćenje, već brigu o svakom detalju – od izgleda
+          i sjaja do dugotrajne zaštite.
+          <br />
+          Bilo da ste zaljubljenik u automobile ili jednostavno želite da vaše
+          vozilo izgleda i bude očuvano kao prvog dana, mi smo tu da se
+          pobrinemo za njega.
+          <br />
+          <br />
+          Profesionalna njega nije trošak. To je ulaganje u vaše vozilo.
+        </p>
+
+        {/* TODO: Add desaturated image of the owner on the side  */}
       </Container>
 
       <Container id="reviews">
