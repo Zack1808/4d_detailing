@@ -50,8 +50,8 @@ const Home: React.FC = () => {
         </p>
 
         <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-          {services.map((service) => (
-            <ServiceCard item={service} />
+          {services.map((service, index) => (
+            <ServiceCard item={service} key={`${service.title}-${index}`} />
           ))}
         </div>
 
@@ -189,7 +189,7 @@ const Home: React.FC = () => {
           </div>
           <img
             src={isDark ? "/logo_dark.svg" : "/logo_light.svg"}
-            className="w-1/3"
+            className="w-1/3 md:flex hidden"
           />
         </div>
       </Container>

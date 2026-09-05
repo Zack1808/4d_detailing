@@ -32,7 +32,9 @@ export const DataProvider = ({ children }: DataProviderType) => {
   const [services, setServices] = useState<ServiceDataType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [showLoader, setShowLoader] = useState<boolean>(true);
-  const [isDark, setIsDark] = useState<boolean>(false);
+  const [isDark, setIsDark] = useState<boolean>(
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
+  );
 
   const { pageLoading, getPageData } = useGetPageData();
 

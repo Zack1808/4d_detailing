@@ -141,7 +141,7 @@ const Carousel: React.FC<CarouselProps> = ({ reviews }) => {
   const translatePercentage = currentIndex * (100 / itemsPerPage);
 
   return (
-    <div className="relative mt-6 w-full overflow-hidden">
+    <div className="relative mt-3 w-full overflow-hidden">
       <div
         className="flex"
         onTransitionEnd={handleTransitionEnd}
@@ -154,10 +154,9 @@ const Carousel: React.FC<CarouselProps> = ({ reviews }) => {
               : "none",
         }}
       >
-        {" "}
         {slides.map((review, index) => (
           <div
-            className={`w-full shrink-0 ${reviews.length % 2 === 0 ? "md:odd:pr-1.5 md:even:pl-1.5" : "md:odd:pl-1.5 md:even:pr-1.5"} md:w-1/2`}
+            className={`w-full shrink-0 px-1.5 md:w-1/2`}
             key={`${review.name}-${index}`}
           >
             <ReviewCard review={review} />
