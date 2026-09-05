@@ -4,7 +4,7 @@ const Container = React.memo(
   React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
     ({ children, className, ...rest }, ref) => {
       const sectionClassName =
-        `w-full px-5 flex justify-center items-center py-9 ${className}`.trim();
+        `w-full px-5 flex justify-center items-center py-9 md:py-15 ${className}`.trim();
 
       return (
         <section ref={ref} className={sectionClassName} {...rest}>

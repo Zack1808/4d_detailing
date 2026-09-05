@@ -43,7 +43,7 @@ const Home: React.FC = () => {
         <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naše najpopularnije usluge
         </h2>
-        <p className="text-dark dark:text-light max-w-[75ch] mt-3">
+        <p className="text-dark dark:text-light max-w-[85ch] mt-3">
           Odaberite jednu od naših najtraženijih usluga i priuštite svom vozilu
           temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa koje naši
           klijenti najčešće biraju.
@@ -60,7 +60,7 @@ const Home: React.FC = () => {
             <h5 className="text-dark dark:text-light text-xl font-bold">
               Ne znate koja je usluga najbolja za vaše vozilo?
             </h5>
-            <p className="text-dark dark:text-light max-w-[75ch]">
+            <p className="text-dark dark:text-light max-w-[85ch]">
               Pogledajte kompletnu ponudu i pronađite paket koji vam odgovara.
             </p>
           </div>
@@ -72,27 +72,64 @@ const Home: React.FC = () => {
       </Container>
 
       <Container id="about">
-        <h2 className="font-bold text-4xl text-dark dark:text-light">
-          Naša misija
-        </h2>
-        <p className="text-dark dark:text-light max-w-[75ch] mt-3">
-          4D Detailing nastao je iz ljubavi prema automobilima i želje da tu
-          strast pretvorimo u vrhunsku uslugu.
-          <br />
-          Vjerujemo da svako vozilo zaslužuje pažnju, kvalitetnu njegu i
-          profesionalan pristup. Zato pružamo detailing usluge koje ne
-          podrazumijevaju samo čišćenje, već brigu o svakom detalju – od izgleda
-          i sjaja do dugotrajne zaštite.
-          <br />
-          Bilo da ste zaljubljenik u automobile ili jednostavno želite da vaše
-          vozilo izgleda i bude očuvano kao prvog dana, mi smo tu da se
-          pobrinemo za njega.
-          <br />
-          <br />
-          Profesionalna njega nije trošak. To je ulaganje u vaše vozilo.
-        </p>
+        <div className="w-full flex md:flex-row flex-col gap-6 justify-between">
+          <div>
+            <h2 className="font-bold text-4xl text-dark dark:text-light">
+              Naša misija
+            </h2>
+            <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+              <strong>
+                4D Detailing nastao je iz ljubavi prema automobilima i želje da
+                tu strast pretvorimo u vrhunsku uslugu.
+              </strong>
+              <br />
+              <br />
+              Ljubav prema automobilima prati nas od malih nogu. Briga o
+              vlastitim vozilima, pažnja prema detaljima i zadovoljstvo koje
+              donosi savršeno čist i očuvan automobil bili su početak priče koja
+              je dovela do stvaranja 4D Detailing studija.
+              <br />
+              <br />
+              Danas tu istu pažnju želimo pružiti svakom vozilu koje nam
+              povjerite. Vjerujemo da detailing nije samo obično čišćenje
+              automobila, već cjelovita njega kojom se čuva njegov izgled,
+              kvaliteta i dugotrajnost. Zato svakom vozilu pristupamo
+              individualno, temeljito i s posebnom pažnjom prema detaljima.
+              <br />
+              <br />
+              Bilo da ste pravi zaljubljenik u automobile ili jednostavno želite
+              svoje vozilo održavati urednim i očuvanim bez trošenja vlastitog
+              vremena,{" "}
+              <strong>
+                naš cilj je pružiti vam kvalitetu kojoj možete vjerovati.
+              </strong>
+              <br />
+              <br />
+              Želimo profesionalnu njegu vozila približiti što većem broju ljudi
+              i pokazati da kvalitetno održavanje nije nepotreban trošak, već
+              <strong>
+                ulaganje u izgled, očuvanost i vrijednost vašeg automobila.
+              </strong>
+              <br />
+              <br />
+              Svaki automobil koji izađe iz našeg studija predstavlja naš rad,
+              našu reputaciju i povjerenje koje ste nam ukazali. Upravo zato
+              nastojimo da rezultat uvijek bude nešto iza čega možemo ponosno
+              stati.
+            </p>
+          </div>
 
-        {/* TODO: Add desaturated image of the owner on the side  */}
+          <div className="flex flex-col gap-3 md:w-3/7 w-full md:mt-15 mt-6">
+            <img
+              src="/founder.avif"
+              alt="Slika osnivatelja"
+              className="object-cover rounded-sm"
+            />
+            <small className="font-bold text-dark dark:text-light italic">
+              Luka Novak - Osnivač 4D Detailinga
+            </small>
+          </div>
+        </div>
       </Container>
 
       <Container id="reviews">
@@ -113,7 +150,7 @@ const Home: React.FC = () => {
             <h5 className="text-dark dark:text-light text-xl font-bold">
               Bili ste zadovoljni našom uslugom?
             </h5>
-            <p className="text-dark dark:text-light max-w-[75ch]">
+            <p className="text-dark dark:text-light max-w-[85ch]">
               Vaše mišljenje nam puno znači. Ako ste već svoje vozilo povjerili
               našem timu, podijelite svoje iskustvo i pomozite drugima da nas
               lakše upoznaju.
@@ -128,17 +165,32 @@ const Home: React.FC = () => {
         <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
           <div className="flex flex-col gap-3">
             <h3 className="text-dark dark:text-light text-xl font-bold">
-              Vaše vozilo. Naša pažnja. Besprijekoran rezultat.
+              Vaš automobil zaslužuje više od običnog čišćenja.
             </h3>
-            <p className="text-dark dark:text-light max-w-[75ch]">
-              Prepustite svoje vozilo u ruke profesionalaca i vratite mu
-              čistoću, sjaj i zaštitu koju zaslužuje.
+            <p className="text-dark dark:text-light max-w-[85ch]">
+              Detalji čine razliku. Od dubinskog čišćenja do poliranja i
+              zaštite, u 4D Detailingu svakom vozilu pristupamo s istom pažnjom
+              kao da je naše vlastito.
+              <br />
+              <br />
+              Dopustite nam da vratimo vašem automobilu svježinu, sjaj i osjećaj
+              novog.
+              <br />
+              <br />
+              Niste sigurni što je potrebno vašem vozilu? Javite nam se — rado
+              ćemo vam preporučiti najbolju opciju.
+              <br />
+              <br />
+              Rezervirajte svoj termin i prepustite svoje vozilo u naše ruke.
             </p>
+            <Button variant="primary" to="/kontakt" className="mt-6">
+              Rezerviraj termin
+            </Button>
           </div>
-
-          <Button variant="primary" to="/kontakt">
-            Rezerviraj termin
-          </Button>
+          <img
+            src={isDark ? "/logo_dark.svg" : "/logo_light.svg"}
+            className="w-1/3"
+          />
         </div>
       </Container>
     </main>
