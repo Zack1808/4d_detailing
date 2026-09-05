@@ -1,8 +1,15 @@
-import React, { useRef, useCallback, useMemo, useEffect } from "react";
+import React, {
+  useRef,
+  useCallback,
+  useMemo,
+  useEffect,
+  useState,
+} from "react";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
 import Carousel from "../components/layout/Carousel";
+import Modal from "../components/layout/Modal";
 
 import Button from "../components/common/Button";
 import ServiceCard from "../components/common/ServiceCard";
@@ -12,6 +19,8 @@ import Tesseract from "../components/animated/Tessaract";
 import { useData } from "../context/DataContext";
 
 const Home: React.FC = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
   const { isDark, services, reviews } = useData();
 
   const servicesRef = useRef<HTMLDivElement>(null);
@@ -184,7 +193,9 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <Button variant="primary">Ostavite recenziju</Button>
+          <Button variant="primary" onClick={() => setOpenModal(true)}>
+            Ostavite recenziju
+          </Button>
         </div>
       </Container>
 
@@ -220,6 +231,13 @@ const Home: React.FC = () => {
           />
         </div>
       </Container>
+      <Modal
+        isOpen={openModal}
+        setIsOpen={setOpenModal}
+        title={"Ostavite recenziju"}
+      >
+        <span></span>
+      </Modal>
     </main>
   );
 };
