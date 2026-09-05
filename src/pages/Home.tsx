@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useMemo, useEffect } from "react";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
@@ -16,6 +16,11 @@ const Home: React.FC = () => {
 
   const servicesRef = useRef<HTMLDivElement>(null);
 
+  const featuredServices = useMemo(
+    () => services.filter((service) => service.isFeatured),
+    [services],
+  );
+
   const handleScroll = useCallback(() => {
     if (!servicesRef.current) return;
 
@@ -23,6 +28,12 @@ const Home: React.FC = () => {
       behavior: "smooth",
     });
   }, [servicesRef.current]);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <main className="relative overflow-hidden">
@@ -66,7 +77,7 @@ const Home: React.FC = () => {
         </p>
 
         <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-          {services.map((service, index) => (
+          {featuredServices.map((service, index) => (
             <ServiceCard item={service} key={`${service.title}-${index}`} />
           ))}
         </div>

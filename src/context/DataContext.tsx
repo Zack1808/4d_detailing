@@ -89,7 +89,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
           }`}
         />
       )}
-      {children}
+      {!pageLoading && children}
     </DataContext.Provider>
   );
 };
