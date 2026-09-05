@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useCallback } from "react";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
@@ -13,6 +13,16 @@ import { useData } from "../context/DataContext";
 
 const Home: React.FC = () => {
   const { isDark, services, reviews } = useData();
+
+  const servicesRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    if (!servicesRef.current) return;
+
+    servicesRef.current.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [servicesRef.current]);
 
   return (
     <main className="relative overflow-hidden">
@@ -32,14 +42,20 @@ const Home: React.FC = () => {
           Sjaj koji nadilazi vrijeme.
         </p>
         <div className="flex sm:flex-row flex-col gap-2 mt-10">
-          <Button variant="primary">Pregledaj usluge</Button>
+          <Button variant="primary" onClick={handleScroll}>
+            Pregledaj usluge
+          </Button>
           <Button variant="secondary" to="/kontakt">
             Rezerviraj termin
           </Button>
         </div>
       </Hero>
 
-      <Container id="services" className="bg-light dark:bg-dark pt-40! ">
+      <Container
+        id="services"
+        className="bg-light dark:bg-dark pt-40!"
+        ref={servicesRef}
+      >
         <h2 className="font-bold text-4xl text-dark dark:text-light">
           Naše najpopularnije usluge
         </h2>
