@@ -180,10 +180,10 @@ const Home: React.FC = () => {
       <Container id="cta-contact">
         <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
           <div className="flex flex-col gap-3">
-            <h3 className="text-dark dark:text-light text-xl font-bold">
+            <h3 className="text-dark dark:text-light text-4xl font-bold">
               Vaš automobil zaslužuje više od običnog čišćenja.
             </h3>
-            <p className="text-dark dark:text-light max-w-[85ch]">
+            <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
               Detalji čine razliku. Od dubinskog čišćenja do poliranja i
               zaštite, u 4D Detailingu svakom vozilu pristupamo s istom pažnjom
               kao da je naše vlastito.
