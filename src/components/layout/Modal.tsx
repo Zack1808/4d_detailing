@@ -75,8 +75,8 @@ const Modal: React.FC<ModalProps> = ({
         fixed inset-0 z-45
         flex items-center justify-center
         p-4
-        transition-opacity duration-300
-        ${isVisible ? "opacity-100" : "opacity-0 delay-100"}
+        transition-opacity duration-50
+        ${isVisible ? "opacity-100" : "opacity-0 delay-50"}
       `}
       role="dialog"
       aria-modal="true"
@@ -86,7 +86,7 @@ const Modal: React.FC<ModalProps> = ({
           absolute inset-0
           bg-gray-dark/15 dark:bg-light/15
           backdrop-blur-lg
-          transition-opacity duration-300
+          transition-opacity duration-50
           ${isVisible ? "opacity-100" : "opacity-0"}
         `}
         onClick={() => setIsOpen(false)}
@@ -96,21 +96,21 @@ const Modal: React.FC<ModalProps> = ({
         className={`
           relative z-10
           w-full max-w-3xl
-          rounded-sm
+          rounded-xs
           bg-light dark:bg-dark
           shadow-sm
           transition-all duration-100 ease-out
           ${
             isVisible
-              ? "translate-y-0 scale-100 opacity-100 delay-200"
+              ? "translate-y-0 scale-100 opacity-100 delay-100"
               : "translate-y-4 scale-95 opacity-0"
           }
         `}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="bg-gray-light/20 dark:bg-gray-dark/20 p-6">
-          <header className="flex w-full justify-between">
-            <h6 className="text-dark dark:text-light font-semibold text-xl">
+          <header className="flex w-full justify-between items-center">
+            <h6 className="text-dark dark:text-light font-semibold text-2xl">
               {title}
             </h6>
             <Button variant="none" onClick={() => setIsOpen(false)}>

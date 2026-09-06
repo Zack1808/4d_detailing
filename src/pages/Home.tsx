@@ -13,6 +13,7 @@ import Modal from "../components/layout/Modal";
 
 import Button from "../components/common/Button";
 import ServiceCard from "../components/common/ServiceCard";
+import StarSelect from "../components/common/StarSelect";
 
 import Tesseract from "../components/animated/Tessaract";
 
@@ -20,6 +21,7 @@ import { useData } from "../context/DataContext";
 
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [starCount, setStarCount] = useState<number>(0);
 
   const { isDark, services, reviews } = useData();
 
@@ -37,6 +39,13 @@ const Home: React.FC = () => {
       behavior: "smooth",
     });
   }, [servicesRef.current]);
+
+  const handleReviewSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+    },
+    [],
+  );
 
   useEffect(() => {
     window.scrollTo({
@@ -231,12 +240,21 @@ const Home: React.FC = () => {
           />
         </div>
       </Container>
+
       <Modal
         isOpen={openModal}
         setIsOpen={setOpenModal}
         title={"Ostavite recenziju"}
       >
-        <span></span>
+        <form onSubmit={handleReviewSubmit} className="mt-6">
+          <label
+            htmlFor="star-count"
+            className="text-dark dark:text-light font-semibold flex flex-col "
+          >
+            Recenzija:
+            <StarSelect count={starCount} setCount={setStarCount} />
+          </label>
+        </form>
       </Modal>
     </main>
   );
