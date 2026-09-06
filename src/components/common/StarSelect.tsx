@@ -39,6 +39,7 @@ const StarSelect: React.FC<StarSelectProps> = ({ count, setCount, id }) => {
         return (
           <Button
             variant="none"
+            type="button"
             key={`star-${starNumber}`}
             onClick={() => setCount(starNumber)}
             onMouseEnter={() => setHoverCount(starNumber)}

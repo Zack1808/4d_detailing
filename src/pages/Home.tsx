@@ -15,6 +15,7 @@ import Button from "../components/common/Button";
 import ServiceCard from "../components/common/ServiceCard";
 import StarSelect from "../components/common/StarSelect";
 import Input from "../components/common/Input";
+import Textarea from "../components/common/Textarea";
 
 import Tesseract from "../components/animated/Tessaract";
 
@@ -284,6 +285,16 @@ const Home: React.FC = () => {
             Prezime*
             <Input required placeholder="Ivic" />
           </label>
+          <label
+            htmlFor="message"
+            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+          >
+            Poruka*
+            <Textarea placeholder="Unesite  poruku" />
+          </label>
+          <Button variant="primary" className="self-end">
+            Pošalji recenziju
+          </Button>
         </form>
       </Modal>
     </main>
