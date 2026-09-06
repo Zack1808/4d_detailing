@@ -19,13 +19,19 @@ import Textarea from "../components/common/Textarea";
 
 import Tesseract from "../components/animated/Tessaract";
 
+import { useGetPageData } from "../hooks/useGetPageData";
+
 import { useData } from "../context/DataContext";
+import type { ReviewType } from "../types/data";
+import { toast } from "react-toastify";
 
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [starCount, setStarCount] = useState<number>(1);
 
   const { isDark, services, reviews } = useData();
+
+  const { setReview, loading, error } = useGetPageData();
 
   const servicesRef = useRef<HTMLDivElement>(null);
 
@@ -43,10 +49,35 @@ const Home: React.FC = () => {
   }, [servicesRef.current]);
 
   const handleReviewSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+
+      try {
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+
+        const values = Object.fromEntries(formData.entries());
+
+        const reviewData: ReviewType = {
+          starCount,
+          name: String(values.name),
+          surname: String(values.surname),
+          review: String(values.review),
+          approvedBy: null,
+        };
+
+        const successfull = await setReview(reviewData);
+
+        if (successfull)
+          toast.success("Recenzija uspješno poslana!", {
+            theme: isDark ? "dark" : "light",
+          });
+        else toast.error(error, { theme: isDark ? "dark" : "light" });
+      } catch (err) {
+        toast.error(error, { theme: isDark ? "dark" : "light" });
+      }
     },
-    [],
+    [starCount],
   );
 
   const clearReviewForm = useCallback(() => {
@@ -60,6 +91,14 @@ const Home: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [openModal]);
+
+  useEffect(() => {
+    if (!loading && !error) {
+      const timer = setTimeout(() => setOpenModal(false), 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [loading, error]);
 
   useEffect(() => {
     window.scrollTo({
@@ -269,30 +308,34 @@ const Home: React.FC = () => {
             className="text-dark dark:text-light font-semibold flex flex-col gap-3"
           >
             Recenzija*
-            <StarSelect count={starCount} setCount={setStarCount} />
+            <StarSelect
+              count={starCount}
+              setCount={setStarCount}
+              name="star-count"
+            />
           </label>
           <label
             htmlFor="name"
             className="text-dark dark:text-light font-semibold flex flex-col gap-3"
           >
             Ime*
-            <Input required placeholder="Ivan" />
+            <Input required placeholder="Ivan" name="name" />
           </label>
           <label
             htmlFor="surname"
             className="text-dark dark:text-light font-semibold flex flex-col gap-3"
           >
             Prezime*
-            <Input required placeholder="Ivic" />
+            <Input required placeholder="Ivic" name="surname" />
           </label>
           <label
             htmlFor="message"
             className="text-dark dark:text-light font-semibold flex flex-col gap-3"
           >
             Poruka*
-            <Textarea placeholder="Unesite  poruku" />
+            <Textarea placeholder="Unesite  poruku" required name="review" />
           </label>
-          <Button variant="primary" className="self-end">
+          <Button variant="primary" className="self-end" loading={loading}>
             Pošalji recenziju
           </Button>
         </form>

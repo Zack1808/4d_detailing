@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import { DataProvider } from "./context/DataContext";
 
@@ -26,6 +27,9 @@ const App: React.FC = () => {
           <Route path="/uvijeti-koristenja" element={<Terms />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
+        <ToastContainer
+          toastClassName={`rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]!`}
+        />
         <Footer />
       </BrowserRouter>
     </DataProvider>

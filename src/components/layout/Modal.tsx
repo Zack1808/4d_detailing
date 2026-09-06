@@ -113,7 +113,11 @@ const Modal: React.FC<ModalProps> = ({
             <h6 className="text-dark dark:text-light font-semibold text-2xl">
               {title}
             </h6>
-            <Button variant="none" onClick={() => setIsOpen(false)}>
+            <Button
+              variant="none"
+              className="text-2xl"
+              onClick={() => setIsOpen(false)}
+            >
               <FaX />
             </Button>
           </header>

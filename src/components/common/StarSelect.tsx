@@ -7,9 +7,15 @@ type StarSelectProps = {
   count: number;
   setCount: (value: number) => void;
   id?: string;
+  name?: string;
 };
 
-const StarSelect: React.FC<StarSelectProps> = ({ count, setCount, id }) => {
+const StarSelect: React.FC<StarSelectProps> = ({
+  count,
+  setCount,
+  id,
+  name,
+}) => {
   const [hoverCount, setHoverCount] = useState<number>(0);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(
     window.innerWidth < 768,
@@ -44,6 +50,7 @@ const StarSelect: React.FC<StarSelectProps> = ({ count, setCount, id }) => {
             onClick={() => setCount(starNumber)}
             onMouseEnter={() => setHoverCount(starNumber)}
             className="text-3xl md:px-6! py-0! px-3!"
+            name={name && `${name}-${starNumber}`}
           >
             {isFilled ? <FaStar /> : <FaRegStar />}
           </Button>

@@ -1,11 +1,19 @@
 import React, {
   type AnchorHTMLAttributes,
   type ButtonHTMLAttributes,
+  useState,
 } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 
+import Tesseract from "../animated/Tessaract";
+import Wheel from "../animated/Wheel";
+import Polisher from "../animated/Polisher";
+
+import { useData } from "../../context/DataContext";
+
 type BaseButtonProps = {
   variant: "primary" | "secondary" | "none";
+  loading?: boolean;
 };
 
 type RegularButtonProps = BaseButtonProps &
@@ -39,27 +47,41 @@ const Button: React.FC<ButtonProps> = ({
   variant = "none",
   children,
   className = "",
+  loading,
   ...rest
 }) => {
+  const { isDark } = useData();
+
+  const loaders = [
+    <Tesseract size={25} isDark={!isDark} speed={3} thickness={15} />,
+    <Wheel size={25} speed={2} isDark={!isDark} />,
+    <Polisher size={50} speed={7} isDark={!isDark} className=" max-h-min" />,
+  ];
+
+  const [selectLoader] = useState<number>(() => {
+    const randomIndex = Math.floor(Math.random() * loaders.length);
+    return randomIndex;
+  });
+
   const classNames = buttonClasses(variant, className);
 
   if ("to" in rest)
     return (
       <Link className={classNames} {...rest}>
-        {children}
+        {children} {loading && loaders[selectLoader]}
       </Link>
     );
 
   if ("href" in rest)
     return (
       <a className={classNames} {...rest}>
-        {children}
+        {children} {loading && loaders[selectLoader]}
       </a>
     );
 
   return (
     <button className={classNames} {...(rest as RegularButtonProps)}>
-      {children}
+      {children} {loading && loaders[selectLoader]}
     </button>
   );
 };
