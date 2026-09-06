@@ -27,9 +27,7 @@ const App: React.FC = () => {
           <Route path="/uvijeti-koristenja" element={<Terms />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-        <ToastContainer
-          toastClassName={`rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]!`}
-        />
+        <ToastContainer />
         <Footer />
       </BrowserRouter>
     </DataProvider>

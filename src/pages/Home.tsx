@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
@@ -24,6 +25,9 @@ import { useGetPageData } from "../hooks/useGetPageData";
 import { useData } from "../context/DataContext";
 import type { ReviewType } from "../types/data";
 import { toast } from "react-toastify";
+
+const toastClasses =
+  "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
 
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -70,10 +74,20 @@ const Home: React.FC = () => {
 
         if (successfull) {
           toast.success("Recenzija uspješno poslana!", {
-            theme: isDark ? "dark" : "light",
+            className: toastClasses,
+            icon: (
+              <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
+            ),
+            progressClassName: "bg-green-400! dark:bg-green-900!",
           });
           setOpenModal(false);
-        } else toast.error(error, { theme: isDark ? "dark" : "light" });
+        } else
+          toast.error(error, {
+            className: toastClasses,
+            icon: (
+              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
+            ),
+          });
       } catch (err) {
         toast.error(error, { theme: isDark ? "dark" : "light" });
       }
