@@ -42,7 +42,7 @@ const StarSelect: React.FC<StarSelectProps> = ({ count, setCount, id }) => {
             key={`star-${starNumber}`}
             onClick={() => setCount(starNumber)}
             onMouseEnter={() => setHoverCount(starNumber)}
-            className="text-3xl md:p-6! p-3!"
+            className="text-3xl md:px-6! py-0! px-3!"
           >
             {isFilled ? <FaStar /> : <FaRegStar />}
           </Button>

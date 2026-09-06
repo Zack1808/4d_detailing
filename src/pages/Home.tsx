@@ -14,6 +14,7 @@ import Modal from "../components/layout/Modal";
 import Button from "../components/common/Button";
 import ServiceCard from "../components/common/ServiceCard";
 import StarSelect from "../components/common/StarSelect";
+import Input from "../components/common/Input";
 
 import Tesseract from "../components/animated/Tessaract";
 
@@ -21,7 +22,7 @@ import { useData } from "../context/DataContext";
 
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [starCount, setStarCount] = useState<number>(0);
+  const [starCount, setStarCount] = useState<number>(1);
 
   const { isDark, services, reviews } = useData();
 
@@ -46,6 +47,18 @@ const Home: React.FC = () => {
     },
     [],
   );
+
+  const clearReviewForm = useCallback(() => {
+    setStarCount(1);
+  }, []);
+
+  useEffect(() => {
+    if (!openModal) {
+      const timer = setTimeout(clearReviewForm, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [openModal]);
 
   useEffect(() => {
     window.scrollTo({
@@ -246,13 +259,30 @@ const Home: React.FC = () => {
         setIsOpen={setOpenModal}
         title={"Ostavite recenziju"}
       >
-        <form onSubmit={handleReviewSubmit} className="mt-6">
+        <form
+          onSubmit={handleReviewSubmit}
+          className="mt-6 flex flex-col gap-6"
+        >
           <label
             htmlFor="star-count"
-            className="text-dark dark:text-light font-semibold flex flex-col "
+            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
           >
-            Recenzija:
+            Recenzija*
             <StarSelect count={starCount} setCount={setStarCount} />
+          </label>
+          <label
+            htmlFor="name"
+            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+          >
+            Ime*
+            <Input required placeholder="Ivan" />
+          </label>
+          <label
+            htmlFor="surname"
+            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+          >
+            Prezime*
+            <Input required placeholder="Ivic" />
           </label>
         </form>
       </Modal>
