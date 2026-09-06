@@ -8,7 +8,7 @@ import {
 
 import { type ServiceDataType, type ReviewType } from "../types/data";
 
-type useGetPageDataType = (useMockData: boolean) => {
+type useGetPageDataType = (useMockData?: boolean) => {
   loading: boolean;
   pageLoading: boolean;
   error: string | null;
@@ -28,7 +28,7 @@ export const useGetPageData: useGetPageDataType = (
   useMockData = MOCK_CONFIG.enableMockData,
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [pageLoading, setPageLoading] = useState<boolean>(false);
+  const [pageLoading, setPageLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const getServices = useCallback(async () => {

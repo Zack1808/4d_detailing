@@ -1,19 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useData } from "../../context/DataContext";
+
 const Navigation: React.FC = () => {
+  const { isDark } = useData();
+
   const linkClasses =
-    "font-semibold text-content text-lg text-secondary flex md:w-max w-full px-4 py-3 items-center justify-center hover:bg-thertiary";
+    "font-semibold text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
 
   return (
-    <header className="w-full bg-primary px-4 py-4 shadow-thertiary/50 shadow-xs flex items-center justify-center">
+    <header className="w-full bg-light/10 dark:bg-dark/10 fixed  px-4 py-4 backdrop-blur-xs dark:backdrop-blur-lg shadow-sm flex items-center justify-center z-40">
       <div className="w-full md:max-w-[1700px] flex justify-between align-center md:flex-row flex-col gap-4">
         <Link
           to="/"
-          className="flex items-center justify-center gap-4 md:w-max w-full font-title text-secondary"
+          className="flex items-center justify-center gap-4 md:w-max w-full"
         >
-          <img src="/logo_light.svg" alt="4D Detailing" className="w-14" />
-          <p className="font-semibold text-3xl">4D Detailing</p>
+          <img
+            src={isDark ? "/logo_dark.svg" : "/logo_light.svg"}
+            alt="4D Detailing"
+            className="w-24"
+          />
+          <p className="font-semibold text-4xl text-dark dark:text-light">
+            4D Detailing
+          </p>
         </Link>
 
         <nav className="flex items-center justify-center md:flex-row flex-col">

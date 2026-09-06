@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
+import { DataProvider } from "./context/DataContext";
 
 import Contact from "./pages/Contact";
 import Error404 from "./pages/Error404";
@@ -13,18 +16,21 @@ import Footer from "./components/layout/Footer";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/usluge" element={<Services />} />
-        <Route path="/kontakt" element={<Contact />} />
-        <Route path="/pravila-privatnosti" element={<Privacy />} />
-        <Route path="/uvijeti-koristenja" element={<Terms />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <DataProvider>
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/usluge" element={<Services />} />
+          <Route path="/kontakt" element={<Contact />} />
+          <Route path="/pravila-privatnosti" element={<Privacy />} />
+          <Route path="/uvijeti-koristenja" element={<Terms />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+        <ToastContainer />
+        <Footer />
+      </BrowserRouter>
+    </DataProvider>
   );
 };
 
