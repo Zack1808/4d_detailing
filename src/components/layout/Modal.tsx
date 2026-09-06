@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaX } from "react-icons/fa6";
-
 import Button from "../common/Button";
 
 type ModalProps = {
@@ -19,8 +18,14 @@ const Modal: React.FC<ModalProps> = ({
   const [showModal, setShowModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     if (isOpen) {
+      previousActiveElement.current =
+        document.activeElement as HTMLElement | null;
+
       setShowModal(true);
 
       requestAnimationFrame(() => {
@@ -33,6 +38,9 @@ const Modal: React.FC<ModalProps> = ({
 
       const timer = setTimeout(() => {
         setShowModal(false);
+
+        previousActiveElement.current?.focus();
+        previousActiveElement.current = null;
       }, 500);
 
       return () => clearTimeout(timer);
@@ -52,9 +60,65 @@ const Modal: React.FC<ModalProps> = ({
   }, [isOpen]);
 
   useEffect(() => {
+    if (!isOpen || !showModal) return;
+
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    const getFocusableElements = () => {
+      return Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          `
+          a[href],
+          button:not([disabled]),
+          textarea:not([disabled]),
+          input:not([disabled]),
+          select:not([disabled]),
+          [tabindex]:not([tabindex="-1"])
+          `,
+        ),
+      ).filter(
+        (element) =>
+          !element.hasAttribute("disabled") &&
+          element.getAttribute("aria-hidden") !== "true",
+      );
+    };
+
+    const focusableElements = getFocusableElements();
+
+    if (focusableElements.length > 0) {
+      focusableElements[0].focus();
+    } else {
+      modal.focus();
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isOpen) {
+      if (event.key === "Escape") {
         setIsOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const elements = getFocusableElements();
+
+      if (elements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const firstElement = elements[0];
+      const lastElement = elements[elements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+        return;
+      }
+
+      if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
@@ -63,7 +127,7 @@ const Modal: React.FC<ModalProps> = ({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, setIsOpen]);
+  }, [isOpen, showModal, setIsOpen]);
 
   if (!showModal) {
     return null;
@@ -80,6 +144,7 @@ const Modal: React.FC<ModalProps> = ({
       `}
       role="dialog"
       aria-modal="true"
+      aria-labelledby="modal-title"
     >
       <div
         className={`
@@ -90,9 +155,11 @@ const Modal: React.FC<ModalProps> = ({
           ${isVisible ? "opacity-100" : "opacity-0"}
         `}
         onClick={() => setIsOpen(false)}
+        aria-hidden="true"
       />
 
       <div
+        ref={modalRef}
         className={`
           relative z-10
           w-full max-w-3xl
@@ -106,13 +173,17 @@ const Modal: React.FC<ModalProps> = ({
               : "translate-y-4 scale-95 opacity-0"
           }
         `}
-        onClick={(event) => event.stopPropagation()}
+        tabIndex={-1}
       >
         <div className="bg-gray-light/20 dark:bg-gray-dark/20 p-6">
           <header className="flex w-full justify-between items-center">
-            <h6 className="text-dark dark:text-light font-semibold text-2xl">
+            <h6
+              id="modal-title"
+              className="text-dark dark:text-light font-semibold text-2xl"
+            >
               {title}
             </h6>
+
             <Button
               variant="none"
               className="text-2xl"
@@ -121,6 +192,7 @@ const Modal: React.FC<ModalProps> = ({
               <FaX />
             </Button>
           </header>
+
           <main>{children}</main>
         </div>
       </div>
