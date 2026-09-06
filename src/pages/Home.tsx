@@ -68,11 +68,12 @@ const Home: React.FC = () => {
 
         const successfull = await setReview(reviewData);
 
-        if (successfull)
+        if (successfull) {
           toast.success("Recenzija uspješno poslana!", {
             theme: isDark ? "dark" : "light",
           });
-        else toast.error(error, { theme: isDark ? "dark" : "light" });
+          setOpenModal(false);
+        } else toast.error(error, { theme: isDark ? "dark" : "light" });
       } catch (err) {
         toast.error(error, { theme: isDark ? "dark" : "light" });
       }
@@ -91,14 +92,6 @@ const Home: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [openModal]);
-
-  useEffect(() => {
-    if (!loading && !error) {
-      const timer = setTimeout(() => setOpenModal(false), 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, [loading, error]);
 
   useEffect(() => {
     window.scrollTo({
