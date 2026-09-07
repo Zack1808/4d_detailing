@@ -226,7 +226,7 @@ const Home: React.FC = () => {
 
           <div className="flex flex-col gap-3 md:w-3/7 w-full md:mt-15 mt-6">
             <img
-              src="/founder.avif"
+              src="/images/founder.avif"
               alt="Slika osnivatelja"
               className="object-cover rounded-sm"
             />
@@ -295,7 +295,7 @@ const Home: React.FC = () => {
             </Button>
           </div>
           <img
-            src={isDark ? "/logo_dark.svg" : "/logo_light.svg"}
+            src={isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg"}
             className="w-1/3 md:flex hidden"
           />
         </div>

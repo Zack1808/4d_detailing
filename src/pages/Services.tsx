@@ -2,14 +2,21 @@ import React, { useEffect } from "react";
 
 import Container from "../components/layout/Container";
 
+import Input from "../components/common/Input";
+import ServiceCard from "../components/common/ServiceCard";
+
+import { useData } from "../context/DataContext";
+
 const Services: React.FC = () => {
+  const { services } = useData();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <>
-      <Container id="services-intro" className="min-h-screen">
+    <main>
+      <Container className="pb-3!" id="service-intro">
         <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
           Naše usluge
         </h2>
@@ -36,8 +43,17 @@ const Services: React.FC = () => {
           </strong>
         </p>
       </Container>
-      <Container></Container>
-    </>
+      <Container className="pt-3!">
+        <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs">
+          <Input placeholder="Unesite naziv usluge..." />
+        </div>
+        <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+          {services.map((service, index) => (
+            <ServiceCard item={service} key={`${service.title}-${index}`} />
+          ))}
+        </div>
+      </Container>
+    </main>
   );
 };
 

@@ -13,7 +13,7 @@ type ServiceCardProps = {
 const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   const { isDark } = useData();
 
-  const wheel = isDark ? "/wheel_dark.svg" : "/wheel_light.svg";
+  const wheel = isDark ? "/images/wheel_dark.svg" : "/images/wheel_light.svg";
 
   const discountedPrice = useMemo(() => {
     const priceList = item.price.split("-");
