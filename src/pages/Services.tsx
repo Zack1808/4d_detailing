@@ -43,11 +43,11 @@ const Services: React.FC = () => {
           </strong>
         </p>
       </Container>
-      <Container className="pt-3!">
+      <Container className="pt-9!">
         <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs">
           <Input placeholder="Unesite naziv usluge..." />
         </div>
-        <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+        <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 ">
           {services.map((service, index) => (
             <ServiceCard item={service} key={`${service.title}-${index}`} />
           ))}

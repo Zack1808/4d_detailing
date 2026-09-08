@@ -40,7 +40,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
           >
             {item.price}
           </span>
-          {item.hasDiscount && <span>{discountedPrice}</span>}
+          {item.hasDiscount && <span>{discountedPrice}</span>} ·
+          <span className="font-normal">~ {item.duration} sata</span>
         </p>
       </header>
       <main className="flex flex-col gap-6 text-dark dark:text-light ">
