@@ -4,8 +4,31 @@ import Container from "../components/layout/Container";
 
 import Input from "../components/common/Input";
 import ServiceCard from "../components/common/ServiceCard";
+import Select from "../components/common/Select";
 
 import { useData } from "../context/DataContext";
+
+const CATEGORIES_OPTIONS = [
+  { value: "", label: "Sve" },
+  { value: "interior", label: "Interijer" },
+  { value: "exterior", label: "Eksterijer" },
+  { value: "polishing", label: "Poliranje i zaštita" },
+  { value: "packages", label: "Posebni paketi" },
+] as const;
+
+const SORTING_OPTIONS = [
+  { value: "", label: "Popularno" },
+  { value: "priceUp", label: "Cijena rastuća" },
+  { value: "priceDown", label: "Cijena padajuća" },
+  { value: "alphabetical", label: "Naziv A-Z" },
+  { value: "timeUp", label: "Trajanje uzlazno" },
+  { value: "timeDown", label: "Trajanje silazno" },
+  { value: "timeDown", label: "Trajanje silazno" },
+  { value: "timeDown", label: "Trajanje silazno" },
+  { value: "timeDown", label: "Trajanje silazno" },
+  { value: "timeDown", label: "Trajanje silazno" },
+  { value: "timeDown", label: "Trajanje silazno" },
+] as const;
 
 const Services: React.FC = () => {
   const [search, setSearch] = useState<string>("");
@@ -64,12 +87,31 @@ const Services: React.FC = () => {
         </p>
       </Container>
       <Container className="pt-9!">
-        <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs">
+        <p className="font-bold text-2xl text-dark dark:text-light">Filteri</p>
+        <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col">
           <Input
             placeholder="Pranje, poliranje, čišćenje..."
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
+          <div className="flex gap-3 md:items-center flex-1 md:flex-row flex-col">
+            <label
+              htmlFor="CATEGORIES_OPTIONS"
+              className="text-dark dark:text-light font-semibold"
+            >
+              Kategorije:
+            </label>
+            <Select options={[...CATEGORIES_OPTIONS]} id="CATEGORIES_OPTIONS" />
+          </div>
+          <div className="flex gap-3 md:items-center flex-1 md:flex-row flex-col">
+            <label
+              htmlFor="sorting"
+              className="text-dark dark:text-light font-semibold"
+            >
+              Sortiraj:
+            </label>
+            <Select options={[...SORTING_OPTIONS]} id="sorting" />
+          </div>
         </div>
         <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 ">
           {displayServices.map((service, index) => (
