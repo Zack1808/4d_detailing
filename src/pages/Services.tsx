@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import Container from "../components/layout/Container";
 
@@ -8,7 +8,27 @@ import ServiceCard from "../components/common/ServiceCard";
 import { useData } from "../context/DataContext";
 
 const Services: React.FC = () => {
+  const [search, setSearch] = useState<string>("");
+
   const { services } = useData();
+
+  const displayServices = useMemo(() => {
+    let newList = [...services];
+    const searchTerm = search.toLowerCase();
+
+    newList = newList.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm) ||
+        item.services.some((service) =>
+          service.toLowerCase().includes(searchTerm),
+        ) ||
+        item.keywords.some((keyword) =>
+          keyword.toLowerCase().includes(searchTerm),
+        ),
+    );
+
+    return newList;
+  }, [services, search]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -45,10 +65,14 @@ const Services: React.FC = () => {
       </Container>
       <Container className="pt-9!">
         <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs">
-          <Input placeholder="Unesite naziv usluge..." />
+          <Input
+            placeholder="Pranje, poliranje, čišćenje..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
         </div>
         <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 ">
-          {services.map((service, index) => (
+          {displayServices.map((service, index) => (
             <ServiceCard item={service} key={`${service.title}-${index}`} />
           ))}
         </div>

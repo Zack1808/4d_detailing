@@ -98,10 +98,10 @@ export const mockServices: ServiceDataType[] = [
     hasDiscount: false,
     discount: "",
     isFeatured: true,
-    keywords: [],
+    keywords: ["poliranje"],
   },
   {
-    title: "Vanjsko pranje, uključujući naplatke.",
+    title: "Unutarnje pranje, uključujući naplatke.",
     price: "20",
     duration: 2.5,
     services: [
@@ -117,7 +117,7 @@ export const mockServices: ServiceDataType[] = [
     hasDiscount: false,
     discount: "",
     isFeatured: true,
-    keywords: [],
+    keywords: ["felge"],
   },
   {
     title: "Vanjsko pranje, uključujući naplatke.",
