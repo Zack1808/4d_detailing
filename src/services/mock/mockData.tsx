@@ -193,7 +193,7 @@ export const mockServices: ServiceDataType[] = [
     slug: "standard_paket",
     title: "Standard Paket",
     priceFrom: 40,
-    duration: "3-6",
+    duration: "3-6 sata",
     services: [
       "Detaljnjo vanjsko pranje, pranje naplataka",
       "Otprašivanje i usisavanje interijera",

@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+
+import { type ServiceDataType } from "../types/data";
 
 import Container from "../components/layout/Container";
 
@@ -27,6 +29,75 @@ const Services: React.FC = () => {
 
   const { services } = useData();
 
+  const parseDuration = useCallback((duration: string) => {
+    const normalized = duration
+      .toLowerCase()
+      .replace(",", ".")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const numbers = normalized.match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+
+    const isDays = normalized.includes("dan");
+    const multiplier = isDays ? 24 : 1;
+
+    if (numbers.length === 1) {
+      const value = numbers[0] * multiplier;
+
+      return {
+        min: value,
+        max: value,
+      };
+    }
+
+    if (numbers.length >= 2) {
+      return {
+        min: numbers[0] * multiplier,
+        max: numbers[1] * multiplier,
+      };
+    }
+
+    return {
+      min: Infinity,
+      max: Infinity,
+    };
+  }, []);
+
+  const sortList = useCallback(
+    (
+      list: ServiceDataType[],
+      key: keyof ServiceDataType,
+      direction: "asc" | "desc",
+    ) => {
+      const multiplier = direction === "asc" ? 1 : -1;
+
+      return [...list].sort((a, b) => {
+        switch (key) {
+          case "priceFrom":
+            return (a.priceFrom - b.priceFrom) * multiplier;
+
+          case "isFeatured":
+            return (Number(a.isFeatured) - Number(b.isFeatured)) * multiplier;
+
+          case "title":
+            return a.title.localeCompare(b.title) * multiplier;
+
+          case "duration":
+            const durationA = parseDuration(a.duration);
+            const durationB = parseDuration(b.duration);
+            return (
+              (durationA.min - durationB.min) * multiplier ||
+              (durationA.max - durationB.max) * multiplier
+            );
+
+          default:
+            return 0;
+        }
+      });
+    },
+    [],
+  );
+
   const displayServices = useMemo(() => {
     let newList = [...services];
     const searchTerm = search.toLowerCase();
@@ -46,8 +117,29 @@ const Services: React.FC = () => {
         ),
     );
 
+    switch (sortValue) {
+      case "popular":
+        newList = sortList(newList, "isFeatured", "desc");
+        break;
+      case "priceUp":
+        newList = sortList(newList, "priceFrom", "asc");
+        break;
+      case "priceDown":
+        newList = sortList(newList, "priceFrom", "desc");
+        break;
+      case "alphabetical":
+        newList = sortList(newList, "title", "asc");
+        break;
+      case "timeUp":
+        newList = sortList(newList, "duration", "asc");
+        break;
+      case "timeDown":
+        newList = sortList(newList, "duration", "desc");
+        break;
+    }
+
     return newList;
-  }, [services, search, category]);
+  }, [services, search, category, sortValue]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
