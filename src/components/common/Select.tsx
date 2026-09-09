@@ -361,7 +361,7 @@ const Select: React.FC<SelectProps> = ({
           id={listboxId}
           role="listbox"
           aria-multiselectable={multiple || undefined}
-          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-xs bg-light dark:bg-dark outline-none shadow-lg divide-y divide-gray-light/50 dark:divide-gray-dark/50"
+          className="absolute z-50 mt-1 max-h-62 w-full overflow-auto rounded-xs bg-[#e5e5e4] dark:bg-[#1e1716] border border-dark/20 dark:border-light/20 outline-none shadow-2xl dark:shadow-light/10"
         >
           {options.map((option, index) => {
             const selected = isSelected(option.value);
@@ -382,7 +382,7 @@ const Select: React.FC<SelectProps> = ({
                 }
                 className={`
                   flex min-h-9 items-center
-                  gap-2 rounded-xs px-2 py-2
+                  gap-2 rounded-xs p-2
                   select-none text-dark dark:text-light
                   ${active ? "bg-gray-dark/20 dark:bg-gray-light/20" : ""}
                   ${selected ? "bg-gray-dark/40 dark:bg-gray-light/40" : ""}

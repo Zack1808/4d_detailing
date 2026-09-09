@@ -1,7 +1,7 @@
 export type ServiceDataType = {
   title: string;
   price: string;
-  duration: number;
+  duration: string;
   category: "exterior" | "interior" | "polishing" | "package";
   services: string[];
   extraSuv: string;
