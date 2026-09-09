@@ -5,6 +5,7 @@ import Container from "../components/layout/Container";
 import Input from "../components/common/Input";
 import ServiceCard from "../components/common/ServiceCard";
 import Select from "../components/common/Select";
+import Button from "../components/common/Button";
 
 import { useData } from "../context/DataContext";
 
@@ -20,6 +21,9 @@ const SORTING_OPTIONS = [
 const Services: React.FC = () => {
   const [search, setSearch] = useState<string>("");
   const [sortValue, setSortValue] = useState<string | string[]>(["popular"]);
+  const [category, setCategory] = useState<
+    "all" | "interior" | "exterior" | "polishing" | "package"
+  >("all");
 
   const { services } = useData();
 
@@ -27,19 +31,23 @@ const Services: React.FC = () => {
     let newList = [...services];
     const searchTerm = search.toLowerCase();
 
+    if (category !== "all") {
+      newList = newList.filter((item) => item.category === category);
+    }
+
     newList = newList.filter(
       (item) =>
         item.title.toLowerCase().includes(searchTerm) ||
         item.services.some((service) =>
           service.toLowerCase().includes(searchTerm),
         ) ||
-        item.keywords.some((keyword) =>
+        item.keywords?.some((keyword) =>
           keyword.toLowerCase().includes(searchTerm),
         ),
     );
 
     return newList;
-  }, [services, search]);
+  }, [services, search, category]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,7 +83,48 @@ const Services: React.FC = () => {
         </p>
       </Container>
       <Container className="pt-9!">
-        <p className="font-bold text-2xl text-dark dark:text-light">Filteri</p>
+        <h3 className="font-bold text-2xl text-dark dark:text-light">Usluge</h3>
+
+        <div className="w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col">
+          <div className="w-full flex flex-col md:flex-row">
+            <Button
+              variant="none"
+              className={`max-w-none flex-1 items-center justify-center ${category === "all" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("all")}
+            >
+              Sve usluge
+            </Button>
+            <Button
+              variant="none"
+              className={`max-w-none flex-1 items-center justify-center ${category === "exterior" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("exterior")}
+            >
+              Eksterijer
+            </Button>
+            <Button
+              variant="none"
+              className={`max-w-none flex-1 items-center justify-center ${category === "interior" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("interior")}
+            >
+              Interijer
+            </Button>
+            <Button
+              variant="none"
+              className={`max-w-none flex-1 items-center justify-center ${category === "polishing" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("polishing")}
+            >
+              Poliranje i zaštita
+            </Button>
+            <Button
+              variant="none"
+              className={`max-w-none flex-1 items-center justify-center ${category === "package" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("package")}
+            >
+              Posebni paketi
+            </Button>
+          </div>
+        </div>
+
         <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col">
           <div className="flex gap-3 md:items-center flex-3 md:flex-row flex-col">
             <Input
@@ -100,9 +149,10 @@ const Services: React.FC = () => {
             />
           </div>
         </div>
+
         <div className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1  gap-3 ">
           {displayServices.map((service, index) => (
-            <ServiceCard item={service} key={`${service.title}-${index}`} />
+            <ServiceCard item={service} key={`${service.slug}-${index}`} />
           ))}
         </div>
       </Container>
