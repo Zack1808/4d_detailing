@@ -69,9 +69,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
                 isDark={!isDark}
                 speed={10}
                 size={iconSize}
-                className="opacity-15"
+                className="opacity-5"
               />
-              <div className="absolute bg-dark/15 dark:bg-light/15 inset-0 rounded-full p-3 flex items-end justify-center">
+              <div className="absolute bg-dark/5 dark:bg-light/5 inset-0 rounded-full p-3 flex items-end justify-center">
                 <p className="text-dark dark:text-light sm:mb-15 mb-10 sm:mr-21 mr-18 sm:text-2xl text-lg">
                   -
                   {`${item.discount?.value}${item.discount?.type === "percentage" ? "%" : "€"}`}
@@ -80,7 +80,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
             </div>
           )}
           <span className="font-normal text-xl text-dark dark:text-light mt-3">
-            ~ {item.duration.split("-").join(" - ")} sata
+            ~ {item.duration.split("-").join(" - ")}
           </span>
         </div>
       </header>
