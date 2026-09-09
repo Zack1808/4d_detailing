@@ -20,16 +20,21 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   const wheel = isDark ? "/images/wheel_dark.svg" : "/images/wheel_light.svg";
 
   const discountedPrice = useMemo(() => {
-    const priceList = item.price.split("-");
+    let priceList = [item.priceFrom];
 
-    if (!item.hasDiscount) return `${priceList.join("-")}`;
+    if (item.priceTo) priceList = [...priceList, item.priceTo];
+
+    if (!item.discount || !item.discount.value)
+      return `${priceList.join(" - ")}`;
 
     const newPriceList = priceList.map((price) => {
-      return Math.round(Number(price) * (1 - Number(item.discount) / 100));
+      return item.discount?.type === "percentage"
+        ? Math.round(Number(price) * (1 - Number(item.discount?.value) / 100))
+        : Number(price) - Number(item.discount?.value);
     });
 
-    return `${newPriceList.join("-")}`;
-  }, [item.price, item.discount, item.hasDiscount]);
+    return `${newPriceList.join(" - ")}`;
+  }, [item.priceFrom, item.priceTo, item.discount]);
 
   useEffect(() => {
     const getIconSize = () => {
@@ -49,7 +54,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 px-6 py-9 flex flex-col gap-9 overflow-hidden relative">
       <header className="flex flex-col gap-6">
         <h3
-          className={`text-3xl font-bold text-dark dark:text-light ${item.hasDiscount ? "sm:max-w-[15ch] max-w-[10ch]" : ""}`}
+          className={`text-3xl font-bold text-dark dark:text-light ${item.discount?.value ? "sm:max-w-[15ch] max-w-[10ch]" : ""}`}
         >
           {item.title}
         </h3>
@@ -58,7 +63,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
             <small className="mb-3 text-md font-normal">€</small>
             <span className="flex gap-6 w-full">{discountedPrice}</span>
           </p>
-          {item.hasDiscount && (
+          {item.discount && (
             <div className="rounded-full aspect-square flex items-center justify-center text-light dark:text-dark font-black absolute top-0 right-0 translate-x-1/2 p-1 -translate-y-1/2 -z-10">
               <Wheel
                 isDark={!isDark}
@@ -67,14 +72,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
                 className="opacity-15"
               />
               <div className="absolute bg-dark/15 dark:bg-light/15 inset-0 rounded-full p-3 flex items-end justify-center">
-                <p className="text-dark dark:text-light sm:mb-13 mb-10 sm:mr-25 mr-18 sm:text-2xl text-lg">
-                  -{item.discount}%
+                <p className="text-dark dark:text-light sm:mb-15 mb-10 sm:mr-21 mr-18 sm:text-2xl text-lg">
+                  -
+                  {`${item.discount?.value}${item.discount?.type === "percentage" ? "%" : "€"}`}
                 </p>
               </div>
             </div>
           )}
           <span className="font-normal text-xl text-dark dark:text-light mt-3">
-            ~ {item.duration} sata
+            ~ {item.duration.split("-").join(" - ")} sata
           </span>
         </div>
       </header>
@@ -92,22 +98,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
         </ul>
 
         <div className="flex flex-col gap-3">
-          {item.extraSuv && (
+          {item.suv && (
             <span>
-              <strong>Cijena za SUV: </strong>+€{item.extraSuv}
+              <strong>Cijena za SUV: </strong>+€{item.suv}
             </span>
           )}
-          {item.extraTransporter && (
+          {item.transporter && (
             <span>
-              <strong>Cijena za Transporter: </strong>+€{item.extraTransporter}
+              <strong>Cijena za Transporter: </strong>+€{item.transporter}
             </span>
           )}
         </div>
       </main>
       <footer className="mt-auto text-dark dark:text-light flex flex-col gap-6">
-        {item.info && (
+        {item.remark && (
           <small>
-            <strong>Info:</strong> {item.info}
+            <strong>Info:</strong> {item.remark}
           </small>
         )}
         <Button

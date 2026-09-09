@@ -1,16 +1,22 @@
+type Category = "exterior" | "interior" | "polishing" | "package";
+
 export type ServiceDataType = {
+  slug: string;
   title: string;
-  price: string;
+  priceFrom: number;
+  priceTo?: number;
   duration: string;
-  category: "exterior" | "interior" | "polishing" | "package";
+  category: Category;
   services: string[];
-  extraSuv: string;
-  extraTransporter: string;
-  info: string;
-  hasDiscount: boolean;
-  discount: string;
+  suv?: number;
+  transporter?: number;
+  remark?: string;
+  discount?: {
+    type: "percentage" | "fixed";
+    value: number;
+  };
   isFeatured: boolean;
-  keywords: string[];
+  keywords?: string[];
 };
 
 export type ReviewType = {
