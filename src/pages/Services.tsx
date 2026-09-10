@@ -218,7 +218,7 @@ const Services: React.FC = () => {
         </div>
 
         <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col">
-          <div className="flex gap-3 md:items-center flex-3 md:flex-row flex-col">
+          <div className="flex gap-3 md:items-center flex-1/3 md:flex-row flex-col">
             <Input
               placeholder="Pranje, poliranje, čišćenje..."
               value={search}

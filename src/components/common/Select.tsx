@@ -385,41 +385,49 @@ const Select: React.FC<SelectProps> = ({
 
       {isOpen && (
         <div
-          id={listboxId}
-          ref={dropDownRef}
-          role="listbox"
-          aria-multiselectable={multiple || undefined}
-          className={`absolute z-50 max-h-62 w-full overflow-auto rounded-xs bg-[#e5e5e4] dark:bg-[#1e1716] border border-dark/20 dark:border-light/20 outline-none shadow-2xl dark:shadow-light/10 ${hasSpaceBelow ? "mt-1" : "bottom-10 mb-1"}`}
+          className={`md:absolute fixed inset-0 h-screen md:inset-auto md:p-0 p-3 flex items-center justify-center bg-gray-dark/15 dark:bg-light/15
+          backdrop-blur-lg z-50 md:max-h-62 w-full md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-15 md:mt-1" : "md:bottom-15 md:mb-1"}`}
+          onClick={(event) =>
+            event.target === event.currentTarget && closeSelect()
+          }
         >
-          {options.map((option, index) => {
-            const selected = isSelected(option.value);
+          <div
+            id={listboxId}
+            ref={dropDownRef}
+            className="bg-[#e5e5e4] dark:bg-[#1e1716] w-full border border-dark/20 dark:border-light/20 rounded-xs outline-none overflow-auto"
+            role="listbox"
+            aria-multiselectable={multiple || undefined}
+          >
+            {options.map((option, index) => {
+              const selected = isSelected(option.value);
 
-            const active = activeIndex !== undefined && index === activeIndex;
+              const active = activeIndex !== undefined && index === activeIndex;
 
-            return (
-              <div
-                key={option.value}
-                id={`${id}-option-${index}`}
-                role="option"
-                aria-selected={selected}
-                onMouseEnter={() => setActiveIndex(index)}
-                onClick={() =>
-                  option.value === ""
-                    ? handleReset()
-                    : selectValue(option.value)
-                }
-                className={`
+              return (
+                <div
+                  key={option.value}
+                  id={`${id}-option-${index}`}
+                  role="option"
+                  aria-selected={selected}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() =>
+                    option.value === ""
+                      ? handleReset()
+                      : selectValue(option.value)
+                  }
+                  className={`
                   flex min-h-9 items-center
-                  gap-2 rounded-xs p-2
+                  gap-2 rounded-xs px-3 py-3
                   select-none text-dark dark:text-light
                   ${active ? "bg-gray-dark/20 dark:bg-gray-light/20" : ""}
                   ${selected ? "bg-gray-dark/40 dark:bg-gray-light/40" : ""}
                 `}
-              >
-                {option.label}
-              </div>
-            );
-          })}
+                >
+                  {option.label}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
