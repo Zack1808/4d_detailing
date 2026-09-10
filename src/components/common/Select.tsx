@@ -65,6 +65,7 @@ const Select: React.FC<SelectProps> = ({
     useState<string[]>(initialValues);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [hasSpaceBelow, setHasSpaceBelow] = useState<boolean>(true);
 
   const isControlled = value !== undefined;
 
@@ -78,8 +79,20 @@ const Select: React.FC<SelectProps> = ({
 
   const rootRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const dropDownRef = useRef<HTMLDivElement>(null);
 
   const listboxId = `${id}-listbox`;
+
+  const checkSpace = useCallback(() => {
+    if (!rootRef.current || !dropDownRef.current) return;
+
+    const rootRect = rootRef.current.getBoundingClientRect();
+    const dropDownHeight = dropDownRef.current.offsetHeight;
+
+    const availableSpace = window.innerHeight - rootRect.bottom;
+
+    setHasSpaceBelow(dropDownHeight < availableSpace);
+  }, []);
 
   const selectedOptions = useMemo(
     () => options.filter((option) => selected.includes(option.value)),
@@ -272,6 +285,20 @@ const Select: React.FC<SelectProps> = ({
     });
   }, [activeIndex, id, isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    checkSpace();
+
+    window.addEventListener("scroll", checkSpace, true);
+    window.addEventListener("resize", checkSpace);
+
+    return () => {
+      window.removeEventListener("scroll", checkSpace, true);
+      window.removeEventListener("resize", checkSpace);
+    };
+  }, [isOpen, checkSpace]);
+
   const defaultRenderValue = () => {
     if (selectedOptions.length === 0) {
       return (
@@ -359,9 +386,10 @@ const Select: React.FC<SelectProps> = ({
       {isOpen && (
         <div
           id={listboxId}
+          ref={dropDownRef}
           role="listbox"
           aria-multiselectable={multiple || undefined}
-          className="absolute z-50 mt-1 max-h-62 w-full overflow-auto rounded-xs bg-[#e5e5e4] dark:bg-[#1e1716] border border-dark/20 dark:border-light/20 outline-none shadow-2xl dark:shadow-light/10"
+          className={`absolute z-50 max-h-62 w-full overflow-auto rounded-xs bg-[#e5e5e4] dark:bg-[#1e1716] border border-dark/20 dark:border-light/20 outline-none shadow-2xl dark:shadow-light/10 ${hasSpaceBelow ? "mt-1" : "bottom-10 mb-1"}`}
         >
           {options.map((option, index) => {
             const selected = isSelected(option.value);
