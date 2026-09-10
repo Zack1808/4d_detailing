@@ -113,7 +113,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
       <footer className="mt-auto text-dark dark:text-light flex flex-col gap-6">
         {item.remark && (
           <small>
-            <strong>Info:</strong> {item.remark}
+            <strong>Napomena:</strong> {item.remark}
           </small>
         )}
         <Button
