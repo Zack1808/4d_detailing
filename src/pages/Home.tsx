@@ -9,7 +9,7 @@ import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
-import Carousel from "../components/layout/Carousel";
+import Carousel from "../components/layout/ReviewCarousel";
 import Modal from "../components/layout/Modal";
 
 import Button from "../components/common/Button";

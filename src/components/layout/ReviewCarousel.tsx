@@ -4,13 +4,13 @@ import { type ReviewType } from "../../types/data";
 
 import ReviewCard from "../common/RevievCard";
 
-type CarouselProps = {
+type ReviewCarouselProps = {
   reviews: ReviewType[];
 };
 
 const AUTOPLAY_DELAY = 10000;
 
-const Carousel: React.FC<CarouselProps> = ({ reviews }) => {
+const ReviewCarousel: React.FC<ReviewCarouselProps> = ({ reviews }) => {
   const [currentIndex, setCurrentIndex] = useState(reviews.length);
 
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -167,4 +167,4 @@ const Carousel: React.FC<CarouselProps> = ({ reviews }) => {
   );
 };
 
-export default Carousel;
+export default ReviewCarousel;
