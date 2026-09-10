@@ -84,7 +84,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           type="button"
           onClick={previous}
           aria-label="Prošla slika"
-          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-xs bg-dark/90 p-2 text-white transition hover:bg-black/70"
+          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-xs dark:bg-dark/90 bg-light/90 p-2 dark:text-light text-dark transition dark:hover:bg-dark/70 hover:bg-light/70"
         >
           <FaChevronLeft />
         </button>
@@ -92,12 +92,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           type="button"
           onClick={next}
           aria-label="Slijedeća slika"
-          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-xs bg-dark/90 p-2 text-light transition hover:bg-black/70"
+          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-xs dark:bg-dark/90 bg-light/90 p-2 dark:text-light text-dark transition dark:hover:bg-dark/70 hover:bg-light/70"
         >
           <FaChevronRight />
         </button>
       </div>
-      <div className="mt-3 flex justify-center gap-2 absolute bottom-0 w-full p-6 bg-dark/70">
+      <div className="mt-3 flex justify-center gap-2 absolute bottom-0 w-full p-6 dark:bg-dark/70 bg-light/70">
         {images.map((image, index) => (
           <button
             key={`${image}-indicator`}
@@ -105,7 +105,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
             onClick={() => goTo(index)}
             aria-label={`Idi na sliku ${index + 1}`}
             aria-current={logicalIndex === index}
-            className={`h-2.5 w-2.5 rounded-full transition ${logicalIndex === index ? "scale-110 bg-light" : "bg-gray-light hover:bg-gray-400"}`}
+            className={`h-2.5 w-2.5 rounded-full transition ${logicalIndex === index ? "scale-110 dark:bg-light bg-dark" : "dark:bg-gray-light bg-gray-dark/50"}`}
           ></button>
         ))}
       </div>
