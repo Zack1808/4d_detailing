@@ -51,7 +51,12 @@ export const Wheel: React.FC<WheelIconProps> = ({
         }}
       >
         {/* Tire */}
-        <circle cx="61.08" cy="61.08" r="57.78" fill="#fff" />
+        <circle
+          cx="61.08"
+          cy="61.08"
+          r="57.78"
+          fill={isDark ? "#1a1110" : "#fafafa"}
+        />
 
         <circle
           cx="61.08"

@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
           className="flex items-center justify-center gap-4 md:w-max w-full"
         >
           <img
-            src={isDark ? "/logo_dark.svg" : "/logo_light.svg"}
+            src={isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg"}
             alt="4D Detailing"
             className="w-24"
           />
