@@ -22,7 +22,7 @@ const SORTING_OPTIONS = [
 
 const Services: React.FC = () => {
   const [search, setSearch] = useState<string>("");
-  const [sortValue, setSortValue] = useState<string | string[]>(["popular"]);
+  const [sortValue, setSortValue] = useState<string | string[]>("popular");
   const [category, setCategory] = useState<
     "all" | "interior" | "exterior" | "polishing" | "package"
   >("all");
@@ -95,7 +95,7 @@ const Services: React.FC = () => {
         }
       });
     },
-    [],
+    [parseDuration],
   );
 
   const displayServices = useMemo(() => {
@@ -105,17 +105,6 @@ const Services: React.FC = () => {
     if (category !== "all") {
       newList = newList.filter((item) => item.category === category);
     }
-
-    newList = newList.filter(
-      (item) =>
-        item.title.toLowerCase().includes(searchTerm) ||
-        item.services.some((service) =>
-          service.toLowerCase().includes(searchTerm),
-        ) ||
-        item.keywords?.some((keyword) =>
-          keyword.toLowerCase().includes(searchTerm),
-        ),
-    );
 
     switch (sortValue) {
       case "popular":
@@ -137,6 +126,17 @@ const Services: React.FC = () => {
         newList = sortList(newList, "duration", "desc");
         break;
     }
+
+    newList = newList.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm) ||
+        item.services.some((service) =>
+          service.toLowerCase().includes(searchTerm),
+        ) ||
+        item.keywords?.some((keyword) =>
+          keyword.toLowerCase().includes(searchTerm),
+        ),
+    );
 
     return newList;
   }, [services, search, category, sortValue]);
