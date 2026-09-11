@@ -87,12 +87,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
       <main className="flex flex-col gap-6 text-dark dark:text-light ">
         <ul className={`flex flex-col gap-3`}>
           {item.services.map((service, index) => (
-            <li
-              key={`${service}-${index}`}
-              className="flex items-center  justify-start gap-3"
-            >
-              <img src={wheel} alt="wheel image" className="w-5" />
-              {service}
+            <li key={`${service}-${index}`} className="flex items-start gap-3">
+              <img src={wheel} alt="wheel image" className="w-5 mt-0.5" />
+              <p className="">{service}</p>
             </li>
           ))}
         </ul>
