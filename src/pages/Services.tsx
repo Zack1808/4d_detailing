@@ -190,7 +190,7 @@ const Services: React.FC = () => {
           </div>
         </div>
       </Container>
-      <Container className="pt-9!">
+      <Container className="pt-9!" id="service-list">
         <h3 className="font-bold text-2xl text-dark dark:text-light">Usluge</h3>
 
         <div className="w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col">

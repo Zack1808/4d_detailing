@@ -366,8 +366,8 @@ const Select: React.FC<SelectProps> = ({
         onKeyDown={handleKeyDown}
         className="
           flex min-h-10 w-full items-center
-          justify-between gap-2 rounded-xs bg-dark/10 dark:bg-light/10
-          px-3 border-b-2 border-transparent focus:border-dark dark:focus:border-light
+          justify-between gap-3 rounded-xs bg-dark/10 dark:bg-light/10
+          p-3 border-b-2 border-transparent transition-all transition-1000 focus:border-dark dark:focus:border-light
           text-left 
           outline-none
           cursor-pointer
@@ -386,7 +386,7 @@ const Select: React.FC<SelectProps> = ({
       {isOpen && (
         <div
           className={`md:absolute fixed inset-0 h-screen md:inset-auto md:p-0 p-3 flex items-center justify-center bg-gray-dark/15 dark:bg-light/15
-          backdrop-blur-lg z-50 md:max-h-62 w-full md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-15 md:mt-1" : "md:bottom-15 md:mb-1"}`}
+          backdrop-blur-lg z-50 md:max-h-62 w-full md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-15 md:mt-4" : "md:bottom-15 md:mb-4"}`}
           onClick={(event) =>
             event.target === event.currentTarget && closeSelect()
           }
@@ -417,7 +417,7 @@ const Select: React.FC<SelectProps> = ({
                   }
                   className={`
                   flex min-h-9 items-center
-                  gap-2 rounded-xs px-3 py-3
+                  gap-3 rounded-xs p-3
                   select-none text-dark dark:text-light
                   ${active ? "bg-gray-dark/20 dark:bg-gray-light/20" : ""}
                   ${selected ? "bg-gray-dark/40 dark:bg-gray-light/40" : ""}
