@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
 
 import Button from "../components/common/Button";
+import Input from "../components/common/Input";
+import Select from "../components/common/Select";
+import Textarea from "../components/common/Textarea";
 
 import Container from "../components/layout/Container";
 
@@ -12,7 +15,7 @@ import Polisher from "../components/animated/Polisher";
 import { useData } from "../context/DataContext";
 
 const Contact: React.FC = () => {
-  const { isDark } = useData();
+  const { isDark, services } = useData();
 
   const loaders = [
     <Tesseract isDark={isDark} size={60} thickness={10} />,
@@ -25,6 +28,20 @@ const Contact: React.FC = () => {
     return randomIndex;
   });
 
+  const options = useMemo(
+    () => [
+      {
+        value: "general_question",
+        label: "Općenito pitanje",
+      },
+      ...services.map((service) => ({
+        label: service.title,
+        value: service.slug,
+      })),
+    ],
+    [services],
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -35,7 +52,7 @@ const Contact: React.FC = () => {
         <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
           Rezervirajte svoj termin
         </h2>
-        <div className="flex gap-3 mt-3 w-full min-h-0">
+        <div className="flex gap-12 mt-3 w-full min-h-0 lg:flex-row flex-col">
           <div className="flex flex-col gap-3 flex-1 min-h-0">
             <p className="text-dark dark:text-light">
               Želite svom vozilu pružiti pažnju koju zaslužuje? Ispunite obrazac
@@ -89,7 +106,7 @@ const Contact: React.FC = () => {
               </li>
             </ul>
 
-            <div className="flex-1 min-h-0 relative rounded-xs overflow-hidden group">
+            <div className="lg:flex-1 min-h-0 relative rounded-xs overflow-hidden group">
               <div className="absolute inset-0 bg-gray-light/20 dark:bg-gray-dark/20 flex items-center justify-center -z-10 text-dark dark:text-light flex-col font-semibold gap-3">
                 {loaders[selectLoader]}
                 Loading...
@@ -114,7 +131,93 @@ const Contact: React.FC = () => {
               />
             </div>
           </div>
-          <form className="flex flex-col gap-3 flex-1"></form>
+          <form className="flex flex-col gap-6 lg:flex-1">
+            <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="fullName" className="text-dark dark:text-light">
+                Ime i Prezime *
+              </label>
+              <Input
+                required
+                type="text"
+                className="w-full"
+                placeholder="Ivan Ivic"
+                id="fullName"
+              />
+            </fieldset>
+
+            <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="email" className="text-dark dark:text-light">
+                Email *
+              </label>
+              <Input
+                required
+                type="email"
+                className="w-full"
+                placeholder="ivanivic@gmail.com"
+                id="email"
+              />
+            </fieldset>
+
+            <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="phone" className="text-dark dark:text-light">
+                Broj telefona *
+              </label>
+              <Input
+                required
+                type="tel"
+                className="w-full"
+                placeholder="Vaš broj telefona"
+                id="phone"
+              />
+            </fieldset>
+
+            <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="service" className="text-dark dark:text-light">
+                Usluga *
+              </label>
+              <Select
+                required
+                className="w-full"
+                options={options}
+                defaultValue="general_question"
+                id="service"
+              />
+            </fieldset>
+
+            <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="carType" className="text-dark dark:text-light">
+                Model vozila *
+              </label>
+              <Input
+                required
+                type="text"
+                className="w-full"
+                placeholder="Mazda 3 Hatchback 2023"
+                id="carType"
+              />
+            </fieldset>
+
+            {/* <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="date" className="text-dark dark:text-light">
+                Željeni termin *
+              </label>
+            </fieldset> */}
+
+            <fieldset className="w-full flex flex-col gap-3">
+              <label htmlFor="message" className="text-dark dark:text-light">
+                Napomena / dodatni zahtjevi
+              </label>
+              <Textarea
+                className="w-full"
+                placeholder="Navedite dodatne detalje ili posebne zahtjeve..."
+                id="message"
+              />
+            </fieldset>
+
+            <Button variant="primary" className="self-end">
+              Pošalji upit
+            </Button>
+          </form>
         </div>
       </Container>
     </main>
