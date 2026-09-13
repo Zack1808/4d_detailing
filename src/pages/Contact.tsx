@@ -5,6 +5,7 @@ import Button from "../components/common/Button";
 import Input from "../components/common/Input";
 import Select from "../components/common/Select";
 import Textarea from "../components/common/Textarea";
+import DatePicker from "../components/common/DatePicker";
 
 import Container from "../components/layout/Container";
 
@@ -197,11 +198,16 @@ const Contact: React.FC = () => {
               />
             </fieldset>
 
-            {/* <fieldset className="w-full flex flex-col gap-3">
+            <fieldset className="w-full flex flex-col gap-3">
               <label htmlFor="date" className="text-dark dark:text-light">
                 Željeni termin *
               </label>
-            </fieldset> */}
+              <DatePicker
+                id="date"
+                min="13.09.2026"
+                defaultValue="13.09.2026"
+              />
+            </fieldset>
 
             <fieldset className="w-full flex flex-col gap-3">
               <label htmlFor="message" className="text-dark dark:text-light">
