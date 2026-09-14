@@ -543,28 +543,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
     });
   };
 
-  const goToToday = () => {
-    const today = getTodayString();
-
-    if (isDateUnavailable(today)) {
-      return;
-    }
-
-    const parsed = parseDate(today);
-
-    if (!parsed) return;
-
-    selectDate(today);
-
-    setFocusedDate(today);
-
-    setViewDate(startOfMonth(parsed));
-
-    requestAnimationFrame(() => {
-      dayRefs.current[today]?.focus();
-    });
-  };
-
   return (
     <div
       ref={containerRef}
@@ -719,7 +697,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                       onFocus={() => {
                         setFocusedDate(calendarDay.date);
                       }}
-                      className={`flex p-2  items-center  border-transparent justify-center cursor-pointer ${
+                      className={`flex p-3 items-center  border-transparent justify-center cursor-pointer ${
                         calendarDay.currentMonth
                           ? "text-dark dark:text-light font-semibold"
                           : "bg-dark/10 dark:bg-light/10 text-dark/70 dark:text-light/70"
@@ -737,31 +715,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
                     </button>
                   );
                 })}
-              </div>
-
-              <div className="mt-3 flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(false);
-
-                    requestAnimationFrame(() => {
-                      inputRef.current?.focus();
-                    });
-                  }}
-                  className="px-3 py-2 rounded-xs font-semibold border border-dark dark:border-light text-dark dark:text-light"
-                >
-                  Odustani
-                </button>
-
-                <button
-                  type="button"
-                  disabled={isDateUnavailable(getTodayString())}
-                  onClick={goToToday}
-                  className="px-3 py-2 bg-dark dark:bg-light text-light dark:text-dark rounded-xs font-semibold"
-                >
-                  Danas
-                </button>
               </div>
             </div>
           </div>
