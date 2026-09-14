@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
 
 import Button from "../components/common/Button";
@@ -43,6 +43,26 @@ const Contact: React.FC = () => {
       })),
     ],
     [services],
+  );
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+
+      if (!form.checkValidity()) {
+        const invalidField = form.querySelector<HTMLElement>(":invalid");
+
+        invalidField?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+
+        return;
+      }
+    },
+    [],
   );
 
   useEffect(() => {
@@ -136,7 +156,10 @@ const Contact: React.FC = () => {
               />
             </div>
           </div>
-          <form className="flex flex-col gap-6 lg:flex-1">
+          <form
+            className="flex flex-col gap-6 lg:flex-1"
+            onSubmit={handleSubmit}
+          >
             <fieldset className="w-full flex flex-col gap-3">
               <label htmlFor="fullName" className="text-dark dark:text-light">
                 Ime i Prezime *
@@ -144,7 +167,7 @@ const Contact: React.FC = () => {
               <Input
                 required
                 type="text"
-                className="w-full"
+                className="w-full scroll-mt-38"
                 placeholder="Ivan Ivic"
                 id="fullName"
               />
@@ -157,7 +180,7 @@ const Contact: React.FC = () => {
               <Input
                 required
                 type="email"
-                className="w-full"
+                className="w-full scroll-mt-40"
                 placeholder="ivanivic@gmail.com"
                 id="email"
               />
@@ -170,7 +193,7 @@ const Contact: React.FC = () => {
               <Input
                 required
                 type="tel"
-                className="w-full"
+                className="w-full scroll-mt-40"
                 placeholder="Vaš broj telefona"
                 id="phone"
               />
@@ -182,7 +205,7 @@ const Contact: React.FC = () => {
               </label>
               <Select
                 required
-                className="w-full"
+                className="w-full scroll-mt-40"
                 options={options}
                 defaultValue="general_question"
                 id="service"
@@ -196,7 +219,7 @@ const Contact: React.FC = () => {
               <Input
                 required
                 type="text"
-                className="w-full"
+                className="w-full scroll-mt-40"
                 placeholder="Mazda 3 Hatchback 2023"
                 id="carType"
               />
