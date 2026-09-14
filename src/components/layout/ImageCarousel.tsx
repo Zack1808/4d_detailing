@@ -70,11 +70,15 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           }}
         >
           {slides.map((image, index) => (
-            <div className="w-full shrink-0" key={`${images}-${index}`}>
+            <div
+              className="w-full shrink-0 aspect-video"
+              key={`${images}-${index}`}
+            >
               <img
                 src={image}
                 alt={`Slika ${(index % images.length) + 1}`}
                 className="block h-auto w-full object-cover"
+                loading="lazy"
               />
             </div>
           ))}
