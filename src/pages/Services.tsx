@@ -44,12 +44,26 @@ const IMAGES_CAROUSEL = [
 ];
 
 const Services: React.FC = () => {
-  const [search, setSearch] = useState<string>("");
-  const [sortValue, setSortValue] = useState<string | string[]>("popularno");
-  const [category, setCategory] = useState<Category>("all");
-
   const location = useLocation();
   const navigate = useNavigate();
+
+  const getInitialFilters = () => {
+    const params = new URLSearchParams(location.search);
+
+    return {
+      category: (params.get("kategorija") as Category) || "all",
+      search: params.get("pretraga") || "",
+      sortValue: params.get("sortiranje") || "popularno",
+    };
+  };
+
+  const initialFilters = getInitialFilters();
+
+  const [search, setSearch] = useState<string>(initialFilters.search);
+  const [sortValue, setSortValue] = useState<string | string[]>(
+    initialFilters.sortValue,
+  );
+  const [category, setCategory] = useState<Category>(initialFilters.category);
 
   const { services } = useData();
 
@@ -177,21 +191,11 @@ const Services: React.FC = () => {
 
     const params = new URLSearchParams(searchParams);
 
-    navigate(`/usluge?${params.toString()}`);
+    navigate(`/usluge?${params.toString()}`, { replace: true });
   }, [category, search, sortValue]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    const search = new URLSearchParams(location.search);
-
-    const category = search.get("kategorija");
-    const sort = search.get("sortiranje");
-    const userSearch = search.get("pretraga");
-
-    if (category) setCategory(category as Category);
-    if (userSearch) setSearch(userSearch);
-    if (sort) setSortValue(sort);
   }, []);
 
   return (
