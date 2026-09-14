@@ -29,6 +29,8 @@ const Contact: React.FC = () => {
     return randomIndex;
   });
 
+  const today = new Date();
+
   const options = useMemo(
     () => [
       {
@@ -204,8 +206,7 @@ const Contact: React.FC = () => {
               </label>
               <DatePicker
                 id="date"
-                min="13.09.2026"
-                defaultValue="13.09.2026"
+                min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
               />
             </fieldset>
 

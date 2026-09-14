@@ -199,28 +199,35 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const selectedValue = isControlled ? value : internalValue;
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [inputValue, setInputValue] = useState<string>(
     formatDisplayDate(selectedValue),
   );
-
   const [viewDate, setViewDate] = useState<Date>(() => {
     const selected = parseDate(selectedValue);
 
     return selected ? startOfMonth(selected) : startOfMonth(new Date());
   });
-
   const [focusedDate, setFocusedDate] = useState<string>(
     selectedValue || getTodayString(),
   );
+  const [hasSpaceBelow, setHasSpaceBelow] = useState<boolean>(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
-
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const calendarRef = useRef<HTMLDivElement>(null);
   const dayRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-
   const calendarId = useId();
+
+  const checkSpace = useCallback(() => {
+    if (!containerRef.current || !calendarRef.current) return;
+
+    const rootRect = containerRef.current.getBoundingClientRect();
+    const dropDownHeight = calendarRef.current.offsetHeight;
+
+    const availableSpace = window.innerHeight - rootRect.bottom;
+
+    setHasSpaceBelow(dropDownHeight < availableSpace);
+  }, []);
 
   useEffect(() => {
     setInputValue(formatDisplayDate(selectedValue));
@@ -244,6 +251,20 @@ const DatePicker: React.FC<DatePickerProps> = ({
       document.removeEventListener("mousedown", handlePointerDown);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    checkSpace();
+
+    window.addEventListener("scroll", checkSpace, true);
+    window.addEventListener("resize", checkSpace);
+
+    return () => {
+      window.removeEventListener("scroll", checkSpace, true);
+      window.removeEventListener("resize", checkSpace);
+    };
+  }, [isOpen, checkSpace]);
 
   const isDateUnavailable = useCallback(
     (date: string) => {
@@ -603,13 +624,14 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       {isOpen && !disabled && (
         <div
-          className="md:absolute fixed flex items-center justify-center md:mt-1 inset-0 md:inset-auto md:p-0 p-3 w-full md:max-w-lg z-50 bg-gray-dark/15 dark:bg-light/15 backdrop-blur-lg md:backdrop-blur-none md:shadow-2xl md:dark:shadow-light/10 md:bg-transparent md:top-full"
+          className={`md:absolute fixed flex items-center justify-center inset-0 md:inset-auto md:p-0 p-3 w-full md:max-w-sm z-50 bg-gray-dark/15 dark:bg-light/15 backdrop-blur-lg md:backdrop-blur-none md:shadow-2xl md:dark:shadow-light/10 md:bg-transparent ${hasSpaceBelow ? "md:top-full md:mt-1" : "md:bottom-full md:mb-1"}`}
           onClick={(event) =>
             event.target === event.currentTarget && setIsOpen(false)
           }
         >
           <div
             id={calendarId}
+            ref={calendarRef}
             role="dialog"
             aria-label="Odaberite datum"
             className="p-3 rounded-xs bg-[#e5e5e4] dark:bg-[#1e1716] w-full border border-dark/20 dark:border-light/20"
@@ -661,7 +683,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               </div>
 
               <div
-                className="grid grid-cols-7 gap-0.5"
+                className="grid grid-cols-7"
                 role="grid"
                 aria-label={formatMonthYear(viewDate)}
               >
@@ -693,17 +715,19 @@ const DatePicker: React.FC<DatePickerProps> = ({
                       onFocus={() => {
                         setFocusedDate(calendarDay.date);
                       }}
-                      className={`flex p-3 rounded-xs items-center border-2 border-transparent justify-center cursor-pointer ${
+                      className={`flex p-2  items-center  border-transparent justify-center cursor-pointer ${
                         calendarDay.currentMonth
                           ? "text-dark dark:text-light font-semibold"
                           : "bg-dark/10 dark:bg-light/10 text-dark/70 dark:text-light/70"
                       } disabled:bg-dark/50 dark:disabled:bg-light/50 disabled:cursor-auto disabled:text-dark/50 dark:disabled:text-light/50 ${
                         selected
-                          ? "bg-dark text-light dark:bg-light dark:text-dark! focus:inset-ring-light dark:inset-ring-dark"
+                          ? "bg-dark text-light dark:bg-light dark:text-dark! focus:inset-ring-3 focus:inset-ring-light dark:focus:inset-ring-dark"
                           : "focus:inset-ring-dark dark:focus:inset-ring-light"
                       } ${
-                        today ? "border-dark dark:border-light" : ""
-                      } focus:outline-none focus:ring-2`}
+                        today
+                          ? "inset-ring-dark dark:inset-ring-light inset-ring-3"
+                          : ""
+                      } focus:outline-none focus:inset-ring-2`}
                     >
                       {calendarDay.day}
                     </button>
@@ -711,7 +735,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 })}
               </div>
 
-              <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
+              <div className="mt-3 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => {
