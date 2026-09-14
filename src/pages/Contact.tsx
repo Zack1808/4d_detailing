@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
   const { isDark, services } = useData();
 
   const loaders = [
-    <Tesseract isDark={isDark} size={60} thickness={10} />,
+    <Tesseract isDark={isDark} size={60} thickness={15} speed={10} />,
     <Wheel isDark={isDark} size={60} speed={3} />,
     <Polisher isDark={isDark} size={80} speed={3} />,
   ];
@@ -109,10 +109,12 @@ const Contact: React.FC = () => {
               </li>
             </ul>
 
-            <div className="lg:flex-1 min-h-0 relative rounded-xs overflow-hidden group">
+            <div className="lg:flex-1 min-h-0 relative rounded-xs overflow-hidden group lg:mb-18.5">
               <div className="absolute inset-0 bg-gray-light/20 dark:bg-gray-dark/20 flex items-center justify-center -z-10 text-dark dark:text-light flex-col font-semibold gap-3">
-                {loaders[selectLoader]}
-                Loading...
+                <div className="flex flex-col gap-3">
+                  {loaders[selectLoader]}
+                  Loading...
+                </div>
               </div>
 
               <iframe
@@ -202,7 +204,7 @@ const Contact: React.FC = () => {
 
             <fieldset className="w-full flex flex-col gap-3">
               <label htmlFor="date" className="text-dark dark:text-light">
-                Željeni termin *
+                Željeni termin
               </label>
               <DatePicker
                 id="date"

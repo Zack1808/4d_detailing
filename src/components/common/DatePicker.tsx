@@ -38,7 +38,7 @@ const toDateString = (year: number, month: number, day: number) =>
 const parseDate = (value: string): Date | null => {
   if (!value) return null;
 
-  const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(value.trim());
+  const match = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value.trim());
 
   if (!match) return null;
 
@@ -347,7 +347,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   }, []);
 
   const parseDisplayValue = (value: string) => {
-    const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(value.trim());
+    const match = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value.trim());
 
     if (!match) return null;
 
@@ -372,12 +372,17 @@ const DatePicker: React.FC<DatePickerProps> = ({
         setInternalValue("");
       }
 
+      setInputValue("");
       onChange?.("");
 
       return;
     }
 
+    console.log(inputValue);
+
     const parsed = parseDisplayValue(inputValue);
+
+    console.log(parsed);
 
     if (!parsed || isDateUnavailable(parsed)) {
       setInputValue(formatDisplayDate(selectedValue));
@@ -596,7 +601,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
           }}
           onBlur={commitInput}
           onKeyDown={handleInputKeyDown}
-          className="w-full rounded-xs outline-none placeholder:text-gray-dark dark:placeholder:text-gray-light text-dark dark:text-light p-3"
+          className="w-full rounded-xs cursor-pointer outline-none placeholder:text-gray-light text-dark dark:text-light p-3"
         />
 
         <button
@@ -719,7 +724,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                         calendarDay.currentMonth
                           ? "text-dark dark:text-light font-semibold"
                           : "bg-dark/10 dark:bg-light/10 text-dark/70 dark:text-light/70"
-                      } disabled:bg-dark/50 dark:disabled:bg-light/50 disabled:cursor-auto disabled:text-dark/50 dark:disabled:text-light/50 ${
+                      } disabled:bg-dark/30 dark:disabled:bg-light/50 disabled:cursor-auto disabled:text-dark/50 dark:disabled:text-light/50 ${
                         selected
                           ? "bg-dark text-light dark:bg-light dark:text-dark! focus:inset-ring-3 focus:inset-ring-light dark:focus:inset-ring-dark"
                           : "focus:inset-ring-dark dark:focus:inset-ring-light"

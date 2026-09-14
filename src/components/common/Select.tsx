@@ -301,11 +301,7 @@ const Select: React.FC<SelectProps> = ({
 
   const defaultRenderValue = () => {
     if (selectedOptions.length === 0) {
-      return (
-        <span className="text-gray-dark dark:text-gray-light">
-          {placeholder}
-        </span>
-      );
+      return <span className="text-gray-light">{placeholder}</span>;
     }
 
     if (!multiple) return selectedOptions[0].label;
