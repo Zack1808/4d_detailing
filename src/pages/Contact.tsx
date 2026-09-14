@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -18,6 +19,9 @@ import { useData } from "../context/DataContext";
 const Contact: React.FC = () => {
   const { isDark, services } = useData();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const loaders = [
     <Tesseract isDark={isDark} size={60} thickness={15} speed={10} />,
     <Wheel isDark={isDark} size={60} speed={3} />,
@@ -28,6 +32,9 @@ const Contact: React.FC = () => {
     const randomIndex = Math.floor(Math.random() * loaders.length);
     return randomIndex;
   });
+  const [selectValue, setSelectValue] = useState<string | string[]>(
+    "general_question",
+  );
 
   const today = new Date();
 
@@ -69,6 +76,31 @@ const Contact: React.FC = () => {
     },
     [],
   );
+
+  const handleSelectChange = (value: string | string[]) => {
+    setSelectValue(value);
+
+    if (value === "general_question") {
+      navigate(`/kontakt`, {
+        replace: true,
+      });
+
+      return;
+    }
+    navigate(`/kontakt?usluga=${value}`, {
+      replace: true,
+    });
+  };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+
+    const service = searchParams.get("usluga");
+
+    if (!service) return;
+
+    setSelectValue(service);
+  }, [location.search]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -215,9 +247,10 @@ const Contact: React.FC = () => {
                 required
                 className="w-full scroll-mt-40"
                 options={options}
-                defaultValue="general_question"
+                value={selectValue}
                 id="service"
                 name="service"
+                onChange={handleSelectChange}
               />
             </fieldset>
 
