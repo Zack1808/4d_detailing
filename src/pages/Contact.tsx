@@ -61,6 +61,11 @@ const Contact: React.FC = () => {
 
         return;
       }
+
+      const formData = new FormData(form);
+      const values = Object.fromEntries(formData.entries());
+
+      console.log(values);
     },
     [],
   );
@@ -170,6 +175,7 @@ const Contact: React.FC = () => {
                 className="w-full scroll-mt-38"
                 placeholder="Ivan Ivic"
                 id="fullName"
+                name="fullName"
               />
             </fieldset>
 
@@ -183,6 +189,7 @@ const Contact: React.FC = () => {
                 className="w-full scroll-mt-40"
                 placeholder="ivanivic@gmail.com"
                 id="email"
+                name="email"
               />
             </fieldset>
 
@@ -196,6 +203,7 @@ const Contact: React.FC = () => {
                 className="w-full scroll-mt-40"
                 placeholder="Vaš broj telefona"
                 id="phone"
+                name="phone"
               />
             </fieldset>
 
@@ -209,6 +217,7 @@ const Contact: React.FC = () => {
                 options={options}
                 defaultValue="general_question"
                 id="service"
+                name="service"
               />
             </fieldset>
 
@@ -222,6 +231,7 @@ const Contact: React.FC = () => {
                 className="w-full scroll-mt-40"
                 placeholder="Mazda 3 Hatchback 2023"
                 id="carType"
+                name="carType"
               />
             </fieldset>
 
@@ -232,6 +242,7 @@ const Contact: React.FC = () => {
               <DatePicker
                 id="date"
                 min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
+                name="date"
               />
             </fieldset>
 
@@ -243,6 +254,7 @@ const Contact: React.FC = () => {
                 className="w-full"
                 placeholder="Navedite dodatne detalje ili posebne zahtjeve..."
                 id="message"
+                name="message"
               />
             </fieldset>
 

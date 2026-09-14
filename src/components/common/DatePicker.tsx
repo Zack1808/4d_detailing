@@ -20,6 +20,7 @@ type DatePickerProps = {
   className?: string;
   isDateDisabled?: (date: string) => boolean;
   required?: boolean;
+  name?: string;
 };
 
 type CalendarDay = {
@@ -191,6 +192,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   className = "",
   isDateDisabled,
   required,
+  name,
 }) => {
   const isControlled = value !== undefined;
 
@@ -378,11 +380,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       return;
     }
 
-    console.log(inputValue);
-
     const parsed = parseDisplayValue(inputValue);
-
-    console.log(parsed);
 
     if (!parsed || isDateUnavailable(parsed)) {
       setInputValue(formatDisplayDate(selectedValue));
@@ -578,7 +576,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
           id={id}
           ref={inputRef}
           inputMode="numeric"
-          value={inputValue}
+          value={inputValue.replace(" ", "").replace(". ", ".")}
           disabled={disabled}
           required={required}
           placeholder={placeholder}
@@ -599,6 +597,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
               });
             }
           }}
+          name={name}
           onBlur={commitInput}
           onKeyDown={handleInputKeyDown}
           className="w-full rounded-xs cursor-pointer outline-none placeholder:text-gray-light text-dark dark:text-light p-3"
