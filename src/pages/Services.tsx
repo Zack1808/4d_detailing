@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { type ServiceDataType } from "../types/data";
 
@@ -12,14 +13,28 @@ import Button from "../components/common/Button";
 
 import { useData } from "../context/DataContext";
 
+type Category =
+  | "all"
+  | "interijer"
+  | "eksterijer"
+  | "poliranje_i_zastita"
+  | "posebni_paketi";
+
 const SORTING_OPTIONS = [
-  { value: "popular", label: "Popularno" },
-  { value: "priceUp", label: "Cijena rastuća" },
-  { value: "priceDown", label: "Cijena padajuća" },
-  { value: "alphabetical", label: "Naziv A-Z" },
-  { value: "timeUp", label: "Trajanje uzlazno" },
-  { value: "timeDown", label: "Trajanje silazno" },
+  { value: "popularno", label: "Popularno" },
+  { value: "cijena_rastuca", label: "Cijena rastuća" },
+  { value: "cijena_padajuca", label: "Cijena padajuća" },
+  { value: "abecedno", label: "Naziv A-Z" },
+  { value: "trajanje_uzlazno", label: "Trajanje uzlazno" },
+  { value: "trajanje_silazno", label: "Trajanje silazno" },
 ] as const;
+
+const CATEGORIES = {
+  interijer: "interior",
+  eksterijer: "exterior",
+  poliranje_i_zastita: "polishing",
+  posebni_paketi: "package",
+};
 
 const IMAGES_CAROUSEL = [
   "/images/service1.jpg",
@@ -30,10 +45,11 @@ const IMAGES_CAROUSEL = [
 
 const Services: React.FC = () => {
   const [search, setSearch] = useState<string>("");
-  const [sortValue, setSortValue] = useState<string | string[]>("popular");
-  const [category, setCategory] = useState<
-    "all" | "interior" | "exterior" | "polishing" | "package"
-  >("all");
+  const [sortValue, setSortValue] = useState<string | string[]>("popularno");
+  const [category, setCategory] = useState<Category>("all");
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const { services } = useData();
 
@@ -111,26 +127,28 @@ const Services: React.FC = () => {
     const searchTerm = search.toLowerCase();
 
     if (category !== "all") {
-      newList = newList.filter((item) => item.category === category);
+      newList = newList.filter(
+        (item) => item.category === CATEGORIES[category],
+      );
     }
 
     switch (sortValue) {
-      case "popular":
+      case "popularno":
         newList = sortList(newList, "isFeatured", "desc");
         break;
-      case "priceUp":
+      case "cijena_rastuca":
         newList = sortList(newList, "priceFrom", "asc");
         break;
-      case "priceDown":
+      case "cijena_padajuca":
         newList = sortList(newList, "priceFrom", "desc");
         break;
-      case "alphabetical":
+      case "abecedno":
         newList = sortList(newList, "title", "asc");
         break;
-      case "timeUp":
+      case "trajanje_uzlazno":
         newList = sortList(newList, "duration", "asc");
         break;
-      case "timeDown":
+      case "trajanje_silazno":
         newList = sortList(newList, "duration", "desc");
         break;
     }
@@ -150,7 +168,30 @@ const Services: React.FC = () => {
   }, [services, search, category, sortValue]);
 
   useEffect(() => {
+    let searchParams = {};
+
+    if (search) searchParams = { ...searchParams, pretraga: search };
+    if (category !== "all")
+      searchParams = { ...searchParams, kategorija: category };
+    searchParams = { ...searchParams, sortiranje: sortValue };
+
+    const params = new URLSearchParams(searchParams);
+
+    navigate(`/usluge?${params.toString()}`);
+  }, [category, search, sortValue]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
+
+    const search = new URLSearchParams(location.search);
+
+    const category = search.get("kategorija");
+    const sort = search.get("sortiranje");
+    const userSearch = search.get("pretraga");
+
+    if (category) setCategory(category as Category);
+    if (userSearch) setSearch(userSearch);
+    if (sort) setSortValue(sort);
   }, []);
 
   return (
@@ -204,29 +245,29 @@ const Services: React.FC = () => {
             </Button>
             <Button
               variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "exterior" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("exterior")}
+              className={`max-w-none flex-1 items-center justify-center ${category === "eksterijer" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("eksterijer")}
             >
               Eksterijer
             </Button>
             <Button
               variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "interior" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("interior")}
+              className={`max-w-none flex-1 items-center justify-center ${category === "interijer" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("interijer")}
             >
               Interijer
             </Button>
             <Button
               variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "polishing" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("polishing")}
+              className={`max-w-none flex-1 items-center justify-center ${category === "poliranje_i_zastita" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("poliranje_i_zastita")}
             >
               Poliranje i zaštita
             </Button>
             <Button
               variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "package" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("package")}
+              className={`max-w-none flex-1 items-center justify-center ${category === "posebni_paketi" ? "bg-light dark:bg-dark" : ""}`}
+              onClick={() => setCategory("posebni_paketi")}
             >
               Posebni paketi
             </Button>
