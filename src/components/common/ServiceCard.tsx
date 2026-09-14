@@ -114,7 +114,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
           </small>
         )}
         <Button
-          to={`/kontakt?usluga=${item.title}`}
+          to={`/kontakt?usluga=${item.slug}`}
           variant="primary"
           className="w-full max-w-none justify-center"
         >
