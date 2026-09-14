@@ -227,7 +227,7 @@ const Services: React.FC = () => {
             </p>
           </div>
           <div className="md:w-5/12 hidden 2xl:flex mt-30">
-            <ImageCarousel images={[...IMAGES_CAROUSEL]} />
+            <ImageCarousel images={IMAGES_CAROUSEL} />
           </div>
         </div>
       </Container>
