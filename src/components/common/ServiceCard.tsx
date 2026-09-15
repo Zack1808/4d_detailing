@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 
 import Button from "./Button";
+import List from "./List";
 
 import Wheel from "../animated/Wheel";
 
@@ -16,8 +17,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   const [iconSize, setIconSize] = useState<number>(260);
 
   const { isDark } = useData();
-
-  const wheel = isDark ? "/images/wheel_dark.svg" : "/images/wheel_light.svg";
 
   const discountedPrice = useMemo(() => {
     let priceList = [item.priceFrom];
@@ -85,14 +84,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
         </div>
       </header>
       <main className="flex flex-col gap-6 text-dark dark:text-light ">
-        <ul className={`flex flex-col gap-3`}>
-          {item.services.map((service, index) => (
-            <li key={`${service}-${index}`} className="flex items-start gap-3">
-              <img src={wheel} alt="wheel image" className="w-5 mt-0.5" />
-              <p className="">{service}</p>
-            </li>
-          ))}
-        </ul>
+        <List list={item.services} isDark={isDark} />
 
         <div className="flex flex-col gap-3">
           {item.suv && (

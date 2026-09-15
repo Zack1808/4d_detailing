@@ -297,6 +297,7 @@ const Home: React.FC = () => {
           <img
             src={isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg"}
             className="w-1/3 md:flex hidden"
+            loading="lazy"
           />
         </div>
       </Container>
