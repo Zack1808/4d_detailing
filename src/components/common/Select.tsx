@@ -382,7 +382,7 @@ const Select: React.FC<SelectProps> = ({
       {isOpen && (
         <div
           className={`md:absolute fixed inset-0 md:inset-auto md:p-0 p-3 flex items-center justify-center bg-gray-dark/15 dark:bg-light/15
-          backdrop-blur-lg z-50 md:max-h-62 w-full md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-12 mt-1 " : "md:bottom-12 mb-1"}`}
+          backdrop-blur-lg z-50 md:max-h-62 w-full md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-12 md:mt-1 " : "md:bottom-12 md:mb-1"}`}
           onClick={(event) =>
             event.target === event.currentTarget && closeSelect()
           }
