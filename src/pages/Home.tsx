@@ -177,7 +177,7 @@ const Home: React.FC = () => {
       </Container>
 
       <Container id="about">
-        <div className="w-full flex md:flex-row flex-col gap-6 justify-between">
+        <div className="w-full flex xl:flex-row flex-col gap-6 justify-between">
           <div>
             <h2 className="font-bold text-4xl text-dark dark:text-light">
               Naša misija
@@ -224,7 +224,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 md:w-3/7 w-full md:mt-15 mt-6">
+          <div className="flex flex-col gap-3 xl:w-3/7 w-full xl:mt-15 mt-6">
             <img
               src="/images/founder.avif"
               alt="Slika osnivatelja"
