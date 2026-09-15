@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Container from "../components/layout/Container";
 
 const Terms: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main>
       <Container>

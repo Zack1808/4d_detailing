@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import List from "../components/common/List";
 
@@ -31,6 +31,10 @@ const COOKIES = [
 const Privacy: React.FC = () => {
   const { isDark } = useData();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main>
       <Container>
@@ -38,7 +42,7 @@ const Privacy: React.FC = () => {
           Pravila privatnosti
         </h2>
 
-        <ul className="flex flex-col gap-12+ mt-15">
+        <ul className="flex flex-col gap-12 mt-15">
           <li className="text-dark dark:text-light flex flex-col gap-3">
             <h3 className="font-semibold text-3xl">1. Voditelj obrade</h3>
             <p>Obrt za detailing 4D Detailing</p>
