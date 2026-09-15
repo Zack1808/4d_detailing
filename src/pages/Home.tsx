@@ -19,6 +19,7 @@ import Input from "../components/common/Input";
 import Textarea from "../components/common/Textarea";
 
 import Tesseract from "../components/animated/Tessaract";
+import Wheel from "../components/animated/Wheel";
 
 import { useGetPageData } from "../hooks/useGetPageData";
 
@@ -36,6 +37,27 @@ const Home: React.FC = () => {
   const { isDark, services, reviews } = useData();
 
   const { setReview, loading, error } = useGetPageData();
+
+  const heroBackground = [
+    <Tesseract
+      size={1700}
+      className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
+      thickness={5}
+      speed={70}
+      isDark={isDark}
+    />,
+    <Wheel
+      size={1500}
+      className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
+      speed={70}
+      isDark={isDark}
+    />,
+  ];
+
+  const [selectLoader] = useState(() => {
+    const result = Math.floor(Math.random() * heroBackground.length);
+    return result;
+  });
 
   const servicesRef = useRef<HTMLDivElement>(null);
 
@@ -115,14 +137,7 @@ const Home: React.FC = () => {
 
   return (
     <main className="relative overflow-hidden">
-      <Tesseract
-        size={1700}
-        className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
-        thickness={5}
-        speed={70}
-        isDark={isDark}
-      />
-
+      {heroBackground[selectLoader]}
       <Hero>
         <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
           4D Detailing
