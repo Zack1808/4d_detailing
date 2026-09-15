@@ -143,7 +143,7 @@ const Home: React.FC = () => {
           4D Detailing
         </h1>
         <p className="text-2xl text-dark dark:text-light">
-          Sjaj koji nadilazi vrijeme.
+          Luksuz koji si možete priuštiti
         </p>
         <div className="flex sm:flex-row flex-col gap-2 mt-10">
           <Button variant="primary" onClick={handleScroll}>
