@@ -70,7 +70,7 @@ const Navigation: React.FC = () => {
   return (
     <>
       <header
-        className={`w-full fixed  px-3 py-3 shadow-sm flex items-center justify-center z-40  ${changeBlur ? "backdrop-blur-xl" : "backdrop-blur-xs"}`}
+        className={`w-full fixed md:p-4 p-3 shadow-sm flex items-center justify-center z-40  ${changeBlur ? "backdrop-blur-xl" : "backdrop-blur-xs"}`}
         style={{
           backgroundColor: isDark
             ? `color-mix(in srgb, var(--color-dark) ${changeBg}%, transparent)`
