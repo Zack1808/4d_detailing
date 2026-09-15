@@ -34,17 +34,17 @@ const Privacy: React.FC = () => {
   return (
     <main>
       <Container>
-        <h2 className="text-dark dark:text-light mt-30 text-4xl font-bold">
+        <h2 className="text-dark dark:text-light mt-30 text-5xl font-bold">
           Pravila privatnosti
         </h2>
 
-        <ul className="flex flex-col gap-9 mt-15">
+        <ul className="flex flex-col gap-12+ mt-15">
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">1. Voditelj obrade</h3>
+            <h3 className="font-semibold text-3xl">1. Voditelj obrade</h3>
             <p>Obrt za detailing 4D Detailing</p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">
+            <h3 className="font-semibold text-3xl">
               2. Podaci koje prikupljamo
             </h3>
             <p>
@@ -60,7 +60,7 @@ const Privacy: React.FC = () => {
             <List list={ANON_DATA} isDark={isDark} inset />
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">
+            <h3 className="font-semibold text-3xl">
               3. Kako koristimo vaše podatke
             </h3>
             <p>
@@ -71,7 +71,7 @@ const Privacy: React.FC = () => {
             </p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">4. Dijeljenje podataka</h3>
+            <h3 className="font-semibold text-3xl">4. Dijeljenje podataka</h3>
             <p>
               Vaši osobni podaci neće biti dijeljeni s trećim stranama. Anonimni
               podaci prikupljeni putem Google Analytics-a mogu biti dostupni
@@ -79,7 +79,7 @@ const Privacy: React.FC = () => {
             </p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">5. Kolačići</h3>
+            <h3 className="font-semibold text-3xl">5. Kolačići</h3>
             <p>
               Naša web stranica koristi kolačiće za praćenje aktivnosti
               korisnika i prikupljanje anonimnih podataka putem Google
@@ -100,7 +100,7 @@ const Privacy: React.FC = () => {
             </p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">6. Sigurnost podataka</h3>
+            <h3 className="font-semibold text-3xl">6. Sigurnost podataka</h3>
             <p>
               Poduzimamo sve razumne mjere kako bismo osigurali zaštitu vaših
               osobnih podataka. Ipak, imajte na umu da nijedna metoda prijenosa
@@ -109,7 +109,7 @@ const Privacy: React.FC = () => {
             </p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">7. Vaša prava</h3>
+            <h3 className="font-semibold text-3xl">7. Vaša prava</h3>
             <p>
               Imate pravo na pristup, ispravak ili brisanje osobnih podataka
               koje ste nam dostavili. Ako želite ostvariti bilo koje od ovih
@@ -124,7 +124,7 @@ const Privacy: React.FC = () => {
             </p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">
+            <h3 className="font-semibold text-3xl">
               8. Izmjene pravila privatnosti
             </h3>
             <p>
@@ -133,7 +133,7 @@ const Privacy: React.FC = () => {
             </p>
           </li>
           <li className="text-dark dark:text-light flex flex-col gap-3">
-            <h3 className="font-semibold text-2xl">9. Kontakt</h3>
+            <h3 className="font-semibold text-3xl">9. Kontakt</h3>
             <p>
               Ako imate bilo kakvih pitanja u vezi s našim pravilima
               privatnosti, slobodno nas kontaktirajte putem{" "}
