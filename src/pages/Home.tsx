@@ -259,7 +259,7 @@ const Home: React.FC = () => {
             <div>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`delay-none md:delay-200 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
                   <strong>
@@ -270,7 +270,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`delay-none md:delay-300 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
                   Ljubav prema automobilima prati nas od malih nogu. Briga o
@@ -281,7 +281,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`delay-none md:delay-400 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
                   Danas tu istu pažnju želimo pružiti svakom vozilu koje nam
@@ -293,7 +293,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`delay-none md:delay-500 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
                   Bilo da ste pravi zaljubljenik u automobile ili jednostavno
@@ -306,7 +306,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`delay-none md:delay-600 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
                   Želimo profesionalnu njegu vozila približiti što većem broju
@@ -319,7 +319,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`delay-none md:delay-600 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
                   Svaki automobil koji izađe iz našeg studija predstavlja naš
@@ -414,7 +414,7 @@ const Home: React.FC = () => {
           <div className="flex flex-col gap-3">
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
-              transitionTo={`md:delay-200 opacity-100 translate-x-0`}
+              transitionTo={` opacity-100 translate-x-0`}
             >
               <h3 className="text-dark dark:text-light text-4xl font-bold">
                 Vaš automobil zaslužuje više od običnog čišćenja.
@@ -423,7 +423,7 @@ const Home: React.FC = () => {
             <div>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`md:delay-400 opacity-100 translate-x-0`}
+                transitionTo={`opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
                   Detalji čine razliku. Od dubinskog čišćenja do poliranja i
@@ -433,7 +433,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`md:delay-500 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
                   Dopustite nam da vratimo vašem automobilu svježinu, sjaj i
@@ -442,7 +442,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`md:delay-600 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
                   Niste sigurni što je potrebno vašem vozilu? Javite nam se —
@@ -451,7 +451,7 @@ const Home: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`md:delay-700 opacity-100 translate-x-0`}
+                transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
                   Rezervirajte svoj termin i prepustite svoje vozilo u naše
@@ -462,7 +462,7 @@ const Home: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
-              transitionTo={`md:delay-900 opacity-100 translate-x-0`}
+              transitionTo={`opacity-100 translate-x-0`}
             >
               <Button variant="primary" to="/kontakt" className="mt-6">
                 Rezerviraj termin
