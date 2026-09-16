@@ -37,7 +37,7 @@ const Home: React.FC = () => {
 
   const { isDark, services, reviews } = useData();
 
-  const { setReview, loading, error, pageLoading } = useGetPageData();
+  const { setReview, loading, error } = useGetPageData();
 
   const heroBackground = [
     <Tesseract
@@ -142,7 +142,7 @@ const Home: React.FC = () => {
       <Hero>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 ${pageLoading ? "delay-200 duration-1000" : ""}`}
+          transitionTo={`opacity-100 translate-x-0 delay-200`}
         >
           <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
             4D Detailing
@@ -150,7 +150,7 @@ const Home: React.FC = () => {
         </Reveal>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 ${pageLoading ? "delay-400 duration-1000" : ""}`}
+          transitionTo={`opacity-100 translate-x-0 delay-400`}
         >
           <p className="text-2xl text-dark dark:text-light">
             Luksuz koji si možete priuštiti
@@ -159,7 +159,7 @@ const Home: React.FC = () => {
         <Reveal
           className="flex sm:flex-row flex-col gap-2 mt-10"
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 ${pageLoading ? "delay-600 duration-1000" : ""}`}
+          transitionTo={`opacity-100 translate-x-0 delay-600`}
         >
           <Button variant="primary" onClick={handleScroll}>
             Pregledaj usluge
