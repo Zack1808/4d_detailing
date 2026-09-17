@@ -145,7 +145,7 @@ const Home: React.FC = () => {
           transitionTo={`opacity-100 translate-x-0`}
           delay={200}
         >
-          <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
+          <h1 className="md:text-8xl text-5xl font-bold text-dark dark:text-light">
             4D Detailing
           </h1>
         </Reveal>
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
           transitionTo={`opacity-100 translate-x-0`}
           delay={400}
         >
-          <p className="text-2xl text-dark dark:text-light">
+          <p className="text-2xl text-dark dark:text-light font-normal">
             Luksuz koji si možete priuštiti
           </p>
         </Reveal>
@@ -191,7 +191,7 @@ const Home: React.FC = () => {
           transitionTo={`opacity-100 translate-x-0`}
           delay={200}
         >
-          <p className="text-dark dark:text-light max-w-[85ch] mt-3">
+          <p className="text-dark dark:text-light font-light max-w-[85ch] mt-3">
             Odaberite jednu od naših najtraženijih usluga i priuštite svom
             vozilu temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa
             koje naši klijenti najčešće biraju.
@@ -219,7 +219,7 @@ const Home: React.FC = () => {
               transitionTo={`opacity-100 translate-x-0`}
               threshold={0.5}
             >
-              <h5 className="text-dark dark:text-light text-xl font-bold">
+              <h5 className="text-dark dark:text-light text-xl font-semibold">
                 Ne znate koja je usluga najbolja za vaše vozilo?
               </h5>
             </Reveal>
@@ -227,7 +227,7 @@ const Home: React.FC = () => {
               transitionFrom="opacity-0 -translate-x-6"
               transitionTo={`opacity-100 translate-x-0`}
             >
-              <p className="text-dark dark:text-light max-w-[85ch]">
+              <p className="text-dark dark:text-light font-light max-w-[85ch]">
                 Pogledajte kompletnu ponudu i pronađite paket koji vam odgovara.
               </p>
             </Reveal>
@@ -261,7 +261,7 @@ const Home: React.FC = () => {
                 transitionTo={` opacity-100 translate-x-0`}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6">
-                  <strong>
+                  <strong className="font-semibold">
                     4D Detailing nastao je iz ljubavi prema automobilima i želje
                     da tu strast pretvorimo u vrhunsku uslugu.
                   </strong>
@@ -271,7 +271,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Ljubav prema automobilima prati nas od malih nogu. Briga o
                   vlastitim vozilima, pažnja prema detaljima i zadovoljstvo koje
                   donosi savršeno čist i očuvan automobil bili su početak priče
@@ -282,7 +282,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Danas tu istu pažnju želimo pružiti svakom vozilu koje nam
                   povjerite. Vjerujemo da detailing nije samo obično čišćenje
                   automobila, već cjelovita njega kojom se čuva njegov izgled,
@@ -294,11 +294,11 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Bilo da ste pravi zaljubljenik u automobile ili jednostavno
                   želite svoje vozilo održavati urednim i očuvanim bez trošenja
                   vlastitog vremena,{" "}
-                  <strong>
+                  <strong className="font-semibold">
                     naš cilj je pružiti vam kvalitetu kojoj možete vjerovati.
                   </strong>
                 </p>
@@ -307,11 +307,11 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Želimo profesionalnu njegu vozila približiti što većem broju
                   ljudi i pokazati da kvalitetno održavanje nije nepotreban
                   trošak, već
-                  <strong>
+                  <strong className="font-semibold">
                     ulaganje u izgled, očuvanost i vrijednost vašeg automobila.
                   </strong>
                 </p>
@@ -320,7 +320,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Svaki automobil koji izađe iz našeg studija predstavlja naš
                   rad, našu reputaciju i povjerenje koje ste nam ukazali. Upravo
                   zato nastojimo da rezultat uvijek bude nešto iza čega možemo
@@ -340,7 +340,7 @@ const Home: React.FC = () => {
               alt="Slika osnivatelja"
               className="object-cover rounded-sm"
             />
-            <small className="font-bold text-dark dark:text-light italic">
+            <small className="font-semibold text-dark dark:text-light italic">
               Luka Novak - Osnivač 4D Detailinga
             </small>
           </Reveal>
@@ -360,7 +360,7 @@ const Home: React.FC = () => {
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
         >
-          <p className="text-dark dark:text-light">
+          <p className="text-dark dark:text-light font-light">
             Vaše zadovoljstvo je naša najbolja preporuka.
             <br />
             Pogledajte iskustva onih koji su svoje vozilo već povjerili 4D
@@ -381,7 +381,7 @@ const Home: React.FC = () => {
               transitionFrom="opacity-0 -translate-x-6"
               transitionTo={`opacity-100 translate-x-0`}
             >
-              <h5 className="text-dark dark:text-light text-xl font-bold">
+              <h5 className="text-dark dark:text-light text-xl font-semibold">
                 Bili ste zadovoljni našom uslugom?
               </h5>
             </Reveal>
@@ -389,7 +389,7 @@ const Home: React.FC = () => {
               transitionFrom="opacity-0 -translate-x-6"
               transitionTo={`opacity-100 translate-x-0`}
             >
-              <p className="text-dark dark:text-light max-w-[85ch]">
+              <p className="font-light text-dark dark:text-light max-w-[85ch]">
                 Vaše mišljenje nam puno znači. Ako ste već svoje vozilo
                 povjerili našem timu, podijelite svoje iskustvo i pomozite
                 drugima da nas lakše upoznaju.
@@ -424,7 +424,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={`opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
+                <p className="text-dark dark:text-light font-light mt-3 max-w-[85ch]">
                   Detalji čine razliku. Od dubinskog čišćenja do poliranja i
                   zaštite, u 4D Detailingu svakom vozilu pristupamo s istom
                   pažnjom kao da je naše vlastito.
@@ -434,7 +434,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
+                <p className="text-dark dark:text-light mt-3 max-w-[85ch] font-light">
                   Dopustite nam da vratimo vašem automobilu svježinu, sjaj i
                   osjećaj novog.
                 </p>
@@ -443,7 +443,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
+                <p className="text-dark dark:text-light mt-3 max-w-[85ch] font-light">
                   Niste sigurni što je potrebno vašem vozilu? Javite nam se —
                   rado ćemo vam preporučiti najbolju opciju.
                 </p>
@@ -452,7 +452,7 @@ const Home: React.FC = () => {
                 transitionFrom="opacity-0 -translate-x-6"
                 transitionTo={` opacity-100 translate-x-0`}
               >
-                <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
+                <p className="text-dark dark:text-light mt-3 max-w-[85ch] font-light">
                   Rezervirajte svoj termin i prepustite svoje vozilo u naše
                   ruke.
                 </p>
@@ -487,9 +487,9 @@ const Home: React.FC = () => {
         >
           <label
             htmlFor="star-count"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Recenzija*
+            Recenzija *
             <StarSelect
               count={starCount}
               setCount={setStarCount}
@@ -498,23 +498,23 @@ const Home: React.FC = () => {
           </label>
           <label
             htmlFor="name"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Ime*
+            Ime *
             <Input required placeholder="Ivan" name="name" />
           </label>
           <label
             htmlFor="surname"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Prezime*
+            Prezime *
             <Input required placeholder="Ivic" name="surname" />
           </label>
           <label
             htmlFor="message"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Poruka*
+            Poruka *
             <Textarea placeholder="Unesite  poruku" required name="review" />
           </label>
           <Button variant="primary" className="self-end" loading={loading}>

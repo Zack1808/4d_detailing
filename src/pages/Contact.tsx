@@ -127,7 +127,7 @@ const Contact: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={300}
               >
-                <p className="text-dark dark:text-light">
+                <p className="text-dark dark:text-light font-light">
                   Želite svom vozilu pružiti pažnju koju zaslužuje? Ispunite
                   obrazac i pošaljite nam upit za termin, a mi ćemo vam se
                   javiti kako bismo dogovorili sve detalje.
@@ -138,7 +138,7 @@ const Contact: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={400}
               >
-                <p className="text-dark dark:text-light">
+                <p className="text-dark dark:text-light font-light">
                   Niste sigurni koja je usluga najbolji izbor za vaše vozilo?
                   Slobodno nam se obratite – rado ćemo odgovoriti na vaša
                   pitanja i preporučiti opciju koja najbolje odgovara vašim
@@ -150,7 +150,7 @@ const Contact: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={500}
               >
-                <p className="text-dark dark:text-light">
+                <p className="text-dark dark:text-light font-light">
                   Ako vam je jednostavnije, možete nas kontaktirati telefonom
                   ili e-mailom. Za rezervaciju termina možete koristiti i
                   obrazac u nastavku.
@@ -194,7 +194,7 @@ const Contact: React.FC = () => {
                 <Reveal
                   transitionFrom="opacity-0 -translate-x-6"
                   transitionTo={`opacity-100 translate-x-0`}
-                  className="text-dark dark:text-light flex gap-3 items-center py-3 font-semibold"
+                  className="text-dark dark:text-light flex gap-3 items-center py-3 font-medium"
                   delay={800}
                 >
                   <FaClock className="text-lg" /> Radno vrijeme: Po dogovoru
@@ -261,7 +261,10 @@ const Contact: React.FC = () => {
               delay={300}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="fullName" className="text-dark dark:text-light">
+                <label
+                  htmlFor="fullName"
+                  className="text-dark dark:text-light font-light"
+                >
                   Ime i Prezime *
                 </label>
                 <Input
@@ -281,7 +284,10 @@ const Contact: React.FC = () => {
               delay={400}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="email" className="text-dark dark:text-light">
+                <label
+                  htmlFor="email"
+                  className="text-dark dark:text-light font-light"
+                >
                   Email *
                 </label>
                 <Input
@@ -301,7 +307,10 @@ const Contact: React.FC = () => {
               delay={500}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="phone" className="text-dark dark:text-light">
+                <label
+                  htmlFor="phone"
+                  className="text-dark dark:text-light font-light"
+                >
                   Broj telefona *
                 </label>
                 <Input
@@ -321,7 +330,10 @@ const Contact: React.FC = () => {
               delay={600}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="service" className="text-dark dark:text-light">
+                <label
+                  htmlFor="service"
+                  className="text-dark dark:text-light font-light"
+                >
                   Usluga *
                 </label>
                 <Select
@@ -342,7 +354,10 @@ const Contact: React.FC = () => {
               delay={700}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="carType" className="text-dark dark:text-light">
+                <label
+                  htmlFor="carType"
+                  className="text-dark dark:text-light font-light"
+                >
                   Model vozila *
                 </label>
                 <Input
@@ -362,7 +377,10 @@ const Contact: React.FC = () => {
               delay={800}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="date" className="text-dark dark:text-light">
+                <label
+                  htmlFor="date"
+                  className="text-dark dark:text-light font-light"
+                >
                   Željeni termin
                 </label>
                 <DatePicker
@@ -379,7 +397,10 @@ const Contact: React.FC = () => {
               delay={900}
             >
               <fieldset className="w-full flex flex-col gap-3">
-                <label htmlFor="message" className="text-dark dark:text-light">
+                <label
+                  htmlFor="message"
+                  className="text-dark dark:text-light font-light"
+                >
                   Napomena / dodatni zahtjevi
                 </label>
                 <Textarea

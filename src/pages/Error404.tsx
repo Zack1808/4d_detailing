@@ -35,11 +35,11 @@ const Error404: React.FC = () => {
         >
           <h2 className="font-bold md:text-9xl text-6xl text-dark dark:text-light text-center">
             404 <br />
-            <span className="md:text-5xl text-2xl mt-6">
+            <span className="md:text-5xl text-2xl mt-6 font-semibold">
               Ups... promašili ste skretanje.
             </span>
           </h2>
-          <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center">
+          <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center font-light">
             Ova stranica ne postoji, ali nema potrebe za panikom i naglim
             kočenjem. <br />
             <br />

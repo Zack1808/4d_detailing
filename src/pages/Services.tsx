@@ -218,7 +218,7 @@ const Services: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={200}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
                   Svako vozilo ima svoje potrebe, a kvalitetna njega počinje
                   pravim odabirom usluge. U 4D Detailingu zato nudimo različite
                   tretmane kojima možemo osvježiti, obnoviti i zaštititi vaše
@@ -230,7 +230,7 @@ const Services: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={300}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
                   Našu ponudu podijelili smo u četiri glavne kategorije:
                   temeljitu njegu interijera, održavanje i čišćenje eksterijera,
                   profesionalno poliranje te pažljivo osmišljene pakete za one
@@ -242,7 +242,7 @@ const Services: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={400}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
                   Bez obzira želite li samo osvježiti izgled vozila, ukloniti
                   tragove svakodnevnog korištenja ili mu pružiti kompletnu
                   njegu, pronaći ćete opciju prilagođenu svojim potrebama.
@@ -253,7 +253,7 @@ const Services: React.FC = () => {
                 transitionTo={`opacity-100 translate-x-0`}
                 delay={500}
               >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3">
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
                   <strong>
                     Istražite našu ponudu i pronađite tretman koji najbolje
                     odgovara vašem vozilu.
@@ -278,7 +278,7 @@ const Services: React.FC = () => {
           transitionTo={`opacity-100 translate-x-0`}
           delay={200}
         >
-          <h3 className="font-bold text-2xl text-dark dark:text-light">
+          <h3 className="font-semibold text-2xl text-dark dark:text-light">
             Usluge
           </h3>
         </Reveal>
@@ -344,7 +344,7 @@ const Services: React.FC = () => {
           <div className="flex gap-3 md:items-center flex-1 md:flex-row flex-col">
             <label
               htmlFor="sorting"
-              className="text-dark dark:text-light font-semibold"
+              className="text-dark dark:text-light font-medium"
             >
               Sortiraj:
             </label>
