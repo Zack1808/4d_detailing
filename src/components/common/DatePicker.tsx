@@ -700,7 +700,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                       className={`flex p-3 items-center  border-transparent justify-center cursor-pointer ${
                         calendarDay.currentMonth
                           ? "text-dark dark:text-light font-semibold"
-                          : "bg-dark/10 dark:bg-light/10 text-dark/70 dark:text-light/70"
+                          : "bg-dark/5 dark:bg-light/5 text-dark/80 dark:text-light/80"
                       } disabled:bg-dark/30 dark:disabled:bg-light/50 disabled:cursor-auto disabled:text-dark/50 dark:disabled:text-light/50 ${
                         selected
                           ? "bg-dark text-light dark:bg-light dark:text-dark! focus:inset-ring-3 focus:inset-ring-light dark:focus:inset-ring-dark"
