@@ -252,7 +252,7 @@ const Contact: React.FC = () => {
             </Reveal>
           </div>
           <form
-            className="flex flex-col gap-6 lg:flex-1"
+            className="flex flex-col gap-6 lg:flex-2"
             onSubmit={handleSubmit}
           >
             <Reveal
