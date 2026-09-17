@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 
 export const useInView = (threshold: number = 0.15) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
+
   const [isVisibile, setIsVisible] = useState(false);
+  const [isInitiallyVisible, setIsInitiallyVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const element = ref.current;
 
     if (!element) return;
 
+    let initialCheck = true;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
+        if (initialCheck) {
+          setIsInitiallyVisible(entry.isIntersecting);
+          initialCheck = false;
+        }
+
         if (entry.isIntersecting) {
           setIsVisible(true);
           observer.unobserve(element);
@@ -24,5 +33,5 @@ export const useInView = (threshold: number = 0.15) => {
     return () => observer.disconnect();
   }, [threshold]);
 
-  return { ref, isVisibile };
+  return { ref, isVisibile, isInitiallyVisible };
 };

@@ -142,7 +142,8 @@ const Home: React.FC = () => {
       <Hero>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 delay-200`}
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
         >
           <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
             4D Detailing
@@ -150,7 +151,8 @@ const Home: React.FC = () => {
         </Reveal>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 delay-400`}
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={400}
         >
           <p className="text-2xl text-dark dark:text-light">
             Luksuz koji si možete priuštiti
@@ -159,7 +161,8 @@ const Home: React.FC = () => {
         <Reveal
           className="flex sm:flex-row flex-col gap-2 mt-10"
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 delay-600`}
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={600}
         >
           <Button variant="primary" onClick={handleScroll}>
             Pregledaj usluge
@@ -177,7 +180,7 @@ const Home: React.FC = () => {
       >
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 duration-1000`}
+          transitionTo={`opacity-100 translate-x-0`}
         >
           <h2 className="font-bold text-4xl text-dark dark:text-light">
             Naše najpopularnije usluge
@@ -185,7 +188,8 @@ const Home: React.FC = () => {
         </Reveal>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 delay-200 duration-1000`}
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
         >
           <p className="text-dark dark:text-light max-w-[85ch] mt-3">
             Odaberite jednu od naših najtraženijih usluga i priuštite svom
@@ -194,18 +198,13 @@ const Home: React.FC = () => {
           </p>
         </Reveal>
 
-        <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+        <div className="w-full grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 gap-3 mt-6">
           {featuredServices.map((service, index) => {
             return (
               <Reveal
                 key={`${service.title}-${index}`}
-                transitionTo={`opacity-100 translate-y-0 md:delay-(--delay) duration-1000`}
-                className={`flex h-full`}
-                style={
-                  {
-                    "--delay": `${index * 200 + 200}ms`,
-                  } as React.CSSProperties
-                }
+                transitionTo={`opacity-100 translate-y-0`}
+                className={`flex h-full lg:nth-[2]:delay-100! lg:nth-[3]:delay-200! md:nth-[2]:delay-200!`}
               >
                 <ServiceCard item={service} />
               </Reveal>
@@ -226,7 +225,7 @@ const Home: React.FC = () => {
             </Reveal>
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
-              transitionTo={`delay-200 opacity-100 translate-x-0`}
+              transitionTo={`opacity-100 translate-x-0`}
             >
               <p className="text-dark dark:text-light max-w-[85ch]">
                 Pogledajte kompletnu ponudu i pronađite paket koji vam odgovara.
@@ -236,7 +235,7 @@ const Home: React.FC = () => {
 
           <Reveal
             transitionFrom="opacity-0 md:translate-x-6 -translate-x-6"
-            transitionTo={`md:delay-400 delay-200 opacity-100 translate-x-0`}
+            transitionTo={`opacity-100 translate-x-0`}
           >
             <Button variant="secondary" to="/usluge">
               Pregledajte sve usluge
@@ -332,8 +331,8 @@ const Home: React.FC = () => {
           </div>
 
           <Reveal
-            transitionFrom="opacity-0 md:translate-x-6 md:translate-y-0 translate-y-6 translate-x-0"
-            transitionTo={`md:delay-200 opacity-100 translate-x-0 translate-y-0`}
+            transitionFrom="opacity-0 xl:translate-x-6 xl:translate-y-0 translate-y-6 translate-x-0"
+            transitionTo={`opacity-100 translate-x-0 translate-y-0`}
             className="flex flex-col gap-3 xl:w-3/7 w-full xl:mt-15 mt-6"
           >
             <img
@@ -359,7 +358,7 @@ const Home: React.FC = () => {
         </Reveal>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`delay-200 opacity-100 translate-x-0`}
+          transitionTo={`opacity-100 translate-x-0`}
         >
           <p className="text-dark dark:text-light">
             Vaše zadovoljstvo je naša najbolja preporuka.
@@ -371,7 +370,7 @@ const Home: React.FC = () => {
 
         <Reveal
           className="relative mt-3 w-full overflow-hidden"
-          transitionTo="opacity-100 translate-y-0 delay-400 duration-1000"
+          transitionTo="opacity-100 translate-y-0"
         >
           <ReviewCarousel reviews={reviews} />
         </Reveal>
@@ -388,7 +387,7 @@ const Home: React.FC = () => {
             </Reveal>
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
-              transitionTo={`delay-200 opacity-100 translate-x-0`}
+              transitionTo={`opacity-100 translate-x-0`}
             >
               <p className="text-dark dark:text-light max-w-[85ch]">
                 Vaše mišljenje nam puno znači. Ako ste već svoje vozilo
@@ -400,7 +399,7 @@ const Home: React.FC = () => {
 
           <Reveal
             transitionFrom="opacity-0 md:translate-x-6 -translate-x-6"
-            transitionTo={`md:delay-400 delay-200 opacity-100 translate-x-0`}
+            transitionTo={`opacity-100 translate-x-0`}
           >
             <Button variant="primary" onClick={() => setOpenModal(true)}>
               Ostavite recenziju

@@ -215,7 +215,8 @@ const Services: React.FC = () => {
             <div>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 delay-200`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={200}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3">
                   Svako vozilo ima svoje potrebe, a kvalitetna njega počinje
@@ -226,7 +227,8 @@ const Services: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 delay-200`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={300}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3">
                   Našu ponudu podijelili smo u četiri glavne kategorije:
@@ -237,7 +239,8 @@ const Services: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 delay-200`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={400}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3">
                   Bez obzira želite li samo osvježiti izgled vozila, ukloniti
@@ -247,7 +250,8 @@ const Services: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 delay-200`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={500}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3">
                   <strong>
@@ -260,8 +264,9 @@ const Services: React.FC = () => {
           </div>
           <Reveal
             transitionFrom="opacity-0 translate-x-6"
-            transitionTo={`opacity-100 translate-x-0 delay-200`}
+            transitionTo={`opacity-100 translate-x-0`}
             className=" md:w-5/12 hidden 2xl:flex mt-30 aspect-video overflow-hidden"
+            delay={200}
           >
             <ImageCarousel images={IMAGES_CAROUSEL} />
           </Reveal>
@@ -270,7 +275,8 @@ const Services: React.FC = () => {
       <Container className="pt-9!" id="service-list">
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 delay-200`}
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
         >
           <h3 className="font-bold text-2xl text-dark dark:text-light">
             Usluge
@@ -280,7 +286,8 @@ const Services: React.FC = () => {
         <Reveal
           transitionFrom="opacity-0"
           transitionTo="opacity-100 md:delay-300 duration-1000"
-          className={`w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col delay-200`}
+          className={`w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col`}
+          delay={300}
         >
           <div className="w-full flex flex-col md:flex-row">
             <Button
@@ -323,8 +330,9 @@ const Services: React.FC = () => {
 
         <Reveal
           transitionFrom="opacity-0"
-          transitionTo="opacity-100 md:delay-400 duration-1000"
+          transitionTo="opacity-100 duration-1000"
           className={`p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col`}
+          delay={300}
         >
           <div className="flex gap-3 md:items-center flex-1/3 md:flex-row flex-col">
             <Input
@@ -350,19 +358,24 @@ const Services: React.FC = () => {
           </div>
         </Reveal>
 
-        <div className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-3 ">
+        <Reveal
+          transitionTo="opacity-100"
+          className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-3"
+          delay={400}
+          threshold={0.01}
+        >
           {displayServices.map((service, index) => {
             return (
               <Reveal
                 key={`${service.slug}-${index}`}
-                className={`xl:nth-[3n+2]:delay-200 xl:nth-[3n]:delay-400 xl:nth-[1]:delay-400! xl:nth-[2]:delay-600! xl:nth-[3]:delay-800! lg:nth-[2n]:delay-200 lg:nth-[1]:delay-400! lg:nth-[2]:delay-600! flex h-full`}
+                className={`xl:nth-[3n+2]:delay-100! xl:nth-[3n]:delay-200! lg:nth-[2n]:delay-100! flex h-full`}
                 threshold={0.05}
               >
                 <ServiceCard item={service} />
               </Reveal>
             );
           })}
-        </div>
+        </Reveal>
       </Container>
     </main>
   );

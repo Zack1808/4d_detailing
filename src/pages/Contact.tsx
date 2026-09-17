@@ -112,7 +112,8 @@ const Contact: React.FC = () => {
       <Container id="contact-data">
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0 md:delay-200`}
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
         >
           <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
             Rezervirajte svoj termin
@@ -123,7 +124,8 @@ const Contact: React.FC = () => {
             <div className="flex flex-col gap-3">
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 md:delay-400`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={300}
               >
                 <p className="text-dark dark:text-light">
                   Želite svom vozilu pružiti pažnju koju zaslužuje? Ispunite
@@ -133,7 +135,8 @@ const Contact: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 md:delay-600`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={400}
               >
                 <p className="text-dark dark:text-light">
                   Niste sigurni koja je usluga najbolji izbor za vaše vozilo?
@@ -144,7 +147,8 @@ const Contact: React.FC = () => {
               </Reveal>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0 md:delay-800`}
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={500}
               >
                 <p className="text-dark dark:text-light">
                   Ako vam je jednostavnije, možete nas kontaktirati telefonom
@@ -158,7 +162,8 @@ const Contact: React.FC = () => {
               <li>
                 <Reveal
                   transitionFrom="opacity-0 -translate-x-6"
-                  transitionTo={`opacity-100 translate-x-0 md:delay-1000`}
+                  transitionTo={`opacity-100 translate-x-0`}
+                  delay={600}
                 >
                   <Button
                     variant="none"
@@ -173,7 +178,8 @@ const Contact: React.FC = () => {
               <li>
                 <Reveal
                   transitionFrom="opacity-0 -translate-x-6"
-                  transitionTo={`opacity-100 translate-x-0 md:delay-1200`}
+                  transitionTo={`opacity-100 translate-x-0`}
+                  delay={700}
                 >
                   <Button
                     variant="none"
@@ -187,8 +193,9 @@ const Contact: React.FC = () => {
               <li>
                 <Reveal
                   transitionFrom="opacity-0 -translate-x-6"
-                  transitionTo={`opacity-100 translate-x-0 md:delay-1400`}
+                  transitionTo={`opacity-100 translate-x-0`}
                   className="text-dark dark:text-light flex gap-3 items-center py-3 font-semibold"
+                  delay={800}
                 >
                   <FaClock className="text-lg" /> Radno vrijeme: Po dogovoru
                 </Reveal>
@@ -196,7 +203,8 @@ const Contact: React.FC = () => {
               <li>
                 <Reveal
                   transitionFrom="opacity-0 -translate-x-6"
-                  transitionTo={`opacity-100 translate-x-0 md:delay-1600`}
+                  transitionTo={`opacity-100 translate-x-0`}
+                  delay={900}
                 >
                   <Button
                     variant="none"
@@ -214,7 +222,8 @@ const Contact: React.FC = () => {
             <Reveal
               className="lg:flex-1 min-h-0 relative rounded-xs overflow-hidden group lg:mb-18.5"
               transitionFrom="opacity-0 lg:-translate-x-6 lg:translate-y-0 translate-y-6"
-              transitionTo={`opacity-100 translate-x-0 translate-y-0 md:delay-1800`}
+              transitionTo={`opacity-100 translate-x-0 translate-y-0`}
+              delay={1000}
             >
               <div className="absolute inset-0 bg-gray-light/20 dark:bg-gray-dark/20 flex items-center justify-center -z-10 text-dark dark:text-light flex-col font-semibold gap-3">
                 <div className="flex flex-col gap-3">
@@ -248,7 +257,8 @@ const Contact: React.FC = () => {
           >
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-400`}
+              transitionTo={`opacity-100`}
+              delay={300}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="fullName" className="text-dark dark:text-light">
@@ -267,7 +277,8 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-600`}
+              transitionTo={`opacity-100`}
+              delay={400}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="email" className="text-dark dark:text-light">
@@ -286,7 +297,8 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-600`}
+              transitionTo={`opacity-100`}
+              delay={500}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="phone" className="text-dark dark:text-light">
@@ -305,7 +317,8 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-800`}
+              transitionTo={`opacity-100`}
+              delay={600}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="service" className="text-dark dark:text-light">
@@ -325,7 +338,8 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-1000`}
+              transitionTo={`opacity-100`}
+              delay={700}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="carType" className="text-dark dark:text-light">
@@ -344,7 +358,8 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-1200`}
+              transitionTo={`opacity-100`}
+              delay={800}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="date" className="text-dark dark:text-light">
@@ -360,7 +375,8 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-1400`}
+              transitionTo={`opacity-100`}
+              delay={900}
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label htmlFor="message" className="text-dark dark:text-light">
@@ -377,8 +393,9 @@ const Contact: React.FC = () => {
 
             <Reveal
               transitionFrom="opacity-0"
-              transitionTo={`opacity-100 md:delay-1600`}
+              transitionTo={`opacity-100`}
               className="self-end"
+              delay={1000}
             >
               <Button variant="primary">Pošalji upit</Button>
             </Reveal>

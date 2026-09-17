@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useInView } from "../../hooks/useInView";
 
 type RevealProps = {
@@ -9,6 +7,7 @@ type RevealProps = {
   className?: string;
   threshold?: number;
   style?: React.CSSProperties;
+  delay?: number;
 };
 
 const Reveal: React.FC<RevealProps> = ({
@@ -18,14 +17,18 @@ const Reveal: React.FC<RevealProps> = ({
   className = "",
   threshold = 0.15,
   style,
+  delay = 0,
 }) => {
-  const { ref, isVisibile } = useInView(threshold);
+  const { ref, isVisibile, isInitiallyVisible } = useInView(threshold);
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${isVisibile ? transitionTo : transitionFrom} ${className}`}
-      style={style}
+      style={{
+        ...style,
+        transitionDelay: isInitiallyVisible ? `${delay}ms` : "0ms",
+      }}
+      className={`transition-all duration-1000 ease-out ${isVisibile ? transitionTo : transitionFrom} ${className}`}
     >
       {children}
     </div>

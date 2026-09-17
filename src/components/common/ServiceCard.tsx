@@ -53,7 +53,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
       <header className="flex flex-col gap-6">
         <h3
-          className={`text-3xl font-bold text-dark dark:text-light ${item.discount?.value ? "sm:max-w-[15ch] max-w-[10ch]" : ""}`}
+          className={`text-3xl font-bold text-dark dark:text-light ${item.discount?.value ? "lg:max-w-[15ch] max-w-[10ch]" : ""}`}
         >
           {item.title}
         </h3>
