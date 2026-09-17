@@ -179,7 +179,7 @@ const Modal: React.FC<ModalProps> = ({
           <header className="flex w-full justify-between items-center">
             <h6
               id="modal-title"
-              className="text-dark dark:text-light font-semibold text-2xl"
+              className="text-dark dark:text-light font-normal text-2xl"
             >
               {title}
             </h6>

@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
         <div className="flex xl:flex-row flex-col lg:px-9 px-3 py-3 h-full items-center justify-center flex-2 gap-6">
           <img src={logo} alt="logo" className="w-45" />
           <div className="flex flex-col gap-3">
-            <p className="text-dark dark:text-light">
+            <p className="text-dark dark:text-light font-light">
               Profesionalne usluge čišćenja i poliranja vozila. Jer čistoća i
               sjaj nisu trošak, nego ulaganje!
             </p>
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col lg:px-9 px-3 py-3 h-full justify-center flex-1 w-full lg:w-auto">
-          <span className="text-dark dark:text-light font-bold text-2xl mb-3">
+          <span className="text-dark dark:text-light font-medium text-2xl mb-3">
             Kontakt
           </span>
           <Button
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
           </Button>
         </div>
         <div className="flex flex-col lg:px-9 px-3 py-3 h-full flex-1 justify-center w-full lg:w-auto">
-          <span className="text-dark dark:text-light font-bold text-2xl mb-3">
+          <span className="text-dark dark:text-light font-medium text-2xl mb-3">
             Linkovi
           </span>
           <Button
@@ -109,7 +109,7 @@ const Footer: React.FC = () => {
           </Button>
         </div>
         <div className="flex flex-col lg:px-9 px-3 py-3 h-full flex-1 justify-center w-full lg:w-auto">
-          <span className="text-dark dark:text-light font-bold text-2xl mb-3">
+          <span className="text-dark dark:text-light font-medium text-2xl mb-3">
             Pratite nas
           </span>
           <Button
@@ -161,18 +161,18 @@ const Footer: React.FC = () => {
       </div>
       <div className="w-full md:max-w-[1700px] flex justify-between align-center gap-3 text-dark dark:text-light px-9 lg:flex-row flex-col items-center">
         <span className="flex justify-center gap-3 text-center">
-          <FaCopyright className="text-xl" />{" "}
+          <FaCopyright className="text-xl font-light" />{" "}
           <span>
-            2024 - {new Date().getFullYear()} <b>4D Detailing</b>. Sva prava
-            pridržana.
+            2024 - {new Date().getFullYear()}{" "}
+            <b className="font-semibold">4D Detailing</b>. Sva prava pridržana.
           </span>
         </span>
         <a
           href="https://jeanpierrenovak.from.hr/"
           target="_blank"
-          className="opacity-50"
+          className="opacity-50 font-light"
         >
-          Izradio: <b>JPN</b>
+          Izradio: <b className="font-semibold">JPN</b>
         </a>
       </div>
     </footer>

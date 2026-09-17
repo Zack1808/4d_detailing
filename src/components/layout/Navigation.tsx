@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
   const { isDark } = useData();
 
   const linkClasses =
-    "font-semibold text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
+    "font-normal text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
 
   const location = useLocation();
 
@@ -94,7 +94,7 @@ const Navigation: React.FC = () => {
               alt="4D Detailing"
               className="md:w-24 w-20"
             />
-            <p className="font-semibold text-4xl text-dark dark:text-light md:flex hidden">
+            <p className="font-bold text-4xl text-dark dark:text-light md:flex hidden">
               4D Detailing
             </p>
           </Link>
@@ -137,21 +137,21 @@ const Navigation: React.FC = () => {
           </div>
           <Link
             to="/"
-            className={`${linkClasses} opacity-0 transition-opacity ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
+            className={`${linkClasses} opacity-0 transition-opacity font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
           >
             Početna
           </Link>
           <Link
             to="/usluge"
-            className={`${linkClasses} opacity-0 transition-opacity ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
+            className={`${linkClasses} opacity-0 transition-opacity font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
           >
             Usluge
           </Link>
           <Link
             to="/kontakt"
-            className={`${linkClasses} opacity-0 transition-opacity ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
+            className={`${linkClasses} opacity-0 transition-opacity font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
           >
             Kontakt
