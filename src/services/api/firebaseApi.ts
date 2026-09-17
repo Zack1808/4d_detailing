@@ -1,11 +1,11 @@
-import { type ServiceDataType, type ReviewType } from "../../types/data";
+// import { type ServiceDataType, type ReviewType } from "../../types/data";
 
-export const firebaseApi = {
-  getData: async (
-    documentId: string,
-  ): Promise<ServiceDataType[] | ReviewType[]> => {
-    return [];
-  },
+// export const firebaseApi = {
+//   getData: async (
+//     documentId: string,
+//   ): Promise<ServiceDataType[] | ReviewType[]> => {
+//     return [];
+//   },
 
-  addReview: async (data: ReviewType) => {},
-};
+//   addReview: async (data: ReviewType) => {},
+// };

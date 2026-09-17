@@ -69,7 +69,7 @@ export const useGetPageData: useGetPageDataType = (
   }, [useMockData]);
 
   const setReview = useCallback(
-    async (reveiw: ReviewType) => {
+    async (review: ReviewType) => {
       setLoading(true);
       setError(null);
 
@@ -78,6 +78,8 @@ export const useGetPageData: useGetPageDataType = (
           await new Promise((resolve) =>
             setTimeout(resolve, MOCK_CONFIG.apiDelay),
           );
+
+          console.log(review);
 
           return true;
         }
