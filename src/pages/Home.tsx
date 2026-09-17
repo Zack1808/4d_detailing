@@ -6,11 +6,13 @@ import React, {
   useState,
 } from "react";
 import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
-import Carousel from "../components/layout/ReviewCarousel";
+import ReviewCarousel from "../components/layout/ReviewCarousel";
 import Modal from "../components/layout/Modal";
+import Reveal from "../components/layout/Reveal";
 
 import Button from "../components/common/Button";
 import ServiceCard from "../components/common/ServiceCard";
@@ -19,12 +21,12 @@ import Input from "../components/common/Input";
 import Textarea from "../components/common/Textarea";
 
 import Tesseract from "../components/animated/Tessaract";
+import Wheel from "../components/animated/Wheel";
 
 import { useGetPageData } from "../hooks/useGetPageData";
 
 import { useData } from "../context/DataContext";
 import type { ReviewType } from "../types/data";
-import { toast } from "react-toastify";
 
 const toastClasses =
   "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
@@ -36,6 +38,27 @@ const Home: React.FC = () => {
   const { isDark, services, reviews } = useData();
 
   const { setReview, loading, error } = useGetPageData();
+
+  const heroBackground = [
+    <Tesseract
+      size={1700}
+      className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
+      thickness={5}
+      speed={70}
+      isDark={isDark}
+    />,
+    <Wheel
+      size={1500}
+      className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-y-180"
+      speed={70}
+      isDark={isDark}
+    />,
+  ];
+
+  const [selectLoader] = useState(() => {
+    const result = Math.floor(Math.random() * heroBackground.length);
+    return result;
+  });
 
   const servicesRef = useRef<HTMLDivElement>(null);
 
@@ -115,29 +138,39 @@ const Home: React.FC = () => {
 
   return (
     <main className="relative overflow-hidden">
-      <Tesseract
-        size={1700}
-        className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
-        thickness={5}
-        speed={70}
-        isDark={isDark}
-      />
-
+      {heroBackground[selectLoader]}
       <Hero>
-        <h1 className="md:text-8xl text-5xl font-bold  text-dark dark:text-light">
-          4D Detailing
-        </h1>
-        <p className="text-2xl text-dark dark:text-light">
-          Sjaj koji nadilazi vrijeme.
-        </p>
-        <div className="flex sm:flex-row flex-col gap-2 mt-10">
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
+        >
+          <h1 className="md:text-8xl text-5xl font-bold text-dark dark:text-light">
+            4D Detailing
+          </h1>
+        </Reveal>
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={400}
+        >
+          <p className="text-2xl text-dark dark:text-light font-normal">
+            Luksuz koji si možete priuštiti
+          </p>
+        </Reveal>
+        <Reveal
+          className="flex sm:flex-row flex-col gap-2 mt-10"
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={600}
+        >
           <Button variant="primary" onClick={handleScroll}>
             Pregledaj usluge
           </Button>
           <Button variant="secondary" to="/kontakt">
             Rezerviraj termin
           </Button>
-        </div>
+        </Reveal>
       </Hero>
 
       <Container
@@ -145,158 +178,300 @@ const Home: React.FC = () => {
         className="bg-light dark:bg-dark pt-40!"
         ref={servicesRef}
       >
-        <h2 className="font-bold text-4xl text-dark dark:text-light">
-          Naše najpopularnije usluge
-        </h2>
-        <p className="text-dark dark:text-light max-w-[85ch] mt-3">
-          Odaberite jednu od naših najtraženijih usluga i priuštite svom vozilu
-          temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa koje naši
-          klijenti najčešće biraju.
-        </p>
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+        >
+          <h2 className="font-bold text-4xl text-dark dark:text-light">
+            Naše najpopularnije usluge
+          </h2>
+        </Reveal>
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
+        >
+          <p className="text-dark dark:text-light font-light max-w-[85ch] mt-3">
+            Odaberite jednu od naših najtraženijih usluga i priuštite svom
+            vozilu temeljito čišćenje, obnovu i zaštitu. Izdvojili smo 3 paketa
+            koje naši klijenti najčešće biraju.
+          </p>
+        </Reveal>
 
-        <div className="w-full grid lg:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-          {featuredServices.map((service, index) => (
-            <ServiceCard item={service} key={`${service.title}-${index}`} />
-          ))}
+        <div className="w-full grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 gap-3 mt-6">
+          {featuredServices.map((service, index) => {
+            return (
+              <Reveal
+                key={`${service.title}-${index}`}
+                transitionTo={`opacity-100 translate-y-0`}
+                className={`flex h-full lg:nth-[2]:delay-100! lg:nth-[3]:delay-200! md:nth-[2]:delay-200!`}
+              >
+                <ServiceCard item={service} />
+              </Reveal>
+            );
+          })}
         </div>
 
         <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
           <div className="flex flex-col gap-3">
-            <h5 className="text-dark dark:text-light text-xl font-bold">
-              Ne znate koja je usluga najbolja za vaše vozilo?
-            </h5>
-            <p className="text-dark dark:text-light max-w-[85ch]">
-              Pogledajte kompletnu ponudu i pronađite paket koji vam odgovara.
-            </p>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+              threshold={0.5}
+            >
+              <h5 className="text-dark dark:text-light text-xl font-semibold">
+                Ne znate koja je usluga najbolja za vaše vozilo?
+              </h5>
+            </Reveal>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+            >
+              <p className="text-dark dark:text-light font-light max-w-[85ch]">
+                Pogledajte kompletnu ponudu i pronađite paket koji vam odgovara.
+              </p>
+            </Reveal>
           </div>
 
-          <Button variant="secondary" to="/usluge">
-            Pregledajte sve usluge
-          </Button>
+          <Reveal
+            transitionFrom="opacity-0 md:translate-x-6 -translate-x-6"
+            transitionTo={`opacity-100 translate-x-0`}
+          >
+            <Button variant="secondary" to="/usluge">
+              Pregledajte sve usluge
+            </Button>
+          </Reveal>
         </div>
       </Container>
 
       <Container id="about">
-        <div className="w-full flex md:flex-row flex-col gap-6 justify-between">
+        <div className="w-full flex xl:flex-row flex-col gap-6 justify-between">
           <div>
-            <h2 className="font-bold text-4xl text-dark dark:text-light">
-              Naša misija
-            </h2>
-            <p className="text-dark dark:text-light max-w-[85ch] mt-6">
-              <strong>
-                4D Detailing nastao je iz ljubavi prema automobilima i želje da
-                tu strast pretvorimo u vrhunsku uslugu.
-              </strong>
-              <br />
-              <br />
-              Ljubav prema automobilima prati nas od malih nogu. Briga o
-              vlastitim vozilima, pažnja prema detaljima i zadovoljstvo koje
-              donosi savršeno čist i očuvan automobil bili su početak priče koja
-              je dovela do stvaranja 4D Detailing studija.
-              <br />
-              <br />
-              Danas tu istu pažnju želimo pružiti svakom vozilu koje nam
-              povjerite. Vjerujemo da detailing nije samo obično čišćenje
-              automobila, već cjelovita njega kojom se čuva njegov izgled,
-              kvaliteta i dugotrajnost. Zato svakom vozilu pristupamo
-              individualno, temeljito i s posebnom pažnjom prema detaljima.
-              <br />
-              <br />
-              Bilo da ste pravi zaljubljenik u automobile ili jednostavno želite
-              svoje vozilo održavati urednim i očuvanim bez trošenja vlastitog
-              vremena,{" "}
-              <strong>
-                naš cilj je pružiti vam kvalitetu kojoj možete vjerovati.
-              </strong>
-              <br />
-              <br />
-              Želimo profesionalnu njegu vozila približiti što većem broju ljudi
-              i pokazati da kvalitetno održavanje nije nepotreban trošak, već
-              <strong>
-                ulaganje u izgled, očuvanost i vrijednost vašeg automobila.
-              </strong>
-              <br />
-              <br />
-              Svaki automobil koji izađe iz našeg studija predstavlja naš rad,
-              našu reputaciju i povjerenje koje ste nam ukazali. Upravo zato
-              nastojimo da rezultat uvijek bude nešto iza čega možemo ponosno
-              stati.
-            </p>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+            >
+              <h2 className="font-bold text-4xl text-dark dark:text-light">
+                Naša misija
+              </h2>
+            </Reveal>
+            <div>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6">
+                  <strong className="font-semibold">
+                    4D Detailing nastao je iz ljubavi prema automobilima i želje
+                    da tu strast pretvorimo u vrhunsku uslugu.
+                  </strong>
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
+                  Ljubav prema automobilima prati nas od malih nogu. Briga o
+                  vlastitim vozilima, pažnja prema detaljima i zadovoljstvo koje
+                  donosi savršeno čist i očuvan automobil bili su početak priče
+                  koja je dovela do stvaranja 4D Detailing studija.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
+                  Danas tu istu pažnju želimo pružiti svakom vozilu koje nam
+                  povjerite. Vjerujemo da detailing nije samo obično čišćenje
+                  automobila, već cjelovita njega kojom se čuva njegov izgled,
+                  kvaliteta i dugotrajnost. Zato svakom vozilu pristupamo
+                  individualno, temeljito i s posebnom pažnjom prema detaljima.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
+                  Bilo da ste pravi zaljubljenik u automobile ili jednostavno
+                  želite svoje vozilo održavati urednim i očuvanim bez trošenja
+                  vlastitog vremena,{" "}
+                  <strong className="font-semibold">
+                    naš cilj je pružiti vam kvalitetu kojoj možete vjerovati.
+                  </strong>
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
+                  Želimo profesionalnu njegu vozila približiti što većem broju
+                  ljudi i pokazati da kvalitetno održavanje nije nepotreban
+                  trošak, već
+                  <strong className="font-semibold">
+                    ulaganje u izgled, očuvanost i vrijednost vašeg automobila.
+                  </strong>
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
+                  Svaki automobil koji izađe iz našeg studija predstavlja naš
+                  rad, našu reputaciju i povjerenje koje ste nam ukazali. Upravo
+                  zato nastojimo da rezultat uvijek bude nešto iza čega možemo
+                  ponosno stati.
+                </p>
+              </Reveal>
+            </div>
           </div>
 
-          <div className="flex flex-col gap-3 md:w-3/7 w-full md:mt-15 mt-6">
+          <Reveal
+            transitionFrom="opacity-0 xl:translate-x-6 xl:translate-y-0 translate-y-6 translate-x-0"
+            transitionTo={`opacity-100 translate-x-0 translate-y-0`}
+            className="flex flex-col gap-3 xl:w-3/7 w-full xl:mt-15 mt-6"
+          >
             <img
               src="/images/founder.avif"
               alt="Slika osnivatelja"
               className="object-cover rounded-sm"
             />
-            <small className="font-bold text-dark dark:text-light italic">
+            <small className="font-semibold text-dark dark:text-light italic">
               Luka Novak - Osnivač 4D Detailinga
             </small>
-          </div>
+          </Reveal>
         </div>
       </Container>
 
       <Container id="reviews">
-        <h2 className="font-bold text-4xl text-dark dark:text-light">
-          Što kažu naši klijenti?
-        </h2>
-        <p className="text-dark dark:text-light">
-          Vaše zadovoljstvo je naša najbolja preporuka.
-          <br />
-          Pogledajte iskustva onih koji su svoje vozilo već povjerili 4D
-          Detailing timu.
-        </p>
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+        >
+          <h2 className="font-bold text-4xl text-dark dark:text-light">
+            Što kažu naši klijenti?
+          </h2>
+        </Reveal>
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+        >
+          <p className="text-dark dark:text-light font-light">
+            Vaše zadovoljstvo je naša najbolja preporuka.
+            <br />
+            Pogledajte iskustva onih koji su svoje vozilo već povjerili 4D
+            Detailing timu.
+          </p>
+        </Reveal>
 
-        <Carousel reviews={reviews} />
+        <Reveal
+          className="relative mt-3 w-full overflow-hidden"
+          transitionTo="opacity-100 translate-y-0"
+        >
+          <ReviewCarousel reviews={reviews} />
+        </Reveal>
 
         <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
           <div className="flex flex-col gap-3">
-            <h5 className="text-dark dark:text-light text-xl font-bold">
-              Bili ste zadovoljni našom uslugom?
-            </h5>
-            <p className="text-dark dark:text-light max-w-[85ch]">
-              Vaše mišljenje nam puno znači. Ako ste već svoje vozilo povjerili
-              našem timu, podijelite svoje iskustvo i pomozite drugima da nas
-              lakše upoznaju.
-            </p>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+            >
+              <h5 className="text-dark dark:text-light text-xl font-semibold">
+                Bili ste zadovoljni našom uslugom?
+              </h5>
+            </Reveal>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+            >
+              <p className="font-light text-dark dark:text-light max-w-[85ch]">
+                Vaše mišljenje nam puno znači. Ako ste već svoje vozilo
+                povjerili našem timu, podijelite svoje iskustvo i pomozite
+                drugima da nas lakše upoznaju.
+              </p>
+            </Reveal>
           </div>
 
-          <Button variant="primary" onClick={() => setOpenModal(true)}>
-            Ostavite recenziju
-          </Button>
+          <Reveal
+            transitionFrom="opacity-0 md:translate-x-6 -translate-x-6"
+            transitionTo={`opacity-100 translate-x-0`}
+          >
+            <Button variant="primary" onClick={() => setOpenModal(true)}>
+              Ostavite recenziju
+            </Button>
+          </Reveal>
         </div>
       </Container>
 
       <Container id="cta-contact">
         <div className="flex w-full md:flex-row flex-col md:items-center gap-6 mt-3 justify-between">
           <div className="flex flex-col gap-3">
-            <h3 className="text-dark dark:text-light text-4xl font-bold">
-              Vaš automobil zaslužuje više od običnog čišćenja.
-            </h3>
-            <p className="text-dark dark:text-light mt-3 max-w-[85ch]">
-              Detalji čine razliku. Od dubinskog čišćenja do poliranja i
-              zaštite, u 4D Detailingu svakom vozilu pristupamo s istom pažnjom
-              kao da je naše vlastito.
-              <br />
-              <br />
-              Dopustite nam da vratimo vašem automobilu svježinu, sjaj i osjećaj
-              novog.
-              <br />
-              <br />
-              Niste sigurni što je potrebno vašem vozilu? Javite nam se — rado
-              ćemo vam preporučiti najbolju opciju.
-              <br />
-              <br />
-              Rezervirajte svoj termin i prepustite svoje vozilo u naše ruke.
-            </p>
-            <Button variant="primary" to="/kontakt" className="mt-6">
-              Rezerviraj termin
-            </Button>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={` opacity-100 translate-x-0`}
+            >
+              <h3 className="text-dark dark:text-light text-4xl font-bold">
+                Vaš automobil zaslužuje više od običnog čišćenja.
+              </h3>
+            </Reveal>
+            <div>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light font-light mt-3 max-w-[85ch]">
+                  Detalji čine razliku. Od dubinskog čišćenja do poliranja i
+                  zaštite, u 4D Detailingu svakom vozilu pristupamo s istom
+                  pažnjom kao da je naše vlastito.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light mt-3 max-w-[85ch] font-light">
+                  Dopustite nam da vratimo vašem automobilu svježinu, sjaj i
+                  osjećaj novog.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light mt-3 max-w-[85ch] font-light">
+                  Niste sigurni što je potrebno vašem vozilu? Javite nam se —
+                  rado ćemo vam preporučiti najbolju opciju.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={` opacity-100 translate-x-0`}
+              >
+                <p className="text-dark dark:text-light mt-3 max-w-[85ch] font-light">
+                  Rezervirajte svoj termin i prepustite svoje vozilo u naše
+                  ruke.
+                </p>
+              </Reveal>
+            </div>
+
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+            >
+              <Button variant="primary" to="/kontakt" className="mt-6">
+                Rezerviraj termin
+              </Button>
+            </Reveal>
           </div>
           <img
             src={isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg"}
             className="w-1/3 md:flex hidden"
+            loading="lazy"
           />
         </div>
       </Container>
@@ -312,9 +487,9 @@ const Home: React.FC = () => {
         >
           <label
             htmlFor="star-count"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Recenzija*
+            Recenzija *
             <StarSelect
               count={starCount}
               setCount={setStarCount}
@@ -323,23 +498,23 @@ const Home: React.FC = () => {
           </label>
           <label
             htmlFor="name"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Ime*
+            Ime *
             <Input required placeholder="Ivan" name="name" />
           </label>
           <label
             htmlFor="surname"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Prezime*
+            Prezime *
             <Input required placeholder="Ivic" name="surname" />
           </label>
           <label
             htmlFor="message"
-            className="text-dark dark:text-light font-semibold flex flex-col gap-3"
+            className="text-dark dark:text-light font-light flex flex-col gap-3"
           >
-            Poruka*
+            Poruka *
             <Textarea placeholder="Unesite  poruku" required name="review" />
           </label>
           <Button variant="primary" className="self-end" loading={loading}>

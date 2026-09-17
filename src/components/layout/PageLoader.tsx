@@ -26,10 +26,10 @@ const PageLoader: React.FC<PageLoaderProps> = ({
 
   return (
     <div
-      className={`flex flex-col items-center justify-center z-50 fixed bg-light dark:bg-dark h-svh w-full gap-4 ${className}`}
+      className={`flex flex-col items-center justify-center z-50 fixed bg-light dark:bg-dark h-svh w-full gap-6 ${className}`}
     >
       {loaders[selectLoader]}
-      <span className="text-dark dark:text-light font-bold text-2xl">
+      <span className="text-dark dark:text-light font-normal text-2xl">
         Loading...
       </span>
     </div>

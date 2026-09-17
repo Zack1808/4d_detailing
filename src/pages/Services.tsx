@@ -5,6 +5,7 @@ import { type ServiceDataType } from "../types/data";
 
 import Container from "../components/layout/Container";
 import ImageCarousel from "../components/layout/ImageCarousel";
+import Reveal from "../components/layout/Reveal";
 
 import Input from "../components/common/Input";
 import ServiceCard from "../components/common/ServiceCard";
@@ -199,46 +200,95 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <main>
+    <main className="overflow-hidden">
       <Container className="pb-3!" id="service-intro">
-        <div className="flex gap-3 justify-between">
+        <div className="flex gap-3 w-full justify-between">
           <div className="flex flex-col gap-6">
-            <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
-              Naše usluge
-            </h2>
-            <p className="text-dark dark:text-light max-w-[85ch] mt-3">
-              Svako vozilo ima svoje potrebe, a kvalitetna njega počinje pravim
-              odabirom usluge. U 4D Detailingu zato nudimo različite tretmane
-              kojima možemo osvježiti, obnoviti i zaštititi vaše vozilo – izvana
-              i iznutra.
-              <br />
-              <br />
-              Našu ponudu podijelili smo u četiri glavne kategorije: temeljitu
-              njegu interijera, održavanje i čišćenje eksterijera, profesionalno
-              poliranje te pažljivo osmišljene pakete za one koji žele
-              kombinirati više usluga.
-              <br />
-              <br />
-              Bez obzira želite li samo osvježiti izgled vozila, ukloniti
-              tragove svakodnevnog korištenja ili mu pružiti kompletnu njegu,
-              pronaći ćete opciju prilagođenu svojim potrebama.
-              <br />
-              <br />
-              <strong>
-                Istražite našu ponudu i pronađite tretman koji najbolje odgovara
-                vašem vozilu.
-              </strong>
-            </p>
+            <Reveal
+              transitionFrom="opacity-0 -translate-x-6"
+              transitionTo={`opacity-100 translate-x-0`}
+            >
+              <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
+                Naše usluge
+              </h2>
+            </Reveal>
+            <div>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={200}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+                  Svako vozilo ima svoje potrebe, a kvalitetna njega počinje
+                  pravim odabirom usluge. U 4D Detailingu zato nudimo različite
+                  tretmane kojima možemo osvježiti, obnoviti i zaštititi vaše
+                  vozilo – izvana i iznutra.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={300}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+                  Našu ponudu podijelili smo u četiri glavne kategorije:
+                  temeljitu njegu interijera, održavanje i čišćenje eksterijera,
+                  profesionalno poliranje te pažljivo osmišljene pakete za one
+                  koji žele kombinirati više usluga.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={400}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+                  Bez obzira želite li samo osvježiti izgled vozila, ukloniti
+                  tragove svakodnevnog korištenja ili mu pružiti kompletnu
+                  njegu, pronaći ćete opciju prilagođenu svojim potrebama.
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={500}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+                  <strong>
+                    Istražite našu ponudu i pronađite tretman koji najbolje
+                    odgovara vašem vozilu.
+                  </strong>
+                </p>
+              </Reveal>
+            </div>
           </div>
-          <div className="md:w-5/12 hidden 2xl:flex mt-30">
+          <Reveal
+            transitionFrom="opacity-0 translate-x-6"
+            transitionTo={`opacity-100 translate-x-0`}
+            className=" md:w-5/12 hidden 2xl:flex mt-30 aspect-video overflow-hidden"
+            delay={200}
+          >
             <ImageCarousel images={IMAGES_CAROUSEL} />
-          </div>
+          </Reveal>
         </div>
       </Container>
       <Container className="pt-9!" id="service-list">
-        <h3 className="font-bold text-2xl text-dark dark:text-light">Usluge</h3>
+        <Reveal
+          transitionFrom="opacity-0 -translate-x-6"
+          transitionTo={`opacity-100 translate-x-0`}
+          delay={200}
+        >
+          <h3 className="font-semibold text-2xl text-dark dark:text-light">
+            Usluge
+          </h3>
+        </Reveal>
 
-        <div className="w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col">
+        <Reveal
+          transitionFrom="opacity-0"
+          transitionTo="opacity-100 md:delay-300 duration-1000"
+          className={`w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col`}
+          delay={300}
+        >
           <div className="w-full flex flex-col md:flex-row">
             <Button
               variant="none"
@@ -276,9 +326,14 @@ const Services: React.FC = () => {
               Posebni paketi
             </Button>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col">
+        <Reveal
+          transitionFrom="opacity-0"
+          transitionTo="opacity-100 duration-1000"
+          className={`p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col`}
+          delay={300}
+        >
           <div className="flex gap-3 md:items-center flex-1/3 md:flex-row flex-col">
             <Input
               placeholder="Pranje, poliranje, čišćenje..."
@@ -289,7 +344,7 @@ const Services: React.FC = () => {
           <div className="flex gap-3 md:items-center flex-1 md:flex-row flex-col">
             <label
               htmlFor="sorting"
-              className="text-dark dark:text-light font-semibold"
+              className="text-dark dark:text-light font-medium"
             >
               Sortiraj:
             </label>
@@ -301,13 +356,26 @@ const Services: React.FC = () => {
               defaultValue={sortValue}
             />
           </div>
-        </div>
+        </Reveal>
 
-        <div className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1  gap-3 ">
-          {displayServices.map((service, index) => (
-            <ServiceCard item={service} key={`${service.slug}-${index}`} />
-          ))}
-        </div>
+        <Reveal
+          transitionTo="opacity-100"
+          className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-3"
+          delay={400}
+          threshold={0.01}
+        >
+          {displayServices.map((service, index) => {
+            return (
+              <Reveal
+                key={`${service.slug}-${index}`}
+                className={`xl:nth-[3n+2]:delay-100! xl:nth-[3n]:delay-200! lg:nth-[2n]:delay-100! flex h-full`}
+                threshold={0.05}
+              >
+                <ServiceCard item={service} />
+              </Reveal>
+            );
+          })}
+        </Reveal>
       </Container>
     </main>
   );
