@@ -26,7 +26,7 @@ const Reveal: React.FC<RevealProps> = ({
       ref={ref}
       style={{
         ...style,
-        transitionDelay: isInitiallyVisible ? `${delay}ms` : "0ms",
+        transitionDelay: isInitiallyVisible ? `${delay}ms` : "100ms",
       }}
       className={`transition-all duration-1000 ease-out ${isVisibile ? transitionTo : transitionFrom} ${className}`}
     >
