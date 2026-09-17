@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaX } from "react-icons/fa6";
 
 import Button from "../common/Button";
@@ -18,6 +18,8 @@ const Navigation: React.FC = () => {
 
   const linkClasses =
     "font-semibold text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
+
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,6 +64,11 @@ const Navigation: React.FC = () => {
 
     return () => clearTimeout(timer);
   }, [isVisible]);
+
+  useEffect(() => {
+    setChangeBg(10);
+    setChangeBlur(false);
+  }, [location.search]);
 
   const openMenu = () => setMenuOpen(true);
 
