@@ -68,7 +68,7 @@ const Navigation: React.FC = () => {
   useEffect(() => {
     setChangeBg(10);
     setChangeBlur(false);
-  }, [location.search]);
+  }, [location.pathname]);
 
   const openMenu = () => setMenuOpen(true);
 
