@@ -19,9 +19,9 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
         ))}
       </header>
       <blockquote className="text-dark dark:text-light flex flex-col gap-6 h-full">
-        <p>{review.review}</p>
+        <p className="font-light">{review.review}</p>
 
-        <span className="font-bold mt-auto">
+        <span className="font-medium mt-auto">
           -{" "}
           <cite>
             {review.name} {review.surname}

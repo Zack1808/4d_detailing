@@ -301,7 +301,7 @@ const Select: React.FC<SelectProps> = ({
 
   const defaultRenderValue = () => {
     if (selectedOptions.length === 0) {
-      return <span className="text-gray-light">{placeholder}</span>;
+      return <span className="text-gray-light font-light">{placeholder}</span>;
     }
 
     if (!multiple) return selectedOptions[0].label;
@@ -311,7 +311,7 @@ const Select: React.FC<SelectProps> = ({
         {selectedOptions.map((option) => (
           <span
             key={option.value}
-            className="rounded-xs bg-dark dark:bg-light text-light dark:text-dark px-2 py-0.5 text-sm"
+            className="rounded-xs bg-dark dark:bg-light text-light dark:text-dark px-2 py-0.5 text-sm font-light"
           >
             {option.label}
           </span>
@@ -373,6 +373,7 @@ const Select: React.FC<SelectProps> = ({
           disabled:text-gray-700
           text-dark dark:text-light
           divide-x divide-dark dark:divide-light
+          font-light
         "
       >
         <span className="min-w-0 flex-1">{defaultRenderValue()}</span>{" "}
@@ -414,7 +415,7 @@ const Select: React.FC<SelectProps> = ({
                   className={`
                   flex min-h-9 items-center
                   gap-3 rounded-xs p-3
-                  select-none text-dark dark:text-light
+                  select-none text-dark dark:text-light font-light
                   ${active ? "bg-gray-dark/20 dark:bg-gray-light/20" : ""}
                   ${selected ? "bg-gray-dark/40 dark:bg-gray-light/40" : ""}
                 `}

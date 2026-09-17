@@ -53,13 +53,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
       <header className="flex flex-col gap-6">
         <h3
-          className={`text-3xl font-bold text-dark dark:text-light ${item.discount?.value ? "lg:max-w-[15ch] max-w-[10ch]" : ""}`}
+          className={`text-3xl font-semibold text-dark dark:text-light ${item.discount?.value ? "lg:max-w-[15ch] max-w-[10ch]" : ""}`}
         >
           {item.title}
         </h3>
         <div className="flex flex-col w-full">
-          <p className="text-2xl text-dark dark:text-light flex gap-3 font-semibold">
-            <small className="mb-3 text-md font-normal">€</small>
+          <p className="text-2xl text-dark dark:text-light flex gap-3 font-medium">
+            <small className="mb-3 text-md font-light">€</small>
             <span className="flex gap-6 w-full">{discountedPrice}</span>
           </p>
           {item.discount && (
@@ -71,7 +71,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
                 className="opacity-5"
               />
               <div className="absolute bg-dark/5 dark:bg-light/5 inset-0 rounded-full p-3 flex items-end justify-center">
-                <p className="text-dark dark:text-light sm:mb-15 mb-10 sm:mr-21 mr-18 sm:text-2xl text-lg">
+                <p className="text-dark dark:text-light sm:mb-15 mb-10 sm:mr-21 mr-18 sm:text-2xl text-lg font-normal">
                   -
                   {`${item.discount?.value}${item.discount?.type === "percentage" ? "%" : "€"}`}
                 </p>
@@ -86,15 +86,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
       <main className="flex flex-col gap-6 text-dark dark:text-light ">
         <List list={item.services} isDark={isDark} />
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 font-light">
           {item.suv && (
             <span>
-              <strong>Cijena za SUV: </strong>+€{item.suv}
+              <strong className="font-semibold">Cijena za SUV: </strong>+€
+              {item.suv}
             </span>
           )}
           {item.transporter && (
             <span>
-              <strong>Cijena za Transporter: </strong>+€{item.transporter}
+              <strong className="font-semibold">Cijena za Transporter: </strong>
+              +€{item.transporter}
             </span>
           )}
         </div>
