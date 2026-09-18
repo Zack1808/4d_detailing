@@ -112,7 +112,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
           variant="primary"
           className="w-full max-w-none justify-center"
         >
-          Rezerviraj Termin
+          Rezerviraj termin
         </Button>
       </footer>
     </div>
