@@ -108,6 +108,9 @@ const Tesseract = ({
   const edgesRef = useRef<SVGGElement>(null);
   const shineRef = useRef<SVGGElement>(null);
 
+  const darkColor = "#111416";
+  const lightColor = "#fafafa";
+
   // Makes SVG IDs unique if you render multiple tesseracts.
   const id = useId().replace(/:/g, "");
 
@@ -184,7 +187,6 @@ const Tesseract = ({
       <defs>
         <filter
           id={`${id}-wideGlow`}
-          fill="#5aa8ee"
           x="-80%"
           y="-80%"
           width="260%"
@@ -227,7 +229,7 @@ const Tesseract = ({
       <g
         ref={edgesRef}
         fill="none"
-        stroke={isDark ? "#fafafa" : "#1a1110"}
+        stroke={isDark ? lightColor : darkColor}
         strokeWidth={thickness}
         strokeLinecap="round"
         strokeLinejoin="miter"
