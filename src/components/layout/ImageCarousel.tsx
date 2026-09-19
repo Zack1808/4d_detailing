@@ -101,7 +101,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
           <FaChevronRight />
         </button>
       </div>
-      <div className="mt-3 flex justify-center gap-2 absolute bottom-0 w-full p-6 dark:bg-dark/70 bg-light/70">
+      <div className="mt-3 flex justify-center gap-2 absolute bottom-0 w-full p-6 dark:bg-dark/80 bg-light/70">
         {images.map((image, index) => (
           <button
             key={`${image}-indicator`}
