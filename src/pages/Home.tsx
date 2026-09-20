@@ -159,16 +159,24 @@ const Home: React.FC = () => {
           </p>
         </Reveal>
         <Reveal
-          className="flex sm:flex-row flex-col gap-2 mt-10"
+          className="flex sm:flex-row flex-col gap-3 mt-10"
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
           delay={600}
         >
-          <Button variant="primary" onClick={handleScroll}>
-            Pregledaj usluge
-          </Button>
-          <Button variant="secondary" to="/kontakt">
+          <Button
+            variant="secondary"
+            to="/kontakt"
+            className="sm:order-1 order-2"
+          >
             Rezerviraj termin
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleScroll}
+            className="sm:order-2 order-1"
+          >
+            Pregledaj usluge
           </Button>
         </Reveal>
       </Hero>
