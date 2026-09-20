@@ -19,6 +19,7 @@ export const mockServices: ServiceDataType[] = [
       "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
     isFeatured: true,
     keywords: [],
+    description: "",
   },
   {
     slug: "vanjsko_pranje",
@@ -37,6 +38,7 @@ export const mockServices: ServiceDataType[] = [
       "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "kemijsko_ciscenje_sjedala",
@@ -57,6 +59,7 @@ export const mockServices: ServiceDataType[] = [
     },
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "dubinsko_ciscenje_unutrasnjosti",
@@ -83,6 +86,7 @@ export const mockServices: ServiceDataType[] = [
     },
     isFeatured: true,
     keywords: [],
+    description: "",
   },
   {
     slug: "keramicka_zastita_koznih_povrsina",
@@ -103,6 +107,7 @@ export const mockServices: ServiceDataType[] = [
     },
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "full_detailing_interijera",
@@ -126,6 +131,7 @@ export const mockServices: ServiceDataType[] = [
       "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
     isFeatured: false,
     keywords: ["poliranje"],
+    description: "",
   },
   {
     slug: "nanosenje_keramicke_zastite_12_mjeseci",
@@ -143,6 +149,7 @@ export const mockServices: ServiceDataType[] = [
       "Nanošenje keramičkog premaza vrši se isključivo na neposredno poliran lak te služi kao završni korak nakon korekcije laka ",
     isFeatured: false,
     keywords: ["felge"],
+    description: "",
   },
   {
     slug: "korekcija_laka_poliranje",
@@ -161,6 +168,7 @@ export const mockServices: ServiceDataType[] = [
       "Razina i cijena usluge određuje se ovisno o željenim rezultatima te veličini vozila.",
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "nanosenje_keramicke_zastite_24_mjeseca",
@@ -175,6 +183,7 @@ export const mockServices: ServiceDataType[] = [
       "Nanošenje keramičkog premaza vrši se isključivo na neposredno poliran lak te služi kao završni korak nakon korekcije laka ",
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "poliranje_farova",
@@ -188,6 +197,7 @@ export const mockServices: ServiceDataType[] = [
       "Prikazana cijena odnosi se na oba fara zajedno. Cijena usluge može se mijenjati ovisno o zamagljenosti farova.",
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "standard_paket",
@@ -205,6 +215,7 @@ export const mockServices: ServiceDataType[] = [
     transporter: 60,
     isFeatured: false,
     keywords: [],
+    description: "",
   },
   {
     slug: "luxury+_paket",
@@ -228,6 +239,7 @@ export const mockServices: ServiceDataType[] = [
       "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
     isFeatured: true,
     keywords: [],
+    description: "",
   },
   {
     slug: "premium_paket",
@@ -250,6 +262,7 @@ export const mockServices: ServiceDataType[] = [
       "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
     isFeatured: false,
     keywords: [],
+    description: "",
   },
 ];
 export const mockReviews: ReviewType[] = [

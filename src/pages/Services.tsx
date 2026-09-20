@@ -11,8 +11,11 @@ import Input from "../components/common/Input";
 import ServiceCard from "../components/common/ServiceCard";
 import Select from "../components/common/Select";
 import Button from "../components/common/Button";
+import SEO from "../components/common/SEO";
 
 import { useData } from "../context/DataContext";
+
+import { generateServicesSchema } from "../utils/schema";
 
 type Category =
   | "all"
@@ -201,6 +204,13 @@ const Services: React.FC = () => {
 
   return (
     <main className="overflow-hidden">
+      <SEO
+        title="Usluge Detailinga – Pranje, Poliranje i Zaštita Vozila | 4D Detailing"
+        canonical="https://4d-detailing.hr/usluge"
+        schema={
+          services.length > 0 ? generateServicesSchema(services) : undefined
+        }
+      />
       <Container className="pb-3!" id="service-intro">
         <div className="flex gap-3 w-full justify-between">
           <div className="flex flex-col gap-6">

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import List from "../components/common/List";
+import SEO from "../components/common/SEO";
 
 import Container from "../components/layout/Container";
 
@@ -37,6 +38,10 @@ const Privacy: React.FC = () => {
 
   return (
     <main>
+      <SEO
+        title="Pravila privatnosti | 4D Detailing"
+        canonical="https://4d-detailing.hr/pravila-privatnosti"
+      />
       <Container>
         <h2 className="text-dark dark:text-light mt-30 text-5xl font-bold">
           Pravila privatnosti
