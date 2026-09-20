@@ -2,7 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo_light.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/logo_dark.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/logo_light.svg"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="preload"
@@ -18,7 +29,25 @@
       type="font/woff2"
       crossorigin
     />
-    <title>4d_detailing</title>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/logo_dark.svg"
+      media="(prefers-color-scheme: dark)"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/images/logo_light.svg"
+      media="(prefers-color-scheme: light)"
+      fetchpriority="high"
+    />
+    <title>4D Detailing – Profesionalno čišćenje i poliranje vozila</title>
+    <meta
+      name="description"
+      content="4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici. Luksuz koji si možete priuštiti."
+    />
   </head>
   <body class="bg-light dark:bg-dark tracking-wide scrollbar-gutter-stable!">
     <div id="root"></div>

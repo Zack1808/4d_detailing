@@ -159,16 +159,24 @@ const Home: React.FC = () => {
           </p>
         </Reveal>
         <Reveal
-          className="flex sm:flex-row flex-col gap-2 mt-10"
+          className="flex sm:flex-row flex-col gap-3 mt-10"
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
           delay={600}
         >
-          <Button variant="primary" onClick={handleScroll}>
-            Pregledaj usluge
-          </Button>
-          <Button variant="secondary" to="/kontakt">
+          <Button
+            variant="secondary"
+            to="/kontakt"
+            className="sm:order-1 order-2"
+          >
             Rezerviraj termin
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleScroll}
+            className="sm:order-2 order-1"
+          >
+            Pregledaj usluge
           </Button>
         </Reveal>
       </Hero>
@@ -219,9 +227,9 @@ const Home: React.FC = () => {
               transitionTo={`opacity-100 translate-x-0`}
               threshold={0.5}
             >
-              <h5 className="text-dark dark:text-light text-xl font-semibold">
+              <h3 className="text-dark dark:text-light text-xl font-semibold">
                 Ne znate koja je usluga najbolja za vaše vozilo?
-              </h5>
+              </h3>
             </Reveal>
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
@@ -237,7 +245,7 @@ const Home: React.FC = () => {
             transitionFrom="opacity-0 md:translate-x-6 -translate-x-6"
             transitionTo={`opacity-100 translate-x-0`}
           >
-            <Button variant="secondary" to="/usluge">
+            <Button variant="secondary" to="/usluge?sortiranje=popularno">
               Pregledajte sve usluge
             </Button>
           </Reveal>
@@ -339,6 +347,8 @@ const Home: React.FC = () => {
               src="/images/founder.avif"
               alt="Slika osnivatelja"
               className="object-cover rounded-sm"
+              width={1000}
+              height={666}
             />
             <small className="font-semibold text-dark dark:text-light italic">
               Luka Novak - Osnivač 4D Detailinga
@@ -381,9 +391,9 @@ const Home: React.FC = () => {
               transitionFrom="opacity-0 -translate-x-6"
               transitionTo={`opacity-100 translate-x-0`}
             >
-              <h5 className="text-dark dark:text-light text-xl font-semibold">
+              <h3 className="text-dark dark:text-light text-xl font-semibold">
                 Bili ste zadovoljni našom uslugom?
-              </h5>
+              </h3>
             </Reveal>
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
@@ -471,7 +481,10 @@ const Home: React.FC = () => {
           <img
             src={isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg"}
             className="w-1/3 md:flex hidden"
+            alt=""
             loading="lazy"
+            width={567}
+            height={495}
           />
         </div>
       </Container>

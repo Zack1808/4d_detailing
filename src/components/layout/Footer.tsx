@@ -26,7 +26,13 @@ const Footer: React.FC = () => {
       <div className="flex lg:flex-row flex-col items-start justify-between gap-12 flex-1 w-full mt-6 max-w-[1700px]">
         <div className="flex flex-col lg:px-9 px-3 py-3 h-full items-center justify-center flex-1 gap-6">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="logo" className="w-20" />
+            <img
+              src={logo}
+              alt="logo"
+              width={80}
+              height={70}
+              className="w-20"
+            />
             <span className="text-dark dark:text-light font-bold text-4xl">
               4D Detailing
             </span>
@@ -140,6 +146,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://www.tiktok.com/@4ddetailing?_t=ZN-8sUT8kPvC5e&_r=1"
             target="_blank"
+            aria-label="TikTok"
           >
             <FaTiktok className="lg:text-2xl text-lg" />
             <span className="lg:hidden block">TikTok</span>{" "}
@@ -150,6 +157,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-"
             href="https://www.instagram.com/4dcardetailing?igsh=MTAzYnVsa2U0bmY5MA=="
             target="_blank"
+            aria-label="Instagram"
           >
             <FaInstagram className="lg:text-2xl text-lg" />
             <span className="lg:hidden block">Instagram</span>{" "}
@@ -160,6 +168,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://www.facebook.com/p/4D-Detailing-61573426065582/"
             target="_blank"
+            aria-label="Facebook"
           >
             <FaSquareFacebook className="lg:text-2xl text-lg" />
             <span className="lg:hidden block">Facebook</span>{" "}
@@ -170,6 +179,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://wa.me/+385977588716"
             target="_blank"
+            aria-label="Whatsapp"
           >
             <FaWhatsapp className="lg:text-2xl text-lg" />
             <span className="lg:hidden block">Whatsapp</span>{" "}
@@ -180,6 +190,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://www.youtube.com/@4DDetailing"
             target="_blank"
+            aria-label="YouTube"
           >
             <FaYoutube className="lg:text-2xl text-lg" />
             <span className="lg:hidden block">YouTube</span>{" "}
@@ -190,7 +201,7 @@ const Footer: React.FC = () => {
           <a
             href="https://jeanpierrenovak.from.hr/"
             target="_blank"
-            className="opacity-20 font-light"
+            className="text-gray-500 dark:text-gray-400 font-light"
           >
             Izradio: <b className="font-semibold">JPN</b>
           </a>

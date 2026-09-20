@@ -1,24 +1,28 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { DataProvider } from "./context/DataContext";
-
-import Contact from "./pages/Contact";
-import Error404 from "./pages/Error404";
-import Home from "./pages/Home";
-import Privacy from "./pages/Privacy";
-import Services from "./pages/Services";
-import Terms from "./pages/Terms";
+import { DataProvider, useData } from "./context/DataContext";
 
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
+import PageLoader from "./components/layout/PageLoader";
 
-const App: React.FC = () => {
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const Error404 = lazy(() => import("./pages/Error404"));
+
+const AppRoutes: React.FC = () => {
+  const { isDark } = useData();
+
   return (
-    <DataProvider>
-      <BrowserRouter>
-        <Navigation />
+    <BrowserRouter>
+      <Navigation />
+      <Suspense fallback={<PageLoader isDark={isDark} />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/usluge" element={<Services />} />
@@ -27,11 +31,17 @@ const App: React.FC = () => {
           <Route path="/uvijeti-koristenja" element={<Terms />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
-        <ToastContainer />
-        <Footer />
-      </BrowserRouter>
-    </DataProvider>
+      </Suspense>
+      <ToastContainer />
+      <Footer />
+    </BrowserRouter>
   );
 };
+
+const App: React.FC = () => (
+  <DataProvider>
+    <AppRoutes />
+  </DataProvider>
+);
 
 export default App;

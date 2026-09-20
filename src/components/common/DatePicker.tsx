@@ -546,7 +546,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full flex-1 bg-dark/10 dark:bg-light/10 border-b-2 border-transparent focus-within:border-dark dark:focus-within:border-light transition-all transition-1000 flex flex-col items-center ${className}`}
+      className={`relative w-full flex-1 bg-dark/5 dark:bg-light/5 border-b-2 border-transparent focus-within:border-dark dark:focus-within:border-light transition-all transition-1000 flex flex-col items-center ${className}`}
     >
       <div className="relative flex w-full">
         <input
@@ -606,7 +606,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
       {isOpen && !disabled && (
         <div
-          className={`md:absolute fixed flex items-center justify-center inset-0 md:inset-auto md:p-0 p-3 w-full md:max-w-sm z-50 bg-gray-dark/15 dark:bg-light/15 backdrop-blur-lg md:backdrop-blur-none md:shadow-2xl md:dark:shadow-light/10 md:bg-transparent ${hasSpaceBelow ? "md:top-full md:mt-1" : "md:bottom-full md:mb-1"}`}
+          className={`md:absolute fixed flex items-center justify-center inset-0 md:inset-auto md:p-0 p-3 w-full md:max-w-sm z-50 md:bg-light bg-gray-dark/15 md:dark:bg-dark dark:bg-light/15 backdrop-blur-lg md:backdrop-blur-none md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-full md:mt-1" : "md:bottom-full md:mb-1"}`}
           onClick={(event) =>
             event.target === event.currentTarget && setIsOpen(false)
           }
@@ -616,7 +616,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
             ref={calendarRef}
             role="dialog"
             aria-label="Odaberite datum"
-            className="p-3 rounded-xs bg-[#e5e5e4] dark:bg-[#1e1716] w-full border border-dark/20 dark:border-light/20"
+            className="p-3 rounded-xs bg-[#eeeeee] dark:bg-[#1c2022] w-full border border-dark/20 dark:border-light/20"
           >
             <div
               role="application"

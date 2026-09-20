@@ -79,6 +79,8 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
                 alt={`Slika ${(index % images.length) + 1}`}
                 className="block h-auto w-full object-cover"
                 loading="lazy"
+                width={1000}
+                height={666}
               />
             </div>
           ))}
