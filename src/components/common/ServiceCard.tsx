@@ -50,7 +50,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   }, []);
 
   return (
-    <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/20 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
+    <div className="rounded-sm shadow-sm bg-gray-light/20 dark:bg-gray-dark/40 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
       <header className="flex flex-col gap-6">
         <h3
           className={`text-3xl font-semibold text-dark dark:text-light ${item.discount?.value ? "lg:max-w-[15ch] max-w-[10ch]" : ""}`}
@@ -112,7 +112,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
           variant="primary"
           className="w-full max-w-none justify-center"
         >
-          Rezerviraj Termin
+          Rezerviraj termin
         </Button>
       </footer>
     </div>

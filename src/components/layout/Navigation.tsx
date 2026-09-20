@@ -119,7 +119,7 @@ const Navigation: React.FC = () => {
 
       {menuOpen && (
         <nav
-          className={`fixed md:hidden flex flex-col gap-3 items-center justify-center bg-light dark:bg-dark inset-0 z-50 scale-0 origin-center transition-transform  ease-in-out ${isVisible ? "scale-100 duration-250" : "scale-0 delay-150 duration-150"}`}
+          className={`fixed md:hidden flex flex-col gap-3 items-center justify-center bg-light dark:bg-dark inset-0 z-50 scale-0 origin-center transition-transform motion-reduce:transition-none!  ease-in-out ${isVisible ? "scale-100 duration-250" : "scale-0 delay-150 duration-150"}`}
         >
           <Wheel
             size={1000}
@@ -129,7 +129,7 @@ const Navigation: React.FC = () => {
           />
 
           <div
-            className={`fixed top-0 p-3 pt-5 w-full flex justify-end items-center opacity-0 transition-opacity ${isVisible ? "opacity-100 delay-250 transition-700" : "delay-none transition-150"}`}
+            className={`fixed top-0 p-3 pt-5 w-full flex justify-end items-center opacity-0 transition-opacity motion-reduce:transition-none! ${isVisible ? "opacity-100 delay-250 transition-700" : "delay-none transition-150"}`}
           >
             <Button variant="none" onClick={closeMenu}>
               <FaX className="text-2xl" />
@@ -137,21 +137,21 @@ const Navigation: React.FC = () => {
           </div>
           <Link
             to="/"
-            className={`${linkClasses} opacity-0 transition-opacity font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
+            className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
           >
             Početna
           </Link>
           <Link
             to="/usluge"
-            className={`${linkClasses} opacity-0 transition-opacity font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
+            className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
           >
             Usluge
           </Link>
           <Link
             to="/kontakt"
-            className={`${linkClasses} opacity-0 transition-opacity font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
+            className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
           >
             Kontakt

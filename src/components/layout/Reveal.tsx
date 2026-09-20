@@ -28,7 +28,7 @@ const Reveal: React.FC<RevealProps> = ({
         ...style,
         transitionDelay: isInitiallyVisible ? `${delay}ms` : "100ms",
       }}
-      className={`transition-all duration-1000 ease-out ${isVisibile ? transitionTo : transitionFrom} ${className}`}
+      className={`transition-all duration-1000 ease-out motion-reduce:transition-opacity! ${isVisibile ? transitionTo : transitionFrom} ${className}`}
     >
       {children}
     </div>

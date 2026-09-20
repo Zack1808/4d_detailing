@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../components/common/Button";
 
 import Container from "../components/layout/Container";
+import Reveal from "../components/layout/Reveal";
 
 import Tesseract from "../components/animated/Tessaract";
 
@@ -33,21 +34,30 @@ const Error404: React.FC = () => {
           className="flex items-center justify-center w-full
          flex-col gap-6"
         >
-          <h2 className="font-bold md:text-9xl text-6xl text-dark dark:text-light text-center">
-            404 <br />
-            <span className="md:text-5xl text-2xl mt-6 font-semibold">
-              Ups... promašili ste skretanje.
-            </span>
-          </h2>
-          <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center font-light">
-            Ova stranica ne postoji, ali nema potrebe za panikom i naglim
-            kočenjem. <br />
-            <br />
-            Ubacite u rikverc i vratite se na početnu.
-          </p>
-          <Button variant="primary" to="/">
-            Vrati se na početnu
-          </Button>
+          <Reveal delay={200}>
+            <h2 className="font-bold md:text-9xl text-6xl text-dark dark:text-light text-center">
+              404 <br />
+              <span className="md:text-5xl text-2xl mt-6 font-semibold">
+                Ups... promašili ste skretanje.
+              </span>
+            </h2>
+          </Reveal>
+          <Reveal delay={300}>
+            <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center font-light">
+              Ova stranica ne postoji, ali nema potrebe za panikom i naglim
+              kočenjem.{" "}
+            </p>
+          </Reveal>
+          <Reveal delay={400}>
+            <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center font-light">
+              Ubacite u rikverc i vratite se na početnu.
+            </p>
+          </Reveal>
+          <Reveal delay={500}>
+            <Button variant="primary" to="/">
+              Vrati se na početnu
+            </Button>
+          </Reveal>
         </div>
       </Container>
     </main>

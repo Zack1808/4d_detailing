@@ -286,7 +286,7 @@ const Services: React.FC = () => {
         <Reveal
           transitionFrom="opacity-0"
           transitionTo="opacity-100 md:delay-300 duration-1000"
-          className={`w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex-col`}
+          className={`w-full bg-gray-light/20 dark:bg-gray-dark/40 rounded-xs flex-col`}
           delay={300}
         >
           <div className="w-full flex flex-col md:flex-row">
@@ -331,7 +331,7 @@ const Services: React.FC = () => {
         <Reveal
           transitionFrom="opacity-0"
           transitionTo="opacity-100 duration-1000"
-          className={`p-3 w-full bg-gray-light/20 dark:bg-gray-dark/20 rounded-xs flex gap-3 md:flex-row flex-col`}
+          className={`p-3 w-full bg-gray-light/20 dark:bg-gray-dark/40 rounded-xs flex gap-3 md:flex-row flex-col`}
           delay={300}
         >
           <div className="flex gap-3 md:items-center flex-1/3 md:flex-row flex-col">
