@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../components/common/Button";
+import SEO from "../components/common/SEO";
 
 import Container from "../components/layout/Container";
 import Reveal from "../components/layout/Reveal";
@@ -14,6 +15,7 @@ const Error404: React.FC = () => {
 
   return (
     <main className="h-screen flex items-center justify-center relative overflow-hidden">
+      <SEO title="Stranica nije pronađena | 4D Detailing" noindex />
       <Tesseract
         size={1700}
         className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"

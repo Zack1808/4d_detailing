@@ -7,6 +7,7 @@ import Input from "../components/common/Input";
 import Select from "../components/common/Select";
 import Textarea from "../components/common/Textarea";
 import DatePicker from "../components/common/DatePicker";
+import SEO from "../components/common/SEO";
 
 import Container from "../components/layout/Container";
 import Reveal from "../components/layout/Reveal";
@@ -109,6 +110,10 @@ const Contact: React.FC = () => {
 
   return (
     <main>
+      <SEO
+        title="Kontakt | 4D Detailing Velika Gorica"
+        canonical="https://4d-detailing.hr/kontakt"
+      />
       <Container id="contact-data">
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"

@@ -17,6 +17,7 @@ export type ServiceDataType = {
   };
   isFeatured: boolean;
   keywords?: string[];
+  description: string;
 };
 
 export type ReviewType = {

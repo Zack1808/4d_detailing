@@ -19,6 +19,7 @@ import ServiceCard from "../components/common/ServiceCard";
 import StarSelect from "../components/common/StarSelect";
 import Input from "../components/common/Input";
 import Textarea from "../components/common/Textarea";
+import SEO from "../components/common/SEO";
 
 import Tesseract from "../components/animated/Tessaract";
 import Wheel from "../components/animated/Wheel";
@@ -28,8 +29,17 @@ import { useGetPageData } from "../hooks/useGetPageData";
 import { useData } from "../context/DataContext";
 import type { ReviewType } from "../types/data";
 
+import { generateAutoWashSchema } from "../utils/schema";
+
 const toastClasses =
   "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
+
+const schema = generateAutoWashSchema({
+  telephone: "+385-97-758-87163",
+  streetAddress: "Rakitovec 274",
+  addressLocality: "Velika Gorica",
+  postalCode: "10410",
+});
 
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -139,6 +149,12 @@ const Home: React.FC = () => {
   return (
     <main className="relative overflow-hidden">
       {heroBackground[selectLoader]}
+      <SEO
+        title="4D Detailing Velika Gorica – Profesionalno čišćenje i poliranje vozila"
+        description="4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici."
+        canonical="https://4d-detailing.hr/"
+        schema={schema}
+      />
       <Hero>
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"

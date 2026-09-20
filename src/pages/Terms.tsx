@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import SEO from "../components/common/SEO";
+
 import Container from "../components/layout/Container";
 
 const Terms: React.FC = () => {
@@ -9,6 +11,10 @@ const Terms: React.FC = () => {
 
   return (
     <main>
+      <SEO
+        title="Uvjeti korištenja | 4D Detailing"
+        canonical="https://4d-detailing.hr/uvijeti-koristenja"
+      />
       <Container>
         <h2 className="text-dark dark:text-light mt-30 text-5xl font-bold">
           Uvijeti korištenja
