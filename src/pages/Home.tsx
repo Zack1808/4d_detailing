@@ -362,8 +362,8 @@ const Home: React.FC = () => {
               src="/images/founder.avif"
               alt="Slika osnivatelja"
               className="object-cover rounded-sm"
-              width={1000}
-              height={666}
+              width={729}
+              height={485}
               loading="lazy"
               decoding="async"
             />
