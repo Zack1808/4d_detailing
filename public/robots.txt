@@ -3,6 +3,5 @@ Allow: /
 
 # Ne dopuštaj indeksiranje filtriranih/sortiranih varijanti stranice usluga
 # (npr. /usluge?sortiranje=popularno) kako ne bi nastao duplicate content
-Disallow: /usluge?*
 
 Sitemap: https://4d-detailing.hr/sitemap.xml
