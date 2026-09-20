@@ -159,7 +159,6 @@ const Home: React.FC = () => {
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
-          delay={200}
         >
           <h1 className="md:text-8xl text-5xl font-bold text-dark dark:text-light">
             4D Detailing
@@ -168,7 +167,7 @@ const Home: React.FC = () => {
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
-          delay={400}
+          delay={200}
         >
           <p className="text-2xl text-dark dark:text-light font-normal">
             Luksuz koji si možete priuštiti
@@ -178,7 +177,7 @@ const Home: React.FC = () => {
           className="flex sm:flex-row flex-col gap-3 mt-10"
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
-          delay={600}
+          delay={400}
         >
           <Button
             variant="secondary"
@@ -365,6 +364,8 @@ const Home: React.FC = () => {
               className="object-cover rounded-sm"
               width={1000}
               height={666}
+              loading="lazy"
+              decoding="async"
             />
             <small className="font-semibold text-dark dark:text-light italic">
               Luka Novak - Osnivač 4D Detailinga
