@@ -111,7 +111,7 @@ const Navigation: React.FC = () => {
               Početna
             </Link>
             <Link
-              to="/usluge"
+              to="/usluge?sortiranje=popularno"
               className={linkClasses}
               onMouseEnter={() => import("../../pages/Services")}
             >
@@ -168,7 +168,7 @@ const Navigation: React.FC = () => {
             Početna
           </Link>
           <Link
-            to="/usluge"
+            to="/usluge?sortiranje=popularno"
             className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
             onClick={closeMenu}
             onTouchStart={() => import("../../pages/Services")}

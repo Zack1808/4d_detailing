@@ -245,7 +245,7 @@ const Home: React.FC = () => {
             transitionFrom="opacity-0 md:translate-x-6 -translate-x-6"
             transitionTo={`opacity-100 translate-x-0`}
           >
-            <Button variant="secondary" to="/usluge">
+            <Button variant="secondary" to="/usluge?sortiranje=popularno">
               Pregledajte sve usluge
             </Button>
           </Reveal>
