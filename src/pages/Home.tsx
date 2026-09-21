@@ -52,14 +52,14 @@ const Home: React.FC = () => {
   const heroBackground = [
     <Tesseract
       size={1700}
-      className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
+      className="absolute contain-strict will-change-transform md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
       thickness={5}
       speed={70}
       isDark={isDark}
     />,
     <Wheel
       size={1500}
-      className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-y-180"
+      className="absolute contain-strict will-change-transform md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-y-180"
       speed={100}
       isDark={isDark}
     />,

@@ -12,7 +12,7 @@ const Hero: React.FC<React.HTMLAttributes<HTMLElement>> = ({
   }, []);
 
   const sectionClasses =
-    `w-full min-h-svh flex justify-center items-center bg-linear-to-b md:from-transparent md:dark:from-transparent from-light/80 dark:from-dark/80 from-70% to-light dark:to-dark ${className}`.trim();
+    `w-full ${heroHeight ? "" : "h-svh"}  flex justify-center items-center bg-linear-to-b md:from-transparent md:dark:from-transparent from-light/80 dark:from-dark/80 from-70% to-light dark:to-dark ${className}`.trim();
 
   return (
     <section
