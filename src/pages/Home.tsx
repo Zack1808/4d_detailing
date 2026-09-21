@@ -227,7 +227,8 @@ const Home: React.FC = () => {
               <Reveal
                 key={`${service.title}-${index}`}
                 transitionTo={`opacity-100 translate-y-0`}
-                className={`flex h-full lg:nth-[2]:delay-100! lg:nth-[3]:delay-200! md:nth-[2]:delay-200!`}
+                className={`flex h-full lg:nth-[2]:delay-100! lg:nth-[3]:delay-200! md:nth-[2]:delay-200! md:duration-1000 duration-500`}
+                threshold={0.05}
               >
                 <ServiceCard item={service} />
               </Reveal>

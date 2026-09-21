@@ -378,7 +378,7 @@ const Services: React.FC = () => {
             return (
               <Reveal
                 key={`${service.slug}-${index}`}
-                className={`xl:nth-[3n+2]:delay-100! xl:nth-[3n]:delay-200! lg:nth-[2n]:delay-100! flex h-full`}
+                className={`xl:nth-[3n+2]:delay-100! xl:nth-[3n]:delay-200! lg:nth-[2n]:delay-100! flex h-full md:duration-1000 duration-500`}
                 threshold={0.05}
               >
                 <ServiceCard item={service} />
