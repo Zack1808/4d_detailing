@@ -551,6 +551,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       <div className="relative flex w-full">
         <input
           type="text"
+          role="combobox"
           id={id}
           ref={inputRef}
           inputMode="numeric"

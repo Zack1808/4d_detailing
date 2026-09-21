@@ -2,12 +2,14 @@ import React, {
   type AnchorHTMLAttributes,
   type ButtonHTMLAttributes,
   useState,
+  lazy,
+  Suspense,
 } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 
-import Tesseract from "../animated/Tessaract";
-import Wheel from "../animated/Wheel";
-import Polisher from "../animated/Polisher";
+const Tesseract = lazy(() => import("../animated/Tessaract"));
+const Wheel = lazy(() => import("../animated/Wheel"));
+const Polisher = lazy(() => import("../animated/Polisher"));
 
 import { useData } from "../../context/DataContext";
 
@@ -52,36 +54,50 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const { isDark } = useData();
 
-  const loaders = [
-    <Tesseract size={25} isDark={!isDark} speed={3} thickness={15} />,
-    <Wheel size={25} speed={2} isDark={!isDark} />,
-    <Polisher size={50} speed={7} isDark={!isDark} className=" max-h-min" />,
-  ];
-
   const [selectLoader] = useState<number>(() => {
-    const randomIndex = Math.floor(Math.random() * loaders.length);
+    const randomIndex = Math.floor(Math.random() * 3);
     return randomIndex;
   });
+
+  const renderLoader = () => {
+    if (!loading) return null;
+    return (
+      <Suspense fallback={null}>
+        {selectLoader === 0 && (
+          <Tesseract size={25} isDark={!isDark} speed={3} thickness={15} />
+        )}
+        {selectLoader === 1 && <Wheel size={25} speed={2} isDark={!isDark} />}
+        {selectLoader === 2 && (
+          <Polisher
+            size={50}
+            speed={7}
+            isDark={!isDark}
+            className=" max-h-min"
+          />
+        )}
+      </Suspense>
+    );
+  };
 
   const classNames = buttonClasses(variant, className);
 
   if ("to" in rest)
     return (
       <Link className={classNames} {...rest}>
-        {children} {loading && loaders[selectLoader]}
+        {children} {loading && renderLoader()}
       </Link>
     );
 
   if ("href" in rest)
     return (
       <a className={classNames} {...rest}>
-        {children} {loading && loaders[selectLoader]}
+        {children} {loading && renderLoader()}
       </a>
     );
 
   return (
     <button className={classNames} {...(rest as RegularButtonProps)}>
-      {children} {loading && loaders[selectLoader]}
+      {children} {loading && renderLoader()}
     </button>
   );
 };
