@@ -25,5 +25,5 @@ export type ReviewType = {
   name: string;
   surname: string;
   review: string;
-  approvedBy: string | null;
+  isApproved: boolean;
 };

@@ -272,7 +272,7 @@ export const mockReviews: ReviewType[] = [
     starCount: 5,
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao.",
-    approvedBy: null,
+    isApproved: true,
   },
   {
     name: "Matej",
@@ -280,7 +280,7 @@ export const mockReviews: ReviewType[] = [
     starCount: 5,
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
-    approvedBy: null,
+    isApproved: true,
   },
   {
     name: "Matej",
@@ -288,7 +288,7 @@ export const mockReviews: ReviewType[] = [
     starCount: 1,
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
-    approvedBy: null,
+    isApproved: true,
   },
   {
     name: "Matej",
@@ -296,7 +296,7 @@ export const mockReviews: ReviewType[] = [
     starCount: 3,
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
-    approvedBy: null,
+    isApproved: true,
   },
 ];
 
