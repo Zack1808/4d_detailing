@@ -43,8 +43,6 @@ export const DataProvider = ({ children }: DataProviderType) => {
       try {
         const data = await getPageData();
 
-        console.log(data);
-
         if (data === undefined) return;
 
         setServices(data.services);

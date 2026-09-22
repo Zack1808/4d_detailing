@@ -112,9 +112,13 @@ export const useGetPageData: useGetPageDataType = (
       }
 
       const services = await firebaseApi.getData<ServiceDataType>("services");
-      const reviews = await firebaseApi.getData<ReviewType>("reviews");
-
-      console.log(services);
+      const reviews = await firebaseApi.getData<ReviewType>("reviews", [
+        {
+          field: "isApproved",
+          operator: "==",
+          value: true,
+        },
+      ]);
 
       return {
         services,

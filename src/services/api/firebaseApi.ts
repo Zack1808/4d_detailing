@@ -1,10 +1,31 @@
-import { getDocs, collection } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  query,
+  where,
+  QueryConstraint,
+  type WhereFilterOp,
+} from "firebase/firestore";
 
 import { db } from "../../firebaseConfig";
 
+type FilterCondition = {
+  field: string;
+  operator: WhereFilterOp;
+  value: unknown;
+};
+
 export const firebaseApi = {
-  getData: async <T>(coll: string): Promise<T[]> => {
-    const querySnapshot = await getDocs(collection(db, coll));
+  getData: async <T>(
+    coll: string,
+    filters?: FilterCondition[],
+  ): Promise<T[]> => {
+    const constraints: QueryConstraint[] = (filters ?? []).map((f) =>
+      where(f.field, f.operator, f.value),
+    );
+
+    const q = query(collection(db, coll), ...constraints);
+    const querySnapshot = await getDocs(q);
 
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
