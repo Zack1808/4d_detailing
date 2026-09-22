@@ -43,11 +43,15 @@ export const DataProvider = ({ children }: DataProviderType) => {
       try {
         const data = await getPageData();
 
+        console.log(data);
+
         if (data === undefined) return;
 
         setServices(data.services);
         setReviews(data.reviews);
-      } catch (err) {}
+      } catch (err) {
+        console.error("getPageData failed:", err);
+      }
     };
 
     getData();

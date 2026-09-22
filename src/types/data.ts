@@ -1,6 +1,7 @@
 type Category = "exterior" | "interior" | "polishing" | "package";
 
 export type ServiceDataType = {
+  id: string;
   slug: string;
   title: string;
   priceFrom: number;
@@ -21,6 +22,7 @@ export type ServiceDataType = {
 };
 
 export type ReviewType = {
+  id: string;
   starCount: number;
   name: string;
   surname: string;

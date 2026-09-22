@@ -2,6 +2,7 @@ import { type ServiceDataType, type ReviewType } from "../../types/data";
 
 export const mockServices: ServiceDataType[] = [
   {
+    id: "fasdfadsfvcad",
     slug: "vanjsko_pranje_ukljucujuci_naplatke",
     title: "Vanjsko pranje, uključujući naplatke.",
     priceFrom: 20,
@@ -22,6 +23,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcac",
     slug: "vanjsko_pranje",
     title: "Vanjsko pranje",
     priceFrom: 15,
@@ -41,6 +43,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcaa",
     slug: "kemijsko_ciscenje_sjedala",
     title: "Kemijsko čišćenje sjedala",
     priceFrom: 50,
@@ -62,6 +65,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcae",
     slug: "dubinsko_ciscenje_unutrasnjosti",
     title: "Dubinsko čišćenje unutrašnjosti",
     priceFrom: 100,
@@ -89,6 +93,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcaz",
     slug: "keramicka_zastita_koznih_povrsina",
     title: "Keramička zaštita kožnih površina",
     priceFrom: 60,
@@ -110,6 +115,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcadq",
     slug: "full_detailing_interijera",
     title: "Full detailing interijera",
     priceFrom: 300,
@@ -134,6 +140,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcada",
     slug: "nanosenje_keramicke_zastite_12_mjeseci",
     title: "Nanošenje keramičke zaštite (12 mjeseci)",
     priceFrom: 120,
@@ -152,6 +159,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcadk",
     slug: "korekcija_laka_poliranje",
     title: "Korekcija laka (poliranje)",
     priceFrom: 120,
@@ -171,6 +179,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcadq",
     slug: "nanosenje_keramicke_zastite_24_mjeseca",
     title: "Nanošenje keramičke zaštite (24 mjeseca)",
     priceFrom: 180,
@@ -186,6 +195,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcadp",
     slug: "poliranje_farova",
     title: "Poliranje farova",
     priceFrom: 40,
@@ -200,6 +210,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcadv",
     slug: "standard_paket",
     title: "Standard Paket",
     priceFrom: 40,
@@ -218,6 +229,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcadp",
     slug: "luxury+_paket",
     title: "Luxury+ Paket",
     priceFrom: 500,
@@ -242,6 +254,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
   {
+    id: "fasdfadsfvcado",
     slug: "premium_paket",
     title: "Premium Paket",
     priceFrom: 320,
@@ -273,6 +286,7 @@ export const mockReviews: ReviewType[] = [
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao.",
     isApproved: true,
+    id: "sdafsdfa",
   },
   {
     name: "Matej",
@@ -281,6 +295,7 @@ export const mockReviews: ReviewType[] = [
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
     isApproved: true,
+    id: "sdafsdfb",
   },
   {
     name: "Matej",
@@ -289,6 +304,7 @@ export const mockReviews: ReviewType[] = [
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
     isApproved: true,
+    id: "sdafsdfc",
   },
   {
     name: "Matej",
@@ -297,10 +313,11 @@ export const mockReviews: ReviewType[] = [
     review:
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
     isApproved: true,
+    id: "sdafsdf",
   },
 ];
 
 export const MOCK_CONFIG = {
-  enableMockData: true,
+  enableMockData: false,
   apiDelay: 500,
 };

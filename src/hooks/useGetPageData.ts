@@ -1,5 +1,7 @@
 import { useState, useCallback } from "react";
 
+import { firebaseApi } from "../services/api/firebaseApi";
+
 import {
   mockServices,
   mockReviews,
@@ -109,11 +111,18 @@ export const useGetPageData: useGetPageDataType = (
         };
       }
 
+      const services = await firebaseApi.getData<ServiceDataType>("services");
+      const reviews = await firebaseApi.getData<ReviewType>("reviews");
+
+      console.log(services);
+
       return {
-        services: [],
-        reviews: [],
+        services,
+        reviews,
       };
     } catch (err: unknown) {
+      console.error("getPageData failed: ", err);
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setPageLoading(false);
     }
