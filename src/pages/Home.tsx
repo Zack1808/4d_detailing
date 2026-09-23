@@ -95,12 +95,12 @@ const Home: React.FC = () => {
 
         const values = Object.fromEntries(formData.entries());
 
-        const reviewData: ReviewType = {
+        const reviewData: Omit<ReviewType, "id"> = {
           starCount,
           name: String(values.name),
           surname: String(values.surname),
           review: String(values.review),
-          approvedBy: null,
+          isApproved: false,
         };
 
         const successfull = await setReview(reviewData);
@@ -122,7 +122,10 @@ const Home: React.FC = () => {
             ),
           });
       } catch (err) {
-        toast.error(error, { theme: isDark ? "dark" : "light" });
+        toast.error(
+          err instanceof Error ? err.message : "Something went wrong",
+          { theme: isDark ? "dark" : "light" },
+        );
       }
     },
     [starCount],

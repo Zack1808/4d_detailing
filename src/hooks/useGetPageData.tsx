@@ -16,7 +16,7 @@ type useGetPageDataType = (useMockData?: boolean) => {
   error: string | null;
   getServices: () => Promise<ServiceDataType[] | undefined>;
   getReviews: () => Promise<ReviewType[] | undefined>;
-  setReview: (review: ReviewType) => Promise<boolean | undefined>;
+  setReview: (review: Omit<ReviewType, "id">) => Promise<boolean | undefined>;
   getPageData: () => Promise<
     | {
         services: ServiceDataType[];
@@ -71,7 +71,7 @@ export const useGetPageData: useGetPageDataType = (
   }, [useMockData]);
 
   const setReview = useCallback(
-    async (review: ReviewType) => {
+    async (review: Omit<ReviewType, "id">) => {
       setLoading(true);
       setError(null);
 
@@ -86,8 +86,15 @@ export const useGetPageData: useGetPageDataType = (
           return true;
         }
 
-        return true;
+        const id = await firebaseApi.setData<ReviewType>("reviews", review);
+
+        if (id) return true;
+
+        return false;
       } catch (err: unknown) {
+        console.error("setReview failed: ", err);
+        setError(err instanceof Error ? err.message : "Something went wrong");
+        return false;
       } finally {
         setLoading(false);
       }

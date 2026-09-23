@@ -1,5 +1,6 @@
 import {
   getDocs,
+  addDoc,
   collection,
   query,
   where,
@@ -37,5 +38,8 @@ export const firebaseApi = {
     return [];
   },
 
-  // addReview: async (data: ReviewType) => {},
+  setData: async <T>(coll: string, data: Omit<T, "id">): Promise<string> => {
+    const docRef = await addDoc(collection(db, coll), data);
+    return docRef.id;
+  },
 };
