@@ -5,22 +5,29 @@ import { firebaseApi } from "../services/api/firebaseApi";
 import {
   mockServices,
   mockReviews,
+  mockAppointments,
   MOCK_CONFIG,
 } from "../services/mock/mockData";
 
-import { type ServiceDataType, type ReviewType } from "../types/data";
+import {
+  type ServiceDataType,
+  type ReviewType,
+  type AppointmentType,
+} from "../types/data";
 
 type useGetPageDataType = (useMockData?: boolean) => {
   loading: boolean;
   pageLoading: boolean;
   error: string | null;
   getServices: () => Promise<ServiceDataType[] | undefined>;
+  getAppointments: () => Promise<AppointmentType[] | undefined>;
   getReviews: () => Promise<ReviewType[] | undefined>;
   setReview: (review: Omit<ReviewType, "id">) => Promise<boolean | undefined>;
   getPageData: () => Promise<
     | {
         services: ServiceDataType[];
         reviews: ReviewType[];
+        appointments: AppointmentType[];
       }
     | undefined
   >;
@@ -44,6 +51,26 @@ export const useGetPageData: useGetPageDataType = (
         );
 
         return mockServices;
+      }
+
+      return [];
+    } catch (err: unknown) {
+    } finally {
+      setLoading(false);
+    }
+  }, [useMockData]);
+
+  const getAppointments = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (useMockData) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, MOCK_CONFIG.apiDelay),
+        );
+
+        return mockAppointments;
       }
 
       return [];
@@ -115,6 +142,7 @@ export const useGetPageData: useGetPageDataType = (
         return {
           services: mockServices,
           reviews: mockReviews,
+          appointments: mockAppointments,
         };
       }
 
@@ -126,10 +154,21 @@ export const useGetPageData: useGetPageDataType = (
           value: true,
         },
       ]);
+      const appointments = await firebaseApi.getData<AppointmentType>(
+        "appointments",
+        [
+          {
+            field: "isBlocked",
+            operator: "==",
+            value: true,
+          },
+        ],
+      );
 
       return {
         services,
         reviews,
+        appointments,
       };
     } catch (err: unknown) {
       console.error("getPageData failed: ", err);
@@ -144,6 +183,7 @@ export const useGetPageData: useGetPageDataType = (
     pageLoading,
     error,
     getServices,
+    getAppointments,
     getReviews,
     setReview,
     getPageData,

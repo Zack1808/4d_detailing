@@ -4,12 +4,17 @@ import PageLoader from "../components/layout/PageLoader";
 
 import { useGetPageData } from "../hooks/useGetPageData";
 
-import { type ServiceDataType, type ReviewType } from "../types/data";
+import {
+  type ServiceDataType,
+  type ReviewType,
+  type AppointmentType,
+} from "../types/data";
 
 type DataContextType = {
   isDark: boolean;
   services: ServiceDataType[];
   reviews: ReviewType[];
+  appointments: AppointmentType[];
 };
 
 type DataProviderType = {
@@ -31,6 +36,7 @@ export const useData = () => {
 export const DataProvider = ({ children }: DataProviderType) => {
   const [services, setServices] = useState<ServiceDataType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
+  const [appointments, setAppointments] = useState<AppointmentType[]>([]);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [isDark, setIsDark] = useState<boolean>(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
@@ -47,6 +53,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
 
         setServices(data.services);
         setReviews(data.reviews);
+        setAppointments(data.appointments);
       } catch (err) {
         console.error("getPageData failed:", err);
       }
@@ -80,7 +87,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
   }, [pageLoading]);
 
   return (
-    <DataContext.Provider value={{ isDark, services, reviews }}>
+    <DataContext.Provider value={{ isDark, services, reviews, appointments }}>
       {showLoader && (
         <PageLoader
           isDark={isDark}

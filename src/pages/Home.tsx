@@ -120,11 +120,18 @@ const Home: React.FC = () => {
             icon: (
               <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
             ),
+            progressClassName: "bg-red-400! dark:bg-red-900!",
           });
       } catch (err) {
         toast.error(
           err instanceof Error ? err.message : "Something went wrong",
-          { theme: isDark ? "dark" : "light" },
+          {
+            className: toastClasses,
+            icon: (
+              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
+            ),
+            progressClassName: "bg-red-400! dark:bg-red-900!",
+          },
         );
       }
     },
