@@ -19,7 +19,7 @@ import Polisher from "../components/animated/Polisher";
 import { useData } from "../context/DataContext";
 
 const Contact: React.FC = () => {
-  const { isDark, services } = useData();
+  const { isDark, services, appointments } = useData();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -78,6 +78,25 @@ const Contact: React.FC = () => {
     },
     [],
   );
+
+  const parseDate = useCallback((date: string) => {
+    const [day, month, year] = date.split(".").map(Number);
+    return new Date(year, month - 1, day);
+  }, []);
+
+  const toMidnight = (date: Date) =>
+    new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  const blockDates = useCallback((date: string) => {
+    const target = toMidnight(parseDate(date));
+
+    return appointments.some(({ dateFrom, dateTo, isBlocked }) => {
+      if (!isBlocked) return false;
+      const from = toMidnight(parseDate(dateFrom as string));
+      const to = toMidnight(parseDate(dateTo as string));
+      return target >= from && target <= to;
+    });
+  }, []);
 
   const handleSelectChange = (value: string | string[]) => {
     setSelectValue(value);
@@ -393,6 +412,7 @@ const Contact: React.FC = () => {
                   id="date"
                   min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
                   name="date"
+                  isDateDisabled={blockDates}
                 />
               </fieldset>
             </Reveal>

@@ -334,9 +334,22 @@ export const mockAppointments: AppointmentType[] = [
     isConfirmed: true,
     isBlocked: true,
   },
+  {
+    id: "afadsfadsklfjadskfnadsklfn",
+    fullName: "Test Test",
+    email: "test@gmal.com",
+    phone: "+385950000000",
+    service: "vanjsko_pranje_ukljucujuci_naplatke",
+    vehicle: "Ford Fiesta 2017",
+    dateFrom: "27.09.2026",
+    dateTo: "27.09.2026",
+    remark: "",
+    isConfirmed: true,
+    isBlocked: true,
+  },
 ];
 
 export const MOCK_CONFIG = {
-  enableMockData: true,
+  enableMockData: false,
   apiDelay: 500,
 };

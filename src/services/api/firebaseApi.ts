@@ -28,6 +28,8 @@ export const firebaseApi = {
     const q = query(collection(db, coll), ...constraints);
     const querySnapshot = await getDocs(q);
 
+    if (querySnapshot.empty) return [];
+
     const data = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
