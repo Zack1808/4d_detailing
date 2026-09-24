@@ -50,6 +50,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
       return new Date(year, month - 1, day).getTime();
     };
 
+    if (!item.discount.lowest.length) return undefined;
+
     for (const entry of item.discount.lowest) {
       const entryTime = parseDate(entry.date);
       const isWithinWindow =
@@ -150,7 +152,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
             <span>
               <strong className="font-normal">Cijena za SUV: </strong>+€
               {item.suv.current} <br />
-              <small className="font-medium text-xs">
+              <small className="font-medium text-xs text-gray-400">
                 {item.suv.ref
                   ? `Nadoplata na 10.09.2026: ${item.suv.ref}€`
                   : "Dana 10.09.2026 nije bilo nadoplate za SUV-ove."}
@@ -161,7 +163,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
             <span>
               <strong className="font-normal">Cijena za Transporter: </strong>
               +€{item.transporter.current} <br />
-              <small className="font-medium text-xs">
+              <small className="font-medium text-xs text-gray-400">
                 {item.transporter.ref
                   ? `Nadoplata na 10.09.2026: ${item.transporter.ref}€`
                   : "Dana 10.09.2026 nije bilo nadoplate za transportere."}
