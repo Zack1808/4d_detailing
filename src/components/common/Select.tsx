@@ -299,18 +299,6 @@ const Select: React.FC<SelectProps> = ({
     };
   }, [isOpen, checkSpace]);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isOpen]);
-
   const defaultRenderValue = () => {
     if (selectedOptions.length === 0) {
       return <span className="text-gray-light font-light">{placeholder}</span>;
