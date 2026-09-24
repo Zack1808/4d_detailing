@@ -95,7 +95,7 @@ const Navigation: React.FC = () => {
               alt="4D Detailing"
               width={96}
               height={84}
-              className="md:w-24 w-20"
+              className="md:w-24 w-16"
             />
             <p className="font-bold text-4xl text-dark dark:text-light md:flex hidden">
               4D Detailing
