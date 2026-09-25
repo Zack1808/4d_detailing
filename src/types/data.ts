@@ -49,7 +49,7 @@ export type AppointmentType = {
   phone: string;
   service: string;
   vehicle: string;
-  dateFrom?: string;
+  dateFrom: string;
   dateTo?: string;
   remark?: string;
   isConfirmed: boolean;
