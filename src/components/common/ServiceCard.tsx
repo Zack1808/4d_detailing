@@ -91,7 +91,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
           <p className="text-2xl text-dark dark:text-light flex gap-1 flex-col font-medium">
             {item.discount.isEnabled ? (
               <span className="flex gap-3">
-                <span className="text-sm flex gap-1 text-gray-400 line-through self-center min-w-max ">
+                <span className="text-sm flex gap-1 text-gray-500 dark:text-gray-400 line-through self-center min-w-max ">
                   <span className="flex gap-6 w-full">
                     €
                     {item.priceTo
@@ -110,15 +110,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
                 <span className="flex gap-6 w-full">{discountedPrice}</span>
               </span>
             )}
-            <small className="text-xs text-gray-400">
+            <small className="text-xs text-gray-500 dark:text-gray-400">
               {item.priceFrom.ref
                 ? item.priceTo?.ref
-                  ? `Cijena na 10.09.2026: ${item.priceFrom.ref} - ${item.priceTo.ref} €`
+                  ? `Cijena na 10.09.2026: ${item.priceFrom.ref} - ${item.priceTo.ref}€`
                   : `Cijena na 10.09.2026: ${item.priceFrom.ref}€`
                 : `Dana 10.09.2026 ove usluge nije bilo.`}
             </small>
             {item.discount.isEnabled && (
-              <small className="text-xs text-gray-400">
+              <small className="text-xs text-gray-500 dark:text-gray-400">
                 Najniža cijena u zadnjih 30 dana: {`${getLowestPrice}€`}
               </small>
             )}
@@ -152,7 +152,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
             <span>
               <strong className="font-normal">Cijena za SUV: </strong>+€
               {item.suv.current} <br />
-              <small className="font-medium text-xs text-gray-400">
+              <small className="font-medium text-xs text-gray-500 dark:text-gray-400">
                 {item.suv.ref
                   ? `Nadoplata na 10.09.2026: ${item.suv.ref}€`
                   : "Dana 10.09.2026 nije bilo nadoplate za SUV-ove."}
@@ -163,7 +163,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
             <span>
               <strong className="font-normal">Cijena za Transporter: </strong>
               +€{item.transporter.current} <br />
-              <small className="font-medium text-xs text-gray-400">
+              <small className="font-medium text-xs text-gray-500 dark:text-gray-400">
                 {item.transporter.ref
                   ? `Nadoplata na 10.09.2026: ${item.transporter.ref}€`
                   : "Dana 10.09.2026 nije bilo nadoplate za transportere."}
