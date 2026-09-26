@@ -1,6 +1,16 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaClock,
+  FaLocationDot,
+  FaCircleCheck,
+  FaCircleXmark,
+} from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
+import { render } from "@react-email/components";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -16,10 +26,17 @@ import Tesseract from "../components/animated/Tessaract";
 import Wheel from "../components/animated/Wheel";
 import Polisher from "../components/animated/Polisher";
 
+import NotifyUser from "../components/email/NotifyUser";
+
 import { useData } from "../context/DataContext";
+
+import type { AppointmentType } from "../types/data";
 
 const Contact: React.FC = () => {
   const { isDark, services, appointments } = useData();
+
+  const toastClasses =
+    "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -55,7 +72,7 @@ const Contact: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const form = event.currentTarget;
@@ -72,9 +89,56 @@ const Contact: React.FC = () => {
       }
 
       const formData = new FormData(form);
-      const values = Object.fromEntries(formData.entries());
+      const values = Object.fromEntries(
+        formData.entries(),
+      ) as unknown as AppointmentType;
 
-      console.log(values);
+      const selectedService = services.filter(
+        (service) => service.slug === values.service,
+      );
+
+      const data = {
+        ...values,
+        service: selectedService[0].title,
+        isConfirmed: false,
+        isBlocked: false,
+      };
+
+      try {
+        const html = await render(<NotifyUser {...data} />);
+
+        await emailjs.send(
+          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+          {
+            to_email: data.email,
+            from_email: "4d.detailing.ln@gmail.com",
+            subject: `Testni run za mail, usluga ${data.service}`,
+            email_template: html,
+            name: data.fullName,
+          },
+          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+        );
+
+        toast.success("Recenzija uspješno poslana!", {
+          className: toastClasses,
+          icon: (
+            <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
+          ),
+          progressClassName: "bg-green-400! dark:bg-green-900!",
+        });
+      } catch (err: unknown) {
+        toast.error(
+          err instanceof Error ? err.message : "Something went wrong",
+          {
+            className: toastClasses,
+            icon: (
+              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
+            ),
+            progressClassName: "bg-red-400! dark:bg-red-900!",
+          },
+        );
+      }
     },
     [],
   );
@@ -380,7 +444,7 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="carType"
+                  htmlFor="vehicle"
                   className="text-dark dark:text-light font-light"
                 >
                   Model vozila *
@@ -390,8 +454,8 @@ const Contact: React.FC = () => {
                   type="text"
                   className="w-full scroll-mt-40"
                   placeholder="Mazda 3 Hatchback 2023"
-                  id="carType"
-                  name="carType"
+                  id="vehicle"
+                  name="vehicle"
                 />
               </fieldset>
             </Reveal>

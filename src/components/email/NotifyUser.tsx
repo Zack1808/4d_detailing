@@ -8,6 +8,8 @@ import {
   Text,
   Heading,
   Img,
+  Row,
+  Column,
 } from "@react-email/components";
 import { Tailwind } from "@react-email/tailwind";
 
@@ -48,24 +50,22 @@ const NotifyUser = (props: Omit<AppointmentType, "id">) => {
       >
         <Body className="bg-light dark:bg-dark font-sans">
           <Container className="w-full p-3 flex flex-col gap-3">
-            <Section className="p-3 flex gap-3 justify-start items-center w-full border-b border-gray-400">
-              <Img
-                src="https://develop--deft-bonbon-4f3314.netlify.app/images/logo_light.svg"
-                alt="4D Detailing"
-                width="40"
-                height="40"
-                className="w-24 block dark:hidden"
-              />
-              <Img
-                src="https://develop--deft-bonbon-4f3314.netlify.app/images/logo_dark.svg"
-                alt="4D Detailing"
-                width="40"
-                height="40"
-                className="w-24 hidden dark:block"
-              />
-              <Text className="text-2xl font-semibold text-dark dark:text-light">
-                4D Detailing
-              </Text>
+            <Section className="p-3 border-b border-gray-400">
+              <Row>
+                <Column width={70}>
+                  <Img
+                    src="https://develop--deft-bonbon-4f3314.netlify.app/images/logo_light.svg"
+                    alt="4D Detailing"
+                    width="70"
+                    height="60"
+                  />
+                </Column>
+                <Column className="pl-3">
+                  <Text className="text-2xl font-bold text-dark dark:text-light m-0">
+                    4D Detailing
+                  </Text>
+                </Column>
+              </Row>
             </Section>
 
             <Heading className="text-dark dark:text-light">
