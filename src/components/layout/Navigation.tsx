@@ -77,7 +77,7 @@ const Navigation: React.FC = () => {
   return (
     <>
       <header
-        className={`w-full fixed md:p-4 p-3 shadow-sm flex items-center justify-center z-40  ${changeBlur ? "backdrop-blur-xl" : "backdrop-blur-xs"}`}
+        className={`w-full fixed md:px-3 py-3 px-6 shadow-sm flex items-center justify-center z-40  ${changeBlur ? "backdrop-blur-xl" : "backdrop-blur-xs"}`}
         style={{
           backgroundColor: isDark
             ? `color-mix(in srgb, var(--color-dark) ${changeBg}%, transparent)`
@@ -95,7 +95,7 @@ const Navigation: React.FC = () => {
               alt="4D Detailing"
               width={96}
               height={84}
-              className="md:w-24 w-20"
+              className="md:w-24 w-16"
             />
             <p className="font-bold text-4xl text-dark dark:text-light md:flex hidden">
               4D Detailing
@@ -143,7 +143,7 @@ const Navigation: React.FC = () => {
         >
           <Wheel
             size={1000}
-            className="absolute md:right-80 right-0 -z-50 opacity-3 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
+            className="absolute md:right-80 right-0 -z-50 opacity-5 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
             speed={70}
             isDark={isDark}
           />

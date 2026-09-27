@@ -1,6 +1,16 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaClock,
+  FaLocationDot,
+  FaCircleCheck,
+  FaCircleXmark,
+} from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
+import { render } from "@react-email/components";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -16,13 +26,27 @@ import Tesseract from "../components/animated/Tessaract";
 import Wheel from "../components/animated/Wheel";
 import Polisher from "../components/animated/Polisher";
 
+import NotifyUser from "../components/email/NotifyUser";
+import NotifyAdmin from "../components/email/NotifyAdmin";
+
 import { useData } from "../context/DataContext";
 
+import { useGetPageData } from "../hooks/useGetPageData";
+
+import type { AppointmentType } from "../types/data";
+
 const Contact: React.FC = () => {
-  const { isDark, services } = useData();
+  const [loading, setLoading] = useState(false);
+
+  const { isDark, services, appointments } = useData();
+
+  const toastClasses =
+    "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { setAppointment } = useGetPageData();
 
   const loaders = [
     <Tesseract isDark={isDark} size={60} thickness={15} speed={10} />,
@@ -55,7 +79,7 @@ const Contact: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const form = event.currentTarget;
@@ -71,13 +95,100 @@ const Contact: React.FC = () => {
         return;
       }
 
-      const formData = new FormData(form);
-      const values = Object.fromEntries(formData.entries());
+      setLoading(true);
 
-      console.log(values);
+      const formData = new FormData(form);
+      const values = Object.fromEntries(
+        formData.entries(),
+      ) as unknown as AppointmentType;
+
+      const selectedService = services.filter(
+        (service) => service.slug === values.service,
+      );
+
+      const data = {
+        ...values,
+        service: selectedService[0].title,
+        isConfirmed: false,
+        isBlocked: false,
+        toDate: "",
+      };
+
+      try {
+        const notifyUser = await render(<NotifyUser {...data} />);
+        const notifyAdmin = await render(<NotifyAdmin {...data} />);
+
+        await emailjs.send(
+          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+          {
+            to_email: data.email,
+            from_email: "4d.detailing.ln@gmail.com",
+            subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
+            email_template: notifyUser,
+            name: "4D Detailing",
+          },
+          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+        );
+
+        await emailjs.send(
+          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+          {
+            to_email: "4d.detailing.ln@gmail.com",
+            from_email: data.email,
+            subject: `Novi upit za termin: ${data.service}`,
+            email_template: notifyAdmin,
+            name: data.fullName,
+          },
+          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+        );
+
+        await setAppointment(data);
+
+        toast.success("Vaš upit je uspješno poslan!", {
+          className: toastClasses,
+          icon: (
+            <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
+          ),
+          progressClassName: "bg-green-400! dark:bg-green-900!",
+        });
+      } catch (err: unknown) {
+        toast.error(
+          err instanceof Error ? err.message : "Something went wrong",
+          {
+            className: toastClasses,
+            icon: (
+              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
+            ),
+            progressClassName: "bg-red-400! dark:bg-red-900!",
+          },
+        );
+      } finally {
+        setLoading(false);
+      }
     },
     [],
   );
+
+  const parseDate = useCallback((date: string) => {
+    const [day, month, year] = date.split(".").map(Number);
+    return new Date(year, month - 1, day);
+  }, []);
+
+  const toMidnight = (date: Date) =>
+    new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  const blockDates = useCallback((date: string) => {
+    const target = toMidnight(parseDate(date));
+
+    return appointments.some(({ dateFrom, dateTo, isBlocked }) => {
+      if (!isBlocked) return false;
+      const from = toMidnight(parseDate(dateFrom as string));
+      const to = toMidnight(parseDate(dateTo as string));
+      return target >= from && target <= to;
+    });
+  }, []);
 
   const handleSelectChange = (value: string | string[]) => {
     setSelectValue(value);
@@ -361,7 +472,7 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="carType"
+                  htmlFor="vehicle"
                   className="text-dark dark:text-light font-light"
                 >
                   Model vozila *
@@ -371,8 +482,8 @@ const Contact: React.FC = () => {
                   type="text"
                   className="w-full scroll-mt-40"
                   placeholder="Mazda 3 Hatchback 2023"
-                  id="carType"
-                  name="carType"
+                  id="vehicle"
+                  name="vehicle"
                 />
               </fieldset>
             </Reveal>
@@ -393,6 +504,7 @@ const Contact: React.FC = () => {
                   id="date"
                   min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
                   name="date"
+                  isDateDisabled={blockDates}
                 />
               </fieldset>
             </Reveal>
@@ -404,7 +516,7 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="message"
+                  htmlFor="remark"
                   className="text-dark dark:text-light font-light"
                 >
                   Napomena / dodatni zahtjevi
@@ -412,8 +524,8 @@ const Contact: React.FC = () => {
                 <Textarea
                   className="w-full"
                   placeholder="Navedite dodatne detalje ili posebne zahtjeve..."
-                  id="message"
-                  name="message"
+                  id="remark"
+                  name="remark"
                 />
               </fieldset>
             </Reveal>
@@ -424,7 +536,9 @@ const Contact: React.FC = () => {
               className="self-end"
               delay={1000}
             >
-              <Button variant="primary">Pošalji upit</Button>
+              <Button variant="primary" loading={loading}>
+                Pošalji upit
+              </Button>
             </Reveal>
           </form>
         </div>
