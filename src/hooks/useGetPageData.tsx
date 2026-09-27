@@ -2,12 +2,7 @@ import { useState, useCallback } from "react";
 
 import { firebaseApi } from "../services/api/firebaseApi";
 
-import {
-  mockServices,
-  mockReviews,
-  mockAppointments,
-  MOCK_CONFIG,
-} from "../services/mock/mockData";
+import { MOCK_CONFIG } from "../services/mock/mockConfig";
 
 import {
   type ServiceDataType,
@@ -34,6 +29,8 @@ type useGetPageDataType = (useMockData?: boolean) => {
   >;
 };
 
+const loadMockData = () => import("../services/mock/mockData");
+
 export const useGetPageData: useGetPageDataType = (
   useMockData = MOCK_CONFIG.enableMockData,
 ) => {
@@ -47,15 +44,20 @@ export const useGetPageData: useGetPageDataType = (
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockServices }] = await Promise.all([
+          loadMockData(),
+          new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+        ]);
 
         return mockServices;
       }
 
-      return [];
+      const services = await firebaseApi.getData<ServiceDataType>("services");
+
+      return services;
     } catch (err: unknown) {
+      console.error("getService failed: ", err);
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -67,15 +69,29 @@ export const useGetPageData: useGetPageDataType = (
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockAppointments }] = await Promise.all([
+          loadMockData(),
+          new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+        ]);
 
         return mockAppointments;
       }
 
-      return [];
+      const appointments = await firebaseApi.getData<AppointmentType>(
+        "appointments",
+        [
+          {
+            field: "isBlocked",
+            operator: "==",
+            value: true,
+          },
+        ],
+      );
+
+      return appointments;
     } catch (err: unknown) {
+      console.error("getAppointments failed: ", err);
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -87,12 +103,26 @@ export const useGetPageData: useGetPageDataType = (
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockReviews }] = await Promise.all([
+          loadMockData(),
+          new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+        ]);
+
         return mockReviews;
       }
+
+      const reviews = await firebaseApi.getData<ReviewType>("reviews", [
+        {
+          field: "isApproved",
+          operator: "==",
+          value: true,
+        },
+      ]);
+
+      return reviews;
     } catch (err: unknown) {
+      console.error("getReviews failed: ", err);
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -142,7 +172,7 @@ export const useGetPageData: useGetPageDataType = (
 
         await firebaseApi.setData<AppointmentType>("appointments", data);
       } catch (err) {
-        console.error("getPageData failed: ", err);
+        console.error("setAppointment failed: ", err);
         setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
         setLoading(false);
@@ -157,9 +187,11 @@ export const useGetPageData: useGetPageDataType = (
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockServices, mockReviews, mockAppointments }] =
+          await Promise.all([
+            loadMockData(),
+            new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+          ]);
 
         return {
           services: mockServices,
