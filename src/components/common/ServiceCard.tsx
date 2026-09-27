@@ -47,7 +47,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
 
     let bestPrice = Infinity;
 
-    if (!item.discount.lowest.length) return undefined;
+    if (!item.discount.lowest.length) return item.priceFrom.current;
 
     for (const entry of item.discount.lowest) {
       const entryDate = parseDate(entry.date);
@@ -63,8 +63,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
       }
     }
 
-    return bestPrice === Infinity ? undefined : bestPrice;
-  }, [item.discount.lowest]);
+    return bestPrice === Infinity ? item.priceFrom.current : bestPrice;
+  }, [item.discount.lowest, item.priceFrom.current]);
 
   useEffect(() => {
     const getIconSize = () => {
