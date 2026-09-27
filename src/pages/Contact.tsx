@@ -33,6 +33,8 @@ import { useData } from "../context/DataContext";
 
 import { useGetPageData } from "../hooks/useGetPageData";
 
+import { parseDate, toMidnight } from "../utils/date";
+
 import type { AppointmentType } from "../types/data";
 
 const Contact: React.FC = () => {
@@ -171,22 +173,22 @@ const Contact: React.FC = () => {
     [],
   );
 
-  const parseDate = useCallback((date: string) => {
-    const [day, month, year] = date.split(".").map(Number);
-    return new Date(year, month - 1, day);
-  }, []);
+  const blockDates = useCallback((value: string) => {
+    const date = parseDate(value);
 
-  const toMidnight = (date: Date) =>
-    new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    if (!date) return false;
 
-  const blockDates = useCallback((date: string) => {
-    const target = toMidnight(parseDate(date));
+    const target = toMidnight(date);
 
     return appointments.some(({ dateFrom, dateTo, isBlocked }) => {
       if (!isBlocked) return false;
-      const from = toMidnight(parseDate(dateFrom as string));
-      const to = toMidnight(parseDate(dateTo as string));
-      return target >= from && target <= to;
+
+      const from = parseDate(dateFrom as string);
+      const to = parseDate(dateTo as string);
+
+      if (!from || !to) return false;
+
+      return target >= toMidnight(from) && target <= toMidnight(to);
     });
   }, []);
 
