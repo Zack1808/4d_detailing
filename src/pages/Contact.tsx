@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
-import { render } from "@react-email/components";
-import emailjs from "@emailjs/browser";
 
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -17,9 +15,6 @@ import Reveal from "../components/layout/Reveal";
 import Tesseract from "../components/animated/Tessaract";
 import Wheel from "../components/animated/Wheel";
 import Polisher from "../components/animated/Polisher";
-
-import NotifyUser from "../components/email/NotifyUser";
-import NotifyAdmin from "../components/email/NotifyAdmin";
 
 import { useData } from "../context/DataContext";
 
@@ -107,34 +102,50 @@ const Contact: React.FC = () => {
       };
 
       try {
-        const notifyUser = await render(<NotifyUser {...data} />);
-        const notifyAdmin = await render(<NotifyAdmin {...data} />);
+        const [
+          { render },
+          { default: emailjs },
+          { default: NotifyUser },
+          { default: NotifyAdmin },
+        ] = await Promise.all([
+          import("@react-email/components"),
+          import("@emailjs/browser"),
+          import("../components/email/NotifyUser"),
+          import("../components/email/NotifyAdmin"),
+        ]);
 
-        await emailjs.send(
-          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-          {
-            to_email: data.email,
-            from_email: "4d.detailing.ln@gmail.com",
-            subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
-            email_template: notifyUser,
-            name: "4D Detailing",
-          },
-          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-        );
+        const [notifyUser, notifyAdmin] = await Promise.all([
+          render(<NotifyUser {...data} />),
+          render(<NotifyAdmin {...data} />),
+        ]);
 
-        await emailjs.send(
-          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-          {
-            to_email: "4d.detailing.ln@gmail.com",
-            from_email: data.email,
-            subject: `Novi upit za termin: ${data.service}`,
-            email_template: notifyAdmin,
-            name: data.fullName,
-          },
-          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-        );
+        await Promise.all([
+          emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+              to_email: data.email,
+              from_email: "4d.detailing.ln@gmail.com",
+              subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
+              email_template: notifyUser,
+              name: "4D Detailing",
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+          ),
+
+          emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+              to_email: "4d.detailing.ln@gmail.com",
+              from_email: data.email,
+              subject: `Novi upit za termin: ${data.service}`,
+              email_template: notifyAdmin,
+              name: data.fullName,
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+          ),
+        ]);
 
         await setAppointment(data);
 
