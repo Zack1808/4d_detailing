@@ -1,16 +1,8 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import {
-  FaEnvelope,
-  FaPhone,
-  FaClock,
-  FaLocationDot,
-  FaCircleCheck,
-  FaCircleXmark,
-} from "react-icons/fa6";
+import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 import { render } from "@react-email/components";
 import emailjs from "@emailjs/browser";
-import { toast } from "react-toastify";
 
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -34,6 +26,7 @@ import { useData } from "../context/DataContext";
 import { useGetPageData } from "../hooks/useGetPageData";
 
 import { parseDate, toMidnight } from "../utils/date";
+import { notifyError, notifySuccess } from "../utils/toast";
 
 import type { AppointmentType } from "../types/data";
 
@@ -41,9 +34,6 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const { isDark, services, appointments } = useData();
-
-  const toastClasses =
-    "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -148,23 +138,10 @@ const Contact: React.FC = () => {
 
         await setAppointment(data);
 
-        toast.success("Vaš upit je uspješno poslan!", {
-          className: toastClasses,
-          icon: (
-            <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
-          ),
-          progressClassName: "bg-green-400! dark:bg-green-900!",
-        });
+        notifySuccess("Vaš upit je uspješno poslan!");
       } catch (err: unknown) {
-        toast.error(
-          err instanceof Error ? err.message : "Something went wrong",
-          {
-            className: toastClasses,
-            icon: (
-              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
-            ),
-            progressClassName: "bg-red-400! dark:bg-red-900!",
-          },
+        notifyError(
+          err instanceof Error ? err.message : "Nešto je pošlo po zlu",
         );
       } finally {
         setLoading(false);

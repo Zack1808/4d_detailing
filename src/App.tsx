@@ -32,7 +32,7 @@ const AppRoutes: React.FC = () => {
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Suspense>
-      <ToastContainer />
+      <ToastContainer autoClose={1000} closeOnClick />
       <Footer />
     </BrowserRouter>
   );

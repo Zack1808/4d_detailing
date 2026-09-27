@@ -5,8 +5,6 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
-import { toast } from "react-toastify";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
@@ -30,9 +28,7 @@ import { useData } from "../context/DataContext";
 import type { ReviewType } from "../types/data";
 
 import { generateAutoWashSchema } from "../utils/schema";
-
-const toastClasses =
-  "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
+import { notifyError, notifySuccess } from "../utils/toast";
 
 const schema = generateAutoWashSchema({
   telephone: "+385-97-758-87163",
@@ -106,32 +102,12 @@ const Home: React.FC = () => {
         const successfull = await setReview(reviewData);
 
         if (successfull) {
-          toast.success("Recenzija uspješno poslana!", {
-            className: toastClasses,
-            icon: (
-              <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
-            ),
-            progressClassName: "bg-green-400! dark:bg-green-900!",
-          });
+          notifySuccess("Recenzija uspješno poslana!");
           setOpenModal(false);
-        } else
-          toast.error(error, {
-            className: toastClasses,
-            icon: (
-              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
-            ),
-            progressClassName: "bg-red-400! dark:bg-red-900!",
-          });
+        } else notifyError(error as string);
       } catch (err) {
-        toast.error(
+        notifyError(
           err instanceof Error ? err.message : "Something went wrong",
-          {
-            className: toastClasses,
-            icon: (
-              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
-            ),
-            progressClassName: "bg-red-400! dark:bg-red-900!",
-          },
         );
       }
     },
