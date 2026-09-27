@@ -23,6 +23,7 @@ type useGetPageDataType = (useMockData?: boolean) => {
   getAppointments: () => Promise<AppointmentType[] | undefined>;
   getReviews: () => Promise<ReviewType[] | undefined>;
   setReview: (review: Omit<ReviewType, "id">) => Promise<boolean | undefined>;
+  setAppointment: (review: Omit<AppointmentType, "id">) => void;
   getPageData: () => Promise<
     | {
         services: ServiceDataType[];
@@ -108,8 +109,6 @@ export const useGetPageData: useGetPageDataType = (
             setTimeout(resolve, MOCK_CONFIG.apiDelay),
           );
 
-          console.log(review);
-
           return true;
         }
 
@@ -122,6 +121,29 @@ export const useGetPageData: useGetPageDataType = (
         console.error("setReview failed: ", err);
         setError(err instanceof Error ? err.message : "Something went wrong");
         return false;
+      } finally {
+        setLoading(false);
+      }
+    },
+    [useMockData],
+  );
+
+  const setAppointment = useCallback(
+    async (data: Omit<AppointmentType, "id">) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        if (useMockData) {
+          await new Promise((resolve) =>
+            setTimeout(resolve, MOCK_CONFIG.apiDelay),
+          );
+        }
+
+        await firebaseApi.setData<AppointmentType>("appointments", data);
+      } catch (err) {
+        console.error("getPageData failed: ", err);
+        setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
         setLoading(false);
       }
@@ -187,5 +209,6 @@ export const useGetPageData: useGetPageDataType = (
     getReviews,
     setReview,
     getPageData,
+    setAppointment,
   };
 };

@@ -27,12 +27,17 @@ import Wheel from "../components/animated/Wheel";
 import Polisher from "../components/animated/Polisher";
 
 import NotifyUser from "../components/email/NotifyUser";
+import NotifyAdmin from "../components/email/NotifyAdmin";
 
 import { useData } from "../context/DataContext";
+
+import { useGetPageData } from "../hooks/useGetPageData";
 
 import type { AppointmentType } from "../types/data";
 
 const Contact: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+
   const { isDark, services, appointments } = useData();
 
   const toastClasses =
@@ -40,6 +45,8 @@ const Contact: React.FC = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { setAppointment } = useGetPageData();
 
   const loaders = [
     <Tesseract isDark={isDark} size={60} thickness={15} speed={10} />,
@@ -88,6 +95,8 @@ const Contact: React.FC = () => {
         return;
       }
 
+      setLoading(true);
+
       const formData = new FormData(form);
       const values = Object.fromEntries(
         formData.entries(),
@@ -102,10 +111,12 @@ const Contact: React.FC = () => {
         service: selectedService[0].title,
         isConfirmed: false,
         isBlocked: false,
+        toDate: "",
       };
 
       try {
-        const html = await render(<NotifyUser {...data} />);
+        const notifyUser = await render(<NotifyUser {...data} />);
+        const notifyAdmin = await render(<NotifyAdmin {...data} />);
 
         await emailjs.send(
           import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
@@ -113,14 +124,29 @@ const Contact: React.FC = () => {
           {
             to_email: data.email,
             from_email: "4d.detailing.ln@gmail.com",
-            subject: `Testni run za mail, usluga ${data.service}`,
-            email_template: html,
+            subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
+            email_template: notifyUser,
+            name: "4D Detailing",
+          },
+          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+        );
+
+        await emailjs.send(
+          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+          {
+            to_email: "4d.detailing.ln@gmail.com",
+            from_email: data.email,
+            subject: `Novi upit za termin: ${data.service}`,
+            email_template: notifyAdmin,
             name: data.fullName,
           },
           import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
         );
 
-        toast.success("Recenzija uspješno poslana!", {
+        await setAppointment(data);
+
+        toast.success("Vaš upit je uspješno poslan!", {
           className: toastClasses,
           icon: (
             <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
@@ -138,6 +164,8 @@ const Contact: React.FC = () => {
             progressClassName: "bg-red-400! dark:bg-red-900!",
           },
         );
+      } finally {
+        setLoading(false);
       }
     },
     [],
@@ -488,7 +516,7 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="message"
+                  htmlFor="remark"
                   className="text-dark dark:text-light font-light"
                 >
                   Napomena / dodatni zahtjevi
@@ -496,8 +524,8 @@ const Contact: React.FC = () => {
                 <Textarea
                   className="w-full"
                   placeholder="Navedite dodatne detalje ili posebne zahtjeve..."
-                  id="message"
-                  name="message"
+                  id="remark"
+                  name="remark"
                 />
               </fieldset>
             </Reveal>
@@ -508,7 +536,9 @@ const Contact: React.FC = () => {
               className="self-end"
               delay={1000}
             >
-              <Button variant="primary">Pošalji upit</Button>
+              <Button variant="primary" loading={loading}>
+                Pošalji upit
+              </Button>
             </Reveal>
           </form>
         </div>
