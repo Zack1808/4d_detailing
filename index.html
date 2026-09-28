@@ -1,60 +1,52 @@
-<!DOCTYPE html>
-<html lang="hr">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="192x192" />
     <link
-      rel="apple-touch-icon"
+      rel="icon"
       type="image/svg+xml"
-      href="/favicon.svg"
-      sizes="192x192"
+      href="/images/logo_dark.svg"
+      media="(prefers-color-scheme: light)"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Profesionalne usluge detailinga vozila, što uključuje premazivanje, poliranje i čišćenje vozila izvana i iznutra"
-    />
-    <meta name="robots" content="index, follow" />
-    <meta
-      name="keywords"
-      content="poliranje vozila, čišćenje vozila izvana, čišćenje vozila iznutra, premazivanje vozila, keramika, vosak, detailing, 4D, 4D detailing, 4d-detailing, 4d-detailing hr, 4d-detailing Luka Novak, 4d-detailing Hrvatska"
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/images/logo_light.svg"
+      media="(prefers-color-scheme: dark)"
     />
 
-    <meta property="og:title" content="4D Detailing" />
-    <meta
-      property="og:description"
-      content="Nudimo usluge detailinga i poliranje vozila"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="preload"
+      href="/fonts/Montserrat-VariableFont_wght.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
-    <meta
-      property="og:image"
-      content="https://4d-detailing.hr/display-image.svg"
+
+    <link
+      rel="preload"
+      as="image"
+      href="/images/logo_dark.svg"
+      media="(prefers-color-scheme: dark)"
+      fetchpriority="high"
     />
-    <title>
-      4D Detailing - profesionalni detailing servis za vašeg limenog ljubimca
-    </title>
+    <link
+      rel="preload"
+      as="image"
+      href="/images/logo_light.svg"
+      media="(prefers-color-scheme: light)"
+      fetchpriority="high"
+    />
+
+    <meta
+      name="description"
+      content="4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici. Luksuz koji si možete priuštiti."
+    />
   </head>
-  <body>
+  <body class="bg-light dark:bg-dark tracking-wide scrollbar-gutter-stable!">
     <div id="root"></div>
-    <div id="modal"></div>
-    <script type="module" src="/src/main.jsx" defer></script>
-    <script type="application/ld+json" defer>
-      {
-        "@context": "https://schema.org",
-        "@type": "AutomotiveBusiness",
-        "currencyAccepted": "EUR",
-        "name": "4D Detailing",
-        "description": "Profesionalne usluge detailinga vozila, što uključuje premazivanje, poliranje i čišćenje vozila izvana i iznutra",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Rakitovec 274",
-          "addressLocality": "Rakitovec",
-          "addressRegion": "Zagrebačka županija",
-          "postalCode": "10419",
-          "addressCountry": "Hrvatska"
-        },
-        "url": "https://4d-detailing.hr",
-        "priceRange": "15€ to 800€"
-      }
-    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
