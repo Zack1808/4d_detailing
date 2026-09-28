@@ -2,12 +2,7 @@ import { useState, useCallback } from "react";
 
 import { firebaseApi } from "../services/api/firebaseApi";
 
-import {
-  mockServices,
-  mockReviews,
-  mockAppointments,
-  MOCK_CONFIG,
-} from "../services/mock/mockData";
+import { MOCK_CONFIG } from "../services/mock/mockConfig";
 
 import {
   type ServiceDataType,
@@ -16,8 +11,6 @@ import {
 } from "../types/data";
 
 type useGetPageDataType = (useMockData?: boolean) => {
-  loading: boolean;
-  pageLoading: boolean;
   error: string | null;
   getServices: () => Promise<ServiceDataType[] | undefined>;
   getAppointments: () => Promise<AppointmentType[] | undefined>;
@@ -34,73 +27,99 @@ type useGetPageDataType = (useMockData?: boolean) => {
   >;
 };
 
+const loadMockData = () => import("../services/mock/mockData");
+
 export const useGetPageData: useGetPageDataType = (
   useMockData = MOCK_CONFIG.enableMockData,
 ) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [pageLoading, setPageLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const getServices = useCallback(async () => {
-    setLoading(true);
     setError(null);
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockServices }] = await Promise.all([
+          loadMockData(),
+          new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+        ]);
 
         return mockServices;
       }
 
-      return [];
+      const services = await firebaseApi.getData<ServiceDataType>("services");
+
+      return services;
     } catch (err: unknown) {
+      console.error("getService failed: ", err);
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setLoading(false);
     }
   }, [useMockData]);
 
   const getAppointments = useCallback(async () => {
-    setLoading(true);
     setError(null);
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockAppointments }] = await Promise.all([
+          loadMockData(),
+          new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+        ]);
 
         return mockAppointments;
       }
 
-      return [];
+      const appointments = await firebaseApi.getData<AppointmentType>(
+        "appointments",
+        [
+          {
+            field: "isBlocked",
+            operator: "==",
+            value: true,
+          },
+        ],
+      );
+
+      return appointments;
     } catch (err: unknown) {
+      console.error("getAppointments failed: ", err);
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setLoading(false);
     }
   }, [useMockData]);
 
   const getReviews = useCallback(async () => {
-    setLoading(true);
     setError(null);
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockReviews }] = await Promise.all([
+          loadMockData(),
+          new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+        ]);
+
         return mockReviews;
       }
+
+      const reviews = await firebaseApi.getData<ReviewType>("reviews", [
+        {
+          field: "isApproved",
+          operator: "==",
+          value: true,
+        },
+      ]);
+
+      return reviews;
     } catch (err: unknown) {
+      console.error("getReviews failed: ", err);
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setLoading(false);
     }
   }, [useMockData]);
 
   const setReview = useCallback(
     async (review: Omit<ReviewType, "id">) => {
-      setLoading(true);
       setError(null);
 
       try {
@@ -119,10 +138,9 @@ export const useGetPageData: useGetPageDataType = (
         return false;
       } catch (err: unknown) {
         console.error("setReview failed: ", err);
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
         return false;
       } finally {
-        setLoading(false);
       }
     },
     [useMockData],
@@ -130,7 +148,6 @@ export const useGetPageData: useGetPageDataType = (
 
   const setAppointment = useCallback(
     async (data: Omit<AppointmentType, "id">) => {
-      setLoading(true);
       setError(null);
 
       try {
@@ -142,24 +159,24 @@ export const useGetPageData: useGetPageDataType = (
 
         await firebaseApi.setData<AppointmentType>("appointments", data);
       } catch (err) {
-        console.error("getPageData failed: ", err);
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        console.error("setAppointment failed: ", err);
+        setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
       } finally {
-        setLoading(false);
       }
     },
     [useMockData],
   );
 
   const getPageData = useCallback(async () => {
-    setPageLoading(true);
     setError(null);
 
     try {
       if (useMockData) {
-        await new Promise((resolve) =>
-          setTimeout(resolve, MOCK_CONFIG.apiDelay),
-        );
+        const [{ mockServices, mockReviews, mockAppointments }] =
+          await Promise.all([
+            loadMockData(),
+            new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
+          ]);
 
         return {
           services: mockServices,
@@ -194,15 +211,12 @@ export const useGetPageData: useGetPageDataType = (
       };
     } catch (err: unknown) {
       console.error("getPageData failed: ", err);
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setPageLoading(false);
     }
   }, [useMockData]);
 
   return {
-    loading,
-    pageLoading,
     error,
     getServices,
     getAppointments,

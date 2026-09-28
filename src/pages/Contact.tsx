@@ -1,16 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import {
-  FaEnvelope,
-  FaPhone,
-  FaClock,
-  FaLocationDot,
-  FaCircleCheck,
-  FaCircleXmark,
-} from "react-icons/fa6";
+import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
-import { render } from "@react-email/components";
-import emailjs from "@emailjs/browser";
-import { toast } from "react-toastify";
 
 import Button from "../components/common/Button";
 import Input from "../components/common/Input";
@@ -26,12 +16,12 @@ import Tesseract from "../components/animated/Tessaract";
 import Wheel from "../components/animated/Wheel";
 import Polisher from "../components/animated/Polisher";
 
-import NotifyUser from "../components/email/NotifyUser";
-import NotifyAdmin from "../components/email/NotifyAdmin";
-
 import { useData } from "../context/DataContext";
 
 import { useGetPageData } from "../hooks/useGetPageData";
+
+import { parseDate, toMidnight } from "../utils/date";
+import { notifyError, notifySuccess } from "../utils/toast";
 
 import type { AppointmentType } from "../types/data";
 
@@ -39,9 +29,6 @@ const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const { isDark, services, appointments } = useData();
-
-  const toastClasses =
-    "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -115,54 +102,57 @@ const Contact: React.FC = () => {
       };
 
       try {
-        const notifyUser = await render(<NotifyUser {...data} />);
-        const notifyAdmin = await render(<NotifyAdmin {...data} />);
+        const [
+          { render },
+          { default: emailjs },
+          { default: NotifyUser },
+          { default: NotifyAdmin },
+        ] = await Promise.all([
+          import("@react-email/components"),
+          import("@emailjs/browser"),
+          import("../components/email/NotifyUser"),
+          import("../components/email/NotifyAdmin"),
+        ]);
 
-        await emailjs.send(
-          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-          {
-            to_email: data.email,
-            from_email: "4d.detailing.ln@gmail.com",
-            subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
-            email_template: notifyUser,
-            name: "4D Detailing",
-          },
-          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-        );
+        const [notifyUser, notifyAdmin] = await Promise.all([
+          render(<NotifyUser {...data} />),
+          render(<NotifyAdmin {...data} />),
+        ]);
 
-        await emailjs.send(
-          import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-          {
-            to_email: "4d.detailing.ln@gmail.com",
-            from_email: data.email,
-            subject: `Novi upit za termin: ${data.service}`,
-            email_template: notifyAdmin,
-            name: data.fullName,
-          },
-          import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-        );
+        await Promise.all([
+          emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+              to_email: data.email,
+              from_email: "4d.detailing.ln@gmail.com",
+              subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
+              email_template: notifyUser,
+              name: "4D Detailing",
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+          ),
+
+          emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+              to_email: "4d.detailing.ln@gmail.com",
+              from_email: data.email,
+              subject: `Novi upit za termin: ${data.service}`,
+              email_template: notifyAdmin,
+              name: data.fullName,
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+          ),
+        ]);
 
         await setAppointment(data);
 
-        toast.success("Vaš upit je uspješno poslan!", {
-          className: toastClasses,
-          icon: (
-            <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
-          ),
-          progressClassName: "bg-green-400! dark:bg-green-900!",
-        });
+        notifySuccess("Vaš upit je uspješno poslan!");
       } catch (err: unknown) {
-        toast.error(
-          err instanceof Error ? err.message : "Something went wrong",
-          {
-            className: toastClasses,
-            icon: (
-              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
-            ),
-            progressClassName: "bg-red-400! dark:bg-red-900!",
-          },
+        notifyError(
+          err instanceof Error ? err.message : "Nešto je pošlo po zlu",
         );
       } finally {
         setLoading(false);
@@ -171,22 +161,22 @@ const Contact: React.FC = () => {
     [],
   );
 
-  const parseDate = useCallback((date: string) => {
-    const [day, month, year] = date.split(".").map(Number);
-    return new Date(year, month - 1, day);
-  }, []);
+  const blockDates = useCallback((value: string) => {
+    const date = parseDate(value);
 
-  const toMidnight = (date: Date) =>
-    new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    if (!date) return false;
 
-  const blockDates = useCallback((date: string) => {
-    const target = toMidnight(parseDate(date));
+    const target = toMidnight(date);
 
     return appointments.some(({ dateFrom, dateTo, isBlocked }) => {
       if (!isBlocked) return false;
-      const from = toMidnight(parseDate(dateFrom as string));
-      const to = toMidnight(parseDate(dateTo as string));
-      return target >= from && target <= to;
+
+      const from = parseDate(dateFrom as string);
+      const to = parseDate(dateTo as string);
+
+      if (!from || !to) return false;
+
+      return target >= toMidnight(from) && target <= toMidnight(to);
     });
   }, []);
 
@@ -327,6 +317,7 @@ const Contact: React.FC = () => {
                     className="gap-3 px-0!"
                     href="https://maps.app.goo.gl/BM2TStTNWFyDirfr9"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <FaLocationDot className="text-lg" /> Lokacija sjedišta:
                     Rakitovec 274, 10410 Velika Gorica

@@ -35,9 +35,7 @@ export const firebaseApi = {
       ...doc.data(),
     }));
 
-    if (data.length) return data as T[];
-
-    return [];
+    return data as T[];
   },
 
   setData: async <T>(coll: string, data: Omit<T, "id">): Promise<string> => {

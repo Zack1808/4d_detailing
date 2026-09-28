@@ -37,15 +37,17 @@ export const DataProvider = ({ children }: DataProviderType) => {
   const [services, setServices] = useState<ServiceDataType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [appointments, setAppointments] = useState<AppointmentType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [isDark, setIsDark] = useState<boolean>(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
   );
 
-  const { pageLoading, getPageData } = useGetPageData();
+  const { getPageData } = useGetPageData();
 
   useEffect(() => {
     const getData = async () => {
+      setLoading(true);
       try {
         const data = await getPageData();
 
@@ -56,6 +58,8 @@ export const DataProvider = ({ children }: DataProviderType) => {
         setAppointments(data.appointments);
       } catch (err) {
         console.error("getPageData failed:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -79,12 +83,12 @@ export const DataProvider = ({ children }: DataProviderType) => {
   }, []);
 
   useEffect(() => {
-    if (!pageLoading) {
+    if (!loading) {
       const timer = setTimeout(() => setShowLoader(false), 700);
 
       return () => clearTimeout(timer);
     }
-  }, [pageLoading]);
+  }, [loading]);
 
   return (
     <DataContext.Provider value={{ isDark, services, reviews, appointments }}>
@@ -92,13 +96,13 @@ export const DataProvider = ({ children }: DataProviderType) => {
         <PageLoader
           isDark={isDark}
           className={` ${
-            pageLoading
+            loading
               ? "opacity-100"
               : "opacity-0 pointer-events-none transition-opacity duration-700"
           }`}
         />
       )}
-      {!pageLoading && children}
+      {!loading && children}
     </DataContext.Provider>
   );
 };

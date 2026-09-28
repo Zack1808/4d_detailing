@@ -5,6 +5,8 @@ import List from "./List";
 
 import Wheel from "../animated/Wheel";
 
+import { parseDate } from "../../utils/date";
+
 import { type ServiceDataType } from "../../types/data";
 
 import { useData } from "../../context/DataContext";
@@ -45,15 +47,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
 
     let bestPrice = Infinity;
 
-    const parseDate = (date: string) => {
-      const [day, month, year] = date.split(".").map(Number);
-      return new Date(year, month - 1, day).getTime();
-    };
-
-    if (!item.discount.lowest.length) return undefined;
+    if (!item.discount.lowest.length) return item.priceFrom.current;
 
     for (const entry of item.discount.lowest) {
-      const entryTime = parseDate(entry.date);
+      const entryDate = parseDate(entry.date);
+
+      if (!entryDate) continue;
+
+      const entryTime = entryDate.getTime();
       const isWithinWindow =
         now - entryTime <= THIRTY_DAYS_MS && entryTime <= now;
 
@@ -62,8 +63,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
       }
     }
 
-    return bestPrice === Infinity ? undefined : bestPrice;
-  }, [item.discount.lowest]);
+    return bestPrice === Infinity ? item.priceFrom.current : bestPrice;
+  }, [item.discount.lowest, item.priceFrom.current]);
 
   useEffect(() => {
     const getIconSize = () => {

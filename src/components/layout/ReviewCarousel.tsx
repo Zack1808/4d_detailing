@@ -136,7 +136,9 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({ reviews }) => {
         setIsTransitioning(!prefersReducedMotion);
       });
     });
-  }, [itemsPerPage, prefersReducedMotion]);
+  }, [itemsPerPage, prefersReducedMotion, reviews.length]);
+
+  if (!reviews.length) return null;
 
   const translatePercentage = currentIndex * (100 / itemsPerPage);
 

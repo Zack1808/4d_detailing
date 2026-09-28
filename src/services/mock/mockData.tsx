@@ -623,7 +623,4 @@ export const mockAppointments: AppointmentType[] = [
   },
 ];
 
-export const MOCK_CONFIG = {
-  enableMockData: false,
-  apiDelay: 500,
-};
+export { MOCK_CONFIG } from "./mockConfig";
