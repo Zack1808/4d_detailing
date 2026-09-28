@@ -150,6 +150,7 @@ const Contact: React.FC = () => {
         await setAppointment(data);
 
         notifySuccess("Vaš upit je uspješno poslan!");
+        form.reset();
       } catch (err: unknown) {
         notifyError(
           err instanceof Error ? err.message : "Nešto je pošlo po zlu",
@@ -486,15 +487,15 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="fromDate"
+                  htmlFor="dateFrom"
                   className="text-dark dark:text-light font-light"
                 >
                   Željeni termin
                 </label>
                 <DatePicker
-                  id="fromDate"
+                  id="dateFrom"
                   min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
-                  name="date"
+                  name="dateFrom"
                   isDateDisabled={blockDates}
                 />
               </fieldset>

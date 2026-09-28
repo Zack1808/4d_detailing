@@ -133,7 +133,7 @@ const Footer: React.FC = () => {
           <FaCopyright className="text-lg font-light mr-2" />{" "}
           <span>
             2024 - {new Date().getFullYear()}{" "}
-            <b className="font-semibold">4D Detailing</b>.
+            <b className="font-semibold">4D Detailing</b>.{" "}
             <br className="lg:hidden block" />
             Sva prava pridržana.
           </span>

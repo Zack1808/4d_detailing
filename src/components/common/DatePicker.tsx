@@ -198,6 +198,37 @@ const DatePicker: React.FC<DatePickerProps> = ({
   const dayRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const calendarId = useId();
 
+  const handleReset = () => {
+    const initial = defaultValue;
+    const parsed = parseDate(initial);
+
+    if (!isControlled) {
+      setInternalValue(initial);
+    }
+
+    setInputValue(formatDisplayDate(initial));
+    setFocusedDate(initial || getTodayString());
+    setViewDate(parsed ? startOfMonth(parsed) : startOfMonth(new Date()));
+    setIsOpen(false);
+
+    onChange?.(initial);
+  };
+
+  const handleResetRef = useRef(handleReset);
+  handleResetRef.current = handleReset;
+
+  useEffect(() => {
+    const form = inputRef.current?.form;
+
+    if (!form) return;
+
+    const listener = () => handleResetRef.current();
+
+    form.addEventListener("reset", listener);
+
+    return () => form.removeEventListener("reset", listener);
+  }, []);
+
   const checkSpace = useCallback(() => {
     if (!containerRef.current || !calendarRef.current) return;
 

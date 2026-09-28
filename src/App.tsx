@@ -35,7 +35,7 @@ const AppRoutes: React.FC = () => {
         </Routes>
       </Suspense>
       <GoogleAnalytics />
-      <ToastContainer autoClose={1000} closeOnClick />
+      <ToastContainer autoClose={2500} closeOnClick />
       <Footer />
     </BrowserRouter>
   );
