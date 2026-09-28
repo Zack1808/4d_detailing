@@ -84,20 +84,20 @@ const Button: React.FC<ButtonProps> = ({
   if ("to" in rest)
     return (
       <Link className={classNames} {...rest}>
-        {children} {loading && renderLoader()}
+        {children} {renderLoader()}
       </Link>
     );
 
   if ("href" in rest)
     return (
       <a className={classNames} {...rest}>
-        {children} {loading && renderLoader()}
+        {children} {renderLoader()}
       </a>
     );
 
   return (
     <button className={classNames} {...(rest as RegularButtonProps)}>
-      {children} {loading && renderLoader()}
+      {children} {renderLoader()}
     </button>
   );
 };

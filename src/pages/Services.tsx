@@ -18,11 +18,7 @@ import { useData } from "../context/DataContext";
 import { generateServicesSchema } from "../utils/schema";
 
 type Category =
-  | "all"
-  | "interijer"
-  | "eksterijer"
-  | "poliranje_i_zastita"
-  | "posebni_paketi";
+  "all" | "interijer" | "eksterijer" | "poliranje_i_zastita" | "posebni_paketi";
 
 const SORTING_OPTIONS = [
   { value: "popularno", label: "Popularno" },
@@ -124,13 +120,14 @@ const Services: React.FC = () => {
           case "title":
             return a.title.localeCompare(b.title) * multiplier;
 
-          case "duration":
+          case "duration": {
             const durationA = parseDuration(a.duration);
             const durationB = parseDuration(b.duration);
             return (
               (durationA.min - durationB.min) * multiplier ||
               (durationA.max - durationB.max) * multiplier
             );
+          }
 
           default:
             return 0;

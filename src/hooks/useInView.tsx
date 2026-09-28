@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 export const useInView = (threshold: number = 0.15) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const [isVisibile, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [isInitiallyVisible, setIsInitiallyVisible] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,5 +33,5 @@ export const useInView = (threshold: number = 0.15) => {
     return () => observer.disconnect();
   }, [threshold]);
 
-  return { ref, isVisibile, isInitiallyVisible };
+  return { ref, isVisible, isInitiallyVisible };
 };

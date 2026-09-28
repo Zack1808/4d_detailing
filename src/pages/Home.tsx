@@ -40,10 +40,11 @@ const schema = generateAutoWashSchema({
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [starCount, setStarCount] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { isDark, services, reviews } = useData();
 
-  const { setReview, loading, error } = useGetPageData();
+  const { setReview, error } = useGetPageData();
 
   const heroBackground = [
     <Tesseract
@@ -84,6 +85,7 @@ const Home: React.FC = () => {
   const handleReviewSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      setLoading(true);
 
       try {
         const form = event.currentTarget;
@@ -104,11 +106,13 @@ const Home: React.FC = () => {
         if (successfull) {
           notifySuccess("Recenzija uspješno poslana!");
           setOpenModal(false);
-        } else notifyError(error as string);
+        } else notifyError(error ?? "Nešto je pošlo po zlu");
       } catch (err) {
         notifyError(
-          err instanceof Error ? err.message : "Something went wrong",
+          err instanceof Error ? err.message : "Nešto je pošlo po zlu",
         );
+      } finally {
+        setLoading(false);
       }
     },
     [starCount],

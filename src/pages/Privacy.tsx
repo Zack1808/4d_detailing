@@ -101,6 +101,7 @@ const Privacy: React.FC = () => {
               <a
                 href="https://policies.google.com/technologies/cookies"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="font-semibold underline"
               >
                 službenim Google stranicama

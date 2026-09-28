@@ -75,6 +75,7 @@ const Footer: React.FC = () => {
               className="px-0! text-sm max-w-none w-full lg:max-w-"
               href="https://maps.app.goo.gl/BM2TStTNWFyDirfr9"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <FaLocationDot className="text-lg" />
               Rakitovec 274, 10410 Velika Gorica{" "}
@@ -146,6 +147,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://www.tiktok.com/@4ddetailing?_t=ZN-8sUT8kPvC5e&_r=1"
             target="_blank"
+            rel="noopener noreferrer"
             aria-label="TikTok"
           >
             <FaTiktok className="lg:text-2xl text-lg" />
@@ -157,6 +159,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-"
             href="https://www.instagram.com/4dcardetailing?igsh=MTAzYnVsa2U0bmY5MA=="
             target="_blank"
+            rel="noopener noreferrer"
             aria-label="Instagram"
           >
             <FaInstagram className="lg:text-2xl text-lg" />
@@ -168,6 +171,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://www.facebook.com/p/4D-Detailing-61573426065582/"
             target="_blank"
+            rel="noopener noreferrer"
             aria-label="Facebook"
           >
             <FaSquareFacebook className="lg:text-2xl text-lg" />
@@ -179,6 +183,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://wa.me/+385977588716"
             target="_blank"
+            rel="noopener noreferrer"
             aria-label="Whatsapp"
           >
             <FaWhatsapp className="lg:text-2xl text-lg" />
@@ -190,6 +195,7 @@ const Footer: React.FC = () => {
             className="px-0! text-sm max-w-none w-full lg:max-w-max"
             href="https://www.youtube.com/@4DDetailing"
             target="_blank"
+            rel="noopener noreferrer"
             aria-label="YouTube"
           >
             <FaYoutube className="lg:text-2xl text-lg" />
@@ -201,6 +207,7 @@ const Footer: React.FC = () => {
           <a
             href="https://jeanpierrenovak.from.hr/"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-500 dark:text-gray-400 font-light"
           >
             Izradio: <b className="font-semibold">JPN</b>

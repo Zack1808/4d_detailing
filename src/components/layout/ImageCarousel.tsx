@@ -51,7 +51,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     );
   }, [images]);
 
-  if (images.length === 0) return null;
+  if (!images.length) return null;
 
   const logicalIndex =
     ((currentIndex % images.length) + images.length) % images.length;

@@ -11,8 +11,6 @@ import {
 } from "../types/data";
 
 type useGetPageDataType = (useMockData?: boolean) => {
-  loading: boolean;
-  pageLoading: boolean;
   error: string | null;
   getServices: () => Promise<ServiceDataType[] | undefined>;
   getAppointments: () => Promise<AppointmentType[] | undefined>;
@@ -34,12 +32,9 @@ const loadMockData = () => import("../services/mock/mockData");
 export const useGetPageData: useGetPageDataType = (
   useMockData = MOCK_CONFIG.enableMockData,
 ) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [pageLoading, setPageLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const getServices = useCallback(async () => {
-    setLoading(true);
     setError(null);
 
     try {
@@ -57,14 +52,12 @@ export const useGetPageData: useGetPageDataType = (
       return services;
     } catch (err: unknown) {
       console.error("getService failed: ", err);
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setLoading(false);
     }
   }, [useMockData]);
 
   const getAppointments = useCallback(async () => {
-    setLoading(true);
     setError(null);
 
     try {
@@ -91,14 +84,12 @@ export const useGetPageData: useGetPageDataType = (
       return appointments;
     } catch (err: unknown) {
       console.error("getAppointments failed: ", err);
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setLoading(false);
     }
   }, [useMockData]);
 
   const getReviews = useCallback(async () => {
-    setLoading(true);
     setError(null);
 
     try {
@@ -122,15 +113,13 @@ export const useGetPageData: useGetPageDataType = (
       return reviews;
     } catch (err: unknown) {
       console.error("getReviews failed: ", err);
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setLoading(false);
     }
   }, [useMockData]);
 
   const setReview = useCallback(
     async (review: Omit<ReviewType, "id">) => {
-      setLoading(true);
       setError(null);
 
       try {
@@ -149,10 +138,9 @@ export const useGetPageData: useGetPageDataType = (
         return false;
       } catch (err: unknown) {
         console.error("setReview failed: ", err);
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
         return false;
       } finally {
-        setLoading(false);
       }
     },
     [useMockData],
@@ -160,7 +148,6 @@ export const useGetPageData: useGetPageDataType = (
 
   const setAppointment = useCallback(
     async (data: Omit<AppointmentType, "id">) => {
-      setLoading(true);
       setError(null);
 
       try {
@@ -173,16 +160,14 @@ export const useGetPageData: useGetPageDataType = (
         await firebaseApi.setData<AppointmentType>("appointments", data);
       } catch (err) {
         console.error("setAppointment failed: ", err);
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
       } finally {
-        setLoading(false);
       }
     },
     [useMockData],
   );
 
   const getPageData = useCallback(async () => {
-    setPageLoading(true);
     setError(null);
 
     try {
@@ -226,15 +211,12 @@ export const useGetPageData: useGetPageDataType = (
       };
     } catch (err: unknown) {
       console.error("getPageData failed: ", err);
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
     } finally {
-      setPageLoading(false);
     }
   }, [useMockData]);
 
   return {
-    loading,
-    pageLoading,
     error,
     getServices,
     getAppointments,

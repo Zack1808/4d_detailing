@@ -317,6 +317,7 @@ const Contact: React.FC = () => {
                     className="gap-3 px-0!"
                     href="https://maps.app.goo.gl/BM2TStTNWFyDirfr9"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <FaLocationDot className="text-lg" /> Lokacija sjedišta:
                     Rakitovec 274, 10410 Velika Gorica
