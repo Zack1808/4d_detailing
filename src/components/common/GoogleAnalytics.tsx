@@ -1,16 +1,23 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 
 import Button from "./Button";
 
 const STORAGE_KEY = "4d_consent";
 const GA_ID = "G-4MMF4065DH";
+const BANNER_ROUTES = ["/", "/usluge", "/kontakt"];
 
 const GoogleAnalytics: React.FC = () => {
+  const { pathname } = useLocation();
+  const canShowBanner = BANNER_ROUTES.includes(pathname);
+
   const [hasConsent, setHasConsent] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!canShowBanner) return;
+
     const stored = localStorage.getItem(STORAGE_KEY);
 
     if (stored !== null) {
@@ -28,7 +35,7 @@ const GoogleAnalytics: React.FC = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [canShowBanner]);
 
   useEffect(() => {
     if (!isOpen) return;
