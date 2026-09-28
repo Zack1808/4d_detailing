@@ -1,7 +1,10 @@
-/*
- X-Content-Type-Options: nosniff
- X-Frame-Options: DENY
- Referrer-Policy: strict-origin-when-cross-origin
- Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+# Place at public/_headers so it lands in the root of the deployed site.
+# HSTS is already sent by Netlify, so it is not repeated here.
+# Hostnames are written out in full on purpose (no * wildcards), so nothing can get mangled when copying.
 
- Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://_.google-analytics.com https://_.googletagmanager.com; connect-src 'self' https://api.emailjs.com https://_.googleapis.com https://_.firebaseio.com wss://_.firebaseio.com https://_.google-analytics.com https://_.analytics.google.com https://_.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://www.google.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://api.emailjs.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
