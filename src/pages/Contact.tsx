@@ -89,13 +89,13 @@ const Contact: React.FC = () => {
         formData.entries(),
       ) as unknown as AppointmentType;
 
-      const selectedService = services.filter(
-        (service) => service.slug === values.service,
+      const selectedService = options.filter(
+        (service) => service.value === values.service,
       );
 
       const data = {
         ...values,
-        service: selectedService[0].title,
+        service: selectedService[0].label,
         isConfirmed: false,
         isBlocked: false,
         toDate: "",
