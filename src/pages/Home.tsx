@@ -324,7 +324,7 @@ const Home: React.FC = () => {
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Želimo profesionalnu njegu vozila približiti što većem broju
                   ljudi i pokazati da kvalitetno održavanje nije nepotreban
-                  trošak, već
+                  trošak, već{" "}
                   <strong className="font-semibold">
                     ulaganje u izgled, očuvanost i vrijednost vašeg automobila.
                   </strong>
