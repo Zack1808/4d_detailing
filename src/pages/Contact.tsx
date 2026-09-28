@@ -486,13 +486,13 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="date"
+                  htmlFor="fromDate"
                   className="text-dark dark:text-light font-light"
                 >
                   Željeni termin
                 </label>
                 <DatePicker
-                  id="date"
+                  id="fromDate"
                   min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
                   name="date"
                   isDateDisabled={blockDates}

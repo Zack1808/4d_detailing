@@ -1,13 +1,7 @@
-# Place this file at public/_headers (Vite / CRA) so it ends up in the root of the deployed site.
-# HSTS is already sent by Netlify, so it is intentionally not repeated here.
-
 /*
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+ X-Content-Type-Options: nosniff
+ X-Frame-Options: DENY
+ Referrer-Policy: strict-origin-when-cross-origin
+ Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
 
-  # STEP 1: report-only. Deploy, open the site, click through every page and submit the form,
-  # then check the browser console for "Content Security Policy" violations and fix the allow-list.
-  # STEP 2: when the console is clean, rename the header to "Content-Security-Policy".
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://api.emailjs.com https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+ Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://_.google-analytics.com https://_.googletagmanager.com; connect-src 'self' https://api.emailjs.com https://_.googleapis.com https://_.firebaseio.com wss://_.firebaseio.com https://_.google-analytics.com https://_.analytics.google.com https://_.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
