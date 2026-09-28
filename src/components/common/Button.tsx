@@ -9,7 +9,6 @@ import { Link, type LinkProps } from "react-router-dom";
 
 const Tesseract = lazy(() => import("../animated/Tessaract"));
 const Wheel = lazy(() => import("../animated/Wheel"));
-const Polisher = lazy(() => import("../animated/Polisher"));
 
 import { useData } from "../../context/DataContext";
 
@@ -55,7 +54,7 @@ const Button: React.FC<ButtonProps> = ({
   const { isDark } = useData();
 
   const [selectLoader] = useState<number>(() => {
-    const randomIndex = Math.floor(Math.random() * 3);
+    const randomIndex = Math.floor(Math.random() * 2);
     return randomIndex;
   });
 
@@ -67,14 +66,6 @@ const Button: React.FC<ButtonProps> = ({
           <Tesseract size={25} isDark={!isDark} speed={3} thickness={15} />
         )}
         {selectLoader === 1 && <Wheel size={25} speed={2} isDark={!isDark} />}
-        {selectLoader === 2 && (
-          <Polisher
-            size={50}
-            speed={7}
-            isDark={!isDark}
-            className=" max-h-min"
-          />
-        )}
       </Suspense>
     );
   };
