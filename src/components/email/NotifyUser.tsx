@@ -31,7 +31,7 @@ const NotifyUser = (props: Omit<AppointmentType, "id">) => {
           fontFamily="Montserrat"
           fallbackFontFamily="Arial"
           webFont={{
-            url: "https://develop--deft-bonbon-4f3314.netlify.app/fonts/Montserrat-VariableFont_wght.woff2",
+            url: "https://4d-detailing.hr/fonts/Montserrat-VariableFont_wght.woff2",
             format: "woff2",
           }}
           fontStyle="normal"
@@ -54,7 +54,7 @@ const NotifyUser = (props: Omit<AppointmentType, "id">) => {
               <Row>
                 <Column width={70}>
                   <Img
-                    src="https://develop--deft-bonbon-4f3314.netlify.app/images/logo_light.svg"
+                    src="https://4d-detailing.hr/images/logo_light.svg"
                     alt="4D Detailing"
                     width="70"
                     height="60"
