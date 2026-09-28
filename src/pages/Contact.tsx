@@ -18,11 +18,22 @@ import Polisher from "../components/animated/Polisher";
 
 import { useData } from "../context/DataContext";
 
+import { useGetPageData } from "../hooks/useGetPageData";
+
+import { parseDate, toMidnight } from "../utils/date";
+import { notifyError, notifySuccess } from "../utils/toast";
+
+import type { AppointmentType } from "../types/data";
+
 const Contact: React.FC = () => {
-  const { isDark, services } = useData();
+  const [loading, setLoading] = useState(false);
+
+  const { isDark, services, appointments } = useData();
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { setAppointment } = useGetPageData();
 
   const loaders = [
     <Tesseract isDark={isDark} size={60} thickness={15} speed={10} />,
@@ -55,7 +66,7 @@ const Contact: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       const form = event.currentTarget;
@@ -71,13 +82,103 @@ const Contact: React.FC = () => {
         return;
       }
 
-      const formData = new FormData(form);
-      const values = Object.fromEntries(formData.entries());
+      setLoading(true);
 
-      console.log(values);
+      const formData = new FormData(form);
+      const values = Object.fromEntries(
+        formData.entries(),
+      ) as unknown as AppointmentType;
+
+      const selectedService = options.filter(
+        (service) => service.value === values.service,
+      );
+
+      const data = {
+        ...values,
+        service: selectedService[0].label,
+        isConfirmed: false,
+        isBlocked: false,
+        toDate: "",
+      };
+
+      try {
+        const [
+          { render },
+          { default: emailjs },
+          { default: NotifyUser },
+          { default: NotifyAdmin },
+        ] = await Promise.all([
+          import("@react-email/components"),
+          import("@emailjs/browser"),
+          import("../components/email/NotifyUser"),
+          import("../components/email/NotifyAdmin"),
+        ]);
+
+        const [notifyUser, notifyAdmin] = await Promise.all([
+          render(<NotifyUser {...data} />),
+          render(<NotifyAdmin {...data} />),
+        ]);
+
+        await Promise.all([
+          emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+              to_email: data.email,
+              from_email: "4d.detailing.ln@gmail.com",
+              subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
+              email_template: notifyUser,
+              name: "4D Detailing",
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+          ),
+
+          emailjs.send(
+            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+            {
+              to_email: "4d.detailing.ln@gmail.com",
+              from_email: data.email,
+              subject: `Novi upit za termin: ${data.service}`,
+              email_template: notifyAdmin,
+              name: data.fullName,
+            },
+            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+          ),
+        ]);
+
+        await setAppointment(data);
+
+        notifySuccess("Vaš upit je uspješno poslan!");
+      } catch (err: unknown) {
+        notifyError(
+          err instanceof Error ? err.message : "Nešto je pošlo po zlu",
+        );
+      } finally {
+        setLoading(false);
+      }
     },
     [],
   );
+
+  const blockDates = useCallback((value: string) => {
+    const date = parseDate(value);
+
+    if (!date) return false;
+
+    const target = toMidnight(date);
+
+    return appointments.some(({ dateFrom, dateTo, isBlocked }) => {
+      if (!isBlocked) return false;
+
+      const from = parseDate(dateFrom as string);
+      const to = parseDate(dateTo as string);
+
+      if (!from || !to) return false;
+
+      return target >= toMidnight(from) && target <= toMidnight(to);
+    });
+  }, []);
 
   const handleSelectChange = (value: string | string[]) => {
     setSelectValue(value);
@@ -216,6 +317,7 @@ const Contact: React.FC = () => {
                     className="gap-3 px-0!"
                     href="https://maps.app.goo.gl/BM2TStTNWFyDirfr9"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <FaLocationDot className="text-lg" /> Lokacija sjedišta:
                     Rakitovec 274, 10410 Velika Gorica
@@ -361,7 +463,7 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="carType"
+                  htmlFor="vehicle"
                   className="text-dark dark:text-light font-light"
                 >
                   Model vozila *
@@ -371,8 +473,8 @@ const Contact: React.FC = () => {
                   type="text"
                   className="w-full scroll-mt-40"
                   placeholder="Mazda 3 Hatchback 2023"
-                  id="carType"
-                  name="carType"
+                  id="vehicle"
+                  name="vehicle"
                 />
               </fieldset>
             </Reveal>
@@ -393,6 +495,7 @@ const Contact: React.FC = () => {
                   id="date"
                   min={`${String(today.getDate()).padStart(2, "0")}.${String(today.getMonth() + 1).padStart(2, "0")}.${today.getFullYear()}`}
                   name="date"
+                  isDateDisabled={blockDates}
                 />
               </fieldset>
             </Reveal>
@@ -404,7 +507,7 @@ const Contact: React.FC = () => {
             >
               <fieldset className="w-full flex flex-col gap-3">
                 <label
-                  htmlFor="message"
+                  htmlFor="remark"
                   className="text-dark dark:text-light font-light"
                 >
                   Napomena / dodatni zahtjevi
@@ -412,8 +515,8 @@ const Contact: React.FC = () => {
                 <Textarea
                   className="w-full"
                   placeholder="Navedite dodatne detalje ili posebne zahtjeve..."
-                  id="message"
-                  name="message"
+                  id="remark"
+                  name="remark"
                 />
               </fieldset>
             </Reveal>
@@ -424,7 +527,9 @@ const Contact: React.FC = () => {
               className="self-end"
               delay={1000}
             >
-              <Button variant="primary">Pošalji upit</Button>
+              <Button variant="primary" loading={loading}>
+                Pošalji upit
+              </Button>
             </Reveal>
           </form>
         </div>

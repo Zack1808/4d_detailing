@@ -103,6 +103,7 @@ const Tesseract = ({
 }: TesseractProps) => {
   const duration = LOOP * speed;
 
+  const svgRef = useRef<SVGSVGElement>(null);
   const auraRef = useRef<SVGGElement>(null);
   const bodyRef = useRef<SVGGElement>(null);
   const edgesRef = useRef<SVGGElement>(null);
@@ -115,12 +116,23 @@ const Tesseract = ({
   const id = useId().replace(/:/g, "");
 
   useEffect(() => {
+    const svg = svgRef.current;
     const aura = auraRef.current;
     const body = bodyRef.current;
     const edges = edgesRef.current;
     const shine = shineRef.current;
 
-    if (!aura || !body || !edges || !shine) {
+    if (!svg || !aura || !body || !edges || !shine) {
+      return;
+    }
+
+    // Skip the animation loop entirely for people who've asked for
+    // reduced motion — the tesseract just renders its resting frame.
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReducedMotion) {
       return;
     }
 
@@ -136,7 +148,9 @@ const Tesseract = ({
       shine.querySelectorAll<SVGPathElement>("path"),
     );
 
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
+    let isVisible = false;
+    let isPageVisible = document.visibilityState === "visible";
 
     const animate = (ms: number) => {
       const phase = (ms % duration) / duration;
@@ -167,15 +181,51 @@ const Tesseract = ({
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animationFrameId = requestAnimationFrame(animate);
+    const start = () => {
+      if (animationFrameId !== null) return;
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const stop = () => {
+      if (animationFrameId === null) return;
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    };
+
+    const syncRunning = () => {
+      if (isVisible && isPageVisible) start();
+      else stop();
+    };
+
+    // Only spend CPU on this while it's actually on screen.
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        syncRunning();
+      },
+      { threshold: 0 },
+    );
+
+    intersectionObserver.observe(svg);
+
+    // ...and only while the tab itself is in the foreground.
+    const handleVisibilityChange = () => {
+      isPageVisible = document.visibilityState === "visible";
+      syncRunning();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      intersectionObserver.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stop();
     };
-  }, []);
+  }, [duration]);
 
   return (
     <svg
+      ref={svgRef}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
       width={size}

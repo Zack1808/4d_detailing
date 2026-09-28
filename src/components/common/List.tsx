@@ -13,7 +13,13 @@ const List: React.FC<ListProps> = ({ list, isDark, inset }) => {
     <ul className={`${inset ? "pl-6" : ""} font-normal flex flex-col gap-3`}>
       {list.map((item, index) => (
         <li key={`${item}-${index}`} className="flex gap-3 items-start">
-          <img src={wheel} alt="" className="w-5 mb-0.5" />
+          <img
+            src={wheel}
+            alt=""
+            width={25}
+            height={25}
+            className="w-5 mb-0.5"
+          />
           {item}
         </li>
       ))}

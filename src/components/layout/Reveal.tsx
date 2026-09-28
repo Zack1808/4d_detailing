@@ -19,7 +19,7 @@ const Reveal: React.FC<RevealProps> = ({
   style,
   delay = 0,
 }) => {
-  const { ref, isVisibile, isInitiallyVisible } = useInView(threshold);
+  const { ref, isVisible, isInitiallyVisible } = useInView(threshold);
 
   return (
     <div
@@ -28,7 +28,7 @@ const Reveal: React.FC<RevealProps> = ({
         ...style,
         transitionDelay: isInitiallyVisible ? `${delay}ms` : "100ms",
       }}
-      className={`transition-all duration-1000 ease-out motion-reduce:transition-opacity! ${isVisibile ? transitionTo : transitionFrom} ${className}`}
+      className={`transition-all duration-1000 ease-out motion-reduce:transition-opacity! ${isVisible ? transitionTo : transitionFrom} ${className}`}
     >
       {children}
     </div>

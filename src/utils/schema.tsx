@@ -8,11 +8,6 @@ export interface BusinessInfo {
   image?: string;
 }
 
-interface BreadcrumbItem {
-  name: string;
-  url: string;
-}
-
 export const generateAutoWashSchema = (business: BusinessInfo) => {
   return {
     "@context": "https://schema.org",
@@ -52,23 +47,10 @@ export const generateServicesSchema = (services: ServiceDataType[]) => {
         name: u.title,
         ...(u.description && { description: u.description }),
       },
-      ...(u.priceFrom && {
-        price: u.priceFrom,
+      ...(u.priceFrom.current && {
+        price: u.priceFrom.current,
         priceCurrency: "EUR",
       }),
-    })),
-  };
-};
-
-export const generateBreadcrumbSchema = (items: BreadcrumbItem[]) => {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: item.url,
     })),
   };
 };

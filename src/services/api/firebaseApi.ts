@@ -1,11 +1,45 @@
-// import { type ServiceDataType, type ReviewType } from "../../types/data";
+import {
+  getDocs,
+  addDoc,
+  collection,
+  query,
+  where,
+  QueryConstraint,
+  type WhereFilterOp,
+} from "firebase/firestore";
 
-// export const firebaseApi = {
-//   getData: async (
-//     documentId: string,
-//   ): Promise<ServiceDataType[] | ReviewType[]> => {
-//     return [];
-//   },
+import { db } from "../../firebaseConfig";
 
-//   addReview: async (data: ReviewType) => {},
-// };
+type FilterCondition = {
+  field: string;
+  operator: WhereFilterOp;
+  value: unknown;
+};
+
+export const firebaseApi = {
+  getData: async <T>(
+    coll: string,
+    filters?: FilterCondition[],
+  ): Promise<T[]> => {
+    const constraints: QueryConstraint[] = (filters ?? []).map((f) =>
+      where(f.field, f.operator, f.value),
+    );
+
+    const q = query(collection(db, coll), ...constraints);
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) return [];
+
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return data as T[];
+  },
+
+  setData: async <T>(coll: string, data: Omit<T, "id">): Promise<string> => {
+    const docRef = await addDoc(collection(db, coll), data);
+    return docRef.id;
+  },
+};

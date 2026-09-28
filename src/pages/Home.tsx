@@ -5,8 +5,6 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
-import { toast } from "react-toastify";
 
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
@@ -30,9 +28,7 @@ import { useData } from "../context/DataContext";
 import type { ReviewType } from "../types/data";
 
 import { generateAutoWashSchema } from "../utils/schema";
-
-const toastClasses =
-  "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
+import { notifyError, notifySuccess } from "../utils/toast";
 
 const schema = generateAutoWashSchema({
   telephone: "+385-97-758-87163",
@@ -44,10 +40,11 @@ const schema = generateAutoWashSchema({
 const Home: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [starCount, setStarCount] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { isDark, services, reviews } = useData();
 
-  const { setReview, loading, error } = useGetPageData();
+  const { setReview, error } = useGetPageData();
 
   const heroBackground = [
     <Tesseract
@@ -88,6 +85,7 @@ const Home: React.FC = () => {
   const handleReviewSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      setLoading(true);
 
       try {
         const form = event.currentTarget;
@@ -95,34 +93,26 @@ const Home: React.FC = () => {
 
         const values = Object.fromEntries(formData.entries());
 
-        const reviewData: ReviewType = {
+        const reviewData: Omit<ReviewType, "id"> = {
           starCount,
           name: String(values.name),
           surname: String(values.surname),
           review: String(values.review),
-          approvedBy: null,
+          isApproved: false,
         };
 
         const successfull = await setReview(reviewData);
 
         if (successfull) {
-          toast.success("Recenzija uspješno poslana!", {
-            className: toastClasses,
-            icon: (
-              <FaCircleCheck className="text-green-400! dark:text-green-900! w-full! h-full!" />
-            ),
-            progressClassName: "bg-green-400! dark:bg-green-900!",
-          });
+          notifySuccess("Recenzija uspješno poslana!");
           setOpenModal(false);
-        } else
-          toast.error(error, {
-            className: toastClasses,
-            icon: (
-              <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
-            ),
-          });
+        } else notifyError(error ?? "Nešto je pošlo po zlu");
       } catch (err) {
-        toast.error(error, { theme: isDark ? "dark" : "light" });
+        notifyError(
+          err instanceof Error ? err.message : "Nešto je pošlo po zlu",
+        );
+      } finally {
+        setLoading(false);
       }
     },
     [starCount],
@@ -334,7 +324,7 @@ const Home: React.FC = () => {
                 <p className="text-dark dark:text-light max-w-[85ch] mt-6 font-light">
                   Želimo profesionalnu njegu vozila približiti što većem broju
                   ljudi i pokazati da kvalitetno održavanje nije nepotreban
-                  trošak, već
+                  trošak, već{" "}
                   <strong className="font-semibold">
                     ulaganje u izgled, očuvanost i vrijednost vašeg automobila.
                   </strong>

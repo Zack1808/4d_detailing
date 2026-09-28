@@ -8,6 +8,8 @@ import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import PageLoader from "./components/layout/PageLoader";
 
+import GoogleAnalytics from "./components/common/GoogleAnalytics";
+
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
@@ -32,7 +34,8 @@ const AppRoutes: React.FC = () => {
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Suspense>
-      <ToastContainer />
+      <GoogleAnalytics />
+      <ToastContainer autoClose={1000} closeOnClick />
       <Footer />
     </BrowserRouter>
   );

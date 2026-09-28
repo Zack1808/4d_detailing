@@ -1,19 +1,32 @@
 type Category = "exterior" | "interior" | "polishing" | "package";
 
+type LowestPriceData = {
+  date: string;
+  priceFrom: number;
+};
+
+type PriceType = {
+  ref: number;
+  current: number;
+};
+
 export type ServiceDataType = {
+  id: string;
   slug: string;
   title: string;
-  priceFrom: number;
-  priceTo?: number;
+  priceFrom: PriceType;
+  priceTo?: PriceType;
   duration: string;
   category: Category;
   services: string[];
-  suv?: number;
-  transporter?: number;
+  suv: PriceType;
+  transporter: PriceType;
   remark?: string;
-  discount?: {
+  discount: {
+    isEnabled: boolean;
     type: "percentage" | "fixed";
     value: number;
+    lowest: LowestPriceData[];
   };
   isFeatured: boolean;
   keywords?: string[];
@@ -21,9 +34,24 @@ export type ServiceDataType = {
 };
 
 export type ReviewType = {
+  id: string;
   starCount: number;
   name: string;
   surname: string;
   review: string;
-  approvedBy: string | null;
+  isApproved: boolean;
+};
+
+export type AppointmentType = {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  service: string;
+  vehicle: string;
+  dateFrom: string;
+  dateTo?: string;
+  remark?: string;
+  isConfirmed: boolean;
+  isBlocked: boolean;
 };

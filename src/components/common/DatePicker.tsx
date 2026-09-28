@@ -8,6 +8,8 @@ import React, {
 } from "react";
 import { FaCalendarAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
+import { parseDate } from "../../utils/date";
+
 type DatePickerProps = {
   value?: string;
   id?: string;
@@ -35,30 +37,6 @@ const pad = (value: number) => String(value).padStart(2, "0");
 
 const toDateString = (year: number, month: number, day: number) =>
   `${pad(day)}.${pad(month)}.${year}`;
-
-const parseDate = (value: string): Date | null => {
-  if (!value) return null;
-
-  const match = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value.trim());
-
-  if (!match) return null;
-
-  const day = Number(match[1]);
-  const month = Number(match[2]);
-  const year = Number(match[3]);
-
-  const date = new Date(year, month - 1, day);
-
-  if (
-    date.getFullYear() !== year ||
-    date.getMonth() !== month - 1 ||
-    date.getDate() !== day
-  ) {
-    return null;
-  }
-
-  return date;
-};
 
 const formatDisplayDate = (value: string) => {
   const date = parseDate(value);

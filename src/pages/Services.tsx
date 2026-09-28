@@ -18,11 +18,7 @@ import { useData } from "../context/DataContext";
 import { generateServicesSchema } from "../utils/schema";
 
 type Category =
-  | "all"
-  | "interijer"
-  | "eksterijer"
-  | "poliranje_i_zastita"
-  | "posebni_paketi";
+  "all" | "interijer" | "eksterijer" | "poliranje_i_zastita" | "posebni_paketi";
 
 const SORTING_OPTIONS = [
   { value: "popularno", label: "Popularno" },
@@ -41,10 +37,10 @@ const CATEGORIES = {
 };
 
 const IMAGES_CAROUSEL = [
-  "/images/service1.jpg",
-  "/images/service2.jpg",
-  "/images/service3.jpg",
-  "/images/service4.jpg",
+  "/images/service1.avif",
+  "/images/service2.avif",
+  "/images/service3.avif",
+  "/images/service4.avif",
 ];
 
 const Services: React.FC = () => {
@@ -116,7 +112,7 @@ const Services: React.FC = () => {
       return [...list].sort((a, b) => {
         switch (key) {
           case "priceFrom":
-            return (a.priceFrom - b.priceFrom) * multiplier;
+            return (a.priceFrom.current - b.priceFrom.current) * multiplier;
 
           case "isFeatured":
             return (Number(a.isFeatured) - Number(b.isFeatured)) * multiplier;
@@ -124,13 +120,14 @@ const Services: React.FC = () => {
           case "title":
             return a.title.localeCompare(b.title) * multiplier;
 
-          case "duration":
+          case "duration": {
             const durationA = parseDuration(a.duration);
             const durationB = parseDuration(b.duration);
             return (
               (durationA.min - durationB.min) * multiplier ||
               (durationA.max - durationB.max) * multiplier
             );
+          }
 
           default:
             return 0;
