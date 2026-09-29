@@ -65,6 +65,14 @@ const Contact: React.FC = () => {
     [services],
   );
 
+  const loadEmail = () =>
+    Promise.all([
+      import("@react-email/components"),
+      import("@emailjs/browser"),
+      import("../components/email/NotifyUser"),
+      import("../components/email/NotifyAdmin"),
+    ]);
+
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -102,17 +110,14 @@ const Contact: React.FC = () => {
       };
 
       try {
+        const savePromise = setAppointment(data);
+
         const [
           { render },
           { default: emailjs },
           { default: NotifyUser },
           { default: NotifyAdmin },
-        ] = await Promise.all([
-          import("@react-email/components"),
-          import("@emailjs/browser"),
-          import("../components/email/NotifyUser"),
-          import("../components/email/NotifyAdmin"),
-        ]);
+        ] = await loadEmail();
 
         const [notifyUser, notifyAdmin] = await Promise.all([
           render(<NotifyUser {...data} />),
@@ -120,6 +125,8 @@ const Contact: React.FC = () => {
         ]);
 
         await Promise.all([
+          savePromise,
+
           emailjs.send(
             import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
             import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
@@ -146,8 +153,6 @@ const Contact: React.FC = () => {
             import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
           ),
         ]);
-
-        await setAppointment(data);
 
         notifySuccess("Vaš upit je uspješno poslan!");
         form.reset();
@@ -208,6 +213,7 @@ const Contact: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    loadEmail();
   }, []);
 
   return (
@@ -528,7 +534,7 @@ const Contact: React.FC = () => {
               className="self-end"
               delay={1000}
             >
-              <Button variant="primary" loading={loading}>
+              <Button variant="primary" loading={loading} disabled={loading}>
                 Pošalji upit
               </Button>
             </Reveal>
