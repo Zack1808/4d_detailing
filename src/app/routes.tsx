@@ -2,12 +2,12 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import SiteLayout from "@/features/site/layout/SiteLayout";
-import Home from "../pages/Home";
-import Services from "../pages/Services";
-import Contact from "../pages/Contact";
-import Privacy from "../pages/Privacy";
-import Terms from "../pages/Terms";
-import Error404 from "../pages/Error404";
+import Home from "@features/site/pages/Home";
+import Services from "@features/site/pages/Services";
+import Contact from "@features/site/pages/Contact";
+import Privacy from "@features/site/pages/Privacy";
+import Terms from "@features/site/pages/Terms";
+import Error404 from "@features/site/pages/Error404";
 
 const AppRoutes: React.FC = () => (
   <Routes>

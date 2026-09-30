@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import AppRoutes from "./routes";
+import AppRoutes from "@/app/routes";
 
-import { DataProvider } from "../context/DataContext";
+import { DataProvider } from "@features/catalog/context/DataContext";
 
 const App: React.FC = () => (
   <BrowserRouter>

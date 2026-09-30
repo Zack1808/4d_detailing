@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
-import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+import Navigation from "@/features/site/components/Navigation";
+import Footer from "@/features/site/components/Footer";
+import GoogleAnalytics from "@/shared/components/GoogleAnalytics";
 
 const SiteLayout: React.FC = () => {
   return (
