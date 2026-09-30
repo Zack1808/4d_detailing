@@ -5,7 +5,7 @@ import SEO from "@shared/components/SEO";
 
 import Container from "@shared/components/Container";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 const EMAIL = "4d.detailing.ln@gmail.com";
 const OWNER = "Luka Novak";
@@ -84,7 +84,7 @@ const MailLink: React.FC = () => (
 );
 
 const Privacy: React.FC = () => {
-  const { isDark } = useData();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     window.scrollTo(0, 0);

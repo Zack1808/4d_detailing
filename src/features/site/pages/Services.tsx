@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { type ServiceDataType } from "../../catalog/types";
+import type { ServiceType } from "../../catalog/types";
 
 import Container from "@shared/components/Container";
 import ImageCarousel from "@features/site/components/ImageCarousel";
@@ -103,8 +103,8 @@ const Services: React.FC = () => {
 
   const sortList = useCallback(
     (
-      list: ServiceDataType[],
-      key: keyof ServiceDataType,
+      list: ServiceType[],
+      key: keyof ServiceType,
       direction: "asc" | "desc",
     ) => {
       const multiplier = direction === "asc" ? 1 : -1;

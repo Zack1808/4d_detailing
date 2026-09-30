@@ -8,10 +8,10 @@ import Reveal from "@shared/components/Reveal";
 
 import Tesseract from "@features/site/components/animated/Tessaract";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 const Error404: React.FC = () => {
-  const { isDark } = useData();
+  const { isDark } = useTheme();
 
   return (
     <main className="h-screen flex items-center justify-center relative overflow-hidden">

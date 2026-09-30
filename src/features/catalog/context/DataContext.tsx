@@ -4,13 +4,14 @@ import PageLoader from "@/shared/components/PageLoader";
 
 import { useGetPageData } from "../hooks/useGetPageData";
 
-import { type ServiceDataType, type ReviewType } from "../types";
+import { useTheme } from "@/shared/context/ThemeContext";
 
-import { type AppointmentType } from "@/features/booking/types";
+import type { ServiceType, ReviewType } from "../types";
+
+import type { AppointmentType } from "@/features/booking/types";
 
 type DataContextType = {
-  isDark: boolean;
-  services: ServiceDataType[];
+  services: ServiceType[];
   reviews: ReviewType[];
   appointments: AppointmentType[];
 };
@@ -32,16 +33,15 @@ export const useData = () => {
 };
 
 export const DataProvider = ({ children }: DataProviderType) => {
-  const [services, setServices] = useState<ServiceDataType[]>([]);
+  const [services, setServices] = useState<ServiceType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [appointments, setAppointments] = useState<AppointmentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
-  const [isDark, setIsDark] = useState<boolean>(
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
-  );
 
   const { getPageData } = useGetPageData();
+
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const getData = async () => {
@@ -65,22 +65,6 @@ export const DataProvider = ({ children }: DataProviderType) => {
   }, []);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const updateTheme = () => {
-      setIsDark(mediaQuery.matches);
-    };
-
-    updateTheme();
-
-    mediaQuery.addEventListener("change", updateTheme);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateTheme);
-    };
-  }, []);
-
-  useEffect(() => {
     if (!loading) {
       const timer = setTimeout(() => setShowLoader(false), 700);
 
@@ -89,7 +73,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
   }, [loading]);
 
   return (
-    <DataContext.Provider value={{ isDark, services, reviews, appointments }}>
+    <DataContext.Provider value={{ services, reviews, appointments }}>
       {showLoader && (
         <PageLoader
           isDark={isDark}

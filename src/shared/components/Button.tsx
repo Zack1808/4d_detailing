@@ -12,7 +12,7 @@ const Tesseract = lazy(
 );
 const Wheel = lazy(() => import("@features/site/components/animated/Wheel"));
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "../context/ThemeContext";
 
 type BaseButtonProps = {
   variant: "primary" | "secondary" | "none";
@@ -53,7 +53,7 @@ const Button: React.FC<ButtonProps> = ({
   loading,
   ...rest
 }) => {
-  const { isDark } = useData();
+  const { isDark } = useTheme();
 
   const [selectLoader] = useState<number>(() => {
     const randomIndex = Math.floor(Math.random() * 2);

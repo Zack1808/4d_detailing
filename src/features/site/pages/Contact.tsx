@@ -17,6 +17,7 @@ import Wheel from "@features/site/components/animated/Wheel";
 import Polisher from "@features/site/components/animated/Polisher";
 
 import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 import { useGetPageData } from "@features/catalog/hooks/useGetPageData";
 
@@ -28,7 +29,8 @@ import type { AppointmentType } from "@features/booking/types";
 const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
-  const { isDark, services, appointments } = useData();
+  const { services, appointments } = useData();
+  const { isDark } = useTheme();
 
   const location = useLocation();
   const navigate = useNavigate();

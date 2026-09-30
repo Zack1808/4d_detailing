@@ -6,7 +6,7 @@ import Button from "@shared/components/Button";
 
 import Wheel from "@features/site/components/animated/Wheel";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 const Navigation: React.FC = () => {
   const [changeBlur, setChangeBlur] = useState<boolean>(false);
@@ -14,7 +14,7 @@ const Navigation: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const { isDark } = useData();
+  const { isDark } = useTheme();
 
   const linkClasses =
     "font-normal text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";

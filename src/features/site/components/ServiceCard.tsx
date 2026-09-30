@@ -7,18 +7,18 @@ import Wheel from "@features/site/components/animated/Wheel";
 
 import { parseDate } from "@shared/utils/date";
 
-import { type ServiceDataType } from "@features/catalog/types";
+import type { ServiceType } from "@features/catalog/types";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 type ServiceCardProps = {
-  item: ServiceDataType;
+  item: ServiceType;
 };
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   const [iconSize, setIconSize] = useState<number>(260);
 
-  const { isDark } = useData();
+  const { isDark } = useTheme();
 
   const discountedPrice = useMemo(() => {
     let priceList = [item.priceFrom.current];

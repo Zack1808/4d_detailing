@@ -1,6 +1,6 @@
-import { type ServiceDataType, type ReviewType } from "@features/catalog/types";
+import type { ServiceType, ReviewType } from "@features/catalog/types";
 
-export const mockServices: ServiceDataType[] = [
+export const mockServices: ServiceType[] = [
   {
     id: "fasdfadsfvcad",
     slug: "vanjsko_pranje_ukljucujuci_naplatke",

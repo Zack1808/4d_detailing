@@ -14,10 +14,10 @@ import {
 
 import Button from "@shared/components/Button";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useTheme } from "@/shared/context/ThemeContext";
 
 const Footer: React.FC = () => {
-  const { isDark } = useData();
+  const { isDark } = useTheme();
 
   const logo = isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg";
 
