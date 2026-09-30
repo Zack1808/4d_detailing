@@ -11,3 +11,8 @@ export type AppointmentType = {
   isConfirmed: boolean;
   isBlocked: boolean;
 };
+
+export type NewAppointmentType = Omit<
+  AppointmentType,
+  "id" | "isConfirmed" | "isBlocked"
+>;

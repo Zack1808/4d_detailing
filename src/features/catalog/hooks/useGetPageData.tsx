@@ -1,20 +1,24 @@
 import { useState, useCallback } from "react";
 
-import { catalogApi } from "@/features/catalog/api/catalogApi";
+import { catalogApi } from "../api/catalogApi";
+import { appointmentApi } from "@/features/booking/api/appointmentsApi";
 
 import { MOCK_CONFIG } from "@/config/mockConfig";
 
-import { type ServiceDataType, type ReviewType } from "../types";
+import type { ServiceType, ReviewType, NewReviewType } from "../types";
 
-import { type AppointmentType } from "@/features/booking/types";
+import type {
+  AppointmentType,
+  NewAppointmentType,
+} from "@/features/booking/types";
 
 type useGetPageDataType = (useMockData?: boolean) => {
   error: string | null;
-  setReview: (review: Omit<ReviewType, "id">) => Promise<boolean | undefined>;
-  setAppointment: (review: Omit<AppointmentType, "id">) => void;
+  setReview: (review: NewReviewType) => Promise<boolean | undefined>;
+  setAppointment: (review: NewAppointmentType) => void;
   getPageData: () => Promise<
     | {
-        services: ServiceDataType[];
+        services: ServiceType[];
         reviews: ReviewType[];
         appointments: AppointmentType[];
       }
@@ -32,7 +36,7 @@ export const useGetPageData: useGetPageDataType = (
   const [error, setError] = useState<string | null>(null);
 
   const setReview = useCallback(
-    async (review: Omit<ReviewType, "id">) => {
+    async (review: NewReviewType) => {
       setError(null);
 
       try {
@@ -44,7 +48,7 @@ export const useGetPageData: useGetPageDataType = (
           return true;
         }
 
-        const id = await catalogApi.setData<ReviewType>("reviews", review);
+        const id = await catalogApi.addReview(review);
 
         if (id) return true;
 
@@ -60,7 +64,7 @@ export const useGetPageData: useGetPageDataType = (
   );
 
   const setAppointment = useCallback(
-    async (data: Omit<AppointmentType, "id">) => {
+    async (data: NewAppointmentType) => {
       setError(null);
 
       try {
@@ -70,7 +74,7 @@ export const useGetPageData: useGetPageDataType = (
           );
         }
 
-        await catalogApi.setData<AppointmentType>("appointments", data);
+        await appointmentApi.addAppointment(data);
       } catch (err) {
         console.error("setAppointment failed: ", err);
         setError(err instanceof Error ? err.message : "Nešto je pošlo po zlu!");
@@ -99,24 +103,9 @@ export const useGetPageData: useGetPageDataType = (
         };
       }
 
-      const services = await catalogApi.getData<ServiceDataType>("services");
-      const reviews = await catalogApi.getData<ReviewType>("reviews", [
-        {
-          field: "isApproved",
-          operator: "==",
-          value: true,
-        },
-      ]);
-      const appointments = await catalogApi.getData<AppointmentType>(
-        "appointments",
-        [
-          {
-            field: "isBlocked",
-            operator: "==",
-            value: true,
-          },
-        ],
-      );
+      const services = await catalogApi.getServices();
+      const reviews = await catalogApi.getReviews();
+      const appointments = await appointmentApi.getAppointments();
 
       return {
         services,

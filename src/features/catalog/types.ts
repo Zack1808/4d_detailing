@@ -10,7 +10,7 @@ type PriceType = {
   current: number;
 };
 
-export type ServiceDataType = {
+export type ServiceType = {
   id: string;
   slug: string;
   title: string;
@@ -41,3 +41,5 @@ export type ReviewType = {
   review: string;
   isApproved: boolean;
 };
+
+export type NewReviewType = Omit<ReviewType, "id" | "isApproved">;
