@@ -15,7 +15,7 @@ type useAuthDataType = (useMockData?: boolean) => {
 };
 
 const MOCK_SESSION_KEY = "mock-admin-session";
-const loadMockData = () => import("@features/catalog/mock/mockData");
+const loadMockData = () => import("@/features/catalog/mock/catalogMock");
 const wait = () =>
   new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay));
 

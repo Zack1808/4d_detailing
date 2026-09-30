@@ -16,7 +16,7 @@ type FilterCondition = {
   value: unknown;
 };
 
-export const firebaseApi = {
+export const catalogApi = {
   getData: async <T>(
     coll: string,
     filters?: FilterCondition[],

@@ -1,7 +1,5 @@
 import { type ServiceDataType, type ReviewType } from "@features/catalog/types";
 
-import { type AppointmentType } from "@/features/booking/types";
-
 export const mockServices: ServiceDataType[] = [
   {
     id: "fasdfadsfvcad",
@@ -591,35 +589,6 @@ export const mockReviews: ReviewType[] = [
       "Prezadovoljan uslugom! Nakon čišćenja auto izgleda 10 godina mlađe. Super brza i iznimno temeljita usluga, a uistinu jednostavan dogovor. Vanjski sjaj je nevjerojatan, dugo već nije tako blistao. Unutrašnjost savršeno čista, a miris kao da je auto nov! Što sigurno nije bilo jednostavno postići s obzirom da se u autu pušilo, a redoviti putnik je zlatni retriver. Cijena i više nego prihvatljiva za kvalitetu usluge. Ja sigurno dolazim opet!",
     isApproved: true,
     id: "sdafsdf",
-  },
-];
-
-export const mockAppointments: AppointmentType[] = [
-  {
-    id: "afadsfadsklfjadskfnadsklfn",
-    fullName: "Test Test",
-    email: "test@gmal.com",
-    phone: "+385950000000",
-    service: "vanjsko_pranje_ukljucujuci_naplatke",
-    vehicle: "Ford Fiesta 2017",
-    dateFrom: "15.10.2026",
-    dateTo: "17.10.2026",
-    remark: "",
-    isConfirmed: true,
-    isBlocked: true,
-  },
-  {
-    id: "afadsfadsklfjadskfnadsklfn",
-    fullName: "Test Test",
-    email: "test@gmal.com",
-    phone: "+385950000000",
-    service: "vanjsko_pranje_ukljucujuci_naplatke",
-    vehicle: "Ford Fiesta 2017",
-    dateFrom: "27.09.2026",
-    dateTo: "27.09.2026",
-    remark: "",
-    isConfirmed: true,
-    isBlocked: true,
   },
 ];
 
