@@ -55,3 +55,8 @@ export type AppointmentType = {
   isConfirmed: boolean;
   isBlocked: boolean;
 };
+
+export type AdminUserType = {
+  uid: string;
+  email: string;
+};

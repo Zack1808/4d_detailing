@@ -1,4 +1,5 @@
 export const MOCK_CONFIG = {
-  enableMockData: false,
+  enableMockData: true,
+  enableMockAuth: true,
   apiDelay: 500,
 };

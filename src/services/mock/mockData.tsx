@@ -556,6 +556,7 @@ export const mockServices: ServiceDataType[] = [
     description: "",
   },
 ];
+
 export const mockReviews: ReviewType[] = [
   {
     name: "Matej",
@@ -594,6 +595,7 @@ export const mockReviews: ReviewType[] = [
     id: "sdafsdf",
   },
 ];
+
 export const mockAppointments: AppointmentType[] = [
   {
     id: "afadsfadsklfjadskfnadsklfn",
@@ -622,5 +624,11 @@ export const mockAppointments: AppointmentType[] = [
     isBlocked: true,
   },
 ];
+
+export const mockAdminCredentials = {
+  uid: "mock-admin-1",
+  email: "admin@test.com",
+  password: "admin123",
+};
 
 export { MOCK_CONFIG } from "./mockConfig";
