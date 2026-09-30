@@ -8,7 +8,7 @@ import {
   type WhereFilterOp,
 } from "firebase/firestore";
 
-import { db } from "../../firebaseConfig";
+import { db } from "../../app/firebaseConfig";
 
 type FilterCondition = {
   field: string;
