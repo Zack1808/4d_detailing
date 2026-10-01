@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import Button from "@/shared/components/Button";
@@ -8,11 +8,17 @@ import Textarea from "@/shared/components/Textarea";
 import DatePicker from "@/shared/components/DatePicker";
 import Reveal from "@/shared/components/Reveal";
 
-import { useSubmitAppointment } from "../hooks/useSubmitAppointment";
+import { useSubmitAppointment } from "@features/booking/hooks/useSubmitAppointment";
+import { useBlockedDates } from "@features/booking/hooks/useBlockedDates";
 
-import { preloadEmail } from "../api/emailService";
+import { parseDate, toMidnight } from "@/shared/utils/date";
 
-import type { NewAppointmentType } from "@features/booking/types";
+import { preloadEmail } from "@features/booking/api/emailService";
+
+import type {
+  BlockedAppointments,
+  NewAppointmentType,
+} from "@features/booking/types";
 import type { ServiceType } from "@/features/catalog/types";
 
 const GENERAL = "general_question";
@@ -20,10 +26,13 @@ const GENERAL = "general_question";
 const AppointmentForm: React.FC<{ services: ServiceType[] }> = ({
   services,
 }) => {
+  const [dates, setDates] = useState<BlockedAppointments[]>([]);
+
   const [params, setParams] = useSearchParams();
   const selectedValue = params.get("usluga") ?? GENERAL;
 
   const { submit, loading } = useSubmitAppointment();
+  const { getBlockedAppointments } = useBlockedDates();
 
   const options = useMemo(
     () => [
@@ -37,6 +46,16 @@ const AppointmentForm: React.FC<{ services: ServiceType[] }> = ({
   );
 
   useEffect(preloadEmail, []);
+
+  useEffect(() => {
+    const getDates = async () => {
+      const result = await getBlockedAppointments();
+
+      setDates(result);
+    };
+
+    getDates();
+  }, []);
 
   const handleSelectChange = (value: string | string[]) => {
     const next = new URLSearchParams(params);
@@ -66,6 +85,23 @@ const AppointmentForm: React.FC<{ services: ServiceType[] }> = ({
       service: service?.label ?? values.service,
     });
     if (ok) form.reset();
+  };
+
+  const blockDates = (value: string) => {
+    const parsed = parseDate(value);
+
+    if (!parsed) return false;
+
+    const target = toMidnight(parsed);
+
+    return dates.some(({ dateFrom, dateTo }) => {
+      const from = parseDate(dateFrom);
+      const to = parseDate(dateTo);
+
+      if (!from || !to) return false;
+
+      return target >= toMidnight(from) && target <= toMidnight(to);
+    });
   };
 
   const today = new Date();
@@ -205,7 +241,7 @@ const AppointmentForm: React.FC<{ services: ServiceType[] }> = ({
             id="dateFrom"
             min={min}
             name="dateFrom"
-            // isDateDisabled={blockDates}
+            isDateDisabled={blockDates}
           />
         </fieldset>
       </Reveal>

@@ -1,8 +1,11 @@
-import { type AppointmentType } from "@/features/booking/types";
+import type {
+  AppointmentType,
+  BlockedAppointments,
+} from "@/features/booking/types";
 
 export const mockAppointments: AppointmentType[] = [
   {
-    id: "afadsfadsklfjadskfnadsklfn",
+    id: "vaserafdasdrfads",
     fullName: "Test Test",
     email: "test@gmal.com",
     phone: "+385950000000",
@@ -26,5 +29,20 @@ export const mockAppointments: AppointmentType[] = [
     remark: "",
     isConfirmed: true,
     isBlocked: true,
+  },
+];
+
+export const mockBlockedAppointments: BlockedAppointments[] = [
+  {
+    id: "asdremnvemvaue",
+    dateFrom: "15.10.2026",
+    dateTo: "17.10.2026",
+    appointmentId: "vaserafdasdrfads",
+  },
+  {
+    id: "fadsfakldfčdsafnds",
+    dateFrom: "20.10.2026",
+    dateTo: "20.10.2026",
+    appointmentId: "afadsfadsklfjadskfnadsklfn",
   },
 ];

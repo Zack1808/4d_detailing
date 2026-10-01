@@ -16,3 +16,10 @@ export type NewAppointmentType = Omit<
   AppointmentType,
   "id" | "isConfirmed" | "isBlocked" | "toDate"
 >;
+
+export type BlockedAppointments = {
+  dateFrom: string;
+  dateTo: string;
+  id: string;
+  appointmentId: string;
+};
