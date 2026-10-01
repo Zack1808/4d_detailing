@@ -27,7 +27,7 @@ import { useGetPageData } from "@features/catalog/hooks/useGetPageData";
 import { useData } from "@features/catalog/context/DataContext";
 import { useTheme } from "@/shared/context/ThemeContext";
 
-import type { ReviewType } from "@features/catalog/types";
+import type { NewReviewType } from "@features/catalog/types";
 
 import { generateAutoWashSchema } from "@features/site/utils/schema";
 import { notifyError, notifySuccess } from "@shared/utils/toast";
@@ -96,12 +96,11 @@ const Home: React.FC = () => {
 
         const values = Object.fromEntries(formData.entries());
 
-        const reviewData: Omit<ReviewType, "id"> = {
+        const reviewData: NewReviewType = {
           starCount,
           name: String(values.name),
           surname: String(values.surname),
           review: String(values.review),
-          isApproved: false,
         };
 
         const successfull = await setReview(reviewData);
