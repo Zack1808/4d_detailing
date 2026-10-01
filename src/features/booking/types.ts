@@ -23,3 +23,5 @@ export type BlockedAppointments = {
   id: string;
   appointmentId: string;
 };
+
+export type NewBlockedAppointment = Omit<BlockedAppointments, "id">;
