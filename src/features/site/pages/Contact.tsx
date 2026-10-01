@@ -13,11 +13,11 @@ import Tesseract from "@features/site/components/animated/Tessaract";
 import Wheel from "@features/site/components/animated/Wheel";
 import Polisher from "@features/site/components/animated/Polisher";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useCatalog } from "@/features/catalog/context/CatalogContext";
 import { useTheme } from "@/shared/context/ThemeContext";
 
 const Contact: React.FC = () => {
-  const { services } = useData();
+  const { services } = useCatalog();
   const { isDark } = useTheme();
 
   const loaders = [

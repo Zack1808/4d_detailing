@@ -13,7 +13,7 @@ import Select from "@shared/components/Select";
 import Button from "@shared/components/Button";
 import SEO from "@shared/components/SEO";
 
-import { useData } from "../../catalog/context/DataContext";
+import { useCatalog } from "../../catalog/context/CatalogContext";
 
 import { generateServicesSchema } from "@features/site/utils/schema";
 
@@ -65,7 +65,7 @@ const Services: React.FC = () => {
   );
   const [category, setCategory] = useState<Category>(initialFilters.category);
 
-  const { services } = useData();
+  const { services } = useCatalog();
 
   const parseDuration = useCallback((duration: string) => {
     const normalized = duration

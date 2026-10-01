@@ -8,22 +8,21 @@ import { useTheme } from "@/shared/context/ThemeContext";
 
 import type { ServiceType, ReviewType } from "../types";
 
-import type { AppointmentType } from "@/features/booking/types";
-
 type DataContextType = {
   services: ServiceType[];
   reviews: ReviewType[];
-  appointments: AppointmentType[];
 };
 
 type DataProviderType = {
   children: React.ReactNode;
 };
 
-const DataContext = React.createContext<DataContextType | undefined>(undefined);
+const CatalogContext = React.createContext<DataContextType | undefined>(
+  undefined,
+);
 
-export const useData = () => {
-  const context = useContext(DataContext);
+export const useCatalog = () => {
+  const context = useContext(CatalogContext);
 
   if (!context) {
     throw new Error("useData must be used within a DataProvider");
@@ -32,10 +31,9 @@ export const useData = () => {
   return context;
 };
 
-export const DataProvider = ({ children }: DataProviderType) => {
+export const CatalogProvider = ({ children }: DataProviderType) => {
   const [services, setServices] = useState<ServiceType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [appointments, setAppointments] = useState<AppointmentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
 
@@ -53,7 +51,6 @@ export const DataProvider = ({ children }: DataProviderType) => {
 
         setServices(data.services);
         setReviews(data.reviews);
-        setAppointments(data.appointments);
       } catch (err) {
         console.error("getPageData failed:", err);
       } finally {
@@ -73,7 +70,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
   }, [loading]);
 
   return (
-    <DataContext.Provider value={{ services, reviews, appointments }}>
+    <CatalogContext.Provider value={{ services, reviews }}>
       {showLoader && (
         <PageLoader
           isDark={isDark}
@@ -85,6 +82,6 @@ export const DataProvider = ({ children }: DataProviderType) => {
         />
       )}
       {!loading && children}
-    </DataContext.Provider>
+    </CatalogContext.Provider>
   );
 };

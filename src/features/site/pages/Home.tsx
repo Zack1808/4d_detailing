@@ -24,7 +24,7 @@ import Wheel from "@features/site/components/animated/Wheel";
 
 import { useGetPageData } from "@features/catalog/hooks/useGetPageData";
 
-import { useData } from "@features/catalog/context/DataContext";
+import { useCatalog } from "@/features/catalog/context/CatalogContext";
 import { useTheme } from "@/shared/context/ThemeContext";
 
 import type { NewReviewType } from "@features/catalog/types";
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
   const [starCount, setStarCount] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { services, reviews } = useData();
+  const { services, reviews } = useCatalog();
   const { isDark } = useTheme();
 
   const { setReview, error } = useGetPageData();

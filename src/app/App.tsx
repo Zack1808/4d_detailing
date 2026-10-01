@@ -4,16 +4,16 @@ import { ToastContainer } from "react-toastify";
 
 import AppRoutes from "@/app/routes";
 
-import { DataProvider } from "@features/catalog/context/DataContext";
+import { CatalogProvider } from "@/features/catalog/context/CatalogContext";
 import { ThemeProvider } from "@/shared/context/ThemeContext";
 
 const App: React.FC = () => (
   <BrowserRouter>
     <ThemeProvider>
-      <DataProvider>
+      <CatalogProvider>
         <AppRoutes />
         <ToastContainer autoClose={2500} closeOnClick />
-      </DataProvider>
+      </CatalogProvider>
     </ThemeProvider>
   </BrowserRouter>
 );
