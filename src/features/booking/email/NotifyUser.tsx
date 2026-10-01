@@ -13,9 +13,9 @@ import {
 } from "@react-email/components";
 import { Tailwind } from "@react-email/tailwind";
 
-import { type AppointmentType } from "@features/booking/types";
+import type { NewAppointmentType } from "@features/booking/types";
 
-const NotifyUser = (props: Omit<AppointmentType, "id">) => {
+const NotifyUser = (props: NewAppointmentType) => {
   const { fullName, phone, email, vehicle, dateFrom, service } = props;
 
   const name = fullName.split(" ");
