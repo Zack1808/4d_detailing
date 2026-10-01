@@ -14,5 +14,5 @@ export type AppointmentType = {
 
 export type NewAppointmentType = Omit<
   AppointmentType,
-  "id" | "isConfirmed" | "isBlocked"
+  "id" | "isConfirmed" | "isBlocked" | "toDate"
 >;

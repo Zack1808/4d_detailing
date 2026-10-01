@@ -106,9 +106,6 @@ const Contact: React.FC = () => {
       const data = {
         ...values,
         service: selectedService[0].label,
-        isConfirmed: false,
-        isBlocked: false,
-        toDate: "",
       };
 
       try {
