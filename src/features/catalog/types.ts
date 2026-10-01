@@ -33,6 +33,8 @@ export type ServiceType = {
   description: string;
 };
 
+export type NewServiceType = Omit<ServiceType, "id">;
+
 export type ReviewType = {
   id: string;
   starCount: number;
