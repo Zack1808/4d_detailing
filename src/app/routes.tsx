@@ -28,19 +28,16 @@ const AppRoutes: React.FC = () => {
           <Route path="/pravila-privatnosti" element={<Privacy />} />
           <Route path="/uvijeti-koristenja" element={<Terms />} />
           <Route path="*" element={<Error404 />} />
-          <Route
-            path="/admin"
-            element={<Navigate to="/admin/login" replace />}
-          />
-          <Route
-            path="/admin/*"
-            element={
-              <Suspense fallback={<PageLoader isDark={isDark} />}>
-                <AdminRoutes />
-              </Suspense>
-            }
-          />
         </Route>
+        <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+        <Route
+          path="/admin/*"
+          element={
+            <Suspense fallback={<PageLoader isDark={isDark} />}>
+              <AdminRoutes />
+            </Suspense>
+          }
+        />
       </Routes>
     </>
   );
