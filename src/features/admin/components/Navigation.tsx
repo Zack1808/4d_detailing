@@ -36,7 +36,7 @@ const Navigation: React.FC = () => {
           Usluge
         </Button>
         <Button
-          to="/admin/reviews"
+          to="/admin/recenzije"
           className="max-w-none flex items-center gap-3"
         >
           <FaStar className="text-2xl" />

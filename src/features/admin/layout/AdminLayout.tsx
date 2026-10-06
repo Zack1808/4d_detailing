@@ -7,6 +7,9 @@ import {
 
 import Login from "@features/admin/pages/Login";
 import Dashboard from "@features/admin/pages/Dashboard";
+import Services from "@features/admin/pages/Services";
+import Reviews from "@features/admin/pages/Reviews";
+import Appointments from "@features/admin/pages/Appointments";
 
 import Navigation from "@features/admin/components/Navigation";
 
@@ -39,6 +42,9 @@ const AdminRoutes = () => {
         <Route element={<ProtectedRoute />}>
           <Route element={<AdminLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="usluge" element={<Services />} />
+            <Route path="recenzije" element={<Reviews />} />
+            <Route path="termini" element={<Appointments />} />
           </Route>
         </Route>
 
