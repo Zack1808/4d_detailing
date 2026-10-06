@@ -5,8 +5,10 @@ import {
   useAdminAuth,
 } from "@/features/auth/context/AuthContext";
 
-import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
+import Login from "@features/admin/pages/Login";
+import Dashboard from "@features/admin/pages/Dashboard";
+
+import Navigation from "@features/admin/components/Navigation";
 
 const ProtectedRoute = () => {
   const { user } = useAdminAuth();
@@ -19,6 +21,15 @@ const ProtectedRoute = () => {
   return <Outlet />;
 };
 
+const AdminLayout = () => {
+  return (
+    <div className="flex w-full">
+      <Navigation />
+      <Outlet />
+    </div>
+  );
+};
+
 const AdminRoutes = () => {
   return (
     <AuthProvider>
@@ -26,7 +37,9 @@ const AdminRoutes = () => {
         <Route path="login" element={<Login />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route element={<AdminLayout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />

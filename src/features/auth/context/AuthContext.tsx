@@ -7,6 +7,7 @@ import { useAuth } from "@features/auth/hooks/useAuth";
 import { useTheme } from "@/shared/context/ThemeContext";
 
 import type { AdminUserType } from "../types";
+import { notifySuccess } from "@/shared/utils/toast";
 
 type AuthContextType = {
   user: AdminUserType | null;
@@ -85,7 +86,10 @@ export const AuthProvider = ({ children }: AuthProviderType) => {
   const signOut = useCallback(async () => {
     const success = await authSignOut();
 
-    if (success) setUser(null);
+    if (success) {
+      notifySuccess("Odjava uspiješna");
+      setUser(null);
+    }
   }, [authSignOut]);
 
   return (

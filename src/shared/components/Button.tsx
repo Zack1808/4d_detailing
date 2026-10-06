@@ -15,7 +15,7 @@ const Wheel = lazy(() => import("@features/site/components/animated/Wheel"));
 import { useTheme } from "../context/ThemeContext";
 
 type BaseButtonProps = {
-  variant: "primary" | "secondary" | "none";
+  variant?: "primary" | "secondary" | "none";
   loading?: boolean;
 };
 
