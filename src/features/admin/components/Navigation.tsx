@@ -15,7 +15,7 @@ const Navigation: React.FC = () => {
   const { signOut } = useAdminAuth();
 
   return (
-    <header className="h-dvh p-6 bg-gray-light/15 dark:bg-gray-dark/40 text-dark dark:text-light flex flex-col gap-15 min-w-74 relative">
+    <header className="h-dvh p-6 bg-gray-light/15 dark:bg-gray-dark/40 text-dark dark:text-light flex flex-col gap-15 min-w-74  sticky top-0">
       <Button to="/admin/dashboard" className="flex gap-6">
         <span className="text-3xl font-semibold">Admin</span>
       </Button>
