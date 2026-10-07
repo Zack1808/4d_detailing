@@ -23,36 +23,39 @@ const Navigation: React.FC = () => {
       <nav className="flex-1 flex flex-col gap-3">
         <Button
           to="/admin/dashboard"
-          className="max-w-none flex items-center gap-3"
+          className="max-w-none flex justify-start items-center gap-3"
         >
-          <FaServer className="text-2xl" />
-          Dashboard
+          <FaServer className="text-xl" />
+          <span className="mt-1">Dashboard</span>
         </Button>
         <Button
           to="/admin/usluge"
-          className="max-w-none flex items-center gap-3"
+          className="max-w-none flex justify-start items-center gap-3"
         >
-          <FaScroll className="text-2xl" />
-          Usluge
+          <FaScroll className="text-xl" />
+          <span className="mt-0.5">Usluge</span>
         </Button>
         <Button
           to="/admin/recenzije"
-          className="max-w-none flex items-center gap-3"
+          className="max-w-none flex justify-start items-center gap-3"
         >
-          <FaStar className="text-2xl" />
-          Recenzije
+          <FaStar className="text-xl" />
+          <span className="mt-1">Recenzije</span>
         </Button>
         <Button
           to="/admin/termini"
-          className="max-w-none flex items-center gap-3"
+          className="max-w-none flex justify-start items-center gap-3"
         >
-          <FaCalendarCheck className="text-2xl" />
-          Termini
+          <FaCalendarCheck className="text-xl" />
+          <span className="mt-1">Termini</span>
         </Button>
 
-        <Button className="mt-auto flex items-center gap-3" onClick={signOut}>
-          <FaPowerOff className="text-2xl" />
-          Odjava
+        <Button
+          className="mt-auto flex justify-start items-center gap-3"
+          onClick={signOut}
+        >
+          <FaPowerOff className="text-xl" />
+          <span className="mt-1">Odjava</span>
         </Button>
       </nav>
     </header>
