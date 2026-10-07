@@ -4,17 +4,18 @@ import SEO from "@/shared/components/SEO";
 
 import Container from "@/shared/components/Container";
 
+import CircularProgress from "../components/CircularProgress";
+
 const Dashboard: React.FC = () => {
   return (
-    <main className="px-9 pt-9">
+    <main className="px-9">
       <SEO title="4D Detailing | Admin Dashboard" />
-      <h1 className="text-dark dark:text-light text-3xl font-semibold">
-        Dobrodošao, Luka
-      </h1>
+
       <Container>
-        <h2 className="text-dark dark:text-light font-medium text-xl">
-          Analitika
-        </h2>
+        <h1 className="text-dark dark:text-light text-3xl font-semibold">
+          Dobrodošao, Luka
+        </h1>
+        <CircularProgress value={365} max={365} label="test" />
       </Container>
 
       <Container>
