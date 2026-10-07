@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
                 </small>
               </div>
               <div className="flex gap-6 border-b border-gray-500 dark:border-gray-400 pb-6">
-                <div className="flex-1 flex flex-col gap-6">
+                <div className="flex-1/5 flex flex-col gap-6">
                   <p className="text-md text-gray-500 dark:text-gray-400 font-light flex flex-col">
                     Posjetitelji
                     <strong className="text-dark dark:text-light font-semibold text-5xl">
