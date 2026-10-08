@@ -5,6 +5,7 @@ import {
   FaStar,
   FaCalendarCheck,
   FaPowerOff,
+  FaArrowTrendUp,
 } from "react-icons/fa6";
 
 import Button from "@/shared/components/Button";
@@ -15,18 +16,25 @@ const Navigation: React.FC = () => {
   const { signOut } = useAdminAuth();
 
   return (
-    <header className="h-dvh p-6 bg-gray-light/15 dark:bg-gray-dark/40 text-dark dark:text-light flex flex-col gap-15 min-w-74  sticky top-0">
+    <header className="xl:h-dvh p-6 bg-gray-light/15 dark:bg-gray-dark/40 text-dark dark:text-light flex flex-col gap-15 min-w-74  sticky top-0">
       <Button to="/admin/dashboard" className="flex gap-6">
         <span className="text-3xl font-semibold">Admin</span>
       </Button>
 
-      <nav className="flex-1 flex flex-col gap-3">
+      <nav className="flex-1 xl:flex hidden flex-col gap-3">
         <Button
           to="/admin/dashboard"
           className="max-w-none flex justify-start items-center gap-3"
         >
           <FaServer className="text-xl" />
           <span className="mt-1">Dashboard</span>
+        </Button>
+        <Button
+          to="/admin/analitika"
+          className="max-w-none flex justify-start items-center gap-3"
+        >
+          <FaArrowTrendUp className="text-xl" />
+          <span className="mt-0.5">Analitika</span>
         </Button>
         <Button
           to="/admin/usluge"
