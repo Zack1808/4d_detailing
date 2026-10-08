@@ -5,7 +5,8 @@ import SEO from "@/shared/components/SEO";
 
 import Container from "@/shared/components/Container";
 
-import CircularProgress from "../components/CircularProgress";
+import CircularProgress from "@features/admin/components/CircularProgress";
+import BarProgress from "@features/admin/components/BarProgress";
 
 const Dashboard: React.FC = () => {
   return (
@@ -69,8 +70,59 @@ const Dashboard: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="flex flex-1 bg-gray-light/15 dark:bg-gray-dark/40 p-3 rounded-xs"></div>
-            <div className="flex flex-1 bg-gray-light/15 dark:bg-gray-dark/40 p-3 rounded-xs"></div>
+            <div className="flex flex-1 flex-col bg-gray-light/15 dark:bg-gray-dark/40 p-6 gap-6 rounded-xs">
+              <div className="flex flex-1 items-baseline justify-between gap-3">
+                <h2 className="text-dark dark:text-light text-2xl">
+                  Pregledi po stranicama
+                </h2>
+
+                <small className="text-gray-500 dark:text-gray-400">
+                  Zadnjih 30 dana
+                </small>
+              </div>
+              <div className="flex flex-col justify-between h-full gap-3">
+                <BarProgress max={365} value={182} label="početna">
+                  <div className="flex-1 flex justify-between mb-1 text-xs">
+                    <p>/</p>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      182 pregleda
+                    </p>
+                  </div>
+                </BarProgress>
+                <BarProgress max={365} value={102} label="početna">
+                  <div className="flex-1 flex justify-between mb-1 text-xs">
+                    <p>/usluge</p>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      102 pregleda
+                    </p>
+                  </div>
+                </BarProgress>
+                <BarProgress max={365} value={58} label="početna">
+                  <div className="flex-1 flex justify-between mb-1 text-xs">
+                    <p>/kontakt</p>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      58 pregleda
+                    </p>
+                  </div>
+                </BarProgress>
+                <BarProgress max={365} value={12} label="početna">
+                  <div className="flex-1 flex justify-between mb-1 text-xs">
+                    <p>/pravila-privatnosti</p>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      12 pregleda
+                    </p>
+                  </div>
+                </BarProgress>
+                <BarProgress max={365} value={11} label="početna">
+                  <div className="flex-1 flex justify-between mb-1 text-xs">
+                    <p>/uvijeti-koristenja</p>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      11 pregleda
+                    </p>
+                  </div>
+                </BarProgress>
+              </div>
+            </div>
           </div>
         </div>
       </Container>

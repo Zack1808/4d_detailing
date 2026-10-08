@@ -61,7 +61,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [percent, duration]);
 
   const offset = circumference * (1 - displayed / 100);
 
