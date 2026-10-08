@@ -71,7 +71,7 @@ const BarProgress: React.FC<BarProgress> = ({
         aria-valuemax={max}
         aria-valuenow={clamped}
         aria-valuetext={valueText ?? `${Math.round(percent)}%`}
-        className="h-(--progress-height,0.75rem) w-full overflow-hidden rounded-full bg-dark/20 dark:bg-light/20"
+        className="h-(--progress-height,0.5rem) w-full overflow-hidden rounded-full bg-dark/20 dark:bg-light/20"
       >
         <div
           className="h-full rounded-full bg-dark dark:bg-light"
