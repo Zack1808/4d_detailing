@@ -14,18 +14,21 @@ const Dashboard: React.FC = () => {
     <main className="px-9 flex-1">
       <SEO title="4D Detailing | Admin Dashboard" />
 
-      <Container>
-        <h1 className="text-dark dark:text-light text-3xl font-semibold">
+      <Container className="pb-0!">
+        <h1 className="text-dark dark:text-light text-4xl font-semibold">
           Dobrodošao, Luka
         </h1>
       </Container>
 
-      <Container>
+      <Container className="pb-0!">
+        <h2 className="text-dark dark:text-light font-semibold text-2xl">
+          Analitika
+        </h2>
         <div className="flex flex-col w-full gap-6">
           <div className="flex w-full lg:flex-row flex-col gap-3">
             <div className="flex flex-1 bg-gray-light/15 dark:bg-gray-dark/40 p-6 rounded-xs gap-6 flex-col">
               <div className="flex flex-1 items-baseline justify-between gap-3">
-                <h2 className="text-dark dark:text-light text-2xl">Pregledi</h2>
+                <h3 className="text-dark dark:text-light text-xl">Pregledi</h3>
 
                 <small className="text-gray-500 dark:text-gray-400">
                   Zadnjih 30 dana
@@ -74,9 +77,9 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="flex flex-1 flex-col bg-gray-light/15 dark:bg-gray-dark/40 p-6 gap-6 rounded-xs">
               <div className="flex flex-1 items-baseline justify-between gap-3">
-                <h2 className="text-dark dark:text-light text-2xl">
+                <h3 className="text-dark dark:text-light text-xl">
                   Pregledi po stranicama
-                </h2>
+                </h3>
 
                 <small className="text-gray-500 dark:text-gray-400">
                   Zadnjih 30 dana
@@ -164,8 +167,8 @@ const Dashboard: React.FC = () => {
                   </div>
                 </BarProgress>
               </div>
-              <div className="flex gap-3 border-t border-gray-500 dark:border-gray-400 pt-5 mt-auto justify-end">
-                <Button to="/admin/analitika" className="p-0!">
+              <div className="flex gap-3 border-t border-gray-500 dark:border-gray-400 pt-6 mt-auto justify-end">
+                <Button to="/admin/analitika" className="p-0! text-sm!">
                   Vidi više <FaArrowRight />
                 </Button>
               </div>
@@ -174,19 +177,19 @@ const Dashboard: React.FC = () => {
         </div>
       </Container>
 
-      <Container>
+      <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
           Usluge
         </h2>
       </Container>
 
-      <Container>
+      <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
           Recenzije
         </h2>
       </Container>
 
-      <Container>
+      <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
           Termini
         </h2>
