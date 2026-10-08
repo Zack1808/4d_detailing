@@ -11,7 +11,7 @@ import BarProgress from "@features/admin/components/BarProgress";
 
 const Dashboard: React.FC = () => {
   return (
-    <main className="px-9 flex-1">
+    <main className="md:px-9 flex-1">
       <SEO title="4D Detailing | Admin Dashboard" />
 
       <Container className="pb-0!">
@@ -26,8 +26,8 @@ const Dashboard: React.FC = () => {
         </h2>
         <div className="flex flex-col w-full gap-6">
           <div className="flex w-full lg:flex-row flex-col gap-3">
-            <div className="flex flex-1 bg-gray-light/15 dark:bg-gray-dark/40 p-6 rounded-xs gap-6 flex-col">
-              <div className="flex flex-1 items-baseline justify-between gap-3">
+            <div className="flex flex-1 bg-gray-light/15 dark:bg-gray-dark/40 p-6 rounded-xs gap-6 flex-col justify-between">
+              <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-dark dark:text-light text-xl">Pregledi</h3>
 
                 <small className="text-gray-500 dark:text-gray-400">
@@ -62,7 +62,7 @@ const Dashboard: React.FC = () => {
                   </span>
                 </CircularProgress>
               </div>
-              <div className="flex gap-3 border-t border-gray-500 dark:border-gray-400 pt-6 mt-auto">
+              <div className="flex gap-3 border-t border-gray-500 dark:border-gray-400 pt-6 ">
                 <p className="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-1">
                   <span className="p-1.5 rounded-full bg-dark dark:bg-light aspect-square" />
                   Novi posjetitelji:{" "}
