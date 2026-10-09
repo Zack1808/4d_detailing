@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 
-import { useGetPageData } from "@/features/catalog/hooks/useGetPageData";
+import { useServices } from "@/features/catalog/hooks/useServices";
 
 import type { ServiceType } from "@/features/catalog/types";
 
 type AdminServiceContextType = {
   services: ServiceType[];
+  loading: boolean;
 };
 
 type AdminServiceProviderProps = {
@@ -29,5 +30,33 @@ export const useAdminService = () => {
 export const AdminServiceProvider = ({
   children,
 }: AdminServiceProviderProps) => {
-  const [service, setService] = useState<ServiceType[]>([]);
+  const [services, setServices] = useState<ServiceType[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const { getServices } = useServices();
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      try {
+        const data = await getServices();
+
+        if (data === undefined) return;
+
+        setServices(data);
+      } catch (err: unknown) {
+        console.error("getPageData failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, []);
+
+  return (
+    <AdminServiceContext.Provider value={{ services, loading }}>
+      {children}
+    </AdminServiceContext.Provider>
+  );
 };

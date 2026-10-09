@@ -14,6 +14,8 @@ import Analytics from "../pages/Analytics";
 
 import Navigation from "@features/admin/components/Navigation";
 
+import { AdminServiceProvider } from "../context/ServiceContext";
+
 const ProtectedRoute = () => {
   const { user } = useAdminAuth();
   const location = useLocation();
@@ -28,8 +30,10 @@ const ProtectedRoute = () => {
 const AdminLayout = () => {
   return (
     <div className="flex xl:flex-row flex-col w-full">
-      <Navigation />
-      <Outlet />
+      <AdminServiceProvider>
+        <Navigation />
+        <Outlet />
+      </AdminServiceProvider>
     </div>
   );
 };
