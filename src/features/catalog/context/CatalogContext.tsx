@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import PageLoader from "@/shared/components/PageLoader";
+import SEO, { type SEOProps } from "@/shared/components/SEO";
 
 import { useGetPageData } from "../hooks/useGetPageData";
 
@@ -29,6 +31,33 @@ export const useCatalog = () => {
   }
 
   return context;
+};
+
+const CANONICAL: Record<string, SEOProps> = {
+  "/": {
+    title:
+      "4D Detailing Velika Gorica – Profesionalno čišćenje i poliranje vozila",
+    description:
+      "4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici.",
+    canonical: "https://4d-detailing.hr/",
+  },
+  "/usluge": {
+    title:
+      "Usluge Detailinga – Pranje, Poliranje i Zaštita Vozila | 4D Detailing",
+    canonical: "https://4d-detailing.hr/usluge",
+  },
+  "/kontakt": {
+    title: "Kontakt | 4D Detailing Velika Gorica",
+    canonical: "https://4d-detailing.hr/kontakt",
+  },
+  "/uvijeti-koristenja": {
+    title: "Uvjeti korištenja | 4D Detailing",
+    canonical: "https://4d-detailing.hr/uvijeti-koristenja",
+  },
+  "/pravila-privatnosti": {
+    title: "Pravila privatnosti | 4D Detailing",
+    canonical: "https://4d-detailing.hr/pravila-privatnosti",
+  },
 };
 
 export const CatalogProvider = ({ children }: DataProviderType) => {
@@ -69,8 +98,13 @@ export const CatalogProvider = ({ children }: DataProviderType) => {
     }
   }, [loading]);
 
+  const { pathname } = useLocation();
+
+  const config = CANONICAL[pathname];
+
   return (
     <CatalogContext.Provider value={{ services, reviews }}>
+      <SEO {...config} />
       {showLoader && (
         <PageLoader
           isDark={isDark}

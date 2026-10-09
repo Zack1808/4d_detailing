@@ -1,13 +1,13 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
-interface SEOProps {
+export type SEOProps = {
   title: string;
   description?: string;
   canonical?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
-}
+};
 
 const SEO: React.FC<SEOProps> = ({
   title,
