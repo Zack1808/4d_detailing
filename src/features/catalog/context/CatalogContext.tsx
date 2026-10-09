@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 import PageLoader from "@/shared/components/PageLoader";
 import SEO, { type SEOProps } from "@/shared/components/SEO";
 
-import { useGetPageData } from "../hooks/useGetPageData";
+import { useServices } from "../hooks/useServices";
+import { useReviews } from "../hooks/useReview";
 
 import { useTheme } from "@/shared/context/ThemeContext";
 
@@ -66,7 +67,8 @@ export const CatalogProvider = ({ children }: DataProviderType) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
 
-  const { getPageData } = useGetPageData();
+  const { getServices } = useServices();
+  const { getReviews } = useReviews();
 
   const { isDark } = useTheme();
 
@@ -74,12 +76,12 @@ export const CatalogProvider = ({ children }: DataProviderType) => {
     const getData = async () => {
       setLoading(true);
       try {
-        const data = await getPageData();
+        const data = await Promise.all([getServices(), getReviews()]);
 
         if (data === undefined) return;
 
-        setServices(data.services);
-        setReviews(data.reviews);
+        setServices(data[0] as ServiceType[]);
+        setReviews(data[1] as ReviewType[]);
       } catch (err) {
         console.error("getPageData failed:", err);
       } finally {

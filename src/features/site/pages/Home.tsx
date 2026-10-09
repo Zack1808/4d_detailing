@@ -22,7 +22,7 @@ import SEO from "@shared/components/SEO";
 import Tesseract from "@features/site/components/animated/Tessaract";
 import Wheel from "@features/site/components/animated/Wheel";
 
-import { useGetPageData } from "@features/catalog/hooks/useGetPageData";
+import { useReviews } from "@/features/catalog/hooks/useReview";
 
 import { useCatalog } from "@/features/catalog/context/CatalogContext";
 import { useTheme } from "@/shared/context/ThemeContext";
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
   const { services, reviews } = useCatalog();
   const { isDark } = useTheme();
 
-  const { setReview, error } = useGetPageData();
+  const { addReview } = useReviews();
 
   const heroBackground = [
     <Tesseract
@@ -103,12 +103,12 @@ const Home: React.FC = () => {
           review: String(values.review),
         };
 
-        const successfull = await setReview(reviewData);
+        const successfull = await addReview(reviewData);
 
         if (successfull) {
           notifySuccess("Recenzija uspješno poslana!");
           setOpenModal(false);
-        } else notifyError(error ?? "Nešto je pošlo po zlu");
+        } else notifyError("Nešto je pošlo po zlu");
       } catch (err) {
         notifyError(
           err instanceof Error ? err.message : "Nešto je pošlo po zlu",
