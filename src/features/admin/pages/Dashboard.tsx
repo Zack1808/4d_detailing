@@ -13,7 +13,7 @@ import BarProgress from "@features/admin/components/BarProgress";
 import Spinner from "../components/Spinner";
 
 const Dashboard: React.FC = () => {
-  const { loading } = useAdminService();
+  const { loading, services } = useAdminService();
 
   return (
     <main className="md:px-9 flex-1">
@@ -190,15 +190,15 @@ const Dashboard: React.FC = () => {
 
       <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
-          Usluge
+          Recenzije
         </h2>
-        {loading ? <Spinner size="xl" className="mx-auto" /> : null}
       </Container>
 
       <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
-          Recenzije
+          Usluge
         </h2>
+        {loading ? <Spinner size="xl" className="mx-auto" /> : services.length}
       </Container>
     </main>
   );
