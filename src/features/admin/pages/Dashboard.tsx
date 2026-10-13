@@ -6,10 +6,15 @@ import Button from "@/shared/components/Button";
 
 import Container from "@/shared/components/Container";
 
+import { useAdminService } from "../context/ServiceContext";
+
 import CircularProgress from "@features/admin/components/CircularProgress";
 import BarProgress from "@features/admin/components/BarProgress";
+import Spinner from "../components/Spinner";
 
 const Dashboard: React.FC = () => {
+  const { loading } = useAdminService();
+
   return (
     <main className="md:px-9 flex-1">
       <SEO title="4D Detailing | Admin Dashboard" />
@@ -179,19 +184,20 @@ const Dashboard: React.FC = () => {
 
       <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
+          Nadolazeći termini
+        </h2>
+      </Container>
+
+      <Container className="pb-0!">
+        <h2 className="text-dark dark:text-light font-medium text-xl">
           Usluge
         </h2>
+        {loading ? <Spinner size="xl" className="mx-auto" /> : null}
       </Container>
 
       <Container className="pb-0!">
         <h2 className="text-dark dark:text-light font-medium text-xl">
           Recenzije
-        </h2>
-      </Container>
-
-      <Container className="pb-0!">
-        <h2 className="text-dark dark:text-light font-medium text-xl">
-          Termini
         </h2>
       </Container>
     </main>
