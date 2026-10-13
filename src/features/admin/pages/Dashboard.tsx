@@ -183,21 +183,36 @@ const Dashboard: React.FC = () => {
       </Container>
 
       <Container className="pb-0!">
-        <h2 className="text-dark dark:text-light font-medium text-xl">
-          Nadolazeći termini
-        </h2>
+        <div className="flex w-full justify-between gap-3 items-center">
+          <h2 className="text-dark dark:text-light font-medium text-xl">
+            Nadolazeći termini
+          </h2>
+          <Button to="/admin/termini" className="text-sm">
+            Vidi više <FaArrowRight />
+          </Button>
+        </div>
       </Container>
 
       <Container className="pb-0!">
-        <h2 className="text-dark dark:text-light font-medium text-xl">
-          Recenzije
-        </h2>
+        <div className="flex w-full justify-between gap-3 items-center">
+          <h2 className="text-dark dark:text-light font-medium text-xl">
+            Recenzije
+          </h2>
+          <Button to="/admin/recenzije" className="text-sm">
+            Vidi više <FaArrowRight />
+          </Button>
+        </div>
       </Container>
 
       <Container className="pb-0!">
-        <h2 className="text-dark dark:text-light font-medium text-xl">
-          Usluge
-        </h2>
+        <div className="flex w-full justify-between gap-3 items-center">
+          <h2 className="text-dark dark:text-light font-medium text-xl">
+            usluge
+          </h2>
+          <Button to="/admin/usluge" className="text-sm">
+            Vidi više <FaArrowRight />
+          </Button>
+        </div>
         {loading ? <Spinner size="xl" className="mx-auto" /> : services.length}
       </Container>
     </main>

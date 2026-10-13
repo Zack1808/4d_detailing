@@ -37,11 +37,11 @@ const Navigation: React.FC = () => {
           <span className="mt-0.5">Analitika</span>
         </Button>
         <Button
-          to="/admin/usluge"
+          to="/admin/termini"
           className="max-w-none flex justify-start items-center gap-3"
         >
-          <FaScroll className="text-xl" />
-          <span className="mt-0.5">Usluge</span>
+          <FaCalendarCheck className="text-xl" />
+          <span className="mt-1">Termini</span>
         </Button>
         <Button
           to="/admin/recenzije"
@@ -51,11 +51,11 @@ const Navigation: React.FC = () => {
           <span className="mt-1">Recenzije</span>
         </Button>
         <Button
-          to="/admin/termini"
+          to="/admin/usluge"
           className="max-w-none flex justify-start items-center gap-3"
         >
-          <FaCalendarCheck className="text-xl" />
-          <span className="mt-1">Termini</span>
+          <FaScroll className="text-xl" />
+          <span className="mt-0.5">Usluge</span>
         </Button>
 
         <Button
