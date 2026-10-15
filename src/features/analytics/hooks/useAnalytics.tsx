@@ -11,7 +11,7 @@ type UseAnalyticsType = (useMockData?: boolean) => {
 const loadMockAnalyticsData = () =>
   import("@features/analytics/mock/analyticsMock");
 
-export const UseAnalytics: UseAnalyticsType = (
+export const useAnalytics: UseAnalyticsType = (
   useMockData = MOCK_CONFIG.enableMockData,
 ) => {
   const getAnalytics = useCallback(async () => {
