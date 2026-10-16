@@ -8,7 +8,7 @@ import Textarea from "@/shared/components/Textarea";
 import DatePicker from "@/shared/components/DatePicker";
 import Reveal from "@/shared/components/Reveal";
 
-import { useSubmitAppointment } from "@features/booking/hooks/useSubmitAppointment";
+import { useAppointments } from "@/features/booking/hooks/useAppointments";
 import { useBlockedDates } from "@features/booking/hooks/useBlockedDates";
 
 import { parseDate, toMidnight } from "@/shared/utils/date";
@@ -31,7 +31,7 @@ const AppointmentForm: React.FC<{ services: ServiceType[] }> = ({
   const [params, setParams] = useSearchParams();
   const selectedValue = params.get("usluga") ?? GENERAL;
 
-  const { submit, loading } = useSubmitAppointment();
+  const { submitAppointment, loading } = useAppointments();
   const { getBlockedAppointments } = useBlockedDates();
 
   const options = useMemo(
@@ -80,7 +80,7 @@ const AppointmentForm: React.FC<{ services: ServiceType[] }> = ({
     ) as unknown as NewAppointmentType;
     const service = options.find((o) => o.value === values.service);
 
-    const ok = await submit({
+    const ok = await submitAppointment({
       ...values,
       service: service?.label ?? values.service,
     });

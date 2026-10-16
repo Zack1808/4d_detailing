@@ -8,13 +8,16 @@ import Container from "@/shared/components/Container";
 
 import { useAdminService } from "@features/admin/context/ServiceContext";
 import { useAnalytics } from "@features/analytics/hooks/useAnalytics";
+import { useAppointments } from "@/features/booking/hooks/useAppointments";
 
 import CircularProgress from "@features/admin/components/CircularProgress";
 import BarProgress from "@features/admin/components/BarProgress";
 import Spinner from "@features/admin/components/Spinner";
 import SkeletonLoader from "../components/Skeletonloader";
+import AppointmentTable from "../components/AppintmentTable";
 
 import type { AnalyticsType } from "@features/analytics/types";
+import type { AppointmentType } from "@/features/booking/types";
 
 const PAGE_LABELS: Record<string, string> = {
   "/": "Početna",
@@ -29,12 +32,29 @@ const MOCK_PAGES = Array.from({ length: 5 }, (_, i) => ({
   views: 0,
 }));
 
+const MOCK_APPOINTMENTS = Array.from({ length: 5 }, (_, i) => ({
+  id: `vaserafdasdrfads-${i}`,
+  fullName: "Test Test",
+  email: "test@gmal.com",
+  phone: "+385950000000",
+  service: "Luxury+ Paket",
+  vehicle: "Ford Fiesta 2017",
+  dateFrom: "15.10.2026",
+  dateTo: "17.10.2026",
+  remark: "",
+  isConfirmed: true,
+  isBlocked: true,
+}));
+
 const Dashboard: React.FC = () => {
   const [analytics, setAnalytics] = useState<AnalyticsType>();
   const [analyticsLoading, setAnalyticsLoading] = useState<boolean>(true);
+  const [appointments, setAppointments] = useState<AppointmentType[]>([]);
+  const [appointmentsLoading, setAppointmentsLoading] = useState<boolean>(true);
 
   const { loading, services } = useAdminService();
   const { getAnalytics } = useAnalytics();
+  const { getAppointments } = useAppointments();
 
   useEffect(() => {
     const fetchAnalytics = async () => {
@@ -53,6 +73,25 @@ const Dashboard: React.FC = () => {
     };
 
     fetchAnalytics();
+  }, []);
+
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      setAppointmentsLoading(true);
+      try {
+        const data = await getAppointments();
+
+        if (!data) throw Error("No appointments fetched");
+
+        setAppointments(data);
+      } catch (err: unknown) {
+        console.error(err);
+      } finally {
+        setAppointmentsLoading(false);
+      }
+    };
+
+    fetchAppointments();
   }, []);
 
   return (
@@ -221,6 +260,13 @@ const Dashboard: React.FC = () => {
             Vidi više <FaArrowRight />
           </Button>
         </div>
+        <SkeletonLoader loading={appointmentsLoading} className="w-full">
+          <AppointmentTable
+            appointments={
+              appointmentsLoading ? MOCK_APPOINTMENTS : appointments
+            }
+          />
+        </SkeletonLoader>
       </Container>
 
       <Container className="pb-0!">
