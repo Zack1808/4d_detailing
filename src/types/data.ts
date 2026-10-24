@@ -1,36 +1,31 @@
-type Category = "exterior" | "interior" | "polishing" | "package";
-
-type LowestPriceData = {
-  date: string;
-  priceFrom: number;
-};
+type VehicleClass = "car" | "suv" | "transporter";
 
 type PriceType = {
-  ref: number;
-  current: number;
+  price: number;
+  anchorPrice: number;
 };
 
 export type ServiceDataType = {
   id: string;
   slug: string;
   title: string;
-  priceFrom: PriceType;
-  priceTo?: PriceType;
+  description: string;
   duration: string;
-  category: Category;
   services: string[];
-  suv: PriceType;
-  transporter: PriceType;
   remark?: string;
+  keywords?: string[];
+  isFeatured: boolean;
+  status: "active" | "hidden" | "archived";
+  sortOrder: number;
+  prices: Record<VehicleClass, PriceType>;
   discount: {
-    isEnabled: boolean;
     type: "percentage" | "fixed";
     value: number;
-    lowest: LowestPriceData[];
+    startsAt: string;
+    endsAt: string;
   };
-  isFeatured: boolean;
-  keywords?: string[];
-  description: string;
+  lowestPrice30d?: Record<VehicleClass, { amount: number; computedAt: string }>;
+  updatedAt: string;
 };
 
 export type ReviewType = {
