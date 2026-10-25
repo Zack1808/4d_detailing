@@ -22,7 +22,7 @@ const AppRoutes: React.FC = () => {
   const { isDark } = useData();
 
   return (
-    <BrowserRouter>
+    <>
       <Navigation />
       <Suspense fallback={<PageLoader isDark={isDark} />}>
         <Routes>
@@ -37,14 +37,16 @@ const AppRoutes: React.FC = () => {
       <GoogleAnalytics />
       <ToastContainer autoClose={2500} closeOnClick />
       <Footer />
-    </BrowserRouter>
+    </>
   );
 };
 
 const App: React.FC = () => (
-  <DataProvider>
-    <AppRoutes />
-  </DataProvider>
+  <BrowserRouter>
+    <DataProvider>
+      <AppRoutes />
+    </DataProvider>
+  </BrowserRouter>
 );
 
 export default App;
