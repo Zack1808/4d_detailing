@@ -4,399 +4,10 @@ import {
   type AppointmentType,
 } from "../../types/data";
 
-export const mockServices = [
-  {
-    id: "fasdfadsfvcae",
-    slug: "dubinsko_ciscenje_unutrasnjosti",
-    title: "Dubinsko čišćenje unutrašnjosti",
-    priceFrom: {
-      ref: 100,
-      current: 100,
-    },
-    priceTo: {
-      ref: 200,
-      current: 200,
-    },
-    duration: "1-2 dana",
-    services: [
-      "Detaljno vanjsko pranje, pranje naplataka",
-      "Detaljno pranje pragova i rubova oko vrata, pranje gumenih tepiha",
-      "Otprašivanje i usisavanje unutrašnjosti",
-      "Detaljno pranje plastičnih i teško dostupnih površina unutrašnjosti",
-      "Dubinsko izvlačenje sjedala i ostalih tkanenih površina unutrašnjosti",
-      "Pranje stakala, zaštita svih površina unutrašnjosti",
-    ],
-    category: "interior",
-    suv: {
-      ref: 50,
-      current: 50,
-    },
-    transporter: {
-      ref: 80,
-      current: 80,
-    },
-    remark:
-      "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
-    discount: {
-      isEnabled: true,
-      type: "percentage",
-      value: 22,
-      lowest: [
-        {
-          date: "19.09.2026",
-          priceFrom: 70,
-        },
-      ],
-    },
-    isFeatured: true,
-    keywords: [],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcadq",
-    slug: "full_detailing_interijera",
-    title: "Full detailing interijera",
-    priceFrom: {
-      ref: 300,
-      current: 300,
-    },
-    priceTo: {
-      ref: 450,
-      current: 450,
-    },
-    duration: "2 - 3 dana",
-    services: [
-      "Detaljno vanjsko pranje, pranje naplataka",
-      "Detaljno pranje rubova i površina oko vrata",
-      "Otprašivanje i usisavanje unutrašnjosti",
-      "Dubinsko pranje svih plastičnih površina unutrašnjosti",
-      "Demontaža i montaža sjedala",
-      "Dubinsko izvlačenje sjedala i ostalih tkanenih površina",
-      "Pranje stakala, zaštita svih površina unutrašnjosti",
-    ],
-    category: "interior",
-    suv: {
-      ref: 50,
-      current: 50,
-    },
-    transporter: {
-      ref: 130,
-      current: 130,
-    },
-    remark:
-      "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: ["poliranje"],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcada",
-    slug: "nanosenje_keramicke_zastite_12_mjeseci",
-    title: "Nanošenje keramičke zaštite (12 mjeseci)",
-    priceFrom: {
-      ref: 120,
-      current: 120,
-    },
-    duration: "2 - 3 dana",
-    services: [
-      "Priprema laka za zaštitni premaz",
-      "Premaz keramičkim premazom",
-    ],
-    category: "polishing",
-    suv: {
-      ref: 50,
-      current: 50,
-    },
-    transporter: {
-      ref: 100,
-      current: 100,
-    },
-    remark:
-      "Nanošenje keramičkog premaza vrši se isključivo na neposredno poliran lak te služi kao završni korak nakon korekcije laka ",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: ["felge"],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcadk",
-    slug: "korekcija_laka_poliranje",
-    title: "Korekcija laka (poliranje)",
-    priceFrom: {
-      ref: 120,
-      current: 120,
-    },
-    priceTo: {
-      ref: 400,
-      current: 400,
-    },
-    duration: "1-3 dana",
-    services: [
-      "Detaljno pranje ekterijera kao priprema",
-      "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
-    ],
-    category: "polishing",
-    suv: {
-      ref: 70,
-      current: 70,
-    },
-    transporter: {
-      ref: 120,
-      current: 120,
-    },
-    remark:
-      "Razina i cijena usluge određuje se ovisno o željenim rezultatima te veličini vozila.",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: [],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcadq",
-    slug: "nanosenje_keramicke_zastite_24_mjeseca",
-    title: "Nanošenje keramičke zaštite (24 mjeseca)",
-    priceFrom: {
-      ref: 180,
-      current: 180,
-    },
-    duration: "1 - 2 dana",
-    services: ["Priprema laka za zaštitu", "Premaz zaštitom"],
-    category: "polishing",
-    suv: {
-      ref: 60,
-      current: 60,
-    },
-    transporter: {
-      ref: 80,
-      current: 80,
-    },
-    remark:
-      "Nanošenje keramičkog premaza vrši se isključivo na neposredno poliran lak te služi kao završni korak nakon korekcije laka ",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: [],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcadp",
-    slug: "poliranje_farova",
-    title: "Poliranje farova",
-    priceFrom: {
-      ref: 40,
-      current: 40,
-    },
-    priceTo: {
-      ref: 70,
-      current: 70,
-    },
-    duration: "1-2 sata",
-    services: ["Brušenje i poliranje", "Zaštita i booster premaz"],
-    category: "polishing",
-    suv: {
-      ref: 0,
-      current: 0,
-    },
-    transporter: {
-      ref: 0,
-      current: 0,
-    },
-    remark:
-      "Prikazana cijena odnosi se na oba fara zajedno. Cijena usluge može se mijenjati ovisno o zamagljenosti farova.",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: [],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcadv",
-    slug: "standard_paket",
-    title: "Standard Paket",
-    priceFrom: {
-      ref: 40,
-      current: 40,
-    },
-    duration: "3-6 sata",
-    services: [
-      "Detaljnjo vanjsko pranje, pranje naplataka",
-      "Otprašivanje i usisavanje interijera",
-      "Detaljno pranje svih plastičnih površina",
-      "Pranje stakala, zaštita plastičnih površina interijera",
-    ],
-    category: "package",
-    suv: {
-      ref: 40,
-      current: 40,
-    },
-    transporter: {
-      ref: 60,
-      current: 60,
-    },
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: [],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcadp",
-    slug: "luxury+_paket",
-    title: "Luxury+ Paket",
-    priceFrom: {
-      ref: 500,
-      current: 500,
-    },
-    priceTo: {
-      ref: 750,
-      current: 750,
-    },
-    duration: "3-4 dana",
-    services: [
-      "Detaljnjo vanjsko pranje, pranje naplataka",
-      "Detaljno pranje štokova i prostora između vrata",
-      "Dubinsko čišćenje svih površina unutrašnjosti",
-      "Dubinsko čišćenje sjedala i ostalih tkanenih površina unutrašnjosti",
-      "Višeslojna korekcija laka",
-      "Po želji, zatočkavanje oštećenja od kamenčića (klijent nabavlja boju)",
-      "Zaštita keramičkim premazom (24 mjeseca)",
-    ],
-    category: "package",
-    suv: {
-      ref: 60,
-      current: 60,
-    },
-    transporter: {
-      ref: 80,
-      current: 80,
-    },
-    remark:
-      "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: true,
-    keywords: [],
-    description: "",
-  },
-  {
-    id: "fasdfadsfvcado",
-    slug: "premium_paket",
-    title: "Premium Paket",
-    priceFrom: {
-      ref: 320,
-      current: 320,
-    },
-    priceTo: {
-      ref: 400,
-      current: 400,
-    },
-    duration: "2-3 dana",
-    services: [
-      "Detaljnjo vanjsko pranje, pranje naplataka",
-      "Pranje područja i rubova oko vrata",
-      "Otprašivanje i usisavanje unutrašnjosti",
-      "Dubinsko pranje svih površina unutrašnjosti",
-      "jednosoljna korekcija laka",
-      "Zaštita keramičkim premazom (12 - 18 mjeseci)",
-    ],
-    category: "package",
-    suv: {
-      ref: 50,
-      current: 50,
-    },
-    transporter: {
-      ref: 80,
-      current: 80,
-    },
-    remark:
-      "Cijena usluge može se mijenjati ovisno o veličini i zaprljanosti vozila.",
-    discount: {
-      isEnabled: false,
-      type: "percentage",
-      value: 0,
-      lowest: [
-        {
-          date: "",
-          priceFrom: 0,
-        },
-      ],
-    },
-    isFeatured: false,
-    keywords: [],
-    description: "",
-  },
-];
-
 const now = new Date().toISOString();
+const created = new Date(2024, 0, 1).toISOString();
 
-export const mockServicesNew: ServiceDataType[] = [
+export const mockServices: ServiceDataType[] = [
   {
     id: "svc-01",
     slug: "poliranje_farova_samo_poliranje_i_zastita",
@@ -419,6 +30,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -443,6 +55,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -467,6 +80,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -494,6 +108,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -521,6 +136,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -549,6 +165,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -577,6 +194,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -604,6 +222,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -631,6 +250,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -658,6 +278,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -682,6 +303,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -709,10 +331,11 @@ export const mockServicesNew: ServiceDataType[] = [
     },
     discount: {
       type: "percentage",
-      value: 0,
+      value: 20,
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -745,6 +368,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -760,7 +384,7 @@ export const mockServicesNew: ServiceDataType[] = [
       "Pranje stakala, zaštita plastičnih površina interijera",
     ],
     keywords: [],
-    isFeatured: false,
+    isFeatured: true,
     status: "active",
     sortOrder: 13,
     prices: {
@@ -774,6 +398,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -791,7 +416,7 @@ export const mockServicesNew: ServiceDataType[] = [
       "Zaštita keramičkim premazom (12 - 18 mjeseci)",
     ],
     keywords: [],
-    isFeatured: false,
+    isFeatured: true,
     status: "active",
     sortOrder: 14,
     prices: {
@@ -805,6 +430,7 @@ export const mockServicesNew: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
   {
@@ -823,7 +449,7 @@ export const mockServicesNew: ServiceDataType[] = [
       "Zaštita keramičkim premazom (24 mjeseca)",
     ],
     keywords: [],
-    isFeatured: false,
+    isFeatured: true,
     status: "active",
     sortOrder: 15,
     prices: {
@@ -833,10 +459,11 @@ export const mockServicesNew: ServiceDataType[] = [
     },
     discount: {
       type: "percentage",
-      value: 0,
+      value: 20,
       startsAt: "",
       endsAt: "",
     },
+    createdAt: created,
     updatedAt: now,
   },
 ];

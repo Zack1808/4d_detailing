@@ -7,9 +7,64 @@ import Wheel from "../animated/Wheel";
 
 import { parseDate } from "../../utils/date";
 
-import { type ServiceDataType } from "../../types/data";
+import type { ServiceDataType } from "../../types/data";
 
 import { useData } from "../../context/DataContext";
+
+type VehicleClass = keyof ServiceDataType["prices"];
+
+type PriceInfo = {
+  price: number;
+  anchorPrice: number;
+  current: number;
+  lowest: number;
+};
+
+const EXTRA_CLASSES: { key: VehicleClass; label: string }[] = [
+  {
+    key: "suv",
+    label: "SUV",
+  },
+  {
+    key: "transporter",
+    label: "Transporter",
+  },
+];
+
+const toDate = (value: string, endOfDay = false): Date | null => {
+  if (!value) return null;
+
+  let date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    const parsed = parseDate(value);
+
+    if (!parsed) return null;
+
+    date = new Date(parsed.getTime());
+  }
+
+  if (endOfDay && !value.includes(":")) date.setHours(23, 59, 59, 999);
+
+  return date;
+};
+
+const applyDiscount = (
+  price: number,
+  discount: ServiceDataType["discount"],
+): number => {
+  const result =
+    discount.type === "percentage"
+      ? Math.round(price * (1 - Number(discount.value) / 100))
+      : price - Number(discount.value);
+
+  return Math.max(result, 0);
+};
+
+const LAW_DATE = new Date(2026, 8, 10);
+
+const formatDate = (date: Date): string =>
+  `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
 
 type ServiceCardProps = {
   item: ServiceDataType;
@@ -20,51 +75,50 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
 
   const { isDark } = useData();
 
-  const discountedPrice = useMemo(() => {
-    let priceList = [item.priceFrom.current];
+  const isDiscountActive = useMemo(() => {
+    if (!(Number(item.discount.value) > 0)) return false;
 
-    if (item.priceTo?.current) priceList = [...priceList, item.priceTo.current];
-
-    if (!item.discount.isEnabled) return `${priceList.join(" - ")}`;
-
-    const newPriceList = priceList.map((price) => {
-      return item.discount?.type === "percentage"
-        ? Math.round(Number(price) * (1 - Number(item.discount?.value) / 100))
-        : Number(price) - Number(item.discount.value);
-    });
-
-    return `${newPriceList.join(" - ")}`;
-  }, [
-    item.priceFrom.current,
-    item.priceTo?.current,
-    item.discount.isEnabled,
-    item.discount.value,
-  ]);
-
-  const getLowestPrice = useMemo(() => {
-    const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
     const now = Date.now();
+    const start = toDate(item.discount.startsAt);
+    const end = toDate(item.discount.endsAt);
 
-    let bestPrice = Infinity;
+    if (start && now < start.getTime()) return false;
+    if (end && now > end.getTime()) return false;
 
-    if (!item.discount.lowest.length) return item.priceFrom.current;
+    return true;
+  }, [item.discount]);
 
-    for (const entry of item.discount.lowest) {
-      const entryDate = parseDate(entry.date);
+  const priceInfo = useMemo(() => {
+    const entries = (Object.keys(item.prices) as VehicleClass[]).map(
+      (vehicleClass) => {
+        const { price, anchorPrice } = item.prices[vehicleClass];
 
-      if (!entryDate) continue;
+        const info: PriceInfo = {
+          price,
+          anchorPrice,
+          current: isDiscountActive
+            ? applyDiscount(price, item.discount)
+            : price,
+          lowest: item.lowestPrice30d?.[vehicleClass]?.amount ?? price,
+        };
 
-      const entryTime = entryDate.getTime();
-      const isWithinWindow =
-        now - entryTime <= THIRTY_DAYS_MS && entryTime <= now;
+        return [vehicleClass, info] as const;
+      },
+    );
 
-      if (isWithinWindow && entry.priceFrom < bestPrice) {
-        bestPrice = entry.priceFrom;
-      }
-    }
+    return Object.fromEntries(entries) as Record<VehicleClass, PriceInfo>;
+  }, [item.prices, item.lowestPrice30d, item.discount, isDiscountActive]);
 
-    return bestPrice === Infinity ? item.priceFrom.current : bestPrice;
-  }, [item.discount.lowest, item.priceFrom.current]);
+  const car = priceInfo.car;
+
+  const anchorDate = useMemo(() => {
+    const created = toDate(item.createdAt);
+
+    if (created && created.getTime() > LAW_DATE.getTime() + 86_399_999)
+      return formatDate(created);
+
+    return formatDate(LAW_DATE);
+  }, [item.createdAt]);
 
   useEffect(() => {
     const getIconSize = () => {
@@ -75,56 +129,45 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
 
     window.addEventListener("resize", getIconSize);
 
-    return () => {
-      window.removeEventListener("resize", getIconSize);
-    };
+    return () => window.removeEventListener("resize", getIconSize);
   }, []);
 
   return (
     <div className="rounded-sm shadow-sm bg-gray-light/15 dark:bg-gray-dark/40 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
       <header className="flex flex-col gap-6">
         <h3
-          className={`text-3xl font-semibold text-dark dark:text-light ${item.discount.isEnabled ? "lg:max-w-[15ch] max-w-[10ch]" : ""}`}
+          className={`text-2xl font-semibold text-dark dark:text-light ${isDiscountActive ? "max-w-[25ch]" : ""}`}
         >
           {item.title}
         </h3>
         <div className="flex flex-col w-full gap-3">
-          <p className="text-2xl text-dark dark:text-light flex gap-1 flex-col font-medium">
-            {item.discount.isEnabled ? (
+          <p className="text-5xl text-dark dark:text-light flex gap-1 flex-col font-medium">
+            {isDiscountActive ? (
               <span className="flex gap-3">
                 <span className="text-sm flex gap-1 text-gray-500 dark:text-gray-400 line-through self-center min-w-max ">
-                  <span className="flex gap-6 w-full">
-                    €
-                    {item.priceTo
-                      ? `${item.priceFrom.current} - ${item.priceTo?.current}`
-                      : `${item.priceFrom.current}`}
-                  </span>
+                  <span>€{car.price}</span>
                 </span>
-                <span className="flex gap-1">
-                  <small className="mb-3 text-md font-light">€</small>
-                  <span className="flex gap-6 w-full">{discountedPrice}</span>
+                <span className="flex gap-1 font-bold">
+                  <small className="mb-3 text-lg font-light">€</small>
+                  <span>{car.current}</span>
                 </span>
               </span>
             ) : (
-              <span className="flex gap-1">
-                <small className="mb-3 text-md font-light">€</small>
-                <span className="flex gap-6 w-full">{discountedPrice}</span>
+              <span className="flex gap-1 font-bold">
+                <small className="mb-3 text-lg font-light">€</small>
+                <span>{car.current}</span>
               </span>
             )}
             <small className="text-xs text-gray-500 dark:text-gray-400">
-              {item.priceFrom.ref
-                ? item.priceTo?.ref
-                  ? `Cijena na 10.09.2026: ${item.priceFrom.ref} - ${item.priceTo.ref}€`
-                  : `Cijena na 10.09.2026: ${item.priceFrom.ref}€`
-                : `Dana 10.09.2026 ove usluge nije bilo.`}
+              Cijena na {anchorDate}: {car.anchorPrice}€
             </small>
-            {item.discount.isEnabled && (
+            {isDiscountActive && (
               <small className="text-xs text-gray-500 dark:text-gray-400">
-                Najniža cijena u zadnjih 30 dana: {`${getLowestPrice}€`}
+                Najniža cijena u zadnjih 30 dana: {car.lowest}
               </small>
             )}
           </p>
-          {item.discount.isEnabled && (
+          {isDiscountActive && (
             <div className="rounded-full aspect-square flex items-center justify-center text-light dark:text-dark font-black absolute top-0 right-0 translate-x-1/2 p-1 -translate-y-1/2 -z-10">
               <Wheel
                 isDark={!isDark}
@@ -134,8 +177,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
               />
               <div className="absolute bg-dark/5 dark:bg-light/5 inset-0 rounded-full p-3 flex items-end justify-center">
                 <p className="text-dark dark:text-light sm:mb-15 mb-10 sm:mr-21 mr-18 sm:text-2xl text-lg font-normal">
-                  -
-                  {`${item.discount?.value}${item.discount?.type === "percentage" ? "%" : "€"}`}
+                  -{item.discount.value}
+                  {item.discount.type === "percentage" ? "%" : "€"}
                 </p>
               </div>
             </div>
@@ -146,31 +189,44 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
         </div>
       </header>
       <main className="flex flex-col gap-6 text-dark dark:text-light mb-10">
-        <List list={item.services} isDark={isDark} />
+        {item.services.length > 0 && (
+          <List list={item.services} isDark={isDark} />
+        )}
 
         <div className="flex flex-col gap-3 font-light">
-          {item.suv.current > 0 && (
-            <span>
-              <strong className="font-normal">Cijena za SUV: </strong>+€
-              {item.suv.current} <br />
-              <small className="font-medium text-xs text-gray-500 dark:text-gray-400">
-                {item.suv.ref
-                  ? `Nadoplata na 10.09.2026: ${item.suv.ref}€`
-                  : "Dana 10.09.2026 nije bilo nadoplate za SUV-ove."}
-              </small>
-            </span>
-          )}
-          {item.transporter.current > 0 && (
-            <span>
-              <strong className="font-normal">Cijena za Transporter: </strong>
-              +€{item.transporter.current} <br />
-              <small className="font-medium text-xs text-gray-500 dark:text-gray-400">
-                {item.transporter.ref
-                  ? `Nadoplata na 10.09.2026: ${item.transporter.ref}€`
-                  : "Dana 10.09.2026 nije bilo nadoplate za transportere."}
-              </small>
-            </span>
-          )}
+          {EXTRA_CLASSES.map(({ key, label }) => {
+            const info = priceInfo[key];
+
+            if (!info || info.price <= 0) return null;
+
+            return (
+              <span key={key}>
+                <strong className="font-normal">Cijena za {label}: </strong>
+                {isDiscountActive ? (
+                  <>
+                    <span className="line-through text-gray-500 dark:text-gray-400 mr-2">
+                      €{info.price}
+                    </span>
+                    €{info.current}
+                  </>
+                ) : (
+                  <>€{info.current}</>
+                )}
+                <br />
+                <small className="font-medium text-xs text-gray-500 dark:text-gray-400">
+                  Cijena na {anchorDate}: {info.anchorPrice}€
+                </small>
+                {isDiscountActive && (
+                  <>
+                    <br />
+                    <small className="font-medium text-xs text-gray-500 dark:text-gray-400">
+                      Najniža cijena u zadnjih 30 dana: {info.lowest}€
+                    </small>
+                  </>
+                )}
+              </span>
+            );
+          })}
         </div>
       </main>
       <footer className="mt-auto text-dark dark:text-light flex flex-col gap-6">
@@ -180,8 +236,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
           </small>
         )}
         <Button
-          to={`/kontakt?usluga=${item.slug}`}
           variant="primary"
+          to={`/kontakt?usluga=${item.slug}`}
           className="w-full max-w-none justify-center"
         >
           Rezerviraj termin

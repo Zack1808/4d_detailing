@@ -1,4 +1,4 @@
-type VehicleClass = "car" | "suv" | "transporter";
+export type VehicleClass = "car" | "suv" | "transporter";
 
 type PriceType = {
   price: number;
@@ -25,6 +25,7 @@ export type ServiceDataType = {
     endsAt: string;
   };
   lowestPrice30d?: Record<VehicleClass, { amount: number; computedAt: string }>;
+  createdAt: string;
   updatedAt: string;
 };
 

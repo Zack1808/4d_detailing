@@ -212,10 +212,10 @@ const Home: React.FC = () => {
         </Reveal>
 
         <div className="w-full grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 gap-3 mt-6">
-          {featuredServices.map((service, index) => {
+          {featuredServices.map((service) => {
             return (
               <Reveal
-                key={`${service.title}-${index}`}
+                key={service.id}
                 transitionTo={`opacity-100 translate-y-0`}
                 className={`flex h-full lg:nth-[2]:delay-100! lg:nth-[3]:delay-200! md:nth-[2]:delay-200! md:duration-1000 duration-500`}
                 threshold={0.05}
