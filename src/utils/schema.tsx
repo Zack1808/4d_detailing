@@ -47,8 +47,8 @@ export const generateServicesSchema = (services: ServiceDataType[]) => {
         name: u.title,
         ...(u.description && { description: u.description }),
       },
-      ...(u.priceFrom.current && {
-        price: u.priceFrom.current,
+      ...(u.prices.car.price && {
+        price: u.prices.car.price,
         priceCurrency: "EUR",
       }),
     })),

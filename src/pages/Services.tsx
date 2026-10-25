@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { type ServiceDataType } from "../types/data";
+import type { ServiceDataType } from "../types/data";
 
 import Container from "../components/layout/Container";
 import ImageCarousel from "../components/layout/ImageCarousel";
@@ -10,31 +10,39 @@ import Reveal from "../components/layout/Reveal";
 import Input from "../components/common/Input";
 import ServiceCard from "../components/common/ServiceCard";
 import Select from "../components/common/Select";
-import Button from "../components/common/Button";
 import SEO from "../components/common/SEO";
 
 import { useData } from "../context/DataContext";
 
 import { generateServicesSchema } from "../utils/schema";
-
-type Category =
-  "all" | "interijer" | "eksterijer" | "poliranje_i_zastita" | "posebni_paketi";
+import { getCurrentPrice } from "../utils/pricing";
 
 const SORTING_OPTIONS = [
-  { value: "popularno", label: "Popularno" },
-  { value: "cijena_rastuca", label: "Cijena rastuća" },
-  { value: "cijena_padajuca", label: "Cijena padajuća" },
-  { value: "abecedno", label: "Naziv A-Z" },
-  { value: "trajanje_uzlazno", label: "Trajanje uzlazno" },
-  { value: "trajanje_silazno", label: "Trajanje silazno" },
-] as const;
-
-const CATEGORIES = {
-  interijer: "interior",
-  eksterijer: "exterior",
-  poliranje_i_zastita: "polishing",
-  posebni_paketi: "package",
-};
+  {
+    value: "popularno",
+    label: "Popularno",
+  },
+  {
+    value: "cijena_rastuca",
+    label: "Cijena rastuća",
+  },
+  {
+    value: "cijena_padajuca",
+    label: "Cijena padajuća",
+  },
+  {
+    value: "abecedno",
+    label: "Naziv A-Z",
+  },
+  {
+    value: "trajanje_uzlazno",
+    label: "Trajanje uzlazno",
+  },
+  {
+    value: "trajanje_silazno",
+    label: "Trajanje silazno",
+  },
+];
 
 const IMAGES_CAROUSEL = [
   "/images/service1.avif",
@@ -42,6 +50,14 @@ const IMAGES_CAROUSEL = [
   "/images/service3.avif",
   "/images/service4.avif",
 ];
+
+const compareNumbers = (a: number, b: number, multiplier: number) => {
+  if (a === b) return 0;
+  if (!Number.isFinite(a)) return 1;
+  if (!Number.isFinite(b)) return -1;
+
+  return (a - b) * multiplier;
+};
 
 const Services: React.FC = () => {
   const location = useLocation();
@@ -51,19 +67,17 @@ const Services: React.FC = () => {
     const params = new URLSearchParams(location.search);
 
     return {
-      category: (params.get("kategorija") as Category) || "all",
       search: params.get("pretraga") || "",
       sortValue: params.get("sortiranje") || "popularno",
     };
   };
 
-  const initialFilters = getInitialFilters();
+  const initialFilter = getInitialFilters();
 
-  const [search, setSearch] = useState<string>(initialFilters.search);
+  const [search, setSearch] = useState<string>(initialFilter.search);
   const [sortValue, setSortValue] = useState<string | string[]>(
-    initialFilters.sortValue,
+    initialFilter.sortValue,
   );
-  const [category, setCategory] = useState<Category>(initialFilters.category);
 
   const { services } = useData();
 
@@ -104,15 +118,15 @@ const Services: React.FC = () => {
   const sortList = useCallback(
     (
       list: ServiceDataType[],
-      key: keyof ServiceDataType,
+      key: "price" | "isFeatured" | "title" | "duration",
       direction: "asc" | "desc",
     ) => {
       const multiplier = direction === "asc" ? 1 : -1;
 
       return [...list].sort((a, b) => {
         switch (key) {
-          case "priceFrom":
-            return (a.priceFrom.current - b.priceFrom.current) * multiplier;
+          case "price":
+            return (getCurrentPrice(a) - getCurrentPrice(b)) * multiplier;
 
           case "isFeatured":
             return (Number(a.isFeatured) - Number(b.isFeatured)) * multiplier;
@@ -120,14 +134,14 @@ const Services: React.FC = () => {
           case "title":
             return a.title.localeCompare(b.title) * multiplier;
 
-          case "duration": {
+          case "duration":
             const durationA = parseDuration(a.duration);
             const durationB = parseDuration(b.duration);
+
             return (
-              (durationA.min - durationB.min) * multiplier ||
-              (durationA.max - durationB.max) * multiplier
+              compareNumbers(durationA.min, durationB.min, multiplier) ||
+              compareNumbers(durationA.max, durationB.max, multiplier)
             );
-          }
 
           default:
             return 0;
@@ -138,24 +152,21 @@ const Services: React.FC = () => {
   );
 
   const displayServices = useMemo(() => {
-    let newList = [...services];
     const searchTerm = search.toLowerCase();
 
-    if (category !== "all") {
-      newList = newList.filter(
-        (item) => item.category === CATEGORIES[category],
-      );
-    }
+    let newList = [...services]
+      .filter((item) => item.status === "active")
+      .sort((a, b) => a.sortOrder - b.sortOrder);
 
     switch (sortValue) {
       case "popularno":
         newList = sortList(newList, "isFeatured", "desc");
         break;
       case "cijena_rastuca":
-        newList = sortList(newList, "priceFrom", "asc");
+        newList = sortList(newList, "price", "asc");
         break;
       case "cijena_padajuca":
-        newList = sortList(newList, "priceFrom", "desc");
+        newList = sortList(newList, "price", "desc");
         break;
       case "abecedno":
         newList = sortList(newList, "title", "asc");
@@ -180,20 +191,18 @@ const Services: React.FC = () => {
     );
 
     return newList;
-  }, [services, search, category, sortValue]);
+  }, [services, search, sortValue, sortList]);
 
   useEffect(() => {
     let searchParams = {};
 
     if (search) searchParams = { ...searchParams, pretraga: search };
-    if (category !== "all")
-      searchParams = { ...searchParams, kategorija: category };
     searchParams = { ...searchParams, sortiranje: sortValue };
 
     const params = new URLSearchParams(searchParams);
 
     navigate(`/usluge?${params.toString()}`, { replace: true });
-  }, [category, search, sortValue]);
+  }, [search, sortValue]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -202,18 +211,19 @@ const Services: React.FC = () => {
   return (
     <main className="overflow-hidden">
       <SEO
-        title="Usluge Detailinga – Pranje, Poliranje i Zaštita Vozila | 4D Detailing"
+        title="Usluge Detailinga - Pranje, Poliranje i Zaštita Vozila | 4D Detailing"
         canonical="https://4d-detailing.hr/usluge"
         schema={
           services.length > 0 ? generateServicesSchema(services) : undefined
         }
       />
-      <Container className="pb-3!" id="service-intro">
+
+      <Container className="pb-3!" id="Service-intro">
         <div className="flex gap-3 w-full justify-between">
           <div className="flex flex-col gap-6">
             <Reveal
               transitionFrom="opacity-0 -translate-x-6"
-              transitionTo={`opacity-100 translate-x-0`}
+              transitionTo="opacity-100 translate-x-0"
             >
               <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
                 Naše usluge
@@ -222,7 +232,7 @@ const Services: React.FC = () => {
             <div>
               <Reveal
                 transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0`}
+                transitionTo="opacity-100 translate-x-0"
                 delay={200}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
@@ -238,10 +248,9 @@ const Services: React.FC = () => {
                 delay={300}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
-                  Našu ponudu podijelili smo u četiri glavne kategorije:
-                  temeljitu njegu interijera, održavanje i čišćenje eksterijera,
-                  profesionalno poliranje te pažljivo osmišljene pakete za one
-                  koji žele kombinirati više usluga.
+                  Naša ponuda obuhvaća temeljitu njegu interijera, održavanje i
+                  čišćenje eksterijera, profesionalno poliranje te pažljivo
+                  osmišljene pakete za one koji žele kombinirati više usluga.
                 </p>
               </Reveal>
               <Reveal
@@ -279,7 +288,7 @@ const Services: React.FC = () => {
           </Reveal>
         </div>
       </Container>
-      <Container className="pt-9!" id="service-list">
+      <Container className="pt-9!" id="services-list">
         <Reveal
           transitionFrom="opacity-0 -translate-x-6"
           transitionTo={`opacity-100 translate-x-0`}
@@ -289,52 +298,6 @@ const Services: React.FC = () => {
             Usluge
           </h3>
         </Reveal>
-
-        <Reveal
-          transitionFrom="opacity-0"
-          transitionTo="opacity-100 md:delay-300 duration-1000"
-          className={`w-full bg-gray-light/15 dark:bg-gray-dark/40 rounded-xs flex-col`}
-          delay={300}
-        >
-          <div className="w-full flex flex-col md:flex-row">
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "all" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("all")}
-            >
-              Sve usluge
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "eksterijer" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("eksterijer")}
-            >
-              Eksterijer
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "interijer" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("interijer")}
-            >
-              Interijer
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "poliranje_i_zastita" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("poliranje_i_zastita")}
-            >
-              Poliranje i zaštita
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "posebni_paketi" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("posebni_paketi")}
-            >
-              Posebni paketi
-            </Button>
-          </div>
-        </Reveal>
-
         <Reveal
           transitionFrom="opacity-0"
           transitionTo="opacity-100 duration-1000"
@@ -364,17 +327,16 @@ const Services: React.FC = () => {
             />
           </div>
         </Reveal>
-
         <Reveal
           transitionTo="opacity-100"
           className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-3"
           delay={400}
           threshold={0.01}
         >
-          {displayServices.map((service, index) => {
+          {displayServices.map((service) => {
             return (
               <Reveal
-                key={`${service.slug}-${index}`}
+                key={`${service.id}}`}
                 className={`xl:nth-[3n+2]:delay-100! xl:nth-[3n]:delay-200! lg:nth-[2n]:delay-100! flex h-full md:duration-1000 duration-500`}
                 threshold={0.05}
               >

@@ -5,7 +5,7 @@ import List from "./List";
 
 import Wheel from "../animated/Wheel";
 
-import { parseDate } from "../../utils/date";
+import { toDate, isDiscounted, getCurrentPrice } from "../../utils/pricing";
 
 import type { ServiceDataType } from "../../types/data";
 
@@ -31,36 +31,6 @@ const EXTRA_CLASSES: { key: VehicleClass; label: string }[] = [
   },
 ];
 
-const toDate = (value: string, endOfDay = false): Date | null => {
-  if (!value) return null;
-
-  let date = new Date(value);
-
-  if (Number.isNaN(date.getTime())) {
-    const parsed = parseDate(value);
-
-    if (!parsed) return null;
-
-    date = new Date(parsed.getTime());
-  }
-
-  if (endOfDay && !value.includes(":")) date.setHours(23, 59, 59, 999);
-
-  return date;
-};
-
-const applyDiscount = (
-  price: number,
-  discount: ServiceDataType["discount"],
-): number => {
-  const result =
-    discount.type === "percentage"
-      ? Math.round(price * (1 - Number(discount.value) / 100))
-      : price - Number(discount.value);
-
-  return Math.max(result, 0);
-};
-
 const LAW_DATE = new Date(2026, 8, 10);
 
 const formatDate = (date: Date): string =>
@@ -76,16 +46,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
   const { isDark } = useData();
 
   const isDiscountActive = useMemo(() => {
-    if (!(Number(item.discount.value) > 0)) return false;
-
-    const now = Date.now();
-    const start = toDate(item.discount.startsAt);
-    const end = toDate(item.discount.endsAt);
-
-    if (start && now < start.getTime()) return false;
-    if (end && now > end.getTime()) return false;
-
-    return true;
+    return isDiscounted(item.discount);
   }, [item.discount]);
 
   const priceInfo = useMemo(() => {
@@ -96,9 +57,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
         const info: PriceInfo = {
           price,
           anchorPrice,
-          current: isDiscountActive
-            ? applyDiscount(price, item.discount)
-            : price,
+          current: getCurrentPrice(item, vehicleClass),
           lowest: item.lowestPrice30d?.[vehicleClass]?.amount ?? price,
         };
 
@@ -107,7 +66,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     );
 
     return Object.fromEntries(entries) as Record<VehicleClass, PriceInfo>;
-  }, [item.prices, item.lowestPrice30d, item.discount, isDiscountActive]);
+  }, [item, item.prices, item.lowestPrice30d, item.discount, isDiscountActive]);
 
   const car = priceInfo.car;
 
