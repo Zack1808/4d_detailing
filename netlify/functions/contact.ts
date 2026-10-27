@@ -3,7 +3,7 @@ import Mailgun from "mailgun.js";
 
 const mailgun = new Mailgun(FormData);
 const mg = mailgun.client({
-  username: "",
+  username: "api",
   key: process.env.MAILGUN_API_KEY || "",
   url: "https://api.eu.mailgun.net",
 });
@@ -85,7 +85,7 @@ export default async (req: Request) => {
         };
 
         const adminMail = mg.messages.create(DOMAIN, {
-          from: data.email,
+          from: `4D Detaling Web stranica <postmaster@4d-detailing.hr>`,
           to: ["info@4d-detailing.hr"],
           subject: `Novi upit za termin: ${data.service}`,
           template: TEMPLATE_APPOINTMENT_REQUEST,
@@ -94,7 +94,7 @@ export default async (req: Request) => {
         });
 
         const userMail = mg.messages.create(DOMAIN, {
-          from: "noreply@4d-detailing.hr",
+          from: "4D Detailing Noreply <noreply@4d-detailing.hr>",
           to: [data.email],
           subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
           template: TEMPLATE_USER_NOTIFICATION,
@@ -126,7 +126,7 @@ export default async (req: Request) => {
         };
 
         await mg.messages.create(DOMAIN, {
-          from: "noreply@4d-detailing.hr",
+          from: "4D Detaling Web stranica <postmaster@4d-detailing.hr>",
           to: "info@4d-detailing.hr",
           subject: "Postavljena je nova recenzija na stranicu!",
           template: TEMPLATE_REVIEW_SUBMITION,

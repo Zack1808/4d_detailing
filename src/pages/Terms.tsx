@@ -4,7 +4,7 @@ import SEO from "../components/common/SEO";
 
 import Container from "../components/layout/Container";
 
-const EMAIL = "4d.detailing.ln@gmail.com";
+const EMAIL = "info@4d-detailing.hr";
 const OWNER = "Luka Novak";
 const OIB = "17787878930";
 const ADDRESS = "Rakitovec 274, 10410 Velika Gorica";

@@ -65,14 +65,6 @@ const Contact: React.FC = () => {
     [services],
   );
 
-  const loadEmail = () =>
-    Promise.all([
-      import("@react-email/components"),
-      import("@emailjs/browser"),
-      import("../components/email/NotifyUser"),
-      import("../components/email/NotifyAdmin"),
-    ]);
-
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -90,12 +82,14 @@ const Contact: React.FC = () => {
         return;
       }
 
-      setLoading(true);
-
       const formData = new FormData(form);
-      const values = Object.fromEntries(
+      const { website, ...values } = Object.fromEntries(
         formData.entries(),
-      ) as unknown as AppointmentType;
+      ) as unknown as AppointmentType & { website?: string };
+
+      if (website) return;
+
+      setLoading(true);
 
       const selectedService = options.filter(
         (service) => service.value === values.service,
@@ -112,47 +106,28 @@ const Contact: React.FC = () => {
       try {
         const savePromise = setAppointment(data);
 
-        const [
-          { render },
-          { default: emailjs },
-          { default: NotifyUser },
-          { default: NotifyAdmin },
-        ] = await loadEmail();
+        const sendEmailPromise = fetch("/.netlify/functions/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "appointment",
+            fullName: data.fullName,
+            email: data.email,
+            phone: data.phone,
+            service: data.service,
+            vehicle: data.vehicle,
+            dateFrom: data.dateFrom,
+            remark: data.remark,
+          }),
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "Slanje e-pošte nije uspjelo. Pokušajte ponovno ili nas kontaktirajte izravno.",
+            );
+          }
+        });
 
-        const [notifyUser, notifyAdmin] = await Promise.all([
-          render(<NotifyUser {...data} />),
-          render(<NotifyAdmin {...data} />),
-        ]);
-
-        await Promise.all([
-          savePromise,
-
-          emailjs.send(
-            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-            {
-              to_email: data.email,
-              from_email: "4d.detailing.ln@gmail.com",
-              subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
-              email_template: notifyUser,
-              name: "4D Detailing",
-            },
-            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-          ),
-
-          emailjs.send(
-            import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-            import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-            {
-              to_email: "4d.detailing.ln@gmail.com",
-              from_email: data.email,
-              subject: `Novi upit za termin: ${data.service}`,
-              email_template: notifyAdmin,
-              name: data.fullName,
-            },
-            import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
-          ),
-        ]);
+        await Promise.all([savePromise, sendEmailPromise]);
 
         notifySuccess("Vaš upit je uspješno poslan!");
         form.reset();
@@ -213,7 +188,6 @@ const Contact: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    loadEmail();
   }, []);
 
   return (
@@ -281,10 +255,10 @@ const Contact: React.FC = () => {
                   <Button
                     variant="none"
                     className="gap-3 px-0!"
-                    href="mailto:4d.detailing.ln@gmail.com"
+                    href="mailto:info@4d-detailing.hr"
                   >
                     <FaEnvelope className="text-lg" />
-                    Email: 4d.detailing.ln@gmail.com
+                    Email: info@4d-detailing.hr
                   </Button>
                 </Reveal>
               </li>
@@ -370,6 +344,21 @@ const Contact: React.FC = () => {
             className="flex flex-col gap-6 lg:flex-2"
             onSubmit={handleSubmit}
           >
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                width: 0,
+                height: 0,
+                opacity: 0,
+              }}
+            />
+
             <Reveal
               transitionFrom="opacity-0"
               transitionTo={`opacity-100`}

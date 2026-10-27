@@ -55,10 +55,10 @@ const Footer: React.FC = () => {
             <Button
               variant="none"
               className="px-0! text-sm max-w-none w-full lg:max-w-"
-              href="mailto:4d.detailing.ln@gmail.com"
+              href="mailto:info@4d-detailing.hr"
             >
               <FaEnvelope className="text-lg" />
-              4d.detailing.ln@gmail.com
+              info@4d-detailing.hr
               <FaChevronRight className="ml-auto lg:hidden block" />
             </Button>
             <Button
