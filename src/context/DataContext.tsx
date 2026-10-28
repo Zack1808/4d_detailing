@@ -9,6 +9,7 @@ import type {
   ServiceDataType,
   ReviewType,
   BlockedAppointments,
+  PriceTableType,
 } from "../types/data";
 
 import type { SEOProps } from "../types/components";
@@ -20,6 +21,7 @@ type DataContextType = {
   services: ServiceDataType[];
   reviews: ReviewType[];
   blockedAppointments: BlockedAppointments[];
+  priceArchive: PriceTableType[];
 };
 
 type DataProviderType = {
@@ -71,6 +73,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
   const [blockedAppointments, setBlockedAppointments] = useState<
     BlockedAppointments[]
   >([]);
+  const [priceArchive, setPriceArchive] = useState<PriceTableType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [isDark, setIsDark] = useState<boolean>(
@@ -90,6 +93,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
         setServices(data.services);
         setReviews(data.reviews);
         setBlockedAppointments(data.blockedAppointments);
+        setPriceArchive(data.priceArchive);
       } catch (err) {
         console.error("getPageData failed:", err);
       } finally {
@@ -130,7 +134,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
 
   return (
     <DataContext.Provider
-      value={{ isDark, services, reviews, blockedAppointments }}
+      value={{ isDark, services, reviews, blockedAppointments, priceArchive }}
     >
       <SEO {...config} />
       {showLoader && (

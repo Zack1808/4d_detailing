@@ -1,8 +1,9 @@
-import {
-  type ServiceDataType,
-  type ReviewType,
-  type AppointmentType,
-  type BlockedAppointments,
+import type {
+  ServiceDataType,
+  ReviewType,
+  AppointmentType,
+  BlockedAppointments,
+  PriceTableType,
 } from "../../types/data";
 
 const now = new Date().toISOString();
@@ -549,6 +550,39 @@ export const mockBlockedAppointments: BlockedAppointments[] = [
     dateFrom: "01.11.2026",
     dateTo: "02.11.2026",
     appointmentId: "afadsfadsklfjadskfnadsklfn",
+  },
+];
+
+export const mockPriceTable: PriceTableType[] = [
+  {
+    name: "Tablica 1",
+    createdAt: now,
+    downloadLink: "link",
+    isActual: true,
+  },
+  {
+    name: "Tablica 2",
+    createdAt: now,
+    downloadLink: "link",
+    isActual: false,
+  },
+  {
+    name: "Tablica 3",
+    createdAt: now,
+    downloadLink: "link",
+    isActual: false,
+  },
+  {
+    name: "Tablica 4",
+    createdAt: now,
+    downloadLink: "link",
+    isActual: false,
+  },
+  {
+    name: "Tablica 5",
+    createdAt: now,
+    downloadLink: "link",
+    isActual: false,
   },
 ];
 
