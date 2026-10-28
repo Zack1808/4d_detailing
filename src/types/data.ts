@@ -63,5 +63,5 @@ export type PriceTableType = {
   name: string;
   createdAt: string;
   downloadLink: string;
-  isActual: boolean;
+  isCurrent: boolean;
 };

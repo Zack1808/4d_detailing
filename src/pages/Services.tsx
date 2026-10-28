@@ -6,6 +6,7 @@ import type { ServiceDataType } from "../types/data";
 import Container from "../components/layout/Container";
 import ImageCarousel from "../components/layout/ImageCarousel";
 import Reveal from "../components/layout/Reveal";
+import Button from "../components/common/Button";
 
 import Input from "../components/common/Input";
 import ServiceCard from "../components/common/ServiceCard";
@@ -78,8 +79,9 @@ const Services: React.FC = () => {
   const [sortValue, setSortValue] = useState<string | string[]>(
     initialFilter.sortValue,
   );
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const { services } = useData();
+  const { services, priceArchive } = useData();
 
   const parseDuration = useCallback((duration: string) => {
     const normalized = duration
@@ -151,6 +153,34 @@ const Services: React.FC = () => {
     [parseDuration],
   );
 
+  const downloadFile = async (url: string, fileName: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(
+          `Download failed: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(objectUrl);
+    } catch (err: unknown) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const displayServices = useMemo(() => {
     const searchTerm = search.toLowerCase();
 
@@ -192,6 +222,11 @@ const Services: React.FC = () => {
 
     return newList;
   }, [services, search, sortValue, sortList]);
+
+  const currentPriceTable = useMemo(
+    () => priceArchive.find((item) => item.isCurrent),
+    [priceArchive],
+  );
 
   useEffect(() => {
     let searchParams = {};
@@ -270,11 +305,50 @@ const Services: React.FC = () => {
                 delay={500}
               >
                 <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
-                  <strong>
+                  <strong className="font-semibold">
                     Istražite našu ponudu i pronađite tretman koji najbolje
                     odgovara vašem vozilu.
                   </strong>
                 </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={600}
+              >
+                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+                  Trebate cijene pri ruci?{" "}
+                  <strong className="font-semibold">
+                    Preuzmite tablicu cjenika ili zavirite u arhivu starijih
+                    cjenika.
+                  </strong>
+                </p>
+              </Reveal>
+              <Reveal
+                transitionFrom="opacity-0 -translate-x-6"
+                transitionTo={`opacity-100 translate-x-0`}
+                delay={700}
+                className="mt-9 flex gap-3 flex-col md:flex-row"
+              >
+                {currentPriceTable?.isCurrent && (
+                  <Button
+                    variant="primary"
+                    loading={loading}
+                    onClick={() =>
+                      downloadFile(
+                        currentPriceTable.downloadLink,
+                        currentPriceTable.name,
+                      )
+                    }
+                  >
+                    Preuzmi aktualni cijenik
+                  </Button>
+                )}
+                {priceArchive.length > 0 && (
+                  <Button variant="none" to="/arhiva-cijenika">
+                    Pregledaj arhivu cijenika
+                  </Button>
+                )}
               </Reveal>
             </div>
           </div>

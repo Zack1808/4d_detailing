@@ -557,32 +557,33 @@ export const mockPriceTable: PriceTableType[] = [
   {
     name: "Tablica 1",
     createdAt: now,
-    downloadLink: "link",
-    isActual: true,
+    downloadLink:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIP1NYSlOEA7v6t1PLxz-S_AdsqbMT-lBvN9-HsXMiUg&s=10",
+    isCurrent: true,
   },
   {
     name: "Tablica 2",
     createdAt: now,
     downloadLink: "link",
-    isActual: false,
+    isCurrent: false,
   },
   {
     name: "Tablica 3",
     createdAt: now,
     downloadLink: "link",
-    isActual: false,
+    isCurrent: false,
   },
   {
     name: "Tablica 4",
     createdAt: now,
     downloadLink: "link",
-    isActual: false,
+    isCurrent: false,
   },
   {
     name: "Tablica 5",
     createdAt: now,
     downloadLink: "link",
-    isActual: false,
+    isCurrent: false,
   },
 ];
 
