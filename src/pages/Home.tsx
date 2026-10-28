@@ -101,7 +101,26 @@ const Home: React.FC = () => {
           isApproved: false,
         };
 
-        const successfull = await setReview(reviewData);
+        const sendEmailPromise = fetch("/.netlify/functions/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "review",
+            starCount: reviewData.starCount,
+            name: reviewData.name,
+            surname: reviewData.surname,
+            review: reviewData.review,
+          }),
+        }).then((response) => {
+          if (!response.ok) {
+            throw new Error("Nešto je pošlo po zlu");
+          }
+        });
+
+        const [successfull] = await Promise.all([
+          setReview(reviewData),
+          sendEmailPromise,
+        ]);
 
         if (successfull) {
           notifySuccess("Recenzija uspješno poslana!");
