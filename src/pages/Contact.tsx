@@ -28,7 +28,7 @@ import type { AppointmentType } from "../types/data";
 const Contact: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
-  const { isDark, services, appointments } = useData();
+  const { isDark, services, blockedAppointments } = useData();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -142,24 +142,22 @@ const Contact: React.FC = () => {
     [],
   );
 
-  const blockDates = useCallback((value: string) => {
-    const date = parseDate(value);
+  const blockDates = (value: string) => {
+    const parsed = parseDate(value);
 
-    if (!date) return false;
+    if (!parsed) return false;
 
-    const target = toMidnight(date);
+    const target = toMidnight(parsed);
 
-    return appointments.some(({ dateFrom, dateTo, isBlocked }) => {
-      if (!isBlocked) return false;
-
-      const from = parseDate(dateFrom as string);
-      const to = parseDate(dateTo as string);
+    return blockedAppointments.some(({ dateFrom, dateTo }) => {
+      const from = parseDate(dateFrom);
+      const to = parseDate(dateTo);
 
       if (!from || !to) return false;
 
       return target >= toMidnight(from) && target <= toMidnight(to);
     });
-  }, []);
+  };
 
   const handleSelectChange = (value: string | string[]) => {
     setSelectValue(value);

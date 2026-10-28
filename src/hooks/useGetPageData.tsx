@@ -8,6 +8,7 @@ import {
   type ServiceDataType,
   type ReviewType,
   type AppointmentType,
+  type BlockedAppointments,
 } from "../types/data";
 
 type useGetPageDataType = (useMockData?: boolean) => {
@@ -21,7 +22,7 @@ type useGetPageDataType = (useMockData?: boolean) => {
     | {
         services: ServiceDataType[];
         reviews: ReviewType[];
-        appointments: AppointmentType[];
+        blockedAppointments: BlockedAppointments[];
       }
     | undefined
   >;
@@ -172,7 +173,7 @@ export const useGetPageData: useGetPageDataType = (
 
     try {
       if (useMockData) {
-        const [{ mockServices, mockReviews, mockAppointments }] =
+        const [{ mockServices, mockReviews, mockBlockedAppointments }] =
           await Promise.all([
             loadMockData(),
             new Promise((resolve) => setTimeout(resolve, MOCK_CONFIG.apiDelay)),
@@ -181,7 +182,7 @@ export const useGetPageData: useGetPageDataType = (
         return {
           services: mockServices,
           reviews: mockReviews,
-          appointments: mockAppointments,
+          blockedAppointments: mockBlockedAppointments,
         };
       }
 
@@ -193,21 +194,13 @@ export const useGetPageData: useGetPageDataType = (
           value: true,
         },
       ]);
-      const appointments = await firebaseApi.getData<AppointmentType>(
-        "appointments",
-        [
-          {
-            field: "isBlocked",
-            operator: "==",
-            value: true,
-          },
-        ],
-      );
+      const blockedAppointments =
+        await firebaseApi.getData<BlockedAppointments>("blockedAppointments");
 
       return {
         services,
         reviews,
-        appointments,
+        blockedAppointments,
       };
     } catch (err: unknown) {
       console.error("getPageData failed: ", err);

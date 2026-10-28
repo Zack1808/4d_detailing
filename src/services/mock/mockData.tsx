@@ -2,6 +2,7 @@ import {
   type ServiceDataType,
   type ReviewType,
   type AppointmentType,
+  type BlockedAppointments,
 } from "../../types/data";
 
 const now = new Date().toISOString();
@@ -506,6 +507,7 @@ export const mockReviews: ReviewType[] = [
     id: "sdafsdf",
   },
 ];
+
 export const mockAppointments: AppointmentType[] = [
   {
     id: "afadsfadsklfjadskfnadsklfn",
@@ -532,6 +534,21 @@ export const mockAppointments: AppointmentType[] = [
     remark: "",
     isConfirmed: true,
     isBlocked: true,
+  },
+];
+
+export const mockBlockedAppointments: BlockedAppointments[] = [
+  {
+    id: "asdremnvemvaue",
+    dateFrom: "15.10.2026",
+    dateTo: "17.10.2026",
+    appointmentId: "vaserafdasdrfads",
+  },
+  {
+    id: "fadsfakldfčdsafnds",
+    dateFrom: "01.11.2026",
+    dateTo: "02.11.2026",
+    appointmentId: "afadsfadsklfjadskfnadsklfn",
   },
 ];
 

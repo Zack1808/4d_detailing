@@ -8,7 +8,7 @@ import { useGetPageData } from "../hooks/useGetPageData";
 import type {
   ServiceDataType,
   ReviewType,
-  AppointmentType,
+  BlockedAppointments,
 } from "../types/data";
 
 import type { SEOProps } from "../types/components";
@@ -19,7 +19,7 @@ type DataContextType = {
   isDark: boolean;
   services: ServiceDataType[];
   reviews: ReviewType[];
-  appointments: AppointmentType[];
+  blockedAppointments: BlockedAppointments[];
 };
 
 type DataProviderType = {
@@ -68,7 +68,9 @@ export const useData = () => {
 export const DataProvider = ({ children }: DataProviderType) => {
   const [services, setServices] = useState<ServiceDataType[]>([]);
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [appointments, setAppointments] = useState<AppointmentType[]>([]);
+  const [blockedAppointments, setBlockedAppointments] = useState<
+    BlockedAppointments[]
+  >([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const [isDark, setIsDark] = useState<boolean>(
@@ -87,7 +89,7 @@ export const DataProvider = ({ children }: DataProviderType) => {
 
         setServices(data.services);
         setReviews(data.reviews);
-        setAppointments(data.appointments);
+        setBlockedAppointments(data.blockedAppointments);
       } catch (err) {
         console.error("getPageData failed:", err);
       } finally {
@@ -127,7 +129,9 @@ export const DataProvider = ({ children }: DataProviderType) => {
   const config = CANONICAL[pathname];
 
   return (
-    <DataContext.Provider value={{ isDark, services, reviews, appointments }}>
+    <DataContext.Provider
+      value={{ isDark, services, reviews, blockedAppointments }}
+    >
       <SEO {...config} />
       {showLoader && (
         <PageLoader

@@ -51,3 +51,10 @@ export type AppointmentType = {
   isConfirmed: boolean;
   isBlocked: boolean;
 };
+
+export type BlockedAppointments = {
+  dateFrom: string;
+  dateTo: string;
+  id: string;
+  appointmentId: string;
+};
