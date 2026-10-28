@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 
+const PriceArchive = lazy(() => import("./pages/PriceArchive"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Error404 = lazy(() => import("./pages/Error404"));
@@ -29,6 +30,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/usluge" element={<Services />} />
           <Route path="/kontakt" element={<Contact />} />
+          <Route path="/arhiva-cijenika" element={<PriceArchive />} />
           <Route path="/pravila-privatnosti" element={<Privacy />} />
           <Route path="/uvijeti-koristenja" element={<Terms />} />
           <Route path="*" element={<Error404 />} />

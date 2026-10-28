@@ -41,6 +41,10 @@ const CANONICAL: Record<string, SEOProps> = {
       "Usluge Detailinga – Pranje, Poliranje i Zaštita Vozila | 4D Detailing",
     canonical: "https://4d-detailing.hr/usluge",
   },
+  "/arhiva-cijenika": {
+    title: "Arhiva cjenika | 4D Detailing",
+    canonical: "https://4d-detailing.hr/arhiva-cijenika",
+  },
   "/kontakt": {
     title: "Kontakt | 4D Detailing Velika Gorica",
     canonical: "https://4d-detailing.hr/kontakt",

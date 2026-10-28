@@ -17,6 +17,7 @@ import { useData } from "../context/DataContext";
 
 import { generateServicesSchema } from "../utils/schema";
 import { getCurrentPrice } from "../utils/pricing";
+import { downloadFile } from "../utils/download";
 
 const SORTING_OPTIONS = [
   {
@@ -153,28 +154,10 @@ const Services: React.FC = () => {
     [parseDuration],
   );
 
-  const downloadFile = async (url: string, fileName: string) => {
+  const download = async (url: string, fileName: string) => {
     setLoading(true);
     try {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(
-          `Download failed: ${response.status} ${response.statusText}`,
-        );
-      }
-
-      const blob = await response.blob();
-      const objectUrl = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = objectUrl;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      URL.revokeObjectURL(objectUrl);
+      await downloadFile(url, fileName);
     } catch (err: unknown) {
     } finally {
       setLoading(false);
@@ -335,7 +318,7 @@ const Services: React.FC = () => {
                     variant="primary"
                     loading={loading}
                     onClick={() =>
-                      downloadFile(
+                      download(
                         currentPriceTable.downloadLink,
                         currentPriceTable.name,
                       )
