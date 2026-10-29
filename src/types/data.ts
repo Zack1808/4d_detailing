@@ -10,7 +10,6 @@ export type ServiceDataType = {
   slug: string;
   title: string;
   description: string;
-  duration: string;
   services: string[];
   remark?: string;
   keywords?: string[];

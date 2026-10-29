@@ -15,7 +15,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "poliranje_farova_samo_poliranje_i_zastita",
     title: "Poliranje farova (samo poliranje i zaštita)",
     description: "",
-    duration: "1-2 sata",
     services: ["Brušenje i poliranje", "Zaštita i booster premaz"],
     keywords: [],
     isFeatured: false,
@@ -40,7 +39,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "poliranje_farova_brusenje_3_faze_poliranje_i_zastita",
     title: "Poliranje farova (brušenje 3 faze, poliranje i zaštita)",
     description: "",
-    duration: "1-2 sata",
     services: ["Brušenje i poliranje", "Zaštita i booster premaz"],
     keywords: [],
     isFeatured: false,
@@ -57,7 +55,7 @@ export const mockServices: ServiceDataType[] = [
       startsAt: "",
       endsAt: "",
     },
-    createdAt: created,
+    createdAt: new Date(2026, 9, 1).toISOString(),
     updatedAt: now,
   },
   {
@@ -65,7 +63,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "poliranje_farova_brusenje_5_faza_poliranje_i_zastita",
     title: "Poliranje farova (brušenje 5 faza, poliranje i zaštita)",
     description: "",
-    duration: "1-2 sata",
     services: ["Brušenje i poliranje", "Zaštita i booster premaz"],
     keywords: [],
     isFeatured: false,
@@ -90,7 +87,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "keramicka_zastita_koznih_povrsina_5_sjedala",
     title: "Keramička zaštita kožnih površina (5 sjedala)",
     description: "",
-    duration: "2-3 sata",
     services: [
       "Priprema kožnih površina za zaštitu",
       "Premaz keramičkom zaštitom za kožu",
@@ -118,7 +114,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "keramicka_zastita_koznih_povrsina_7_sjedala",
     title: "Keramička zaštita kožnih površina (7 sjedala)",
     description: "",
-    duration: "2-3 sata",
     services: [
       "Priprema kožnih površina za zaštitu",
       "Premaz keramičkom zaštitom za kožu",
@@ -147,7 +142,6 @@ export const mockServices: ServiceDataType[] = [
     title:
       "Keramička zaštita kožnih površina (5 sjedala + površine interijera)",
     description: "",
-    duration: "2-3 sata",
     services: [
       "Priprema kožnih površina za zaštitu",
       "Premaz keramičkom zaštitom za kožu",
@@ -176,7 +170,6 @@ export const mockServices: ServiceDataType[] = [
     title:
       "Keramička zaštita kožnih površina (7 sjedala + površine interijera)",
     description: "",
-    duration: "2-3 sata",
     services: [
       "Priprema kožnih površina za zaštitu",
       "Premaz keramičkom zaštitom za kožu",
@@ -204,7 +197,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "korekcija_laka_1_faza",
     title: "Korekcija laka (1 faza)",
     description: "",
-    duration: "1-3 dana",
     services: [
       "Detaljno pranje ekterijera kao priprema",
       "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
@@ -232,7 +224,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "brusenje_laka_1_faza_po_panelu_vozila",
     title: "Brušenje laka (1 faza po panelu vozila)",
     description: "",
-    duration: "1-3 dana",
     services: [
       "Detaljno pranje ekterijera kao priprema",
       "Kemijska i mehanička dekontaminacija kao priprema laka za poliranje",
@@ -260,7 +251,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "nanosenje_keramicke_zastite_12_mjeseci",
     title: "Nanošenje keramičke zaštite (12 mjeseci)",
     description: "",
-    duration: "2 - 3 dana",
     services: [
       "Priprema laka za zaštitni premaz",
       "Premaz keramičkim premazom",
@@ -288,7 +278,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "nanosenje_keramicke_zastite_24_mjeseca",
     title: "Nanošenje keramičke zaštite (24 mjeseca)",
     description: "",
-    duration: "1 - 2 dana",
     services: ["Priprema laka za zaštitu", "Premaz zaštitom"],
     keywords: [],
     isFeatured: false,
@@ -313,7 +302,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "dubinsko_ciscenje_unutrasnjosti",
     title: "Dubinsko čišćenje unutrašnjosti",
     description: "",
-    duration: "1-2 dana",
     services: [
       "Detaljno vanjsko pranje, pranje naplataka",
       "Detaljno pranje pragova i rubova oko vrata, pranje gumenih tepiha",
@@ -345,7 +333,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "full_detailing_interijera",
     title: "Full detailing interijera",
     description: "",
-    duration: "2 - 3 dana",
     services: [
       "Detaljno vanjsko pranje, pranje naplataka",
       "Detaljno pranje rubova i površina oko vrata",
@@ -378,7 +365,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "standard_paket",
     title: "Standard Paket",
     description: "",
-    duration: "3-6 sata",
     services: [
       "Detaljnjo vanjsko pranje, pranje naplataka",
       "Otprašivanje i usisavanje interijera",
@@ -408,7 +394,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "premium_paket",
     title: "Premium Paket",
     description: "",
-    duration: "2-3 dana",
     services: [
       "Detaljnjo vanjsko pranje, pranje naplataka",
       "Pranje područja i rubova oko vrata",
@@ -440,7 +425,6 @@ export const mockServices: ServiceDataType[] = [
     slug: "luxury_plus_paket",
     title: "Luxury+ Paket",
     description: "",
-    duration: "3-4 dana",
     services: [
       "Detaljnjo vanjsko pranje, pranje naplataka",
       "Detaljno pranje štokova i prostora između vrata",

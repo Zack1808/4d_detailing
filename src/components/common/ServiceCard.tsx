@@ -91,6 +91,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     return () => window.removeEventListener("resize", getIconSize);
   }, []);
 
+  console.log(item.updatedAt);
+
   return (
     <div className="rounded-sm shadow-sm bg-gray-light/15 dark:bg-gray-dark/40 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
       <header className="flex flex-col gap-6">
@@ -142,9 +144,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
               </div>
             </div>
           )}
-          <span className="font-normal text-xl text-dark dark:text-light mt-3">
-            ~ {item.duration.split("-").join(" - ")}
-          </span>
         </div>
       </header>
       <main className="flex flex-col gap-6 text-dark dark:text-light mb-10">
