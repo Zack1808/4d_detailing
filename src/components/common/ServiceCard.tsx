@@ -91,8 +91,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ item }) => {
     return () => window.removeEventListener("resize", getIconSize);
   }, []);
 
-  console.log(item.updatedAt);
-
   return (
     <div className="rounded-sm shadow-sm bg-gray-light/15 dark:bg-gray-dark/40 px-6 py-9 flex flex-col gap-9 overflow-hidden relative w-full">
       <header className="flex flex-col gap-6">

@@ -1,5 +1,9 @@
 export const downloadFile = async (url: string, fileName: string) => {
-  const response = await fetch(url);
+  const link = import.meta.env.DEV
+    ? url.replace("https://firebasestorage.googleapis.com", "/firebase-storage")
+    : url;
+
+  const response = await fetch(link);
 
   if (!response.ok) {
     throw new Error(

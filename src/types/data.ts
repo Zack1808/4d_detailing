@@ -59,6 +59,7 @@ export type BlockedAppointments = {
 };
 
 export type PriceTableType = {
+  id: string;
   name: string;
   createdAt: string;
   downloadLink: string;

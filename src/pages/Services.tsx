@@ -36,14 +36,6 @@ const SORTING_OPTIONS = [
     value: "abecedno",
     label: "Naziv A-Z",
   },
-  {
-    value: "trajanje_uzlazno",
-    label: "Trajanje uzlazno",
-  },
-  {
-    value: "trajanje_silazno",
-    label: "Trajanje silazno",
-  },
 ];
 
 const IMAGES_CAROUSEL = [
@@ -52,14 +44,6 @@ const IMAGES_CAROUSEL = [
   "/images/service3.avif",
   "/images/service4.avif",
 ];
-
-const compareNumbers = (a: number, b: number, multiplier: number) => {
-  if (a === b) return 0;
-  if (!Number.isFinite(a)) return 1;
-  if (!Number.isFinite(b)) return -1;
-
-  return (a - b) * multiplier;
-};
 
 const Services: React.FC = () => {
   const location = useLocation();
@@ -84,47 +68,15 @@ const Services: React.FC = () => {
 
   const { services, priceArchive } = useData();
 
-  const parseDuration = useCallback((duration: string) => {
-    const normalized = duration
-      .toLowerCase()
-      .replace(",", ".")
-      .replace(/\s+/g, " ")
-      .trim();
-
-    const numbers = normalized.match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
-
-    const isDays = normalized.includes("dan");
-    const multiplier = isDays ? 24 : 1;
-
-    if (numbers.length === 1) {
-      const value = numbers[0] * multiplier;
-
-      return {
-        min: value,
-        max: value,
-      };
-    }
-
-    if (numbers.length >= 2) {
-      return {
-        min: numbers[0] * multiplier,
-        max: numbers[1] * multiplier,
-      };
-    }
-
-    return {
-      min: Infinity,
-      max: Infinity,
-    };
-  }, []);
-
   const sortList = useCallback(
     (
       list: ServiceDataType[],
-      key: "price" | "isFeatured" | "title" | "duration",
+      key: "price" | "isFeatured" | "title",
       direction: "asc" | "desc",
     ) => {
       const multiplier = direction === "asc" ? 1 : -1;
+
+      console.log(list);
 
       return [...list].sort((a, b) => {
         switch (key) {
@@ -137,21 +89,12 @@ const Services: React.FC = () => {
           case "title":
             return a.title.localeCompare(b.title) * multiplier;
 
-          case "duration":
-            const durationA = parseDuration(a.duration);
-            const durationB = parseDuration(b.duration);
-
-            return (
-              compareNumbers(durationA.min, durationB.min, multiplier) ||
-              compareNumbers(durationA.max, durationB.max, multiplier)
-            );
-
           default:
             return 0;
         }
       });
     },
-    [parseDuration],
+    [],
   );
 
   const download = async (url: string, fileName: string) => {
@@ -173,7 +116,10 @@ const Services: React.FC = () => {
 
     switch (sortValue) {
       case "popularno":
+        console.log(newList);
+
         newList = sortList(newList, "isFeatured", "desc");
+        console.log(newList);
         break;
       case "cijena_rastuca":
         newList = sortList(newList, "price", "asc");
@@ -183,12 +129,6 @@ const Services: React.FC = () => {
         break;
       case "abecedno":
         newList = sortList(newList, "title", "asc");
-        break;
-      case "trajanje_uzlazno":
-        newList = sortList(newList, "duration", "asc");
-        break;
-      case "trajanje_silazno":
-        newList = sortList(newList, "duration", "desc");
         break;
     }
 

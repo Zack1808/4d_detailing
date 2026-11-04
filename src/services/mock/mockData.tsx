@@ -539,6 +539,7 @@ export const mockBlockedAppointments: BlockedAppointments[] = [
 
 export const mockPriceTable: PriceTableType[] = [
   {
+    id: "tbl-1",
     name: "Tablica 1",
     createdAt: now,
     downloadLink:
@@ -546,24 +547,28 @@ export const mockPriceTable: PriceTableType[] = [
     isCurrent: true,
   },
   {
+    id: "tbl-2",
     name: "Tablica 2",
     createdAt: now,
     downloadLink: "link",
     isCurrent: false,
   },
   {
+    id: "tbl-3",
     name: "Tablica 3",
     createdAt: now,
     downloadLink: "link",
     isCurrent: false,
   },
   {
+    id: "tbl-4",
     name: "Tablica 4",
     createdAt: now,
     downloadLink: "link",
     isCurrent: false,
   },
   {
+    id: "tbl-5",
     name: "Tablica 5",
     createdAt: now,
     downloadLink: "link",
