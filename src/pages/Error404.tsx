@@ -6,7 +6,7 @@ import SEO from "../components/seo/SEO";
 import Container from "../components/layout/Container";
 import Reveal from "../components/layout/Reveal";
 
-import Tesseract from "../components/animated/Tessaract";
+import Tesseract from "../components/animated/Tesseract";
 
 import { useData } from "../context/DataContext";
 

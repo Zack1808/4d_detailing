@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 
-const Tesseract = lazy(() => import("../animated/Tessaract"));
+const Tesseract = lazy(() => import("../animated/Tesseract"));
 const Wheel = lazy(() => import("../animated/Wheel"));
 
 import { useData } from "../../context/DataContext";

@@ -19,7 +19,7 @@ import Input from "../components/ui/Input";
 import Textarea from "../components/ui/Textarea";
 import SEO from "../components/seo/SEO";
 
-import Tesseract from "../components/animated/Tessaract";
+import Tesseract from "../components/animated/Tesseract";
 import Wheel from "../components/animated/Wheel";
 
 import { useGetPageData } from "../hooks/useGetPageData";

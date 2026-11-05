@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import Tesseract from "../animated/Tessaract";
+import Tesseract from "../animated/Tesseract";
 import Wheel from "../animated/Wheel";
 import Polisher from "../animated/Polisher";
 
