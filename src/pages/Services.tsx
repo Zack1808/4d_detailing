@@ -6,12 +6,12 @@ import type { ServiceDataType } from "../types/data";
 import Container from "../components/layout/Container";
 import ImageCarousel from "../components/layout/ImageCarousel";
 import Reveal from "../components/layout/Reveal";
-import Button from "../components/common/Button";
+import Button from "../components/ui/Button";
 
-import Input from "../components/common/Input";
-import ServiceCard from "../components/common/ServiceCard";
-import Select from "../components/common/Select";
-import SEO from "../components/common/SEO";
+import Input from "../components/ui/Input";
+import ServiceCard from "../components/ui/ServiceCard";
+import Select from "../components/ui/Select";
+import SEO from "../components/seo/SEO";
 
 import { useData } from "../context/DataContext";
 

@@ -1,7 +1,7 @@
 import React from "react";
 
-import Button from "../components/common/Button";
-import SEO from "../components/common/SEO";
+import Button from "../components/ui/Button";
+import SEO from "../components/seo/SEO";
 
 import Container from "../components/layout/Container";
 import Reveal from "../components/layout/Reveal";

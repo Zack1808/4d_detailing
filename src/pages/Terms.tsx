@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import SEO from "../components/common/SEO";
+import SEO from "../components/seo/SEO";
 
 import Container from "../components/layout/Container";
 

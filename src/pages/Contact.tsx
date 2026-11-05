@@ -2,12 +2,12 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { FaEnvelope, FaPhone, FaClock, FaLocationDot } from "react-icons/fa6";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import Button from "../components/common/Button";
-import Input from "../components/common/Input";
-import Select from "../components/common/Select";
-import Textarea from "../components/common/Textarea";
-import DatePicker from "../components/common/DatePicker";
-import SEO from "../components/common/SEO";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import Select from "../components/ui/Select";
+import Textarea from "../components/ui/Textarea";
+import DatePicker from "../components/ui/DatePicker";
+import SEO from "../components/seo/SEO";
 
 import Container from "../components/layout/Container";
 import Reveal from "../components/layout/Reveal";

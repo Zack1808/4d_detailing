@@ -12,7 +12,7 @@ import {
   FaChevronRight,
 } from "react-icons/fa6";
 
-import Button from "../common/Button";
+import Button from "../ui/Button";
 
 import { useData } from "../../context/DataContext";
 

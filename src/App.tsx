@@ -8,7 +8,7 @@ import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
 import PageLoader from "./components/layout/PageLoader";
 
-import GoogleAnalytics from "./components/common/GoogleAnalytics";
+import GoogleAnalytics from "./components/ui/GoogleAnalytics";
 
 import Home from "./pages/Home";
 import Services from "./pages/Services";

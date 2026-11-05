@@ -12,12 +12,12 @@ import ReviewCarousel from "../components/layout/ReviewCarousel";
 import Modal from "../components/layout/Modal";
 import Reveal from "../components/layout/Reveal";
 
-import Button from "../components/common/Button";
-import ServiceCard from "../components/common/ServiceCard";
-import StarSelect from "../components/common/StarSelect";
-import Input from "../components/common/Input";
-import Textarea from "../components/common/Textarea";
-import SEO from "../components/common/SEO";
+import Button from "../components/ui/Button";
+import ServiceCard from "../components/ui/ServiceCard";
+import StarSelect from "../components/ui/StarSelect";
+import Input from "../components/ui/Input";
+import Textarea from "../components/ui/Textarea";
+import SEO from "../components/seo/SEO";
 
 import Tesseract from "../components/animated/Tessaract";
 import Wheel from "../components/animated/Wheel";

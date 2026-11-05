@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
-import List from "../components/common/List";
-import SEO from "../components/common/SEO";
+import List from "../components/ui/List";
+import SEO from "../components/seo/SEO";
 
 import Container from "../components/layout/Container";
 

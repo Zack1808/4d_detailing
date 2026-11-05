@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import { type ReviewType } from "../../types/data";
 
-import ReviewCard from "../common/RevievCard";
+import ReviewCard from "../ui/RevievCard";
 
 type ReviewCarouselProps = {
   reviews: ReviewType[];

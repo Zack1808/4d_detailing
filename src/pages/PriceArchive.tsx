@@ -6,10 +6,10 @@ import type { PriceTableType } from "../types/data";
 
 import Container from "../components/layout/Container";
 import Reveal from "../components/layout/Reveal";
-import Button from "../components/common/Button";
-import Input from "../components/common/Input";
-import Select from "../components/common/Select";
-import SEO from "../components/common/SEO";
+import Button from "../components/ui/Button";
+import Input from "../components/ui/Input";
+import Select from "../components/ui/Select";
+import SEO from "../components/seo/SEO";
 
 import { useData } from "../context/DataContext";
 

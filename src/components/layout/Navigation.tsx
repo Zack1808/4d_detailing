@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaX } from "react-icons/fa6";
 
-import Button from "../common/Button";
+import Button from "../ui/Button";
 
 import Wheel from "../animated/Wheel";
 

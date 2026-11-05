@@ -14,7 +14,7 @@ import type {
 
 import type { SEOProps } from "../types/components";
 
-import SEO from "../components/common/SEO";
+import SEO from "../components/seo/SEO";
 
 type DataContextType = {
   isDark: boolean;
