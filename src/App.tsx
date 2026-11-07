@@ -17,7 +17,7 @@ import Contact from "./pages/Contact";
 const PriceArchive = lazy(() => import("./pages/PriceArchive"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
-const Error404 = lazy(() => import("./pages/Error404"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const AppRoutes: React.FC = () => {
   const { isDark } = useData();
@@ -33,7 +33,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/arhiva-cijenika" element={<PriceArchive />} />
           <Route path="/pravila-privatnosti" element={<Privacy />} />
           <Route path="/uvijeti-koristenja" element={<Terms />} />
-          <Route path="*" element={<Error404 />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <GoogleAnalytics />

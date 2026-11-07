@@ -1,94 +1,105 @@
-import React, {
-  type AnchorHTMLAttributes,
-  type ButtonHTMLAttributes,
-  useState,
-  lazy,
-  Suspense,
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ReactNode,
 } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 
-const Tesseract = lazy(() => import("../animated/Tesseract"));
-const Wheel = lazy(() => import("../animated/Wheel"));
+import Loader from "./Loader";
 
-import { useData } from "../../context/DataContext";
+import { cn } from "../../utils/cn";
 
-type BaseButtonProps = {
-  variant: "primary" | "secondary" | "none";
+type Variant = "primary" | "secondary" | "none" | "link";
+
+type Common = {
+  variant?: Variant;
   loading?: boolean;
+  className?: string;
+  children?: ReactNode;
 };
 
-type RegularButtonProps = BaseButtonProps &
-  ButtonHTMLAttributes<HTMLButtonElement>;
-
-type LinkButtonProps = BaseButtonProps & LinkProps;
-
-type AnchorButtonProps = BaseButtonProps &
-  AnchorHTMLAttributes<HTMLAnchorElement>;
-
-type ButtonProps = RegularButtonProps | LinkButtonProps | AnchorButtonProps;
-
-const BASE_CLASSES =
-  "py-3 px-4 flex rounded-xs items-center gap-2 transition max-w-fit disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-400 disabled:pointer-events-none font-medium cursor-pointer";
-
-const VARIANT_CLASSES = {
-  primary:
-    "border border-dark dark:border-light bg-dark dark:bg-light text-light dark:text-dark hover:border-gray-semidark hover:bg-gray-semidark dark:hover:border-gray-400 dark:hover:bg-gray-400",
-  secondary:
-    "border border-dark dark:border-light text-dark dark:text-light hover:border-gray-semidark dark:hover:border-gray-200 hover:bg-gray-200 dark:hover:bg-gray-semidark",
-  none: "text-dark dark:text-light",
-} as const;
-
-const buttonClasses = (
-  variant: BaseButtonProps["variant"],
-  className: string,
-) =>
-  `${BASE_CLASSES} ${VARIANT_CLASSES[variant || "none"]} ${className}`.trim();
-
-const Button: React.FC<ButtonProps> = ({
-  variant = "none",
-  children,
-  className = "",
-  loading,
-  ...rest
-}) => {
-  const { isDark } = useData();
-
-  const [selectLoader] = useState<number>(() => {
-    const randomIndex = Math.floor(Math.random() * 2);
-    return randomIndex;
-  });
-
-  const renderLoader = () => {
-    if (!loading) return null;
-    return (
-      <Suspense fallback={null}>
-        {selectLoader === 0 && (
-          <Tesseract size={25} isDark={!isDark} speed={3} thickness={15} />
-        )}
-        {selectLoader === 1 && <Wheel size={25} speed={2} isDark={!isDark} />}
-      </Suspense>
-    );
+type ButtonAsButton = Common &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof Common> & {
+    to?: undefined;
+    href?: undefined;
   };
 
-  const classNames = buttonClasses(variant, className);
+type ButtonAsRouterLink = Common &
+  Omit<LinkProps, keyof Common> & { href?: undefined };
 
-  if ("to" in rest)
+type ButtonAsAnchor = Common &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof Common> & {
+    href: string;
+    to?: undefined;
+  };
+
+type ButtonProps = ButtonAsButton | ButtonAsRouterLink | ButtonAsAnchor;
+
+const BASE =
+  "flex max-w-fit cursor-pointer items-center gap-2 rounded-xs font-medium transition";
+
+const VARIANTS: Record<Variant, string> = {
+  primary:
+    "px-4 py-3 border border-dark bg-dark text-light hover:border-gray-semidark hover:bg-gray-semidark dark:border-light dark:bg-light dark:text-dark dark:hover:border-gray-400 dark:hover:bg-gray-400",
+  secondary:
+    "px-4 py-3 border border-dark hover:border-gray-semidark hover:bg-gray-200 dark:border-light dark:hover:border-gray-200 dark:hover:bg-gray-semidark",
+  none: "px-4 py-3",
+  link: "py-3 hover:underline underline-offset-4",
+};
+
+const DISABLED =
+  "disabled:pointer-events-none disabled:border-gray-400 disabled:bg-gray-200 disabled:text-gray-400";
+
+const Button = ({
+  variant = "none",
+  loading = false,
+  className,
+  children,
+  ...rest
+}: ButtonProps) => {
+  const classes = cn(BASE, VARIANTS[variant], !loading && DISABLED, className);
+
+  const content = (
+    <>
+      {children}
+      {loading && <Loader size="sm" inverted={variant === "primary"} />}
+    </>
+  );
+
+  if (rest.to !== undefined) {
     return (
-      <Link className={classNames} {...rest}>
-        {children} {renderLoader()}
+      <Link className={classes} {...(rest as Omit<LinkProps, "className">)}>
+        {content}
       </Link>
     );
+  }
 
-  if ("href" in rest)
+  if (rest.href !== undefined) {
     return (
-      <a className={classNames} {...rest}>
-        {children} {renderLoader()}
+      <a
+        className={classes}
+        {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {content}
       </a>
     );
+  }
+
+  const {
+    disabled,
+    type = "button",
+    ...buttonProps
+  } = rest as ButtonHTMLAttributes<HTMLButtonElement>;
 
   return (
-    <button className={classNames} {...(rest as RegularButtonProps)}>
-      {children} {renderLoader()}
+    <button
+      className={cn(classes, loading && "pointer-events-none")}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      type={type}
+      {...buttonProps}
+    >
+      {content}
     </button>
   );
 };

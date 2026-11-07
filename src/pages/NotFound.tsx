@@ -10,7 +10,7 @@ import Tesseract from "../components/animated/Tesseract";
 
 import { useData } from "../context/DataContext";
 
-const Error404: React.FC = () => {
+const NotFound: React.FC = () => {
   const { isDark } = useData();
 
   return (
@@ -66,4 +66,4 @@ const Error404: React.FC = () => {
   );
 };
 
-export default Error404;
+export default NotFound;
