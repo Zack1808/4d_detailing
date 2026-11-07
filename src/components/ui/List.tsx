@@ -1,30 +1,27 @@
-import React from "react";
+import ThemedImage from "./ThemedImage";
+
+import { cn } from "../../utils/cn";
 
 type ListProps = {
-  isDark?: boolean;
-  list: string[];
+  items: readonly string[];
   inset?: boolean;
 };
 
-const List: React.FC<ListProps> = ({ list, isDark, inset }) => {
-  const wheel = isDark ? "/images/wheel_dark.svg" : "/images/wheel_light.svg";
-
-  return (
-    <ul className={`${inset ? "pl-6" : ""} font-normal flex flex-col gap-3`}>
-      {list.map((item, index) => (
-        <li key={`${item}-${index}`} className="flex gap-3 items-start">
-          <img
-            src={wheel}
-            alt=""
-            width={25}
-            height={25}
-            className="w-5 mb-0.5"
-          />
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-};
+const List = ({ items, inset }: ListProps) => (
+  <ul className={cn("flex flex-col gap-3 font-normal", inset && "pl-6")}>
+    {items.map((item) => (
+      <li key={item} className="flex items-start gap-3">
+        <ThemedImage
+          light="/images/wheel_light.svg"
+          dark="/images/wheel_dark.svg"
+          width={25}
+          height={25}
+          className="mb-0.5 w-5"
+        />
+        {item}
+      </li>
+    ))}
+  </ul>
+);
 
 export default List;
