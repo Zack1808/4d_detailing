@@ -1,456 +1,206 @@
-import React, {
-  useCallback,
+import {
   useEffect,
   useId,
   useMemo,
   useRef,
   useState,
+  type KeyboardEvent,
 } from "react";
-import { FaCalendarAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaCalendarDays, FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
-import { parseDate } from "../../utils/date";
+import Popover from "./Popover";
+import { POPOVER_PANEL, fieldWrapperBorder } from "./fieldStyles";
+
+import { useClickOutside } from "../../hooks/useClickOutside";
+import { usePopoverPlacement } from "../../hooks/usePopoverPlacement";
+
+import { cn } from "../../utils/cn";
+import { formatDate, parseDate } from "../../utils/date";
 
 type DatePickerProps = {
-  value?: string;
-  id?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+  onBlur?: () => void;
+  name?: string;
   min?: string;
   max?: string;
-  disabled?: boolean;
-  placeholder?: string;
-  className?: string;
   isDateDisabled?: (date: string) => boolean;
-  required?: boolean;
-  name?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  invalid?: boolean;
+  className?: string;
+  "aria-invalid"?: boolean;
+  "aria-describedby"?: string;
 };
 
-type CalendarDay = {
-  date: string;
-  day: number;
-  currentMonth: boolean;
-};
+type CalendarDay = { date: string; day: number; currentMonth: boolean };
 
 const WEEKDAYS = ["PON", "UTO", "SRI", "ČET", "PET", "SUB", "NED"];
 
-const pad = (value: number) => String(value).padStart(2, "0");
-
-const toDateString = (year: number, month: number, day: number) =>
-  `${pad(day)}.${pad(month)}.${year}`;
-
-const formatDisplayDate = (value: string) => {
-  const date = parseDate(value);
-
-  if (!date) return "";
-
-  return new Intl.DateTimeFormat("hr-HR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).format(date);
-};
-
-const formatMonthYear = (date: Date) => {
-  return new Intl.DateTimeFormat("hr-HR", {
-    month: "long",
-    year: "numeric",
-  }).format(date);
-};
+const monthYear = new Intl.DateTimeFormat("hr-HR", {
+  month: "long",
+  year: "numeric",
+});
+const longDate = new Intl.DateTimeFormat("hr-HR", { dateStyle: "long" });
 
 const startOfMonth = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth(), 1);
 
-const addMonths = (date: Date, amount: number) =>
-  new Date(date.getFullYear(), date.getMonth() + amount, 1);
+const addDays = (date: Date, amount: number) =>
+  new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
 
-const addDays = (date: Date, amount: number) => {
-  const result = new Date(date);
+const addMonths = (date: Date, amount: number) => {
+  const target = new Date(date.getFullYear(), date.getMonth() + amount, 1);
+  const lastDay = new Date(
+    target.getFullYear(),
+    target.getMonth() + 1,
+    0,
+  ).getDate();
 
-  result.setDate(result.getDate() + amount);
+  target.setDate(Math.min(date.getDate(), lastDay));
 
-  return result;
+  return target;
 };
 
-const getDaysInMonth = (year: number, month: number) =>
-  new Date(year, month + 1, 0).getDate();
+const mondayIndex = (date: Date) => (date.getDay() + 6) % 7;
 
-const getDateString = (date: Date) =>
-  toDateString(date.getFullYear(), date.getMonth() + 1, date.getDate());
+const getCalendarDays = (month: Date): CalendarDay[] => {
+  const first = startOfMonth(month);
+  const gridStart = addDays(first, -mondayIndex(first));
 
-const getTodayString = () => {
-  return getDateString(new Date());
+  return Array.from({ length: 42 }, (_, i) => {
+    const date = addDays(gridStart, i);
+
+    return {
+      date: formatDate(date),
+      day: date.getDate(),
+      currentMonth: date.getMonth() === month.getMonth(),
+    };
+  });
 };
 
-const compareDates = (a: string, b: string) => {
-  const dateA = parseDate(a);
-  const dateB = parseDate(b);
+const time = (value: string) => parseDate(value)?.getTime() ?? NaN;
 
-  if (!dateA || !dateB) {
-    return 0;
-  }
-
-  const timeA = dateA.getTime();
-  const timeB = dateB.getTime();
-
-  if (timeA < timeB) return -1;
-  if (timeA > timeB) return 1;
-
-  return 0;
-};
-
-const isToday = (value: string) => value === getTodayString();
-
-const getCalendarDays = (monthDate: Date): CalendarDay[] => {
-  const year = monthDate.getFullYear();
-
-  const month = monthDate.getMonth();
-
-  const firstDay = new Date(year, month, 1);
-
-  const firstDayIndex = (firstDay.getDay() + 6) % 7;
-
-  const daysInCurrentMonth = getDaysInMonth(year, month);
-
-  const previousMonth = addMonths(monthDate, -1);
-
-  const previousYear = previousMonth.getFullYear();
-
-  const previousMonthNumber = previousMonth.getMonth();
-
-  const daysInPreviousMonth = getDaysInMonth(previousYear, previousMonthNumber);
-
-  const days: CalendarDay[] = [];
-
-  for (let i = firstDayIndex - 1; i >= 0; i--) {
-    const day = daysInPreviousMonth - i;
-
-    days.push({
-      date: toDateString(previousYear, previousMonthNumber + 1, day),
-      day,
-      currentMonth: false,
-    });
-  }
-
-  for (let day = 1; day <= daysInCurrentMonth; day++) {
-    days.push({
-      date: toDateString(year, month + 1, day),
-      day,
-      currentMonth: true,
-    });
-  }
-
-  const nextMonth = addMonths(monthDate, 1);
-
-  const nextYear = nextMonth.getFullYear();
-
-  const nextMonthNumber = nextMonth.getMonth();
-
-  while (days.length < 42) {
-    const day = days.length - firstDayIndex - daysInCurrentMonth + 1;
-
-    days.push({
-      date: toDateString(nextYear, nextMonthNumber + 1, day),
-      day,
-      currentMonth: false,
-    });
-  }
-
-  return days;
-};
-
-const DatePicker: React.FC<DatePickerProps> = ({
-  value,
-  defaultValue = "",
+const DatePicker = ({
   id,
+  value,
   onChange,
+  onBlur,
+  name,
   min,
   max,
-  disabled = false,
-  placeholder = "DD.MM.YYYY",
-  className = "",
   isDateDisabled,
-  required,
-  name,
-}) => {
-  const isControlled = value !== undefined;
-
-  const [internalValue, setInternalValue] = useState<string>(defaultValue);
-
-  const selectedValue = isControlled ? value : internalValue;
-
+  placeholder = "DD.MM.GGGG",
+  disabled = false,
+  invalid,
+  className,
+  ...aria
+}: DatePickerProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState<string>(
-    formatDisplayDate(selectedValue),
+  const [draft, setDraft] = useState<string | null>(null);
+  const [viewDate, setViewDate] = useState(() =>
+    startOfMonth(parseDate(value) ?? new Date()),
   );
-  const [viewDate, setViewDate] = useState<Date>(() => {
-    const selected = parseDate(selectedValue);
-
-    return selected ? startOfMonth(selected) : startOfMonth(new Date());
-  });
-  const [focusedDate, setFocusedDate] = useState<string>(
-    selectedValue || getTodayString(),
+  const [focusedDate, setFocusedDate] = useState(
+    value || formatDate(new Date()),
   );
-  const [hasSpaceBelow, setHasSpaceBelow] = useState<boolean>(true);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const calendarRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const dayRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const calendarId = useId();
 
-  const handleReset = () => {
-    const initial = defaultValue;
-    const parsed = parseDate(initial);
+  const dropUp = usePopoverPlacement(rootRef, panelRef, isOpen);
+  const today = formatDate(new Date());
 
-    if (!isControlled) {
-      setInternalValue(initial);
-    }
+  const close = () => setIsOpen(false);
 
-    setInputValue(formatDisplayDate(initial));
-    setFocusedDate(initial || getTodayString());
-    setViewDate(parsed ? startOfMonth(parsed) : startOfMonth(new Date()));
-    setIsOpen(false);
+  useClickOutside(rootRef, close, isOpen);
 
-    onChange?.(initial);
+  const isUnavailable = (date: string) => {
+    const t = time(date);
+
+    if (Number.isNaN(t)) return true;
+    if (min && t < time(min)) return true;
+    if (max && t > time(max)) return true;
+
+    return Boolean(isDateDisabled?.(date));
   };
-
-  const handleResetRef = useRef(handleReset);
-  handleResetRef.current = handleReset;
-
-  useEffect(() => {
-    const form = inputRef.current?.form;
-
-    if (!form) return;
-
-    const listener = () => handleResetRef.current();
-
-    form.addEventListener("reset", listener);
-
-    return () => form.removeEventListener("reset", listener);
-  }, []);
-
-  const checkSpace = useCallback(() => {
-    if (!containerRef.current || !calendarRef.current) return;
-
-    const rootRect = containerRef.current.getBoundingClientRect();
-    const dropDownHeight = calendarRef.current.offsetHeight;
-
-    const availableSpace = window.innerHeight - rootRect.bottom;
-
-    setHasSpaceBelow(dropDownHeight < availableSpace);
-  }, []);
-
-  useEffect(() => {
-    setInputValue(formatDisplayDate(selectedValue));
-  }, [selectedValue]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handlePointerDown = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handlePointerDown);
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    checkSpace();
-
-    window.addEventListener("scroll", checkSpace, true);
-    window.addEventListener("resize", checkSpace);
-
-    return () => {
-      window.removeEventListener("scroll", checkSpace, true);
-      window.removeEventListener("resize", checkSpace);
-    };
-  }, [isOpen, checkSpace]);
-
-  const isDateUnavailable = useCallback(
-    (date: string) => {
-      if (!parseDate(date)) {
-        return true;
-      }
-
-      if (min && compareDates(date, min) < 0) {
-        return true;
-      }
-
-      if (max && compareDates(date, max) > 0) {
-        return true;
-      }
-
-      if (isDateDisabled?.(date)) {
-        return true;
-      }
-
-      return false;
-    },
-    [min, max, isDateDisabled],
-  );
 
   const calendarDays = useMemo(() => getCalendarDays(viewDate), [viewDate]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    requestAnimationFrame(() => {
-      dayRefs.current[focusedDate]?.focus();
-    });
-  }, [isOpen, focusedDate, viewDate]);
-
-  const selectDate = useCallback(
-    (date: string) => {
-      if (isDateUnavailable(date)) {
-        return;
-      }
-
-      if (!isControlled) {
-        setInternalValue(date);
-      }
-
-      setInputValue(formatDisplayDate(date));
-
-      setFocusedDate(date);
-
-      onChange?.(date);
-
-      setIsOpen(false);
-
-      requestAnimationFrame(() => {
-        inputRef.current?.focus();
-      });
-    },
-    [isControlled, isDateUnavailable, onChange],
+  const weeks = Array.from({ length: 6 }, (_, i) =>
+    calendarDays.slice(i * 7, i * 7 + 7),
   );
 
-  const openCalendar = useCallback(() => {
+  useEffect(() => {
+    if (isOpen) dayRefs.current[focusedDate]?.focus();
+  }, [isOpen, focusedDate, viewDate]);
+
+  const focusInput = () =>
+    requestAnimationFrame(() => inputRef.current?.focus());
+
+  const openCalendar = () => {
     if (disabled) return;
 
-    const selected = parseDate(selectedValue);
+    const target = parseDate(value) ?? new Date();
 
-    const dateToFocus = selected ? selectedValue : getTodayString();
-
-    const parsed = parseDate(dateToFocus);
-
-    if (parsed) {
-      setViewDate(startOfMonth(parsed));
-    }
-
-    setFocusedDate(dateToFocus);
-
+    setViewDate(startOfMonth(target));
+    setFocusedDate(formatDate(target));
     setIsOpen(true);
-  }, [disabled, selectedValue]);
-
-  const changeMonth = useCallback((amount: number) => {
-    setViewDate((previous) => addMonths(previous, amount));
-  }, []);
-
-  const parseDisplayValue = (value: string) => {
-    const match = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value.trim());
-
-    if (!match) return null;
-
-    const day = Number(match[1]);
-
-    const month = Number(match[2]);
-
-    const year = Number(match[3]);
-
-    const date = toDateString(year, month, day);
-
-    if (!parseDate(date)) {
-      return null;
-    }
-
-    return date;
   };
 
-  const commitInput = () => {
-    if (!inputValue.trim()) {
-      if (!isControlled) {
-        setInternalValue("");
-      }
-
-      setInputValue("");
-      onChange?.("");
-
-      return;
-    }
-
-    const parsed = parseDisplayValue(inputValue);
-
-    if (!parsed || isDateUnavailable(parsed)) {
-      setInputValue(formatDisplayDate(selectedValue));
-
-      return;
-    }
-
-    selectDate(parsed);
+  const toggleCalendar = () => {
+    if (isOpen) close();
+    else openCalendar();
   };
 
-  const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (
-      event.key === "ArrowDown" ||
-      event.key === "ArrowUp" ||
-      event.key === "Enter" ||
-      event.key === " "
-    ) {
+  const select = (date: string) => {
+    if (isUnavailable(date)) return;
+
+    setDraft(null);
+    onChange(date);
+    close();
+    focusInput();
+  };
+
+  const commitDraft = () => {
+    if (draft !== null) {
+      onChange(draft.trim());
+      setDraft(null);
+    }
+
+    onBlur?.();
+  };
+
+  const handleInputKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (["ArrowDown", "ArrowUp"].includes(event.key)) {
       event.preventDefault();
-
-      if (!isOpen) {
-        openCalendar();
-      }
-
-      return;
+      if (!isOpen) openCalendar();
+    } else if (event.key === "Escape" && isOpen) {
+      event.preventDefault();
+      close();
     }
+  };
 
+  const handleCalendarKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Escape") {
       event.preventDefault();
-
-      setIsOpen(false);
-
+      close();
+      focusInput();
       return;
     }
 
     if (event.key === "Tab") {
-      commitInput();
-    }
-  };
-
-  const handleCalendarKeyDown = (
-    event: React.KeyboardEvent<HTMLDivElement>,
-  ) => {
-    if (event.key === "Escape") {
-      event.preventDefault();
-
-      setIsOpen(false);
-
-      requestAnimationFrame(() => {
-        inputRef.current?.focus();
-      });
-
+      close();
+      focusInput();
       return;
     }
 
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-
-      if (!isDateUnavailable(focusedDate)) {
-        selectDate(focusedDate);
-      }
-
+      select(focusedDate);
       return;
     }
 
@@ -458,137 +208,59 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
     if (!current) return;
 
-    let next: Date | null = null;
+    const moves: Record<string, Date> = {
+      ArrowLeft: addDays(current, -1),
+      ArrowRight: addDays(current, 1),
+      ArrowUp: addDays(current, -7),
+      ArrowDown: addDays(current, 7),
+      Home: addDays(current, -mondayIndex(current)),
+      End: addDays(current, 6 - mondayIndex(current)),
+      PageUp: addMonths(current, event.shiftKey ? -12 : -1),
+      PageDown: addMonths(current, event.shiftKey ? 12 : 1),
+    };
 
-    switch (event.key) {
-      case "ArrowLeft":
-        next = addDays(current, -1);
-        break;
-
-      case "ArrowRight":
-        next = addDays(current, 1);
-        break;
-
-      case "ArrowUp":
-        next = addDays(current, -7);
-        break;
-
-      case "ArrowDown":
-        next = addDays(current, 7);
-        break;
-
-      case "Home":
-        next = addDays(current, -((current.getDay() + 6) % 7));
-        break;
-
-      case "End":
-        next = addDays(current, 6 - ((current.getDay() + 6) % 7));
-        break;
-
-      case "PageUp": {
-        event.preventDefault();
-
-        const amount = event.shiftKey ? -12 : -1;
-
-        const target = new Date(
-          current.getFullYear(),
-          current.getMonth() + amount,
-          1,
-        );
-
-        const maxDay = getDaysInMonth(target.getFullYear(), target.getMonth());
-
-        target.setDate(Math.min(current.getDate(), maxDay));
-
-        next = target;
-
-        break;
-      }
-
-      case "PageDown": {
-        event.preventDefault();
-
-        const amount = event.shiftKey ? 12 : 1;
-
-        const target = new Date(
-          current.getFullYear(),
-          current.getMonth() + amount,
-          1,
-        );
-
-        const maxDay = getDaysInMonth(target.getFullYear(), target.getMonth());
-
-        target.setDate(Math.min(current.getDate(), maxDay));
-
-        next = target;
-
-        break;
-      }
-
-      case "Tab":
-        setIsOpen(false);
-
-        requestAnimationFrame(() => {
-          inputRef.current?.focus();
-        });
-        break;
-
-      default:
-        return;
-    }
-
-    event.preventDefault();
+    const next = moves[event.key];
 
     if (!next) return;
 
-    const nextValue = getDateString(next);
-
-    setFocusedDate(nextValue);
-
+    event.preventDefault();
+    setFocusedDate(formatDate(next));
     setViewDate(startOfMonth(next));
-
-    requestAnimationFrame(() => {
-      dayRefs.current[nextValue]?.focus();
-    });
   };
 
   return (
     <div
-      ref={containerRef}
-      className={`relative w-full flex-1 bg-dark/5 dark:bg-light/5 border-b-2 border-transparent focus-within:border-dark dark:focus-within:border-light transition-all transition-1000 flex flex-col items-center ${className}`}
+      ref={rootRef}
+      className={cn(
+        "relative w-full rounded-xs border-b-2 bg-dark/5 transition-colors duration-200 dark:bg-light/5",
+        fieldWrapperBorder(invalid),
+        className,
+      )}
     >
-      <div className="relative flex w-full">
+      <div className="flex w-full">
         <input
+          ref={inputRef}
+          id={id}
+          name={name}
           type="text"
           role="combobox"
-          id={id}
-          ref={inputRef}
           inputMode="numeric"
-          value={inputValue.replace(" ", "").replace(". ", ".")}
+          autoComplete="off"
+          maxLength={10}
+          value={draft ?? value}
           disabled={disabled}
-          required={required}
           placeholder={placeholder}
           aria-haspopup="dialog"
           aria-expanded={isOpen}
-          aria-controls={calendarId}
-          onChange={(event) => {
-            setInputValue(event.target.value);
-          }}
-          onClick={() => {
-            if (isOpen) {
-              setIsOpen(false);
-            } else {
-              openCalendar();
-
-              requestAnimationFrame(() => {
-                inputRef.current?.focus();
-              });
-            }
-          }}
-          name={name}
-          onBlur={commitInput}
+          aria-controls={isOpen ? calendarId : undefined}
+          onChange={(event) =>
+            setDraft(event.target.value.replace(/[^\d.]/g, ""))
+          }
+          onClick={toggleCalendar}
+          onBlur={commitDraft}
           onKeyDown={handleInputKeyDown}
-          className="w-full rounded-xs cursor-pointer outline-none placeholder:text-gray-light text-dark dark:text-light p-3"
+          className="w-full cursor-pointer rounded-xs bg-transparent p-3 font-light outline-none placeholder:text-gray-light"
+          {...aria}
         />
 
         <button
@@ -598,137 +270,111 @@ const DatePicker: React.FC<DatePickerProps> = ({
           tabIndex={-1}
           onMouseDown={(event) => event.preventDefault()}
           onClick={() => {
-            if (isOpen) {
-              setIsOpen(false);
-            } else {
-              openCalendar();
-
-              requestAnimationFrame(() => {
-                inputRef.current?.focus();
-              });
-            }
+            toggleCalendar();
+            focusInput();
           }}
-          className="p-3 text-dark dark:text-light text-2xl cursor-pointer"
+          className="cursor-pointer p-3 text-2xl"
         >
-          <FaCalendarAlt />
+          <FaCalendarDays aria-hidden="true" />
         </button>
       </div>
 
       {isOpen && !disabled && (
-        <div
-          className={`md:absolute fixed flex items-center justify-center inset-0 md:inset-auto md:p-0 p-3 w-full md:max-w-sm z-50 md:bg-light bg-gray-dark/15 md:dark:bg-dark dark:bg-light/15 backdrop-blur-lg md:backdrop-blur-none md:shadow-2xl md:dark:shadow-light/10 ${hasSpaceBelow ? "md:top-full md:mt-1" : "md:bottom-full md:mb-1"}`}
-          onClick={(event) =>
-            event.target === event.currentTarget && setIsOpen(false)
-          }
-        >
+        <Popover dropUp={dropUp} onDismiss={close} className="md:max-w-sm">
           <div
             id={calendarId}
-            ref={calendarRef}
+            ref={panelRef}
             role="dialog"
             aria-label="Odaberite datum"
-            className="p-3 rounded-xs bg-[#eeeeee] dark:bg-[#1c2022] w-full border border-dark/20 dark:border-light/20"
+            className={cn(POPOVER_PANEL, "p-3")}
           >
-            <div
-              role="application"
-              aria-label="Kalendar"
-              onKeyDown={handleCalendarKeyDown}
-              className="outline-none"
-            >
+            <div onKeyDown={handleCalendarKeyDown}>
               <div className="mb-3 flex items-center justify-between">
                 <button
                   type="button"
                   aria-label="Prošli mjesec"
-                  onClick={() => changeMonth(-1)}
-                  className="text-dark dark:text-light p-3 dark:hover:bg-light/5 hover:bg-dark/5 transition-color transition-500 cursor-pointer"
+                  onClick={() => setViewDate((d) => addMonths(d, -1))}
+                  className="cursor-pointer p-3 transition-colors hover:bg-dark/5 dark:hover:bg-light/5"
                 >
-                  <FaChevronLeft />
+                  <FaChevronLeft aria-hidden="true" />
                 </button>
 
-                <div
-                  aria-live="polite"
-                  aria-atomic="true"
-                  className="text-medium font-normal text-dark dark:text-light capitalize"
-                >
-                  {formatMonthYear(viewDate).replace(".", "")}
+                <div aria-live="polite" className="font-normal capitalize">
+                  {monthYear.format(viewDate).replace(".", "")}
                 </div>
 
                 <button
                   type="button"
                   aria-label="Idući mjesec"
-                  onClick={() => changeMonth(1)}
-                  className="text-dark dark:text-light p-3 dark:hover:bg-light/5 hover:bg-dark/5 transition-color transition-500 cursor-pointer"
+                  onClick={() => setViewDate((d) => addMonths(d, 1))}
+                  className="cursor-pointer p-3 transition-colors hover:bg-dark/5 dark:hover:bg-light/5"
                 >
-                  <FaChevronRight />
+                  <FaChevronRight aria-hidden="true" />
                 </button>
               </div>
 
-              <div className="mb-1 grid grid-cols-7" role="row">
-                {WEEKDAYS.map((weekday) => (
+              <div role="grid" aria-label={monthYear.format(viewDate)}>
+                <div role="row" className="mb-1 grid grid-cols-7">
+                  {WEEKDAYS.map((weekday) => (
+                    <div
+                      key={weekday}
+                      role="columnheader"
+                      className="text-center font-light"
+                    >
+                      {weekday}
+                    </div>
+                  ))}
+                </div>
+
+                {weeks.map((week) => (
                   <div
-                    key={weekday}
-                    role="columnheader"
-                    className="text-dark dark:text-light text-center font-light"
+                    key={week[0].date}
+                    role="row"
+                    className="grid grid-cols-7"
                   >
-                    {weekday}
+                    {week.map(({ date, day, currentMonth }) => {
+                      const unavailable = isUnavailable(date);
+                      const selected = value === date;
+                      const focused = focusedDate === date;
+
+                      return (
+                        <button
+                          type="button"
+                          key={date}
+                          ref={(element) => {
+                            dayRefs.current[date] = element;
+                          }}
+                          role="gridcell"
+                          aria-label={longDate.format(
+                            parseDate(date) ?? undefined,
+                          )}
+                          aria-selected={selected}
+                          tabIndex={focused ? 0 : -1}
+                          disabled={unavailable}
+                          onClick={() => select(date)}
+                          onFocus={() => setFocusedDate(date)}
+                          className={cn(
+                            "flex cursor-pointer items-center justify-center p-3 font-normal focus:inset-ring-2 focus:inset-ring-dark focus:outline-none dark:focus:inset-ring-light",
+                            !currentMonth &&
+                              "bg-dark/5 text-dark/80 dark:bg-light/5 dark:text-light/80",
+                            unavailable &&
+                              "cursor-auto bg-dark/30 text-dark/50 dark:bg-light/50 dark:text-light/50",
+                            date === today &&
+                              "inset-ring-3 inset-ring-dark dark:inset-ring-light",
+                            selected &&
+                              "bg-dark text-light dark:bg-light dark:text-dark",
+                          )}
+                        >
+                          {day}
+                        </button>
+                      );
+                    })}
                   </div>
                 ))}
               </div>
-
-              <div
-                className="grid grid-cols-7"
-                role="grid"
-                aria-label={formatMonthYear(viewDate)}
-              >
-                {calendarDays.map((calendarDay) => {
-                  const unavailable = isDateUnavailable(calendarDay.date);
-
-                  const selected = selectedValue === calendarDay.date;
-
-                  const focused = focusedDate === calendarDay.date;
-
-                  const today = isToday(calendarDay.date);
-
-                  return (
-                    <button
-                      type="button"
-                      key={calendarDay.date}
-                      ref={(element) => {
-                        dayRefs.current[calendarDay.date] = element;
-                      }}
-                      role="gridcell"
-                      aria-label={calendarDay.date}
-                      aria-selected={selected}
-                      aria-disabled={unavailable}
-                      tabIndex={focused ? 0 : -1}
-                      disabled={unavailable}
-                      onClick={() => {
-                        selectDate(calendarDay.date);
-                      }}
-                      onFocus={() => {
-                        setFocusedDate(calendarDay.date);
-                      }}
-                      className={`flex p-3 items-center  border-transparent justify-center cursor-pointer ${
-                        calendarDay.currentMonth
-                          ? "text-dark dark:text-light font-normal"
-                          : "bg-dark/5 dark:bg-light/5 text-dark/80 dark:text-light/80"
-                      } disabled:bg-dark/30 dark:disabled:bg-light/50 disabled:cursor-auto disabled:text-dark/50 dark:disabled:text-light/50 ${
-                        selected
-                          ? "bg-dark text-light dark:bg-light dark:text-dark! focus:inset-ring-3 focus:inset-ring-light dark:focus:inset-ring-dark"
-                          : "focus:inset-ring-dark dark:focus:inset-ring-light"
-                      } ${
-                        today
-                          ? "inset-ring-dark dark:inset-ring-light inset-ring-3"
-                          : ""
-                      } focus:outline-none focus:inset-ring-2 font-ligh`}
-                    >
-                      {calendarDay.day}
-                    </button>
-                  );
-                })}
-              </div>
             </div>
           </div>
-        </div>
+        </Popover>
       )}
     </div>
   );
