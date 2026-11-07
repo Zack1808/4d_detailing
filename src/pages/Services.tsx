@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import type { ServiceDataType } from "../types/data";
 
 import Container from "../components/layout/Container";
-import ImageCarousel from "../components/layout/ImageCarousel";
+import ImageCarousel from "../components/ui/ImageCarousel";
 import Reveal from "../components/layout/Reveal";
 import Button from "../components/ui/Button";
 
