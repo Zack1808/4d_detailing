@@ -10,7 +10,7 @@ import DatePicker from "../components/ui/DatePicker";
 import SEO from "../components/seo/SEO";
 
 import Container from "../components/layout/Container";
-import Reveal from "../components/layout/Reveal";
+import Reveal from "../components/ui/Reveal";
 
 import Tesseract from "../components/animated/Tesseract";
 import Wheel from "../components/animated/Wheel";

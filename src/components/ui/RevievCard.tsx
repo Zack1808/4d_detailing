@@ -1,35 +1,56 @@
-import React from "react";
-import { FaRegStar, FaStar } from "react-icons/fa6";
+import type { CSSProperties, ReactNode } from "react";
 
-import { type ReviewType } from "../../types/data";
+import { useInView } from "../../hooks/useInView";
+import { cn } from "../../utils/cn";
 
-type ReviewCardProps = {
-  review: ReviewType;
+const VARIANTS = {
+  up: ["opacity-0 translate-y-6", "opacity-100 translate-y-0"],
+  left: ["opacity-0 -translate-x-6", "opacity-100 translate-x-0"],
+  right: ["opacity-0 translate-x-6", "opacity-100 translate-x-0"],
+  fade: ["opacity-0", "opacity-100"],
+} as const;
+
+type RevealProps = {
+  children: ReactNode;
+  variant?: keyof typeof VARIANTS;
+  transitionFrom?: string;
+  transitionTo?: string;
+  className?: string;
+  style?: CSSProperties;
+  threshold?: number;
+  delay?: number;
 };
 
-const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
-  return (
-    <div className="px-6 py-9 rounded-sm shadow-sm w-full bg-gray-light/15 dark:bg-gray-dark/20 flex flex-col gap-9 h-full">
-      <header className="flex gap-3 text-dark dark:text-light text-2xl">
-        {Array.from({ length: review.starCount }).map((_, index) => (
-          <FaStar key={index} />
-        ))}
-        {Array.from({ length: 5 - review.starCount }).map((_, index) => (
-          <FaRegStar key={index} />
-        ))}
-      </header>
-      <blockquote className="text-dark dark:text-light flex flex-col gap-6 h-full">
-        <p className="font-light">{review.review}</p>
+const Reveal = ({
+  children,
+  variant = "up",
+  transitionFrom,
+  transitionTo,
+  className,
+  style,
+  threshold = 0.15,
+  delay = 0,
+}: RevealProps) => {
+  const { ref, isVisible, isInitiallyVisible } = useInView(threshold);
 
-        <span className="font-medium mt-auto">
-          -{" "}
-          <cite>
-            {review.name} {review.surname}
-          </cite>
-        </span>
-      </blockquote>
+  const [from, to] = VARIANTS[variant];
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        ...style,
+        transitionDelay: isInitiallyVisible ? `${delay}ms` : "100ms",
+      }}
+      className={cn(
+        "transition-[opacity,translate] duration-1000 ease-out motion-reduce:transition-opacity!",
+        isVisible ? (transitionTo ?? to) : (transitionFrom ?? from),
+        className,
+      )}
+    >
+      {children}
     </div>
   );
 };
 
-export default ReviewCard;
+export default Reveal;

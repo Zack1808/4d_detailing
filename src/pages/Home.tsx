@@ -9,8 +9,8 @@ import React, {
 import Hero from "../components/layout/Hero";
 import Container from "../components/layout/Container";
 import ReviewCarousel from "../components/layout/ReviewCarousel";
-import Modal from "../components/layout/Modal";
-import Reveal from "../components/layout/Reveal";
+import Modal from "../components/ui/Modal";
+import Reveal from "../components/ui/Reveal";
 
 import Button from "../components/ui/Button";
 import ServiceCard from "../components/ui/ServiceCard";

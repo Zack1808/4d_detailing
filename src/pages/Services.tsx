@@ -5,7 +5,7 @@ import type { ServiceDataType } from "../types/data";
 
 import Container from "../components/layout/Container";
 import ImageCarousel from "../components/ui/ImageCarousel";
-import Reveal from "../components/layout/Reveal";
+import Reveal from "../components/ui/Reveal";
 import Button from "../components/ui/Button";
 
 import Input from "../components/ui/Input";

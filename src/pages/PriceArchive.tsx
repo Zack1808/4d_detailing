@@ -5,7 +5,7 @@ import { FaDownload } from "react-icons/fa6";
 import type { PriceTableType } from "../types/data";
 
 import Container from "../components/layout/Container";
-import Reveal from "../components/layout/Reveal";
+import Reveal from "../components/ui/Reveal";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Select from "../components/ui/Select";
