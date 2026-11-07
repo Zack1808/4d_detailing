@@ -32,7 +32,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/kontakt" element={<Contact />} />
           <Route path="/arhiva-cijenika" element={<PriceArchive />} />
           <Route path="/pravila-privatnosti" element={<Privacy />} />
-          <Route path="/uvijeti-koristenja" element={<Terms />} />
+          <Route path="/uvjeti-koristenja" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
