@@ -1,6 +1,6 @@
 export type VehicleClass = "car" | "suv" | "transporter";
 
-type PriceType = {
+export type PriceType = {
   price: number;
   anchorPrice: number;
 };
@@ -49,6 +49,16 @@ export type AppointmentType = {
   remark?: string;
   isConfirmed: boolean;
   isBlocked: boolean;
+};
+
+export type NewAppointment = Omit<AppointmentType, "id" | "dateTo">;
+export type NewReview = Omit<ReviewType, "id">;
+
+export type PageData = {
+  services: ServiceDataType[];
+  reviews: ReviewType[];
+  blockedAppointments: BlockedAppointments[];
+  priceArchive: PriceTableType[];
 };
 
 export type BlockedAppointments = {

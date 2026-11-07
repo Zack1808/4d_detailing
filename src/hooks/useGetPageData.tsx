@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 
 import { firebaseApi } from "../services/api/firebaseApi";
 
-import { MOCK_CONFIG } from "../services/mock/mockConfig";
+import { MOCK_CONFIG } from "../services/mock/config";
 
 import {
   type ServiceDataType,

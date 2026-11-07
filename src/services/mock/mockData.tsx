@@ -576,4 +576,4 @@ export const mockPriceTable: PriceTableType[] = [
   },
 ];
 
-export { MOCK_CONFIG } from "./mockConfig";
+export { MOCK_CONFIG } from "./config";
