@@ -38,7 +38,6 @@ const CAROUSEL_IMAGES = [
   "/images/service4.avif",
 ];
 
-/** `services` arrive sorted by `sortOrder`; sorting here is stable on top of that. */
 const sortServices = (list: ServiceDataType[], sort: string) => {
   const sorted = [...list];
 
@@ -65,7 +64,6 @@ const Services = () => {
   const { services, priceArchive, status, error, reload } = useData();
   const { activeKey, download } = useFileDownload();
 
-  // Search and sort live in the URL so the view can be shared / reloaded.
   const [params, setParams] = useSearchParams();
   const search = params.get("pretraga") ?? "";
   const sort = params.get("sortiranje") ?? DEFAULT_SORT;
