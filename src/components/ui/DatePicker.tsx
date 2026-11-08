@@ -232,7 +232,7 @@ const DatePicker = ({
     <div
       ref={rootRef}
       className={cn(
-        "relative w-full rounded-xs border-b-2 bg-dark/5 transition-colors duration-200 dark:bg-light/5",
+        "relative w-full rounded-xs border-b-2 bg-dark/5 transition-colors duration-200 dark:bg-light/5 flex flex-col",
         fieldWrapperBorder(invalid),
         className,
       )}
@@ -280,7 +280,11 @@ const DatePicker = ({
       </div>
 
       {isOpen && !disabled && (
-        <Popover dropUp={dropUp} onDismiss={close} className="md:max-w-sm">
+        <Popover
+          dropUp={dropUp}
+          onDismiss={close}
+          className="md:max-w-sm self-center"
+        >
           <div
             id={calendarId}
             ref={panelRef}

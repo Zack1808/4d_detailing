@@ -1,11 +1,9 @@
-import { Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import CookieConsent from "../analytics/CookieConsent";
 import ErrorBoundary from "./ErrorBoundary";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
-import PageLoader from "./PageLoader";
 
 import { DataProvider } from "../../context/DataContext";
 
@@ -16,9 +14,7 @@ const PublicLayout = () => {
     <DataProvider>
       <Navigation />
       <ErrorBoundary key={pathname}>
-        <Suspense fallback={<PageLoader />}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </ErrorBoundary>
       <CookieConsent />
       <Footer />

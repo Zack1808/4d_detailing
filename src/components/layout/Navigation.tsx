@@ -12,7 +12,6 @@ import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
 import { useFocusTrap } from "../../hooks/useFocusTrap";
 import { useIsDark } from "../../hooks/useMediaQuery";
 import { useTransitionMount } from "../../hooks/useTransitionMount";
-import { prefetchPage } from "../../pageLoaders";
 import { cn } from "../../utils/cn";
 
 const SOLID_AT_PX = 500;
@@ -36,6 +35,7 @@ const Navigation = () => {
 
   useBodyScrollLock(mounted);
   useFocusTrap(menuRef, mounted && menuOpen, closeMenu);
+
   useEffect(() => {
     let frame = 0;
 
@@ -94,14 +94,7 @@ const Navigation = () => {
             className="hidden items-center justify-center md:flex"
           >
             {NAV_LINKS.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end
-                className={linkClasses}
-                onMouseEnter={() => prefetchPage(to)}
-                onFocus={() => prefetchPage(to)}
-              >
+              <NavLink key={to} to={to} end className={linkClasses}>
                 {label}
               </NavLink>
             ))}
@@ -164,7 +157,6 @@ const Navigation = () => {
               end
               className={menuLinkClasses}
               onClick={closeMenu}
-              onTouchStart={() => prefetchPage(to)}
             >
               {label}
             </NavLink>

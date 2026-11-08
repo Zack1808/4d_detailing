@@ -18,7 +18,6 @@ import Logo from "../ui/Logo";
 import { BUSINESS, SOCIAL_LINKS, type SocialId } from "../../config/business";
 import { FOOTER_LINKS, PATHS } from "../../config/paths";
 import { openCookieSettings } from "../../lib/analytics";
-import { prefetchPage } from "../../pageLoaders";
 import { cn } from "../../utils/cn";
 
 const SOCIAL_ICONS: Record<SocialId, IconType> = {
@@ -29,6 +28,7 @@ const SOCIAL_ICONS: Record<SocialId, IconType> = {
   youtube: FaYoutube,
 };
 
+/** Link row: full-width list item on phones, plain link on desktop. */
 const ROW = "w-full max-w-none text-sm lg:max-w-max";
 const COLUMN =
   "flex flex-col items-center justify-center gap-0 px-3 py-3 lg:px-9";
@@ -95,13 +95,7 @@ const Footer = () => (
         <div className="flex w-full flex-col lg:w-auto">
           <h2 className={HEADING}>Linkovi</h2>
           {FOOTER_LINKS.map(({ to, label }) => (
-            <Button
-              key={to}
-              variant="link"
-              className={ROW}
-              to={to}
-              onMouseEnter={() => prefetchPage(to)}
-            >
+            <Button key={to} variant="link" className={ROW} to={to}>
               {label}
               <Chevron />
             </Button>

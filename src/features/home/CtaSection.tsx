@@ -50,7 +50,7 @@ const CtaSection = () => (
         width={567}
         height={495}
         loading="lazy"
-        className="hidden w-1/3 md:flex"
+        className="hidden w-md md:flex"
       />
     </div>
   </Container>
