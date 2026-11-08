@@ -26,13 +26,7 @@ const GENERAL_QUESTION = "general_question";
 const SEND_FAILED =
   "Slanje upita nije uspjelo. Pokušajte ponovno ili nas kontaktirajte izravno.";
 
-const HONEYPOT_STYLE = {
-  position: "absolute",
-  left: "-9999px",
-  width: 0,
-  height: 0,
-  opacity: 0,
-} as const;
+const MIN_FILL_MS = 1500;
 
 const ContactForm = () => {
   const { services, blockedAppointments } = useData();
@@ -40,6 +34,7 @@ const ContactForm = () => {
 
   const [sent, setSent] = useState(false);
   const honeypot = useRef<HTMLInputElement>(null);
+  const openedAt = useRef(Date.now());
 
   const options = useMemo(
     () => [
@@ -113,7 +108,10 @@ const ContactForm = () => {
     initialValues,
     validate,
     onSubmit: async (values, { setFieldErrors, focusFirstInvalid, reset }) => {
-      if (honeypot.current?.value) {
+      if (
+        honeypot.current?.checked ||
+        Date.now() - openedAt.current < MIN_FILL_MS
+      ) {
         setSent(true);
         return;
       }
@@ -180,15 +178,12 @@ const ContactForm = () => {
     >
       <input
         ref={honeypot}
-        type="text"
+        type="checkbox"
         name="hp_ref_code"
-        data-1p-ignore
-        data-lpignore="true"
-        data-form-type="other"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
-        style={HONEYPOT_STYLE}
+        className="pointer-events-none absolute left-[9999px] size-0 opacity-0"
       />
 
       <p className="text-sm font-light text-gray-light">
