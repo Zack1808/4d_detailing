@@ -1,221 +1,161 @@
-import React from "react";
+import type { IconType } from "react-icons";
 import {
-  FaEnvelope,
-  FaPhone,
-  FaLocationDot,
-  FaCopyright,
-  FaTiktok,
-  FaInstagram,
-  FaSquareFacebook,
-  FaYoutube,
-  FaWhatsapp,
   FaChevronRight,
+  FaCopyright,
+  FaEnvelope,
+  FaInstagram,
+  FaLocationDot,
+  FaPhone,
+  FaSquareFacebook,
+  FaTiktok,
+  FaWhatsapp,
+  FaYoutube,
 } from "react-icons/fa6";
 
-import Button from "../common/Button";
+import Button from "../ui/Button";
+import Logo from "../ui/Logo";
 
-import { useData } from "../../context/DataContext";
+import { BUSINESS, SOCIAL_LINKS, type SocialId } from "../../config/business";
+import { FOOTER_LINKS, PATHS } from "../../config/paths";
+import { openCookieSettings } from "../../lib/analytics";
+import { cn } from "../../utils/cn";
 
-const Footer: React.FC = () => {
-  const { isDark } = useData();
+const SOCIAL_ICONS: Record<SocialId, IconType> = {
+  tiktok: FaTiktok,
+  instagram: FaInstagram,
+  facebook: FaSquareFacebook,
+  whatsapp: FaWhatsapp,
+  youtube: FaYoutube,
+};
 
-  const logo = isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg";
+/** Link row: full-width list item on phones, plain link on desktop. */
+const ROW = "w-full max-w-none text-sm lg:max-w-max";
+const COLUMN =
+  "flex flex-col items-center justify-center gap-0 px-3 py-3 lg:px-9";
+const HEADING = "mb-3 text-2xl font-medium";
 
-  return (
-    <footer className="w-full bg-light dark:bg-dark px-3 py-18 border-t-gray-light dark:border-t-gray-dark border-t-2 flex items-center justify-center flex-col gap-12">
-      <div className="flex lg:flex-row flex-col items-start justify-between gap-12 flex-1 w-full mt-6 max-w-[1700px]">
-        <div className="flex flex-col lg:px-9 px-3 py-3 h-full items-center justify-center flex-1 gap-6">
-          <div className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt="logo"
-              width={80}
-              height={70}
-              className="w-20"
-            />
-            <span className="text-dark dark:text-light font-bold text-4xl">
-              4D Detailing
-            </span>
-          </div>
-          <div className="flex flex-col gap-6">
-            <p className="text-dark dark:text-light font-light text-sm max-w-[35ch]">
-              Profesionalne usluge čišćenja i poliranja vozila. Jer čistoća i
-              sjaj nisu trošak, nego ulaganje!
-            </p>
-            <Button variant="secondary" to="/kontakt" className="text-xs">
-              Rezerviraj termin
-            </Button>
-          </div>
+const Chevron = () => (
+  <FaChevronRight className="ml-auto block lg:hidden" aria-hidden="true" />
+);
+
+const Footer = () => (
+  <footer className="flex w-full flex-col items-center justify-center gap-12 border-t-2 border-t-gray-light bg-light px-3 py-18 dark:border-t-gray-dark dark:bg-dark">
+    <div className="mt-6 flex w-full max-w-[1700px] flex-1 flex-col items-start justify-between gap-12 lg:flex-row">
+      <div className="flex h-full flex-1 flex-col items-center justify-center gap-6 px-3 py-3 lg:px-9">
+        <div className="flex items-center gap-3">
+          <Logo width={80} height={70} className="w-20" />
+          <span className="text-4xl font-bold">{BUSINESS.name}</span>
         </div>
-        <div className="flex flex-col lg:px-9 px-3 py-3 h-full justify-center items-center flex-1 w-full lg:w-auto">
-          <div className="flex flex-col w-full lg:w-auto">
-            <span className="text-dark dark:text-light font-medium text-2xl mb-3">
-              Kontakt
-            </span>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              href="mailto:info@4d-detailing.hr"
-            >
-              <FaEnvelope className="text-lg" />
-              info@4d-detailing.hr
-              <FaChevronRight className="ml-auto lg:hidden block" />
+        <div className="flex flex-col gap-6">
+          <p className="max-w-[35ch] text-sm font-light">
+            Profesionalne usluge čišćenja i poliranja vozila. Jer čistoća i sjaj
+            nisu trošak, nego ulaganje!
+          </p>
+          <Button variant="secondary" to={PATHS.contact} className="text-xs">
+            Rezerviraj termin
+          </Button>
+        </div>
+      </div>
+
+      <div className={cn(COLUMN, "w-full flex-1 lg:w-auto")}>
+        <div className="flex w-full flex-col lg:w-auto">
+          <h2 className={HEADING}>Kontakt</h2>
+          <Button
+            variant="link"
+            className={ROW}
+            href={`mailto:${BUSINESS.email}`}
+          >
+            <FaEnvelope className="text-lg" aria-hidden="true" />
+            {BUSINESS.email}
+            <Chevron />
+          </Button>
+          <Button variant="link" className={ROW} href={BUSINESS.phone.href}>
+            <FaPhone className="text-lg" aria-hidden="true" />
+            {BUSINESS.phone.display}
+            <Chevron />
+          </Button>
+          <Button
+            variant="link"
+            className={ROW}
+            href={BUSINESS.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLocationDot className="text-lg" aria-hidden="true" />
+            {BUSINESS.address.full}
+            <Chevron />
+          </Button>
+        </div>
+      </div>
+
+      <nav
+        aria-label="Poveznice"
+        className={cn(COLUMN, "w-full flex-1 lg:w-auto")}
+      >
+        <div className="flex w-full flex-col lg:w-auto">
+          <h2 className={HEADING}>Linkovi</h2>
+          {FOOTER_LINKS.map(({ to, label }) => (
+            <Button key={to} variant="link" className={ROW} to={to}>
+              {label}
+              <Chevron />
             </Button>
+          ))}
+          <Button variant="link" className={ROW} onClick={openCookieSettings}>
+            Postavke kolačića
+            <Chevron />
+          </Button>
+        </div>
+      </nav>
+    </div>
+
+    <div className="flex w-full flex-col items-center justify-between gap-9 lg:flex-row lg:px-9 md:max-w-[1700px]">
+      <p className="order-2 flex flex-1 justify-start text-center text-sm lg:order-1">
+        <FaCopyright className="mr-2 text-lg font-light" aria-hidden="true" />
+        <span>
+          2024 - {new Date().getFullYear()}{" "}
+          <b className="font-semibold">{BUSINESS.name}</b>.{" "}
+          <br className="block lg:hidden" />
+          Sva prava pridržana.
+        </span>
+      </p>
+
+      <div className="order-1 flex w-full flex-col justify-center px-3 py-3 pb-12 lg:order-2 lg:w-auto lg:flex-row lg:gap-6 lg:px-0 lg:pb-0">
+        <h2 className="mb-3 block text-2xl font-medium lg:hidden">
+          Pratite nas
+        </h2>
+        {SOCIAL_LINKS.map(({ id, label, href }) => {
+          const Icon = SOCIAL_ICONS[id];
+
+          return (
             <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              href="tel:+385977588716"
-            >
-              <FaPhone className="text-lg" />
-              +385 97 758 8716{" "}
-              <FaChevronRight className="ml-auto lg:hidden block" />
-            </Button>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              href="https://maps.app.goo.gl/BM2TStTNWFyDirfr9"
+              key={id}
+              variant="link"
+              className={ROW}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={label}
             >
-              <FaLocationDot className="text-lg" />
-              Rakitovec 274, 10410 Velika Gorica{" "}
-              <FaChevronRight className="ml-auto lg:hidden block" />
+              <Icon className="text-lg lg:text-2xl" aria-hidden="true" />
+              <span className="block lg:hidden">{label}</span>
+              <Chevron />
             </Button>
-          </div>
-        </div>
-        <div className="flex flex-col lg:px-9 px-3 py-3 h-full flex-1 justify-center items-center w-full lg:w-auto">
-          <div className="flex flex-col w-full lg:w-auto">
-            <span className="text-dark dark:text-light font-medium text-2xl mb-3">
-              Linkovi
-            </span>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              to="/"
-            >
-              Home <FaChevronRight className="ml-auto lg:hidden block" />
-            </Button>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              to="/usluge"
-            >
-              Usluge <FaChevronRight className="ml-auto lg:hidden block" />
-            </Button>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              to="/uvijeti-koristenja"
-            >
-              Uvijeti korištenja{" "}
-              <FaChevronRight className="ml-auto lg:hidden block" />
-            </Button>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              to="/pravila-privatnosti"
-            >
-              Pravila privatnosti{" "}
-              <FaChevronRight className="ml-auto lg:hidden block" />
-            </Button>
-            <Button
-              variant="none"
-              className="px-0! text-sm max-w-none w-full lg:max-w-"
-              to="/kontakt"
-            >
-              Kontakt <FaChevronRight className="ml-auto lg:hidden block" />
-            </Button>
-          </div>
-        </div>
+          );
+        })}
       </div>
-      <div className="w-full md:max-w-[1700px] flex justify-between align-center gap-9 text-dark lg:px-9 dark:text-light lg:flex-row flex-col items-center">
-        <span className="flex justify-start text-center text-sm flex-1 lg:order-1 order-2">
-          <FaCopyright className="text-lg font-light mr-2" />{" "}
-          <span>
-            2024 - {new Date().getFullYear()}{" "}
-            <b className="font-semibold">4D Detailing</b>.{" "}
-            <br className="lg:hidden block" />
-            Sva prava pridržana.
-          </span>
-        </span>
-        <div className="flex lg:flex-row flex-col lg:px-0 px-3 py-3 h-full justify-center items-centerflex-1 w-full lg:w-auto lg:gap-6 lg:order-2 order-1 pb-12 lg:pb-0">
-          <span className="text-dark dark:text-light font-medium text-2xl mb-3 lg:hidden block">
-            Pratite nas
-          </span>
-          <Button
-            variant="none"
-            className="px-0! text-sm max-w-none w-full lg:max-w-max"
-            href="https://www.tiktok.com/@4ddetailing?_t=ZN-8sUT8kPvC5e&_r=1"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="TikTok"
-          >
-            <FaTiktok className="lg:text-2xl text-lg" />
-            <span className="lg:hidden block">TikTok</span>{" "}
-            <FaChevronRight className="ml-auto lg:hidden block" />
-          </Button>
-          <Button
-            variant="none"
-            className="px-0! text-sm max-w-none w-full lg:max-w-"
-            href="https://www.instagram.com/4dcardetailing?igsh=MTAzYnVsa2U0bmY5MA=="
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-          >
-            <FaInstagram className="lg:text-2xl text-lg" />
-            <span className="lg:hidden block">Instagram</span>{" "}
-            <FaChevronRight className="ml-auto lg:hidden block" />
-          </Button>
-          <Button
-            variant="none"
-            className="px-0! text-sm max-w-none w-full lg:max-w-max"
-            href="https://www.facebook.com/p/4D-Detailing-61573426065582/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-          >
-            <FaSquareFacebook className="lg:text-2xl text-lg" />
-            <span className="lg:hidden block">Facebook</span>{" "}
-            <FaChevronRight className="ml-auto lg:hidden block" />
-          </Button>
-          <Button
-            variant="none"
-            className="px-0! text-sm max-w-none w-full lg:max-w-max"
-            href="https://wa.me/+385977588716"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Whatsapp"
-          >
-            <FaWhatsapp className="lg:text-2xl text-lg" />
-            <span className="lg:hidden block">Whatsapp</span>{" "}
-            <FaChevronRight className="ml-auto lg:hidden block" />
-          </Button>
-          <Button
-            variant="none"
-            className="px-0! text-sm max-w-none w-full lg:max-w-max"
-            href="https://www.youtube.com/@4DDetailing"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="YouTube"
-          >
-            <FaYoutube className="lg:text-2xl text-lg" />
-            <span className="lg:hidden block">YouTube</span>{" "}
-            <FaChevronRight className="ml-auto lg:hidden block" />
-          </Button>
-        </div>
-        <div className="flex-1 flex justify-end order-3">
-          <a
-            href="https://jeanpierrenovak.from.hr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-500 dark:text-gray-400 font-light"
-          >
-            Izradio: <b className="font-semibold">JPN</b>
-          </a>
-        </div>
+
+      <div className="order-3 flex flex-1 justify-end">
+        <a
+          href="https://jeanpierrenovak.from.hr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-light text-gray-500 dark:text-gray-400"
+        >
+          Izradio: <b className="font-semibold">JPN</b>
+        </a>
       </div>
-    </footer>
-  );
-};
+    </div>
+  </footer>
+);
 
 export default Footer;

@@ -1,0 +1,25 @@
+import { useCallback, useSyncExternalStore } from "react";
+
+export const useMediaQuery = (query: string): boolean => {
+  const subscribe = useCallback(
+    (onChange: () => void) => {
+      const mediaQuery = window.matchMedia(query);
+
+      mediaQuery.addEventListener("change", onChange);
+
+      return () => mediaQuery.removeEventListener("change", onChange);
+    },
+    [query],
+  );
+
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false,
+  );
+};
+
+export const useIsDark = () => useMediaQuery("(prefers-color-scheme: dark)");
+
+export const usePrefersReducedMotion = () =>
+  useMediaQuery("(prefers-reduced-motion: reduce)");

@@ -2,7 +2,7 @@ import { FaCircleCheck, FaCircleXmark } from "react-icons/fa6";
 import { toast } from "react-toastify";
 
 const toastClasses =
-  "rounded-xs! bg-[#e5e5e4]! dark:bg-[#1e1716]! text-dark! dark:text-light!";
+  "rounded-xs! bg-panel! dark:bg-panel-dark! text-dark! dark:text-light!";
 
 export const notifySuccess = (message: string) => {
   toast.success(message, {
@@ -17,6 +17,7 @@ export const notifySuccess = (message: string) => {
 export const notifyError = (message: string) => {
   toast.error(message, {
     className: toastClasses,
+    autoClose: 6000,
     icon: (
       <FaCircleXmark className="text-red-400! dark:text-red-900! w-full! h-full!" />
     ),

@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
+import {
+  InlineLink,
+  LegalPage,
+  LegalSection,
+  LegalText,
+  MailLink,
+} from "../components/legal/LegalPage";
+import List from "../components/ui/List";
 
-import List from "../components/common/List";
-import SEO from "../components/common/SEO";
+import { BUSINESS } from "../config/business";
+import { PAGE_META } from "../config/seo";
 
-import Container from "../components/layout/Container";
-
-import { useData } from "../context/DataContext";
-
-const EMAIL = "info@4d-detailing.hr";
-const OWNER = "Luka Novak";
-const OIB = "17787878930";
-const ADDRESS = "Rakitovec 274, 10410 Velika Gorica";
-const PHONE = "+385 97 758 8716";
-const LAST_UPDATED = "28. rujna 2026.";
+const LAST_UPDATED = "5. studenoga 2026.";
 
 const FORM_DATA = [
   "Ime i prezime",
   "Email adresa",
   "Broj telefona",
-  "Predmet maila",
+  "Odabrana usluga",
   "Marka vozila",
   "Željeni termin",
   "Napomena koju nam šaljete",
@@ -44,7 +42,7 @@ const PURPOSES = [
 
 const PROCESSORS = [
   "Google Firebase (Google Ireland Limited / Google LLC) – pohrana zahtjeva za termin i podataka iz obrasca",
-  "EmailJS – slanje automatskih e-mail poruka putem obrasca",
+  "Mailgun (Mailgun Technologies, Inc.) – slanje automatskih e-mail poruka putem obrasca",
   "Google (Gmail) – primanje i pohrana e-mail poruka koje nam šaljete ili primamo putem obrasca",
   "Netlify, Inc. – hosting web stranice",
   "Google Analytics (Google Ireland Limited / Google LLC) – analitika posjećenosti, samo uz vašu privolu",
@@ -53,7 +51,7 @@ const PROCESSORS = [
 const RIGHTS = [
   "pravo na pristup vašim osobnim podacima",
   "pravo na ispravak netočnih podataka",
-  "pravo na brisanje (\u201Epravo na zaborav\u201C)",
+  "pravo na brisanje („pravo na zaborav“)",
   "pravo na ograničenje obrade",
   "pravo na prenosivost podataka",
   "pravo na prigovor na obradu koja se temelji na legitimnom interesu",
@@ -65,188 +63,142 @@ const COOKIES = [
   "Analitički kolačići Google Analyticsa (_ga, _ga_*) – postavljaju se tek nakon što ih prihvatite putem obavijesti o kolačićima.",
 ];
 
-const Section: React.FC<{ title: string; children: React.ReactNode }> = ({
-  title,
-  children,
-}) => {
-  return (
-    <li className="text-dark dark:text-light flex flex-col gap-3">
-      <h3 className="font-semibold text-3xl">{title}</h3>
-      {children}
-    </li>
-  );
-};
+const Privacy = () => (
+  <LegalPage
+    meta={PAGE_META.privacy}
+    title="Pravila privatnosti"
+    intro={`Posljednja izmjena: ${LAST_UPDATED}`}
+  >
+    <LegalSection title="1. Voditelj obrade">
+      <LegalText>
+        Voditelj obrade vaših osobnih podataka je obrt za detailing{" "}
+        {BUSINESS.name}, vlasnik {BUSINESS.owner}, OIB: {BUSINESS.oib},
+        sjedište: {BUSINESS.address.full}, tel: {BUSINESS.phone.display},
+        e-mail: <MailLink />.
+      </LegalText>
+    </LegalSection>
 
-const MailLink: React.FC = () => (
-  <a href={`mailto:${EMAIL}`} className="font-semibold underline">
-    {EMAIL}
-  </a>
+    <LegalSection title="2. Podaci koje prikupljamo">
+      <LegalText>
+        Podatke koje dobrovoljno unesete putem kontakt obrasca i obrasca za
+        zahtjev za termin:
+      </LegalText>
+      <List items={FORM_DATA} inset />
+      <LegalText>
+        Podatke koji se automatski bilježe pri posjetu stranici:
+      </LegalText>
+      <List items={TECH_DATA} inset />
+      <LegalText>
+        Samo ako pristanete na analitičke kolačiće, putem Google Analyticsa
+        prikupljamo i:
+      </LegalText>
+      <List items={ANALYTICS_DATA} inset />
+      <LegalText>
+        Ovi se podaci smatraju osobnim podacima jer se mogu povezati s pojedinim
+        uređajem ili korisnikom.
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="3. Svrhe obrade i pravna osnova">
+      <List items={PURPOSES} inset />
+      <LegalText>
+        Podaci koje unosite u obrazac potrebni su za obradu vašeg upita ili
+        zahtjeva. Bez njih ne možemo odgovoriti na upit niti potvrditi termin.
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="4. Primatelji podataka">
+      <LegalText>
+        Vaše osobne podatke ne prodajemo niti ih ustupamo trećim stranama u
+        marketinške svrhe. Za rad stranice koristimo pouzdane pružatelje usluga
+        koji podatke obrađuju u naše ime i prema našim uputama:
+      </LegalText>
+      <List items={PROCESSORS} inset />
+      <LegalText>
+        Podaci mogu biti otkriveni i tijelima javne vlasti ako nas na to
+        obvezuje zakon.
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="5. Prijenos podataka izvan EGP-a">
+      <LegalText>
+        Neki od navedenih pružatelja usluga mogu obrađivati podatke i izvan
+        Europskoga gospodarskog prostora, uključujući SAD. U tom se slučaju
+        prijenos temelji na odgovarajućim zaštitnim mjerama, kao što su
+        standardne ugovorne klauzule Europske komisije ili odluka o
+        primjerenosti (Okvir za privatnost podataka EU-SAD).
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="6. Rok čuvanja">
+      <LegalText>
+        Upite i zahtjeve za termin čuvamo najdulje 12 mjeseci od posljednje
+        komunikacije. Podatke potrebne za izvršenu uslugu i izdavanje računa
+        čuvamo onoliko koliko nalažu računovodstveni i porezni propisi. Podaci
+        Google Analyticsa čuvaju se u razdoblju određenom postavkama našeg
+        Analytics računa. Nakon isteka roka podatke brišemo ili trajno
+        anonimiziramo.
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="7. Kolačići">
+      <LegalText>Naša stranica koristi:</LegalText>
+      <List items={COOKIES} inset />
+      <LegalText>
+        Analitiku pokrećemo tek nakon vaše privole. Privolu možete povući ili
+        promijeniti u bilo kojem trenutku putem poveznice „Postavke kolačića” u
+        podnožju stranice, a kolačiće možete i obrisati ili onemogućiti u
+        postavkama preglednika. Više o Googleovim kolačićima možete saznati na{" "}
+        <InlineLink
+          external
+          href="https://policies.google.com/technologies/cookies"
+        >
+          službenim Google stranicama
+        </InlineLink>
+        .
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="8. Sigurnost podataka">
+      <LegalText>
+        Primjenjujemo odgovarajuće tehničke i organizacijske mjere zaštite, među
+        ostalim šifriranu (HTTPS) komunikaciju, ograničen pristup podacima samo
+        ovlaštenim osobama i zaštićen administratorski pristup. Ipak, nijedna
+        metoda prijenosa ili pohrane podataka putem interneta nije potpuno
+        sigurna.
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="9. Vaša prava">
+      <LegalText>U vezi s vašim osobnim podacima imate:</LegalText>
+      <List items={RIGHTS} inset />
+      <LegalText>
+        Prava možete ostvariti slanjem zahtjeva na <MailLink />. Na zahtjev
+        odgovaramo u roku od mjesec dana. Ako smatrate da obrada vaših podataka
+        krši propise, imate pravo podnijeti pritužbu nadzornom tijelu: Agenciji
+        za zaštitu osobnih podataka (AZOP), Selska cesta 136, Zagreb,{" "}
+        <InlineLink external href="https://azop.hr">
+          azop.hr
+        </InlineLink>
+        .
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="10. Izmjene pravila privatnosti">
+      <LegalText>
+        Ova pravila možemo povremeno izmijeniti, primjerice zbog promjene zakona
+        ili naših usluga. Aktualna verzija uvijek je objavljena na ovoj stranici
+        s datumom posljednje izmjene.
+      </LegalText>
+    </LegalSection>
+
+    <LegalSection title="11. Kontakt">
+      <LegalText>
+        Za sva pitanja o obradi osobnih podataka javite nam se na <MailLink />{" "}
+        ili putem kontakt obrasca na našoj web stranici.
+      </LegalText>
+    </LegalSection>
+  </LegalPage>
 );
-
-const Privacy: React.FC = () => {
-  const { isDark } = useData();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  return (
-    <main>
-      <SEO
-        title="Pravila privatnosti | 4D Detailing"
-        canonical="https://4d-detailing.hr/pravila-privatnosti"
-      />
-      <Container>
-        <h2 className="text-dark dark:text-light mt-30 text-5xl font-bold">
-          Pravila privatnosti
-        </h2>
-        <p className="text-dark dark:text-light mt-6 font-light">
-          Posljednja izmjena: {LAST_UPDATED}
-        </p>
-
-        <ul className="flex flex-col gap-12 mt-15">
-          <Section title="1. Voditelj obrade">
-            <p className="font-light">
-              Voditelj obrade vaših osobnih podataka je obrt za detailing 4D
-              Detailing, vlasnik {OWNER}, OIB: {OIB}, sjedište: {ADDRESS}, tel:{" "}
-              {PHONE}, e-mail: <MailLink />.
-            </p>
-          </Section>
-
-          <Section title="2. Podaci koje prikupljamo">
-            <p className="font-light">
-              Podatke koje dobrovoljno unesete putem kontakt obrasca i obrasca
-              za zahtjev za termin:
-            </p>
-            <List list={FORM_DATA} isDark={isDark} inset />
-            <p className="font-light">
-              Podatke koji se automatski bilježe pri posjetu stranici:
-            </p>
-            <List list={TECH_DATA} isDark={isDark} inset />
-            <p className="font-light">
-              Samo ako pristanete na analitičke kolačiće, putem Google
-              Analyticsa prikupljamo i:
-            </p>
-            <List list={ANALYTICS_DATA} isDark={isDark} inset />
-            <p className="font-light">
-              Ovi se podaci smatraju osobnim podacima jer se mogu povezati s
-              pojedinim uređajem ili korisnikom.
-            </p>
-          </Section>
-
-          <Section title="3. Svrhe obrade i pravna osnova">
-            <List list={PURPOSES} isDark={isDark} inset />
-            <p className="font-light">
-              Podaci koje unosite u obrazac potrebni su za obradu vašeg upita
-              ili zahtjeva. Bez njih ne možemo odgovoriti na upit niti potvrditi
-              termin.
-            </p>
-          </Section>
-
-          <Section title="4. Primatelji podataka">
-            <p className="font-light">
-              Vaše osobne podatke ne prodajemo niti ih ustupamo trećim stranama
-              u marketinške svrhe. Za rad stranice koristimo pouzdane pružatelje
-              usluga koji podatke obrađuju u naše ime i prema našim uputama:
-            </p>
-            <List list={PROCESSORS} isDark={isDark} inset />
-            <p className="font-light">
-              Podaci mogu biti otkriveni i tijelima javne vlasti ako nas na to
-              obvezuje zakon.
-            </p>
-          </Section>
-
-          <Section title="5. Prijenos podataka izvan EGP-a">
-            <p className="font-light">
-              Neki od navedenih pružatelja usluga mogu obrađivati podatke i
-              izvan Europskoga gospodarskog prostora, uključujući SAD. U tom se
-              slučaju prijenos temelji na odgovarajućim zaštitnim mjerama, kao
-              što su standardne ugovorne klauzule Europske komisije ili odluka o
-              primjerenosti (Okvir za privatnost podataka EU-SAD).
-            </p>
-          </Section>
-
-          <Section title="6. Rok čuvanja">
-            <p className="font-light">
-              Upite i zahtjeve za termin čuvamo najdulje 12 mjeseci od
-              posljednje komunikacije. Podatke potrebne za izvršenu uslugu i
-              izdavanje računa čuvamo onoliko koliko nalažu računovodstveni i
-              porezni propisi. Podaci Google Analyticsa čuvaju se u razdoblju
-              određenom postavkama našeg Analytics računa. Nakon isteka roka
-              podatke brišemo ili trajno anonimiziramo.
-            </p>
-          </Section>
-
-          <Section title="7. Kolačići">
-            <p className="font-light">Naša stranica koristi:</p>
-            <List list={COOKIES} isDark={isDark} inset />
-            <p className="font-light">
-              Analitiku pokrećemo tek nakon vaše privole. Privolu možete povući
-              ili promijeniti u bilo kojem trenutku putem obavijesti o
-              kolačićima na stranici, a kolačiće možete i obrisati ili
-              onemogućiti u postavkama preglednika. Više o Googleovim kolačićima
-              možete saznati na{" "}
-              <a
-                href="https://policies.google.com/technologies/cookies"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold underline"
-              >
-                službenim Google stranicama
-              </a>
-              .
-            </p>
-          </Section>
-
-          <Section title="8. Sigurnost podataka">
-            <p className="font-light">
-              Primjenjujemo odgovarajuće tehničke i organizacijske mjere
-              zaštite, među ostalim šifriranu (HTTPS) komunikaciju, ograničen
-              pristup podacima samo ovlaštenim osobama i zaštićen
-              administratorski pristup. Ipak, nijedna metoda prijenosa ili
-              pohrane podataka putem interneta nije potpuno sigurna.
-            </p>
-          </Section>
-
-          <Section title="9. Vaša prava">
-            <p className="font-light">U vezi s vašim osobnim podacima imate:</p>
-            <List list={RIGHTS} isDark={isDark} inset />
-            <p className="font-light">
-              Prava možete ostvariti slanjem zahtjeva na <MailLink />. Na
-              zahtjev odgovaramo u roku od mjesec dana. Ako smatrate da obrada
-              vaših podataka krši propise, imate pravo podnijeti pritužbu
-              nadzornom tijelu: Agenciji za zaštitu osobnih podataka (AZOP),
-              Selska cesta 136, Zagreb,{" "}
-              <a
-                href="https://azop.hr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold underline"
-              >
-                azop.hr
-              </a>
-              .
-            </p>
-          </Section>
-
-          <Section title="10. Izmjene pravila privatnosti">
-            <p className="font-light">
-              Ova pravila možemo povremeno izmijeniti, primjerice zbog promjene
-              zakona ili naših usluga. Aktualna verzija uvijek je objavljena na
-              ovoj stranici s datumom posljednje izmjene.
-            </p>
-          </Section>
-
-          <Section title="11. Kontakt">
-            <p className="font-light">
-              Za sva pitanja o obradi osobnih podataka javite nam se na{" "}
-              <MailLink /> ili putem kontakt obrasca na našoj web stranici.
-            </p>
-          </Section>
-        </ul>
-      </Container>
-    </main>
-  );
-};
 
 export default Privacy;

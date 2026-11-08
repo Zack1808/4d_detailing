@@ -1,13 +1,8 @@
 import { parseDate } from "./date";
 
-import type { ServiceDataType } from "../types/data";
+import type { ServiceDataType, VehicleClass } from "../types/data";
 
-type VehicleClass = keyof ServiceDataType["prices"];
-
-export const toDate = (
-  value: string,
-  endOfDay: boolean = false,
-): Date | null => {
+export const toDate = (value: string, endOfDay = false): Date | null => {
   if (!value) return null;
 
   let date = new Date(value);
@@ -17,7 +12,7 @@ export const toDate = (
 
     if (!parsed) return null;
 
-    date = new Date(parsed.getTime());
+    date = parsed;
   }
 
   if (endOfDay && !value.includes(":")) date.setHours(23, 59, 59, 999);
@@ -32,7 +27,7 @@ export const isDiscounted = (
   if (!(Number(discount.value) > 0)) return false;
 
   const start = toDate(discount.startsAt);
-  const end = toDate(discount.endsAt);
+  const end = toDate(discount.endsAt, true);
 
   if (start && now < start.getTime()) return false;
   if (end && now > end.getTime()) return false;
@@ -44,20 +39,22 @@ export const applyDiscount = (
   price: number,
   discount: ServiceDataType["discount"],
 ): number => {
+  const value = Number(discount.value);
+
   const result =
     discount.type === "percentage"
-      ? Math.round(price * (1 - Number(discount.value) / 100))
-      : price - Number(discount.value);
+      ? Math.round(price * (1 - value / 100))
+      : price - value;
 
   return Math.max(result, 0);
 };
 
 export const getCurrentPrice = (
   item: ServiceDataType,
-  vehilcleClass: VehicleClass = "car",
+  vehicleClass: VehicleClass = "car",
   now: number = Date.now(),
 ): number => {
-  const { price } = item.prices[vehilcleClass];
+  const { price } = item.prices[vehicleClass];
 
   return isDiscounted(item.discount, now)
     ? applyDiscount(price, item.discount)

@@ -1,54 +1,37 @@
-import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
-import { DataProvider, useData } from "./context/DataContext";
+import ErrorBoundary from "./components/layout/ErrorBoundary";
+import PublicLayout from "./components/layout/PublicLayout";
+import ScrollToTop from "./components/layout/ScrollToTop";
+import Toaster from "./components/ui/Toast";
 
-import Navigation from "./components/layout/Navigation";
-import Footer from "./components/layout/Footer";
-import PageLoader from "./components/layout/PageLoader";
-
-import GoogleAnalytics from "./components/common/GoogleAnalytics";
-
-import Home from "./pages/Home";
-import Services from "./pages/Services";
+import { PATHS } from "./config/paths";
 import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import PriceArchive from "./pages/PriceArchive";
+import Privacy from "./pages/Privacy";
+import Services from "./pages/Services";
+import Terms from "./pages/Terms";
 
-const PriceArchive = lazy(() => import("./pages/PriceArchive"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const Terms = lazy(() => import("./pages/Terms"));
-const Error404 = lazy(() => import("./pages/Error404"));
-
-const AppRoutes: React.FC = () => {
-  const { isDark } = useData();
-
-  return (
-    <>
-      <Navigation />
-      <Suspense fallback={<PageLoader isDark={isDark} />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/usluge" element={<Services />} />
-          <Route path="/kontakt" element={<Contact />} />
-          <Route path="/arhiva-cijenika" element={<PriceArchive />} />
-          <Route path="/pravila-privatnosti" element={<Privacy />} />
-          <Route path="/uvijeti-koristenja" element={<Terms />} />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
-      </Suspense>
-      <GoogleAnalytics />
-      <ToastContainer autoClose={2500} closeOnClick />
-      <Footer />
-    </>
-  );
-};
-
-const App: React.FC = () => (
-  <BrowserRouter>
-    <DataProvider>
-      <AppRoutes />
-    </DataProvider>
-  </BrowserRouter>
+const App = () => (
+  <ErrorBoundary>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route path={PATHS.home} element={<Home />} />
+          <Route path={PATHS.services} element={<Services />} />
+          <Route path={PATHS.contact} element={<Contact />} />
+          <Route path={PATHS.priceArchive} element={<PriceArchive />} />
+          <Route path={PATHS.privacy} element={<Privacy />} />
+          <Route path={PATHS.terms} element={<Terms />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+      <Toaster />
+    </BrowserRouter>
+  </ErrorBoundary>
 );
 
 export default App;

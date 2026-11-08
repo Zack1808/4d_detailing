@@ -1,157 +1,107 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 import PageLoader from "../components/layout/PageLoader";
 
-import { useGetPageData } from "../hooks/useGetPageData";
+import { fetchPageData } from "../services/pageData";
+import { getErrorMessage } from "../utils/errors";
 
-import type {
-  ServiceDataType,
-  ReviewType,
-  BlockedAppointments,
-  PriceTableType,
-} from "../types/data";
+import type { PageData } from "../types/data";
 
-import type { SEOProps } from "../types/components";
+type Status = "loading" | "ready" | "error";
 
-import SEO from "../components/common/SEO";
-
-type DataContextType = {
-  isDark: boolean;
-  services: ServiceDataType[];
-  reviews: ReviewType[];
-  blockedAppointments: BlockedAppointments[];
-  priceArchive: PriceTableType[];
+type DataContextType = PageData & {
+  status: Status;
+  error: string | null;
+  reload: () => void;
 };
 
-type DataProviderType = {
-  children: React.ReactNode;
+const EMPTY: PageData = {
+  services: [],
+  reviews: [],
+  blockedAppointments: [],
+  priceArchive: [],
 };
 
-const CANONICAL: Record<string, SEOProps> = {
-  "/": {
-    title:
-      "4D Detailing Velika Gorica – Profesionalno čišćenje i poliranje vozila",
-    description:
-      "4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici.",
-    canonical: "https://4d-detailing.hr/",
-  },
-  "/usluge": {
-    title:
-      "Usluge Detailinga – Pranje, Poliranje i Zaštita Vozila | 4D Detailing",
-    canonical: "https://4d-detailing.hr/usluge",
-  },
-  "/arhiva-cijenika": {
-    title: "Arhiva cjenika | 4D Detailing",
-    canonical: "https://4d-detailing.hr/arhiva-cijenika",
-  },
-  "/kontakt": {
-    title: "Kontakt | 4D Detailing Velika Gorica",
-    canonical: "https://4d-detailing.hr/kontakt",
-  },
-  "/uvijeti-koristenja": {
-    title: "Uvjeti korištenja | 4D Detailing",
-    canonical: "https://4d-detailing.hr/uvijeti-koristenja",
-  },
-  "/pravila-privatnosti": {
-    title: "Pravila privatnosti | 4D Detailing",
-    canonical: "https://4d-detailing.hr/pravila-privatnosti",
-  },
-};
+const FADE_OUT_MS = 400;
 
-const DataContext = React.createContext<DataContextType | undefined>(undefined);
+const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const useData = () => {
   const context = useContext(DataContext);
 
-  if (!context) {
-    throw new Error("useData must be used within a DataProvider");
-  }
+  if (!context) throw new Error("useData must be used within a DataProvider");
 
   return context;
 };
 
-export const DataProvider = ({ children }: DataProviderType) => {
-  const [services, setServices] = useState<ServiceDataType[]>([]);
-  const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [blockedAppointments, setBlockedAppointments] = useState<
-    BlockedAppointments[]
-  >([]);
-  const [priceArchive, setPriceArchive] = useState<PriceTableType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [showLoader, setShowLoader] = useState<boolean>(true);
-  const [isDark, setIsDark] = useState<boolean>(
-    window.matchMedia("(prefers-color-scheme: dark)").matches,
-  );
-
-  const { getPageData } = useGetPageData();
+export const DataProvider = ({ children }: { children: ReactNode }) => {
+  const [data, setData] = useState<PageData>(EMPTY);
+  const [status, setStatus] = useState<Status>("loading");
+  const [error, setError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
-    const getData = async () => {
-      setLoading(true);
-      try {
-        const data = await getPageData();
+    let cancelled = false;
 
-        if (data === undefined) return;
+    setStatus("loading");
 
-        setServices(data.services);
-        setReviews(data.reviews);
-        setBlockedAppointments(data.blockedAppointments);
-        setPriceArchive(data.priceArchive);
-      } catch (err) {
-        console.error("getPageData failed:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    fetchPageData()
+      .then((result) => {
+        if (cancelled) return;
 
-    getData();
-  }, []);
+        setData(result);
+        setError(null);
+        setStatus("ready");
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return;
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const updateTheme = () => {
-      setIsDark(mediaQuery.matches);
-    };
-
-    updateTheme();
-
-    mediaQuery.addEventListener("change", updateTheme);
+        console.error("Loading page data failed:", err);
+        setError(getErrorMessage(err));
+        setStatus("error");
+      });
 
     return () => {
-      mediaQuery.removeEventListener("change", updateTheme);
+      cancelled = true;
     };
-  }, []);
+  }, [attempt]);
 
   useEffect(() => {
-    if (!loading) {
-      const timer = setTimeout(() => setShowLoader(false), 700);
+    if (status === "loading") return;
 
-      return () => clearTimeout(timer);
-    }
-  }, [loading]);
+    const timer = window.setTimeout(() => setShowLoader(false), FADE_OUT_MS);
 
-  const { pathname } = useLocation();
+    return () => window.clearTimeout(timer);
+  }, [status]);
 
-  const config = CANONICAL[pathname];
+  const reload = useCallback(() => setAttempt((n) => n + 1), []);
+
+  const value = useMemo(
+    () => ({ ...data, status, error, reload }),
+    [data, status, error, reload],
+  );
 
   return (
-    <DataContext.Provider
-      value={{ isDark, services, reviews, blockedAppointments, priceArchive }}
-    >
-      <SEO {...config} />
+    <DataContext.Provider value={value}>
       {showLoader && (
         <PageLoader
-          isDark={isDark}
-          className={` ${
-            loading
+          className={
+            status === "loading"
               ? "opacity-100"
-              : "opacity-0 pointer-events-none transition-opacity duration-700"
-          }`}
+              : `pointer-events-none opacity-0 transition-opacity duration-400`
+          }
         />
       )}
-      {!loading && children}
+      {(status !== "loading" || !showLoader) && children}
     </DataContext.Provider>
   );
 };
