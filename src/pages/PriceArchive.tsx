@@ -137,7 +137,7 @@ const PriceArchive = () => {
                       {header}
                     </th>
                   ))}
-                  <th scope="col" className="px-4 py-3 text-right">
+                  <th scope="col" className="relative px-4 py-3 text-right">
                     <span className="sr-only">Preuzmi</span>
                   </th>
                 </tr>
