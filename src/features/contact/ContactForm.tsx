@@ -26,7 +26,6 @@ const GENERAL_QUESTION = "general_question";
 const SEND_FAILED =
   "Slanje upita nije uspjelo. Pokušajte ponovno ili nas kontaktirajte izravno.";
 
-/** Honeypot: hidden from people, irresistible to bots. */
 const HONEYPOT_STYLE = {
   position: "absolute",
   left: "-9999px",
@@ -182,7 +181,10 @@ const ContactForm = () => {
       <input
         ref={honeypot}
         type="text"
-        name="website"
+        name="hp_ref_code"
+        data-1p-ignore
+        data-lpignore="true"
+        data-form-type="other"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"

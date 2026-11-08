@@ -1,142 +1,151 @@
 import FormData from "form-data";
 import Mailgun from "mailgun.js";
 
-const mailgun = new Mailgun(FormData);
-const mg = mailgun.client({
+import {
+  APPOINTMENT_FIELDS,
+  REVIEW_FIELDS,
+  validateAppointment,
+  validateReview,
+  type AppointmentValues,
+  type ReviewValues,
+} from "../../src/validation/rules";
+
+const DOMAIN = "4d-detailing.hr";
+const ADMIN_EMAIL = "info@4d-detailing.hr";
+const FROM_WEBSITE = `4D Detailing Web stranica <postmaster@${DOMAIN}>`;
+const FROM_NOREPLY = `4D Detailing Noreply <noreply@${DOMAIN}>`;
+
+const TEMPLATE_USER_NOTIFICATION = "user notification";
+const TEMPLATE_APPOINTMENT_REQUEST = "appointment request";
+const TEMPLATE_REVIEW_SUBMISSION = "review submition";
+
+const MAX_BODY_BYTES = 20_000;
+
+const mg = new Mailgun(FormData).client({
   username: "api",
   key: process.env.MAILGUN_API_KEY || "",
   url: "https://api.eu.mailgun.net",
 });
 
-const DOMAIN = "4d-detailing.hr";
+const json = (body: Record<string, unknown>, status = 200) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json" },
+  });
 
-const TEMPLATE_USER_NOTIFICATION = "user notification";
-const TEMPLATE_APPOINTMENT_REQUEST = "appointment request";
-const TEMPLATE_REVIEW_SUBMITION = "review submition";
+const fail = (error: string, status: number, errors?: Record<string, string>) =>
+  json({ error, ...(errors && { errors }) }, status);
 
-const FIELDS = {
-  appointment: [
-    "fullName",
-    "email",
-    "phone",
-    "vehicle",
-    "service",
-    "dateFrom",
-    "remark",
-  ],
-  review: ["name", "surname", "starCount", "review"],
+const oneLine = (value: string) => value.replace(/[\r\n]+/g, " ").trim();
+
+const pick = <K extends string>(
+  body: Record<string, unknown>,
+  fields: readonly K[],
+): Record<K, string> =>
+  Object.fromEntries(
+    fields.map((field) => [field, String(body[field] ?? "").trim()]),
+  ) as Record<K, string>;
+
+const sendAppointment = async (data: AppointmentValues) => {
+  const service = oneLine(data.service);
+
+  const adminMail = mg.messages.create(DOMAIN, {
+    from: FROM_WEBSITE,
+    to: [ADMIN_EMAIL],
+    subject: `Novi upit za termin: ${service}`,
+    template: TEMPLATE_APPOINTMENT_REQUEST,
+    "h:X-Mailgun-Variables": JSON.stringify({ ...data, service }),
+    "h:Reply-To": data.email,
+  });
+
+  const userMail = mg.messages.create(DOMAIN, {
+    from: FROM_NOREPLY,
+    to: [data.email],
+    subject: `Zaprimili smo vaš upit za uslugu ${service}`,
+    template: TEMPLATE_USER_NOTIFICATION,
+    "h:X-Mailgun-Variables": JSON.stringify({
+      dateFrom: data.dateFrom,
+      email: data.email,
+      name: oneLine(data.fullName).split(/\s+/)[0],
+      phone: data.phone,
+      service,
+      vehicle: data.vehicle,
+    }),
+  });
+
+  const [admin, user] = await Promise.allSettled([adminMail, userMail]);
+
+  if (user.status === "rejected") {
+    console.error("User confirmation failed:", user.reason);
+  }
+
+  if (admin.status === "rejected") throw admin.reason;
 };
 
-type EmailType = keyof typeof FIELDS;
+const sendReview = async (data: ReviewValues) => {
+  await mg.messages.create(DOMAIN, {
+    from: FROM_WEBSITE,
+    to: ADMIN_EMAIL,
+    subject: "Postavljena je nova recenzija na stranicu!",
+    template: TEMPLATE_REVIEW_SUBMISSION,
+    "h:X-Mailgun-Variables": JSON.stringify(data),
+  });
+};
 
 export default async (req: Request) => {
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+    return fail("Metoda nije dopuštena.", 405);
   }
 
   let body: Record<string, unknown>;
 
   try {
-    body = await req.json();
+    const raw = await req.text();
+
+    if (raw.length > MAX_BODY_BYTES) return fail("Zahtjev je prevelik.", 413);
+
+    body = JSON.parse(raw);
   } catch {
-    return new Response("Invalid request", { status: 400 });
+    return fail("Neispravan zahtjev.", 400);
   }
 
-  if (body.website) {
-    return new Response("ok");
+  if (typeof body !== "object" || body === null) {
+    return fail("Neispravan zahtjev.", 400);
   }
 
-  const type = body.type as EmailType;
-  if (type !== "appointment" && type !== "review") {
-    return new Response("Unknown email type", { status: 400 });
-  }
-
-  const data: Record<string, string> = {};
-  for (const field of FIELDS[type]) {
-    const value = String(body[field] ?? "").trim();
-
-    data[field] = value;
-  }
-
-  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-    return new Response("Invalid email address", { status: 400 });
-  }
+  if (body.hp_ref_code) return json({ ok: true });
 
   try {
-    switch (type) {
+    switch (body.type) {
       case "appointment": {
-        const adminVariables = {
-          dateFrom: data.dateFrom,
-          email: data.email,
-          fullName: data.fullName,
-          phone: data.phone,
-          remark: data.remark,
-          service: data.service,
-          vehicle: data.vehicle,
-        };
+        const data = pick(body, APPOINTMENT_FIELDS);
+        const errors = validateAppointment(data);
 
-        const userVariables = {
-          dateFrom: data.dateFrom,
-          email: data.email,
-          name: data.fullName.split(/\s+/)[0],
-          phone: data.phone,
-          service: data.service,
-          vehicle: data.vehicle,
-        };
-
-        const adminMail = mg.messages.create(DOMAIN, {
-          from: `4D Detaling Web stranica <postmaster@4d-detailing.hr>`,
-          to: ["info@4d-detailing.hr"],
-          subject: `Novi upit za termin: ${data.service}`,
-          template: TEMPLATE_APPOINTMENT_REQUEST,
-          "h:X-Mailgun-Variables": JSON.stringify(adminVariables),
-          "h:Reply-To": data.email,
-        });
-
-        const userMail = mg.messages.create(DOMAIN, {
-          from: "4D Detailing Noreply <noreply@4d-detailing.hr>",
-          to: [data.email],
-          subject: `Zaprimili smo vaš upit za uslugu ${data.service}`,
-          template: TEMPLATE_USER_NOTIFICATION,
-          "h:X-Mailgun-Variables": JSON.stringify(userVariables),
-        });
-
-        const [adminResult, userResult] = await Promise.all([
-          adminMail,
-          userMail,
-        ]);
-
-        if (userResult.status !== 200) {
-          console.error("User confirmation failed: ", userResult.message);
+        if (Object.keys(errors).length > 0) {
+          return fail("Provjerite unesene podatke.", 422, errors);
         }
 
-        if (adminResult.status !== 200) {
-          console.error("Admin notification failed: ", adminResult.message);
-          return new Response("Failed to send message.", { status: 500 });
-        }
-
-        return new Response("ok");
+        await sendAppointment(data);
+        return json({ ok: true });
       }
-      case "review":
-        const reviewVariables = {
-          starCount: data.starCount,
-          name: data.name,
-          surname: data.surname,
-          review: data.review,
-        };
 
-        await mg.messages.create(DOMAIN, {
-          from: "4D Detaling Web stranica <postmaster@4d-detailing.hr>",
-          to: "info@4d-detailing.hr",
-          subject: "Postavljena je nova recenzija na stranicu!",
-          template: TEMPLATE_REVIEW_SUBMITION,
-          "h:X-Mailgun-Variables": JSON.stringify(reviewVariables),
-        });
+      case "review": {
+        const data = pick(body, REVIEW_FIELDS);
+        const errors = validateReview(data);
 
-        return new Response("ok");
+        if (Object.keys(errors).length > 0) {
+          return fail("Provjerite unesene podatke.", 422, errors);
+        }
+
+        await sendReview(data);
+        return json({ ok: true });
+      }
+
+      default:
+        return fail("Nepoznata vrsta zahtjeva.", 400);
     }
   } catch (error) {
-    console.error("Mailgun error: ", error);
-    return new Response("Failed to send message.", { status: 500 });
+    console.error("Mailgun error:", error);
+    return fail("Slanje poruke nije uspjelo. Pokušajte ponovno kasnije.", 500);
   }
 };
