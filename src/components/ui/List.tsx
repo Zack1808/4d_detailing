@@ -10,13 +10,13 @@ type ListProps = {
 const List = ({ items, inset }: ListProps) => (
   <ul className={cn("flex flex-col gap-3 font-normal", inset && "pl-6")}>
     {items.map((item) => (
-      <li key={item} className="flex items-start gap-3">
+      <li key={item} className="flex items-start gap-3 [&>picture]:shrink-0">
         <ThemedImage
           light="/images/wheel_light.svg"
           dark="/images/wheel_dark.svg"
           width={25}
           height={25}
-          className="mb-0.5 w-5"
+          className="mt-0.5 size-5 shrink-0"
         />
         {item}
       </li>
