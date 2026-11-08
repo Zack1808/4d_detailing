@@ -1,62 +1,56 @@
-import React from "react";
-
-import Button from "../components/ui/Button";
 import SEO from "../components/seo/SEO";
-
 import Container from "../components/layout/Container";
+import Tesseract from "../components/animated/Tesseract";
+import Button from "../components/ui/Button";
 import Reveal from "../components/ui/Reveal";
 
-import Tesseract from "../components/animated/Tesseract";
+import { PATHS } from "../config/paths";
+import { useIsDark } from "../hooks/useMediaQuery";
 
-import { useData } from "../context/DataContext";
-
-const NotFound: React.FC = () => {
-  const { isDark } = useData();
+const NotFound = () => {
+  const isDark = useIsDark();
 
   return (
-    <main className="h-screen flex items-center justify-center relative overflow-hidden">
+    <main className="relative flex h-screen items-center justify-center overflow-hidden">
       <SEO title="Stranica nije pronađena | 4D Detailing" noindex />
       <Tesseract
         size={1700}
-        className="absolute md:right-80 right-0 -z-50 opacity-15 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
         thickness={5}
         speed={70}
         isDark={isDark}
+        className="pointer-events-none absolute top-100 right-0 -z-50 translate-x-1/2 -translate-y-3/7 rotate-z-180 opacity-15 md:right-80"
       />
-
       <Tesseract
         size={1700}
-        className="absolute right-100 -translate-x-1/2 -z-50 opacity-15 pointer-events-none top-0 -translate-y-2/7 md:block hidden"
         thickness={5}
         speed={70}
         isDark={isDark}
+        className="pointer-events-none absolute top-0 right-100 -z-50 hidden -translate-x-1/2 -translate-y-2/7 opacity-15 md:block"
       />
-      <Container className="bg-light/80 dark:bg-dark/80 h-full items-center">
-        <div
-          className="flex items-center justify-center w-full
-         flex-col gap-6"
-        >
+
+      <Container className="h-full items-center bg-light/80 dark:bg-dark/80">
+        <div className="flex w-full flex-col items-center justify-center gap-6">
           <Reveal delay={200}>
-            <h2 className="font-bold md:text-9xl text-6xl text-dark dark:text-light text-center">
+            <h1 className="text-center text-6xl font-bold md:text-9xl">
               404 <br />
-              <span className="md:text-5xl text-2xl mt-6 font-semibold">
+              <span className="mt-6 text-2xl font-semibold md:text-5xl">
                 Ups... promašili ste skretanje.
               </span>
-            </h2>
+            </h1>
           </Reveal>
           <Reveal delay={300}>
-            <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center font-light">
+            <p className="mt-3 max-w-[75ch] text-center font-light">
               Ova stranica ne postoji, ali nema potrebe za panikom i naglim
-              kočenjem.{" "}
+              kočenjem.
             </p>
           </Reveal>
           <Reveal delay={400}>
-            <p className="text-dark dark:text-light max-w-[75ch] mt-3 text-center font-light">
+            <p className="mt-3 max-w-[75ch] text-center font-light">
               Ubacite u rikverc i vratite se na početnu.
             </p>
           </Reveal>
           <Reveal delay={500}>
-            <Button variant="primary" to="/">
+            <Button variant="primary" to={PATHS.home}>
               Vrati se na početnu
             </Button>
           </Reveal>
