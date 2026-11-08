@@ -1,188 +1,166 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { FaBars, FaX } from "react-icons/fa6";
 
-import Button from "../common/Button";
-
+import Button from "../ui/Button";
+import Logo from "../ui/Logo";
 import Wheel from "../animated/Wheel";
 
-import { useData } from "../../context/DataContext";
+import { BUSINESS } from "../../config/business";
+import { NAV_LINKS, PATHS } from "../../config/paths";
+import { useBodyScrollLock } from "../../hooks/useBodyScrollLock";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
+import { useIsDark } from "../../hooks/useMediaQuery";
+import { useTransitionMount } from "../../hooks/useTransitionMount";
+import { cn } from "../../utils/cn";
 
-const Navigation: React.FC = () => {
-  const [changeBlur, setChangeBlur] = useState<boolean>(false);
-  const [changeBg, setChangeBg] = useState<number>(10);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState<boolean>(false);
+const SOLID_AT_PX = 500;
+const MIN_OPACITY = 10;
+const MAX_OPACITY = 95;
+const MENU_EXIT_MS = 350;
 
-  const { isDark } = useData();
+const linkClasses =
+  "flex w-full items-center justify-center px-4 py-3 text-lg font-normal md:w-max";
 
-  const linkClasses =
-    "font-normal text-lg text-dark dark:text-light flex md:w-max w-full px-4 py-3 items-center justify-center";
+const Navigation = () => {
+  const isDark = useIsDark();
 
-  const location = useLocation();
+  const [opacity, setOpacity] = useState(MIN_OPACITY);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const menuRef = useRef<HTMLElement>(null);
+
+  const { mounted, visible } = useTransitionMount(menuOpen, MENU_EXIT_MS);
+  const closeMenu = () => setMenuOpen(false);
+
+  useBodyScrollLock(mounted);
+  useFocusTrap(menuRef, mounted && menuOpen, closeMenu);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setChangeBlur(window.scrollY > 500);
+    let frame = 0;
 
-      const percentage = Math.round((window.scrollY / 500) * 100);
+    const update = () => {
+      frame = 0;
 
-      setChangeBg((prevState) => {
-        if (percentage <= 10 || percentage >= 95) return prevState;
-        return percentage;
-      });
+      const percentage = Math.round((window.scrollY / SOLID_AT_PX) * 100);
+
+      setOpacity(Math.min(MAX_OPACITY, Math.max(MIN_OPACITY, percentage)));
     };
-    window.addEventListener("scroll", handleScroll);
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
     };
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
-
-  useEffect(() => {
-    if (menuOpen) {
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => setIsVisible(true)),
-      );
-    } else {
-      setIsVisible(false);
-    }
-  }, [menuOpen]);
-
-  useEffect(() => {
-    if (isVisible) return;
-
-    const timer = setTimeout(() => {
-      setMenuOpen(false);
-    }, 350);
-
-    return () => clearTimeout(timer);
-  }, [isVisible]);
-
-  useEffect(() => {
-    setChangeBg(10);
-    setChangeBlur(false);
-  }, [location.pathname]);
-
-  const openMenu = () => setMenuOpen(true);
-
-  const closeMenu = () => setIsVisible(false);
+  const menuLinkClasses = cn(
+    linkClasses,
+    "font-semibold! opacity-0 transition-opacity motion-reduce:transition-none!",
+    visible ? "opacity-100 delay-400 duration-500" : "duration-150",
+  );
 
   return (
     <>
       <header
-        className={`w-full fixed md:px-3 py-3 px-6 shadow-sm flex items-center justify-center z-40  ${changeBlur ? "backdrop-blur-xl" : "backdrop-blur-xs"}`}
+        className={cn(
+          "fixed z-40 flex w-full items-center justify-center px-6 py-3 shadow-sm md:px-3",
+          opacity > 50 ? "backdrop-blur-xl" : "backdrop-blur-xs",
+        )}
         style={{
-          backgroundColor: isDark
-            ? `color-mix(in srgb, var(--color-dark) ${changeBg}%, transparent)`
-            : `color-mix(in srgb, var(--color-light) ${changeBg}%, transparent)`,
+          backgroundColor: `color-mix(in srgb, var(${isDark ? "--color-dark" : "--color-light"}) ${opacity}%, transparent)`,
         }}
       >
-        <div className="w-full md:max-w-[1700px] flex justify-between md:align-center gap-4">
+        <div className="flex w-full justify-between gap-4 md:max-w-[1700px]">
           <Link
-            to="/"
+            to={PATHS.home}
+            aria-label={`${BUSINESS.name} – početna`}
             className="flex items-center justify-center gap-4 md:w-max"
-            onMouseEnter={() => import("../../pages/Home")}
           >
-            <img
-              src={isDark ? "/images/logo_dark.svg" : "/images/logo_light.svg"}
-              alt="4D Detailing"
-              width={96}
-              height={84}
-              className="md:w-24 w-16"
-            />
-            <p className="font-bold text-4xl text-dark dark:text-light md:flex hidden">
-              4D Detailing
-            </p>
+            <Logo width={96} height={84} className="w-16 md:w-24" />
+            <span className="hidden text-4xl font-bold md:flex">
+              {BUSINESS.name}
+            </span>
           </Link>
 
-          <nav className="md:flex items-center justify-center hidden">
-            <Link
-              to="/"
-              className={linkClasses}
-              onMouseEnter={() => import("../../pages/Home")}
-            >
-              Početna
-            </Link>
-            <Link
-              to="/usluge?sortiranje=popularno"
-              className={linkClasses}
-              onMouseEnter={() => import("../../pages/Services")}
-            >
-              Usluge
-            </Link>
-            <Link
-              to="/kontakt"
-              className={linkClasses}
-              onMouseEnter={() => import("../../pages/Contact")}
-            >
-              Kontakt
-            </Link>
+          <nav
+            aria-label="Glavna navigacija"
+            className="hidden items-center justify-center md:flex"
+          >
+            {NAV_LINKS.map(({ to, label }) => (
+              <NavLink key={to} to={to} end className={linkClasses}>
+                {label}
+              </NavLink>
+            ))}
           </nav>
 
           <Button
             variant="none"
-            className="md:hidden flex"
-            onClick={openMenu}
+            className="flex md:hidden"
+            onClick={() => setMenuOpen(true)}
             aria-label="Otvori izbornik"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            <FaBars className="text-2xl" />
+            <FaBars className="text-2xl" aria-hidden="true" />
           </Button>
         </div>
       </header>
 
-      {menuOpen && (
+      {mounted && (
         <nav
-          className={`fixed md:hidden flex flex-col gap-3 items-center justify-center bg-light dark:bg-dark inset-0 z-50 scale-0 origin-center transition-transform motion-reduce:transition-none!  ease-in-out ${isVisible ? "scale-100 duration-250" : "scale-0 delay-150 duration-150"}`}
+          id="mobile-menu"
+          ref={menuRef}
+          tabIndex={-1}
+          aria-label="Izbornik"
+          className={cn(
+            "fixed inset-0 z-50 flex origin-center flex-col items-center justify-center gap-3 bg-light transition-transform ease-in-out motion-reduce:transition-none! md:hidden dark:bg-dark",
+            visible
+              ? "scale-100 duration-250"
+              : "scale-0 delay-150 duration-150",
+          )}
         >
           <Wheel
             size={1000}
-            className="absolute md:right-80 right-0 -z-50 opacity-5 pointer-events-none top-100 -translate-y-3/7 translate-x-1/2 rotate-z-180"
             speed={70}
             isDark={isDark}
+            className="pointer-events-none absolute top-100 right-0 -z-50 translate-x-1/2 -translate-y-3/7 rotate-z-180 opacity-5"
           />
 
           <div
-            className={`fixed top-0 p-3 pt-5 w-full flex justify-end items-center opacity-0 transition-opacity motion-reduce:transition-none! ${isVisible ? "opacity-100 delay-250 transition-700" : "delay-none transition-150"}`}
+            className={cn(
+              "fixed top-0 flex w-full items-center justify-end p-3 pt-5 transition-opacity motion-reduce:transition-none!",
+              visible
+                ? "opacity-100 delay-250 duration-700"
+                : "opacity-0 duration-150",
+            )}
           >
             <Button
               variant="none"
               onClick={closeMenu}
               aria-label="Zatvori izbornik"
             >
-              <FaX className="text-2xl" />
+              <FaX className="text-2xl" aria-hidden="true" />
             </Button>
           </div>
-          <Link
-            to="/"
-            className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
-            onClick={closeMenu}
-            onTouchStart={() => import("../../pages/Home")}
-          >
-            Početna
-          </Link>
-          <Link
-            to="/usluge?sortiranje=popularno"
-            className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
-            onClick={closeMenu}
-            onTouchStart={() => import("../../pages/Services")}
-          >
-            Usluge
-          </Link>
-          <Link
-            to="/kontakt"
-            className={`${linkClasses} opacity-0 transition-opacity motion-reduce:transition-none! font-semibold! ${isVisible ? "opacity-100 delay-400 transition-500" : "delay-none transition-150"}`}
-            onClick={closeMenu}
-            onTouchStart={() => import("../../pages/Contact")}
-          >
-            Kontakt
-          </Link>
+
+          {NAV_LINKS.map(({ to, label }) => (
+            <NavLink
+              key={to}
+              to={to}
+              end
+              className={menuLinkClasses}
+              onClick={closeMenu}
+            >
+              {label}
+            </NavLink>
+          ))}
         </nav>
       )}
     </>

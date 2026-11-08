@@ -1,388 +1,259 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 
-import { type ServiceDataType } from "../types/data";
-
+import SEO from "../components/seo/SEO";
 import Container from "../components/layout/Container";
-import ImageCarousel from "../components/layout/ImageCarousel";
-import Reveal from "../components/layout/Reveal";
+import Button from "../components/ui/Button";
+import ImageCarousel from "../components/ui/ImageCarousel";
+import Input from "../components/ui/Input";
+import { InlineError } from "../components/ui/InlineMessage";
+import Reveal from "../components/ui/Reveal";
+import Select from "../components/ui/Select";
+import { PageTitle, Paragraph, SubTitle } from "../components/ui/Typography";
+import ServiceGrid from "../features/services/ServiceGrid";
 
-import Input from "../components/common/Input";
-import ServiceCard from "../components/common/ServiceCard";
-import Select from "../components/common/Select";
-import Button from "../components/common/Button";
-import SEO from "../components/common/SEO";
-
+import { PATHS } from "../config/paths";
+import { PAGE_META } from "../config/seo";
 import { useData } from "../context/DataContext";
-
+import { useFileDownload } from "../hooks/useFileDownload";
+import { getCurrentPrice } from "../utils/pricing";
 import { generateServicesSchema } from "../utils/schema";
+import { normalizeText } from "../utils/text";
 
-type Category =
-  "all" | "interijer" | "eksterijer" | "poliranje_i_zastita" | "posebni_paketi";
+import type { ServiceDataType } from "../types/data";
 
 const SORTING_OPTIONS = [
   { value: "popularno", label: "Popularno" },
   { value: "cijena_rastuca", label: "Cijena rastuća" },
   { value: "cijena_padajuca", label: "Cijena padajuća" },
   { value: "abecedno", label: "Naziv A-Z" },
-  { value: "trajanje_uzlazno", label: "Trajanje uzlazno" },
-  { value: "trajanje_silazno", label: "Trajanje silazno" },
-] as const;
+];
 
-const CATEGORIES = {
-  interijer: "interior",
-  eksterijer: "exterior",
-  poliranje_i_zastita: "polishing",
-  posebni_paketi: "package",
-};
+const DEFAULT_SORT = "popularno";
 
-const IMAGES_CAROUSEL = [
+const CAROUSEL_IMAGES = [
   "/images/service1.avif",
   "/images/service2.avif",
   "/images/service3.avif",
   "/images/service4.avif",
 ];
 
-const Services: React.FC = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+const sortServices = (list: ServiceDataType[], sort: string) => {
+  const sorted = [...list];
 
-  const getInitialFilters = () => {
-    const params = new URLSearchParams(location.search);
+  switch (sort) {
+    case "popularno":
+      return sorted.sort((a, b) => Number(b.isFeatured) - Number(a.isFeatured));
+    case "cijena_rastuca":
+      return sorted.sort((a, b) => getCurrentPrice(a) - getCurrentPrice(b));
+    case "cijena_padajuca":
+      return sorted.sort((a, b) => getCurrentPrice(b) - getCurrentPrice(a));
+    case "abecedno":
+      return sorted.sort((a, b) => a.title.localeCompare(b.title, "hr"));
+    default:
+      return sorted;
+  }
+};
 
-    return {
-      category: (params.get("kategorija") as Category) || "all",
-      search: params.get("pretraga") || "",
-      sortValue: params.get("sortiranje") || "popularno",
-    };
+const matchesSearch = (item: ServiceDataType, term: string) =>
+  [item.title, ...item.services, ...(item.keywords ?? [])].some((text) =>
+    normalizeText(text).includes(term),
+  );
+
+const Services = () => {
+  const { services, priceArchive, status, error, reload } = useData();
+  const { activeKey, download } = useFileDownload();
+
+  const [params, setParams] = useSearchParams();
+  const search = params.get("pretraga") ?? "";
+  const sort = params.get("sortiranje") ?? DEFAULT_SORT;
+
+  const updateParams = (changes: Record<string, string>) => {
+    const next = new URLSearchParams(params);
+
+    Object.entries(changes).forEach(([key, value]) => {
+      if (value) next.set(key, value);
+      else next.delete(key);
+    });
+
+    setParams(next, { replace: true });
   };
 
-  const initialFilters = getInitialFilters();
+  const displayed = useMemo(() => {
+    const term = normalizeText(search);
 
-  const [search, setSearch] = useState<string>(initialFilters.search);
-  const [sortValue, setSortValue] = useState<string | string[]>(
-    initialFilters.sortValue,
-  );
-  const [category, setCategory] = useState<Category>(initialFilters.category);
-
-  const { services } = useData();
-
-  const parseDuration = useCallback((duration: string) => {
-    const normalized = duration
-      .toLowerCase()
-      .replace(",", ".")
-      .replace(/\s+/g, " ")
-      .trim();
-
-    const numbers = normalized.match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
-
-    const isDays = normalized.includes("dan");
-    const multiplier = isDays ? 24 : 1;
-
-    if (numbers.length === 1) {
-      const value = numbers[0] * multiplier;
-
-      return {
-        min: value,
-        max: value,
-      };
-    }
-
-    if (numbers.length >= 2) {
-      return {
-        min: numbers[0] * multiplier,
-        max: numbers[1] * multiplier,
-      };
-    }
-
-    return {
-      min: Infinity,
-      max: Infinity,
-    };
-  }, []);
-
-  const sortList = useCallback(
-    (
-      list: ServiceDataType[],
-      key: keyof ServiceDataType,
-      direction: "asc" | "desc",
-    ) => {
-      const multiplier = direction === "asc" ? 1 : -1;
-
-      return [...list].sort((a, b) => {
-        switch (key) {
-          case "priceFrom":
-            return (a.priceFrom.current - b.priceFrom.current) * multiplier;
-
-          case "isFeatured":
-            return (Number(a.isFeatured) - Number(b.isFeatured)) * multiplier;
-
-          case "title":
-            return a.title.localeCompare(b.title) * multiplier;
-
-          case "duration": {
-            const durationA = parseDuration(a.duration);
-            const durationB = parseDuration(b.duration);
-            return (
-              (durationA.min - durationB.min) * multiplier ||
-              (durationA.max - durationB.max) * multiplier
-            );
-          }
-
-          default:
-            return 0;
-        }
-      });
-    },
-    [parseDuration],
-  );
-
-  const displayServices = useMemo(() => {
-    let newList = [...services];
-    const searchTerm = search.toLowerCase();
-
-    if (category !== "all") {
-      newList = newList.filter(
-        (item) => item.category === CATEGORIES[category],
-      );
-    }
-
-    switch (sortValue) {
-      case "popularno":
-        newList = sortList(newList, "isFeatured", "desc");
-        break;
-      case "cijena_rastuca":
-        newList = sortList(newList, "priceFrom", "asc");
-        break;
-      case "cijena_padajuca":
-        newList = sortList(newList, "priceFrom", "desc");
-        break;
-      case "abecedno":
-        newList = sortList(newList, "title", "asc");
-        break;
-      case "trajanje_uzlazno":
-        newList = sortList(newList, "duration", "asc");
-        break;
-      case "trajanje_silazno":
-        newList = sortList(newList, "duration", "desc");
-        break;
-    }
-
-    newList = newList.filter(
-      (item) =>
-        item.title.toLowerCase().includes(searchTerm) ||
-        item.services.some((service) =>
-          service.toLowerCase().includes(searchTerm),
-        ) ||
-        item.keywords?.some((keyword) =>
-          keyword.toLowerCase().includes(searchTerm),
-        ),
+    return sortServices(services, sort).filter((item) =>
+      matchesSearch(item, term),
     );
+  }, [services, search, sort]);
 
-    return newList;
-  }, [services, search, category, sortValue]);
-
-  useEffect(() => {
-    let searchParams = {};
-
-    if (search) searchParams = { ...searchParams, pretraga: search };
-    if (category !== "all")
-      searchParams = { ...searchParams, kategorija: category };
-    searchParams = { ...searchParams, sortiranje: sortValue };
-
-    const params = new URLSearchParams(searchParams);
-
-    navigate(`/usluge?${params.toString()}`, { replace: true });
-  }, [category, search, sortValue]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const currentPriceTable = priceArchive.find((item) => item.isCurrent);
 
   return (
     <main className="overflow-hidden">
       <SEO
-        title="Usluge Detailinga – Pranje, Poliranje i Zaštita Vozila | 4D Detailing"
-        canonical="https://4d-detailing.hr/usluge"
+        {...PAGE_META.services}
         schema={
           services.length > 0 ? generateServicesSchema(services) : undefined
         }
       />
-      <Container className="pb-3!" id="service-intro">
-        <div className="flex gap-3 w-full justify-between">
+
+      <Container className="pb-3!">
+        <div className="flex w-full justify-between gap-3">
           <div className="flex flex-col gap-6">
-            <Reveal
-              transitionFrom="opacity-0 -translate-x-6"
-              transitionTo={`opacity-100 translate-x-0`}
-            >
-              <h2 className="text-4xl text-dark dark:text-light mt-30 font-bold">
-                Naše usluge
-              </h2>
+            <Reveal variant="left">
+              <PageTitle>Naše usluge</PageTitle>
             </Reveal>
-            <div>
-              <Reveal
-                transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0`}
-                delay={200}
-              >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+            <div className="flex flex-col gap-3">
+              <Reveal variant="left" delay={200}>
+                <Paragraph>
                   Svako vozilo ima svoje potrebe, a kvalitetna njega počinje
                   pravim odabirom usluge. U 4D Detailingu zato nudimo različite
                   tretmane kojima možemo osvježiti, obnoviti i zaštititi vaše
                   vozilo – izvana i iznutra.
-                </p>
+                </Paragraph>
               </Reveal>
-              <Reveal
-                transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0`}
-                delay={300}
-              >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
-                  Našu ponudu podijelili smo u četiri glavne kategorije:
-                  temeljitu njegu interijera, održavanje i čišćenje eksterijera,
-                  profesionalno poliranje te pažljivo osmišljene pakete za one
-                  koji žele kombinirati više usluga.
-                </p>
+              <Reveal variant="left" delay={300}>
+                <Paragraph>
+                  Naša ponuda obuhvaća temeljitu njegu interijera, održavanje i
+                  čišćenje eksterijera, profesionalno poliranje te pažljivo
+                  osmišljene pakete za one koji žele kombinirati više usluga.
+                </Paragraph>
               </Reveal>
-              <Reveal
-                transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0`}
-                delay={400}
-              >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
+              <Reveal variant="left" delay={400}>
+                <Paragraph>
                   Bez obzira želite li samo osvježiti izgled vozila, ukloniti
                   tragove svakodnevnog korištenja ili mu pružiti kompletnu
                   njegu, pronaći ćete opciju prilagođenu svojim potrebama.
-                </p>
+                </Paragraph>
               </Reveal>
-              <Reveal
-                transitionFrom="opacity-0 -translate-x-6"
-                transitionTo={`opacity-100 translate-x-0`}
-                delay={500}
-              >
-                <p className="text-dark dark:text-light max-w-[85ch] mt-3 font-light">
-                  <strong>
+              <Reveal variant="left" delay={500}>
+                <Paragraph>
+                  <strong className="font-semibold">
                     Istražite našu ponudu i pronađite tretman koji najbolje
                     odgovara vašem vozilu.
                   </strong>
-                </p>
+                </Paragraph>
+              </Reveal>
+              <Reveal variant="left" delay={600}>
+                <Paragraph>
+                  Trebate cijene pri ruci?{" "}
+                  <strong className="font-semibold">
+                    Preuzmite tablicu cjenika ili zavirite u arhivu starijih
+                    cjenika.
+                  </strong>
+                </Paragraph>
+              </Reveal>
+              <Reveal
+                variant="left"
+                delay={700}
+                className="mt-6 flex flex-col gap-3 md:flex-row"
+              >
+                {currentPriceTable && (
+                  <Button
+                    variant="primary"
+                    loading={activeKey === currentPriceTable.id}
+                    onClick={() =>
+                      download(
+                        currentPriceTable.id,
+                        currentPriceTable.downloadLink,
+                        currentPriceTable.name,
+                      )
+                    }
+                  >
+                    Preuzmi aktualni cijenik
+                  </Button>
+                )}
+                {priceArchive.length > 0 && (
+                  <Button variant="none" to={PATHS.priceArchive}>
+                    Pregledaj arhivu cijenika
+                  </Button>
+                )}
               </Reveal>
             </div>
           </div>
+
           <Reveal
-            transitionFrom="opacity-0 translate-x-6"
-            transitionTo={`opacity-100 translate-x-0`}
-            className=" md:w-5/12 hidden 2xl:flex mt-30 aspect-video overflow-hidden"
+            variant="right"
             delay={200}
+            className="mt-30 hidden aspect-video overflow-hidden md:w-5/12 2xl:flex"
           >
-            <ImageCarousel images={IMAGES_CAROUSEL} />
+            <ImageCarousel
+              images={CAROUSEL_IMAGES}
+              label="Fotografije naših usluga"
+            />
           </Reveal>
         </div>
       </Container>
-      <Container className="pt-9!" id="service-list">
-        <Reveal
-          transitionFrom="opacity-0 -translate-x-6"
-          transitionTo={`opacity-100 translate-x-0`}
-          delay={200}
-        >
-          <h3 className="font-semibold text-2xl text-dark dark:text-light">
-            Usluge
-          </h3>
+
+      <Container className="pt-9!">
+        <Reveal variant="left" delay={200}>
+          <SubTitle>Usluge</SubTitle>
         </Reveal>
 
         <Reveal
-          transitionFrom="opacity-0"
-          transitionTo="opacity-100 md:delay-300 duration-1000"
-          className={`w-full bg-gray-light/15 dark:bg-gray-dark/40 rounded-xs flex-col`}
+          variant="fade"
           delay={300}
+          className="surface flex w-full flex-col gap-3 p-3 md:flex-row"
         >
-          <div className="w-full flex flex-col md:flex-row">
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "all" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("all")}
-            >
-              Sve usluge
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "eksterijer" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("eksterijer")}
-            >
-              Eksterijer
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "interijer" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("interijer")}
-            >
-              Interijer
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "poliranje_i_zastita" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("poliranje_i_zastita")}
-            >
-              Poliranje i zaštita
-            </Button>
-            <Button
-              variant="none"
-              className={`max-w-none flex-1 items-center justify-center ${category === "posebni_paketi" ? "bg-light dark:bg-dark" : ""}`}
-              onClick={() => setCategory("posebni_paketi")}
-            >
-              Posebni paketi
-            </Button>
-          </div>
-        </Reveal>
-
-        <Reveal
-          transitionFrom="opacity-0"
-          transitionTo="opacity-100 duration-1000"
-          className={`p-3 w-full bg-gray-light/15 dark:bg-gray-dark/40 rounded-xs flex gap-3 md:flex-row flex-col`}
-          delay={300}
-        >
-          <div className="flex gap-3 md:items-center flex-1/3 md:flex-row flex-col">
+          <div className="flex flex-1/3 flex-col gap-3 md:flex-row md:items-center">
             <Input
+              type="search"
+              aria-label="Pretraži usluge"
               placeholder="Pranje, poliranje, čišćenje..."
               value={search}
-              onChange={(event) => setSearch(event.target.value)}
+              onChange={(event) =>
+                updateParams({ pretraga: event.target.value })
+              }
             />
           </div>
-          <div className="flex gap-3 md:items-center flex-1 md:flex-row flex-col">
-            <label
-              htmlFor="sorting"
-              className="text-dark dark:text-light font-medium"
-            >
+          <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-center">
+            <label htmlFor="sorting" id="sorting-label" className="font-medium">
               Sortiraj:
             </label>
             <Select
-              options={[...SORTING_OPTIONS]}
               id="sorting"
-              value={sortValue}
-              onChange={(value: string | string[]) => setSortValue(value)}
-              defaultValue={sortValue}
+              options={SORTING_OPTIONS}
+              value={sort}
+              onChange={(value) => updateParams({ sortiranje: value })}
             />
           </div>
         </Reveal>
 
-        <Reveal
-          transitionTo="opacity-100"
-          className="w-full grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-3"
-          delay={400}
-          threshold={0.01}
-        >
-          {displayServices.map((service, index) => {
-            return (
-              <Reveal
-                key={`${service.slug}-${index}`}
-                className={`xl:nth-[3n+2]:delay-100! xl:nth-[3n]:delay-200! lg:nth-[2n]:delay-100! flex h-full md:duration-1000 duration-500`}
-                threshold={0.05}
+        {status === "error" ? (
+          <InlineError
+            message={`Usluge trenutno nije moguće učitati. ${error ?? ""}`}
+            onRetry={reload}
+          />
+        ) : displayed.length === 0 ? (
+          <div
+            className="surface flex w-full flex-col items-start gap-3 p-6"
+            role="status"
+          >
+            <p className="font-light">
+              {services.length === 0
+                ? "Trenutno nema dostupnih usluga."
+                : "Nema usluga koje odgovaraju pretrazi."}
+            </p>
+            {search && (
+              <Button
+                variant="secondary"
+                onClick={() => updateParams({ pretraga: "" })}
               >
-                <ServiceCard item={service} />
-              </Reveal>
-            );
-          })}
-        </Reveal>
+                Očisti pretragu
+              </Button>
+            )}
+          </div>
+        ) : (
+          <Reveal
+            variant="fade"
+            delay={400}
+            threshold={0.01}
+            className="w-full"
+          >
+            <ServiceGrid services={displayed} />
+          </Reveal>
+        )}
       </Container>
     </main>
   );

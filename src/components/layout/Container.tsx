@@ -1,20 +1,21 @@
-import React from "react";
+import { forwardRef, type HTMLAttributes } from "react";
 
-const Container = React.memo(
-  React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-    ({ children, className, ...rest }, ref) => {
-      const sectionClassName =
-        `w-full px-5 flex justify-center py-9 md:py-15 ${className}`.trim();
+import { cn } from "../../utils/cn";
 
-      return (
-        <section ref={ref} className={sectionClassName} {...rest}>
-          <article className="w-full md:max-w-[1700px] flex flex-col gap-5 items-start">
-            {children}
-          </article>
-        </section>
-      );
-    },
+const Container = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
+  ({ children, className, ...rest }, ref) => (
+    <section
+      ref={ref}
+      className={cn("flex w-full justify-center px-5 py-9 md:py-15", className)}
+      {...rest}
+    >
+      <div className="flex w-full flex-col items-start gap-5 md:max-w-[1700px]">
+        {children}
+      </div>
+    </section>
   ),
 );
+
+Container.displayName = "Container";
 
 export default Container;

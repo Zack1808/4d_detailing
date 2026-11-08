@@ -1,36 +1,31 @@
-type Category = "exterior" | "interior" | "polishing" | "package";
+export type VehicleClass = "car" | "suv" | "transporter";
 
-type LowestPriceData = {
-  date: string;
-  priceFrom: number;
-};
-
-type PriceType = {
-  ref: number;
-  current: number;
+export type PriceType = {
+  price: number;
+  anchorPrice: number;
 };
 
 export type ServiceDataType = {
   id: string;
   slug: string;
   title: string;
-  priceFrom: PriceType;
-  priceTo?: PriceType;
-  duration: string;
-  category: Category;
+  description: string;
   services: string[];
-  suv: PriceType;
-  transporter: PriceType;
   remark?: string;
+  keywords?: string[];
+  isFeatured: boolean;
+  status: "active" | "hidden" | "archived";
+  sortOrder: number;
+  prices: Record<VehicleClass, PriceType>;
   discount: {
-    isEnabled: boolean;
     type: "percentage" | "fixed";
     value: number;
-    lowest: LowestPriceData[];
+    startsAt: string;
+    endsAt: string;
   };
-  isFeatured: boolean;
-  keywords?: string[];
-  description: string;
+  lowestPrice30d?: Record<VehicleClass, { amount: number; computedAt: string }>;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ReviewType = {
@@ -54,4 +49,29 @@ export type AppointmentType = {
   remark?: string;
   isConfirmed: boolean;
   isBlocked: boolean;
+};
+
+export type NewAppointment = Omit<AppointmentType, "id" | "dateTo">;
+export type NewReview = Omit<ReviewType, "id">;
+
+export type PageData = {
+  services: ServiceDataType[];
+  reviews: ReviewType[];
+  blockedAppointments: BlockedAppointments[];
+  priceArchive: PriceTableType[];
+};
+
+export type BlockedAppointments = {
+  dateFrom: string;
+  dateTo: string;
+  id: string;
+  appointmentId: string;
+};
+
+export type PriceTableType = {
+  id: string;
+  name: string;
+  createdAt: string;
+  downloadLink: string;
+  isCurrent: boolean;
 };
