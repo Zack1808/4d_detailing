@@ -14,9 +14,10 @@ const withExtension = (fileName: string, mimeType: string) => {
 };
 
 export const downloadFile = async (url: string, fileName: string) => {
-  const link = import.meta.env.DEV
-    ? url.replace("https://firebasestorage.googleapis.com", "/firebase-storage")
-    : url;
+  const link = url.replace(
+    "https://firebasestorage.googleapis.com",
+    "/firebase-storage",
+  );
 
   const response = await fetch(link);
 

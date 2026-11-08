@@ -1,1 +1,5 @@
+# Price-list downloads go through the site itself (same origin), so the
+# Firebase Storage bucket needs no CORS setup. Must stay above the SPA fallback.
+/firebase-storage/*  https://firebasestorage.googleapis.com/:splat  200
+
 /*   /index.html 200
