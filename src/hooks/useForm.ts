@@ -30,6 +30,7 @@ export const useForm = <V extends Values>({
   const [errors, setErrors] = useState<Errors<V>>({});
   const [submitting, setSubmitting] = useState(false);
 
+  const latest = useRef(values);
   const touched = useRef(new Set<keyof V>());
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -51,7 +52,7 @@ export const useForm = <V extends Values>({
 
   const setValue = useCallback(
     (name: keyof V, value: string) => {
-      const nextValues = { ...values, [name]: value };
+      const nextValues = { ...latest.current, [name]: value };
 
       setValues(nextValues);
 
@@ -59,8 +60,22 @@ export const useForm = <V extends Values>({
         validateField(name, nextValues);
       }
     },
-    [values, errors, validateField],
+    [errors, validateField],
   );
+
+  const setMany = useCallback((next: Partial<V>) => {
+    latest.current = { ...latest.current, ...next };
+    setValues(latest.current);
+    setErrors((current) => {
+      const remaining = { ...current };
+
+      (Object.keys(next) as (keyof V)[]).forEach((key) => {
+        delete remaining[key];
+      });
+
+      return remaining;
+    });
+  }, []);
 
   const setFieldErrors = useCallback((next: Errors<V>) => setErrors(next), []);
 
@@ -77,6 +92,7 @@ export const useForm = <V extends Values>({
 
   const reset = useCallback(() => {
     touched.current.clear();
+    latest.current = initialValues;
     setValues(initialValues);
     setErrors({});
   }, [initialValues]);
@@ -134,6 +150,7 @@ export const useForm = <V extends Values>({
     submitting,
     bind,
     setValue,
+    setMany,
     setFieldErrors,
     handleSubmit,
     focusFirstInvalid,
