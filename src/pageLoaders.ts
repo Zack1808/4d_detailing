@@ -1,3 +1,3 @@
-// import { lazy } from "react";
+import { lazy } from "react";
 
-// export const AdminApp = lazy(() => import("./admin/AdminApp"));
+export const AdminApp = lazy(() => import("./admin/AdminApp"));
