@@ -23,22 +23,20 @@ const prepare = (data: PageData): PageData => ({
     .sort((a, b) => a.sortOrder - b.sortOrder),
 });
 
-const loadMock = async (): Promise<PageData> => {
-  const [mock] = await Promise.all([
-    import("./mock/mockData"),
-    wait(MOCK_CONFIG.apiDelay),
-  ]);
-
-  return {
-    services: mock.mockServices,
-    reviews: mock.mockReviews,
-    blockedAppointments: mock.mockBlockedAppointments,
-    priceArchive: mock.mockPriceTable,
-  };
-};
-
 export const fetchPageData = async (): Promise<PageData> => {
-  if (USE_MOCK_DATA) return prepare(await loadMock());
+  if (USE_MOCK_DATA) {
+    const [mock] = await Promise.all([
+      import("./mock/mockData"),
+      wait(MOCK_CONFIG.apiDelay),
+    ]);
+
+    return prepare({
+      services: mock.mockServices,
+      reviews: mock.mockReviews,
+      blockedAppointments: mock.mockBlockedAppointments,
+      priceArchive: mock.mockPriceTable,
+    });
+  }
 
   const [services, reviews, blockedAppointments, priceArchive] =
     await Promise.all([
