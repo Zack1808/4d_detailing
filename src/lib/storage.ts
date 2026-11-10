@@ -13,3 +13,9 @@ export const writeStorage = (key: string, value: unknown) => {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch {}
 };
+
+export const removeStorage = (key: string) => {
+  try {
+    window.localStorage.removeItem(key);
+  } catch {}
+};
