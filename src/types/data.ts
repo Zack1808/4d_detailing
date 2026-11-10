@@ -49,6 +49,7 @@ export type AppointmentType = {
   remark?: string;
   isConfirmed: boolean;
   isBlocked: boolean;
+  isDenied?: boolean;
 };
 
 export type NewAppointment = Omit<AppointmentType, "id" | "dateTo">;
