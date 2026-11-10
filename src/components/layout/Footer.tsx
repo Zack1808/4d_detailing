@@ -28,7 +28,6 @@ const SOCIAL_ICONS: Record<SocialId, IconType> = {
   youtube: FaYoutube,
 };
 
-/** Link row: full-width list item on phones, plain link on desktop. */
 const ROW = "w-full max-w-none text-sm lg:max-w-max";
 const COLUMN =
   "flex flex-col items-center justify-center gap-0 px-3 py-3 lg:px-9";

@@ -1,5 +1,9 @@
 # Price-list downloads go through the site itself (same origin), so the
-# Firebase Storage bucket needs no CORS setup. Must stay above the SPA fallback.
+# Firebase Storage bucket needs no CORS setup.
 /firebase-storage/*  https://firebasestorage.googleapis.com/:splat  200
 
-/*   /index.html 200
+# The admin is a single-page app: its routes are not real files.
+/admin/*  /index.html  200
+
+# No catch-all on purpose. Every public page is a real file (written by
+# scripts/prerender-meta.mjs); anything else gets dist/404.html with a 404 status.

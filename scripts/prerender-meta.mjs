@@ -78,3 +78,15 @@ for (const meta of Object.values(PAGE_META)) {
   await writeFile(target, html);
   console.log(`prerendered meta: ${meta.path}`);
 }
+
+const notFound = stripped
+  .replace(/<html([^>]*?)(\slang="[^"]*")?([^>]*)>/i, '<html$1$3 lang="hr">')
+  .replace(
+    "</head>",
+    `    <title>Stranica nije pronađena | 4D Detailing</title>
+    <meta data-rh="true" name="robots" content="noindex, nofollow">
+  </head>`,
+  );
+
+await writeFile(path.join(dist, "404.html"), notFound);
+console.log("prerendered: 404.html");
