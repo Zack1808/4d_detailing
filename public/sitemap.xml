@@ -36,4 +36,11 @@
     <priority>0.3</priority>
   </url>
 
+  <url>
+    <loc>https://4d-detailing.hr/arhiva-cijenika</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
+  </url>
+
 </urlset>
