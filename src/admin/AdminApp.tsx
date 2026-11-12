@@ -7,6 +7,7 @@ import AdminLayout from "./layout/AdminLayout";
 
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
+import ReviewsPage from "./pages/ReviewsPage";
 
 import { ADMIN_SEGMENTS } from "./paths";
 
@@ -19,6 +20,7 @@ const AdminApp = () => {
         <Route element={<RequireAdmin />}>
           <Route element={<AdminLayout />}>
             <Route index element={<DashboardPage />} />
+            <Route path={ADMIN_SEGMENTS.reviews} element={<ReviewsPage />} />
             <Route path="*" element={<Navigate to="." replace />} />
           </Route>
         </Route>
