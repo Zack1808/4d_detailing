@@ -6,7 +6,7 @@ type PageHeaderProps = {
   actions?: ReactNode;
 };
 
-const PageHeader = ({ title, description, actions }: PageHeaderProps) => {
+const PageHeader = ({ title, description, actions }: PageHeaderProps) => (
   <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
     <div className="flex flex-col gap-2">
       <h1 className="text-3xl font-bold">{title}</h1>
@@ -15,7 +15,7 @@ const PageHeader = ({ title, description, actions }: PageHeaderProps) => {
       )}
     </div>
     {actions && <div className="flex flex-wrap gap-3">{actions}</div>}
-  </header>;
-};
+  </header>
+);
 
 export default PageHeader;
