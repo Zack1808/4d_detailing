@@ -15,7 +15,7 @@ const StatusBadge = ({
   tone = "neutral",
   children,
 }: {
-  tone: Tone;
+  tone?: Tone;
   children: ReactNode;
 }) => {
   return (

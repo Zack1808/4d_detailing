@@ -13,7 +13,7 @@ export const TableShell = ({ children }: { children: ReactNode }) => (
 export const Th = ({
   className,
   ...rest
-}: ThHTMLAttributes<HTMLTableCellElement>) => {
+}: ThHTMLAttributes<HTMLTableCellElement>) => (
   <th
     scope="col"
     className={cn(
@@ -21,8 +21,8 @@ export const Th = ({
       className,
     )}
     {...rest}
-  />;
-};
+  />
+);
 
 export const Td = ({
   className,
