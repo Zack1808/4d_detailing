@@ -37,3 +37,21 @@ export const getTime = (value: string) => {
 
   return Number.isNaN(time) ? 0 : time;
 };
+
+export const addDaysToValue = (value: string, days: number) => {
+  const date = parseDate(value);
+
+  if (!date) return "";
+
+  return formatDate(
+    new Date(date.getFullYear(), date.getMonth(), date.getDate() + days),
+  );
+};
+
+export const toIsoDate = (value: string) => {
+  const date = parseDate(value);
+
+  if (!date) return "";
+
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${date.getDate()}`;
+};
