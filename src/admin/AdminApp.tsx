@@ -10,6 +10,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ReviewsPage from "./pages/ReviewsPage";
 import PriceTablesPage from "./pages/PriceTablesPage";
 import BlockedDatesPage from "./pages/BlockedDates";
+import AppointmentsPage from "./pages/AppointmentsPage";
 
 import { ADMIN_SEGMENTS } from "./paths";
 
@@ -22,6 +23,10 @@ const AdminApp = () => {
         <Route element={<RequireAdmin />}>
           <Route element={<AdminLayout />}>
             <Route index element={<DashboardPage />} />
+            <Route
+              path={ADMIN_SEGMENTS.appointments}
+              element={<AppointmentsPage />}
+            />
             <Route path={ADMIN_SEGMENTS.reviews} element={<ReviewsPage />} />
             <Route
               path={ADMIN_SEGMENTS.blockedDates}
