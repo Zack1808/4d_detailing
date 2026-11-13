@@ -24,7 +24,7 @@ const prepare = (data: PageData): PageData => ({
 });
 
 export const fetchPageData = async (): Promise<PageData> => {
-  if (USE_MOCK_DATA) {
+  if (import.meta.env.DEV && MOCK_CONFIG.enableMockData) {
     const [mock] = await Promise.all([
       import("./mock/mockData"),
       wait(MOCK_CONFIG.apiDelay),

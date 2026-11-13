@@ -19,6 +19,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 0,
+    duration: "1",
+    durationPerPhase: true,
     prices: {
       car: { price: 40, anchorPrice: 40 },
       suv: { price: 40, anchorPrice: 40 },
@@ -43,6 +45,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 1,
+    duration: "1",
+    durationPerPhase: true,
     prices: {
       car: { price: 60, anchorPrice: 60 },
       suv: { price: 60, anchorPrice: 60 },
@@ -67,6 +71,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 2,
+    duration: "1",
+    durationPerPhase: true,
     prices: {
       car: { price: 80, anchorPrice: 80 },
       suv: { price: 80, anchorPrice: 80 },
@@ -94,6 +100,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 3,
+    duration: "2",
     prices: {
       car: { price: 50, anchorPrice: 50 },
       suv: { price: 50, anchorPrice: 50 },
@@ -121,6 +128,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 4,
+    duration: "2-3",
     prices: {
       car: { price: 70, anchorPrice: 70 },
       suv: { price: 70, anchorPrice: 70 },
@@ -149,6 +157,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 5,
+    duration: "3",
     prices: {
       car: { price: 80, anchorPrice: 80 },
       suv: { price: 80, anchorPrice: 80 },
@@ -177,6 +186,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 6,
+    duration: "3-4",
     prices: {
       car: { price: 100, anchorPrice: 100 },
       suv: { price: 100, anchorPrice: 100 },
@@ -204,6 +214,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 7,
+    duration: "2-3",
+    durationPerPhase: true,
     prices: {
       car: { price: 120, anchorPrice: 120 },
       suv: { price: 190, anchorPrice: 190 },
@@ -231,6 +243,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 8,
+    duration: "1",
+    durationPerPhase: true,
     prices: {
       car: { price: 50, anchorPrice: 50 },
       suv: { price: 70, anchorPrice: 70 },
@@ -258,6 +272,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 9,
+    duration: "2-3",
+    durationPerPhase: true,
     prices: {
       car: { price: 120, anchorPrice: 120 },
       suv: { price: 170, anchorPrice: 170 },
@@ -282,6 +298,8 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 10,
+    duration: "2-3",
+    durationPerPhase: true,
     prices: {
       car: { price: 180, anchorPrice: 180 },
       suv: { price: 240, anchorPrice: 240 },
@@ -313,6 +331,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 11,
+    duration: "1",
     prices: {
       car: { price: 150, anchorPrice: 100 },
       suv: { price: 200, anchorPrice: 150 },
@@ -345,6 +364,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: false,
     status: "active",
     sortOrder: 12,
+    duration: "1-2",
     prices: {
       car: { price: 350, anchorPrice: 300 },
       suv: { price: 400, anchorPrice: 350 },
@@ -374,6 +394,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: true,
     status: "active",
     sortOrder: 13,
+    duration: "1",
     prices: {
       car: { price: 40, anchorPrice: 40 },
       suv: { price: 80, anchorPrice: 80 },
@@ -405,6 +426,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: true,
     status: "active",
     sortOrder: 14,
+    duration: "1-2",
     prices: {
       car: { price: 350, anchorPrice: 320 },
       suv: { price: 400, anchorPrice: 370 },
@@ -437,6 +459,7 @@ export const mockServices: ServiceDataType[] = [
     isFeatured: true,
     status: "active",
     sortOrder: 15,
+    duration: "2-3",
     prices: {
       car: { price: 600, anchorPrice: 500 },
       suv: { price: 660, anchorPrice: 560 },

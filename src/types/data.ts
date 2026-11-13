@@ -16,6 +16,8 @@ export type ServiceDataType = {
   isFeatured: boolean;
   status: "active" | "hidden" | "archived";
   sortOrder: number;
+  duration: string;
+  durationPerPhase?: boolean;
   prices: Record<VehicleClass, PriceType>;
   discount: {
     type: "percentage" | "fixed";

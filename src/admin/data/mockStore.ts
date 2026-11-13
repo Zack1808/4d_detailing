@@ -15,18 +15,25 @@ const wait = (ms: number) =>
   new Promise<void>((resolve) => window.setTimeout(resolve, ms));
 
 const buildSeed = async (): Promise<Db> => {
-  const [mock, { mockAppointments, mockBlockedDates, mockPendingReviews }] =
-    await Promise.all([
-      import("../../services/mock/mockData"),
-      import("./mockAppointments"),
-    ]);
+  const [
+    mock,
+    {
+      mockAppointments,
+      mockPastAppointments,
+      mockBlockedDates,
+      mockPendingReviews,
+    },
+  ] = await Promise.all([
+    import("../../services/mock/mockData"),
+    import("./mockAppointments"),
+  ]);
 
   return {
     [COLLECTIONS.services]: mock.mockServices,
     [COLLECTIONS.reviews]: [...mock.mockReviews, ...mockPendingReviews],
     [COLLECTIONS.blockedAppointments]: mockBlockedDates,
     [COLLECTIONS.priceTables]: mock.mockPriceTable,
-    [COLLECTIONS.appointments]: mockAppointments,
+    [COLLECTIONS.appointments]: [...mockAppointments, ...mockPastAppointments],
   };
 };
 
@@ -43,7 +50,7 @@ const save = (db: Db) => {
   writeStorage(MOCK_DB_KEY, db);
 };
 
-const newId = () => `mock-${crypto.randomUUID}`;
+const newId = () => `mock-${crypto.randomUUID()}`;
 
 export const resetMockData = () => {
   cache = undefined;
