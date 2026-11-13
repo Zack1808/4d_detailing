@@ -11,6 +11,7 @@ import ReviewsPage from "./pages/ReviewsPage";
 import PriceTablesPage from "./pages/PriceTablesPage";
 import BlockedDatesPage from "./pages/BlockedDates";
 import AppointmentsPage from "./pages/AppointmentsPage";
+import ServicesPage from "./pages/ServicesPage";
 
 import { ADMIN_SEGMENTS } from "./paths";
 
@@ -27,6 +28,7 @@ const AdminApp = () => {
               path={ADMIN_SEGMENTS.appointments}
               element={<AppointmentsPage />}
             />
+            <Route path={ADMIN_SEGMENTS.services} element={<ServicesPage />} />
             <Route path={ADMIN_SEGMENTS.reviews} element={<ReviewsPage />} />
             <Route
               path={ADMIN_SEGMENTS.blockedDates}
