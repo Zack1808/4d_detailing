@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       cancelled = true;
       unsubscribe?.();
     };
-  });
+  }, []);
 
   const signIn = useCallback(async (email: string, password: string) => {
     const loaded = api.current ?? (await loadAuthApi());
