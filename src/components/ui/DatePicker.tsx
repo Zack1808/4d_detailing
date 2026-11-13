@@ -166,6 +166,8 @@ const DatePicker = ({
   };
 
   const commitDraft = () => {
+    if (isOpen) return;
+
     if (draft !== null) {
       onChange(draft.trim());
       setDraft(null);
@@ -231,6 +233,11 @@ const DatePicker = ({
   return (
     <div
       ref={rootRef}
+      onBlur={(event) => {
+        if (!rootRef.current?.contains(event.relatedTarget as Node | null)) {
+          commitDraft();
+        }
+      }}
       className={cn(
         "relative w-full rounded-xs border-b-2 bg-dark/5 transition-colors duration-200 dark:bg-light/5 md:flex md:flex-col",
         fieldWrapperBorder(invalid),
@@ -257,7 +264,6 @@ const DatePicker = ({
             setDraft(event.target.value.replace(/[^\d.]/g, ""))
           }
           onClick={toggleCalendar}
-          onBlur={commitDraft}
           onKeyDown={handleInputKeyDown}
           className="w-full cursor-pointer rounded-xs bg-transparent p-3 font-light outline-none placeholder:text-gray-light"
           {...aria}

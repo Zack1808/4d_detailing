@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import ReviewsPage from "./pages/ReviewsPage";
 import PriceTablesPage from "./pages/PriceTablesPage";
+import BlockedDatesPage from "./pages/BlockedDates";
 
 import { ADMIN_SEGMENTS } from "./paths";
 
@@ -22,11 +23,15 @@ const AdminApp = () => {
           <Route element={<AdminLayout />}>
             <Route index element={<DashboardPage />} />
             <Route path={ADMIN_SEGMENTS.reviews} element={<ReviewsPage />} />
-            <Route path="*" element={<Navigate to="." replace />} />
+            <Route
+              path={ADMIN_SEGMENTS.blockedDates}
+              element={<BlockedDatesPage />}
+            />
             <Route
               path={ADMIN_SEGMENTS.priceTables}
               element={<PriceTablesPage />}
             />
+            <Route path="*" element={<Navigate to="." replace />} />
           </Route>
         </Route>
       </Routes>

@@ -54,6 +54,7 @@ export const useForm = <V extends Values>({
     (name: keyof V, value: string) => {
       const nextValues = { ...latest.current, [name]: value };
 
+      latest.current = nextValues;
       setValues(nextValues);
 
       if (touched.current.has(name) || errors[name]) {
@@ -139,7 +140,7 @@ export const useForm = <V extends Values>({
       ),
     onBlur: () => {
       touched.current.add(name);
-      validateField(name, values);
+      validateField(name, latest.current);
     },
   });
 
