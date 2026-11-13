@@ -5,7 +5,7 @@ import type { AuthApi } from "./types";
 export const USE_MOCK_AUTH = import.meta.env.DEV && MOCK_CONFIG.enableMockAuth;
 
 export const loadAuthApi = async (): Promise<AuthApi> => {
-  if (USE_MOCK_AUTH) {
+  if (import.meta.env.DEV && MOCK_CONFIG.enableMockAuth) {
     return (await import("./mockAuth")).mockAuth;
   }
 
