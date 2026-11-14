@@ -6,6 +6,7 @@ import PublicLayout from "./components/layout/PublicLayout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Toaster from "./components/ui/Toast";
 import AdminLoginSkeleton from "./components/skeletons/AdminLoginSkeleton";
+import AdminShellSkeleton from "./components/skeletons/AdminShellSkeleton";
 
 import { PATHS } from "./config/paths";
 import Contact from "./pages/Contact";
@@ -22,7 +23,11 @@ import { ADMIN_PATHS } from "./admin/paths";
 const AdminFallback = () => {
   const { pathname } = useLocation();
 
-  return pathname.startsWith(ADMIN_PATHS.login) ? <AdminLoginSkeleton /> : null;
+  return pathname.startsWith(ADMIN_PATHS.login) ? (
+    <AdminLoginSkeleton />
+  ) : (
+    <AdminShellSkeleton />
+  );
 };
 
 const App = () => (
