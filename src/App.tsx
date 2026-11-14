@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Suspense } from "react";
 
 import ErrorBoundary from "./components/layout/ErrorBoundary";
 import PublicLayout from "./components/layout/PublicLayout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Toaster from "./components/ui/Toast";
-import PageLoader from "./components/layout/PageLoader";
+import AdminLoginSkeleton from "./components/skeletons/AdminLoginSkeleton";
 
 import { PATHS } from "./config/paths";
 import Contact from "./pages/Contact";
@@ -17,6 +17,13 @@ import Services from "./pages/Services";
 import Terms from "./pages/Terms";
 
 import { AdminApp } from "./pageLoaders";
+import { ADMIN_PATHS } from "./admin/paths";
+
+const AdminFallback = () => {
+  const { pathname } = useLocation();
+
+  return pathname.startsWith(ADMIN_PATHS.login) ? <AdminLoginSkeleton /> : null;
+};
 
 const App = () => (
   <ErrorBoundary>
@@ -26,7 +33,7 @@ const App = () => (
         <Route
           path={`${PATHS.admin}/*`}
           element={
-            <Suspense fallback={<PageLoader />}>
+            <Suspense fallback={<AdminFallback />}>
               <AdminApp />
             </Suspense>
           }
