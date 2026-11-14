@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CollectionState from "../components/CollectionState";
 import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
+import { DashboardSkeleton } from "../components/skeletons";
 
 import { getAppointmentState } from "../data/appointmentActions";
 import { useCollections } from "../data/useCollections";
@@ -109,6 +110,7 @@ const DashboardPage = () => {
         status={failed ? "error" : loading ? "loading" : "ready"}
         error={failed?.error ?? null}
         onRetry={retry}
+        skeleton={<DashboardSkeleton />}
       >
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <StatCard

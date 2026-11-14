@@ -4,6 +4,7 @@ import CollectionState from "../components/CollectionState";
 import ConfirmDialog from "../components/ConfirmDialog";
 import PageHeader from "../components/PageHeader";
 import { BodyRow, HeadRow, TableShell, Th, Td } from "../components/Table";
+import { BLOCKED_COLUMNS, TableSkeleton } from "../components/skeletons";
 
 import { appointmentRepo, blockedDatesRepo } from "../data/repositories";
 import { useCollections } from "../data/useCollections";
@@ -119,6 +120,7 @@ const BlockedDatesPage = () => {
         onRetry={blocked.reload}
         isEmpty={rows.length === 0}
         emptyMessage="Trenutno nema blokiranih datuma."
+        skeleton={<TableSkeleton columns={BLOCKED_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>

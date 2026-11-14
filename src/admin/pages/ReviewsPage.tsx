@@ -6,6 +6,7 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import FilterTabs from "../components/FilterTabs";
 import PageHeader from "../components/PageHeader";
 import StatusBadge from "../components/StatusBadge";
+import { ReviewListSkeleton } from "../components/skeletons";
 
 import { reviewsRepo } from "../data/repositories";
 import { useCollections } from "../data/useCollections";
@@ -92,6 +93,7 @@ const ReviewsPage = () => {
         onRetry={reviews.reload}
         isEmpty={rows.length === 0}
         emptyMessage="Nema recenzija za odabrani filer"
+        skeleton={<ReviewListSkeleton />}
       >
         <ul className="flex flex-col gap-3">
           {rows.map((review) => (

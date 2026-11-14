@@ -6,6 +6,7 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import PageHeader from "../components/PageHeader";
 import StatusBadge, { type Tone } from "../components/StatusBadge";
 import { BodyRow, HeadRow, TableShell, Td, Th } from "../components/Table";
+import { APPOINTMENT_COLUMNS, TableSkeleton } from "../components/skeletons";
 
 import {
   confirmAppointment,
@@ -219,6 +220,7 @@ const AppointmentsPage = () => {
         }}
         isEmpty={rows.length === 0}
         emptyMessage="Nema termina za odabrani filter"
+        skeleton={<TableSkeleton columns={APPOINTMENT_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>

@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 
-import Loader from "../../components/ui/Loader";
 import { InlineError } from "../../components/ui/InlineMessage";
+
+import { APPOINTMENT_COLUMNS, TableSkeleton } from "./skeletons";
 
 type CollectionStateProps = {
   status: "loading" | "ready" | "error";
@@ -9,6 +10,7 @@ type CollectionStateProps = {
   onRetry: () => void;
   isEmpty?: boolean;
   emptyMessage?: string;
+  skeleton?: ReactNode;
   children: ReactNode;
 };
 
@@ -18,19 +20,11 @@ const CollectionState = ({
   onRetry,
   isEmpty,
   emptyMessage = "Nema podataka za prikaz",
+  skeleton,
   children,
 }: CollectionStateProps) => {
   if (status === "loading") {
-    return (
-      <div
-        role="status"
-        aria-live="polite"
-        className="flex w-full justify-center py-20"
-      >
-        <Loader size="md" />
-        <span className="sr-only">Učitavanje...</span>
-      </div>
-    );
+    return skeleton ?? <TableSkeleton columns={APPOINTMENT_COLUMNS} rows={4} />;
   }
 
   if (status === "error") {

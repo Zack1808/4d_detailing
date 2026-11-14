@@ -26,7 +26,7 @@ export const SkeletonText = ({
   lines?: number;
   className?: string;
   lineClassName?: string;
-}) => {
+}) => (
   <div
     aria-hidden="true"
     className={cn("flex w-full flex-col gap-2", className)}
@@ -41,8 +41,8 @@ export const SkeletonText = ({
         )}
       />
     ))}
-  </div>;
-};
+  </div>
+);
 
 export const SkeletonRegion = ({
   label = "Učitavanje...",

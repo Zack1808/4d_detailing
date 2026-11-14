@@ -5,6 +5,7 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import PageHeader from "../components/PageHeader";
 import StatusBadge from "../components/StatusBadge";
 import { BodyRow, HeadRow, TableShell, Td, Th } from "../components/Table";
+import { PRICE_TABLE_COLUMNS, TableSkeleton } from "../components/skeletons";
 
 import { priceTableRepo } from "../data/repositories";
 import { useCollections } from "../data/useCollections";
@@ -72,6 +73,7 @@ const PriceTablesPage = () => {
         onRetry={tables.reload}
         isEmpty={rows.length === 0}
         emptyMessage="Još nema cjenika"
+        skeleton={<TableSkeleton columns={PRICE_TABLE_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>

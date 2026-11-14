@@ -7,6 +7,7 @@ import StatusBadge, { type Tone } from "../components/StatusBadge";
 import { BodyRow, HeadRow, TableShell, Td, Th } from "../components/Table";
 import { serviceRepo } from "../data/repositories";
 import { useCollections } from "../data/useCollections";
+import { SERVICE_COLUMNS, TableSkeleton } from "../components/skeletons";
 
 import ServiceEditor from "./ServiceEditor";
 
@@ -86,6 +87,7 @@ const ServicesPage = () => {
         onRetry={services.reload}
         isEmpty={rows.length === 0}
         emptyMessage="Još nema usluga. Dodajte prvu."
+        skeleton={<TableSkeleton columns={SERVICE_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>
