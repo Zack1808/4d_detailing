@@ -2,8 +2,13 @@ import { useMemo, useState } from "react";
 
 import FilterTabs from "../components/FilterTabs";
 import CollectionState from "../components/CollectionState";
+import {
+  CustomerHistoryDialog,
+  CustomerHistorySummary,
+} from "../components/CustomerHistory";
 import ConfirmDialog from "../components/ConfirmDialog";
 import PageHeader from "../components/PageHeader";
+import RescheduleDialog from "../components/RescheduleDialog";
 import StatusBadge, { type Tone } from "../components/StatusBadge";
 import { BodyRow, HeadRow, TableShell, Td, Th } from "../components/Table";
 import { APPOINTMENT_COLUMNS, TableSkeleton } from "../components/skeletons";
@@ -12,12 +17,23 @@ import {
   confirmAppointment,
   countOverlaps,
   denyAppointment,
+  findService,
   getAppointmentState,
+  getDefaultPhases,
   getRange,
+  getStartDate,
+  getSuggestedRange,
+  proposeReschedule,
   type AppointmentState,
   type DateRange,
 } from "../data/appointmentActions";
-import { appointmentRepo, blockedDatesRepo } from "../data/repositories";
+import { USE_MOCK_CALENDAR } from "../data/calendarApi";
+import { getCustomerHistory } from "../data/customerHistory";
+import {
+  appointmentRepo,
+  blockedDatesRepo,
+  serviceRepo,
+} from "../data/repositories";
 import { useCollections } from "../data/useCollections";
 
 import Button from "../../components/ui/Button";
@@ -26,10 +42,15 @@ import Field from "../../components/ui/Field";
 import Input from "../../components/ui/Input";
 import Modal from "../../components/ui/Modal";
 
-import { parseDate } from "../../utils/date";
+import { addDaysToValue, parseDate } from "../../utils/date";
+import {
+  formatDays,
+  formatDuration,
+  getBlockedDays,
+} from "../../utils/duration";
 import { getErrorMessage } from "../../utils/errors";
 import { normalizeText } from "../../utils/text";
-import { notifyError, notifySuccess } from "../../utils/toast";
+import { notifyError, notifySuccess, notifyWarning } from "../../utils/toast";
 
 import type { AppointmentType } from "../../types/data";
 
@@ -77,19 +98,24 @@ const time = (appointment: AppointmentType) =>
 
 type Action =
   | { type: "confirm"; appointment: AppointmentType }
+  | { type: "reschedule"; appointment: AppointmentType }
   | { type: "deny"; appointment: AppointmentType }
   | { type: "delete"; appointment: AppointmentType };
 
 const AppointmentsPage = () => {
   const appointments = useCollections(appointmentRepo);
   const blocked = useCollections(blockedDatesRepo);
+  const services = useCollections(serviceRepo);
 
   const [filter, setFilter] = useState<Filter>("pending");
   const [search, setSearch] = useState<string>("");
   const [action, setAction] = useState<Action | null>(null);
   const [range, setRange] = useState<DateRange>({ dateFrom: "", dateTo: "" });
   const [rangeError, setRangeError] = useState<string>();
+  const [phases, setPhases] = useState<string>("1");
   const [busy, setBusy] = useState<boolean>(false);
+  const [historyFor, setHistoryFor] = useState<AppointmentType | null>(null);
+  const [rescheduleKey, setRescheduleKey] = useState(0);
 
   const counts = useMemo(() => {
     const results: Record<Filter, number> = {
@@ -123,27 +149,104 @@ const AppointmentsPage = () => {
       );
   }, [appointments.items, filter, search]);
 
+  const histories = useMemo(
+    () =>
+      new Map(
+        appointments.items.map((a) => [
+          a.id,
+          getCustomerHistory(a, appointments.items),
+        ]),
+      ),
+    [appointments.items],
+  );
+
+  const getFit = (appointment: AppointmentType) => {
+    const service = findService(appointment, services.items);
+    const days = getBlockedDays(
+      service,
+      getDefaultPhases(appointment, service),
+    );
+    const start = getStartDate(appointment);
+    const overlaps =
+      start && days !== null
+        ? countOverlaps(
+            { dateFrom: start, dateTo: addDaysToValue(start, days - 1) },
+            blocked.items,
+            appointment.id,
+          ) > 0
+        : false;
+
+    return { service, days, overlaps };
+  };
+
+  const phaseCount = (value: string) => {
+    const count = Number(value);
+
+    return Number.isInteger(count) && count >= 1 ? count : 1;
+  };
+
+  const confirmService =
+    action?.type === "confirm"
+      ? findService(action.appointment, services.items)
+      : undefined;
+  const confirmDays = getBlockedDays(confirmService, phaseCount(phases));
+
   const openConfirm = (appointment: AppointmentType) => {
-    setRange(getRange(appointment));
+    const service = findService(appointment, services.items);
+    const defaultPhases = getDefaultPhases(appointment, service);
+    const start = getStartDate(appointment);
+
+    setPhases(String(defaultPhases));
+    setRange(
+      service && getBlockedDays(service, defaultPhases) !== null
+        ? getSuggestedRange(start, service, defaultPhases)
+        : { dateFrom: start, dateTo: appointment.dateTo ?? start },
+    );
     setRangeError(undefined);
     setAction({ type: "confirm", appointment });
+  };
+
+  const openReschedule = (appointment: AppointmentType) => {
+    setRescheduleKey((key) => key + 1);
+    setAction({ type: "reschedule", appointment });
+  };
+
+  /** Re-derives the last day from the first day / phases (when the service has a duration). */
+  const updateRange = (dateFrom: string, phaseValue: string) => {
+    const days = getBlockedDays(confirmService, phaseCount(phaseValue));
+
+    setRange((current) =>
+      days === null
+        ? { ...current, dateFrom }
+        : getSuggestedRange(dateFrom, confirmService, phaseCount(phaseValue)),
+    );
+    setRangeError(undefined);
   };
 
   const close = () => {
     if (!busy) setAction(null);
   };
 
-  const run = async (task: () => Promise<void>, success: string) => {
+  const run = async (
+    task: () => Promise<{ warning?: string } | void>,
+    success: string,
+  ): Promise<boolean> => {
     setBusy(true);
 
     try {
-      await task();
+      const result = await task();
+
       await Promise.all([appointments.refresh(), blocked.refresh()]);
       notifySuccess(success);
+      if (result?.warning) notifyWarning(result.warning);
       setAction(null);
+
+      return true;
     } catch (error) {
       console.error("Appointment action failed: ", error);
       notifyError(getErrorMessage(error));
+
+      return false;
     } finally {
       setBusy(false);
     }
@@ -165,10 +268,20 @@ const AppointmentsPage = () => {
       return;
     }
 
-    run(
-      () => confirmAppointment(action?.appointment, range),
-      "Termin je potvrđen",
-    );
+    run(async () => {
+      const { calendar } = await confirmAppointment(
+        action.appointment,
+        range,
+        phaseCount(phases),
+      );
+
+      if (calendar === "failed") {
+        return {
+          warning:
+            "Termin je potvrđen, ali nije dodan u Google Calendar. Dodajte ga ručno.",
+        };
+      }
+    }, "Termin je potvrđen");
   };
 
   const overlaps =
@@ -176,12 +289,12 @@ const AppointmentsPage = () => {
       ? countOverlaps(range, blocked.items, action.appointment.id)
       : 0;
 
-  const loadStatus =
-    appointments.status === "error" || blocked.status === "error"
-      ? "error"
-      : appointments.status === "loading" || blocked.status === "loading"
-        ? "loading"
-        : "ready";
+  const sources = [appointments, blocked, services];
+  const loadStatus = sources.some((source) => source.status === "error")
+    ? "error"
+    : sources.some((source) => source.status === "loading")
+      ? "loading"
+      : "ready";
 
   return (
     <>
@@ -197,7 +310,7 @@ const AppointmentsPage = () => {
           onChange={setFilter}
           options={FILTERS.map((item) => ({
             ...item,
-            count: counts[item.value],
+            count: loadStatus === "ready" ? counts[item.value] : undefined,
           }))}
         />
 
@@ -213,14 +326,15 @@ const AppointmentsPage = () => {
 
       <CollectionState
         status={loadStatus}
-        error={appointments.error || blocked.error}
+        error={appointments.error || blocked.error || services.error}
+        skeleton={<TableSkeleton columns={APPOINTMENT_COLUMNS} />}
         onRetry={() => {
           appointments.reload();
           blocked.reload();
+          services.reload();
         }}
         isEmpty={rows.length === 0}
         emptyMessage="Nema termina za odabrani filter"
-        skeleton={<TableSkeleton columns={APPOINTMENT_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>
@@ -234,11 +348,37 @@ const AppointmentsPage = () => {
             {rows.map((a) => {
               const state = getAppointmentState(a);
               const { dateFrom, dateTo } = getRange(a);
+              const { days, overlaps: noFit } = getFit(a);
+              const proposal = a.rescheduleProposal;
 
               return (
                 <BodyRow key={a.id}>
                   <Td className="whitespace-nowrap">
-                    {dateFrom === dateTo ? dateFrom : `${dateFrom} - ${dateTo}`}
+                    {dateFrom ? (
+                      <p>
+                        {dateFrom === dateTo
+                          ? dateFrom
+                          : `${dateFrom} - ${dateTo}`}
+                      </p>
+                    ) : (
+                      <p className="text-gray-light">Bez termina</p>
+                    )}
+                    {state === "pending" && proposal && (
+                      <p className="text-sm">Predloženo: {proposal.dateFrom}</p>
+                    )}
+                    {state === "pending" && days !== null && (
+                      <p className="text-sm text-gray-light">
+                        Zauzima {formatDays(days)}
+                      </p>
+                    )}
+                    {state === "pending" && noFit && (
+                      <p
+                        className="mt-1 max-w-[22ch] text-sm whitespace-normal text-amber-700 dark:text-amber-300"
+                        role="status"
+                      >
+                        Preklapa se s blokiranim datumima
+                      </p>
+                    )}
                   </Td>
                   <Td>
                     <p className="font-medium">{a.fullName}</p>
@@ -255,6 +395,10 @@ const AppointmentsPage = () => {
                         {a.phone}
                       </a>
                     </p>
+                    <CustomerHistorySummary
+                      history={histories.get(a.id) ?? []}
+                      onOpen={() => setHistoryFor(a)}
+                    />
                   </Td>
                   <Td>
                     <p>{a.service}</p>
@@ -266,9 +410,17 @@ const AppointmentsPage = () => {
                     )}
                   </Td>
                   <Td>
-                    <StatusBadge tone={STATE_TONE[state] as Tone}>
-                      {STATE_LABEL[state]}
-                    </StatusBadge>
+                    <div className="flex flex-col items-start gap-1">
+                      <StatusBadge tone={STATE_TONE[state] as Tone}>
+                        {STATE_LABEL[state]}
+                      </StatusBadge>
+                      {state === "pending" && proposal && (
+                        <StatusBadge>Novi termin predložen</StatusBadge>
+                      )}
+                      {state === "confirmed" && a.calendarEventId && (
+                        <span className="text-sm">U Google Calendaru</span>
+                      )}
+                    </div>
                   </Td>
                   <Td>
                     <div className="flex flex-wrap justify-end gap-3">
@@ -280,6 +432,13 @@ const AppointmentsPage = () => {
                             onClick={() => openConfirm(a)}
                           >
                             Potvrdi
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            className="px-3 py-2 text-sm"
+                            onClick={() => openReschedule(a)}
+                          >
+                            Predloži novi termin
                           </Button>
                           <Button
                             variant="secondary"
@@ -340,15 +499,51 @@ const AppointmentsPage = () => {
               blokirani u kalendaru.
             </p>
 
+            {confirmService?.durationPerPhase && (
+              <Field
+                id="phases"
+                label="Broj faza"
+                required
+                hint={`Trajanje usluge: ${formatDuration(confirmService.duration)} po fazi.`}
+              >
+                <Input
+                  id="phases"
+                  type="number"
+                  inputMode="numeric"
+                  min={1}
+                  max={20}
+                  value={phases}
+                  onChange={(event) => {
+                    setPhases(event.target.value);
+                    updateRange(range.dateFrom, event.target.value);
+                  }}
+                />
+              </Field>
+            )}
+
+            <p className="text-sm font-light" role="status">
+              {confirmDays !== null ? (
+                <>
+                  Trajanje usluge: {formatDuration(confirmService?.duration)}
+                  {confirmService?.durationPerPhase &&
+                    ` po fazi × ${phaseCount(phases)}`}
+                  {". Blokira se "}
+                  <strong className="font-semibold">
+                    {formatDays(confirmDays)}
+                  </strong>{" "}
+                  (gornja granica trajanja). Raspon možete i ručno promijeniti.
+                </>
+              ) : (
+                "Za ovu uslugu trajanje nije zadano pa raspon unesite ručno (trajanje se postavlja u Uslugama)."
+              )}
+            </p>
+
             <div className="grid gap-3 sm:grid-cols-2">
               <Field id="range-from" label="Prvi dan" required>
                 <DatePicker
                   id="range-from"
                   value={range.dateFrom}
-                  onChange={(dateFrom) => {
-                    setRange((r) => ({ ...r, dateFrom }));
-                    setRangeError(undefined);
-                  }}
+                  onChange={(dateFrom) => updateRange(dateFrom, phases)}
                 />
               </Field>
 
@@ -373,15 +568,27 @@ const AppointmentsPage = () => {
             </div>
 
             {overlaps > 0 && (
-              <p
-                className="text-sm text-amber-700 dark:text-amber-300"
+              <div
+                className="flex flex-col items-start gap-2 text-sm text-amber-700 dark:text-amber-300"
                 role="status"
               >
-                Za ove datume već postoji još {overlaps} blokiranih termina
-              </p>
+                <p>
+                  Za ove datume već postoji još {overlaps} blokiranih termina.
+                </p>
+                <Button
+                  variant="link"
+                  className="py-0 text-sm underline"
+                  onClick={() => openReschedule(action.appointment)}
+                >
+                  Predloži klijentu drugi termin
+                </Button>
+              </div>
             )}
 
             <p className="text-sm font-light text-gray-light">
+              Potvrđeni termin dodaje se u Google Calendar s podsjetnikom dan
+              ranije u 18:00
+              {USE_MOCK_CALENDAR && " (mock: sprema se samo u preglednik)"}.
               Klijentu još ne šaljemo e-mail automatski – potvrdu mu za sada
               javite sami.
             </p>
@@ -397,6 +604,34 @@ const AppointmentsPage = () => {
           </div>
         )}
       </Modal>
+
+      <RescheduleDialog
+        key={rescheduleKey}
+        open={action?.type === "reschedule"}
+        appointment={action?.type === "reschedule" ? action.appointment : null}
+        blocked={blocked.items}
+        days={
+          action?.type === "reschedule"
+            ? (getFit(action.appointment).days ?? 1)
+            : 1
+        }
+        onClose={close}
+        onSubmit={({ dateFrom, message }) =>
+          action?.type === "reschedule"
+            ? run(
+                () =>
+                  proposeReschedule(action.appointment, { dateFrom, message }),
+                "Prijedlog novog termina poslan je klijentu.",
+              )
+            : Promise.resolve(false)
+        }
+      />
+
+      <CustomerHistoryDialog
+        appointment={historyFor}
+        history={historyFor ? (histories.get(historyFor.id) ?? []) : []}
+        onClose={() => setHistoryFor(null)}
+      />
 
       <ConfirmDialog
         open={action?.type === "deny"}
@@ -423,8 +658,9 @@ const AppointmentsPage = () => {
         {action?.type === "deny" && (
           <p>
             {action.appointment.fullName} – {action.appointment.dateFrom}.
-            Rezervirani datumi (ako postoje) bit će oslobođeni. Klijentu još ne
-            šaljemo e-mail automatski.
+            Rezervirani datumi (ako postoje) bit će oslobođeni, a termin
+            uklonjen iz Google Calendara. Klijentu još ne šaljemo e-mail
+            automatski.
           </p>
         )}
       </ConfirmDialog>

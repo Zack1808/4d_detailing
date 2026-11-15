@@ -16,7 +16,9 @@ export type ServiceDataType = {
   isFeatured: boolean;
   status: "active" | "hidden" | "archived";
   sortOrder: number;
-  duration: string;
+  /** Days the service occupies: "1" or a span like "1-2" (upper limit blocks dates). */
+  duration?: string;
+  /** When true, `duration` is per phase and is multiplied by the number of phases. */
   durationPerPhase?: boolean;
   prices: Record<VehicleClass, PriceType>;
   discount: {
@@ -39,6 +41,12 @@ export type ReviewType = {
   isApproved: boolean;
 };
 
+export type RescheduleProposal = {
+  dateFrom: string;
+  message: string;
+  sentAt: string;
+};
+
 export type AppointmentType = {
   id: string;
   fullName: string;
@@ -52,6 +60,10 @@ export type AppointmentType = {
   isConfirmed: boolean;
   isBlocked: boolean;
   isDenied?: boolean;
+  serviceId?: string;
+  phases?: number;
+  rescheduleProposal?: RescheduleProposal | null;
+  calendarEventId?: string | null;
 };
 
 export type NewAppointment = Omit<AppointmentType, "id" | "dateTo">;

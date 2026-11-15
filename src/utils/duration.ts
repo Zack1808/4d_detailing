@@ -30,18 +30,20 @@ export const normalizeDuration = (value: string) => {
 };
 
 const dayWord = (count: number) =>
-  count % 10 === 1 && count % 100 === 11 ? "dan" : "dana";
+  count % 10 === 1 && count % 100 !== 11 ? "dan" : "dana";
 
 export const formatDuration = (value?: string | null) => {
   const range = parseDuration(value);
 
-  if (!range) return null;
+  if (!range) return "";
 
   const label =
     range.min === range.max ? range.max : `${range.min}-${range.max}`;
 
   return `${label} ${dayWord(range.max)}`;
 };
+
+export const formatDays = (count: number) => `${count} ${dayWord(count)}`;
 
 export const guessPhases = (title: string) => {
   const match = /(\d+)\s*fa(?:za|ze|zi|zu)\b/i.exec(title);
