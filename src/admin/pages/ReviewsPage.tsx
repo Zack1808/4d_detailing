@@ -46,6 +46,8 @@ const ReviewsPage = () => {
     [reviews.items],
   );
 
+  const ready = reviews.status === "ready";
+
   const rows = reviews.items.filter(
     (r) =>
       filter === "all" ||
@@ -81,9 +83,17 @@ const ReviewsPage = () => {
         value={filter}
         onChange={setFilter}
         options={[
-          { value: "pending", label: "Na čekanju", count: counts.pending },
-          { value: "approved", label: "Odobrene", count: counts.approved },
-          { value: "all", label: "Sve", count: counts.all },
+          {
+            value: "pending",
+            label: "Na čekanju",
+            count: ready ? counts.pending : undefined,
+          },
+          {
+            value: "approved",
+            label: "Odobrene",
+            count: ready ? counts.approved : undefined,
+          },
+          { value: "all", label: "Sve", count: ready ? counts.all : undefined },
         ]}
       />
 
@@ -91,9 +101,9 @@ const ReviewsPage = () => {
         status={reviews.status}
         error={reviews.error}
         onRetry={reviews.reload}
+        skeleton={<ReviewListSkeleton />}
         isEmpty={rows.length === 0}
         emptyMessage="Nema recenzija za odabrani filer"
-        skeleton={<ReviewListSkeleton />}
       >
         <ul className="flex flex-col gap-3">
           {rows.map((review) => (
