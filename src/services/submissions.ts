@@ -13,7 +13,10 @@ const logFailure = (label: string, result: PromiseSettledResult<unknown>) => {
     console.error(`${label} failed:`, result.reason);
 };
 
-export const submitAppointment = async (values: AppointmentValues) => {
+export const submitAppointment = async (
+  values: AppointmentValues,
+  serviceId?: string,
+) => {
   if (USE_MOCK_DATA) return wait(MOCK_CONFIG.apiDelay);
 
   const record: NewAppointment = {
@@ -24,6 +27,7 @@ export const submitAppointment = async (values: AppointmentValues) => {
     vehicle: values.vehicle,
     dateFrom: values.dateFrom,
     remark: values.remark,
+    ...(serviceId && { serviceId }),
     isConfirmed: false,
     isBlocked: false,
   };
