@@ -11,6 +11,7 @@ import Textarea from "../../components/ui/Textarea";
 import { useForm } from "../../hooks/useForm";
 
 import { formatDate, parseDate } from "../../utils/date";
+import { normalizeDuration, parseDuration } from "../../utils/duration";
 import { slugify } from "../../utils/text";
 import { MESSAGES } from "../../validation/rules";
 
@@ -25,6 +26,8 @@ type Values = {
   remark: string;
   servicesText: string;
   status: string;
+  duration: string;
+  durationPerPhase: string;
   sortOrder: string;
   isFeatured: string;
   priceCar: string;
@@ -90,6 +93,8 @@ const toValues = (service?: ServiceDataType | null): Values => ({
   remark: service?.remark ?? "",
   servicesText: service?.services.join("\n") ?? "",
   status: service?.status ?? "active",
+  duration: service?.duration ?? "",
+  durationPerPhase: String(service?.durationPerPhase ?? false),
   sortOrder: String(service?.sortOrder ?? ""),
   isFeatured: String(service?.isFeatured ?? false),
   priceCar: String(service?.prices.car.price ?? ""),
@@ -137,6 +142,8 @@ const toInput = (
     keywords: base?.keywords ?? [],
     isFeatured: values.isFeatured === "true",
     status: values.status as ServiceInput["status"],
+    duration: normalizeDuration(values.duration),
+    durationPerPhase: values.durationPerPhase === "true",
     sortOrder: Number(values.sortOrder) || 0,
     prices: {
       car: price("priceCar", "anchorCar"),
@@ -195,6 +202,11 @@ const ServiceEditor = ({
 
     if (!values.servicesText.trim())
       errors.servicesText = "Dodajte barem jednu stavku usluge.";
+
+    if (!values.duration.trim())
+      errors.duration = "Unesite trajanje, npr. 1 ili 1-2.";
+    else if (!parseDuration(values.duration))
+      errors.duration = "Unesite broj dana (npr. 2) ili raspon (npr. 1-2).";
 
     if (values.sortOrder.trim() && !Number.isInteger(Number(values.sortOrder)))
       errors.sortOrder = "Unesite cijeli broj.";
@@ -365,6 +377,36 @@ const ServiceEditor = ({
               <DatePicker {...bind("discountEndsAt")} />
             </Field>
           </div>
+        </fieldset>
+
+        <fieldset className="flex flex-col gap-4">
+          <legend className="mb-2 text-lg font-semibold">Trajanje</legend>
+
+          <Field
+            id="duration"
+            label="Trajanje (dana)"
+            required
+            error={errors.duration}
+            hint="Jedan broj (npr. 2) ili raspon (npr. 1-2). Kod potvrde termina blokira se gornja granica."
+          >
+            <Input {...bind("duration")} inputMode="text" placeholder="1-2" />
+          </Field>
+
+          <label className="flex cursor-pointer items-start gap-3 font-light">
+            <input
+              type="checkbox"
+              className="mt-1 size-5 shrink-0 accent-current"
+              checked={values.durationPerPhase === "true"}
+              onChange={(event) =>
+                setValue("durationPerPhase", String(event.target.checked))
+              }
+            />
+            <span>
+              Trajanje ovisi o broju faza (poliranje, keramička zaštita) –
+              uneseno trajanje vrijedi po fazi, a broj faza upisuje se kod
+              potvrde termina.
+            </span>
+          </label>
         </fieldset>
 
         <div className="grid gap-4 sm:grid-cols-2">
