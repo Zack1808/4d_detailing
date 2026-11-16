@@ -6,6 +6,7 @@ import StatCard from "../components/StatCard";
 import { DashboardSkeleton } from "../components/skeletons";
 
 import { getAppointmentState } from "../data/appointmentActions";
+import { getCustomerHistory, getPastServices } from "../data/customerHistory";
 import { useCollections } from "../data/useCollections";
 import {
   appointmentRepo,
@@ -28,10 +29,12 @@ const AppointmentList = ({
   title,
   items,
   empty,
+  repeatIds,
 }: {
   title: string;
   items: AppointmentType[];
   empty: string;
+  repeatIds?: Set<string>;
 }) => (
   <section className="surface flex flex-1 flex-col gap-3 p-6">
     <div className="flex items-center justify-between gap-3">
@@ -55,6 +58,9 @@ const AppointmentList = ({
           >
             <span className="font-medium">
               {item.dateFrom} · {item.fullName}
+              {repeatIds?.has(item.id) && (
+                <span className="ml-2 text-sm font-light">ponovni klijent</span>
+              )}
             </span>
             <span className="text-sm font-light text-gray-light">
               {item.service} - {item.vehicle}
@@ -87,6 +93,15 @@ const DashboardPage = () => {
   const upcoming = appointments.items
     .filter((a) => getAppointmentState(a) === "confirmed" && time(a) >= today)
     .sort((a, b) => time(a) - time(b));
+
+  const repeatIds = new Set(
+    pending
+      .filter(
+        (a) =>
+          getPastServices(getCustomerHistory(a, appointments.items)).length > 0,
+      )
+      .map((a) => a.id),
+  );
 
   const reviewsToApprove = reviews.items.filter((r) => !r.isApproved).length;
   const activeServices = services.items.filter(
@@ -140,6 +155,7 @@ const DashboardPage = () => {
             title="Zahtjevi na čekanju"
             items={pending.slice(0, UPCOMING_LIMIT)}
             empty="Nema novih zahtjeva"
+            repeatIds={repeatIds}
           />
         </div>
 
