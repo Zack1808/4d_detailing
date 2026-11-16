@@ -13,13 +13,13 @@ import {
 import type { AppointmentType } from "../../types/data";
 
 const MATCH_LABEL: Record<MatchReason, string> = {
-  email: "isti email",
+  email: "isti e-mail",
   phone: "isti telefon",
 };
 
 const MAX_INLINE = 3;
 
-const sumarize = (history: HistoryEntry[]) => {
+const summarize = (history: HistoryEntry[]) => {
   const counts = new Map<string, number>();
 
   getPastServices(history).forEach(({ appointment }) =>
@@ -27,7 +27,7 @@ const sumarize = (history: HistoryEntry[]) => {
   );
 
   return [...counts].map(([name, count]) =>
-    count > 1 ? `${name} × ${count}` : name,
+    count > 1 ? `${name} ×${count}` : name,
   );
 };
 
@@ -39,7 +39,7 @@ type SummaryProps = {
 export const CustomerHistorySummary = ({ history, onOpen }: SummaryProps) => {
   if (history.length === 0) return null;
 
-  const services = sumarize(history);
+  const services = summarize(history);
   const shown = services.slice(0, MAX_INLINE);
   const hidden = services.length - shown.length;
 
@@ -49,10 +49,9 @@ export const CustomerHistorySummary = ({ history, onOpen }: SummaryProps) => {
         <span className="font-medium">Ponovni klijent</span>
         {shown.length > 0 && (
           <>
-            {" · ranije: "} {shown.join(", ")}{" "}
-            {hidden > 0 &&
-              ` i još 
-        ${hidden}`}
+            {" · ranije: "}
+            {shown.join(", ")}
+            {hidden > 0 && ` i još ${hidden}`}
           </>
         )}
       </p>
@@ -60,9 +59,9 @@ export const CustomerHistorySummary = ({ history, onOpen }: SummaryProps) => {
         variant="link"
         className="py-0 text-sm underline"
         onClick={onOpen}
-        aria-label={`Prikaži povijest klijenata ${history[0].appointment.fullName}`}
+        aria-label={`Prikaži povijest klijenta ${history[0].appointment.fullName}`}
       >
-        Prikaži povijest ${history[0].appointment.fullName}
+        Prikaži povijest ({history.length})
       </Button>
     </div>
   );
@@ -94,26 +93,27 @@ export const CustomerHistoryDialog = ({
       <div className="mt-3 flex flex-col gap-6">
         <p className="font-light">
           <strong className="font-semibold">{appointment.fullName}</strong>
-          {appointment.email}, {appointment.phone}. Klijenti se ne prijavljuju
+          {" – "}
+          {appointment.email}, {appointment.phone}. Klijenti se ne prijavljuju,
           pa se termini povezuju prema e-mailu ili broju telefona.
         </p>
 
         {history.length === 0 ? (
           <p className="font-light text-gray-light">
-            Nema drugih termina ovog klijenta
+            Nema drugih termina ovog klijenta.
           </p>
         ) : (
           <ul className="flex flex-col gap-3">
             {history.map(({ appointment: past, matchedBy }) => (
               <li
                 key={past.id}
-                className="surface flex flex-col gap-3 p-3 sm:flex-row sm:items-start sm:justify-between"
+                className="surface flex flex-col gap-2 p-3 sm:flex-row sm:items-start sm:justify-between"
               >
                 <div className="flex flex-col gap-1">
                   <p className="font-medium">{past.service}</p>
                   <p className="text-sm font-light">
-                    {past.vehicle}{" "}
-                    {past.dateTo && past.dateTo === past.dateFrom
+                    {past.vehicle} ·{" "}
+                    {past.dateTo && past.dateTo !== past.dateFrom
                       ? `${past.dateFrom} - ${past.dateTo}`
                       : past.dateFrom || "bez termina"}
                   </p>
@@ -131,7 +131,7 @@ export const CustomerHistoryDialog = ({
         )}
 
         <div className="flex justify-end">
-          <Button variant="primary" onClick={onClose}>
+          <Button variant="secondary" onClick={onClose}>
             Zatvori
           </Button>
         </div>

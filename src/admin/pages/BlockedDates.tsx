@@ -118,9 +118,9 @@ const BlockedDatesPage = () => {
         status={blocked.status}
         error={blocked.error}
         onRetry={blocked.reload}
+        skeleton={<TableSkeleton columns={BLOCKED_COLUMNS} rows={3} />}
         isEmpty={rows.length === 0}
         emptyMessage="Trenutno nema blokiranih datuma."
-        skeleton={<TableSkeleton columns={BLOCKED_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>
