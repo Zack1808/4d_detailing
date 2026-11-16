@@ -71,9 +71,9 @@ const PriceTablesPage = () => {
         status={tables.status}
         error={tables.error}
         onRetry={tables.reload}
+        skeleton={<TableSkeleton columns={PRICE_TABLE_COLUMNS} rows={4} />}
         isEmpty={rows.length === 0}
         emptyMessage="Još nema cjenika"
-        skeleton={<TableSkeleton columns={PRICE_TABLE_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>
