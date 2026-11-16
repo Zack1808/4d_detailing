@@ -94,14 +94,14 @@ export const ReviewListSkeleton = ({ count = 3 }: { count?: number }) => (
       {Array.from({ length: count }, (_, i) => (
         <li key={i} className="surface flex flex-col gap-3 p-6">
           <div className="flex items-center justify-between gap-3">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               <Skeleton className="h-5 w-40" />
               <Skeleton className="h-4 w-28" />
             </div>
             <Skeleton className="h-7 w-24 rounded-full" />
           </div>
           <SkeletonText lines={3} className="max-w-[85ch]" />
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <Skeleton className="h-9 w-20" />
             <Skeleton className="h-9 w-20" />
           </div>
@@ -111,7 +111,7 @@ export const ReviewListSkeleton = ({ count = 3 }: { count?: number }) => (
   </SkeletonRegion>
 );
 
-export const ListCardSkeleton = () => (
+const ListCardSkeleton = () => (
   <section className="surface flex flex-1 flex-col gap-3 p-6">
     <div className="flex items-center justify-between gap-3">
       <Skeleton className="h-6 w-48" />
@@ -121,7 +121,7 @@ export const ListCardSkeleton = () => (
       {[0, 1, 2].map((i) => (
         <li
           key={i}
-          className="flex flex-col gap-3 border-t border-gray-light/20 pt-3 first:bordet-t-0 first:pt-0"
+          className="flex flex-col gap-2 border-t border-gray-light/20 pt-3 first:border-t-0 first:pt-0"
         >
           <Skeleton className="h-5 w-56" />
           <Skeleton className="h-4 w-72 max-w-full" />
