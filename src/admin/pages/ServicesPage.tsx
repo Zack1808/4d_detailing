@@ -6,13 +6,14 @@ import PageHeader from "../components/PageHeader";
 import StatusBadge, { type Tone } from "../components/StatusBadge";
 import { BodyRow, HeadRow, TableShell, Td, Th } from "../components/Table";
 import { serviceRepo } from "../data/repositories";
-import { useCollections } from "../data/useCollections";
 import { SERVICE_COLUMNS, TableSkeleton } from "../components/skeletons";
+import { useCollections } from "../data/useCollections";
 
 import ServiceEditor from "./ServiceEditor";
 
 import Button from "../../components/ui/Button";
 
+import { formatDuration } from "../../utils/duration";
 import { notifySuccess } from "../../utils/toast";
 
 import type { ServiceDataType } from "../../types/data";
@@ -85,14 +86,15 @@ const ServicesPage = () => {
         status={services.status}
         error={services.error}
         onRetry={services.reload}
+        skeleton={<TableSkeleton columns={SERVICE_COLUMNS} />}
         isEmpty={rows.length === 0}
         emptyMessage="Još nema usluga. Dodajte prvu."
-        skeleton={<TableSkeleton columns={SERVICE_COLUMNS} />}
       >
         <TableShell>
           <HeadRow>
             <Th>Naziv</Th>
             <Th>Status</Th>
+            <Th>Trajanje</Th>
             <Th>Cijena (auto)</Th>
             <Th>Redoslijed</Th>
             <Th className="text-right">Akcije</Th>
@@ -110,6 +112,16 @@ const ServicesPage = () => {
                   <StatusBadge tone={STATUS[s.status].tone}>
                     {STATUS[s.status].label}
                   </StatusBadge>
+                </Td>
+                <Td className="whitespace-nowrap">
+                  {formatDuration(s.duration) || (
+                    <span className="text-gray-light">Nije zadano</span>
+                  )}
+                  {s.duration && s.durationPerPhase && (
+                    <span className="block text-sm text-gray-light">
+                      po fazi
+                    </span>
+                  )}
                 </Td>
                 <Td className="whitespace-nowrap tabular-nums">
                   €{s.prices.car.price}
