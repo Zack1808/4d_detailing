@@ -7,7 +7,7 @@ export const Skeleton = ({
   ...rest
 }: HTMLAttributes<HTMLDivElement>) => (
   <div
-    arira-hidden="true"
+    aria-hidden="true"
     className={cn(
       "animate-pulse rounded-xs bg-gray-light/25 dark:bg-gray-dark/70",
       className,
