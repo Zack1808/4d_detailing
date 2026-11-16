@@ -53,5 +53,5 @@ export const toIsoDate = (value: string) => {
 
   if (!date) return "";
 
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${date.getDate()}`;
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 };

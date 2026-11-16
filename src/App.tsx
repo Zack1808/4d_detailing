@@ -8,6 +8,7 @@ import Toaster from "./components/ui/Toast";
 import AdminLoginSkeleton from "./components/skeletons/AdminLoginSkeleton";
 import AdminShellSkeleton from "./components/skeletons/AdminShellSkeleton";
 
+import { ADMIN_PATHS } from "./admin/paths";
 import { PATHS } from "./config/paths";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
@@ -18,7 +19,6 @@ import Services from "./pages/Services";
 import Terms from "./pages/Terms";
 
 import { AdminApp } from "./pageLoaders";
-import { ADMIN_PATHS } from "./admin/paths";
 
 const AdminFallback = () => {
   const { pathname } = useLocation();
