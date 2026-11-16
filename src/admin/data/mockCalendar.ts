@@ -1,7 +1,5 @@
 import { readStorage, writeStorage } from "../../lib/storage";
-
 import { MOCK_CONFIG } from "../../services/mock/config";
-
 import { toIsoDate, addDaysToValue } from "../../utils/date";
 
 import { MOCK_CALENDAR_KEY } from "./mockKeys";

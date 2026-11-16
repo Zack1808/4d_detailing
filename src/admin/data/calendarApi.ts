@@ -12,7 +12,7 @@ export type CalendarEvent = { id: string; link?: string };
 export const USE_MOCK_CALENDAR =
   import.meta.env.DEV && MOCK_CONFIG.enableMockCalendar;
 
-const NOT_CONNECTED = "Google Calendar još nije povezan";
+const NOT_CONNECTED = "Google Calendar još nije povezan.";
 
 export const createCalendarEvent = async (
   input: CalendarEventInput,

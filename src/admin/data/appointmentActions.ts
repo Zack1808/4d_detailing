@@ -209,7 +209,6 @@ export const denyAppointment = async (
   await sendDecisionEmail(appointment, "denied");
 };
 
-/** Emails the customer a new date and remembers the proposal on the request. */
 export const proposeReschedule = async (
   appointment: AppointmentType,
   proposal: { dateFrom: string; message: string },
