@@ -8,7 +8,7 @@ import ContactForm from "../features/contact/ContactForm";
 import { PAGE_META } from "../config/seo";
 
 const Contact = () => (
-  <main>
+  <main id="main" tabIndex={-1}>
     <SEO {...PAGE_META.contact} />
     <Container>
       <Reveal variant="left" delay={200}>
