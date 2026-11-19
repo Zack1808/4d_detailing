@@ -4,6 +4,7 @@ import Polisher from "../animated/Polisher";
 import Tesseract from "../animated/Tesseract";
 import Wheel from "../animated/Wheel";
 
+import { useIsClient } from "../../hooks/useIsClient";
 import { useIsDark } from "../../hooks/useMediaQuery";
 
 type LoaderSize = "sm" | "md" | "lg";
@@ -40,13 +41,13 @@ const ARTWORK: Record<LoaderSize, Art[]> = {
   ],
 };
 
-/** A randomly chosen branded spinner (tesseract, wheel or polisher). */
 const Loader = ({ size, inverted = false }: LoaderProps) => {
   const isDark = useIsDark();
+  const isClient = useIsClient();
   const [choice] = useState(() => Math.random());
 
   const options = ARTWORK[size];
-  const Art = options[Math.floor(choice * options.length)];
+  const Art = options[isClient ? Math.floor(choice * options.length) : 0];
 
   return <Art isDark={inverted ? !isDark : isDark} />;
 };
