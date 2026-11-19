@@ -193,7 +193,7 @@ const Select = ({
           {selectedOption ? (
             selectedOption.label
           ) : (
-            <span className="font-light text-gray-light">{placeholder}</span>
+            <span className="font-light text-muted">{placeholder}</span>
           )}
         </span>
         {isOpen ? (
