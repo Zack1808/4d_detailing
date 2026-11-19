@@ -16,7 +16,19 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Arial");
+  size-adjust: 113.39%;
+  ascent-override: 84.95%;
+  descent-override: 22.03%;
+  line-gap-override: 0%;
+}
+
 @theme {
+  --font-sans:
+    "Montserrat", "Montserrat Fallback", ui-sans-serif, system-ui, sans-serif;
+
   --color-light: #fafafa;
   --color-dark: #111416;
   --color-gray-light: #91918e;
@@ -24,22 +36,101 @@
   --color-gray-dark: #2b2b2b;
   --color-panel: #eeeeee;
   --color-panel-dark: #1c2022;
+  --color-muted: #646461;
 }
 
 @layer base {
+  :root {
+    color-scheme: light dark;
+    scroll-padding-top: 7rem;
+
+    @media (prefers-color-scheme: dark) {
+      --color-muted: #91918e;
+    }
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-light font-sans text-dark dark:bg-dark dark:text-light;
-    font-family: "Montserrat", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  blockquote {
+    text-wrap: pretty;
   }
 
   :focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
   }
+
+  [tabindex="-1"]:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  :where([data-reveal]) {
+    --reveal-x: 0;
+    --reveal-y: 0;
+  }
+  :where([data-reveal="up"]) {
+    --reveal-y: 1.5rem;
+  }
+  :where([data-reveal="left"]) {
+    --reveal-x: -1.5rem;
+  }
+  :where([data-reveal="right"]) {
+    --reveal-x: 1.5rem;
+  }
 }
 
 @utility surface {
   @apply rounded-sm bg-gray-light/15 shadow-sm dark:bg-gray-dark/40;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: var(--reveal-x) var(--reveal-y);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.reveal-intro {
+  animation: reveal 1s ease-out backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-name: reveal-fade;
+    animation-duration: 0.4s;
+  }
+}
+
+@supports ((animation-timeline: view()) and (animation-range: entry)) {
+  .reveal {
+    animation: reveal linear backwards;
+    animation-timeline: view();
+    animation-range: entry 0% entry 90%;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-name: reveal-fade;
+    }
+  }
 }
 
 @keyframes wheel-spin {
@@ -49,5 +140,7 @@
 }
 
 .wheel-spin {
-  animation: wheel-spin var(--wheel-duration, 2s) linear infinite;
+  @media (prefers-reduced-motion: no-preference) {
+    animation: wheel-spin var(--wheel-duration, 2s) linear infinite;
+  }
 }
