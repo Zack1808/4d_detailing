@@ -1,28 +1,41 @@
-import React, { useState, useEffect } from "react";
+import { type HTMLAttributes, useEffect, useRef } from "react";
 
-const Hero: React.FC<React.HTMLAttributes<HTMLElement>> = ({
+import { cn } from "../../utils/cn";
+
+const Hero = ({
   children,
-  className = "",
+  className,
   ...rest
-}) => {
-  const [heroHeight, setHeroHeight] = useState<number>();
+}: HTMLAttributes<HTMLElement>) => {
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    setHeroHeight(window.visualViewport?.height ?? window.innerHeight);
+    const section = sectionRef.current;
+    if (!section) return;
+    let lastWidth = 0;
+    const measure = () => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      const height = window.visualViewport?.height ?? window.innerHeight;
+      section.style.minHeight = `${Math.round(height)}px`;
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
   }, []);
-
-  const sectionClasses =
-    `w-full ${heroHeight ? "" : "h-svh"}  flex justify-center items-center bg-linear-to-b md:from-transparent md:dark:from-transparent from-light/80 dark:from-dark/80 from-70% to-light dark:to-dark ${className}`.trim();
 
   return (
     <section
-      className={sectionClasses}
-      style={heroHeight ? { height: heroHeight } : undefined}
+      ref={sectionRef}
+      className={cn(
+        "flex min-h-svh w-full items-center justify-center bg-linear-to-b from-light/80 from-70% to-light md:from-transparent dark:from-dark/80 dark:to-dark md:dark:from-transparent",
+        className,
+      )}
       {...rest}
     >
-      <article className="w-full max-w-[1700px] flex items-start justify-between gap-5 p-5 flex-col">
+      <div className="flex w-full max-w-[1700px] flex-col items-start justify-between gap-5 p-5">
         {children}
-      </article>
+      </div>
     </section>
   );
 };
