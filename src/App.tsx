@@ -30,33 +30,37 @@ const AdminFallback = () => {
   );
 };
 
-const App = () => (
+export const AppRoutes = () => (
   <ErrorBoundary>
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route
-          path={`${PATHS.admin}/*`}
-          element={
-            <Suspense fallback={<AdminFallback />}>
-              <AdminApp />
-            </Suspense>
-          }
-        />
+    <ScrollToTop />
+    <Routes>
+      <Route
+        path={`${PATHS.admin}/*`}
+        element={
+          <Suspense fallback={<AdminFallback />}>
+            <AdminApp />
+          </Suspense>
+        }
+      />
 
-        <Route element={<PublicLayout />}>
-          <Route path={PATHS.home} element={<Home />} />
-          <Route path={PATHS.services} element={<Services />} />
-          <Route path={PATHS.contact} element={<Contact />} />
-          <Route path={PATHS.priceArchive} element={<PriceArchive />} />
-          <Route path={PATHS.privacy} element={<Privacy />} />
-          <Route path={PATHS.terms} element={<Terms />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-      <Toaster />
-    </BrowserRouter>
+      <Route element={<PublicLayout />}>
+        <Route path={PATHS.home} element={<Home />} />
+        <Route path={PATHS.services} element={<Services />} />
+        <Route path={PATHS.contact} element={<Contact />} />
+        <Route path={PATHS.priceArchive} element={<PriceArchive />} />
+        <Route path={PATHS.privacy} element={<Privacy />} />
+        <Route path={PATHS.terms} element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+    <Toaster />
   </ErrorBoundary>
+);
+
+const App = () => (
+  <BrowserRouter>
+    <AppRoutes />
+  </BrowserRouter>
 );
 
 export default App;

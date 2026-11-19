@@ -8,8 +8,6 @@ import {
   type ReactNode,
 } from "react";
 
-import PageLoader from "../components/layout/PageLoader";
-
 import { fetchPageData } from "../services/pageData";
 import { getErrorMessage } from "../utils/errors";
 
@@ -30,7 +28,25 @@ const EMPTY: PageData = {
   priceArchive: [],
 };
 
-const FADE_OUT_MS = 400;
+const SNAPSHOT_ELEMENT_ID = "page-data";
+
+const SnapshotContext = createContext<PageData | null>(null);
+
+export const DataSnapshotProvider = SnapshotContext.Provider;
+
+const readEmbeddedSnapshot = (): PageData | null => {
+  if (typeof document === "undefined") return null;
+
+  const element = document.getElementById(SNAPSHOT_ELEMENT_ID);
+
+  if (!element?.textContent) return null;
+
+  try {
+    return { ...EMPTY, ...(JSON.parse(element.textContent) as PageData) };
+  } catch {
+    return null;
+  }
+};
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
@@ -43,16 +59,16 @@ export const useData = () => {
 };
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
-  const [data, setData] = useState<PageData>(EMPTY);
-  const [status, setStatus] = useState<Status>("loading");
+  const serverSnapshot = useContext(SnapshotContext);
+
+  const [initial] = useState(() => serverSnapshot ?? readEmbeddedSnapshot());
+  const [data, setData] = useState<PageData>(initial ?? EMPTY);
+  const [status, setStatus] = useState<Status>(initial ? "ready" : "loading");
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
-  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
-
-    setStatus("loading");
 
     fetchPageData()
       .then((result) => {
@@ -66,8 +82,9 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         if (cancelled) return;
 
         console.error("Loading page data failed:", err);
+
+        setStatus((current) => (current === "ready" ? current : "error"));
         setError(getErrorMessage(err));
-        setStatus("error");
       });
 
     return () => {
@@ -75,33 +92,15 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     };
   }, [attempt]);
 
-  useEffect(() => {
-    if (status === "loading") return;
-
-    const timer = window.setTimeout(() => setShowLoader(false), FADE_OUT_MS);
-
-    return () => window.clearTimeout(timer);
-  }, [status]);
-
-  const reload = useCallback(() => setAttempt((n) => n + 1), []);
+  const reload = useCallback(() => {
+    setStatus("loading");
+    setAttempt((n) => n + 1);
+  }, []);
 
   const value = useMemo(
     () => ({ ...data, status, error, reload }),
     [data, status, error, reload],
   );
 
-  return (
-    <DataContext.Provider value={value}>
-      {showLoader && (
-        <PageLoader
-          className={
-            status === "loading"
-              ? "opacity-100"
-              : `pointer-events-none opacity-0 transition-opacity duration-400`
-          }
-        />
-      )}
-      {(status !== "loading" || !showLoader) && children}
-    </DataContext.Provider>
-  );
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };

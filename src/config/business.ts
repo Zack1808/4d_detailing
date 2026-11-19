@@ -17,6 +17,11 @@ export const BUSINESS = {
     city: "Velika Gorica",
     full: "Rakitovec 274, 10410 Velika Gorica",
   },
+  geo: { latitude: 45.6554997, longitude: 16.1389658 },
+  areaServed: ["Velika Gorica", "Zagreb", "Zagrebačka županija"],
+  openingHours: null as
+    | { days: string[]; opens: string; closes: string }[]
+    | null,
   mapsUrl: "https://maps.app.goo.gl/BM2TStTNWFyDirfr9",
   mapsEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2788.767048363273!2d16.138965799999994!3d45.6554997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476687ea7e828591%3A0xf8f5db96b6352889!2sRakitovec%20274%2C%2010419%2C%20Rakitovec!5e0!3m2!1sen!2shr!4v1789139385570!5m2!1sen!2shr",
