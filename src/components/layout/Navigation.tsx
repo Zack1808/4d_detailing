@@ -20,7 +20,7 @@ const MAX_OPACITY = 95;
 const MENU_EXIT_MS = 350;
 
 const linkClasses =
-  "flex w-full items-center justify-center px-4 py-3 text-lg font-normal decoration-2 underline-offset-8 hover:underline md:w-max aria-[current=page]:underline";
+  "flex w-full items-center justify-center px-4 py-3 text-lg font-normal transition-opacity hover:opacity-70 md:w-max";
 
 const Navigation = () => {
   const isDark = useIsDark();
