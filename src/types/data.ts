@@ -64,6 +64,7 @@ export type AppointmentType = {
   phases?: number;
   rescheduleProposal?: RescheduleProposal | null;
   calendarEventId?: string | null;
+  contactId?: string | null;
 };
 
 export type NewAppointment = Omit<AppointmentType, "id" | "dateTo">;

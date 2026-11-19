@@ -211,7 +211,6 @@ const AppointmentsPage = () => {
     setAction({ type: "reschedule", appointment });
   };
 
-  /** Re-derives the last day from the first day / phases (when the service has a duration). */
   const updateRange = (dateFrom: string, phaseValue: string) => {
     const days = getBlockedDays(confirmService, phaseCount(phaseValue));
 
@@ -419,6 +418,9 @@ const AppointmentsPage = () => {
                       )}
                       {state === "confirmed" && a.calendarEventId && (
                         <span className="text-sm">U Google Calendaru</span>
+                      )}
+                      {a.contactId && (
+                        <span className="text-sm">Kontakt u Googleu</span>
                       )}
                     </div>
                   </Td>
