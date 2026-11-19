@@ -3,5 +3,6 @@ export const MOCK_CONFIG = {
   enableMockAuth: true,
   enableMockEmail: true,
   enableMockCalendar: true,
+  enableMockContacts: true,
   apiDelay: 500,
 } as const;

@@ -1,10 +1,12 @@
 import { removeStorage } from "../../lib/storage";
+import { USE_MOCK_CONTACTS } from "../../services/contactsApi";
 import { USE_MOCK_DATA } from "../../services/pageData";
 import { USE_MOCK_AUTH } from "../auth/authApi";
 import { USE_MOCK_CALENDAR } from "../data/calendarApi";
 import { USE_MOCK_EMAIL } from "../data/emailApi";
 import {
   MOCK_CALENDAR_KEY,
+  MOCK_CONTACTS_KEY,
   MOCK_DB_KEY,
   MOCK_OUTBOX_KEY,
 } from "../data/mockKeys";
@@ -14,7 +16,13 @@ import Button from "../../components/ui/Button";
 import { cn } from "../../utils/cn";
 
 const MockBanner = ({ className }: { className?: string }) => {
-  if (!USE_MOCK_AUTH && !USE_MOCK_DATA && !USE_MOCK_EMAIL && !USE_MOCK_CALENDAR)
+  if (
+    !USE_MOCK_AUTH &&
+    !USE_MOCK_DATA &&
+    !USE_MOCK_EMAIL &&
+    !USE_MOCK_CALENDAR &&
+    !USE_MOCK_CONTACTS
+  )
     return null;
 
   const modes = [
@@ -22,12 +30,18 @@ const MockBanner = ({ className }: { className?: string }) => {
     USE_MOCK_DATA && "podaci",
     USE_MOCK_EMAIL && "e-mail",
     USE_MOCK_CALENDAR && "kalendar",
+    USE_MOCK_CONTACTS && "kontakti",
   ]
     .filter(Boolean)
     .join(", ");
 
   const reset = () => {
-    [MOCK_DB_KEY, MOCK_OUTBOX_KEY, MOCK_CALENDAR_KEY].forEach(removeStorage);
+    [
+      MOCK_DB_KEY,
+      MOCK_OUTBOX_KEY,
+      MOCK_CALENDAR_KEY,
+      MOCK_CONTACTS_KEY,
+    ].forEach(removeStorage);
     window.location.reload();
   };
 
