@@ -1,8 +1,11 @@
 User-agent: *
 Allow: /
 
-# Ne dopuštaj indeksiranje filtriranih/sortiranih varijanti stranice usluga
-# (npr. /usluge?sortiranje=popularno) kako ne bi nastao duplicate content
-Disallow: /kontakt?usluga=*
+# Administration is private (also sent as X-Robots-Tag: noindex in _headers)
+Disallow: /admin
+
+# Links like /kontakt?usluga=… only preselect a service in the booking form;
+# the page itself is /kontakt (its canonical URL), so skip the variants.
+Disallow: /kontakt?usluga=
 
 Sitemap: https://4d-detailing.hr/sitemap.xml

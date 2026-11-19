@@ -10,7 +10,11 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://www.google.com https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://firestore.googleapis.com https://firebasestorage.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
 
 # Never index the admin area
+/admin
+  X-Robots-Tag: noindex, nofollow
 /admin/*
+  X-Robots-Tag: noindex, nofollow
+/admin.html
   X-Robots-Tag: noindex, nofollow
 
 # Vite fingerprints everything in /assets, so it can be cached "forever"
@@ -22,4 +26,7 @@
 
 # Images keep their file names, so allow a week and revalidate in the background
 /images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/icons/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400

@@ -2,8 +2,10 @@
 # Firebase Storage bucket needs no CORS setup.
 /firebase-storage/*  https://firebasestorage.googleapis.com/:splat  200
 
-# The admin is a single-page app: its routes are not real files.
-/admin/*  /index.html  200
+# The admin is a client-side app: its routes are not real files. It gets its
+# own empty shell (written by scripts/prerender.mjs) instead of the home page.
+/admin    /admin.html  200
+/admin/*  /admin.html  200
 
 # No catch-all on purpose. Every public page is a real file (written by
-# scripts/prerender-meta.mjs); anything else gets dist/404.html with a 404 status.
+# scripts/prerender.mjs); anything else gets dist/404.html with a 404 status.
