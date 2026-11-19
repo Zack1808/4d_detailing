@@ -6,7 +6,7 @@ import { usePrefersReducedMotion } from "../../hooks/useMediaQuery";
 import { cn } from "../../utils/cn";
 
 type ImageCarouselProps = {
-  images: readonly string[];
+  images: readonly { src: string; alt: string }[];
   label: string;
 };
 
@@ -50,12 +50,11 @@ const ImageCarousel = ({ images, label }: ImageCarouselProps) => {
             <div
               key={position}
               className="aspect-video w-full shrink-0"
-              // Only the middle copy is "real"; the others are loop clones.
               aria-hidden={position < length || position >= length * 2}
             >
               <img
-                src={image}
-                alt={`Slika ${(position % length) + 1} od ${length}`}
+                src={image.src}
+                alt={image.alt}
                 className="block h-auto w-full object-cover"
                 loading="lazy"
                 width={1000}
@@ -83,21 +82,25 @@ const ImageCarousel = ({ images, label }: ImageCarouselProps) => {
         </button>
       </div>
 
-      <div className="absolute bottom-0 flex w-full justify-center gap-2 bg-light/70 p-6 dark:bg-dark/80">
+      <div className="absolute bottom-0 flex w-full justify-center bg-light/70 p-3 dark:bg-dark/80">
         {images.map((image, position) => (
           <button
-            key={image}
+            key={image.src}
             type="button"
             onClick={() => goTo(position)}
             aria-label={`Idi na sliku ${position + 1}`}
-            aria-current={logicalIndex === position}
-            className={cn(
-              "h-2.5 w-2.5 cursor-pointer rounded-full transition",
-              logicalIndex === position
-                ? "scale-110 bg-dark dark:bg-light"
-                : "bg-gray-dark/50 dark:bg-gray-light",
-            )}
-          />
+            aria-current={logicalIndex === position || undefined}
+            className="group grid size-6 cursor-pointer place-items-center"
+          >
+            <span
+              className={cn(
+                "size-2.5 rounded-full transition",
+                logicalIndex === position
+                  ? "scale-110 bg-dark dark:bg-light"
+                  : "bg-gray-dark/50 group-hover:bg-gray-dark dark:bg-gray-light",
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>
