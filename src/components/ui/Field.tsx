@@ -49,7 +49,7 @@ const Field = ({
           </p>
         ) : (
           hint && (
-            <p id={`${id}-hint`} className="font-light text-gray-light">
+            <p id={`${id}-hint`} className="font-light text-muted">
               {hint}
             </p>
           )
@@ -61,7 +61,7 @@ const Field = ({
               "ml-auto shrink-0 tabular-nums",
               count.current > count.max
                 ? "text-red-600 dark:text-red-400"
-                : "text-gray-light",
+                : "text-muted",
             )}
           >
             {count.current}/{count.max}
