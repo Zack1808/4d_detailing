@@ -11,7 +11,11 @@ import Textarea from "../../components/ui/Textarea";
 import { useForm } from "../../hooks/useForm";
 
 import { formatDate, parseDate } from "../../utils/date";
-import { normalizeDuration, parseDuration } from "../../utils/duration";
+import {
+  getDurationUnit,
+  normalizeDuration,
+  parseDuration,
+} from "../../utils/duration";
 import { slugify } from "../../utils/text";
 import { MESSAGES } from "../../validation/rules";
 
@@ -27,6 +31,8 @@ type Values = {
   servicesText: string;
   status: string;
   duration: string;
+  durationUnit: string;
+  durationNote: string;
   durationPerPhase: string;
   sortOrder: string;
   isFeatured: string;
@@ -63,6 +69,11 @@ const VEHICLES: {
   },
 ];
 
+const UNIT_OPTIONS = [
+  { value: "hours", label: "Sati" },
+  { value: "days", label: "Dani" },
+];
+
 const STATUS_OPTIONS = [
   { value: "active", label: "Aktivna (vidljiva na stranici)" },
   { value: "hidden", label: "Skrivena" },
@@ -94,6 +105,8 @@ const toValues = (service?: ServiceDataType | null): Values => ({
   servicesText: service?.services.join("\n") ?? "",
   status: service?.status ?? "active",
   duration: service?.duration ?? "",
+  durationUnit: getDurationUnit(service),
+  durationNote: service?.durationNote ?? "",
   durationPerPhase: String(service?.durationPerPhase ?? false),
   sortOrder: String(service?.sortOrder ?? ""),
   isFeatured: String(service?.isFeatured ?? false),
@@ -129,6 +142,7 @@ const toInput = (
 
   const description = values.description.trim();
   const remark = values.remark.trim();
+  const durationNote = values.durationNote.trim();
 
   return {
     slug: values.slug.trim(),
@@ -138,11 +152,15 @@ const toInput = (
       .split("\n")
       .map((line) => line.trim())
       .filter(Boolean),
-    ...(remark && { remark }),
+    // Always sent (also when empty): an update merges fields, so leaving
+    // them out would keep an old value the user has just cleared.
+    remark,
     keywords: base?.keywords ?? [],
     isFeatured: values.isFeatured === "true",
     status: values.status as ServiceInput["status"],
     duration: normalizeDuration(values.duration),
+    durationUnit: values.durationUnit === "hours" ? "hours" : "days",
+    durationNote,
     durationPerPhase: values.durationPerPhase === "true",
     sortOrder: Number(values.sortOrder) || 0,
     prices: {
@@ -204,9 +222,9 @@ const ServiceEditor = ({
       errors.servicesText = "Dodajte barem jednu stavku usluge.";
 
     if (!values.duration.trim())
-      errors.duration = "Unesite trajanje, npr. 1 ili 1-2.";
+      errors.duration = "Unesite trajanje, npr. 2 ili 2-3.";
     else if (!parseDuration(values.duration))
-      errors.duration = "Unesite broj dana (npr. 2) ili raspon (npr. 1-2).";
+      errors.duration = "Unesite broj (npr. 2) ili raspon (npr. 2-3).";
 
     if (values.sortOrder.trim() && !Number.isInteger(Number(values.sortOrder)))
       errors.sortOrder = "Unesite cijeli broj.";
@@ -382,14 +400,35 @@ const ServiceEditor = ({
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-2 text-lg font-semibold">Trajanje</legend>
 
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Field
+              id="duration"
+              label="Trajanje"
+              required
+              error={errors.duration}
+              hint="Jedan broj (npr. 2) ili raspon (npr. 2-3)."
+            >
+              <Input {...bind("duration")} inputMode="text" placeholder="2-3" />
+            </Field>
+
+            <Field
+              id="durationUnit"
+              label="Jedinica"
+              hint="Sati: kod potvrde termina blokira se cijeli dan. Dani: blokira se gornja granica (npr. 2-3 dana = 3 dana)."
+            >
+              <Select {...bind("durationUnit")} options={UNIT_OPTIONS} />
+            </Field>
+          </div>
+
           <Field
-            id="duration"
-            label="Trajanje (dana)"
-            required
-            error={errors.duration}
-            hint="Jedan broj (npr. 2) ili raspon (npr. 1-2). Kod potvrde termina blokira se gornja granica."
+            id="durationNote"
+            label="Napomena uz trajanje"
+            hint="Neobavezno. Prikazuje se na kartici uz trajanje, npr. „ovisno o broju faza”."
           >
-            <Input {...bind("duration")} inputMode="text" placeholder="1-2" />
+            <Input
+              {...bind("durationNote")}
+              placeholder="ovisno o broju faza"
+            />
           </Field>
 
           <label className="flex cursor-pointer items-start gap-3 font-light">
