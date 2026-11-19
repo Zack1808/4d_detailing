@@ -84,9 +84,7 @@ const ContactDetails = () => (
 
     <Reveal
       delay={1000}
-      transitionFrom="opacity-0 translate-y-6 lg:translate-y-0 lg:-translate-x-6"
-      transitionTo="opacity-100 translate-x-0 translate-y-0"
-      className="group relative min-h-0 overflow-hidden rounded-xs lg:mb-18.5 lg:flex-1"
+      className="lg:[--reveal-x:-1.5rem] lg:[--reveal-y:0] group relative min-h-0 overflow-hidden rounded-xs lg:mb-18.5 lg:flex-1"
     >
       <div className="absolute inset-0 -z-10 flex flex-col items-center justify-center gap-3 bg-gray-light/20 font-semibold dark:bg-gray-dark/20">
         <Loader size="md" />
