@@ -8,22 +8,28 @@ import HeroSection, { HeroBackground } from "../features/home/HeroSection";
 import ReviewsSection from "../features/home/ReviewsSection";
 
 import { PAGE_META } from "../config/seo";
-import { generateAutoWashSchema } from "../utils/schema";
+import { generateBusinessSchema, generateWebsiteSchema } from "../utils/schema";
 
-const schema = generateAutoWashSchema();
+const schema = [generateBusinessSchema(), generateWebsiteSchema()];
 
 const Home = () => {
   const servicesRef = useRef<HTMLElement>(null);
 
   return (
-    <main className="relative overflow-hidden">
+    <main id="main" tabIndex={-1} className="relative overflow-hidden">
       <HeroBackground />
       <SEO {...PAGE_META.home} schema={schema} />
 
       <HeroSection
-        onViewServices={() =>
-          servicesRef.current?.scrollIntoView({ behavior: "smooth" })
-        }
+        onViewServices={() => {
+          servicesRef.current?.scrollIntoView({
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+              .matches
+              ? "auto"
+              : "smooth",
+          });
+          servicesRef.current?.focus({ preventScroll: true });
+        }}
       />
       <FeaturedServices ref={servicesRef} />
       <AboutSection />
