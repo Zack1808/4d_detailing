@@ -47,6 +47,7 @@ import {
   formatDays,
   formatDuration,
   getBlockedDays,
+  getDurationUnit,
 } from "../../utils/duration";
 import { getErrorMessage } from "../../utils/errors";
 import { normalizeText } from "../../utils/text";
@@ -506,7 +507,7 @@ const AppointmentsPage = () => {
                 id="phases"
                 label="Broj faza"
                 required
-                hint={`Trajanje usluge: ${formatDuration(confirmService.duration)} po fazi.`}
+                hint={`Trajanje usluge: ${formatDuration(confirmService)} po fazi.`}
               >
                 <Input
                   id="phases"
@@ -526,14 +527,17 @@ const AppointmentsPage = () => {
             <p className="text-sm font-light" role="status">
               {confirmDays !== null ? (
                 <>
-                  Trajanje usluge: {formatDuration(confirmService?.duration)}
+                  Trajanje usluge: {formatDuration(confirmService)}
                   {confirmService?.durationPerPhase &&
                     ` po fazi × ${phaseCount(phases)}`}
                   {". Blokira se "}
                   <strong className="font-semibold">
                     {formatDays(confirmDays)}
                   </strong>{" "}
-                  (gornja granica trajanja). Raspon možete i ručno promijeniti.
+                  {getDurationUnit(confirmService) === "hours"
+                    ? "(usluga traje nekoliko sati, pa se blokira cijeli dan)"
+                    : "(gornja granica trajanja)"}
+                  . Raspon možete i ručno promijeniti.
                 </>
               ) : (
                 "Za ovu uslugu trajanje nije zadano pa raspon unesite ručno (trajanje se postavlja u Uslugama)."
