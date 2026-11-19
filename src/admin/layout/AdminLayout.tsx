@@ -95,9 +95,7 @@ const MobileNav = ({ open, email, onClose, onSignOut }: MobileNavProps) => {
         </nav>
 
         <div className="mt-auto flex flex-col gap-3">
-          <p className="text-sm font-light break-all text-gray-light">
-            {email}
-          </p>
+          <p className="text-sm font-light break-all text-muted">{email}</p>
           <Button variant="secondary" onClick={onSignOut}>
             Odjava
           </Button>
@@ -163,7 +161,7 @@ const AdminLayout = () => {
           </nav>
 
           <div className="mt-auto hidden flex-col gap-3 lg:flex">
-            <p className="text-sm font-light break-all text-gray-light">
+            <p className="text-sm font-light break-all text-muted">
               {user?.email}
             </p>
             <Button variant="secondary" onClick={handleSignOut}>
