@@ -105,7 +105,7 @@ const ServicesPage = () => {
                 <Td>
                   <p className="font-medium">{s.title}</p>
                   {s.isFeatured && (
-                    <p className="text-sm text-gray-light">Istaknuta</p>
+                    <p className="text-sm text-muted">Istaknuta</p>
                   )}
                 </Td>
                 <Td>
@@ -115,12 +115,10 @@ const ServicesPage = () => {
                 </Td>
                 <Td className="whitespace-nowrap">
                   {formatDuration(s.duration) || (
-                    <span className="text-gray-light">Nije zadano</span>
+                    <span className="text-muted">Nije zadano</span>
                   )}
                   {s.duration && s.durationPerPhase && (
-                    <span className="block text-sm text-gray-light">
-                      po fazi
-                    </span>
+                    <span className="block text-sm text-muted">po fazi</span>
                   )}
                 </Td>
                 <Td className="whitespace-nowrap tabular-nums">
