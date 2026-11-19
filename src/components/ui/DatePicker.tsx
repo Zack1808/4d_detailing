@@ -265,7 +265,7 @@ const DatePicker = ({
           }
           onClick={toggleCalendar}
           onKeyDown={handleInputKeyDown}
-          className="w-full cursor-pointer rounded-xs bg-transparent p-3 font-light outline-none placeholder:text-gray-light"
+          className="w-full cursor-pointer rounded-xs bg-transparent p-3 font-light outline-none placeholder:text-muted"
           {...aria}
         />
 
