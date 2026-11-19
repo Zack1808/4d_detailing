@@ -10,14 +10,19 @@ import { InlineError } from "../components/ui/InlineMessage";
 import Reveal from "../components/ui/Reveal";
 import Select from "../components/ui/Select";
 import { PageTitle, Paragraph, SubTitle } from "../components/ui/Typography";
-import ServiceGrid from "../features/services/ServiceGrid";
+import ServiceGrid, {
+  ServiceGridSkeleton,
+} from "../features/services/ServiceGrid";
 
 import { PATHS } from "../config/paths";
 import { PAGE_META } from "../config/seo";
 import { useData } from "../context/DataContext";
 import { useFileDownload } from "../hooks/useFileDownload";
 import { getCurrentPrice } from "../utils/pricing";
-import { generateServicesSchema } from "../utils/schema";
+import {
+  generateBreadcrumbSchema,
+  generateServicesSchema,
+} from "../utils/schema";
 import { normalizeText } from "../utils/text";
 
 import type { ServiceDataType } from "../types/data";
@@ -32,10 +37,22 @@ const SORTING_OPTIONS = [
 const DEFAULT_SORT = "popularno";
 
 const CAROUSEL_IMAGES = [
-  "/images/service1.avif",
-  "/images/service2.avif",
-  "/images/service3.avif",
-  "/images/service4.avif",
+  {
+    src: "/images/service1.avif",
+    alt: "Nanošenje zaštitne folije na prednji dio automobila",
+  },
+  {
+    src: "/images/service2.avif",
+    alt: "Ručno pranje crnog sportskog automobila",
+  },
+  {
+    src: "/images/service3.avif",
+    alt: "Pranje laka mekom spužvom i aktivnom pjenom",
+  },
+  {
+    src: "/images/service4.avif",
+    alt: "Detailing automobila u studiju pod LED rasvjetom",
+  },
 ];
 
 const sortServices = (list: ServiceDataType[], sort: string) => {
@@ -90,18 +107,19 @@ const Services = () => {
   const currentPriceTable = priceArchive.find((item) => item.isCurrent);
 
   return (
-    <main className="overflow-hidden">
+    <main id="main" tabIndex={-1} className="overflow-hidden">
       <SEO
         {...PAGE_META.services}
-        schema={
-          services.length > 0 ? generateServicesSchema(services) : undefined
-        }
+        schema={[
+          generateBreadcrumbSchema("Usluge", PAGE_META.services.path),
+          ...(services.length > 0 ? [generateServicesSchema(services)] : []),
+        ]}
       />
 
       <Container className="pb-3!">
         <div className="flex w-full justify-between gap-3">
           <div className="flex flex-col gap-6">
-            <Reveal variant="left">
+            <Reveal variant="left" delay={0}>
               <PageTitle>Naše usluge</PageTitle>
             </Reveal>
             <div className="flex flex-col gap-3">
@@ -188,7 +206,7 @@ const Services = () => {
 
       <Container className="pt-9!">
         <Reveal variant="left" delay={200}>
-          <SubTitle>Usluge</SubTitle>
+          <SubTitle as="h2">Usluge</SubTitle>
         </Reveal>
 
         <Reveal
@@ -225,6 +243,8 @@ const Services = () => {
             message={`Usluge trenutno nije moguće učitati. ${error ?? ""}`}
             onRetry={reload}
           />
+        ) : status === "loading" ? (
+          <ServiceGridSkeleton count={6} />
         ) : displayed.length === 0 ? (
           <div
             className="surface flex w-full flex-col items-start gap-3 p-6"
@@ -245,12 +265,7 @@ const Services = () => {
             )}
           </div>
         ) : (
-          <Reveal
-            variant="fade"
-            delay={400}
-            threshold={0.01}
-            className="w-full"
-          >
+          <Reveal variant="fade" delay={400} className="w-full">
             <ServiceGrid services={displayed} />
           </Reveal>
         )}
