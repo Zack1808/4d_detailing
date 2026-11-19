@@ -62,7 +62,7 @@ const PriceTablesPage = () => {
         description="Arhiva cjenika koju posjetitelji mogu preuzeti. Označite koji je trenutno aktualan"
       />
 
-      <p className="surface w-full p-3 text-sm font-light text-gray-light">
+      <p className="surface w-full p-3 text-sm font-light text-muted">
         Dodavanje novog cjenika (prijenos CSV datoteke u Firebase Storage) još
         nije povezano.
       </p>
