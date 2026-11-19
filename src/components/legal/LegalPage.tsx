@@ -17,7 +17,7 @@ type LegalPageProps = {
 };
 
 export const LegalPage = ({ meta, title, intro, children }: LegalPageProps) => (
-  <main>
+  <main id="main" tabIndex={-1}>
     <SEO {...meta} />
     <Container>
       <PageTitle>{title}</PageTitle>
