@@ -1,6 +1,6 @@
 import { COLLECTIONS } from "../config/collections";
 
-import { firestoreApi } from "./firestore";
+import { firestoreRest } from "./firestoreRest";
 import { MOCK_CONFIG } from "./mock/config";
 
 import type {
@@ -14,7 +14,7 @@ import type {
 export const USE_MOCK_DATA = import.meta.env.DEV && MOCK_CONFIG.enableMockData;
 
 export const wait = (ms: number) =>
-  new Promise<void>((resolve) => window.setTimeout(resolve, ms));
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 const prepare = (data: PageData): PageData => ({
   ...data,
@@ -40,14 +40,16 @@ export const fetchPageData = async (): Promise<PageData> => {
 
   const [services, reviews, blockedAppointments, priceArchive] =
     await Promise.all([
-      firestoreApi.getAll<ServiceDataType>(COLLECTIONS.services, [
-        { field: "status", operator: "==", value: "active" },
+      firestoreRest.getAll<ServiceDataType>(COLLECTIONS.services, [
+        { field: "status", value: "active" },
       ]),
-      firestoreApi.getAll<ReviewType>(COLLECTIONS.reviews, [
-        { field: "isApproved", operator: "==", value: true },
+      firestoreRest.getAll<ReviewType>(COLLECTIONS.reviews, [
+        { field: "isApproved", value: true },
       ]),
-      firestoreApi.getAll<BlockedAppointments>(COLLECTIONS.blockedAppointments),
-      firestoreApi.getAll<PriceTableType>(COLLECTIONS.priceTables),
+      firestoreRest.getAll<BlockedAppointments>(
+        COLLECTIONS.blockedAppointments,
+      ),
+      firestoreRest.getAll<PriceTableType>(COLLECTIONS.priceTables),
     ]);
 
   return prepare({ services, reviews, blockedAppointments, priceArchive });
