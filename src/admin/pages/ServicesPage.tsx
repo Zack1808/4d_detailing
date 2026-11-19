@@ -114,7 +114,7 @@ const ServicesPage = () => {
                   </StatusBadge>
                 </Td>
                 <Td className="whitespace-nowrap">
-                  {formatDuration(s.duration) || (
+                  {formatDuration(s) || (
                     <span className="text-muted">Nije zadano</span>
                   )}
                   {s.duration && s.durationPerPhase && (
