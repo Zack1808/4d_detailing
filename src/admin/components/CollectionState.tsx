@@ -33,7 +33,7 @@ const CollectionState = ({
 
   if (isEmpty) {
     return (
-      <p className="surface w-full p-9 text-center font-light text-gray-light">
+      <p className="surface w-full p-9 text-center font-light text-muted">
         {emptyMessage}
       </p>
     );
