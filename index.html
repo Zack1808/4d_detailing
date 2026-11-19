@@ -2,6 +2,19 @@
 <html lang="hr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#fafafa"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#111416"
+      media="(prefers-color-scheme: dark)"
+    />
+
     <link
       rel="icon"
       type="image/svg+xml"
@@ -14,8 +27,9 @@
       href="/images/logo_light.svg"
       media="(prefers-color-scheme: dark)"
     />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/icons/icon-48.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
 
     <link
       rel="preload"
@@ -25,27 +39,14 @@
       crossorigin
     />
 
-    <link
-      rel="preload"
-      as="image"
-      href="/images/logo_dark.svg"
-      media="(prefers-color-scheme: dark)"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="/images/logo_light.svg"
-      media="(prefers-color-scheme: light)"
-      fetchpriority="high"
-    />
-
+    <title data-prerendered>4D Detailing</title>
     <meta
+      data-prerendered
       name="description"
       content="4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici. Luksuz koji si možete priuštiti."
     />
   </head>
-  <body class="bg-light dark:bg-dark tracking-wide scrollbar-gutter-stable!">
+  <body class="bg-light dark:bg-dark tracking-wide">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
