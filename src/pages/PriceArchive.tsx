@@ -60,11 +60,11 @@ const PriceArchive = () => {
   }, [priceArchive, search, sort]);
 
   return (
-    <main className="overflow-hidden">
+    <main id="main" tabIndex={-1} className="overflow-hidden">
       <SEO {...PAGE_META.priceArchive} />
 
       <Container className="pb-3!">
-        <Reveal variant="left">
+        <Reveal variant="left" delay={0}>
           <PageTitle>Arhiva cjenika</PageTitle>
         </Reveal>
         <Reveal variant="left" delay={200}>
@@ -83,7 +83,7 @@ const PriceArchive = () => {
 
       <Container className="pt-9!">
         <Reveal variant="left" delay={200}>
-          <SubTitle>Cjenici</SubTitle>
+          <SubTitle as="h2">Cjenici</SubTitle>
         </Reveal>
 
         <Reveal
@@ -119,12 +119,7 @@ const PriceArchive = () => {
             onRetry={reload}
           />
         ) : (
-          <Reveal
-            variant="fade"
-            delay={400}
-            threshold={0.01}
-            className="w-full overflow-x-auto"
-          >
+          <Reveal variant="fade" delay={400} className="w-full overflow-x-auto">
             <table className="w-full min-w-140 border-collapse text-left">
               <thead>
                 <tr className="bg-gray-light/15 dark:bg-gray-dark/40">
@@ -158,7 +153,7 @@ const PriceArchive = () => {
                           Aktualni
                         </span>
                       ) : (
-                        <span className="inline-block rounded-xs border border-gray-light px-2 py-1 text-xs font-medium text-gray-light">
+                        <span className="inline-block rounded-xs border border-gray-light px-2 py-1 text-xs font-medium text-muted">
                           Arhiviran
                         </span>
                       )}
@@ -180,7 +175,18 @@ const PriceArchive = () => {
                     </td>
                   </tr>
                 ))}
-                {tables.length === 0 && (
+                {status === "loading" && (
+                  <tr>
+                    <td
+                      colSpan={HEADERS.length + 1}
+                      className="px-4 py-9 text-center font-light"
+                      role="status"
+                    >
+                      Učitavanje cjenika...
+                    </td>
+                  </tr>
+                )}
+                {status !== "loading" && tables.length === 0 && (
                   <tr>
                     <td
                       colSpan={HEADERS.length + 1}
