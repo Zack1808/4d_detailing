@@ -15,7 +15,11 @@ export const useClickOutside = (
     if (!active) return;
 
     const handlePointerDown = (event: PointerEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const target = event.target as Element;
+
+      if (target.closest?.("[data-popover-portal]")) return;
+
+      if (ref.current && !ref.current.contains(target)) {
         handlerRef.current();
       }
     };
