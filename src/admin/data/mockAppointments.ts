@@ -88,6 +88,17 @@ export const mockAppointments: AppointmentType[] = [
     isBlocked: false,
     isDenied: true,
   },
+  {
+    id: "apt-11",
+    fullName: "Ivana Perić",
+    email: "ivana.peric@example.com",
+    phone: "+385 91 888 9999",
+    service: "Korekcija laka (1 faza)",
+    vehicle: "Peugeot 308",
+    dateFrom: "01.12.2026",
+    isConfirmed: false,
+    isBlocked: false,
+  },
 ];
 
 export const mockPastAppointments: AppointmentType[] = [
