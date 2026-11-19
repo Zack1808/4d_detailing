@@ -1,4 +1,12 @@
+import { SITE_URL } from "./business";
 import { PATHS } from "./paths";
+
+export const OG_IMAGE = {
+  url: `${SITE_URL}/images/og-image.jpg`,
+  width: 1200,
+  height: 630,
+  alt: "4D Detailing – auto detailing u Velikoj Gorici",
+};
 
 export type PageMeta = {
   title: string;
@@ -11,7 +19,7 @@ export const PAGE_META = {
     title:
       "4D Detailing Velika Gorica – Profesionalno čišćenje i poliranje vozila",
     description:
-      "4D Detailing – profesionalne usluge čišćenja, poliranja i zaštite vozila u Velikoj Gorici.",
+      "4D Detailing – profesionalno dubinsko čišćenje interijera i eksterijera, strojno poliranje i zaštita laka vozila u Velikoj Gorici. Rezervirajte termin online.",
     path: PATHS.home,
   },
   services: {
