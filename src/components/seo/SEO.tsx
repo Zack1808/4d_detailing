@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 
-import { SITE_URL } from "../../config/business";
+import { BUSINESS, SITE_URL } from "../../config/business";
+import { OG_IMAGE } from "../../config/seo";
 
 export type SEOProps = {
   title: string;
@@ -29,12 +30,16 @@ const SEO = ({ title, description, path, schema, noindex }: SEOProps) => {
       )}
 
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="4D Detailing" />
+      <meta property="og:site_name" content={BUSINESS.name} />
       <meta property="og:locale" content="hr_HR" />
       <meta property="og:title" content={title} />
       {description && <meta property="og:description" content={description} />}
       {url && <meta property="og:url" content={url} />}
-      <meta name="twitter:card" content="summary" />
+      <meta property="og:image" content={OG_IMAGE.url} />
+      <meta property="og:image:width" content={String(OG_IMAGE.width)} />
+      <meta property="og:image:height" content={String(OG_IMAGE.height)} />
+      <meta property="og:image:alt" content={OG_IMAGE.alt} />
+      <meta name="twitter:card" content="summary_large_image" />
 
       {schemas.map((item) => (
         <script key={toJsonLd(item)} type="application/ld+json">
