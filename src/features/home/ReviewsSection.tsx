@@ -4,6 +4,11 @@ import Container from "../../components/layout/Container";
 import Button from "../../components/ui/Button";
 import Reveal from "../../components/ui/Reveal";
 import { Paragraph, SectionTitle } from "../../components/ui/Typography";
+import {
+  Skeleton,
+  SkeletonRegion,
+  SkeletonText,
+} from "../../components/ui/Skeleton";
 import ReviewCarousel from "../reviews/ReviewCarousel";
 
 import { useData } from "../../context/DataContext";
@@ -11,7 +16,7 @@ import { useData } from "../../context/DataContext";
 const ReviewModal = lazy(() => import("../reviews/ReviewModal"));
 
 const ReviewsSection = () => {
-  const { reviews } = useData();
+  const { reviews, status } = useData();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalRequested, setModalRequested] = useState(false);
 
@@ -35,7 +40,25 @@ const ReviewsSection = () => {
       </Reveal>
 
       <Reveal className="relative mt-3 w-full overflow-hidden">
-        <ReviewCarousel reviews={reviews} />
+        {status === "loading" ? (
+          <SkeletonRegion
+            label="Učitavanje recenzija..."
+            className="mt-3 grid w-full gap-3 md:grid-cols-2"
+          >
+            {[0, 1].map((i) => (
+              <div
+                key={i}
+                className="surface flex flex-col gap-9 px-6 py-9 max-md:nth-2:hidden"
+              >
+                <Skeleton className="h-7 w-40" />
+                <SkeletonText lines={3} />
+                <Skeleton className="h-5 w-32" />
+              </div>
+            ))}
+          </SkeletonRegion>
+        ) : (
+          <ReviewCarousel reviews={reviews} />
+        )}
       </Reveal>
 
       <div className="mt-3 flex w-full flex-col justify-between gap-6 md:flex-row md:items-center">
