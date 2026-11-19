@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaPause,
+  FaPlay,
+} from "react-icons/fa6";
 
 import ReviewCard from "./ReviewCard";
 
@@ -25,6 +30,7 @@ const ReviewCarousel = ({ reviews }: { reviews: ReviewType[] }) => {
   const itemsPerPage = useMediaQuery("(min-width: 768px)") ? 2 : 1;
 
   const [paused, setPaused] = useState(false);
+  const [stopped, setStopped] = useState(false);
 
   const { index, animate, next, previous, onTransitionEnd } =
     useInfiniteCarousel({
@@ -34,12 +40,12 @@ const ReviewCarousel = ({ reviews }: { reviews: ReviewType[] }) => {
     });
 
   useEffect(() => {
-    if (!tabVisible || reducedMotion || paused || length < 2) return;
+    if (!tabVisible || reducedMotion || paused || stopped || length < 2) return;
 
     const timer = window.setTimeout(next, AUTOPLAY_DELAY);
 
     return () => window.clearTimeout(timer);
-  }, [index, tabVisible, reducedMotion, paused, length, next]);
+  }, [index, tabVisible, reducedMotion, paused, stopped, length, next]);
 
   if (length === 0) return null;
 
@@ -79,6 +85,24 @@ const ReviewCarousel = ({ reviews }: { reviews: ReviewType[] }) => {
 
       {length > itemsPerPage && (
         <div className="flex justify-end gap-3">
+          {!reducedMotion && (
+            <button
+              type="button"
+              onClick={() => setStopped((value) => !value)}
+              aria-label={
+                stopped
+                  ? "Pokreni automatsko listanje"
+                  : "Zaustavi automatsko listanje"
+              }
+              className={ARROW}
+            >
+              {stopped ? (
+                <FaPlay aria-hidden="true" />
+              ) : (
+                <FaPause aria-hidden="true" />
+              )}
+            </button>
+          )}
           <button
             type="button"
             onClick={previous}
