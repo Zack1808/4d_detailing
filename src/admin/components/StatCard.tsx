@@ -16,9 +16,7 @@ const StatCard = ({ label, value, hint, to }: StatCardProps) => {
         {label}
       </span>
       <span className="text-5xl font-bold tabular-nums">{value}</span>
-      {hint && (
-        <span className="text-sm font-light text-gray-light">{hint}</span>
-      )}
+      {hint && <span className="text-sm font-light text-muted">{hint}</span>}
     </>
   );
 
