@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
 import { useSearchParams } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import Textarea from "../../components/ui/Textarea";
 
 import { useData } from "../../context/DataContext";
 import { useForm } from "../../hooks/useForm";
+import { useIsClient } from "../../hooks/useIsClient";
 import { submitAppointment } from "../../services/submissions";
 import { formatDate, parseDate, toMidnight } from "../../utils/date";
 import { ApiError, getErrorMessage } from "../../utils/errors";
@@ -31,6 +32,7 @@ const MIN_FILL_MS = 1500;
 const ContactForm = () => {
   const { services, blockedAppointments } = useData();
   const [params, setParams] = useSearchParams();
+  const isClient = useIsClient();
 
   const [sent, setSent] = useState(false);
   const honeypot = useRef<HTMLInputElement>(null);
@@ -139,6 +141,23 @@ const ContactForm = () => {
 
   const { bind, errors, values, submitting } = form;
 
+  // The service list can arrive after the form is shown. Once it does,
+  // preselect the service from the link (?usluga=…) if nothing was chosen yet.
+  const requestedService = params.get("usluga");
+  const { setValue } = form;
+
+  useEffect(() => {
+    if (
+      requestedService &&
+      values.service === GENERAL_QUESTION &&
+      options.some((option) => option.value === requestedService)
+    ) {
+      setValue("service", requestedService);
+    }
+    // Only react to the list of options arriving, not to the user's choice.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options, requestedService]);
+
   const handleServiceChange = (value: string) => {
     form.setValue("service", value);
 
@@ -186,7 +205,7 @@ const ContactForm = () => {
         className="pointer-events-none absolute left-[9999px] size-0 opacity-0"
       />
 
-      <p className="text-sm font-light text-gray-light">
+      <p className="text-sm font-light text-muted">
         Polja označena zvjezdicom (*) su obavezna.
       </p>
 
@@ -251,7 +270,7 @@ const ContactForm = () => {
       >
         <DatePicker
           {...bind("dateFrom")}
-          min={formatDate(new Date())}
+          min={isClient ? formatDate(new Date()) : undefined}
           isDateDisabled={isBlocked}
         />
       </Field>
