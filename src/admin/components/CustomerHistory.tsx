@@ -99,7 +99,7 @@ export const CustomerHistoryDialog = ({
         </p>
 
         {history.length === 0 ? (
-          <p className="font-light text-gray-light">
+          <p className="font-light text-muted">
             Nema drugih termina ovog klijenta.
           </p>
         ) : (
@@ -117,7 +117,7 @@ export const CustomerHistoryDialog = ({
                       ? `${past.dateFrom} - ${past.dateTo}`
                       : past.dateFrom || "bez termina"}
                   </p>
-                  <p className="text-xs font-light text-gray-light">
+                  <p className="text-xs font-light text-muted">
                     {past.fullName} (
                     {matchedBy.map((reason) => MATCH_LABEL[reason]).join(", ")})
                   </p>
