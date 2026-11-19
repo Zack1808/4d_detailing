@@ -11,7 +11,7 @@ const PageHeader = ({ title, description, actions }: PageHeaderProps) => (
     <div className="flex flex-col gap-2">
       <h1 className="text-3xl font-bold">{title}</h1>
       {description && (
-        <p className="max-w-[70ch] font-light text-gray-light">{description}</p>
+        <p className="max-w-[70ch] font-light text-muted">{description}</p>
       )}
     </div>
     {actions && <div className="flex flex-wrap gap-3">{actions}</div>}
