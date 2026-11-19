@@ -143,11 +143,10 @@ const RescheduleDialog = ({
             <p className="font-medium">Pregled e-maila</p>
             <div className="rounded-xs bg-gray-light/15 p-3 text-sm dark:bg-gray-dark/40">
               <p>
-                <span className="text-gray-light">Za:</span> {preview.to}
+                <span className="text-muted">Za:</span> {preview.to}
               </p>
               <p>
-                <span className="text-gray-light">Predmet:</span>{" "}
-                {preview.subject}
+                <span className="text-muted">Predmet:</span> {preview.subject}
               </p>
               <p className="mt-3 max-h-48 overflow-y-auto font-light whitespace-pre-wrap">
                 {preview.body}
