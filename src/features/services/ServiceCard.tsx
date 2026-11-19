@@ -26,7 +26,7 @@ const EXTRA_CLASSES: { key: VehicleClass; label: string }[] = [
 const LAW_DATE = new Date(2026, 8, 10);
 const ONE_DAY_MS = 86_399_999;
 
-const NOTE = "text-xs text-gray-500 dark:text-gray-400";
+const NOTE = "text-xs text-muted";
 
 const PriceNotes = ({
   info,
@@ -103,7 +103,7 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
         <div className="flex w-full flex-col gap-1 text-5xl font-medium">
           <div className="flex gap-3">
             {discounted && (
-              <span className="min-w-max self-center text-sm text-gray-500 line-through dark:text-gray-400">
+              <span className="min-w-max self-center text-sm text-muted line-through">
                 €{car.price}
               </span>
             )}
@@ -150,7 +150,7 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
               <span key={key}>
                 <strong className="font-normal">Cijena za {label}: </strong>
                 {discounted && (
-                  <span className="mr-2 text-gray-500 line-through dark:text-gray-400">
+                  <span className="mr-2 text-muted line-through">
                     €{info.price}
                   </span>
                 )}
@@ -159,7 +159,7 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
                   info={info}
                   anchorDate={anchorDate}
                   discounted={discounted}
-                  className="text-xs font-medium text-gray-500 dark:text-gray-400"
+                  className="text-xs font-medium text-muted"
                 />
               </span>
             );
