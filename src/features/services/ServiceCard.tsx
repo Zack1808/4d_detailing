@@ -92,8 +92,24 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
   const car = prices.car;
 
   return (
-    <div className="surface relative flex w-full flex-col gap-9 overflow-hidden px-6 py-9">
-      <header className="flex flex-col gap-6">
+    <div className="surface relative isolate flex w-full flex-col gap-9 overflow-hidden px-6 py-9">
+      {discounted && (
+        <div className="pointer-events-none absolute top-0 right-0 flex aspect-square -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full p-1">
+          <Wheel
+            isDark={!isDark}
+            speed={10}
+            size={isWide ? 260 : 200}
+            className="opacity-5"
+          />
+          <div className="absolute inset-0 flex items-end justify-center rounded-full bg-dark/5 p-3 dark:bg-light/5">
+            <p className="mr-18 mb-10 text-lg font-normal sm:mr-21 sm:mb-15 sm:text-2xl">
+              -{item.discount.value}
+              {item.discount.type === "percentage" ? "%" : "€"}
+            </p>
+          </div>
+        </div>
+      )}
+      <header className="relative flex flex-col gap-6">
         <h3
           className={`text-2xl font-semibold ${discounted ? "max-w-[25ch]" : ""}`}
         >
@@ -118,23 +134,6 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
             discounted={discounted}
           />
         </div>
-
-        {discounted && (
-          <div className="absolute top-0 right-0 -z-10 flex aspect-square -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full p-1">
-            <Wheel
-              isDark={!isDark}
-              speed={10}
-              size={isWide ? 260 : 200}
-              className="opacity-5"
-            />
-            <div className="absolute inset-0 flex items-end justify-center rounded-full bg-dark/5 p-3 dark:bg-light/5">
-              <p className="mr-18 mb-10 text-lg font-normal sm:mr-21 sm:mb-15 sm:text-2xl">
-                -{item.discount.value}
-                {item.discount.type === "percentage" ? "%" : "€"}
-              </p>
-            </div>
-          </div>
-        )}
       </header>
 
       <div className="mb-10 flex flex-col gap-6">
