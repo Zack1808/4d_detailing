@@ -48,7 +48,7 @@ const AppointmentList = ({
     </div>
 
     {items.length === 0 ? (
-      <p className="font-light text-gray-light">{empty}</p>
+      <p className="font-light text-muted">{empty}</p>
     ) : (
       <ul className="flex flex-col gap-3">
         {items.map((item) => (
@@ -62,7 +62,7 @@ const AppointmentList = ({
                 <span className="ml-2 text-sm font-light">ponovni klijent</span>
               )}
             </span>
-            <span className="text-sm font-light text-gray-light">
+            <span className="text-sm font-light text-muted">
               {item.service} - {item.vehicle}
             </span>
           </li>
@@ -167,7 +167,7 @@ const DashboardPage = () => {
 
         <section className="surface flex flex-col gap-3 p-6">
           <h2>Posjeti stranice</h2>
-          <p className="max-w-[70ch] font-light text-gray-light">
+          <p className="max-w-[70ch] font-light text-muted">
             Ovdje će se prikazivati sažetak posjeta iz Google Analyticsa.
             Kartica još nije povezana s podacima.
           </p>
