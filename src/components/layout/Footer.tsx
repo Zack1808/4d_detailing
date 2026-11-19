@@ -111,7 +111,8 @@ const Footer = () => (
       <p className="order-2 flex flex-1 justify-start text-center text-sm lg:order-1">
         <FaCopyright className="mr-2 text-lg font-light" aria-hidden="true" />
         <span>
-          2024 - {new Date().getFullYear()}{" "}
+          2024 –{" "}
+          <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
           <b className="font-semibold">{BUSINESS.name}</b>.{" "}
           <br className="block lg:hidden" />
           Sva prava pridržana.
@@ -148,7 +149,7 @@ const Footer = () => (
           href="https://jeanpierrenovak.from.hr/"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-light text-gray-500 dark:text-gray-400"
+          className="font-light text-muted"
         >
           Izradio: <b className="font-semibold">JPN</b>
         </a>

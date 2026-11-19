@@ -11,11 +11,15 @@ export const readStorage = <T>(key: string): T | null => {
 export const writeStorage = (key: string, value: unknown) => {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
-  } catch {}
+  } catch {
+    // Storage can be unavailable (private mode, blocked cookies); ignore.
+  }
 };
 
 export const removeStorage = (key: string) => {
   try {
     window.localStorage.removeItem(key);
-  } catch {}
+  } catch {
+    // Storage can be unavailable (private mode, blocked cookies); ignore.
+  }
 };
