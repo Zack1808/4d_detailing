@@ -360,13 +360,13 @@ const AppointmentsPage = () => {
                           : `${dateFrom} - ${dateTo}`}
                       </p>
                     ) : (
-                      <p className="text-gray-light">Bez termina</p>
+                      <p className="text-muted">Bez termina</p>
                     )}
                     {state === "pending" && proposal && (
                       <p className="text-sm">Predloženo: {proposal.dateFrom}</p>
                     )}
                     {state === "pending" && days !== null && (
-                      <p className="text-sm text-gray-light">
+                      <p className="text-sm text-muted">
                         Zauzima {formatDays(days)}
                       </p>
                     )}
@@ -401,7 +401,7 @@ const AppointmentsPage = () => {
                   </Td>
                   <Td>
                     <p>{a.service}</p>
-                    <p className="text-sm text-gray-light">{a.vehicle}</p>
+                    <p className="text-sm text-muted">{a.vehicle}</p>
                     {a.remark && (
                       <p className="mt-1 max-w-[40ch] text-sm italic">
                         {a.remark}
@@ -587,7 +587,7 @@ const AppointmentsPage = () => {
               </div>
             )}
 
-            <p className="text-sm font-light text-gray-light">
+            <p className="text-sm font-light text-muted">
               Potvrđeni termin dodaje se u Google Calendar s podsjetnikom dan
               ranije u 18:00
               {USE_MOCK_CALENDAR && " (mock: sprema se samo u preglednik)"}.
