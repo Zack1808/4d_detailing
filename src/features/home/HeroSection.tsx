@@ -8,6 +8,7 @@ import Reveal from "../../components/ui/Reveal";
 
 import { BUSINESS } from "../../config/business";
 import { PATHS } from "../../config/paths";
+import { useIsClient } from "../../hooks/useIsClient";
 import { useIsDark } from "../../hooks/useMediaQuery";
 
 const BACKGROUND =
@@ -15,7 +16,11 @@ const BACKGROUND =
 
 export const HeroBackground = () => {
   const isDark = useIsDark();
+  const isClient = useIsClient();
   const [useWheel] = useState(() => Math.random() < 0.5);
+
+  // Decorative and picked at random, so it is only drawn in the browser.
+  if (!isClient) return null;
 
   return useWheel ? (
     <Wheel
@@ -37,8 +42,13 @@ export const HeroBackground = () => {
 
 const HeroSection = ({ onViewServices }: { onViewServices: () => void }) => (
   <Hero>
-    <Reveal variant="left">
-      <h1 className="text-5xl font-bold md:text-8xl">{BUSINESS.name}</h1>
+    <Reveal variant="left" delay={0}>
+      <h1 className="flex flex-col gap-3">
+        <span className="text-5xl font-bold md:text-8xl">{BUSINESS.name}</span>
+        <span className="text-sm font-medium tracking-widest uppercase sm:text-lg md:text-xl">
+          Auto detailing · {BUSINESS.address.city}
+        </span>
+      </h1>
     </Reveal>
     <Reveal variant="left" delay={200}>
       <p className="text-2xl font-normal">{BUSINESS.tagline}</p>
