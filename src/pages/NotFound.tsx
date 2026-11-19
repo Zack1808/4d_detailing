@@ -11,7 +11,11 @@ const NotFound = () => {
   const isDark = useIsDark();
 
   return (
-    <main className="relative flex h-screen items-center justify-center overflow-hidden">
+    <main
+      id="main"
+      tabIndex={-1}
+      className="relative flex h-screen items-center justify-center overflow-hidden"
+    >
       <SEO title="Stranica nije pronađena | 4D Detailing" noindex />
       <Tesseract
         size={1700}
