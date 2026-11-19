@@ -1,7 +1,7 @@
 import { cn } from "../../utils/cn";
 
 export const FIELD_BASE =
-  "w-full rounded-xs border-b-2 bg-dark/5 p-3 font-light text-dark outline-none transition-colors duration-200 placeholder:text-gray-light dark:bg-light/5 dark:text-light";
+  "w-full rounded-xs border-b-2 bg-dark/5 p-3 font-light text-dark outline-none transition-colors duration-200 placeholder:text-muted dark:bg-light/5 dark:text-light";
 
 const INVALID_BORDER = "border-red-600 dark:border-red-400";
 
