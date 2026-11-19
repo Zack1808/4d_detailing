@@ -1,7 +1,7 @@
 import { COLLECTIONS } from "../config/collections";
 
 import { sendContactEmail } from "./contactApi";
-import { firestoreApi } from "./firestore";
+import { firestoreRest } from "./firestoreRest";
 import { USE_MOCK_DATA, wait } from "./pageData";
 import { MOCK_CONFIG } from "./mock/config";
 
@@ -33,7 +33,7 @@ export const submitAppointment = async (
   };
 
   const [saved, emailed] = await Promise.allSettled([
-    firestoreApi.add(COLLECTIONS.appointments, record),
+    firestoreRest.add(COLLECTIONS.appointments, record),
     sendContactEmail({ type: "appointment", ...values }),
   ]);
 
@@ -57,7 +57,7 @@ export const submitReview = async (values: ReviewValues) => {
   };
 
   const [saved, emailed] = await Promise.allSettled([
-    firestoreApi.add(COLLECTIONS.reviews, review),
+    firestoreRest.add(COLLECTIONS.reviews, review),
     sendContactEmail({ type: "review", ...values }),
   ]);
 
