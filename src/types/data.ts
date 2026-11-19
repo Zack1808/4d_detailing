@@ -1,5 +1,7 @@
 export type VehicleClass = "car" | "suv" | "transporter";
 
+export type DurationUnit = "hours" | "days";
+
 export type PriceType = {
   price: number;
   anchorPrice: number;
@@ -16,9 +18,9 @@ export type ServiceDataType = {
   isFeatured: boolean;
   status: "active" | "hidden" | "archived";
   sortOrder: number;
-  /** Days the service occupies: "1" or a span like "1-2" (upper limit blocks dates). */
   duration?: string;
-  /** When true, `duration` is per phase and is multiplied by the number of phases. */
+  durationUnit?: DurationUnit;
+  durationNote?: string;
   durationPerPhase?: boolean;
   prices: Record<VehicleClass, PriceType>;
   discount: {

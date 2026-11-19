@@ -1,10 +1,15 @@
 import { addDaysToValue } from "./date";
 
-import type { ServiceDataType } from "../types/data";
+import type { DurationUnit, ServiceDataType } from "../types/data";
 
 export type DurationRange = { min: number; max: number };
 
+type DurationSource = Pick<ServiceDataType, "duration" | "durationUnit">;
+
 const DURATION = /^(\d{1,2})(?:\s*[-–]\s*(\d{1,2}))?$/;
+
+export const getDurationUnit = (service?: Partial<DurationSource> | null) =>
+  service?.durationUnit === "hours" ? "hours" : "days";
 
 export const parseDuration = (value?: string | null): DurationRange | null => {
   const match = DURATION.exec((value ?? "").trim());
@@ -32,15 +37,20 @@ export const normalizeDuration = (value: string) => {
 const dayWord = (count: number) =>
   count % 10 === 1 && count % 100 !== 11 ? "dan" : "dana";
 
-export const formatDuration = (value?: string | null) => {
-  const range = parseDuration(value);
+const UNIT_LABEL: Record<DurationUnit, (max: number) => string> = {
+  hours: () => "h",
+  days: dayWord,
+};
+
+export const formatDuration = (service?: Partial<DurationSource> | null) => {
+  const range = parseDuration(service?.duration);
 
   if (!range) return "";
 
   const label =
     range.min === range.max ? range.max : `${range.min}-${range.max}`;
 
-  return `${label} ${dayWord(range.max)}`;
+  return `${label} ${UNIT_LABEL[getDurationUnit(service)](range.max)}`;
 };
 
 export const formatDays = (count: number) => `${count} ${dayWord(count)}`;
@@ -53,7 +63,9 @@ export const guessPhases = (title: string) => {
 };
 
 export const getBlockedDays = (
-  service: Pick<ServiceDataType, "duration" | "durationPerPhase"> | undefined,
+  service:
+    | Pick<ServiceDataType, "duration" | "durationUnit" | "durationPerPhase">
+    | undefined,
   phases = 1,
 ): number | null => {
   const range = parseDuration(service?.duration);
@@ -61,8 +73,9 @@ export const getBlockedDays = (
   if (!range) return null;
 
   const multiplier = service?.durationPerPhase ? Math.max(1, phases) : 1;
+  const days = getDurationUnit(service) === "hours" ? 1 : range.max;
 
-  return range.max * multiplier;
+  return days * multiplier;
 };
 
 export const getEndDate = (dateFrom: string, days: number | null) =>
