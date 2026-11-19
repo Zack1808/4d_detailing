@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { FaRegClock } from "react-icons/fa6";
 
 import Wheel from "../../components/animated/Wheel";
 import Button from "../../components/ui/Button";
@@ -7,6 +8,7 @@ import List from "../../components/ui/List";
 import { contactPath } from "../../config/paths";
 import { useIsDark, useMediaQuery } from "../../hooks/useMediaQuery";
 import { formatDate } from "../../utils/date";
+import { formatDuration } from "../../utils/duration";
 import { getCurrentPrice, isDiscounted, toDate } from "../../utils/pricing";
 
 import type { ServiceDataType, VehicleClass } from "../../types/data";
@@ -90,6 +92,8 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
   }, [item.createdAt]);
 
   const car = prices.car;
+  const duration = formatDuration(item);
+  const durationNote = item.durationNote?.trim();
 
   return (
     <div className="surface relative isolate flex w-full flex-col gap-9 overflow-hidden px-6 py-9">
@@ -137,6 +141,19 @@ const ServiceCard = ({ item }: { item: ServiceDataType }) => {
       </header>
 
       <div className="mb-10 flex flex-col gap-6">
+        {duration && (
+          <p className="flex items-start gap-2 font-light">
+            <FaRegClock aria-hidden="true" className="mt-1 shrink-0" />
+            <span>
+              <strong className="font-normal">Trajanje: </strong>
+              {duration}
+              {durationNote && (
+                <span className="text-muted"> ({durationNote})</span>
+              )}
+            </span>
+          </p>
+        )}
+
         {item.services.length > 0 && <List items={item.services} />}
 
         <div className="flex flex-col gap-3 font-light">
