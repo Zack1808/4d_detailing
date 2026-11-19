@@ -70,11 +70,7 @@ const AboutSection = () => (
         </Reveal>
       </div>
 
-      <Reveal
-        transitionFrom="opacity-0 translate-y-6 xl:translate-x-6 xl:translate-y-0"
-        transitionTo="opacity-100 translate-x-0 translate-y-0"
-        className="mt-6 flex w-full flex-col gap-3 xl:mt-15 xl:w-3/7"
-      >
+      <Reveal className="xl:[--reveal-x:1.5rem] xl:[--reveal-y:0] mt-6 flex w-full flex-col gap-3 xl:mt-15 xl:w-3/7">
         <img
           src="/images/founder.avif"
           alt="Osnivač 4D Detailinga, Luka Novak"
