@@ -10,9 +10,7 @@ import { InlineError } from "../components/ui/InlineMessage";
 import Reveal from "../components/ui/Reveal";
 import Select from "../components/ui/Select";
 import { PageTitle, Paragraph, SubTitle } from "../components/ui/Typography";
-import ServiceGrid, {
-  ServiceGridSkeleton,
-} from "../features/services/ServiceGrid";
+import ServiceGrid from "../features/services/ServiceGrid";
 
 import { PATHS } from "../config/paths";
 import { PAGE_META } from "../config/seo";
@@ -243,9 +241,7 @@ const Services = () => {
             message={`Usluge trenutno nije moguće učitati. ${error ?? ""}`}
             onRetry={reload}
           />
-        ) : status === "loading" ? (
-          <ServiceGridSkeleton count={6} />
-        ) : displayed.length === 0 ? (
+        ) : status !== "loading" && displayed.length === 0 ? (
           <div
             className="surface flex w-full flex-col items-start gap-3 p-6"
             role="status"
@@ -265,9 +261,11 @@ const Services = () => {
             )}
           </div>
         ) : (
-          <Reveal variant="fade" delay={400} className="w-full">
-            <ServiceGrid services={displayed} />
-          </Reveal>
+          <ServiceGrid
+            services={displayed}
+            loading={status === "loading"}
+            skeletonCount={6}
+          />
         )}
       </Container>
     </main>

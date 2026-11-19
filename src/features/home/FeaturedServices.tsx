@@ -5,7 +5,7 @@ import Button from "../../components/ui/Button";
 import { InlineError } from "../../components/ui/InlineMessage";
 import Reveal from "../../components/ui/Reveal";
 import { Paragraph, SectionTitle } from "../../components/ui/Typography";
-import ServiceGrid, { ServiceGridSkeleton } from "../services/ServiceGrid";
+import ServiceGrid from "../services/ServiceGrid";
 
 import { PATHS } from "../../config/paths";
 import { useData } from "../../context/DataContext";
@@ -42,10 +42,8 @@ const FeaturedServices = forwardRef<HTMLElement>((_, ref) => {
             message={`Usluge trenutno nije moguće učitati. ${error ?? ""}`}
             onRetry={reload}
           />
-        ) : status === "loading" ? (
-          <ServiceGridSkeleton />
         ) : (
-          <ServiceGrid services={featured} />
+          <ServiceGrid services={featured} loading={status === "loading"} />
         )}
       </div>
 
