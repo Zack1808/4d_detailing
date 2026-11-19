@@ -32,6 +32,7 @@ const SNAPSHOT_ELEMENT_ID = "page-data";
 
 const SnapshotContext = createContext<PageData | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const DataSnapshotProvider = SnapshotContext.Provider;
 
 const readEmbeddedSnapshot = (): PageData | null => {
@@ -50,6 +51,7 @@ const readEmbeddedSnapshot = (): PageData | null => {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useData = () => {
   const context = useContext(DataContext);
 

@@ -16,6 +16,7 @@
   font-display: swap;
 }
 
+/* Metric-matched fallback, so text does not jump when Montserrat loads (CLS). */
 @font-face {
   font-family: "Montserrat Fallback";
   src: local("Arial");
@@ -36,6 +37,7 @@
   --color-gray-dark: #2b2b2b;
   --color-panel: #eeeeee;
   --color-panel-dark: #1c2022;
+
   --color-muted: #646461;
 }
 
@@ -98,6 +100,29 @@
   @apply rounded-sm bg-gray-light/15 shadow-sm dark:bg-gray-dark/40;
 }
 
+.reveal {
+  transition:
+    opacity 1s ease-out,
+    translate 1s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-property: opacity;
+    transition-duration: 0.4s;
+  }
+}
+
+@media (scripting: enabled) {
+  .reveal:not([data-revealed]) {
+    opacity: 0;
+    translate: var(--reveal-x) var(--reveal-y);
+
+    @media (prefers-reduced-motion: reduce) {
+      translate: none;
+    }
+  }
+}
+
 @keyframes reveal {
   from {
     opacity: 0;
@@ -118,18 +143,6 @@
   @media (prefers-reduced-motion: reduce) {
     animation-name: reveal-fade;
     animation-duration: 0.4s;
-  }
-}
-
-@supports ((animation-timeline: view()) and (animation-range: entry)) {
-  .reveal {
-    animation: reveal linear backwards;
-    animation-timeline: view();
-    animation-range: entry 0% entry 90%;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation-name: reveal-fade;
-    }
   }
 }
 

@@ -19,7 +19,6 @@ export const HeroBackground = () => {
   const isClient = useIsClient();
   const [useWheel] = useState(() => Math.random() < 0.5);
 
-  // Decorative and picked at random, so it is only drawn in the browser.
   if (!isClient) return null;
 
   return useWheel ? (
@@ -42,7 +41,7 @@ export const HeroBackground = () => {
 
 const HeroSection = ({ onViewServices }: { onViewServices: () => void }) => (
   <Hero>
-    <Reveal variant="left" delay={0}>
+    <Reveal variant="left" intro>
       <h1 className="flex flex-col gap-3">
         <span className="text-5xl font-bold md:text-8xl">{BUSINESS.name}</span>
         <span className="text-sm font-medium tracking-widest uppercase sm:text-lg md:text-xl">
@@ -50,11 +49,12 @@ const HeroSection = ({ onViewServices }: { onViewServices: () => void }) => (
         </span>
       </h1>
     </Reveal>
-    <Reveal variant="left" delay={200}>
+    <Reveal variant="left" intro delay={200}>
       <p className="text-2xl font-normal">{BUSINESS.tagline}</p>
     </Reveal>
     <Reveal
       variant="left"
+      intro
       delay={400}
       className="mt-10 flex flex-col gap-3 sm:flex-row"
     >

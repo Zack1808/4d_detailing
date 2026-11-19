@@ -8,6 +8,7 @@ type RevealProps = {
   className?: string;
   style?: CSSProperties;
   delay?: number;
+  intro?: boolean;
 };
 
 const Reveal = ({
@@ -15,23 +16,21 @@ const Reveal = ({
   variant = "up",
   className,
   style,
-  delay,
-}: RevealProps) => {
-  const intro = delay !== undefined;
-
-  return (
-    <div
-      data-reveal={variant}
-      style={
-        intro
-          ? ({ "--reveal-delay": `${delay}ms`, ...style } as CSSProperties)
-          : style
-      }
-      className={cn(intro ? "reveal-intro" : "reveal", className)}
-    >
-      {children}
-    </div>
-  );
-};
+  delay = 0,
+  intro = false,
+}: RevealProps) => (
+  <div
+    data-reveal={variant}
+    data-reveal-delay={intro ? undefined : delay}
+    style={
+      intro
+        ? ({ "--reveal-delay": `${delay}ms`, ...style } as CSSProperties)
+        : style
+    }
+    className={cn(intro ? "reveal-intro" : "reveal", className)}
+  >
+    {children}
+  </div>
+);
 
 export default Reveal;
