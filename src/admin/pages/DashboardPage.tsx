@@ -5,7 +5,8 @@ import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
 import { DashboardSkeleton } from "../components/skeletons";
 
-import { getAppointmentState } from "../data/appointmentActions";
+import { getAppointmentState, isArchived } from "../data/appointmentActions";
+import { usePastCalendarCleanup } from "../data/usePastCalendarCleanup";
 import { getCustomerHistory, getPastServices } from "../data/customerHistory";
 import { useCollections } from "../data/useCollections";
 import {
@@ -16,7 +17,7 @@ import {
 
 import { ADMIN_PATHS } from "../paths";
 
-import { parseDate, toMidnight } from "../../utils/date";
+import { parseDate } from "../../utils/date";
 
 import type { AppointmentType } from "../../types/data";
 
@@ -84,14 +85,21 @@ const DashboardPage = () => {
     (c) => c.status === "error",
   );
 
-  const today = toMidnight(new Date()).getTime();
+  usePastCalendarCleanup(
+    appointments.items,
+    appointments.status === "ready",
+    appointments.refresh,
+  );
 
-  const pending = appointments.items
+  // Past appointments are archived and left out of the dashboard.
+  const current = appointments.items.filter((a) => !isArchived(a));
+
+  const pending = current
     .filter((a) => getAppointmentState(a) === "pending")
     .sort((a, b) => time(a) - time(b));
 
-  const upcoming = appointments.items
-    .filter((a) => getAppointmentState(a) === "confirmed" && time(a) >= today)
+  const upcoming = current
+    .filter((a) => getAppointmentState(a) === "confirmed")
     .sort((a, b) => time(a) - time(b));
 
   const repeatIds = new Set(

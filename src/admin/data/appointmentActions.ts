@@ -31,6 +31,26 @@ export const getAppointmentState = (
 
 export type DateRange = { dateFrom: string; dateTo: string };
 
+export const getLastDay = (appointment: AppointmentType): Date | null => {
+  const days = [
+    appointment.dateTo,
+    appointment.dateFrom,
+    appointment.rescheduleProposal?.dateFrom,
+  ]
+    .map((value) => (value ? parseDate(value) : null))
+    .filter((date): date is Date => date !== null);
+
+  if (days.length === 0) return null;
+
+  return new Date(Math.max(...days.map((date) => date.getTime())));
+};
+
+export const isArchived = (appointment: AppointmentType, now = new Date()) => {
+  const lastDay = getLastDay(appointment);
+
+  return lastDay !== null && lastDay.getTime() < toMidnight(now).getTime();
+};
+
 export const getRange = (appointment: AppointmentType): DateRange => ({
   dateFrom: appointment.dateFrom,
   dateTo: appointment.dateTo ?? appointment.dateFrom,
@@ -207,6 +227,58 @@ export const denyAppointment = async (
   }
 
   await sendDecisionEmail(appointment, "denied");
+};
+
+export const deleteAppointment = async (
+  appointment: AppointmentType,
+  blocked: BlockedAppointments[],
+) => {
+  await appointmentRepo.remove(appointment.id);
+
+  await Promise.all(
+    blocked
+      .filter((entry) => entry.appointmentId === appointment.id)
+      .map((entry) => blockedDatesRepo.remove(entry.id)),
+  );
+
+  if (appointment.calendarEventId) {
+    await deleteCalendarEvent(appointment.calendarEventId).catch((error) =>
+      console.error("Removing the Google Calendar event failed: ", error),
+    );
+  }
+};
+
+const removingEvents = new Set<string>();
+
+export const removePastCalendarEvents = async (
+  appointments: AppointmentType[],
+): Promise<number> => {
+  const due = appointments.filter(
+    (appointment) =>
+      appointment.calendarEventId &&
+      isArchived(appointment) &&
+      !removingEvents.has(appointment.calendarEventId),
+  );
+
+  let removed = 0;
+
+  for (const appointment of due) {
+    const eventId = appointment.calendarEventId as string;
+
+    removingEvents.add(eventId);
+
+    try {
+      await deleteCalendarEvent(eventId);
+      await appointmentRepo.update(appointment.id, { calendarEventId: null });
+      removed += 1;
+    } catch (error) {
+      console.warn("Removing a past Google Calendar event failed: ", error);
+    } finally {
+      removingEvents.delete(eventId);
+    }
+  }
+
+  return removed;
 };
 
 export const proposeReschedule = async (

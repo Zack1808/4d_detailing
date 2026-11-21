@@ -16,6 +16,7 @@ import { APPOINTMENT_COLUMNS, TableSkeleton } from "../components/skeletons";
 import {
   confirmAppointment,
   countOverlaps,
+  deleteAppointment,
   denyAppointment,
   findService,
   getAppointmentState,
@@ -23,6 +24,7 @@ import {
   getRange,
   getStartDate,
   getSuggestedRange,
+  isArchived,
   proposeReschedule,
   type AppointmentState,
   type DateRange,
@@ -35,6 +37,7 @@ import {
   serviceRepo,
 } from "../data/repositories";
 import { useCollections } from "../data/useCollections";
+import { usePastCalendarCleanup } from "../data/usePastCalendarCleanup";
 
 import Button from "../../components/ui/Button";
 import DatePicker from "../../components/ui/DatePicker";
@@ -55,11 +58,17 @@ import { notifyError, notifySuccess, notifyWarning } from "../../utils/toast";
 
 import type { AppointmentType } from "../../types/data";
 
-type Filter = AppointmentState | "all";
+type Filter = AppointmentState | "all" | "archived";
 
 const STATE_LABEL: Record<AppointmentState, string> = {
   pending: "Na čekanju",
   confirmed: "Potvrđen",
+  denied: "Odbijen",
+};
+
+const ARCHIVED_LABEL: Record<AppointmentState, string> = {
+  pending: "Isteklo (nije potvrđeno)",
+  confirmed: "Odrađen",
   denied: "Odbijen",
 };
 
@@ -85,6 +94,10 @@ const FILTERS: { value: Filter; label: string }[] = [
   {
     value: "all",
     label: "Svi",
+  },
+  {
+    value: "archived",
+    label: "Arhivirano",
   },
 ];
 
@@ -118,15 +131,29 @@ const AppointmentsPage = () => {
   const [historyFor, setHistoryFor] = useState<AppointmentType | null>(null);
   const [rescheduleKey, setRescheduleKey] = useState(0);
 
+  usePastCalendarCleanup(
+    appointments.items,
+    appointments.status === "ready",
+    appointments.refresh,
+  );
+
   const counts = useMemo(() => {
     const results: Record<Filter, number> = {
       pending: 0,
       confirmed: 0,
       denied: 0,
-      all: appointments.items.length,
+      all: 0,
+      archived: 0,
     };
 
-    appointments.items.forEach((a) => (results[getAppointmentState(a)] += 1));
+    appointments.items.forEach((a) => {
+      if (isArchived(a)) {
+        results.archived += 1;
+      } else {
+        results[getAppointmentState(a)] += 1;
+        results.all += 1;
+      }
+    });
 
     return results;
   }, [appointments.items]);
@@ -135,7 +162,12 @@ const AppointmentsPage = () => {
     const term = normalizeText(search.trim());
 
     return appointments.items
-      .filter((a) => filter === "all" || getAppointmentState(a) === filter)
+      .filter((a) =>
+        filter === "archived"
+          ? isArchived(a)
+          : !isArchived(a) &&
+            (filter === "all" || getAppointmentState(a) === filter),
+      )
       .filter(
         (a) =>
           !term ||
@@ -143,10 +175,11 @@ const AppointmentsPage = () => {
             `${a.fullName} ${a.email} ${a.phone} ${a.vehicle}`,
           ).includes(term),
       )
-      .sort(
-        (a, b) =>
-          STATE_ORDER[getAppointmentState(a)] -
-            STATE_ORDER[getAppointmentState(b)] || time(a) - time(b),
+      .sort((a, b) =>
+        filter === "archived"
+          ? time(b) - time(a) // most recent first
+          : STATE_ORDER[getAppointmentState(a)] -
+              STATE_ORDER[getAppointmentState(b)] || time(a) - time(b),
       );
   }, [appointments.items, filter, search]);
 
@@ -346,7 +379,9 @@ const AppointmentsPage = () => {
           </HeadRow>
           <tbody>
             {rows.map((a) => {
+              const archived = isArchived(a);
               const state = getAppointmentState(a);
+              const live = archived ? null : state;
               const { dateFrom, dateTo } = getRange(a);
               const { days, overlaps: noFit } = getFit(a);
               const proposal = a.rescheduleProposal;
@@ -363,15 +398,15 @@ const AppointmentsPage = () => {
                     ) : (
                       <p className="text-muted">Bez termina</p>
                     )}
-                    {state === "pending" && proposal && (
+                    {live === "pending" && proposal && (
                       <p className="text-sm">Predloženo: {proposal.dateFrom}</p>
                     )}
-                    {state === "pending" && days !== null && (
+                    {live === "pending" && days !== null && (
                       <p className="text-sm text-muted">
                         Zauzima {formatDays(days)}
                       </p>
                     )}
-                    {state === "pending" && noFit && (
+                    {live === "pending" && noFit && (
                       <p
                         className="mt-1 max-w-[22ch] text-sm whitespace-normal text-amber-700 dark:text-amber-300"
                         role="status"
@@ -411,10 +446,16 @@ const AppointmentsPage = () => {
                   </Td>
                   <Td>
                     <div className="flex flex-col items-start gap-1">
-                      <StatusBadge tone={STATE_TONE[state] as Tone}>
-                        {STATE_LABEL[state]}
+                      <StatusBadge
+                        tone={
+                          archived && state === "pending"
+                            ? undefined
+                            : (STATE_TONE[state] as Tone)
+                        }
+                      >
+                        {archived ? ARCHIVED_LABEL[state] : STATE_LABEL[state]}
                       </StatusBadge>
-                      {state === "pending" && proposal && (
+                      {live === "pending" && proposal && (
                         <StatusBadge>Novi termin predložen</StatusBadge>
                       )}
                       {state === "confirmed" && a.calendarEventId && (
@@ -427,7 +468,7 @@ const AppointmentsPage = () => {
                   </Td>
                   <Td>
                     <div className="flex flex-wrap justify-end gap-3">
-                      {state === "pending" && (
+                      {live === "pending" && (
                         <>
                           <Button
                             variant="primary"
@@ -454,7 +495,7 @@ const AppointmentsPage = () => {
                           </Button>
                         </>
                       )}
-                      {state === "confirmed" && (
+                      {live === "confirmed" && (
                         <Button
                           variant="secondary"
                           className="px-3 py-2 text-sm"
@@ -465,7 +506,7 @@ const AppointmentsPage = () => {
                           Otkaži
                         </Button>
                       )}
-                      {state === "denied" && (
+                      {(live === "denied" || archived) && (
                         <Button
                           variant="secondary"
                           className="px-3 py-2 text-sm"
@@ -679,9 +720,10 @@ const AppointmentsPage = () => {
         onClose={close}
         onConfirm={() =>
           action?.type === "delete" &&
-          run(async () => {
-            await appointmentRepo.remove(action.appointment.id);
-          }, "Zahtjev je obrisan.")
+          run(
+            () => deleteAppointment(action.appointment, blocked.items),
+            "Zahtjev je obrisan.",
+          )
         }
       >
         {action?.type === "delete" && (
