@@ -20,6 +20,7 @@ type AuthContextType = {
   user: AdminUser | null;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  sendPasswordReset: (email: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -67,9 +68,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await api.current?.signOut();
   }, []);
 
+  const sendPasswordReset = useCallback(async (email: string) => {
+    const loaded = api.current ?? (await loadAuthApi());
+
+    await loaded.sendPasswordReset(email);
+  }, []);
+
   const value = useMemo(
-    () => ({ status, user, signIn, signOut }),
-    [status, user, signIn, signOut],
+    () => ({ status, user, signIn, signOut, sendPasswordReset }),
+    [status, user, signIn, signOut, sendPasswordReset],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

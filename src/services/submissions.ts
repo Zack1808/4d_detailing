@@ -20,13 +20,13 @@ export const submitAppointment = async (
   if (USE_MOCK_DATA) return wait(MOCK_CONFIG.apiDelay);
 
   const record: NewAppointment = {
-    fullName: values.fullName,
-    email: values.email,
-    phone: values.phone,
-    service: values.service,
-    vehicle: values.vehicle,
-    dateFrom: values.dateFrom,
-    remark: values.remark,
+    fullName: values.fullName.trim(),
+    email: values.email.trim(),
+    phone: values.phone.trim(),
+    service: values.service.trim(),
+    vehicle: values.vehicle.trim(),
+    dateFrom: values.dateFrom.trim(),
+    remark: values.remark.trim(),
     ...(serviceId && { serviceId }),
     isConfirmed: false,
     isBlocked: false,
@@ -50,9 +50,9 @@ export const submitReview = async (values: ReviewValues) => {
 
   const review: NewReview = {
     starCount: Number(values.starCount),
-    name: values.name,
-    surname: values.surname,
-    review: values.review,
+    name: values.name.trim(),
+    surname: values.surname.trim(),
+    review: values.review.trim(),
     isApproved: false,
   };
 

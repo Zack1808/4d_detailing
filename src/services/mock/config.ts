@@ -1,6 +1,6 @@
 export const MOCK_CONFIG = {
-  enableMockData: true,
-  enableMockAuth: true,
+  enableMockData: false,
+  enableMockAuth: false,
   enableMockEmail: true,
   enableMockCalendar: true,
   enableMockContacts: true,

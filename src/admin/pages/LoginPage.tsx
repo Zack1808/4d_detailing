@@ -33,17 +33,33 @@ const validate = (values: LoginValues) => {
   return errors;
 };
 
+const RESET_SENT_MESSAGE =
+  "Ako za tu adresu postoji račun, poslali smo poveznicu za novu lozinku. Provjerite i mapu neželjene pošte.";
+
 const LoginPage = () => {
-  const { status, signIn } = useAuth();
+  const { status, signIn, sendPasswordReset } = useAuth();
   const location = useLocation();
   const [formError, setFormError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const [sendingReset, setSendingReset] = useState(false);
   const [mockLogin, setMockLogin] = useState<LoginValues | null>(null);
 
-  const { formRef, bind, setMany, submitting, errors, handleSubmit } = useForm({
+  const {
+    formRef,
+    values,
+    bind,
+    setMany,
+    setFieldErrors,
+    submitting,
+    errors,
+    handleSubmit,
+    focusFirstInvalid,
+  } = useForm({
     initialValues: INITIAL,
     validate,
     onSubmit: async ({ email, password }) => {
       setFormError(null);
+      setNotice(null);
 
       try {
         await signIn(email.trim(), password);
@@ -53,6 +69,35 @@ const LoginPage = () => {
       }
     },
   });
+
+  const requestPasswordReset = async () => {
+    const email = values.email.trim();
+
+    setFormError(null);
+    setNotice(null);
+
+    if (!email || !isValidEmail(email)) {
+      setFieldErrors({
+        email: email
+          ? MESSAGES.email
+          : "Upišite e-adresu na koju da pošaljemo poveznicu.",
+      });
+      focusFirstInvalid();
+      return;
+    }
+
+    setFieldErrors({});
+    setSendingReset(true);
+
+    try {
+      await sendPasswordReset(email);
+      setNotice(RESET_SENT_MESSAGE);
+    } catch (error) {
+      setFormError(getErrorMessage(error, "Slanje poveznice nije uspjelo."));
+    } finally {
+      setSendingReset(false);
+    }
+  };
 
   useEffect(() => {
     if (import.meta.env.DEV && MOCK_CONFIG.enableMockAuth) {
@@ -92,6 +137,10 @@ const LoginPage = () => {
           </p>
         )}
 
+        <p role="status" className={notice ? "text-sm" : "sr-only"}>
+          {notice}
+        </p>
+
         <Field id="email" label="Email" required error={errors.email}>
           <Input
             {...bind("email")}
@@ -116,6 +165,15 @@ const LoginPage = () => {
           loading={submitting}
         >
           Prijavi se
+        </Button>
+
+        <Button
+          variant="link"
+          className="-mt-3 self-center py-0 text-sm"
+          loading={sendingReset}
+          onClick={requestPasswordReset}
+        >
+          Zaboravili ste lozinku?
         </Button>
 
         {mockLogin && (

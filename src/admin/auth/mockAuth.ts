@@ -40,6 +40,10 @@ export const mockAuth: AuthApi = {
     return user;
   },
 
+  async sendPasswordReset() {
+    await wait(MOCK_CONFIG.apiDelay);
+  },
+
   async signOut() {
     removeStorage(SESSION_KEY);
     emit(null);

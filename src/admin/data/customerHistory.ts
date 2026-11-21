@@ -1,9 +1,10 @@
 import type { AppointmentType } from "../../types/data";
 
-export const normalizeEmail = (email: string) => email.trim().toLowerCase();
+export const normalizeEmail = (email?: string) =>
+  (email ?? "").trim().toLowerCase();
 
-export const normalizePhone = (phone: string) => {
-  let digits = phone.replace(/\D/g, "");
+export const normalizePhone = (phone?: string) => {
+  let digits = (phone ?? "").replace(/\D/g, "");
 
   if (digits.startsWith("00")) digits = digits.slice(2);
   if (digits.startsWith("385")) digits = digits.slice(3);
